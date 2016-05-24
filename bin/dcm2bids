@@ -1,64 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 import argparse
-import os
-
-ANATOMY = (
-        ["T1 weighted", "T1w"],
-        ["T2 weighted", "T2w"],
-        ["T1 map", "T1map"],
-        ["T2 map", "T2map"],
-        ["FLAIR", "FLAIR"],
-        ["Proton density", "PD"],
-        ["Combined PD/T2", "PDT2"],
-        ["Inplane T1", "inplaneT1"],
-        ["Inplane T2", "inplaneT2"],
-        ["Angiography", "angio"],
-        ["Defacing mask", "defacemask"],
-        ["Susceptibility Weighted Imaging (SWI)", "SWImagandphase"],
-        )
-
-#        ["", ""],
-
-class Participant(object):
-    """
-    """
-
-    def __init__(self, code, session):
-        self.name = "sub-{}".format(code)
-        self.session = session
+import dcm2bids
 
 
 def get_arguments():
     parser = argparse.ArgumentParser()
 
-    for desc, opt in ANATOMY:
-        parser.add_argument(
-                "-{}".format(opt),
-                required = False,
-                help = "Directory with DICOM of {}".format(desc),
-                )
-
     parser.add_argument(
             "-o",
             "--output",
             required = True,
-            help = "Directory of your study",
+            help = "Directory of your BIDS output",
             )
 
     parser.add_argument(
-            "-p",
-            "--participant",
+            "-j",
+            "--jsonfile",
             required = True,
-            help = "Code of the participant",
-            )
-
-    parser.add_argument(
-            "-s",
-            "--session",
-            required = False,
-            help = "Name of the session",
+            help = "Participant description, JSON format",
             )
 
     args = parser.parse_args()
@@ -67,8 +29,9 @@ def get_arguments():
 
 def main():
     """Let's go"""
-    parser = get_arguments()
-    participant = Participant(parser.participant, parser.session)
+    args = get_arguments()
+    app = dcm2bids.App(args.output, args.jsonfile)
+    app.run()
 
 
 if __name__ == '__main__':
