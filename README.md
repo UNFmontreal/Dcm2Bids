@@ -1,8 +1,8 @@
 # Dcm2Bids
 
-Dcm2Bids aims to provide a way to convert your DICOMs to the [BIDS][bids] easily.
+Dcm2Bids aims to provide a way to convert your DICOMs to [BIDS][bids] easily.
 
-To learn more about BIDS, read the [specifications][bids-spec].
+Learn more about BIDS and read the [specifications][bids-spec].
 
 ***Project under development***
 
