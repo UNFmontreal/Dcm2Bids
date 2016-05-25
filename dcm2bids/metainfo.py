@@ -61,8 +61,8 @@ class Metainfo(object):
                 self.failed[key] = "n/a"
 
 
-    def writeJsons(self, outputWithoutExt)
+    def writeJsons(self, outputWithoutExt):
         passedFile = "{}.json".format(outputWithoutExt)
-            utils.writingJSON(passed, passedJsonFile)
-            failedJsonFile = "{}_failed.json".format(acquisition.getOutputWithoutExt())
-            utils.writingJSON(failed, failedJsonFile)
+        utils.writingJSON(passed, passedJsonFile)
+        failedJsonFile = "{}_failed.json".format(acquisition.getOutputWithoutExt())
+        utils.writingJSON(failed, failedJsonFile)

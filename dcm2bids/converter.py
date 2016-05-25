@@ -2,8 +2,7 @@
 
 
 from subprocess import call
-
-import utils
+import dcm2bids_utils as utils
 
 
 class Converter(object):
@@ -11,20 +10,11 @@ class Converter(object):
     """
 
     def __init__(self):
-        baseTpl = "mrconvert '{0}' {1}.nii.gz -force -quiet"
-        dwiTpl = " -export_grad_mrtrix {1}.b -export_grad_fsl {1}.bvec {1}.bval"
-        self.mrconvertTpl = {
-                'anat': baseTpl,
-                'dwi': baseTpl + dwiTpl,
-                'fmap': baseTpl,
-                'func': "", #TODO
-                }
+        self.cmdTemplate = 'dcm2niix -o "{}" -f {} -z y "{}"'
 
 
-    def convert(self, acquisition, participantName):
-        cmdTpl = self.mrconvertTpl[acquisition.getDataType()]
-        dicomsDir = acquisition.getDicomsDir()
-        outputDir = acquisition.getOutputDir()
+    def convert(self, outputDir, filename, dicomsDir):
         utils.makedirs(outputDir)
-        outputWithoutExt = acquisition.getOutputWithoutExt()
-        call(cmdTpl.format(dicomsDir, outputWithoutExt), shell=True)
+        utils.info('Convert {}'.format(filename))
+        cmd = self.cmdTemplate.format(outputDir, filename, dicomsDir)
+        call(cmd, shell=True)

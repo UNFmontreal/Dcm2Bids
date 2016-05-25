@@ -4,6 +4,8 @@
 
 import argparse
 import dcm2bids
+import dcm2bids.dcm2bids_utils as utils
+import os
 
 
 def get_arguments():
@@ -30,7 +32,14 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-    app = dcm2bids.App(args.output, args.jsonfile)
+
+    bidsDir = os.path.abspath(args.output)
+    dicomsDir = os.path.abspath(os.path.dirname(args.jsonfile))
+    description = utils.loadJsonFile(args.jsonfile)
+    if not description.has_key('session'):
+        description['session'] = 'n/a'
+
+    app = dcm2bids.App(bidsDir, dicomsDir, description)
     app.run()
 
 

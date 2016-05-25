@@ -8,48 +8,40 @@ class Acquisition(object):
     """
     """
 
-    def __init__(self, description, session):
-        self.description = description
-        self.session = session
-        self.dataType = description["data_type"]
-        self.suffix = self.__setSuffix()
-        self.dicomsDir = ''
-        self.outputWithoutExt = ''
+    def __init__(self, description, dicomsDir, participant, session):
+        self._description = description
+        self._dicomsDir = dicomsDir
+        self._participant = participant
+        self._session = session
 
 
-    def __setSuffix(self):
-        suffix = ""
-        if not self.session.isSingle():
-            suffix += "{}_".format(self.session.getName())
-        if self.description.has_key("custom_labels"):
-            for key, value in self.description["custom_labels"].iteritems():
-                suffix += "{}-{}_".format(key, value)
-        suffix += self.description["suffix"]
-        return suffix
+    @property
+    def dataType(self):
+        return self._description['data_type']
 
 
-    def setDicomsDir(self, masterDicomsDir):
-        self.dicomsDir = os.path.join(
-                masterDicomsDir, self.description["directory"])
+    @property
+    def suffix(self):
+        result = ''
+        if not self._session.isSingle():
+            result += '{}_'.format(self._session.name)
+        if self._description.has_key('custom_labels'):
+            for key, value in self._description['custom_labels'].iteritems():
+                result += '{}-{}_'.format(key, value)
+        result += self._description['suffix']
+        return result
 
 
-    def getDicomsDir(self):
-        return self.dicomsDir
+    @property
+    def outputDir(self):
+        return os.path.join(self._session.directory, self.dataType)
 
 
-    def getDataType(self):
-        return self.dataType
+    @property
+    def filename(self):
+        return '{}_{}'.format(self._participant.name, self.suffix)
 
 
-    def getOutputDir(self):
-        return os.path.join(self.session.getSessionDir(), self.dataType)
-
-
-    def setOutputWithoutExt(self, participantName):
-        outputDir = self.getOutputDir()
-        base = "{}_{}".format(participantName, self.suffix)
-        self.outputWithoutExt = os.path.join(outputDir, base)
-
-
-    def getOutputWithoutExt(self):
-        return self.outputWithoutExt
+    @property
+    def dicomsDir(self):
+        return os.path.join(self._dicomsDir, self._description['directory'])

@@ -8,36 +8,27 @@ class Session(object):
     """
     """
 
-    def __init__(self, json):
-        self.__none = 'n/a'
-        self.json = json
-        self.name = self.__setName()
-        self.sessionDir = ''
+    def __init__(self, name, participant):
+        self._name = name
+        self._participant = participant
 
 
-    def __setName(self):
-        name = self.__none
-        if self.json.has_key('session'):
-            value = self.json['session']
-            if value != self.__none:
-                name = "ses-{}".format(value)
-        return name
+    @property
+    def name(self):
+        if self._name == 'n/a':
+            return None
+        else:
+            return 'ses-{}'.format(self._name)
 
 
-    def getName(self):
-        return self.name
+    @property
+    def directory(self):
+        path = self._participant.directory
+        if self.isSingle():
+            return path
+        else:
+            return os.path.join(path, self.name)
 
 
     def isSingle(self):
-        return self.name == self.__none
-
-
-    def setDir(self, bidsDir, participantName):
-        path = os.path.join(bidsDir, participantName)
-        if not self.isSingle():
-            path = os.path.join(path, self.getName())
-        self.sessionDir = path
-
-
-    def getSessionDir(self):
-        return self.sessionDir
+        return self.name == None
