@@ -2,22 +2,22 @@
 
 
 from acquisition import Acquisition
-from converter import Converter
 from participant import Participant
+import pprint
 from session import Session
+import studyparser
 import dcm2bids_utils as utils
-#import metainfo
 
 
 class App(object):
     """
     """
 
+
     def __init__(self, bidsDir, dicomsDir, description):
         self.bidsDir = bidsDir
         self.dicomsDir = dicomsDir
         self._description = description
-        self._converter = Converter()
 
 
     @property
@@ -40,14 +40,16 @@ class App(object):
 
     def run(self):
         for acquisition in self.acquisitions:
-            self._convert(acquisition)
-            #ds = utils.getDicomFromDir(acquisition.getDicomsDir())
-            #meta = metainfo.Metainfo(ds)
-            #meta.writeJsons(acquisition.getOutputWithouExt())
+            acquisition.convert()
+            acquisition.writeJson()
 
 
-    def _convert(self, acquisition):
-        outputDir = acquisition.outputDir
-        filename = acquisition.filename
-        dicomsDir = acquisition.dicomsDir
-        self._converter.convert(outputDir, filename, dicomsDir)
+    def searchAcqDesc(self, study):
+        studyparserRef = {
+                'apneemci': 'ApneeMciParser',
+                'testretest': 'TestRetestParser',
+                }
+        parser = getattr(studyparser, studyparserRef[study])(self.dicomsDir)
+        self._description['acquisitions'] = parser.filter_acquisitions()
+        utils.info('Acquisitions description')
+        pprint.pprint(self._description['acquisitions'])

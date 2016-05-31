@@ -6,6 +6,7 @@ import argparse
 import dcm2bids
 import dcm2bids.dcm2bids_utils as utils
 import os
+import sys
 
 
 def get_arguments():
@@ -19,10 +20,46 @@ def get_arguments():
             )
 
     parser.add_argument(
+            "-d",
+            "--dicomsdir",
+            required = True,
+            help = "Directory of your DICOM files",
+            )
+
+    parser.add_argument(
+            "-p",
+            "--participant",
+            required = False,
+            help = "Name of the participant",
+            )
+
+    parser.add_argument(
+            "-s",
+            "--session",
+            required = False,
+            help = "Name of the session",
+            )
+
+    parser.add_argument(
             "-j",
             "--jsonfile",
-            required = True,
+            required = False,
             help = "Participant description, JSON format",
+            )
+
+    parser.add_argument(
+            "-m",
+            "--study",
+            required = False,
+            help = "Script describing how to parse your DICOM",
+            )
+
+    parser.add_argument(
+            "-t",
+            required = False,
+            action="store_true",
+            help = """Dry like run.
+                    Search acquisition description and print them""",
             )
 
     args = parser.parse_args()
@@ -32,16 +69,49 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
+    print args
+    searchAcqDesc = False
+    if args.t:
+        searchAcqDesc = True
 
     bidsDir = os.path.abspath(args.output)
-    dicomsDir = os.path.abspath(os.path.dirname(args.jsonfile))
-    description = utils.loadJsonFile(args.jsonfile)
-    if not description.has_key('session'):
-        description['session'] = 'n/a'
+    dicomsDir = os.path.abspath(args.dicomsdir)
+
+    if args.jsonfile:
+        description = utils.load_json(args.jsonfile)
+
+        if not description.has_key('participant'):
+            utils.fail('No participant name found in JSON file.')
+            return 0
+
+        if not description.has_key('session'):
+            utils.info('No session name found in JSON file, assuming n/a.')
+            description['session'] = 'n/a'
+
+        if not description.has_key('acquisitions'):
+            utils.info('''No acquisitions description found in JSON file, 
+                    script will execute description search.''')
+            searchAcqDesc = True
+
+    else:
+        description = {}
+        description['participant'] = args.participant
+        if args.session:
+            description['session'] = args.session
+        else:
+            description['session'] = 'n/a'
+        searchAcqDesc = True
 
     app = dcm2bids.App(bidsDir, dicomsDir, description)
+
+    if searchAcqDesc:
+        app.searchAcqDesc(args.study)
+        if args.t:
+            return 0
+
     app.run()
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

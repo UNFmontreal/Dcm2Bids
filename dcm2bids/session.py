@@ -8,6 +8,7 @@ class Session(object):
     """
     """
 
+
     def __init__(self, name, participant):
         self._name = name
         self._participant = participant

@@ -8,6 +8,7 @@ class Participant(object):
     """
     """
 
+
     def __init__(self, name, bidsDir):
         self._name = name
         self._bidsDir = bidsDir
