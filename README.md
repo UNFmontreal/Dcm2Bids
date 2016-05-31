@@ -20,38 +20,38 @@ See `dcm2bids -h` for more information
 
 ```json
 {
-    "participant": "test", 
+    "participant": "test",
     "session": "V2",
     "acquisitions": [
         {
             "data_type": "dwi", 
-            "directory": "EP2D_DIFF_64_DIRECTIONS_0007", 
+            "directory": "EP2D_DIFF_64_DIRECTIONS_0007",
             "suffix": "dwi"
-        }, 
+        },
         {
             "custom_labels": {
                 "dir": "pa"
             }, 
-            "data_type": "fmap", 
-            "directory": "EP2D_DIFF_PA_0014", 
+            "data_type": "fmap",
+            "directory": "EP2D_DIFF_PA_0014",
             "suffix": "epi"
-        }, 
+        },
         {
-            "data_type": "anat", 
-            "directory": "AXIAL_T1_MPRAGE_0005", 
+            "data_type": "anat",
+            "directory": "AXIAL_T1_MPRAGE_0005",
             "suffix": "T1w"
-        }, 
+        },
         {
             "custom_labels": {
                 "dir": "ap"
             }, 
-            "data_type": "fmap", 
-            "directory": "EP2D_DIFF_AP_0013", 
+            "data_type": "fmap",
+            "directory": "EP2D_DIFF_AP_0013",
             "suffix": "epi"
-        }, 
+        },
         {
-            "data_type": "anat", 
-            "directory": "AXIAL_T2_SPACE_0006", 
+            "data_type": "anat",
+            "directory": "AXIAL_T2_SPACE_0006",
             "suffix": "T2w"
         }
     ]
