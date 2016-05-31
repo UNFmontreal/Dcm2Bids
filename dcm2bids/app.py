@@ -7,6 +7,7 @@ import pprint
 from session import Session
 import studyparser
 import dcm2bids_utils as utils
+import os
 
 
 class App(object):
@@ -42,6 +43,7 @@ class App(object):
         for acquisition in self.acquisitions:
             acquisition.convert()
             acquisition.writeJson()
+        self.write_description()
 
 
     def searchAcqDesc(self, study):
@@ -53,3 +55,13 @@ class App(object):
         self._description['acquisitions'] = parser.filter_acquisitions()
         utils.info('Acquisitions description')
         pprint.pprint(self._description['acquisitions'])
+
+
+    def write_description(self):
+        filename = self.participant.name
+        if not self.session.isSingle():
+            filename += '_{}'.format(self.session.name)
+        filename += '.json'
+        utils.write_json(
+                self._description,
+                os.path.join(self.bidsDir, filename))

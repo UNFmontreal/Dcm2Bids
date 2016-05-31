@@ -48,7 +48,7 @@ def get_arguments():
             )
 
     parser.add_argument(
-            "-m",
+            "-u",
             "--study",
             required = False,
             help = "Script describing how to parse your DICOM",
@@ -69,7 +69,6 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-    print args
     searchAcqDesc = False
     if args.t:
         searchAcqDesc = True
