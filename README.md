@@ -4,7 +4,7 @@ Dcm2Bids convert DICOM files to [Brain Imaging Data Structure][bids] (BIDS).
 
 Learn more about BIDS and read the [specifications][bids-spec].
 
-## version: 0.3.0dev
+## version: 0.3.1dev
 
 # Usage
 
@@ -12,11 +12,13 @@ Learn more about BIDS and read the [specifications][bids-spec].
 
 It's possible to add a session with the key `-s`
 
-# Algorithm to parse DICOM directory
+# DICOM directories algorithm parser
 
 Every study is different and this step needs a little bit of work.
 
 The logic is in `studyparser.py` and parse different part of the metadata to filter the DICOM directories.
+
+It creates a batch file in YAML format to feed `dcm2niibatch`.
 
 # DICOM to NIfTI conversion
 

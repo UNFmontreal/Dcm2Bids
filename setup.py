@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='Dcm2Bids',
-    version='0.3.0dev',
+    version='0.3.1dev',
     author='Christophe Bedetti',
     author_email='christophe.bedetti@criugm.qc.ca',
     packages=['dcm2bids'],
