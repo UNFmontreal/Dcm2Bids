@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='Dcm2Bids',
-    version='0.2.1dev',
+    version='0.3.0dev',
     author='Christophe Bedetti',
     author_email='christophe.bedetti@criugm.qc.ca',
     packages=['dcm2bids'],
@@ -15,6 +15,6 @@ setup(
         'dcmstack >= 0.7.0',
         'nibabel >= 2.0.0',
         'pydicom >= 0.9.7',
-        'dcm2niix',
+        'dcm2niibatch',
     ],
 )

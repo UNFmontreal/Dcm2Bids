@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
+from __future__ import print_function
 import argparse
 import dcm2bids
 import dcm2bids.dcm2bids_utils as utils
@@ -14,22 +15,22 @@ def get_arguments():
 
     parser.add_argument(
             "-o",
-            "--output",
+            "--bids_dir",
             required = True,
-            help = "Directory of your BIDS output",
+            help = "BIDS directory output",
             )
 
     parser.add_argument(
             "-d",
-            "--dicomsdir",
+            "--dicom_dir",
             required = True,
-            help = "Directory of your DICOM files",
+            help = "DICOM files directory",
             )
 
     parser.add_argument(
             "-p",
             "--participant",
-            required = False,
+            required = True,
             help = "Name of the participant",
             )
 
@@ -41,25 +42,10 @@ def get_arguments():
             )
 
     parser.add_argument(
-            "-j",
-            "--jsonfile",
-            required = False,
-            help = "Participant description, JSON format",
-            )
-
-    parser.add_argument(
-            "-u",
-            "--study",
-            required = False,
-            help = "Script describing how to parse your DICOM",
-            )
-
-    parser.add_argument(
-            "-t",
-            required = False,
-            action="store_true",
-            help = """Dry like run.
-                    Search acquisition description and print them""",
+            "-a",
+            "--algorithm",
+            required = True,
+            help = "Algorithm describing how to parse directories",
             )
 
     args = parser.parse_args()
@@ -69,47 +55,34 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-    searchAcqDesc = False
-    if args.t:
-        searchAcqDesc = True
+    description = {}
 
-    bidsDir = os.path.abspath(args.output)
-    dicomsDir = os.path.abspath(args.dicomsdir)
+    bidsDir = os.path.abspath(args.bids_dir)
+    dicomDir = os.path.abspath(args.dicom_dir)
 
-    if args.jsonfile:
-        description = utils.load_json(args.jsonfile)
-
-        if not description.has_key('participant'):
-            utils.fail('No participant name found in JSON file.')
-            return 0
-
-        if not description.has_key('session'):
-            utils.info('No session name found in JSON file, assuming n/a.')
-            description['session'] = 'n/a'
-
-        if not description.has_key('acquisitions'):
-            utils.info('''No acquisitions description found in JSON file, 
-                    script will execute description search.''')
-            searchAcqDesc = True
-
+    # Set description
+    description['participant'] = args.participant
+    if args.session:
+        description['session'] = args.session
     else:
-        description = {}
-        description['participant'] = args.participant
-        if args.session:
-            description['session'] = args.session
-        else:
-            description['session'] = 'n/a'
-        searchAcqDesc = True
+        description['session'] = 'n/a'
 
-    app = dcm2bids.App(bidsDir, dicomsDir, description)
+    # Set algorithm
+    algorithmClass = {
+            'apneemci': 'ApneeMciParser',
+            'testretest': 'TestRetestParser',
+            }
+    algorithmKey = args.algorithm
+    if algorithmClass.has_key(algorithmKey):
+        algorithm = algorithmClass[algorithmKey]
+    else:
+        utils.fail("{}: algorithm not implemented".format(algorithmKey))
+        utils.info("Implemented algorithm:")
+        print(*algorithmClass.keys(), sep="\n")
+        return 0
 
-    if searchAcqDesc:
-        app.searchAcqDesc(args.study)
-        if args.t:
-            return 0
-
-    app.run()
-    return 0
+    app = dcm2bids.App(bidsDir, dicomDir, description, algorithm)
+    return app.run()
 
 
 if __name__ == '__main__':

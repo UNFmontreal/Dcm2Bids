@@ -3,7 +3,6 @@
 
 from subprocess import call
 import dcm2bids_utils as utils
-import os
 
 
 class Converter(object):
@@ -11,18 +10,18 @@ class Converter(object):
     """
 
 
-    def __init__(self):
-        self.cmdTemplate = 'dcm2niix -o "{}" -f {} -z y "{}"'
+    def __init__(self, filename):
+        #self.cmdTemplate = 'dcm2niix -o "{}" -f {} -z y "{}"'
+        self._cmdTemplate = 'dcm2niibatch {}'
+        self._filename = "{}.yaml".format(filename)
 
 
-    def convert(self, outputDir, filename, dicomsDir):
-        self.make_directory_tree(outputDir)
-        utils.info('Convert {}'.format(filename))
-        cmd = self.cmdTemplate.format(outputDir, filename, dicomsDir)
-        call(cmd, shell=True)
+    @property
+    def command(self):
+        return self._cmdTemplate.format(self._filename)
 
 
-    @staticmethod
-    def make_directory_tree(directory):
-        if not os.path.exists(directory):
-            os.makedirs(directory)
+    #def convert(self, outputDir, filename, dicomsDir):
+    def convert(self):
+        utils.info("running: {}".format(self.command))
+        call(self.command, shell=True)

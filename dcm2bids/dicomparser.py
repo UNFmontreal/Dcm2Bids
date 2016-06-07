@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+from __future__ import print_function
 import dcmstack
 import dcm2bids_utils as utils
 import dicom
@@ -15,6 +16,32 @@ class Dicomparser(object):
 
     def __init__(self, dicomsDir):
         self._dicomsDir = dicomsDir
+        self._parameters = []
+        self._escapedDir = []
+        self._caughtDir = []
+
+
+    @property
+    def parameters(self):
+        return self._parameters
+
+
+    def filter_acquisitions(self):
+        pass
+
+
+    def classifyDir(self, root, dataType):
+        if dataType == 'n/a':
+            self._escapedDir.append(root)
+        else:
+            self._caughtDir.append(root)
+
+
+    def show_directories(self):
+        utils.ok('Directories with DICOM of interest:')
+        print(*self._caughtDir, sep="\n")
+        utils.fail('Directories ignored:')
+        print(*self._escapedDir, sep="\n")
 
 
     def relpath(self, root):
@@ -24,7 +51,8 @@ class Dicomparser(object):
     def get_wrappers(self, oneDcm):
         for root, files in self._child_directories(self._dicomsDir):
             if any(_ in root for _ in self.excluded_dir_strings):
-                utils.fail('Excluded: {}'.format(self.relpath(root)))
+                self._escapedDir.append(self.relpath(root))
+                #utils.fail('Excluded: {}'.format(self.relpath(root)))
                 continue
             else:
                 yield (root, self.get_wrapper(root, files, oneDcm))

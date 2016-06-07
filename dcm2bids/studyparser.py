@@ -16,16 +16,15 @@ class TestRetestParser(Dicomparser):
     @property
     def excluded_dir_strings(self):
         return [
-                '_FA',
-                '_COLFA',
                 '_ADC',
+                '_COLFA',
+                '_FA',
                 '_TENSOR',
                 '_TRACEW',
                 ]
 
 
     def filter_acquisitions(self):
-        parameters = []
         for root, wrapper in self.get_wrappers(oneDcm=True):
             acquisition = {}
             self.wrapper = wrapper
@@ -58,13 +57,8 @@ class TestRetestParser(Dicomparser):
             else:
                 acquisition['data_type'] = 'n/a'
 
-            if acquisition['data_type'] == 'n/a':
-                utils.info('Escaped: {}'.format(self.relpath(root)))
-            else:
-                utils.ok('Caught: {}'.format(self.relpath(root)))
-
-            parameters.append(acquisition)
-        return parameters
+            self.classifyDir(self.relpath(root), acquisition['data_type'])
+            self._parameters.append(acquisition)
 
 
 class ApneeMciParser(Dicomparser):
@@ -93,7 +87,6 @@ class ApneeMciParser(Dicomparser):
 
 
     def filter_acquisitions(self):
-        parameters = []
         for root, wrapper in self.get_wrappers(oneDcm=True):
             acquisition = {}
             self.wrapper = wrapper
@@ -131,10 +124,5 @@ class ApneeMciParser(Dicomparser):
             else:
                 acquisition['data_type'] = 'n/a'
 
-            if acquisition['data_type'] == 'n/a':
-                utils.info('Escaped: {}'.format(self.relpath(root)))
-            else:
-                utils.ok('Caught: {}'.format(self.relpath(root)))
-
-            parameters.append(acquisition)
-        return parameters
+            self.classifyDir(self.relpath(root), acquisition['data_type'])
+            self._parameters.append(acquisition)
