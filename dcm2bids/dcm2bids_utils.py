@@ -56,6 +56,10 @@ def make_directory_tree(directory):
         os.makedirs(directory)
 
 
+def relative_path(path, currentDir):
+    return os.path.relpath(path, currentDir)
+
+
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
 

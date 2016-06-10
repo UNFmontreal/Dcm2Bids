@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 
 from acquisition import Acquisition
 from batch import Batch
@@ -23,7 +24,8 @@ class App(object):
         self._bidsDir = bidsDir
         self._dicomDir = dicomDir
         self._description = description
-        self._algorithm = algorithm
+        #self._algorithm = algorithm
+        self.parser = getattr(studyparser, algorithm)(self._dicomDir)
 
 
     @property
@@ -61,26 +63,44 @@ class App(object):
 
     def run(self):
         self.parseDicomDir()
-        self.batch = Batch()
+        self.batch = Batch(self.codeDir, self.filename)
         for acquisition in self.acquisitions:
             self.batch.add_acquisition(acquisition)
-            #acquisition.writeJson()
         self.batch.show()
-        filenamePath = os.path.join(self.codeDir, self.filename)
-        self.batch.write(filenamePath)
-        converter = Converter(filenamePath)
+        self.batch.write()
         if utils.query_yes_no("Do you want to launch dcm2niibatch ?"):
-            converter.convert()
+            self.batch.convert()
         else:
-            utils.info("dcm2niibatch command line:\n{}".format(converter.command))
+            msg = "Launch dcm2niibatch form code directory:\n{}"
+            utils.info(msg.format(self.batch.command))
             return 0
         return 0
 
 
     def parseDicomDir(self):
-        parser = getattr(studyparser, self._algorithm)(self._dicomDir)
-        parser.filter_acquisitions()
-        self._description['acquisitions'] = parser.parameters
-        parser.show_directories()
+        utils.info('Parse and group DICOM directory')
+        self.parser.parse_and_group()
+        for key, group in self.parser.groups.iteritems():
+            if self.isFromOneDirectory(group):
+                pass
+            else:
+                self.info("Not in the same directory: {}".format(group))
+        utils.info('Classifying')
+        self._description['acquisitions'] = self.parser.classify()
+        self.show_directories()
         #utils.info('Acquisitions description')
         #pprint.pprint(self._description['acquisitions'])
+
+
+    def isFromOneDirectory(self, group):
+        directory = set()
+        for ds, meta, f in group:
+            directory.add(os.path.dirname(f))
+        return len(directory) == 1
+
+
+    def show_directories(self):
+        utils.ok('Series of interest:')
+        print(*self.parser.caughtSeries, sep="\n")
+        utils.fail('Series ignored:')
+        print(*self.parser.ignoredSeries, sep="\n")

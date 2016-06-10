@@ -6,59 +6,63 @@ import dcm2bids_utils as utils
 import os
 
 
-class TestRetestParser(Dicomparser):
+class DefaultParser(Dicomparser):
 
 
     def __init__(self, dicomsDir):
         Dicomparser.__init__(self, dicomsDir)
-
-
-    @property
-    def excluded_dir_strings(self):
-        return [
+        self.excludedSeries = [
+                'PD',
                 '_ADC',
                 '_COLFA',
+                '_ColFA',
                 '_FA',
                 '_TENSOR',
                 '_TRACEW',
                 ]
 
 
-    def filter_acquisitions(self):
-        for root, wrapper in self.get_wrappers(oneDcm=True):
-            acquisition = {}
-            self.wrapper = wrapper
-            acquisition['directory'] = self.relpath(root)
+    def filter_acquisitions(self, root, wrapper):
+        parameter = {}
+        self.wrapper = wrapper
+        parameter['directory'] = root
 
-            if self.is_in('FLAIR', 'SeriesDescription'):
-                acquisition['data_type'] = 'anat'
-                acquisition['suffix'] = 'FLAIR'
+        if self.is_in('FLAIR', 'SeriesDescription'):
+            parameter['data_type'] = 'anat'
+            parameter['suffix'] = 'FLAIR'
 
-            elif self.is_in('T2', 'SeriesDescription'):
-                acquisition['data_type'] = 'anat'
-                acquisition['suffix'] = 'T2w'
+        elif self.is_in('T2', 'SeriesDescription'):
+            parameter['data_type'] = 'anat'
+            parameter['suffix'] = 'T2w'
 
-            elif self.is_in('MPRAGE', 'SeriesDescription'):
-                acquisition['data_type'] = 'anat'
-                acquisition['suffix'] = 'T1w'
+        elif self.is_in('MPRAGE', 'SeriesDescription'):
+            parameter['data_type'] = 'anat'
+            parameter['suffix'] = 'T1w'
 
-            elif self.is_in('DIFFUSION', 'ImageType'):
-                if self.is_in('MOSAIC', 'ImageType'):
-                    acquisition['data_type'] = 'dwi'
-                    acquisition['suffix'] = 'dwi'
-                else:
-                    acquisition['data_type'] = 'fmap'
-                    acquisition['suffix'] = 'epi'
-                    if self.is_equal(1, 'CsaImage.PhaseEncodingDirectionPositive'):
-                        acquisition['custom_labels'] = {'dir': 'ap'}
-                    else:
-                        acquisition['custom_labels'] = {'dir': 'pa'}
-
+        elif self.is_in('DIFFUSION', 'ImageType'):
+            if self.is_in('MOSAIC', 'ImageType'):
+                parameter['data_type'] = 'dwi'
+                parameter['suffix'] = 'dwi'
             else:
-                acquisition['data_type'] = 'n/a'
+                #self.log_metadata(self.wrapper, root)
+                parameter['data_type'] = 'fmap'
+                parameter['suffix'] = 'epi'
+                #print self.get_value('CsaImage.PhaseEncodingDirectionPositive')
+                if self.is_equal(1, 'CsaImage.PhaseEncodingDirectionPositive'):
+                    parameter['custom_labels'] = {'dir': 'ap'}
+                elif self.is_equal(0, 'CsaImage.PhaseEncodingDirectionPositive'):
+                    parameter['custom_labels'] = {'dir': 'pa'}
+                elif self.is_in('AP', 'SeriesDescription'):
+                    parameter['custom_labels'] = {'dir': 'ap'}
+                elif self.is_in('PA', 'SeriesDescription'):
+                    parameter['custom_labels'] = {'dir': 'pa'}
+                else:
+                    parameter['data_type'] = 'n/a'
 
-            self.classifyDir(self.relpath(root), acquisition['data_type'])
-            self._parameters.append(acquisition)
+        else:
+            parameter['data_type'] = 'n/a'
+
+        return parameter
 
 
 class ApneeMciParser(Dicomparser):
@@ -86,43 +90,43 @@ class ApneeMciParser(Dicomparser):
                 ]
 
 
-    def filter_acquisitions(self):
+    def filter_parameters(self):
         for root, wrapper in self.get_wrappers(oneDcm=True):
-            acquisition = {}
+            parameter = {}
             self.wrapper = wrapper
-            acquisition['directory'] = self.relpath(root)
+            parameter['directory'] = self.relpath(root)
 
             if self.is_in('FLAIR', 'SeriesDescription'):
-                acquisition['data_type'] = 'anat'
-                acquisition['suffix'] = 'FLAIR'
+                parameter['data_type'] = 'anat'
+                parameter['suffix'] = 'FLAIR'
 
             elif self.is_in('T2', 'SeriesDescription'):
-                acquisition['data_type'] = 'anat'
-                acquisition['suffix'] = 'T2w'
+                parameter['data_type'] = 'anat'
+                parameter['suffix'] = 'T2w'
 
             elif self.is_in('MEMPRAGE', 'SeriesDescription'):
-                acquisition['data_type'] = 'anat'
-                acquisition['suffix'] = 'T1w'
+                parameter['data_type'] = 'anat'
+                parameter['suffix'] = 'T1w'
                 if self.is_equal(1, 'NumberOfAverages'):
                     num = self.echoTime[self.get_value('EchoTime')]
-                    acquisition['custom_labels'] = {'acq': num}
+                    parameter['custom_labels'] = {'acq': num}
                 else:
-                    acquisition['custom_labels'] = {'acq': 'RMS'}
+                    parameter['custom_labels'] = {'acq': 'RMS'}
 
             elif self.is_in('DIFFUSION', 'ImageType'):
                 if self.is_in('MOSAIC', 'ImageType'):
-                    acquisition['data_type'] = 'dwi'
-                    acquisition['suffix'] = 'dwi'
+                    parameter['data_type'] = 'dwi'
+                    parameter['suffix'] = 'dwi'
                 else:
-                    acquisition['data_type'] = 'fmap'
-                    acquisition['suffix'] = 'epi'
+                    parameter['data_type'] = 'fmap'
+                    parameter['suffix'] = 'epi'
                     if self.is_equal(1, 'CsaImage.PhaseEncodingDirectionPositive'):
-                        acquisition['custom_labels'] = {'dir': 'ap'}
+                        parameter['custom_labels'] = {'dir': 'ap'}
                     else:
-                        acquisition['custom_labels'] = {'dir': 'pa'}
+                        parameter['custom_labels'] = {'dir': 'pa'}
 
             else:
-                acquisition['data_type'] = 'n/a'
+                parameter['data_type'] = 'n/a'
 
-            self.classifyDir(self.relpath(root), acquisition['data_type'])
-            self._parameters.append(acquisition)
+            self.classifyDir(self.relpath(root), parameter['data_type'])
+            self._parameters.append(parameter)

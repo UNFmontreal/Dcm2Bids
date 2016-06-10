@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import print_function
 import dcmstack
 import dcm2bids_utils as utils
 import dicom
@@ -16,74 +15,84 @@ class Dicomparser(object):
 
     def __init__(self, dicomsDir):
         self._dicomsDir = dicomsDir
-        self._parameters = []
-        self._escapedDir = []
-        self._caughtDir = []
+        self._caughtSeries = set()
+        self._ignoredSeries = set()
+        self._log = 0
+        self.excludedSeries = []
 
 
     @property
-    def parameters(self):
-        return self._parameters
+    def caughtSeries(self):
+        return self._caughtSeries
+
+
+    @property
+    def ignoredSeries(self):
+        return self._ignoredSeries
+
+
+    @property
+    def groups(self):
+        return self._groups
+
+
+    @property
+    def _wrappers(self):
+        for key, group in self._groups.iteritems():
+            stack = dcmstack.stack_group(group)
+            root = os.path.dirname(group[0][2])
+            yield (root, stack.to_nifti_wrapper())
 
 
     def filter_acquisitions(self):
         pass
 
 
-    def classifyDir(self, root, dataType):
+    def classifySeries(self, description, dataType):
         if dataType == 'n/a':
-            self._escapedDir.append(root)
+            self._ignoredSeries.add(description)
         else:
-            self._caughtDir.append(root)
+            self._caughtSeries.add(description)
 
 
-    def show_directories(self):
-        utils.ok('Directories with DICOM of interest:')
-        print(*self._caughtDir, sep="\n")
-        utils.fail('Directories ignored:')
-        print(*self._escapedDir, sep="\n")
+    @property
+    def _files(self):
+        for root, dirs, files in os.walk(self._dicomsDir):
+            for f in files:
+                if f.startswith('.') == True:
+                    pass
+                else:
+                    yield os.path.join(root, f)
 
 
-    def relpath(self, root):
-        return os.path.relpath(root, self._dicomsDir)
-
-
-    def get_wrappers(self, oneDcm):
-        for root, files in self._child_directories(self._dicomsDir):
-            if any(_ in root for _ in self.excluded_dir_strings):
-                self._escapedDir.append(self.relpath(root))
-                #utils.fail('Excluded: {}'.format(self.relpath(root)))
+    def parse_and_group(self):
+        src_paths = []
+        for f in self._files:
+            # Check if it is a DICOM
+            try:
+                ds = dicom.read_file(f)
+            except InvalidDicomError:
+                utils.fail('Not a DICOM: {}'.format(f))
                 continue
+            #
+            dsDesc = ds.SeriesDescription
+            if any(_ in dsDesc for _ in self.excludedSeries):
+                self._ignoredSeries.add(dsDesc)
             else:
-                yield (root, self.get_wrapper(root, files, oneDcm))
+                src_paths.append(f)
+        self._groups = dcmstack.parse_and_group(src_paths)
 
 
-    @staticmethod
-    def _child_directories(directory):
-        for root, dirs, files in os.walk(directory):
-            if not dirs:
-                yield (root, files)
-
-
-    @staticmethod
-    def get_wrapper(root, files, oneDcm):
-        stack = dcmstack.DicomStack()
-        for f in files:
-            if f.startswith('.') == True:
-                pass
-            else:
-                abspath = os.path.join(root, f)
-                try:
-                    src_dcm = dicom.read_file(abspath)
-                    stack.add_dcm(src_dcm)
-                    if oneDcm:
-                        break
-                    else:
-                        continue
-                except InvalidDicomError:
-                    utils.fail('Is not a DICOM: {}'.format(abspath))
-                    continue
-        return stack.to_nifti_wrapper()
+    def classify(self):
+        parameters = []
+        for root, wrapper in self._wrappers:
+            parameter = self.filter_acquisitions(root, wrapper)
+            description = self.get_value('SeriesDescription')
+            dataType = parameter['data_type']
+            self.classifySeries(description, dataType)
+            if dataType != 'n/a':
+                parameters.append(parameter)
+        return parameters
 
 
     def get_value(self, key):
@@ -98,7 +107,8 @@ class Dicomparser(object):
         return value in self.get_value(key)
 
 
-    def write(self, root, filename):
-        files = os.listdir(root)
-        wrapper = self.get_wrapper(root, files, False)
-        utils.write_json(wrapper.meta_ext._content, filename)
+    def log_metadata(self, wrapper, root):
+        data  = wrapper.meta_ext._content
+        data["aroot"] = root
+        utils.write_json(data, "log{}.json".format(self._log))
+        self._log += 1
