@@ -17,29 +17,29 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-
 def print_to_console(message, color):
-    print('')
     print('{}{}{}'.format(color, message, bcolors.ENDC))
 
+def new_line():
+    print('')
+
+def info(message):
+    print_to_console(message, bcolors.OKBLUE)
 
 def ok(message):
     print_to_console(message, bcolors.OKGREEN)
 
+def warning(message):
+    print_to_console(message, bcolors.WARNING)
 
 def fail(message):
     print_to_console(message, bcolors.FAIL)
-
-
-def info(message):
-    print_to_console(message, bcolors.OKBLUE)
 
 
 def load_json(filename):
     with open(filename, 'r') as f:
         data = json.load(f)
     return data
-
 
 def write_json(data, filename):
     with open(filename, 'w') as f:
@@ -48,16 +48,11 @@ def write_json(data, filename):
 
 def write_yaml(data, filename):
     with open(filename, 'w') as f:
-        yaml.dump(data, f)
+        yaml.dump(data, f, default_flow_style=False, indent=4)
 
 
 def make_directory_tree(directory):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-
-def relative_path(path, currentDir):
-    return os.path.relpath(path, currentDir)
+    if not os.path.exists(directory): os.makedirs(directory)
 
 
 def query_yes_no(question, default="yes"):
@@ -82,12 +77,11 @@ def query_yes_no(question, default="yes"):
         raise ValueError("invalid default answer: '%s'" % default)
 
     while True:
-        sys.stdout.write(question + prompt)
+        warning(question + prompt)
         choice = raw_input().lower()
         if default is not None and choice == '':
             return valid[default]
         elif choice in valid:
             return valid[choice]
         else:
-            sys.stdout.write("Please respond with 'yes' or 'no' "
-                             "(or 'y' or 'n').\n")
+            warning("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")

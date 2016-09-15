@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+from subprocess import call
+import argparse
+import dcm2bids.utils
+import sys
+
+
+def get_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+            "yaml", required=True, nargs='?',
+            help="YAML file describing your dicom",
+            )
+
+    args = parser.parse_args()
+    return args
+
+
+def main():
+    """Let's go"""
+    args = get_arguments()
+
+    print args
+    cmd = "dcm2bids -o {} -d {} -p {}".format
+    print cmd
+
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

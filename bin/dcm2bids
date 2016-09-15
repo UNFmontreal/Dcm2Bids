@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import print_function
 import argparse
 import dcm2bids
-import dcm2bids.dcm2bids_utils as utils
 import os
 import sys
 
@@ -14,38 +12,40 @@ def get_arguments():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-            "-o",
-            "--bids_dir",
-            required = True,
-            help = "BIDS directory output",
+            "-o", "--bids_dir",
+            required=True,
+            help="BIDS directory output",
             )
 
     parser.add_argument(
-            "-d",
-            "--dicom_dir",
-            required = True,
-            help = "DICOM files directory",
+            "-d", "--dicom_dir",
+            required=True,
+            help="DICOM files directory",
             )
 
     parser.add_argument(
-            "-p",
-            "--participant",
-            required = True,
-            help = "Name of the participant",
+            "-p", "--participant",
+            required=True,
+            help="Name of the participant",
             )
 
     parser.add_argument(
-            "-s",
-            "--session",
-            required = False,
-            help = "Name of the session",
+            "-s", "--session",
+            required=False, default="n/a",
+            help="Name of the session",
             )
 
     parser.add_argument(
-            "-a",
-            "--algorithm",
-            required = False,
-            help = "Algorithm describing how to parse directories",
+            "-a", "--algorithm",
+            required=False, default="DefaultParser",
+            help="Algorithm describing how to parse directories",
+            )
+
+    parser.add_argument(
+            "-y",
+            "--yes",
+            required=False, action='store_true',
+            help="Launch dcm2niibatch without asking",
             )
 
     args = parser.parse_args()
@@ -55,35 +55,37 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-    description = {}
 
-    bidsDir = os.path.abspath(args.bids_dir)
-    dicomDir = os.path.abspath(args.dicom_dir)
+    #~~~~~~~~~~~~#
+    # Validation #
+    #~~~~~~~~~~~~#
+    #bids_dir
+    args.bids_dir = os.path.abspath(args.bids_dir)
 
-    # Set description
-    description['participant'] = args.participant
-    if args.session:
-        description['session'] = args.session
+    #dicom_dir
+    if os.path.isdir(args.dicom_dir):
+        args.dicom_dir = os.path.abspath(args.dicom_dir)
     else:
-        description['session'] = 'n/a'
-
-    # Set algorithm
-    algorithmClass = {
-            'default': 'DefaultParser',
-            'apneemci': 'ApneeMciParser',
-            }
-    algorithmKey = args.algorithm
-    if algorithmKey == None:
-        algorithm = algorithmClass['default']
-    elif algorithmClass.has_key(algorithmKey):
-        algorithm = algorithmClass[algorithmKey]
-    else:
-        utils.fail("{}: algorithm not implemented".format(algorithmKey))
-        utils.info("Implemented algorithm:")
-        print(*algorithmClass.keys(), sep="\n")
+        dcm2bids.utils.fail("{}: is not a directory".format(args.dicom_dir))
         return 0
 
-    app = dcm2bids.App(bidsDir, dicomDir, description, algorithm)
+    #participant
+    # All good
+
+    #session
+    # All good
+
+    #algorithm
+    if hasattr(dcm2bids.studyparser, args.algorithm):
+        pass
+    else:
+        dcm2bids.utils.fail(
+                "{}: algorithm not implemented".format(args.algorithm))
+        dcm2bids.utils.info(
+                "Implemented algorithm: DefaultParser, ApneeMciParser")
+        return 0
+
+    app = dcm2bids.App(args)
     return app.run()
 
 

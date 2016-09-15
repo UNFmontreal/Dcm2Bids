@@ -1,58 +1,98 @@
 # -*- coding: utf-8 -*-
 
 
-from dicomparser import Dicomparser
-import dcm2bids_utils as utils
 import os
+import utils
 
 
 class Acquisition(object):
     """
     """
 
-
-    def __init__(self, description, dicomDir, participant, session):
-        self._description = description
-        self._dicomDir = dicomDir
-        self._participant = participant
+    def __init__(self, inDir, stack, session=None):
+        self._inDir = inDir
+        self._stack = stack
         self._session = session
-
-
-    @property
-    def dataType(self):
-        return self._description['data_type']
-
-
-    @property
-    def suffix(self):
-        result = ''
-        if not self._session.isSingle():
-            result += '{}_'.format(self._session.name)
-        if self._description.has_key('custom_labels'):
-            for key, value in self._description['custom_labels'].iteritems():
-                result += '{}-{}_'.format(key, value)
-        result += self._description['suffix']
-        return result
-
-
-    @property
-    def in_dir(self):
-        return os.path.join(self._dicomDir, self._description['directory'])
-
-
-    @property
-    def out_dir(self):
-        out_dir = os.path.join(self._session.directory, self.dataType)
-        utils.make_directory_tree(out_dir)
-        return os.path.join(out_dir)
+        self._dataType = None
+        self._suffix = None
+        self._customLabels = None
+        self._description = None
 
 
     @property
     def filename(self):
-        return '{}_{}'.format(self._participant.name, self.suffix)
+        return "{}_{}".format(self._session.prefix, self.postfix)
+
+    @property
+    def inDir(self):
+        return self._inDir
+
+    @property
+    def outDir(self):
+        return os.path.join(self._session.directory, self.dataType)
 
 
-    def writeJson(self, out_dir):
-        parser = Dicomparser(self._dicomDir)
-        filename = '{}.json'.format(self.filename)
-        parser.write(self._dicomDir, os.path.join(out_dir, filename))
+    @property
+    def wrapper(self):
+        return self._stack.to_nifti_wrapper()
+
+
+    @property
+    def session(self):
+        return self._session
+
+    @session.setter
+    def session(self, value):
+        self._session= value
+
+
+    @property
+    def dataType(self):
+        return self._dataType
+
+    @dataType.setter
+    def dataType(self, value):
+        self._dataType = value
+
+
+    @property
+    def suffix(self):
+        return self._suffix
+
+    @suffix.setter
+    def suffix(self, value):
+        self._suffix = value
+
+
+    @property
+    def customLabels(self):
+        return self._customLabels
+
+    @customLabels.setter
+    def customLabels(self, value):
+        self._customLabels = value
+
+
+    @property
+    def description(self):
+        return self._description
+
+    @description.setter
+    def description(self, value):
+        self._description = value
+
+
+    @property
+    def postfix(self):
+        postfix = ''
+        if self.customLabels != None:
+            for key, value in self.customLabels.iteritems():
+                postfix += '{}-{}_'.format(key, value)
+        postfix += self.suffix
+        return postfix
+
+    def update_json(self):
+        jsonFile = os.path.join(self.out_dir, "{}.json".format(self.filename))
+        data = utils.load_json(jsonFile)
+        data.update(self.wrapper.meta_ext._content)
+        utils.write_json(data, jsonFile)

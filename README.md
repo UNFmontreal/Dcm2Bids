@@ -4,8 +4,6 @@ Dcm2Bids convert DICOM files to [Brain Imaging Data Structure][bids] (BIDS).
 
 Learn more about BIDS and read the [specifications][bids-spec].
 
-## version: 0.3.2dev
-
 # Usage
 
 1. `dcm2bids -o <BIDS dir> -d <DICOM dir> -p <participant> -a <algorithm to parse your DICOM dir>`

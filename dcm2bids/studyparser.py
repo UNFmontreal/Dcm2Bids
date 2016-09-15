@@ -2,16 +2,16 @@
 
 
 from dicomparser import Dicomparser
-import dcm2bids_utils as utils
+import utils
 import os
 
 
 class DefaultParser(Dicomparser):
 
 
-    def __init__(self, dicomsDir):
-        Dicomparser.__init__(self, dicomsDir)
-        self.excludedSeries = [
+    def __init__(self, dicomsDir, session):
+        Dicomparser.__init__(self, dicomsDir, session)
+        self.exclusionCriteria = [
                 'PD',
                 '_ADC',
                 '_COLFA',
@@ -22,54 +22,59 @@ class DefaultParser(Dicomparser):
                 ]
 
 
-    def filter_acquisitions(self, root, wrapper):
-        parameter = {}
-        self.wrapper = wrapper
-        parameter['directory'] = root
+    def setup_criteria(self, acq):
 
-        if self.is_in('FLAIR', 'SeriesDescription'):
-            parameter['data_type'] = 'anat'
-            parameter['suffix'] = 'FLAIR'
+        imageType = self.get_value('ImageType')
+        phaseEncoding = self.get_value(
+                'CsaImage.PhaseEncodingDirectionPositive')
 
-        elif self.is_in('T2', 'SeriesDescription'):
-            parameter['data_type'] = 'anat'
-            parameter['suffix'] = 'T2w'
+        if 'FLAIR' in acq.description:
+            acq.dataType = 'anat'
+            acq.suffix = 'FLAIR'
 
-        elif self.is_in('MPRAGE', 'SeriesDescription'):
-            parameter['data_type'] = 'anat'
-            parameter['suffix'] = 'T1w'
+        elif 'T2' in acq.description:
+            acq.dataType = 'anat'
+            acq.suffix = 'T2w'
 
-        elif self.is_in('DIFFUSION', 'ImageType'):
-            if self.is_in('MOSAIC', 'ImageType'):
-                parameter['data_type'] = 'dwi'
-                parameter['suffix'] = 'dwi'
+        elif 'MPRAGE' in acq.description:
+            acq.dataType = 'anat'
+            acq.suffix = 'T1w'
+
+        elif 'DIFFUSION' in imageType:
+            if 'MOSAIC' in imageType:
+                acq.dataType = 'dwi'
+                acq.suffix = 'dwi'
             else:
-                #self.log_metadata(self.wrapper, root)
-                parameter['data_type'] = 'fmap'
-                parameter['suffix'] = 'epi'
-                #print self.get_value('CsaImage.PhaseEncodingDirectionPositive')
-                if self.is_equal(1, 'CsaImage.PhaseEncodingDirectionPositive'):
-                    parameter['custom_labels'] = {'dir': 'ap'}
-                elif self.is_equal(0, 'CsaImage.PhaseEncodingDirectionPositive'):
-                    parameter['custom_labels'] = {'dir': 'pa'}
-                elif self.is_in('AP', 'SeriesDescription'):
-                    parameter['custom_labels'] = {'dir': 'ap'}
-                elif self.is_in('PA', 'SeriesDescription'):
-                    parameter['custom_labels'] = {'dir': 'pa'}
+                acq.dataType = 'fmap'
+                acq.suffix = 'epi'
+                if 1 == phaseEncoding:
+                    acq.customLabels = {'dir': 'ap'}
+                elif 0 == phaseEncoding:
+                    acq.customLabels = {'dir': 'pa'}
+                elif 'AP' in acq.description:
+                    acq.customLabels = {'dir': 'ap'}
+                elif 'PA' in acq.description:
+                    acq.customLabels = {'dir': 'pa'}
                 else:
-                    parameter['data_type'] = 'n/a'
+                    acq.dataType = 'n/a'
 
         else:
-            parameter['data_type'] = 'n/a'
-
-        return parameter
+            acq.dataType = 'n/a'
 
 
 class ApneeMciParser(Dicomparser):
 
 
-    def __init__(self, dicomsDir):
-        Dicomparser.__init__(self, dicomsDir)
+    def __init__(self, dicomsDir, session):
+        Dicomparser.__init__(self, dicomsDir, session)
+        self.exclusionCriteria = [
+                '_FA',
+                '_COLFA',
+                '_ADC',
+                '_TENSOR',
+                '_TRACEW',
+                'localizer',
+                ]
         self.echoTime = {
                 1.64: '01',
                 3.5: '02',
@@ -78,55 +83,46 @@ class ApneeMciParser(Dicomparser):
                 }
 
 
-    @property
-    def excluded_dir_strings(self):
-        return [
-                '_FA',
-                '_COLFA',
-                '_ADC',
-                '_TENSOR',
-                '_TRACEW',
-                'localizer',
-                ]
+    def setup_criteria(self, acq):
 
+        imageType = self.get_value('ImageType')
+        phaseEncoding = self.get_value(
+                'CsaImage.PhaseEncodingDirectionPositive')
 
-    def filter_parameters(self):
-        for root, wrapper in self.get_wrappers(oneDcm=True):
-            parameter = {}
-            self.wrapper = wrapper
-            parameter['directory'] = self.relpath(root)
+        if 'FLAIR' in acq.description:
+            acq.dataType = 'anat'
+            acq.suffix = 'FLAIR'
 
-            if self.is_in('FLAIR', 'SeriesDescription'):
-                parameter['data_type'] = 'anat'
-                parameter['suffix'] = 'FLAIR'
+        elif 'T2' in acq.description:
+            acq.dataType = 'anat'
+            acq.suffix = 'T2w'
 
-            elif self.is_in('T2', 'SeriesDescription'):
-                parameter['data_type'] = 'anat'
-                parameter['suffix'] = 'T2w'
-
-            elif self.is_in('MEMPRAGE', 'SeriesDescription'):
-                parameter['data_type'] = 'anat'
-                parameter['suffix'] = 'T1w'
-                if self.is_equal(1, 'NumberOfAverages'):
-                    num = self.echoTime[self.get_value('EchoTime')]
-                    parameter['custom_labels'] = {'acq': num}
-                else:
-                    parameter['custom_labels'] = {'acq': 'RMS'}
-
-            elif self.is_in('DIFFUSION', 'ImageType'):
-                if self.is_in('MOSAIC', 'ImageType'):
-                    parameter['data_type'] = 'dwi'
-                    parameter['suffix'] = 'dwi'
-                else:
-                    parameter['data_type'] = 'fmap'
-                    parameter['suffix'] = 'epi'
-                    if self.is_equal(1, 'CsaImage.PhaseEncodingDirectionPositive'):
-                        parameter['custom_labels'] = {'dir': 'ap'}
-                    else:
-                        parameter['custom_labels'] = {'dir': 'pa'}
-
+        elif 'MPRAGE' in acq.description:
+            acq.dataType = 'anat'
+            acq.suffix = 'T1w'
+            if 1 == self.get_value('NumberOfAverages'):
+                num = self.echoTime[self.get_value('EchoTime')]
+                acq.customLabels = {'acq': num}
             else:
-                parameter['data_type'] = 'n/a'
+                acq.customLabels = {'acq': 'RMS'}
 
-            self.classifyDir(self.relpath(root), parameter['data_type'])
-            self._parameters.append(parameter)
+        elif 'DIFFUSION' in imageType:
+            if 'MOSAIC' in imageType:
+                acq.dataType = 'dwi'
+                acq.suffix = 'dwi'
+            else:
+                acq.dataType = 'fmap'
+                acq.suffix = 'epi'
+                if 1 == phaseEncoding:
+                    acq.customLabels = {'dir': 'ap'}
+                elif 0 == phaseEncoding:
+                    acq.customLabels = {'dir': 'pa'}
+                elif 'AP' in acq.description:
+                    acq.customLabels = {'dir': 'ap'}
+                elif 'PA' in acq.description:
+                    acq.customLabels = {'dir': 'pa'}
+                else:
+                    acq.dataType = 'n/a'
+
+        else:
+            acq.dataType = 'n/a'
