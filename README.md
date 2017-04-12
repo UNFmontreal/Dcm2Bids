@@ -1,41 +1,71 @@
 # Dcm2Bids
 
-Dcm2Bids convert DICOM files to [Brain Imaging Data Structure][bids] (BIDS).
+Dcm2Bids helps you to convert DICOM files of a study to [Brain Imaging Data Structure][bids] (BIDS).
 
 Learn more about BIDS and read the [specifications][bids-spec].
 
+# Install
+
+```
+git clone https://github.com/cbedetti/Dcm2Bids
+```
+
+Add the installation directory to your PYTHONPATH and the `scripts` directory to your PATH.
+
+### Software dependencies
+
+- [dcm2niix][dcm2niix-github] with `dcm2niibatch` compiled
+
+### Python dependencies
+
+The file `environment.yml` contains the python dependencies. It's possible to create a `dcm2bids` python environment with [conda][conda].
+
+```
+conda config --add channels conda-forge
+conda env create -f environment.yml
+```
+
 # Usage
 
-1. `dcm2bids -o <BIDS dir> -d <DICOM dir> -p <participant> -a <algorithm to parse your DICOM dir>`
+```
+dcm2bids [-h] -o BIDS_DIR -d DICOM_DIR -p PARTICIPANT [-s SESSION] -c CONFIG [-n]
+```
 
-It's possible to add a session with the key `-s`
+You need to build the config file of your study to let `dcm2bids` associate your acquisitions with the right dicoms through dicom header fields. Every study is different and this step needs a little bit of work.
 
-# DICOM directories algorithm parser
+The configuration uses the `json` format and one example is provided in the `example` directory.
 
-Every study is different and this step needs a little bit of work.
+### batch options
 
-The logic is in `studyparser.py` and parse different part of the metadata to filter the DICOM directories.
+```
+{
+    "batch_options": {
+        "isGz": true,
+        "isFlipY": false,
+        "isVerbose": false,
+        "isCreateBIDS": true,
+        "isOnlySingleFile": false
+    }
+}
+```
 
-It creates a batch file in YAML format to feed `dcm2niibatch`.
+This is the options needed for `dcm2niibatch`. Keep them like that.
+
+### descriptions
+
+The description field is a list of dictionnary. Each dictionnary describes one acquisition.
+
+# Output
+
+The script creates a batch file and save it in the `code` directory of your BIDS folder. It execute automatically `dcm2niibatch` after that. It is possible to do a dry run if you add the option `-n`.
 
 # DICOM to NIfTI conversion
 
-Conversion is done with `dcm2niix` through `dcm2niibatch` tool. See [dcm2niix][dcm2niix] github.
+Conversion is done with `dcm2niibatch`, a tool from dcm2niix converter. See their [github][dcm2niix-github] for source or [NITRC][dcm2niix-nitrc] for compiled versions.
 
-# Metadata
-
-[dcmstack][dcmstack] is used to extract metadata from DICOM files with default filtering.
-
-IT IS YOUR RESPONSIBILITY TO KNOW IF THERE IS PRIVATE HEALTH INFORMATION IN THE METADATA EXTRACTED BY THIS PROGRAM.
-
-# To Do
-
-- find a more pleasant way for the user to enter algotithm
-- add bids validator
-- doc strings
-- write test
 
 [bids]: http://bids.neuroimaging.io/
 [bids-spec]: http://bids.neuroimaging.io/#download
-[dcmstack]: https://github.com/moloney/dcmstack
-[dcm2niix]: https://github.com/neurolabusc/dcm2niix
+[conda]: https://conda.io/docs/
+[dcm2niix-github]: https://github.com/rordenlab/dcm2niix
+[dcm2niix-nitrc]: https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage

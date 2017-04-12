@@ -1,0 +1,5 @@
+name: dcm2bids
+dependencies:
+    - future
+    - pydicom
+    - pyyaml

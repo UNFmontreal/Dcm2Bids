@@ -2,52 +2,61 @@
 
 
 from subprocess import call
-import utils
 import os
+import yaml
+
+
+def make_directory_tree(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
 
 class Batch(object):
     """
     """
 
-    def __init__(self, codeDir, session):
-        self._codeDir = codeDir
-        self._session = session
-        self._yamlName = "{}.yaml".format(self._session.prefix)
-        self._cmdTemplate = 'dcm2niibatch {}'
-        self._yamlFile = os.path.join(self._codeDir, self._yamlName)
-        self._options = {
-                "isGz": True,
-                "isFlipY": False,
-                "isVerbose": False,
-                "isCreateBIDS": True,
-                "isOnlySingleFile": False,
-                }
-        self._files = []
+    def __init__(self, options, bidsDir, participant):
+        self.options = options
+        self.bidsDir = bidsDir
+        self.participant = participant
+        self.files = []
+        self.codeDir = os.path.join(os.path.abspath(bidsDir), 'code')
+        self.yaml = os.path.join(
+                self.codeDir, "{}.yml".format(participant.prefix))
 
-    @property
-    def data(self):
-        return {"Options": self._options, "Files": self._files}
 
-    @property
-    def command(self):
-        return self._cmdTemplate.format(self._yamlName)
-
-    def add(self, acq):
-        utils.make_directory_tree(acq.outDir)
-        self._files.append({
-                "filename": acq.filename,
-                "in_dir": os.path.relpath(acq.inDir, self._codeDir),
-                "out_dir": os.path.relpath(acq.outDir, self._codeDir),
+    def add(self, acquisition):
+        filename = "{}_{}".format(self.participant.prefix, acquisition.suffix)
+        in_dir = os.path.relpath(
+                os.path.dirname(acquisition.dicomPath),
+                self.codeDir)
+        out_dir = os.path.relpath(os.path.join(
+                self.bidsDir,
+                self.participant.directory,
+                acquisition.dataType), self.codeDir)
+        self.files.append({
+                "filename": filename,
+                "in_dir": in_dir,
+                "out_dir": out_dir,
                 })
 
+
     def write(self):
-        utils.write_yaml(self.data, self._yamlFile)
+        make_directory_tree(self.codeDir)
+        data = {"Options": self.options, "Files": self.files}
+        with open(self.yaml, 'w') as f:
+            yaml.dump(data, f, default_flow_style=False, indent=4)
+
 
     def show(self):
-        with open(self._yamlFile, 'r') as f:
-            utils.info(f.read())
+        with open(self.yaml, 'r') as f:
+            print(f.read())
 
-    def launch(self):
-        os.chdir(self._codeDir)
-        call(self.command, shell=True)
+
+    def execute(self):
+        command = "dcm2niibatch {}".format(self.yaml)
+        os.chdir(self.codeDir)
+        for f in self.files:
+            make_directory_tree(f["out_dir"])
+        call(command, shell=True)
+
