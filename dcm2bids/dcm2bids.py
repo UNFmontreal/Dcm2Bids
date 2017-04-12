@@ -36,6 +36,20 @@ class Dcm2bids(object):
     def session(self, value):
         self.participant.session = value
 
+    @property
+    def options(self):
+        if "dcm2bids_options" in self.config:
+            return self.config["dcm2bids_options"]
+        else:
+            return {}
+
+    @property
+    def force(self):
+        if "force" in self.options:
+            return self.options["force"]
+        else:
+            return False
+
 
     def acquisitions(self):
         for root, dirs, files in os.walk(self.dicomDir):
@@ -44,7 +58,7 @@ class Dcm2bids(object):
                     continue
                 else:
                     dicomPath = os.path.join(root, f)
-                    dcm = Dcmparser(dicomPath)
+                    dcm = Dcmparser(dicomPath, self.force)
                     if dcm.isDicom():
                         yield dcm.search_from(self.config["descriptions"])
                         break

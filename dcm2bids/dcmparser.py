@@ -9,14 +9,15 @@ from .structure import Acquisition
 
 class Dcmparser(object):
 
-    def __init__(self, dicomPath):
+    def __init__(self, dicomPath, force=False):
         self.ds = None
         self.dicomPath = dicomPath
+        self.force = force
 
 
     def isDicom(self):
         try:
-            self.ds = dicom.read_file(self.dicomPath)
+            self.ds = dicom.read_file(self.dicomPath, force=self.force)
         except InvalidDicomError:
             self.ds = None
         return self.ds is not None

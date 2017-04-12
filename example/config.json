@@ -1,4 +1,7 @@
 {
+    "dcm2bids_options":{
+        "force": false
+    },
     "batch_options": {
         "isGz": true,
         "isFlipY": false,
