@@ -55,8 +55,8 @@ class Acquisition(object):
     """
     """
 
-    def __init__(self, dicomPath, dataType, suffix, customLabels=None):
-        self.dicomPath = dicomPath
+    def __init__(self, base, dataType, suffix, customLabels=None):
+        self.base = base
         self.dataType = dataType
         self._suffix = suffix
         self.customLabels = customLabels

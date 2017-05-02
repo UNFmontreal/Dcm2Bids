@@ -1,71 +1,55 @@
 {
-    "dcm2bids_options":{
-        "force": false
-    },
-    "batch_options": {
-        "isGz": true,
-        "isFlipY": false,
-        "isVerbose": false,
-        "isCreateBIDS": true,
-        "isOnlySingleFile": false
-    },
     "descriptions": [
         {
             "dataType": "anat",
             "suffix": "T1w",
             "criteria": {
-                "is": {
-                    "SeriesDescription": "MPRAGE"
-                }
-            }
-        },
-        {
-            "dataType": "anat",
-            "suffix": "FLAIR",
-            "criteria": {
-                "in": {
-                    "SeriesDescription": "FLAIR"
-                }
+                "in": {"SeriesDescription": "T1W_3D"}
             }
         },
         {
             "dataType": "anat",
             "suffix": "T2w",
             "criteria": {
-                "in": {
-                    "SeriesDescription": "T2"
-                }
+                "in": {"SeriesDescription": "TSE"},
+                "equal": {"EchoTime": 0.1}
+            }
+        },
+        {
+            "dataType": "anat",
+            "suffix": "PD",
+            "criteria": {
+                "in": {"SeriesDescription": "TSE"},
+                "equal": {"EchoTime": 0.008}
+            }
+        },
+        {
+            "dataType": "anat",
+            "suffix": "FLAIR",
+            "criteria": {
+                "in": {"SeriesDescription": "FLAIR"}
             }
         },
         {
             "dataType": "dwi",
             "suffix": "dwi",
             "criteria": {
-                "in": {
-                    "ImageType": ["DIFFUSION", "MOSAIC"]
-                }
+                "in": {"SeriesDescription": "DWI"}
             }
         },
         {
-            "dataType": "fmap",
-            "suffix": "epi",
-            "customLabels": "dir-pa",
+            "dataType": "anat",
+            "suffix": "SWI",
             "criteria": {
-                "in": {
-                    "ImageType": "DIFFUSION",
-                    "SeriesDescription": "ep2d_diff_PA"
-                }
+                "in": {"SeriesDescription": "SWI"}
             }
         },
         {
-            "dataType": "fmap",
-            "suffix": "epi",
-            "customLabels": "dir-ap",
+            "dataType": "func",
+            "suffix": "bold",
+            "customLabels": "task-rest",
             "criteria": {
-                "in": {
-                    "ImageType": "DIFFUSION",
-                    "SeriesDescription": "ep2d_diff_AP"
-                }
+                "equal": {"SeriesDescription": "rs_fMRI"}
             }
         }
     ]

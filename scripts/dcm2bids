@@ -3,7 +3,6 @@
 
 
 import argparse
-import os
 import sys
 from dcm2bids.dcm2bids import Dcm2bids
 
@@ -15,12 +14,6 @@ def get_arguments():
             epilog="""
             Documentation at https://github.com/cbedetti/Dcm2Bids
             """)
-
-    parser.add_argument(
-            "-o", "--bids_dir",
-            required=True,
-            help="BIDS directory output",
-            )
 
     parser.add_argument(
             "-d", "--dicom_dir",
@@ -47,10 +40,10 @@ def get_arguments():
             )
 
     parser.add_argument(
-            "-n",
-            "--dryrun",
+            "-y",
+            "--yes",
             required=False, action='store_true',
-            help="Do not launch dcm2niibatch",
+            help="Always reply yes to continue",
             )
 
     args = parser.parse_args()
@@ -60,7 +53,6 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-
     app = Dcm2bids(**vars(args))
     return app.run()
 

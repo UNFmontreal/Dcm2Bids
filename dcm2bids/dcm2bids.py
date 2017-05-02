@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 
 
+import glob
 import os
-import json
-from .batch import Batch
-from .dcmparser import Dcmparser
-from .structure import Acquisition, Participant
-
-
-def load_json(filename):
-    with open(filename, 'r') as f:
-        data = json.load(f)
-    return data
+from builtins import input
+from .dcm2niix import Dcm2niix
+from .sidecarparser import Sidecarparser
+from .structure import Participant
+from .utils import load_json, make_directory_tree, splitext_
 
 
 class Dcm2bids(object):
     """
     """
 
-    def __init__(self, bids_dir, dicom_dir, config, participant,
-            session=None, dryrun=False):
+    def __init__(self, dicom_dir, config, yes, participant, session=None):
         self.dicomDir = dicom_dir
         self.config = load_json(config)
+        self.yes = yes
         self.participant = Participant(participant, session)
-        self.batch = Batch(
-                self.config["batch_options"], bids_dir, self.participant)
-        self.dryrun = dryrun
 
 
     @property
@@ -36,46 +29,48 @@ class Dcm2bids(object):
     def session(self, value):
         self.participant.session = value
 
-    @property
-    def options(self):
-        if "dcm2bids_options" in self.config:
-            return self.config["dcm2bids_options"]
-        else:
-            return {}
-
-    @property
-    def force(self):
-        if "force" in self.options:
-            return self.options["force"]
-        else:
-            return False
-
-
-    def acquisitions(self):
-        for root, dirs, files in os.walk(self.dicomDir):
-            for f in sorted(files):
-                if f.startswith('.') == True:
-                    continue
-                else:
-                    dicomPath = os.path.join(root, f)
-                    dcm = Dcmparser(dicomPath, self.force)
-                    if dcm.isDicom():
-                        yield dcm.search_from(self.config["descriptions"])
-                        break
-                    else:
-                        continue
-
 
     def run(self):
-        for acquisition in self.acquisitions():
-            if acquisition is not None:
-                self.batch.add(acquisition)
-            else:
-                pass
-        self.batch.write()
-        if self.dryrun:
-            self.batch.show()
-        else:
-            self.batch.execute()
+        dcm2niix = Dcm2niix(self.dicomDir, self.participant)
+        dcm2niix.run()
+        parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
+
+        for acq in parser.acquisitions:
+            state = self._move(acq)
+            if state != 0: return state
         return 0
+
+
+    def _move(self, acquisition):
+        targetDir = os.path.join(
+                os.getcwd(), self.participant.directory, acquisition.dataType)
+        filename = "{}_{}".format(self.participant.prefix, acquisition.suffix)
+        targetBase = os.path.join(targetDir, filename)
+
+        targetNiigz = targetBase + ".nii.gz"
+        if os.path.isfile(targetNiigz) and not self.yes:
+            reply = self._ask(targetNiigz)
+            if reply == "q":
+                return 1
+            elif reply == "a":
+                self.yes = True
+
+        make_directory_tree(targetDir)
+        for f in glob.glob(acquisition.base + ".*"):
+            _, ext = splitext_(f)
+            os.rename(f, targetBase + ext)
+
+        return 0
+
+
+    def _ask(self, target):
+        print("")
+        print("'{}' already exists".format(os.path.basename(target)))
+        print("This file will be erase and replace if you continue")
+        while True:
+            p = "Do you want to (q)uit, (c)ontinue or continue for (a)ll? "
+            reply = input(p)
+            if reply == "c" or reply == "q" or reply == "a":
+                break
+        return reply
 

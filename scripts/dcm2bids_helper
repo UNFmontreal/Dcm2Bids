@@ -4,25 +4,22 @@
 
 import argparse
 import sys
+from dcm2bids.dcm2niix import Dcm2niix
 
 
 def get_arguments():
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description="""
-            """,
+            description="",
             epilog="""
-
-            Not Implemented
-
+            Documentation at https://github.com/cbedetti/Dcm2Bids
             """)
 
-    '''
     parser.add_argument(
-            "yaml", required=True, nargs='?',
-            help="YAML file describing your dicom",
+            "-d", "--dicom_dir",
+            required=True,
+            help="DICOM files directory",
             )
-    '''
 
     args = parser.parse_args()
     return args
@@ -31,12 +28,8 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-
-    #print args
-    #cmd = "dcm2bids -o {} -d {} -p {}".format
-    #print cmd
-
-    return 0
+    app = Dcm2niix(**vars(args))
+    return app.run()
 
 
 if __name__ == '__main__':
