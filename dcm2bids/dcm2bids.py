@@ -3,7 +3,6 @@
 
 import glob
 import os
-from builtins import input
 from .dcm2niix import Dcm2niix
 from .sidecarparser import Sidecarparser
 from .structure import Participant
@@ -14,10 +13,10 @@ class Dcm2bids(object):
     """
     """
 
-    def __init__(self, dicom_dir, config, yes, participant, session=None):
+    def __init__(self, dicom_dir, config, clobber, participant, session=None):
         self.dicomDir = dicom_dir
         self.config = load_json(config)
-        self.yes = yes
+        self.clobber = clobber
         self.participant = Participant(participant, session)
 
 
@@ -36,8 +35,8 @@ class Dcm2bids(object):
         parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
 
         for acq in parser.acquisitions:
-            state = self._move(acq)
-            if state != 0: return state
+            self._move(acq)
+
         return 0
 
 
@@ -48,29 +47,19 @@ class Dcm2bids(object):
         targetBase = os.path.join(targetDir, filename)
 
         targetNiigz = targetBase + ".nii.gz"
-        if os.path.isfile(targetNiigz) and not self.yes:
-            reply = self._ask(targetNiigz)
-            if reply == "q":
-                return 1
-            elif reply == "a":
-                self.yes = True
-
-        make_directory_tree(targetDir)
-        for f in glob.glob(acquisition.base + ".*"):
-            _, ext = splitext_(f)
-            os.rename(f, targetBase + ext)
-
-        return 0
-
-
-    def _ask(self, target):
-        print("")
-        print("'{}' already exists".format(os.path.basename(target)))
-        print("This file will be erase and replace if you continue")
-        while True:
-            p = "Do you want to (q)uit, (c)ontinue or continue for (a)ll? "
-            reply = input(p)
-            if reply == "c" or reply == "q" or reply == "a":
-                break
-        return reply
+        if not os.path.isfile(targetNiigz):
+            make_directory_tree(targetDir)
+            for f in glob.glob(acquisition.base + ".*"):
+                _, ext = splitext_(f)
+                os.rename(f, targetBase + ext)
+        else:
+            if self.clobber:
+                print("'{}' overwrites".format(filename))
+                for f in glob.glob(targetBase + ".*"):
+                    os.remove(f)
+                for f in glob.glob(acquisition.base + ".*"):
+                    _, ext = splitext_(f)
+                    os.rename(f, targetBase + ext)
+            else:
+                print("'{}' already exists".format(filename))
 

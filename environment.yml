@@ -1,3 +1,3 @@
 name: dcm2bids
 dependencies:
-    - future
+    - future>=0.16.0

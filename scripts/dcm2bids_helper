@@ -18,6 +18,7 @@ def get_arguments():
     parser.add_argument(
             "-d", "--dicom_dir",
             required=True,
+            nargs="+",
             help="DICOM files directory",
             )
 

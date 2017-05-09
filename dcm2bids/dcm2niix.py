@@ -21,10 +21,10 @@ class Dcm2niix(object):
     @property
     def outputDir(self):
         if self.participant is None:
-            return os.path.join(os.getcwd(), 'tmp_dcm2bids', "config_help")
+            return os.path.join(os.getcwd(), "tmp_dcm2bids", "dcm2niix-example")
         else:
             return os.path.join(
-                    os.getcwd(), 'tmp_dcm2bids', self.participant.prefix)
+                    os.getcwd(), "tmp_dcm2bids", self.participant.prefix)
 
 
     def run(self):
@@ -38,6 +38,6 @@ class Dcm2niix(object):
     def execute(self):
         commandStr = "dcm2niix {} -o {} {}"
         command = commandStr.format(
-                self.options, self.outputDir, self.dicomDir)
+                self.options, self.outputDir, " ".join(self.dicomDir))
         call(command, shell=True)
 

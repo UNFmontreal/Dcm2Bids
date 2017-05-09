@@ -119,5 +119,8 @@ class Sidecarparser(object):
 
 
     def get_value(self, tag):
-        return self._sidecar[tag]
+        if tag in self._sidecar:
+            return self._sidecar[tag]
+        else:
+            return ""
 
