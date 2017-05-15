@@ -22,6 +22,12 @@ def get_arguments():
             help="DICOM files directory",
             )
 
+    parser.add_argument(
+            "-o", "--output",
+            required=False,
+            help="Name of directory inside tmp_dcm2bids",
+            )
+
     args = parser.parse_args()
     return args
 
