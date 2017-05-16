@@ -24,6 +24,9 @@ class Sidecarparser(object):
         for sidecar, index in itertools.product(
                 self.sidecars, range(len(self.descriptions))):
             self._sidecar = load_json(sidecar)
+            # store sidecar path without extension for later filename-based
+            # checks
+            self._sidecarfn = os.path.splitext(sidecar)[0]
             if self._respect(self.descriptions[index]["criteria"]):
                 graph[sidecar].append(index)
         return graph
@@ -82,9 +85,10 @@ class Sidecarparser(object):
     def _respect(self, criteria):
         isEqual = "equal" in criteria
         isIn = "in" in criteria
+        isFN = "filenamesuffix" in criteria
 
         # Check if there is some criteria
-        if not any([isEqual, isIn]):
+        if not any([isEqual, isIn, isFN]):
             return False
 
         if isEqual:
@@ -97,7 +101,12 @@ class Sidecarparser(object):
         else:
             rsl_in = True
 
-        return all([rsl_equal, rsl_in])
+        if isFN:
+            rsl_fn = self._isFilenameSuffix(criteria['filenamesuffix'])
+        else:
+            rsl_fn = True
+
+        return all([rsl_equal, rsl_in, rsl_fn])
 
 
     def _isEqual(self, criteria):
@@ -117,6 +126,11 @@ class Sidecarparser(object):
                 rsl.append(query in self.get_value(tag))
         return all(rsl)
 
+
+    def _isFilenameSuffix(self, criteria):
+        if isinstance(criteria, list):
+            return any(self._isFilenameSuffix(crit) for crit in criteria)
+        return self._sidecarfn[-len(criteria):] == criteria
 
     def get_value(self, tag):
         if tag in self._sidecar:
