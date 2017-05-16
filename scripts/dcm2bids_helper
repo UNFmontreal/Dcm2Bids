@@ -26,6 +26,7 @@ def get_arguments():
             "-o", "--output",
             required=False,
             help="Name of directory inside tmp_dcm2bids",
+            default=argparse.SUPPRESS,
             )
 
     args = parser.parse_args()
