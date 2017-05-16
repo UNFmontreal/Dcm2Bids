@@ -46,6 +46,16 @@ def get_arguments():
             help="Overwrite output if exists",
             )
 
+    parser.add_argument(
+            "-n", "--selectseries",
+            type=int,
+            required=False,
+            nargs="+",
+            default=None,
+            help="select subset of series numbers for conversion",
+            )
+
+
     args = parser.parse_args()
     return args
 

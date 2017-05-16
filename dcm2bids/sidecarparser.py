@@ -11,9 +11,10 @@ from .utils import load_json, splitext_
 
 class Sidecarparser(object):
 
-    def __init__(self, sidecars, descriptions):
+    def __init__(self, sidecars, descriptions, selectseries=None):
         self.sidecars = sidecars
         self.descriptions = descriptions
+        self.selectseries = selectseries
         self.graph = self._generateGraph()
         self.acquisitions = self._generateAcquisitions()
         self.findRuns()
@@ -23,10 +24,10 @@ class Sidecarparser(object):
         graph = OrderedDict((_, []) for _ in self.sidecars)
         for sidecar, index in itertools.product(
                 self.sidecars, range(len(self.descriptions))):
-            self._sidecar = load_json(sidecar)
-            # store sidecar path without extension for later filename-based
-            # checks
-            self._sidecarfn = os.path.splitext(sidecar)[0]
+            if self.selectseries and not self.sidecars[sidecar]["seriesnum"] in self.selectseries:
+                continue
+            self.sidecars[sidecar]["header"] = load_json(sidecar)
+            self._sidecar = self.sidecars[sidecar]
             if self._respect(self.descriptions[index]["criteria"]):
                 graph[sidecar].append(index)
         return graph
@@ -85,10 +86,11 @@ class Sidecarparser(object):
     def _respect(self, criteria):
         isEqual = "equal" in criteria
         isIn = "in" in criteria
-        isFN = "filenamesuffix" in criteria
+        isSuff = "suffix" in criteria
+        isSeries = "seriesnum" in criteria
 
         # Check if there is some criteria
-        if not any([isEqual, isIn, isFN]):
+        if not any([isEqual, isIn, isSuff, isSeries]):
             return False
 
         if isEqual:
@@ -101,12 +103,17 @@ class Sidecarparser(object):
         else:
             rsl_in = True
 
-        if isFN:
-            rsl_fn = self._isFilenameSuffix(criteria['filenamesuffix'])
+        if isSuff:
+            rsl_suff = self._isFilenameSuffix(criteria["suffix"])
         else:
-            rsl_fn = True
+            rsl_suff = True
 
-        return all([rsl_equal, rsl_in, rsl_fn])
+        if isSeries:
+            rsl_series = self._isFilenameSeries(criteria["seriesnum"])
+        else:
+            rsl_series = True
+
+        return all([rsl_equal, rsl_in, rsl_suff, rsl_series])
 
 
     def _isEqual(self, criteria):
@@ -130,11 +137,17 @@ class Sidecarparser(object):
     def _isFilenameSuffix(self, criteria):
         if isinstance(criteria, list):
             return any(self._isFilenameSuffix(crit) for crit in criteria)
-        return self._sidecarfn[-len(criteria):] == criteria
+        return self._sidecar["suffix"] == criteria
+
+
+    def _isFilenameSeries(self, criteria):
+        if isinstance(criteria, list):
+            return any(self._isFilenameSeries(crit) for crit in criteria)
+        return self._sidecar["seriesnum"] == criteria
+
 
     def get_value(self, tag):
-        if tag in self._sidecar:
-            return self._sidecar[tag]
+        if tag in self._sidecar["header"]:
+            return self._sidecar["header"][tag]
         else:
             return ""
-

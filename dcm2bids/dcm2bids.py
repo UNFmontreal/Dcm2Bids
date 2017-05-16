@@ -13,11 +13,13 @@ class Dcm2bids(object):
     """
     """
 
-    def __init__(self, dicom_dir, config, clobber, participant, session=None):
+    def __init__(self, dicom_dir, config, clobber, participant, session=None,
+                 selectseries=None):
         self.dicomDir = dicom_dir
         self.config = load_json(config)
         self.clobber = clobber
         self.participant = Participant(participant, session)
+        self.selectseries = selectseries
 
 
     @property
@@ -32,7 +34,8 @@ class Dcm2bids(object):
     def run(self):
         dcm2niix = Dcm2niix(self.dicomDir, self.participant)
         dcm2niix.run()
-        parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
+        parser = Sidecarparser(dcm2niix.sidecars,
+                               self.config["descriptions"], self.selectseries)
 
         for acq in parser.acquisitions:
             self._move(acq)
