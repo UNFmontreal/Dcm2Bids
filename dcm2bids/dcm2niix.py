@@ -49,7 +49,7 @@ class Dcm2niix(object):
 
 
     def execute(self):
-        commandStr = "dcm2niix {} -o {} {}"
-        command = commandStr.format(
-                self.options, self.outputDir, " ".join(self.dicomDir))
-        call(command, shell=True)
+        for directory in self.dicomDir:
+            commandStr = "dcm2niix {} -o {} {}"
+            command = commandStr.format(self.options, self.outputDir, directory)
+            call(command, shell=True)
