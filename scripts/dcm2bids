@@ -56,6 +56,13 @@ def get_arguments():
             )
 
 
+    parser.add_argument(
+            "-o", "--outputdir",
+            required=False,
+            default=None,
+            help="output BIDS study directory",
+            )
+
     args = parser.parse_args()
     return args
 

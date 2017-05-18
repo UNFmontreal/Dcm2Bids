@@ -4,13 +4,37 @@
 import json
 import os
 import shutil
-
+import csv
 
 def load_json(filename):
     with open(filename, 'r') as f:
         data = json.load(f)
     return data
 
+
+def save_json(data, filename):
+    with open(filename, 'w') as f:
+        json.dump(data, f)
+
+
+def write_txt(filename,lines=[]):
+    with open(filename, 'a') as f:
+        for row in lines:
+            f.write("%s\n" % row)
+
+def write_participants(filename,participants):
+    with open(filename, 'w') as f:
+        writer = csv.DictWriter(f, delimiter='\t',
+                                fieldnames=participants[0].keys())
+        writer.writeheader()
+        writer.writerows(participants)
+
+def read_participants(filename):
+    if not os.path.exists(filename):
+        return []
+    with open(filename, 'r') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        return [row for row in reader]
 
 def make_directory_tree(directory):
     if not os.path.exists(directory):
