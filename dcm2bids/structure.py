@@ -55,7 +55,7 @@ class Acquisition(object):
     """
     """
 
-    def __init__(self, base, dataType, suffix, customLabels=None):
+    def __init__(self, base, dataType, suffix, customLabels=""):
         self.base = base
         self.dataType = dataType
         self._suffix = suffix
@@ -65,7 +65,7 @@ class Acquisition(object):
     @property
     def suffix(self):
         suffix = ''
-        if self.customLabels is not None:
+        if self.customLabels:
             suffix += '{}_'.format(self.customLabels)
         suffix += self._suffix
         return suffix

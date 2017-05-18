@@ -6,7 +6,7 @@ import os
 from collections import defaultdict, OrderedDict
 from future.utils import iteritems
 from .structure import Acquisition
-from .utils import load_json, splitext_
+from .utils import load_json, save_json, splitext_
 
 
 class Sidecarparser(object):
@@ -27,6 +27,10 @@ class Sidecarparser(object):
             if self.selectseries and not self.sidecars[sidecar]["seriesnum"] in self.selectseries:
                 continue
             self.sidecars[sidecar]["header"] = load_json(sidecar)
+            if "customHeader" in self.descriptions[index]:
+                self.sidecars[sidecar]["header"].update(
+                    self.descriptions[index]["customHeader"])
+                save_json(self.sidecars[sidecar]["header"], sidecar)
             self._sidecar = self.sidecars[sidecar]
             if self._respect(self.descriptions[index]["criteria"]):
                 graph[sidecar].append(index)
@@ -67,10 +71,10 @@ class Sidecarparser(object):
             for run, acq_index in enumerate(dup):
                 runStr = "run-{:02d}".format(run+1)
                 acq = self.acquisitions[acq_index]
-                if acq.customLabels is None:
-                    acq.customLabels = runStr
-                else:
+                if acq.customLabels:
                     acq.customLabels += "_" + runStr
+                else:
+                    acq.customLabels = runStr
         print("")
 
 
@@ -78,8 +82,11 @@ class Sidecarparser(object):
         acq = Acquisition(base, desc["dataType"], desc["suffix"])
         if "customLabels" in desc:
             acq.customLabels = desc["customLabels"]
-        else:
-            acq.customLabels = None
+        if "customHeader" in desc and "TaskName" in desc["customHeader"]:
+            if acq.customLabels:
+                acq.customLabels += '_task-' + desc["customHeader"]["TaskName"]
+            else:
+                acq.customLabels = 'task-' + desc["customHeader"]["TaskName"]
         return acq
 
 

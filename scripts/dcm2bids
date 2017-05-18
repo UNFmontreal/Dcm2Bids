@@ -19,31 +19,31 @@ def get_arguments():
             "-d", "--dicom_dir",
             required=True,
             nargs="+",
-            help="DICOM files directory",
+            help="DICOM files directory(ies). Wild cards are supported.",
             )
 
     parser.add_argument(
             "-p", "--participant",
             required=True,
-            help="Name of the participant",
-            )
-
-    parser.add_argument(
-            "-s", "--session",
-            required=False, default=None,
-            help="Name of the session",
+            help="Participant number in BIDS output",
             )
 
     parser.add_argument(
             "-c", "--config",
             required=True, default=None,
-            help="json configuration file",
+            help="JSON configuration file (see example/config.json)",
+            )
+
+    parser.add_argument(
+            "-s", "--session",
+            required=False, default=None,
+            help="Session name/number",
             )
 
     parser.add_argument(
             "--clobber",
             required=False, action='store_true',
-            help="Overwrite output if exists",
+            help="Overwrite output if it exists",
             )
 
     parser.add_argument(
@@ -52,7 +52,7 @@ def get_arguments():
             required=False,
             nargs="+",
             default=None,
-            help="select subset of series numbers for conversion",
+            help="Select subset of series numbers (integers) for conversion",
             )
 
 
@@ -60,7 +60,7 @@ def get_arguments():
             "-o", "--outputdir",
             required=False,
             default=None,
-            help="output BIDS study directory",
+            help="Output BIDS study directory (default current directory)",
             )
 
     args = parser.parse_args()

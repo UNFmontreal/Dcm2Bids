@@ -47,9 +47,11 @@
         {
             "dataType": "func",
             "suffix": "bold",
-            "customLabels": "task-rest",
             "criteria": {
                 "equal": {"SeriesDescription": "rs_fMRI"}
+            }
+            "customHeader": {
+                "TaskName": "rest"
             }
         }
     ]
