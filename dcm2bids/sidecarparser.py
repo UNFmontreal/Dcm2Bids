@@ -27,13 +27,13 @@ class Sidecarparser(object):
             if self.selectseries and not self.sidecars[sidecar]["seriesnum"] in self.selectseries:
                 continue
             self.sidecars[sidecar]["header"] = load_json(sidecar)
-            if "customHeader" in self.descriptions[index]:
-                self.sidecars[sidecar]["header"].update(
-                    self.descriptions[index]["customHeader"])
-                save_json(self.sidecars[sidecar]["header"], sidecar)
             self._sidecar = self.sidecars[sidecar]
             if self._respect(self.descriptions[index]["criteria"]):
                 graph[sidecar].append(index)
+                if "customHeader" in self.descriptions[index]:
+                    self.sidecars[sidecar]["header"].update(
+                        self.descriptions[index]["customHeader"])
+                    save_json(self.sidecars[sidecar]["header"], sidecar)
         return graph
 
 
