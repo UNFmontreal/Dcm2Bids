@@ -70,6 +70,14 @@ def get_arguments():
             help="Set logging level (the log file is written to outputdir)",
             )
 
+    parser.add_argument(
+        "-a", "--anonymizer",
+        required=False,
+        default=None,
+        help="Anonymize each anat image by passing it to this shell command \
+        (e.g., pydeface.py - the call syntax must be anonymizer inputfile \
+        outputfile)")
+
     args = parser.parse_args()
     return args
 

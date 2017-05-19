@@ -23,7 +23,8 @@ DICOM to NIfTI conversion is done with `dcm2niix` converter. See their [github][
 ```
 usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT -c CONFIG
                 [-s SESSION] [--clobber] [-n SELECTSERIES [SELECTSERIES ...]]
-                [-o OUTPUTDIR]
+                [-o OUTPUTDIR] [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                [-a ANONYMIZER]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -42,6 +43,13 @@ optional arguments:
   -o OUTPUTDIR, --outputdir OUTPUTDIR
                         Output BIDS study directory (default current
                         directory)
+  -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                        Set logging level (the log file is written to
+                        outputdir)
+  -a ANONYMIZER, --anonymizer ANONYMIZER
+                        Anonymize each anat image by passing it to this shell
+                        command (e.g., pydeface.py - the call syntax must be
+                        anonymizer inputfile outputfile)
 ```
 
 #### Descriptions

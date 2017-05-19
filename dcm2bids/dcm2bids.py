@@ -10,6 +10,7 @@ from .dcm2niix import Dcm2niix
 from .sidecarparser import Sidecarparser
 from .structure import Participant
 from .utils import load_json, make_directory_tree, splitext_, save_json, write_txt, read_participants, write_participants
+from subprocess import call
 
 
 class Dcm2bids(object):
@@ -17,15 +18,17 @@ class Dcm2bids(object):
     """
 
     def __init__(self, dicom_dir, config, clobber, participant, session=None,
-                 selectseries=None, outputdir=os.getcwd(),loglevel="INFO"):
+                 selectseries=None, outputdir=os.getcwd(), loglevel="INFO", anonymizer=None):
         self.dicom_dir = dicom_dir
         self.config = load_json(config)
         self.clobber = clobber
+        self.extension = '.nii.gz'
         self.participant = Participant(participant, session)
         self.selectseries = selectseries
         derivdir = os.path.join(outputdir, "derivatives")
         self.outputdir = os.path.join(outputdir,"sourcedata")
         self.dicomdir = os.path.join(outputdir,'tmp_dcm2bids')
+        self.anonymizer = anonymizer
         if not os.path.exists(self.outputdir):
             os.makedirs(self.outputdir)
         if not os.path.exists(derivdir):
@@ -80,13 +83,8 @@ class Dcm2bids(object):
         filename = "{}_{}".format(self.participant.prefix, acquisition.suffix)
         targetBase = os.path.join(targetDir, filename)
 
-        targetNiigz = targetBase + ".nii.gz"
-        if not os.path.isfile(targetNiigz):
-            make_directory_tree(targetDir)
-            for f in glob.glob(acquisition.base + ".*"):
-                _, ext = splitext_(f)
-                os.rename(f, targetBase + ext)
-        else:
+        # need to test for both because dcm2niix sometimes refuses to compress
+        if os.path.isfile(targetBase + ".nii.gz") or os.path.isfile(targetBase + ".nii"):
             if self.clobber:
                 print("'{}' overwrites".format(filename))
                 for f in glob.glob(targetBase + ".*"):
@@ -96,6 +94,20 @@ class Dcm2bids(object):
                     os.rename(f, targetBase + ext)
             else:
                 print("'{}' already exists".format(filename))
+                return
+        # if we make it this far, we can copy away
+        make_directory_tree(targetDir)
+        for f in glob.glob(acquisition.base + ".*"):
+            _, ext = splitext_(f)
+            if self.anonymizer and acquisition.dataType=='anat' and ".nii" in ext:
+                # it's an anat scan - try the anonymizer
+                command = " ".join([self.anonymizer,f,targetBase + ext])
+                self.logger.info("anonymizing anatomical with %s: %s",
+                                 self.anonymizer,targetBase + ext)
+                call(command, shell=True)
+            else:
+                # just move
+                os.rename(f, targetBase + ext)
 
 
     def _updatestudyfiles(self):
