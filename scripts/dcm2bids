@@ -55,12 +55,19 @@ def get_arguments():
             help="Select subset of series numbers (integers) for conversion",
             )
 
-
     parser.add_argument(
             "-o", "--outputdir",
             required=False,
             default=None,
             help="Output BIDS study directory (default current directory)",
+            )
+
+    parser.add_argument(
+            "-l", "--loglevel",
+            required=False,
+            default="INFO",
+            choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],
+            help="Set logging level (the log file is written to outputdir)",
             )
 
     args = parser.parse_args()
