@@ -25,6 +25,7 @@ class Dcm2bids(object):
         self.selectseries = selectseries
         derivdir = os.path.join(outputdir, "derivatives")
         self.outputdir = os.path.join(outputdir,"sourcedata")
+        self.dicomdir = os.path.join(outputdir,'tmp_dcm2bids')
         if not os.path.exists(self.outputdir):
             os.makedirs(self.outputdir)
         if not os.path.exists(derivdir):
@@ -55,7 +56,7 @@ class Dcm2bids(object):
         # convert dicoms to temporary dir
 
         self.logger.info("running dcm2niix DICOM to NIFTI conversion")
-        dcm2niix = Dcm2niix(self.dicom_dir, self.participant)
+        dcm2niix = Dcm2niix(self.dicom_dir, self.participant, outputdir=self.dicomdir)
         dcm2niix.run()
 
         self.logger.info("parsing sidecars")
