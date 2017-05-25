@@ -37,7 +37,7 @@ class Dcm2bids(object):
                             datefmt='%Y/%m/%d %H:%M', filemode='a',
                             filename=os.path.join(
                                 os.path.split(self.outputdir)[0],'dcm2bids.log'))
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger("dcm2bids")
         self.logger.setLevel(loglevel.upper())
         self.logger.info("--- dcm2bids start ---")
         self.logger.info("participant: %s",participant)
