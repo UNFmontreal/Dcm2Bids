@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import csv
+from collections import OrderedDict
 
 def load_json(filename):
     with open(filename, 'r') as f:
@@ -33,8 +34,9 @@ def read_participants(filename):
     if not os.path.exists(filename):
         return []
     with open(filename, 'r') as f:
-        reader = csv.DictReader(f, delimiter='\t')
-        return [row for row in reader]
+        reader = csv.reader(f, delimiter='\t')
+        header = reader.next();
+        return [OrderedDict(zip(header,row)) for row in reader]
 
 def make_directory_tree(directory):
     if not os.path.exists(directory):

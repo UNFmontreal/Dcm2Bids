@@ -119,7 +119,7 @@ class Dcm2bids(object):
             participants.append(
                 OrderedDict(zip(("participant_id","age","sex","group"),
                                 (self.participant.name,"n/a","n/a","n/a"))))
-        write_participants(partfile, participants)
+            write_participants(partfile, participants)
 
         # dataset description
         descfile = os.path.join(self.outputdir,'dataset_description.json')
