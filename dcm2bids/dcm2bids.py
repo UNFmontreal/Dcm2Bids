@@ -25,12 +25,12 @@ class Dcm2bids(object):
         self.extension = '.nii.gz'
         self.participant = Participant(participant, session)
         self.selectseries = selectseries
-        derivdir = os.path.join(outputdir, "derivatives")
-        self.outputdir = os.path.join(outputdir,"sourcedata")
+        self.outputdir = outputdir
         self.dicomdir = os.path.join(outputdir,'tmp_dcm2bids')
         self.anonymizer = anonymizer
         if not os.path.exists(self.outputdir):
             os.makedirs(self.outputdir)
+        derivdir = os.path.join(outputdir, "derivatives")
         if not os.path.exists(derivdir):
             os.makedirs(derivdir)
         logging.basicConfig(format='%(asctime)s %(message)s',
