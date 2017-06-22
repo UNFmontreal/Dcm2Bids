@@ -21,13 +21,36 @@ DICOM to NIfTI conversion is done with `dcm2niix` converter. See their [github][
 ## Usage
 
 ```
-dcm2bids [-h] -d DICOM_DIR -p PARTICIPANT [-s SESSION] -c CONFIG
-         [--dry_dcm2niix] [-y]
+usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT -c CONFIG
+                [-s SESSION] [--clobber] [-n SELECTSERIES [SELECTSERIES ...]]
+                [-o OUTPUTDIR] [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                [-a ANONYMIZER]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
+                        DICOM files directory(ies). Wild cards are supported.
+  -p PARTICIPANT, --participant PARTICIPANT
+                        Participant number in BIDS output
+  -c CONFIG, --config CONFIG
+                        JSON configuration file (see example/config.json)
+  -s SESSION, --session SESSION
+                        Session name/number
+  --clobber             Overwrite output if it exists
+  -n SELECTSERIES [SELECTSERIES ...], --selectseries SELECTSERIES [SELECTSERIES ...]
+                        Select subset of series numbers (integers) for
+                        conversion
+  -o OUTPUTDIR, --outputdir OUTPUTDIR
+                        Output BIDS study directory (default current
+                        directory)
+  -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                        Set logging level (the log file is written to
+                        outputdir)
+  -a ANONYMIZER, --anonymizer ANONYMIZER
+                        Anonymize each anat image by passing it to this shell
+                        command (e.g., pydeface.py - the call syntax must be
+                        anonymizer inputfile outputfile)
 ```
-
-You need to build the config file of your study to let `dcm2bids` associate your acquisitions with the right dicoms through bids sidecar created by dcm2niix. Every study is different and this step needs a little bit of work.
-
-The configuration uses the `json` format and one example is provided in the `example` directory.
 
 #### Descriptions
 
@@ -35,7 +58,8 @@ The description field is a list of dictionnary. Each dictionnary describes one a
 
 #### Output
 
-dcm2bids create `sub-<PARTICIPANT>` directories in the folder the script is launched.
+dcm2bids creates `sub-<PARTICIPANT>` directories in the output directory (by
+default the folder where the script is launched).
 
 Acquisitions with no or more than one fitting descriptions are kept in `tmp_dcm2niix` directory. Users can review these missing acquistions to change the configuration file accordingly.
 
