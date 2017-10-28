@@ -13,10 +13,13 @@ class Dcm2bids(object):
     """
     """
 
-    def __init__(self, dicom_dir, config, clobber, participant, session=None):
+    def __init__(
+            self, dicom_dir, participant, config,
+            session=None, clobber=False, forceDcm2niix=False):
         self.dicomDir = dicom_dir
         self.config = load_json(config)
         self.clobber = clobber
+        self.forceDcm2niix = forceDcm2niix
         self.participant = Participant(participant, session)
 
 
@@ -31,7 +34,7 @@ class Dcm2bids(object):
 
     def run(self):
         dcm2niix = Dcm2niix(self.dicomDir, self.participant)
-        dcm2niix.run()
+        dcm2niix.run(self.forceDcm2niix)
         parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
 
         for acq in parser.acquisitions:
@@ -54,12 +57,12 @@ class Dcm2bids(object):
                 os.rename(f, targetBase + ext)
         else:
             if self.clobber:
-                print("'{}' overwrites".format(filename))
+                print("Overwriting: {}".format(filename))
                 for f in glob.glob(targetBase + ".*"):
                     os.remove(f)
                 for f in glob.glob(acquisition.base + ".*"):
                     _, ext = splitext_(f)
                     os.rename(f, targetBase + ext)
             else:
-                print("'{}' already exists".format(filename))
+                print("'{}' already exists, use --clobber to overwrite it".format(filename))
 

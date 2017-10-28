@@ -2,54 +2,54 @@
     "descriptions": [
         {
             "dataType": "anat",
-            "suffix": "T1w",
+            "modalityLabel": "T1w",
             "criteria": {
-                "in": {"SeriesDescription": "T1W_3D"}
+                "SeriesDescription": "*T1W_3D*"
             }
         },
         {
             "dataType": "anat",
-            "suffix": "T2w",
+            "modalityLabel": "T2w",
             "criteria": {
-                "in": {"SeriesDescription": "TSE"},
-                "equal": {"EchoTime": 0.1}
+                "SeriesDescription": "*TSE*",
+                "EchoTime": 0.1
             }
         },
         {
             "dataType": "anat",
-            "suffix": "PD",
+            "modalityLabel": "PD",
             "criteria": {
-                "in": {"SeriesDescription": "TSE"},
-                "equal": {"EchoTime": 0.008}
+                "SeriesDescription": "*TSE*",
+                "EchoTime": 0.008
             }
         },
         {
             "dataType": "anat",
-            "suffix": "FLAIR",
+            "modalityLabel": "FLAIR",
             "criteria": {
-                "in": {"SeriesDescription": "FLAIR"}
+                "SeriesDescription": "*FLAIR*"
             }
         },
         {
             "dataType": "dwi",
-            "suffix": "dwi",
+            "modalityLabel": "dwi",
             "criteria": {
-                "in": {"SeriesDescription": "DWI"}
+                "SeriesDescription": "*DWI*"
             }
         },
         {
             "dataType": "anat",
-            "suffix": "SWI",
+            "modalityLabel": "SWI",
             "criteria": {
-                "in": {"SeriesDescription": "SWI"}
+                "SeriesDescription": "*SWI*"
             }
         },
         {
             "dataType": "func",
-            "suffix": "bold",
+            "modalityLabel": "bold",
             "customLabels": "task-rest",
             "criteria": {
-                "equal": {"SeriesDescription": "rs_fMRI"}
+                "SeriesDescription": "rs_fMRI"
             }
         }
     ]

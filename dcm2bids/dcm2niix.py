@@ -15,7 +15,7 @@ class Dcm2niix(object):
         self.dicomDir = dicom_dir
         self.participant = participant
         self.output = output
-        self.options = "-b y -ba y -z y -f '%f_%p_%t_%s'"
+        self.options = "-b y -ba y -z y -f '%s_%f_%p_%t'"
         self.sidecars = []
 
 
@@ -28,9 +28,29 @@ class Dcm2niix(object):
                     os.getcwd(), "tmp_dcm2bids", self.participant.prefix)
 
 
-    def run(self):
-        clean(self.outputDir)
-        self.execute()
+    def run(self, forceRun=False):
+        try:
+            oldOutput = os.listdir(self.outputDir) != []
+        except:
+            oldOutput = False
+
+        if oldOutput and forceRun:
+            print("")
+            print("Old dcm2niix output found")
+            print("Cleaning the old dcm2niix output and rerun it because --forceDcm2niix")
+            print("")
+            clean(self.outputDir)
+            self.execute()
+
+        elif oldOutput:
+            print("")
+            print("Old dcm2niix output found")
+            print("Use --forceDcm2niix to rerun the conversion")
+
+        else:
+            clean(self.outputDir)
+            self.execute()
+
         self.sidecars = glob.glob(os.path.join(self.outputDir, "*.json"))
         self.sidecars.sort()
         return 0

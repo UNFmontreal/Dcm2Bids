@@ -46,6 +46,12 @@ def get_arguments():
             help="Overwrite output if exists",
             )
 
+    parser.add_argument(
+            "--forceDcm2niix",
+            required=False, action='store_true',
+            help="Overwrite old temporary dcm2niix output if exists",
+            )
+
     args = parser.parse_args()
     return args
 

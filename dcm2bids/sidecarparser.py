@@ -2,6 +2,7 @@
 
 
 import itertools
+import fnmatch
 import os
 from collections import defaultdict, OrderedDict
 from future.utils import iteritems
@@ -24,7 +25,8 @@ class Sidecarparser(object):
         for sidecar, index in itertools.product(
                 self.sidecars, range(len(self.descriptions))):
             self._sidecar = load_json(sidecar)
-            if self._respect(self.descriptions[index]["criteria"]):
+            criteria = self.descriptions[index]["criteria"]
+            if criteria and self._respect(criteria):
                 graph[sidecar].append(index)
         return graph
 
@@ -32,18 +34,25 @@ class Sidecarparser(object):
     def _generateAcquisitions(self):
         rsl = []
         print("")
+        print("Sidecars matching:")
         for sidecar, match_descs in iteritems(self.graph):
             base = splitext_(sidecar)[0]
             basename = os.path.basename(sidecar)
+
+            if len(basename) > 62:
+                basename = basename[:30] + ".." + basename[-30:]
+
             if len(match_descs) == 1:
-                print("'{}' satisfies one description".format(basename))
+                print("MATCH           {}".format(basename))
                 acq = self._acquisition(
                         base, self.descriptions[match_descs[0]])
                 rsl.append(acq)
+
             elif len(match_descs) == 0:
-                print("'{}' satisfies no description".format(basename))
+                print("NO MATCH        {}".format(basename))
+
             else:
-                print("'{}' satisfies several descriptions".format(basename))
+                print("SEVERAL MATCHES {}".format(basename))
         return rsl
 
 
@@ -57,9 +66,11 @@ class Sidecarparser(object):
                 tally[item].append(i)
             return ((key,locs) for key,locs in tally.items() if len(locs)>1)
 
+        print("")
+        print("Checking if a description matches several sidecars ...")
         suffixes = [_.suffix for _ in self.acquisitions]
         for suffix, dup in sorted(list_duplicates(suffixes)):
-            print("'{}': has several runs".format(suffix))
+            print("'{}' has several runs".format(suffix))
             for run, acq_index in enumerate(dup):
                 runStr = "run-{:02d}".format(run+1)
                 acq = self.acquisitions[acq_index]
@@ -71,7 +82,7 @@ class Sidecarparser(object):
 
 
     def _acquisition(self, base, desc):
-        acq = Acquisition(base, desc["dataType"], desc["suffix"])
+        acq = Acquisition(base, desc["dataType"], desc["modalityLabel"])
         if "customLabels" in desc:
             acq.customLabels = desc["customLabels"]
         else:
@@ -80,41 +91,17 @@ class Sidecarparser(object):
 
 
     def _respect(self, criteria):
-        isEqual = "equal" in criteria
-        isIn = "in" in criteria
-
-        # Check if there is some criteria
-        if not any([isEqual, isIn]):
-            return False
-
-        if isEqual:
-            rsl_equal = self._isEqual(criteria["equal"])
-        else:
-            rsl_equal = True
-
-        if isIn:
-            rsl_in = self._isIn(criteria["in"])
-        else:
-            rsl_in = True
-
-        return all([rsl_equal, rsl_in])
-
-
-    def _isEqual(self, criteria):
         rsl = []
-        for tag, query in iteritems(criteria):
-            rsl.append(query == self.get_value(tag))
-        return all(rsl)
-
-
-    def _isIn(self, criteria):
-        rsl = []
-        for tag, query in iteritems(criteria):
-            if isinstance(query, list):
-                for q in query:
-                    rsl.append(q in self.get_value(tag))
+        for tag, pattern in iteritems(criteria):
+            name = self.get_value(tag)
+            pat = str(pattern)
+            if isinstance(name, list):
+                subRsl = []
+                for subName in name:
+                    subRsl.append(fnmatch.fnmatch(str(subName), pat))
+                rsl.append(any(subRsl))
             else:
-                rsl.append(query in self.get_value(tag))
+                rsl.append(fnmatch.fnmatch(str(name), pat))
         return all(rsl)
 
 

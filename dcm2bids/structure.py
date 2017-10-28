@@ -55,10 +55,10 @@ class Acquisition(object):
     """
     """
 
-    def __init__(self, base, dataType, suffix, customLabels=None):
+    def __init__(self, base, dataType, modalityLabel, customLabels=None):
         self.base = base
         self.dataType = dataType
-        self._suffix = suffix
+        self._suffix = modalityLabel
         self.customLabels = customLabels
 
 
