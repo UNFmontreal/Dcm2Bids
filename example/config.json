@@ -11,7 +11,7 @@
             "dataType": "anat",
             "modalityLabel": "T2w",
             "criteria": {
-                "SeriesDescription": "*TSE*",
+                "SidecarFilename": "007*",
                 "EchoTime": 0.1
             }
         },

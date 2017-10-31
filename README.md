@@ -64,7 +64,7 @@ The dcm2bids configuration file uses also the `JSON` format and one example is p
             "modalityLabel": "bold",
             "customLabels": "task-rest",
             "criteria": {
-                "SeriesDescription": "??-rs_fMRI"
+                "SidecarFilename": "006*"
             }
         }
     ]
@@ -95,7 +95,11 @@ dcm2bids will try to match the sidecars of dcm2niix to the descriptions of the c
 
 The pattern matching is shell-style. It's possible to use wildcard `*`, single character `?` etc ... Please have a look at the [GNU documentation][gnu-pattern] to know more.
 
-For example, in the first description, the pattern `*T2*` will be compared to the value of `SeriesDescription` of a sidecar. `AXIAL_T2_SPACE` will be a match, `AXIAL_T1` won't. You can enter several criteria. **All criteria must match** for a description to be link to a sidecar.
+For example, in the first description, the pattern `*T2*` will be compared to the value of `SeriesDescription` of a sidecar. `AXIAL_T2_SPACE` will be a match, `AXIAL_T1` won't.
+
+`dcm2bids` create a `SidecarFilename` key if you prefer to also match with the filename of the sidecar.
+
+You can enter several criteria. **All criteria must match** for a description to be link to a sidecar.
 
 ## Helper
 

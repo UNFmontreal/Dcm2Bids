@@ -15,7 +15,7 @@ class Dcm2niix(object):
         self.dicomDir = dicom_dir
         self.participant = participant
         self.output = output
-        self.options = "-b y -ba y -z y -f '%s_%f_%p_%t'"
+        self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
         self.sidecars = []
 
 

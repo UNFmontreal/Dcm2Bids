@@ -25,6 +25,7 @@ class Sidecarparser(object):
         for sidecar, index in itertools.product(
                 self.sidecars, range(len(self.descriptions))):
             self._sidecar = load_json(sidecar)
+            self._sidecar["SidecarFilename"] = os.path.basename(sidecar)
             criteria = self.descriptions[index]["criteria"]
             if criteria and self._respect(criteria):
                 graph[sidecar].append(index)
@@ -93,7 +94,7 @@ class Sidecarparser(object):
     def _respect(self, criteria):
         rsl = []
         for tag, pattern in iteritems(criteria):
-            name = self.get_value(tag)
+            name = self._sidecar.get(tag)
             pat = str(pattern)
             if isinstance(name, list):
                 subRsl = []
@@ -103,11 +104,4 @@ class Sidecarparser(object):
             else:
                 rsl.append(fnmatch.fnmatch(str(name), pat))
         return all(rsl)
-
-
-    def get_value(self, tag):
-        if tag in self._sidecar:
-            return self._sidecar[tag]
-        else:
-            return ""
 
