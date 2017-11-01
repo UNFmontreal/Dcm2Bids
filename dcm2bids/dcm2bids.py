@@ -14,9 +14,10 @@ class Dcm2bids(object):
     """
 
     def __init__(
-            self, dicom_dir, participant, config,
+            self, dicom_dir, participant, config, output_dir=os.getcwd(),
             session=None, clobber=False, forceDcm2niix=False):
         self.dicomDir = dicom_dir
+        self.bidsDir = output_dir
         self.config = load_json(config)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
@@ -33,7 +34,7 @@ class Dcm2bids(object):
 
 
     def run(self):
-        dcm2niix = Dcm2niix(self.dicomDir, self.participant)
+        dcm2niix = Dcm2niix(self.dicomDir, self.bidsDir, self.participant)
         dcm2niix.run(self.forceDcm2niix)
         parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
 
@@ -45,7 +46,7 @@ class Dcm2bids(object):
 
     def _move(self, acquisition):
         targetDir = os.path.join(
-                os.getcwd(), self.participant.directory, acquisition.dataType)
+                self.bidsDir, self.participant.directory, acquisition.dataType)
         filename = "{}_{}".format(self.participant.prefix, acquisition.suffix)
         targetBase = os.path.join(targetDir, filename)
 

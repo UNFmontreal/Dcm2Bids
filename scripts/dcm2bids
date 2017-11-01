@@ -3,6 +3,7 @@
 
 
 import argparse
+import os
 import sys
 from dcm2bids.dcm2bids import Dcm2bids
 
@@ -38,6 +39,12 @@ def get_arguments():
             "-c", "--config",
             required=True, default=None,
             help="json configuration file",
+            )
+
+    parser.add_argument(
+            "-o", "--output_dir",
+            required=False, default=os.getcwd(),
+            help="Output BIDS directory, Default: current directory",
             )
 
     parser.add_argument(

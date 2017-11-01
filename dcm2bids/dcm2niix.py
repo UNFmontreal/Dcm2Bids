@@ -11,8 +11,10 @@ class Dcm2niix(object):
     """
     """
 
-    def __init__(self, dicom_dir, participant=None, output="dcm2niix-example"):
+    def __init__(self, dicom_dir, bidsDir,
+            participant=None, output="dcm2niix-example"):
         self.dicomDir = dicom_dir
+        self.bidsDir = bidsDir
         self.participant = participant
         self.output = output
         self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
@@ -22,10 +24,10 @@ class Dcm2niix(object):
     @property
     def outputDir(self):
         if self.participant is None:
-            return os.path.join(os.getcwd(), "tmp_dcm2bids", self.output)
+            return os.path.join(self.bidsDir, "tmp_dcm2bids", self.output)
         else:
             return os.path.join(
-                    os.getcwd(), "tmp_dcm2bids", self.participant.prefix)
+                    self.bidsDir, "tmp_dcm2bids", self.participant.prefix)
 
 
     def run(self, forceRun=False):
