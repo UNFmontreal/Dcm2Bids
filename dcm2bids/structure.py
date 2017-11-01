@@ -15,13 +15,18 @@ class Participant(object):
 
     @property
     def name(self):
-        return "sub-{}".format(self._name)
+        if self._name.startswith("sub-"):
+            return self._name
+        else:
+            return "sub-{}".format(self._name)
 
 
     @property
     def session(self):
         if self._session is None:
             return None
+        elif self._session.startswith("ses-"):
+            return self._session
         else:
             return 'ses-{}'.format(self._session)
 
