@@ -14,7 +14,8 @@ DESCRIPTION = description
 VERSION = "1.0.1"
 AUTHOR = "Christophe Bedetti"
 AUTHOR_EMAIL = "christophe.bedetti@umontreal.ca"
-URL = 'https://github.com/cbedetti/Dcm2Bids'
+URL = "https://github.com/cbedetti/Dcm2Bids"
+DOWNLOAD_URL = URL + "/archive/" + VERSION + ".tar.gz"
 
 
 if __name__ == "__main__":
@@ -25,6 +26,7 @@ if __name__ == "__main__":
             author=AUTHOR,
             author_email=AUTHOR_EMAIL,
             url=URL,
+            download_url=DOWNLOAD_URL,
             packages=['dcm2bids'],
             scripts=['scripts/dcm2bids', 'scripts/dcm2bids_helper'],
             install_requires=['future'],
