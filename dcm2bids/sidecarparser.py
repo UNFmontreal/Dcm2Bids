@@ -13,7 +13,7 @@ from .utils import load_json, splitext_
 
 class Sidecarparser(object):
 
-    def __init__(self, sidecars, descriptions):
+    def __init__(self, sidecars, descriptions, selectseries=None):
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.logger = logging.getLogger("dcm2bids")
@@ -77,10 +77,10 @@ class Sidecarparser(object):
             for run, acq_index in enumerate(dup):
                 runStr = "run-{:02d}".format(run+1)
                 acq = self.acquisitions[acq_index]
-                if acq.customLabels is None:
-                    acq.customLabels = runStr
-                else:
+                if acq.customLabels:
                     acq.customLabels += "_" + runStr
+                else:
+                    acq.customLabels = runStr
         self.logger.info("")
 
 

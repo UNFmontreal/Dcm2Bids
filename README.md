@@ -21,24 +21,29 @@ Add the installation directory to your PYTHONPATH and the `scripts` directory to
 
 ```
 usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION]
-                -c CONFIG [-o OUTPUT_DIR] [--clobber] [--forceDcm2niix]
-                [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+                -c CONFIG [-o OUTPUT_DIR] [--forceDcm2niix] [--clobber]
+                [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a ANONYMIZER]
 
 optional arguments:
   -h, --help            show this help message and exit
   -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
-                        DICOM files directory
+                        DICOM directory(ies)
   -p PARTICIPANT, --participant PARTICIPANT
-                        Name of the participant
+                        Participant code
   -s SESSION, --session SESSION
-                        Name of the session
+                        Session code
   -c CONFIG, --config CONFIG
-                        json configuration file
+                        JSON configuration file (see example/config.json)
   -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
-  --clobber             Overwrite output if exists
-  --forceDcm2niix       Overwrite old temporary dcm2niix output if exists
+  --forceDcm2niix       Overwrite old temporary dcm2niix output if it exists
+  --clobber             Overwrite output if it exists
   -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                        Set logging level
+  -a ANONYMIZER, --anonymizer ANONYMIZER
+                        Anonymize each anat image by passing it to this shell
+                        command (e.g., pydeface.py - the call syntax must be
+                        anonymizer inputfile outputfile)
 
 example:
   dcm2bids -d sourcedata/s101/DICOM/ -s S101 -c code/config_dcm2bids.json
@@ -113,7 +118,7 @@ To build the configuration file, you need to have a example of the sidecars. You
 
 ## Output
 
-dcm2bids creates a `sub-<PARTICIPANT>` directory in the folder the script is launched.
+dcm2bids creates `sub-<PARTICIPANT>` directories in the output directory (by default the folder where the script is launched).
 
 Sidecars with one matching description will be convert to BIDS. If a file already exists, dcm2bids won't overwrite it. You should use the `--clobber` option to overwrite files.
 

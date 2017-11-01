@@ -4,33 +4,30 @@
 import glob
 import logging
 import os
-import shlex
-import subprocess
-from .utils import clean
+from .utils import clean, run_shell_command
 
 
 class Dcm2niix(object):
     """
     """
 
-    def __init__(self, dicom_dir, bidsDir,
-            participant=None, output="dcm2niix-example"):
+    def __init__(self, dicom_dir, bids_dir,
+            participant=None, helper_dir="dcm2niix-example"):
         self.dicomDir = dicom_dir
-        self.bidsDir = bidsDir
+        self.bidsDir = bids_dir
         self.participant = participant
-        self.output = output
+        self.helperDir = helper_dir
         self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
         self.sidecars = []
         self.logger = logging.getLogger("dcm2bids")
 
-
     @property
     def outputDir(self):
-        if self.participant is None:
-            return os.path.join(self.bidsDir, "tmp_dcm2bids", self.output)
+        if self.participant:
+            tmpDir = self.participant.prefix
         else:
-            return os.path.join(
-                    self.bidsDir, "tmp_dcm2bids", self.participant.prefix)
+            tmpDir = self.helperDir
+        return os.path.join(self.bidsDir, "tmp_dcm2bids", tmpDir)
 
 
     def run(self, forceRun=False):
@@ -56,32 +53,13 @@ class Dcm2niix(object):
 
         self.sidecars = glob.glob(os.path.join(self.outputDir, "*.json"))
         self.sidecars.sort()
+
         return 0
-
-
-    def _run_shell_command(self, commandLine):
-        cmd = shlex.split(commandLine)
-        self.logger.info("subprocess: {}".format(commandLine))
-
-        try:
-            process = subprocess.Popen(
-                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            output, _ = process.communicate()
-
-            try:
-                self.logger.info("\n" + output.decode("utf-8"))
-            except:
-                self.logger.info(output)
-
-        except OSError as exception:
-            self.logger.error("Exception: {}".format(exeception))
-            self.logger.info("subprocess failed")
 
 
     def execute(self):
         self.logger.info("--- running dcm2niix ---")
         for directory in self.dicomDir:
             commandStr = "dcm2niix {} -o {} {}"
-            self._run_shell_command(
-                    commandStr.format(self.options, self.outputDir, directory))
-
+            cmd = commandStr.format(self.options, self.outputDir, directory)
+            run_shell_command(cmd)

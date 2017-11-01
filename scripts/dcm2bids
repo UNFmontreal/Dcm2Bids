@@ -18,27 +18,26 @@ def get_arguments():
 
     parser.add_argument(
             "-d", "--dicom_dir",
-            required=True,
-            nargs="+",
-            help="DICOM files directory",
+            required=True, nargs="+",
+            help="DICOM directory(ies)",
             )
 
     parser.add_argument(
             "-p", "--participant",
             required=True,
-            help="Name of the participant",
+            help="Participant code",
             )
 
     parser.add_argument(
             "-s", "--session",
             required=False, default=None,
-            help="Name of the session",
+            help="Session code",
             )
 
     parser.add_argument(
             "-c", "--config",
             required=True, default=None,
-            help="json configuration file",
+            help="JSON configuration file (see example/config.json)",
             )
 
     parser.add_argument(
@@ -48,15 +47,15 @@ def get_arguments():
             )
 
     parser.add_argument(
-            "--clobber",
+            "--forceDcm2niix",
             required=False, action='store_true',
-            help="Overwrite output if exists",
+            help="Overwrite old temporary dcm2niix output if it exists",
             )
 
     parser.add_argument(
-            "--forceDcm2niix",
+            "--clobber",
             required=False, action='store_true',
-            help="Overwrite old temporary dcm2niix output if exists",
+            help="Overwrite output if it exists",
             )
 
     parser.add_argument(
@@ -65,6 +64,13 @@ def get_arguments():
             choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],
             help="Set logging level",
             )
+
+    parser.add_argument(
+            "-a", "--anonymizer",
+            required=False, default=None,
+            help="Anonymize each anat image by passing it to this shell \
+            command (e.g., pydeface.py - the call syntax must be anonymizer \
+            inputfile outputfile)")
 
     args = parser.parse_args()
     return args
