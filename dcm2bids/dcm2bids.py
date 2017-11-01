@@ -48,9 +48,15 @@ class Dcm2bids(object):
         logFile = "{0}_{1}.log".format(self.participant.prefix,
                 datetime.now().strftime("%Y%m%dT%H%M%S"))
         make_directory_tree(logDir)
-        logging.basicConfig(filename=os.path.join(logDir, logFile))
+
+        #file handler
+        handler = logging.FileHandler(os.path.join(logDir, logFile))
+
+        #logger
+        logging.basicConfig()
         self.logger = logging.getLogger("dcm2bids")
         self.logger.setLevel(log_level)
+        self.logger.addHandler(handler)
 
 
     def run(self):
@@ -58,7 +64,7 @@ class Dcm2bids(object):
         dcm2niix.run(self.forceDcm2niix)
         parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
 
-        self.logger.info("parsing sidecars")
+        self.logger.info("moving files")
         for acq in parser.acquisitions:
             self._move(acq)
 
@@ -80,12 +86,12 @@ class Dcm2bids(object):
                 os.rename(f, targetBase + ext)
         else:
             if self.clobber:
-                print("Overwriting: {}".format(filename))
+                self.logger.info("Overwriting: {}".format(filename))
                 for f in glob.glob(targetBase + ".*"):
                     os.remove(f)
                 for f in glob.glob(acquisition.base + ".*"):
                     _, ext = splitext_(f)
                     os.rename(f, targetBase + ext)
             else:
-                print("'{}' already exists, use --clobber to overwrite it".format(filename))
+                self.logger.info("'{}' already exists, use --clobber to overwrite it".format(filename))
 

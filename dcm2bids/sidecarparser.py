@@ -36,26 +36,26 @@ class Sidecarparser(object):
 
     def _generateAcquisitions(self):
         rsl = []
-        print("")
-        print("Sidecars matching:")
+        self.logger.info("")
+        self.logger.info("Sidecars matching:")
         for sidecar, match_descs in iteritems(self.graph):
             base = splitext_(sidecar)[0]
             basename = os.path.basename(sidecar)
 
-            if len(basename) > 62:
-                basename = basename[:30] + ".." + basename[-30:]
+            if len(basename) > 48:
+                basename = basename[:22] + ".." + basename[-22:]
 
             if len(match_descs) == 1:
-                print("MATCH           {}".format(basename))
+                self.logger.info("MATCH           {}".format(basename))
                 acq = self._acquisition(
                         base, self.descriptions[match_descs[0]])
                 rsl.append(acq)
 
             elif len(match_descs) == 0:
-                print("NO MATCH        {}".format(basename))
+                self.logger.info("NO MATCH        {}".format(basename))
 
             else:
-                print("SEVERAL MATCHES {}".format(basename))
+                self.logger.info("SEVERAL MATCHES {}".format(basename))
         return rsl
 
 
@@ -69,11 +69,11 @@ class Sidecarparser(object):
                 tally[item].append(i)
             return ((key,locs) for key,locs in tally.items() if len(locs)>1)
 
-        print("")
-        print("Checking if a description matches several sidecars ...")
+        self.logger.info("")
+        self.logger.info("Checking if a description matches several sidecars ...")
         suffixes = [_.suffix for _ in self.acquisitions]
         for suffix, dup in sorted(list_duplicates(suffixes)):
-            print("'{}' has several runs".format(suffix))
+            self.logger.info("'{}' has several runs".format(suffix))
             for run, acq_index in enumerate(dup):
                 runStr = "run-{:02d}".format(run+1)
                 acq = self.acquisitions[acq_index]
@@ -81,7 +81,7 @@ class Sidecarparser(object):
                     acq.customLabels = runStr
                 else:
                     acq.customLabels += "_" + runStr
-        print("")
+        self.logger.info("")
 
 
     def _acquisition(self, base, desc):
