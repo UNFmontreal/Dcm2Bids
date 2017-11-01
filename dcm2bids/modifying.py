@@ -1,3 +1,4 @@
+"""
             if self.selectseries and not self.sidecars[sidecar]["seriesnum"] in self.selectseries:
                 continue
             self.sidecars[sidecar]["header"] = load_json(sidecar)
@@ -39,3 +40,4 @@
                                            "fix nifti-sidecar mismatch")
                         except:
                             raise
+"""

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+"""
     def _updatestudyfiles(self):
         # participant table
         partfile = os.path.join(self.outputdir,"participants.tsv")
@@ -36,3 +36,4 @@
                        "",
                        " - Initialised study directory"])
 
+"""
