@@ -8,13 +8,13 @@ Before using this software, learn more about BIDS and read the [specifications][
 
 ```
 git clone https://github.com/cbedetti/Dcm2Bids
+cd Dcm2Bids
+python setup.py install
 ```
-
-Add the installation directory to your PYTHONPATH and the `scripts` directory to your PATH.
 
 #### Dependencies
 
-- Python 2 or 3. The `future` module should be installed. `pip install future`
+- Python 2 or 3 with the `future` module
 - `dcm2niix` : DICOM to NIfTI conversion is done with `dcm2niix`. See [github][dcm2niix-github] for source code or [NITRC][dcm2niix-nitrc] for compiled versions.
 
 ## Usage

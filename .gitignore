@@ -1,1 +1,7 @@
-idea
+idea/
+
+#Distribution
+dist/
+build/
+.eggs/
+*.egg-info/
