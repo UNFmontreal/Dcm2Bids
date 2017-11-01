@@ -7,10 +7,17 @@ Before using this software, learn more about BIDS and read the [specifications][
 ## Install
 
 ```
+pip install dcm2bids
+```
+
+or
+
+```
 git clone https://github.com/cbedetti/Dcm2Bids
 cd Dcm2Bids
 python setup.py install
 ```
+
 
 #### Dependencies
 
