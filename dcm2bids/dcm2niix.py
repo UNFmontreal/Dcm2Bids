@@ -11,9 +11,9 @@ class Dcm2niix(object):
     """
     """
 
-    def __init__(self, dicom_dir, bids_dir,
+    def __init__(self, dicom_dirs, bids_dir,
             participant=None, helper_dir="dcm2niix-example"):
-        self.dicomDir = dicom_dir
+        self.dicomDirs = dicom_dirs
         self.bidsDir = bids_dir
         self.participant = participant
         self.helperDir = helper_dir
@@ -59,7 +59,7 @@ class Dcm2niix(object):
 
     def execute(self):
         self.logger.info("--- running dcm2niix ---")
-        for directory in self.dicomDir:
+        for directory in self.dicomDirs:
             commandStr = "dcm2niix {} -o {} {}"
             cmd = commandStr.format(self.options, self.outputDir, directory)
             run_shell_command(cmd)

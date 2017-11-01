@@ -20,7 +20,7 @@ class Dcm2bids(object):
             self, dicom_dir, participant, config, output_dir=os.getcwd(),
             session=None, clobber=False, forceDcm2niix=False, anonymizer=None,
             log_level="INFO"):
-        self.dicomDir = dicom_dir
+        self.dicomDirs = dicom_dir
         self.bidsDir = output_dir
         self.config = load_json(config)
         self.clobber = clobber
@@ -64,7 +64,7 @@ class Dcm2bids(object):
 
 
     def run(self):
-        dcm2niix = Dcm2niix(self.dicomDir, self.bidsDir, self.participant)
+        dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant)
         dcm2niix.run(self.forceDcm2niix)
         parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
 
