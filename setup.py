@@ -4,8 +4,12 @@
 
 description = """Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure"""
 
+try:
+    import pypandoc
+    long_description = pypandoc.convert('README.md', 'rst')
+except(IOError, ImportError):
+    long_description = open('README.md').read()
 
-#from distutils.core import setup
 from setuptools import setup
 
 
@@ -23,6 +27,7 @@ if __name__ == "__main__":
             name=DISTNAME,
             version=VERSION,
             description=description,
+            long_description=long_description,
             author=AUTHOR,
             author_email=AUTHOR_EMAIL,
             url=URL,
