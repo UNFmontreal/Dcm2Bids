@@ -114,7 +114,7 @@ You can enter several criteria. **All criteria must match** for a description to
 
 `dcm2bids_helper -d DICOM_DIR`
 
-To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/dcm2niix-example` directory.
+To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/dcm2niix-example` of the output directory.
 
 ## Output
 
