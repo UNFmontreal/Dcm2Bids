@@ -3,6 +3,7 @@
 
 
 import argparse
+import os
 import sys
 from dcm2bids.dcm2niix import Dcm2niix
 
@@ -23,10 +24,9 @@ def get_arguments():
             )
 
     parser.add_argument(
-            "-o", "--output",
-            required=False,
-            help="Name of directory inside tmp_dcm2bids",
-            default=argparse.SUPPRESS,
+            "-b", "--bids_dir",
+            required=False, default=os.getcwd(),
+            help="Output BIDS directory, Default: current directory",
             )
 
     args = parser.parse_args()
@@ -37,7 +37,10 @@ def main():
     """Let's go"""
     args = get_arguments()
     app = Dcm2niix(**vars(args))
-    return app.run()
+    rsl = app.run()
+    print("Example in:")
+    print(os.path.join(args.bids_dir, "tmp_dcm2bids", "dcm2niix-example"))
+    return rsl
 
 
 if __name__ == '__main__':

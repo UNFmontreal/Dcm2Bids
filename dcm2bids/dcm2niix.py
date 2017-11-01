@@ -11,12 +11,10 @@ class Dcm2niix(object):
     """
     """
 
-    def __init__(self, dicom_dirs, bids_dir,
-            participant=None, helper_dir="dcm2niix-example"):
-        self.dicomDirs = dicom_dirs
+    def __init__(self, dicom_dir, bids_dir, participant=None):
+        self.dicomDirs = dicom_dir
         self.bidsDir = bids_dir
         self.participant = participant
-        self.helperDir = helper_dir
         self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
         self.sidecars = []
         self.logger = logging.getLogger("dcm2bids")
@@ -26,7 +24,7 @@ class Dcm2niix(object):
         if self.participant:
             tmpDir = self.participant.prefix
         else:
-            tmpDir = self.helperDir
+            tmpDir = "dcm2niix-example"
         return os.path.join(self.bidsDir, "tmp_dcm2bids", tmpDir)
 
 
