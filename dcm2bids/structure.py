@@ -65,7 +65,7 @@ class Acquisition(object):
     @property
     def suffix(self):
         suffix = ''
-        if self.customLabels is not None:
+        if self.customLabels:
             suffix += '{}_'.format(self.customLabels)
         suffix += self._suffix
         return suffix

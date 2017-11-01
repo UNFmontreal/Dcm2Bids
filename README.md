@@ -22,6 +22,7 @@ Add the installation directory to your PYTHONPATH and the `scripts` directory to
 ```
 usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION]
                 -c CONFIG [-o OUTPUT_DIR] [--clobber] [--forceDcm2niix]
+                [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -37,6 +38,7 @@ optional arguments:
                         Output BIDS directory, Default: current directory
   --clobber             Overwrite output if exists
   --forceDcm2niix       Overwrite old temporary dcm2niix output if exists
+  -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
 
 example:
   dcm2bids -d sourcedata/s101/DICOM/ -s S101 -c code/config_dcm2bids.json

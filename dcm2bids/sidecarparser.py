@@ -3,6 +3,7 @@
 
 import itertools
 import fnmatch
+import logging
 import os
 from collections import defaultdict, OrderedDict
 from future.utils import iteritems
@@ -15,6 +16,7 @@ class Sidecarparser(object):
     def __init__(self, sidecars, descriptions):
         self.sidecars = sidecars
         self.descriptions = descriptions
+        self.logger = logging.getLogger("dcm2bids")
         self.graph = self._generateGraph()
         self.acquisitions = self._generateAcquisitions()
         self.findRuns()

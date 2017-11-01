@@ -59,6 +59,13 @@ def get_arguments():
             help="Overwrite old temporary dcm2niix output if exists",
             )
 
+    parser.add_argument(
+            "-l", "--log_level",
+            required=False, default="INFO",
+            choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],
+            help="Set logging level",
+            )
+
     args = parser.parse_args()
     return args
 
