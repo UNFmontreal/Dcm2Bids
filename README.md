@@ -66,6 +66,8 @@ Sidecar files are `JSON` files with meta informations about the acquisition. The
 
 The dcm2bids configuration file uses also the `JSON` format and one example is provided in the `example` directory.
 
+It is recommended to use an editor with syntax highlighting to build a correct JSON file. Here is an [online][json-editor] one.
+
 ## Configuration file
 
 ```
@@ -154,3 +156,4 @@ Create basics BIDS files in the output directory (by default folder where the sc
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
 [dcm2niix-nitrc]: https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage
 [gnu-pattern]: https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html
+[json-editor]: http://jsoneditoronline.org/
