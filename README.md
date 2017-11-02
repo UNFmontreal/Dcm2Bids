@@ -1,8 +1,12 @@
 # Dcm2Bids
 
-Dcm2Bids helps you to reorganise the NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
+Dcm2Bids reorganises NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
-Before using this software, learn more about BIDS and read the [specifications][bids-spec].
+Before using this software, learn more about BIDS:
+ - read the [specifications][bids-spec]
+ - a conversion [guide][bids-nature]
+ - some [examples][bids-examples] datasets
+ - a [validator][bids-validator] tool
 
 ## Install
 
@@ -135,7 +139,10 @@ Sidecars with no or more than one matching descriptions are kept in `tmp_dcm2nii
 
 
 [bids]: http://bids.neuroimaging.io/
+[bids-examples]: https://github.com/INCF/BIDS-examples
+[bids-nature]: https://www.nature.com/articles/sdata201644
 [bids-spec]: http://bids.neuroimaging.io/#download
+[bids-validator]: https://github.com/INCF/bids-validator
 [conda]: https://conda.io/docs/
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
 [dcm2niix-nitrc]: https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage
