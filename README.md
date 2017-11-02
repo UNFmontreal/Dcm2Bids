@@ -121,12 +121,6 @@ For example, in the first description, the pattern `*T2*` will be compared to th
 
 You can enter several criteria. **All criteria must match** for a description to be link to a sidecar.
 
-## Helper
-
-`dcm2bids_helper -d DICOM_DIR`
-
-To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/dcm2niix-example` of the output directory.
-
 ## Output
 
 dcm2bids creates `sub-<PARTICIPANT>` directories in the output directory (by default the folder where the script is launched).
@@ -137,6 +131,19 @@ If a description matches several sidecars, dcm2bids will add the custom label `r
 
 Sidecars with no or more than one matching descriptions are kept in `tmp_dcm2niix` directory. Users can review these mismatches to change the configuration file accordingly.
 
+## Tools
+
+#### Helper
+
+`dcm2bids_helper -d DICOM_DIR`
+
+To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/dcm2niix-example` of the output directory.
+
+#### Scaffold
+
+`dcm2bids_scaffold [-o OUTPUT_DIR]`
+
+Create basics BIDS files in the output directory (by default folder where the script is launched).
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/INCF/BIDS-examples
