@@ -33,6 +33,10 @@ if __name__ == "__main__":
             url=URL,
             download_url=DOWNLOAD_URL,
             packages=['dcm2bids'],
-            scripts=['scripts/dcm2bids', 'scripts/dcm2bids_helper'],
+            scripts=[
+                'scripts/dcm2bids',
+                'scripts/dcm2bids_helper'
+                'scripts/dcm2bids_scaffold'
+                ],
             install_requires=['future'],
             )
