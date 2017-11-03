@@ -145,7 +145,7 @@ To build the configuration file, you need to have a example of the sidecars. You
 
 `dcm2bids_scaffold [-o OUTPUT_DIR]`
 
-Create basics BIDS files in the output directory (by default folder where the script is launched).
+Create basic BIDS files and directories in the output directory (by default folder where the script is launched).
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/INCF/BIDS-examples

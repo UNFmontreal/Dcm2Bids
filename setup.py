@@ -15,7 +15,7 @@ from setuptools import setup
 
 DISTNAME = "dcm2bids"
 DESCRIPTION = description
-VERSION = "1.1.1"
+VERSION = "1.1.2"
 AUTHOR = "Christophe Bedetti"
 AUTHOR_EMAIL = "christophe.bedetti@umontreal.ca"
 URL = "https://github.com/cbedetti/Dcm2Bids"

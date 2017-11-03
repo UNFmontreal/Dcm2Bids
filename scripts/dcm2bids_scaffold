@@ -13,7 +13,9 @@ from future.utils import iteritems
 def get_arguments():
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description="",
+            description="""
+            Create basic BIDS files and directories
+            """,
             epilog="""
             Documentation at https://github.com/cbedetti/Dcm2Bids
             """)
@@ -31,7 +33,7 @@ def get_arguments():
 JSON_FILES = {
     "dataset_description.json": {
         "Name": "",
-        "BIDSVersion": "1.0.1",
+        "BIDSVersion": "1.0.2",
         "License": "",
         "Authors": [""],
         "Acknowledgments": "",
@@ -40,6 +42,23 @@ JSON_FILES = {
         "ReferencesAndLinks": [""],
         "DatasetDOI": ""
         },
+    "participants.json": {
+        "education": {
+            "LongName": "Education level",
+            "Description": "Education level, self-rated by participant",
+            "Levels": {
+                "1": "Finished primary school",
+                "2": "Finished secondary school",
+                "3": "Student at university",
+                "4": "Has degree from university"
+                }
+            },
+        "bmi": {
+            "LongName": "Body mass index",
+            "Units": "kilograms per squared meters",
+            "TermURL": "http://purl.bioontology.org/ontology/SNOMEDCT/60621009"
+            }
+        }
     }
 
 TEXT_FILES = {
@@ -47,9 +66,13 @@ TEXT_FILES = {
     "CHANGES": [
         "Revision history for BIDS dataset",
         "",
-        "0.1 " + datetime.date.today().strftime("%Y-%m-%d"),
+        "1.0.0 " + datetime.date.today().strftime("%Y-%m-%d"),
         "",
         " - Initialised study directory"
+        ],
+    "participants.tsv": [
+        "participants_id\teducation\tbmi",
+        "sub-01\tn/a\tn/a",
         ],
     }
 
@@ -58,7 +81,8 @@ def main():
     """Let's go"""
     args = get_arguments()
 
-    make_directory_tree(os.path.join(args.output_dir, "derivatives"))
+    for _ in ["code", "derivatives", "sourcedata"]:
+        make_directory_tree(os.path.join(args.output_dir, _))
 
     for filename, data in iteritems(JSON_FILES):
         filepath = os.path.join(args.output_dir, filename)
