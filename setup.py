@@ -10,12 +10,13 @@ try:
 except(IOError, ImportError):
     long_description = open('README.md').read()
 
+import glob
 from setuptools import setup
 
 
 DISTNAME = "dcm2bids"
 DESCRIPTION = description
-VERSION = "1.1.2"
+VERSION = "1.1.3"
 AUTHOR = "Christophe Bedetti"
 AUTHOR_EMAIL = "christophe.bedetti@umontreal.ca"
 URL = "https://github.com/cbedetti/Dcm2Bids"
@@ -33,10 +34,6 @@ if __name__ == "__main__":
             url=URL,
             download_url=DOWNLOAD_URL,
             packages=['dcm2bids'],
-            scripts=[
-                'scripts/dcm2bids',
-                'scripts/dcm2bids_helper'
-                'scripts/dcm2bids_scaffold'
-                ],
+            scripts=glob.glob('scripts/dcm2bids*'),
             install_requires=['future'],
             )
