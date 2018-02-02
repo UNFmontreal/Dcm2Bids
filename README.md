@@ -10,65 +10,45 @@ Before using this software, learn more about BIDS:
 
 ## Install
 
-```
-pip install dcm2bids
-```
-
-or
-
-```
-git clone https://github.com/cbedetti/Dcm2Bids
-cd Dcm2Bids
-python setup.py install
-```
-
-
 #### Dependencies
 
 - Python 2 or 3 with the `future` module
-- `dcm2niix` : DICOM to NIfTI conversion is done with `dcm2niix`. See [github][dcm2niix-github] for source code or [NITRC][dcm2niix-nitrc] for compiled versions.
+- `dcm2niix` : DICOM to NIfTI conversion tool
+  - [NITRC][dcm2niix-nitrc] for compiled versions
+  - [Recent release][dcm2niix-release]
+  - [github][dcm2niix-github] to build from source code
 
-## Usage
+#### dcm2bids
+
+###### with pip
+
+`pip install dcm2bids`
+
+###### from github
 
 ```
-usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION]
-                -c CONFIG [-o OUTPUT_DIR] [--forceDcm2niix] [--clobber]
-                [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a ANONYMIZER]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
-                        DICOM directory(ies)
-  -p PARTICIPANT, --participant PARTICIPANT
-                        Participant code
-  -s SESSION, --session SESSION
-                        Session code
-  -c CONFIG, --config CONFIG
-                        JSON configuration file (see example/config.json)
-  -o OUTPUT_DIR, --output_dir OUTPUT_DIR
-                        Output BIDS directory, Default: current directory
-  --forceDcm2niix       Overwrite old temporary dcm2niix output if it exists
-  --clobber             Overwrite output if it exists
-  -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
-                        Set logging level
-  -a ANONYMIZER, --anonymizer ANONYMIZER
-                        Anonymize each anat image by passing it to this shell
-                        command (e.g., pydeface.py - the call syntax must be
-                        anonymizer inputfile outputfile)
-
-example:
-  dcm2bids -d sourcedata/s101/DICOM/ -s S101 -c code/config_dcm2bids.json
+git clone https://github.com/cbedetti/Dcm2Bids.git
+cd Dcm2Bids
+pip install .
 ```
 
-You need to build the configuration file of your study to let `dcm2bids` associate your acquisitions through BIDS sidecar. Every study is different and this step needs a little bit of work.
+###### with singularity
 
-Sidecar files are `JSON` files with meta informations about the acquisition. These are created automatically with dcm2niix.
+TBA
 
-The dcm2bids configuration file uses also the `JSON` format and one example is provided in the `example` directory.
+## Introduction
+
+dcm2bids converts one session at a time. A session is all the acquisitions between the entry and exit of the participant in the scanner.
+
+You need to build a configuration file of your study to let `dcm2bids` associates your acquisitions through BIDS sidecar. Every study is different and this step needs a little bit of work. The scanner parameters should not change for one study (several MRI sessions), so one configuration file should work.
+
+BIDS sidecar files are `JSON` files with meta informations about the acquisition. dcm2niix creates automatically one BIDS sidecar for each NIfTI file.
+
+dcm2bids configuration file uses also the `JSON` format. One example is provided in the `example` directory.
 
 It is recommended to use an editor with syntax highlighting to build a correct JSON file. Here is an [online][json-editor] one.
 
-## Configuration file
+## Configuration file example
 
 ```
 {
@@ -125,27 +105,39 @@ You can enter several criteria. **All criteria must match** for a description to
 
 ## Output
 
-dcm2bids creates `sub-<PARTICIPANT>` directories in the output directory (by default the folder where the script is launched).
+dcm2bids creates a `sub-<PARTICIPANT ID>` directory in the output directory (by default the folder where the script is launched).
 
 Sidecars with one matching description will be convert to BIDS. If a file already exists, dcm2bids won't overwrite it. You should use the `--clobber` option to overwrite files.
 
-If a description matches several sidecars, dcm2bids will add the custom label `run-` to the filename.
+If a description matches several sidecars, dcm2bids will add automatically the custom label `run-` to the filename.
 
-Sidecars with no or more than one matching descriptions are kept in `tmp_dcm2niix` directory. Users can review these mismatches to change the configuration file accordingly.
+Sidecars with no or more than one matching descriptions are kept in `dcm2bids_data` directory. Users can review these mismatches to change the configuration file accordingly.
 
 ## Tools
 
 #### Helper
 
-`dcm2bids_helper -d DICOM_DIR`
+`dcm2bids_helper -d DICOM_DIR [-o OUTPUT_DIR]`
 
-To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/dcm2niix-example` of the output directory.
+To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `dcm2bids_data/helper` of the output directory.
 
 #### Scaffold
 
 `dcm2bids_scaffold [-o OUTPUT_DIR]`
 
 Create basic BIDS files and directories in the output directory (by default folder where the script is launched).
+
+## Usage
+
+How to launch dcm2bids when you have build your configuration file ? First `cd` in your BIDS directory.
+
+`dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE`
+
+If your participant have a session ID:
+
+`dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID -c CONFIG_FILE`
+
+See `dcm2bids -h` for more informations
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/INCF/BIDS-examples
@@ -154,6 +146,7 @@ Create basic BIDS files and directories in the output directory (by default fold
 [bids-validator]: https://github.com/INCF/bids-validator
 [conda]: https://conda.io/docs/
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
-[dcm2niix-nitrc]: https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage
+[dcm2niix-release]: https://github.com/rordenlab/dcm2niix/releases
+[dcm2niix-nitrc]: https://www.nitrc.org/frs/?group_id=889
 [gnu-pattern]: https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html
 [json-editor]: http://jsoneditoronline.org/
