@@ -137,6 +137,8 @@ If your participant have a session ID:
 
 `dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID -c CONFIG_FILE`
 
+dcm2bids creates log files inside `tmp_dcm2bids/log`
+
 See `dcm2bids -h` for more informations
 
 [bids]: http://bids.neuroimaging.io/

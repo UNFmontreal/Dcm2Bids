@@ -25,13 +25,13 @@ def get_arguments():
     parser.add_argument(
             "-p", "--participant",
             required=True,
-            help="Participant code",
+            help="Participant ID",
             )
 
     parser.add_argument(
             "-s", "--session",
             required=False, default=None,
-            help="Session code",
+            help="Session ID",
             )
 
     parser.add_argument(

@@ -24,7 +24,7 @@ class Dcm2niix(object):
         if self.participant:
             tmpDir = self.participant.prefix
         else:
-            tmpDir = "dcm2niix-example"
+            tmpDir = "helper"
         return os.path.join(self.bidsDir, "tmp_dcm2bids", tmpDir)
 
 

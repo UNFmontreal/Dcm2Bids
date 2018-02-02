@@ -57,7 +57,7 @@ class Dcm2bids(object):
     def _setLogger(self, log_level):
         logging.basicConfig()
 
-        logDir = os.path.join(self.bidsDir, "log")
+        logDir = os.path.join(self.bidsDir, "tmp_dcm2bids", "log")
         logFile = "{0}_{1}.log".format(self.participant.prefix,
                 datetime.now().strftime("%Y%m%dT%H%M%S"))
         make_directory_tree(logDir)

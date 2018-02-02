@@ -24,7 +24,7 @@ def get_arguments():
             )
 
     parser.add_argument(
-            "-b", "--bids_dir",
+            "-o", "--output_dir",
             required=False, default=os.getcwd(),
             help="Output BIDS directory, Default: current directory",
             )
@@ -36,10 +36,12 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-    app = Dcm2niix(**vars(args))
+    app = Dcm2niix(
+            dicom_dir=args.dicom_dir,
+            bids_dir=args.output_dir)
     rsl = app.run()
     print("Example in:")
-    print(os.path.join(args.bids_dir, "tmp_dcm2bids", "dcm2niix-example"))
+    print(os.path.join(args.output_dir, "tmp_dcm2bids", "helper"))
     return rsl
 
 
