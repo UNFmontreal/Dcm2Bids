@@ -60,6 +60,15 @@ def splitext_(path):
     return os.path.splitext(path)
 
 
+def dcm2niix_version():
+    output = run_shell_command("dcm2niix").split()
+    try:
+        version = output[output.index(b'version')+1]
+    except:
+        version = None
+    return version
+
+
 def run_shell_command(commandLine):
     import logging
     import shlex
@@ -70,6 +79,7 @@ def run_shell_command(commandLine):
     cmd = shlex.split(commandLine)
     logger.info("subprocess: {}".format(commandLine))
 
+    output = None
     try:
         process = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -84,3 +94,4 @@ def run_shell_command(commandLine):
         logger.error("Exception: {}".format(exception))
         logger.info("subprocess failed")
 
+    return output

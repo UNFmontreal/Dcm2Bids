@@ -8,7 +8,13 @@ from datetime import datetime
 from .dcm2niix import Dcm2niix
 from .sidecarparser import Sidecarparser
 from .structure import Participant
-from .utils import load_json, make_directory_tree, run_shell_command, splitext_
+from .utils import (
+        dcm2niix_version,
+        load_json,
+        make_directory_tree,
+        run_shell_command,
+        splitext_,
+        )
 from subprocess import call
 
 
@@ -28,7 +34,9 @@ class Dcm2bids(object):
         self.participant = Participant(participant, session)
         self.anonymizer = anonymizer
         self._setLogger(log_level)
+
         self.logger.info("--- dcm2bids start ---")
+        self.logger.info("dcm2niix:version: {}".format(dcm2niix_version()))
         self.logger.info("participant: {}".format(participant))
         self.logger.info("session: {}".format(session))
         self.logger.info("config: {}".format(os.path.realpath(config)))
