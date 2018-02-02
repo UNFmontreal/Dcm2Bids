@@ -68,9 +68,9 @@ def get_arguments():
     parser.add_argument(
             "-a", "--anonymizer",
             required=False, default=None,
-            help="Anonymize each anat image by passing it to this shell \
-            command (e.g., pydeface.py - the call syntax must be anonymizer \
-            inputfile outputfile)")
+            help="Link to a shell script to anonymize each anat images \
+            The call syntax must be `anonymizer input output` \
+            e.g., pydeface.py")
 
     args = parser.parse_args()
     return args

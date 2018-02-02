@@ -119,7 +119,7 @@ Sidecars with no or more than one matching descriptions are kept in `dcm2bids_da
 
 `dcm2bids_helper -d DICOM_DIR [-o OUTPUT_DIR]`
 
-To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `dcm2bids_data/helper` of the output directory.
+To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/helper` of the output directory.
 
 #### Scaffold
 
@@ -140,6 +140,10 @@ If your participant have a session ID:
 dcm2bids creates log files inside `tmp_dcm2bids/log`
 
 See `dcm2bids -h` for more informations
+
+## bids-validator
+
+Run the [bids-validator][bids-validator] to check your directory. Don't forget to create a `.bidsignore` file at the root of your BIDS directory with `tmp_dcm2bids/*` inside.
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/INCF/BIDS-examples

@@ -1,5 +1,6 @@
 idea/
 upload*
+*.simg
 
 #Distribution
 dist/

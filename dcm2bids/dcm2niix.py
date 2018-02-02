@@ -17,7 +17,8 @@ class Dcm2niix(object):
         self.participant = participant
         self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
         self.sidecars = []
-        if logger:
+        self._logger = logger
+        if self._logger:
             self.logger = logging.getLogger("dcm2bids")
 
     @property
@@ -36,15 +37,17 @@ class Dcm2niix(object):
             oldOutput = False
 
         if oldOutput and forceRun:
-            self.logger.info("Old dcm2niix output found")
-            self.logger.info("Cleaning the old dcm2niix output and rerun it because --forceDcm2niix")
-            self.logger.info("")
+            if self._logger:
+                self.logger.info("Old dcm2niix output found")
+                self.logger.info("Cleaning the old dcm2niix output and rerun it because --forceDcm2niix")
+                self.logger.info("")
             clean(self.outputDir)
             self.execute()
 
         elif oldOutput:
-            self.logger.info("Old dcm2niix output found")
-            self.logger.info("Use --forceDcm2niix to rerun the conversion")
+            if self._logger:
+                self.logger.info("Old dcm2niix output found")
+                self.logger.info("Use --forceDcm2niix to rerun the conversion")
 
         else:
             clean(self.outputDir)
@@ -57,7 +60,8 @@ class Dcm2niix(object):
 
 
     def execute(self):
-        self.logger.info("--- running dcm2niix ---")
+        if self._logger:
+            self.logger.info("--- running dcm2niix ---")
         for directory in self.dicomDirs:
             commandStr = "dcm2niix {} -o {} {}"
             cmd = commandStr.format(self.options, self.outputDir, directory)

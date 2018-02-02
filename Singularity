@@ -40,3 +40,6 @@ Maintainer Christophe Bedetti <christophe.bedetti@criugm.qc.ca>
     git clone https://github.com/cbedetti/Dcm2Bids.git
     cd Dcm2Bids && pip install .
 
+
+%runscript
+    exec dcm2bids "$@"
