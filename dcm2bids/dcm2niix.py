@@ -11,13 +11,14 @@ class Dcm2niix(object):
     """
     """
 
-    def __init__(self, dicom_dir, bids_dir, participant=None):
+    def __init__(self, dicom_dir, bids_dir, participant=None, logger=True):
         self.dicomDirs = dicom_dir
         self.bidsDir = bids_dir
         self.participant = participant
         self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
         self.sidecars = []
-        self.logger = logging.getLogger("dcm2bids")
+        if logger:
+            self.logger = logging.getLogger("dcm2bids")
 
     @property
     def outputDir(self):

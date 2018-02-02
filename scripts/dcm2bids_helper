@@ -38,7 +38,9 @@ def main():
     args = get_arguments()
     app = Dcm2niix(
             dicom_dir=args.dicom_dir,
-            bids_dir=args.output_dir)
+            bids_dir=args.output_dir,
+            logger=False,
+            )
     rsl = app.run()
     print("Example in:")
     print(os.path.join(args.output_dir, "tmp_dcm2bids", "helper"))
