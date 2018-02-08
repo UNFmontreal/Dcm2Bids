@@ -12,8 +12,8 @@ Before using this software, learn more about BIDS:
 
 #### Dependencies
 
-- Python 2 or 3 with the `future` module
-- `dcm2niix` : DICOM to NIfTI conversion tool
+- Python 2 or 3 with the `future` module, `pip` will install it automatically
+- `dcm2niix` : DICOM to NIfTI conversion tool. **You need to install it**
   - [NITRC][dcm2niix-nitrc] for compiled versions
   - [Recent release][dcm2niix-release]
   - [github][dcm2niix-github] to build from source code
@@ -22,9 +22,13 @@ Before using this software, learn more about BIDS:
 
 ###### with pip
 
+There's several ways:
+
 `pip install dcm2bids`
 
-###### from github
+or `pip install https://github.com/cbedetti/Dcm2Bids/archive/master.zip
+
+or
 
 ```
 git clone https://github.com/cbedetti/Dcm2Bids.git
@@ -32,9 +36,13 @@ cd Dcm2Bids
 pip install .
 ```
 
+Don't forget to use `--user` or `-e` flags depending on your need. See `pip install --help` for more informations.
+
 ###### with singularity
 
 [![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/544)
+
+A bit overkill, but it's there.
 
 ## Introduction
 
@@ -145,6 +153,14 @@ See `dcm2bids -h` for more informations
 
 Run the [bids-validator][bids-validator] to check your directory. Don't forget to create a `.bidsignore` file at the root of your BIDS directory with `tmp_dcm2bids/*` inside.
 
+## Similar projects
+
+Other tools to create [BIDS][bids] datasets :
+
+- [heudiconv][link-heudiconv]
+- [bidskit][link-bidskit]
+- [dac2bids][link-dac2bids]
+
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/INCF/BIDS-examples
 [bids-nature]: https://www.nature.com/articles/sdata201644
@@ -156,3 +172,6 @@ Run the [bids-validator][bids-validator] to check your directory. Don't forget t
 [dcm2niix-nitrc]: https://www.nitrc.org/frs/?group_id=889
 [gnu-pattern]: https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html
 [json-editor]: http://jsoneditoronline.org/
+[link-heudiconv]: https://github.com/nipy/heudiconv
+[link-bidskit]: https://github.com/jmtyszka/bidskit
+[link-dac2bids]: https://github.com/dangom/dac2bids
