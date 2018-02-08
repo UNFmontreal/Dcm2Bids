@@ -26,7 +26,7 @@ There's several ways:
 
 `pip install dcm2bids`
 
-or `pip install https://github.com/cbedetti/Dcm2Bids/archive/master.zip
+or `pip install https://github.com/cbedetti/Dcm2Bids/archive/master.zip`
 
 or
 
@@ -36,7 +36,7 @@ cd Dcm2Bids
 pip install .
 ```
 
-Don't forget to use `--user` or `-e` flags depending on your need. See `pip install --help` for more informations.
+Don't forget to use `--user` or `-e` flags depending on your needs. See `pip install --help` for more informations.
 
 ###### with singularity
 
