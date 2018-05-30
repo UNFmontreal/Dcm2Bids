@@ -2,7 +2,7 @@
 
 
 import itertools
-import fnmatch
+import re
 import logging
 import os
 from collections import defaultdict, OrderedDict
@@ -101,9 +101,8 @@ class Sidecarparser(object):
             if isinstance(name, list):
                 subRsl = []
                 for subName in name:
-                    subRsl.append(fnmatch.fnmatch(str(subName), pat))
+                    subRsl.append(bool(re.search(pat, str(subName))))
                 rsl.append(any(subRsl))
             else:
-                rsl.append(fnmatch.fnmatch(str(name), pat))
+                rsl.append(bool(re.search(path, str(name))))
         return all(rsl)
-
