@@ -101,8 +101,8 @@ class Sidecarparser(object):
             if isinstance(name, list):
                 subRsl = []
                 for subName in name:
-                    subRsl.append(bool(re.search(path, str(subName))))
+                    subRsl.append(bool(re.search(pat, str(subName))))
                 rsl.append(any(subRsl))
             else:
-                rsl.append(bool(re.search(path, str(name))))
+                rsl.append(bool(re.search(pat, str(name))))
         return all(rsl)
