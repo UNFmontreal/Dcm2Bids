@@ -71,7 +71,7 @@ TEXT_FILES = {
         " - Initialised study directory"
         ],
     "participants.tsv": [
-        "participants_id\teducation\tbmi",
+        "participant_id\teducation\tbmi",
         "sub-01\tn/a\tn/a",
         ],
     }
