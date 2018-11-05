@@ -4,7 +4,7 @@
 import glob
 import logging
 import os
-from .utils import clean, run_shell_command
+from .utils import alphanum_sort, clean, run_shell_command
 
 
 class Dcm2niix(object):
@@ -54,7 +54,7 @@ class Dcm2niix(object):
             self.execute()
 
         self.sidecars = glob.glob(os.path.join(self.outputDir, "*.json"))
-        self.sidecars.sort()
+        self.sidecars = alphanum_sort(self.sidecars)
 
         return 0
 

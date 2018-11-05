@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 import shutil
 import csv
 
@@ -58,6 +59,13 @@ def splitext_(path):
         if path.endswith(ext):
             return path[:-len(ext)], path[-len(ext):]
     return os.path.splitext(path)
+
+
+def alphanum_sort(_list):
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    sorted_list = sorted(_list, key=alphanum_key)
+    return sorted_list
 
 
 def dcm2niix_version():
