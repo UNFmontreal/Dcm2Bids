@@ -96,8 +96,8 @@ class Dcm2bids(object):
                         and ".nii" in ext):
                     # it's an anat scan - try the anonymizer
                     self.logger.info("")
-                    cmd = "{0} {1} {2}".format(
-                            self.anonymizer, f, targetBase+ext)
+                    cmd = "{0} {1} {2} {3}".format(
+                            self.anonymizer, '--outfile', targetBase+ext, f)
                     run_shell_command(cmd)
                 else:
                     # just move
