@@ -8,21 +8,43 @@ from .utils import clean, run_shell_command
 
 
 class Dcm2niix(object):
-    """
+    """ Object to handle dcm2niix execution
+
+    Args:
+        dicomDirs (list): A list of folder with dicoms to convert
+        bidsDir (str): A path to the root BIDS directory
+        participant: Optional Participant object
+        options (str): Optional arguments for dcm2niix
+
+    Properties:
+        sidecars (list): A list of sidecar path created by dcm2niix
     """
 
-    def __init__(self, dicom_dir, bids_dir, participant=None, logger=True):
-        self.dicomDirs = dicom_dir
-        self.bidsDir = bids_dir
+    def __init__(self, dicomDirs, bidsDir, participant=None,
+                 options="-b y -ba y -z y -f '%3s_%f_%p_%t'"):
+        self._sidecars = []
+
+        self.dicomDirs = dicomDir
+        self.bidsDir = bidsDir
         self.participant = participant
-        self.options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
-        self.sidecars = []
-        self._logger = logger
-        if self._logger:
-            self.logger = logging.getLogger("dcm2bids")
+        self.options = options
+
+
+    @property
+    def sidecars(self):
+        """
+        Returns:
+            sidecars (list): A list of sidecar path created by dcm2niix
+        """
+        return self._sidecars
+
 
     @property
     def outputDir(self):
+        """
+        Returns:
+            A directory to save all the output files of dcm2niix
+        """
         if self.participant:
             tmpDir = self.participant.prefix
         else:
@@ -56,13 +78,35 @@ class Dcm2niix(object):
         self.sidecars = glob.glob(os.path.join(self.outputDir, "*.json"))
         self.sidecars.sort()
 
-        return 0
+        return os.EX_OK
 
 
     def execute(self):
-        if self._logger:
-            self.logger.info("--- running dcm2niix ---")
-        for directory in self.dicomDirs:
-            commandStr = "dcm2niix {} -o {} {}"
-            cmd = commandStr.format(self.options, self.outputDir, directory)
+        """ Execute dcm2niix for each directory in dicomDirs
+        """
+        self.version()
+        for dicomDir in self.dicomDirs:
+            commandTpl = "dcm2niix {} -o {} {}"
+            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
             run_shell_command(cmd)
+
+
+    @staticmethod
+    def version():
+        """
+        Returns:
+            A string of the version of dcm2niix install on the system
+        """
+        try:
+            output = run_shell_command("dcm2niix").decode()
+            output = output.split("\n")[0].split()
+            version = output[output.index('version')+1]
+            logging.info("Running dcm2niix version " + version)
+
+        except FileNotFoundError:
+            logging.error("dcm2niix does not appear to be installed")
+            logging.error("See: https://github.com/rordenlab/dcm2niix")
+            version = ""
+
+        return version
+

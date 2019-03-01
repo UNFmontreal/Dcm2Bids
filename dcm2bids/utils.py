@@ -5,6 +5,9 @@ import json
 import os
 import shutil
 import csv
+import logging
+import shlex
+from subprocess import check_output
 
 
 def load_json(filename):
@@ -53,8 +56,18 @@ def clean(directory):
         make_directory_tree(directory)
 
 
-def splitext_(path):
-    for ext in ['.nii.gz']:
+def splitext_(path, extensions=['.nii.gz']):
+    """ Split the extension from a pathname
+    Handle case with extensions with '.' in it
+
+    Args:
+        path (str): A path to split
+        extensions (list): List of special extensions
+
+    Returns:
+        (root, ext): ext may be empty
+    """
+    for ext in extensions:
         if path.endswith(ext):
             return path[:-len(ext)], path[-len(ext):]
     return os.path.splitext(path)
@@ -70,28 +83,28 @@ def dcm2niix_version():
 
 
 def run_shell_command(commandLine):
-    import logging
-    import shlex
-    import subprocess
+    """ Wrapper of subprocess.check_output
 
-    logger = logging.getLogger("dcm2bids")
-
-    cmd = shlex.split(commandLine)
-    logger.info("subprocess: {}".format(commandLine))
+    Returns:
+        Run command with arguments and return its output
+    """
+    logging.info("Subprocess:{}".format(commandLine))
 
     output = None
     try:
-        process = subprocess.Popen(
-                cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        output, _ = process.communicate()
+        output = check_output(shlex.split(commandLine))
 
-        try:
-            logger.info("\n" + output.decode("utf-8"))
-        except:
-            logger.info(output)
+        #try:
+            #output = output.decode()
+        #except:
+            #pass
 
-    except OSError as exception:
-        logger.error("Exception: {}".format(exception))
-        logger.info("subprocess failed")
+    except FileNotFoundError as e:
+        logging.error(e.strerror)
+        raise
+
+    #except OSError as e:
+        #logging.error(e.strerror)
+        #raise
 
     return output
