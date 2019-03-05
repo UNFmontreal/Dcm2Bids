@@ -5,7 +5,8 @@
 import argparse
 import os
 import sys
-from dcm2bids.dcm2bids import Dcm2bids
+from dcm2bids import Dcm2bids
+from dcm2bids.utils import DEFAULT
 
 
 def get_arguments():
@@ -30,26 +31,27 @@ def get_arguments():
 
     parser.add_argument(
             "-s", "--session",
-            required=False, default=None,
+            required=False, default=DEFAULT.cliSession,
             help="Session ID",
             )
 
     parser.add_argument(
             "-c", "--config",
-            required=True, default=None,
+            required=True,
             help="JSON configuration file (see example/config.json)",
             )
 
     parser.add_argument(
             "-o", "--output_dir",
-            required=False, default=os.getcwd(),
-            help="Output BIDS directory, Default: current directory",
+            required=False, default=DEFAULT.cliOutputDir,
+            help="Output BIDS directory, Default: current directory ({})".format(
+                DEFAULT.cliOutputDir),
             )
 
     parser.add_argument(
             "--forceDcm2niix",
             required=False, action='store_true',
-            help="Overwrite old temporary dcm2niix output if it exists",
+            help="Overwrite previous temporary dcm2niix output if it exists",
             )
 
     parser.add_argument(
@@ -60,14 +62,14 @@ def get_arguments():
 
     parser.add_argument(
             "-l", "--log_level",
-            required=False, default="INFO",
+            required=False, default=DEFAULT.cliLogLevel,
             choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],
             help="Set logging level",
             )
 
     parser.add_argument(
             "-a", "--anonymizer",
-            required=False, default=None,
+            required=False, default=DEFAULT.cliAnonymizer,
             help="Link to a shell script to anonymize each anat images \
             The call syntax must be `anonymizer input output` \
             e.g., pydeface.py")

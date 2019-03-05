@@ -1,19 +1,53 @@
 # -*- coding: utf-8 -*-
 
 
-import json
-import os
-import shutil
 import csv
+import json
 import logging
+import os
 import shlex
 from subprocess import check_output
 
 
+class DEFAULT(object):
+    """ Default values of the package"""
+    #cli dcm2bids
+    cliSession = ""
+    cliOutputDir = os.getcwd()
+    cliAnonymizer = None
+    cliLogLevel = "INFO"
+
+    #dcm2bids.py
+    outputDir = cliOutputDir
+    session = cliSession #also Participant object
+    clobber = False
+    forceDcm2niix = False
+    anonymizer = cliAnonymizer,
+    logLevel = "WARNING"
+
+    #dcm2niix.py
+    options="-b y -ba y -z y -f '%3s_%f_%p_%t'"
+
+    #sidecar.py
+    keylt = "SeriesNumber"
+
+    #misc
+    tmpDirName = "tmp_dcm2bids"
+
+
 def load_json(filename):
+    """ Load a JSON file
+
+    Args:
+        filename (str): Path of a JSON file
+
+    Return:
+        Dictionnary of the JSON file
+    """
     with open(filename, 'r') as f:
         data = json.load(f)
     return data
+
 
 def save_json(filename, data):
     with open(filename, 'w') as f:
@@ -42,20 +76,6 @@ def read_participants(filename):
         return [row for row in reader]
 
 
-def make_directory_tree(directory):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-
-def clean(directory):
-    make_directory_tree(directory)
-    if not os.listdir(directory) == []:
-        shutil.rmtree(directory)
-        make_directory_tree(directory)
-    else:
-        make_directory_tree(directory)
-
-
 def splitext_(path, extensions=['.nii.gz']):
     """ Split the extension from a pathname
     Handle case with extensions with '.' in it
@@ -73,38 +93,22 @@ def splitext_(path, extensions=['.nii.gz']):
     return os.path.splitext(path)
 
 
-def dcm2niix_version():
-    output = run_shell_command("dcm2niix").split()
-    try:
-        version = output[output.index(b'version')+1]
-    except:
-        version = None
-    return version
-
-
 def run_shell_command(commandLine):
     """ Wrapper of subprocess.check_output
 
     Returns:
         Run command with arguments and return its output
     """
-    logging.info("Subprocess:{}".format(commandLine))
+    logger = logging.getLogger(__name__)
+    logger.info("Subprocess:{}".format(commandLine))
 
     output = None
     try:
         output = check_output(shlex.split(commandLine))
 
-        #try:
-            #output = output.decode()
-        #except:
-            #pass
-
-    except FileNotFoundError as e:
-        logging.error(e.strerror)
+    #except FileNotFoundError as e:
+    except OSError as e:
+        logger.error(e.strerror, exc_info=True)
         raise
-
-    #except OSError as e:
-        #logging.error(e.strerror)
-        #raise
 
     return output
