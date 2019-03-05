@@ -27,6 +27,7 @@ class DEFAULT(object):
 
     #dcm2niix.py
     options="-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixVersion="v1.0.20181125"
 
     #sidecar.py
     keylt = "SeriesNumber"

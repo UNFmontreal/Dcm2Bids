@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 
-import glob
 import logging
 import os
-from .utils import clean, run_shell_command
+import shutil
+from distutils.version import LooseVersion
+from glob import glob
+from .utils import DEFAULT, run_shell_command
 
 
 class Dcm2niix(object):
@@ -20,23 +22,17 @@ class Dcm2niix(object):
         sidecars (list): A list of sidecar path created by dcm2niix
     """
 
+    #TODO: make `options` available in the JSON config file
     def __init__(self, dicomDirs, bidsDir, participant=None,
-                 options="-b y -ba y -z y -f '%3s_%f_%p_%t'"):
-        self._sidecars = []
+            options=DEFAULT.options):
+        self.logger = logging.getLogger(__name__)
+
+        self.sidecars = []
 
         self.dicomDirs = dicomDir
         self.bidsDir = bidsDir
         self.participant = participant
         self.options = options
-
-
-    @property
-    def sidecars(self):
-        """
-        Returns:
-            sidecars (list): A list of sidecar path created by dcm2niix
-        """
-        return self._sidecars
 
 
     @property
@@ -49,34 +45,41 @@ class Dcm2niix(object):
             tmpDir = self.participant.prefix
         else:
             tmpDir = "helper"
-        return os.path.join(self.bidsDir, "tmp_dcm2bids", tmpDir)
+        return os.path.join(self.bidsDir, TMP_DIR_NAME, tmpDir)
 
 
-    def run(self, forceRun=False):
+    def run(self, force=False):
+        """ Run dcm2niix if necessary
+
+        Sets:
+            sidecars (list): A list of sidecar path created by dcm2niix
+        """
         try:
             oldOutput = os.listdir(self.outputDir) != []
         except:
             oldOutput = False
 
         if oldOutput and forceRun:
-            if self._logger:
-                self.logger.info("Old dcm2niix output found")
-                self.logger.info("Cleaning the old dcm2niix output and rerun it because --forceDcm2niix")
-                self.logger.info("")
-            clean(self.outputDir)
+            self.logger.warning("Previous dcm2niix directory output found:")
+            self.logger.warning(self.outputDir)
+            self.logger.warning("force argument is set to True")
+            self.logger.warning("Cleaning the previous directory and run dcm2niix")
+
+            shutil.rmtree(self.outputDir, ignore_errors=True)
+            os.makedirs(self.outputDir, exist_ok=True)
             self.execute()
 
         elif oldOutput:
-            if self._logger:
-                self.logger.info("Old dcm2niix output found")
-                self.logger.info("Use --forceDcm2niix to rerun the conversion")
+            self.logger.warning("Previous dcm2niix directory output found:")
+            self.logger.warning(self.outputDir)
+            self.logger.warning("Use --forceDcm2niix to rerun dcm2niix")
 
         else:
-            clean(self.outputDir)
+            os.makedirs(self.outputDir, exist_ok=True)
             self.execute()
 
-        self.sidecars = glob.glob(os.path.join(self.outputDir, "*.json"))
-        self.sidecars.sort()
+        sidecarFiles = glob(os.path.join(self.outputDir, "*.json"))
+        self.sidecars = sorted(sidecarFiles)
 
         return os.EX_OK
 
@@ -101,11 +104,17 @@ class Dcm2niix(object):
             output = run_shell_command("dcm2niix").decode()
             output = output.split("\n")[0].split()
             version = output[output.index('version')+1]
-            logging.info("Running dcm2niix version " + version)
+            self.logger.info("Running dcm2niix version " + version)
 
-        except FileNotFoundError:
-            logging.error("dcm2niix does not appear to be installed")
-            logging.error("See: https://github.com/rordenlab/dcm2niix")
+            #check version
+            if LooseVersion(version) < LooseVersion(DEFAULT.dcm2niixVersion):
+                self.logger.warning(
+                        "Inferior version than the tested version ({})".format(
+                            DEFAULT.dcm2niixVersion))
+
+        except OSError:
+            self.logger.error("dcm2niix does not appear to be installed")
+            self.logger.error("See: https://github.com/rordenlab/dcm2niix")
             version = ""
 
         return version
