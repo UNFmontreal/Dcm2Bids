@@ -22,12 +22,11 @@ class Dcm2niix(object):
         sidecars (list): A list of sidecar path created by dcm2niix
     """
 
-    #TODO: make `options` available in the JSON config file
     def __init__(self, dicomDirs, bidsDir, participant=None,
             options=DEFAULT.options):
         self.logger = logging.getLogger(__name__)
 
-        self.sidecars = []
+        self.sidecarsFiles = []
 
         self.dicomDirs = dicomDir
         self.bidsDir = bidsDir
@@ -51,8 +50,12 @@ class Dcm2niix(object):
     def run(self, force=False):
         """ Run dcm2niix if necessary
 
+        Args:
+            force (boolean): Forces a cleaning of a previous execution of
+                             dcm2niix
+
         Sets:
-            sidecars (list): A list of sidecar path created by dcm2niix
+            sidecarsFiles (list): A list of sidecar path created by dcm2niix
         """
         try:
             oldOutput = os.listdir(self.outputDir) != []
@@ -78,8 +81,7 @@ class Dcm2niix(object):
             os.makedirs(self.outputDir, exist_ok=True)
             self.execute()
 
-        sidecarFiles = glob(os.path.join(self.outputDir, "*.json"))
-        self.sidecars = sorted(sidecarFiles)
+        self.sidecarFiles = glob(os.path.join(self.outputDir, "*.json"))
 
         return os.EX_OK
 
