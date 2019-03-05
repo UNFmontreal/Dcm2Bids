@@ -8,15 +8,45 @@ import os
 from collections import defaultdict, OrderedDict
 from future.utils import iteritems
 from .structure import Acquisition
-from .utils import load_json, splitext_
+from .utils import DEFAULT, load_json, splitext_
+
+
+
+class Sidecar(object):
+    """ A sidecar object
+
+    Args:
+        filename (str): Path of a JSON sidecar
+        keyComp (str): A key from the JSON sidecar to compare sidecars
+                     default="SeriesNumber"
+    """
+
+    def __init__(self, filename, keyComp=DEFAULT.keyComp):
+        self.filename = filename
+        self.root, _ = splitext_(filename)
+        self.data = load_json(filename)
+        self.keyComp = keyComp
+
+
+    def __lt__(self, other):
+        return self.data[self.keyComp] < other.data[self.keyComp]
+
+
+    def __eq__(self, other):
+        return self.data == other.data
 
 
 class Sidecarparser(object):
+    """
+    Args:
+        sidecars (list): List of Sidecar objects
+        descriptions (list): List of dictionnaries describing acquisitions
+    """
 
-    def __init__(self, sidecars, descriptions, selectseries=None):
+    def __init__(self, sidecars, descriptions):
         self.sidecars = sidecars
         self.descriptions = descriptions
-        self.logger = logging.getLogger("dcm2bids")
+        self.logger = logging.getLogger(__name__)
         self.graph = self._generateGraph()
         self.acquisitions = self._generateAcquisitions()
         self.findRuns()

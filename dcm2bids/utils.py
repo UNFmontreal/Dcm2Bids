@@ -30,7 +30,7 @@ class DEFAULT(object):
     dcm2niixVersion="v1.0.20181125"
 
     #sidecar.py
-    keylt = "SeriesNumber"
+    keyComp = "SeriesNumber"
 
     #misc
     tmpDirName = "tmp_dcm2bids"
