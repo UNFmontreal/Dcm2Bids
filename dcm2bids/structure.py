@@ -2,6 +2,7 @@
 
 
 from os.path import join as opj
+from .utils import DEFAULT
 
 
 class Participant(object):
@@ -12,7 +13,7 @@ class Participant(object):
         session (str): Optional label of a session
     """
 
-    def __init__(self, name, session=""):
+    def __init__(self, name, session=DEFAULT.session):
         self._name = ""
         self._session = ""
 
@@ -95,7 +96,7 @@ class Participant(object):
         Returns:
             Boolean
         """
-        return not self._session.strip() == ""
+        return not self._session.strip() == DEFAULT.session
 
 
 
