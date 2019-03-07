@@ -22,7 +22,7 @@ class Dcm2niix(object):
         sidecars (list): A list of sidecar path created by dcm2niix
     """
 
-    def __init__(self, dicomDirs, bidsDir, participant=None,
+    def __init__(self, dicomDirs, bidsDir, participant,
             options=DEFAULT.options):
         self.logger = logging.getLogger(__name__)
 
@@ -102,21 +102,23 @@ class Dcm2niix(object):
         Returns:
             A string of the version of dcm2niix install on the system
         """
+        logger = logging.getLogger(__name__)
+
         try:
             output = run_shell_command("dcm2niix").decode()
             output = output.split("\n")[0].split()
             version = output[output.index('version')+1]
-            self.logger.info("Running dcm2niix version " + version)
+            logger.info("Running dcm2niix version " + version)
 
             #check version
             if LooseVersion(version) < LooseVersion(DEFAULT.dcm2niixVersion):
-                self.logger.warning(
+                logger.warning(
                         "Inferior version than the tested version ({})".format(
                             DEFAULT.dcm2niixVersion))
 
         except OSError:
-            self.logger.error("dcm2niix does not appear to be installed")
-            self.logger.error("See: https://github.com/rordenlab/dcm2niix")
+            logger.error("dcm2niix does not appear to be installed")
+            logger.error("See: https://github.com/rordenlab/dcm2niix")
             version = ""
 
         return version
