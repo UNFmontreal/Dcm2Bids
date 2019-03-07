@@ -6,7 +6,7 @@ description = """Reorganising NIfTI files from dcm2niix into the Brain Imaging D
 
 try:
     import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
+    long_description = pypandoc.convert_file('README.md', 'rst')
 except(IOError, ImportError):
     long_description = open('README.md').read()
 
