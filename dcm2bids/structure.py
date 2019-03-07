@@ -71,9 +71,9 @@ class Participant(object):
             'sub-<subject_label>/ses-<session_label>'
         """
         if self.hasSession():
-            return opj(self._name, self._session)
+            return opj(self.name, self.session)
         else:
-            return self._name
+            return self.name
 
 
     @property
@@ -85,9 +85,9 @@ class Participant(object):
             'sub-<subject_label>_ses-<session_label>'
         """
         if self.hasSession():
-            return self._name + "_" + self._session
+            return self.name + "_" + self.session
         else:
-            return self._name
+            return self.name
 
 
     def hasSession(self):
@@ -96,7 +96,7 @@ class Participant(object):
         Returns:
             Boolean
         """
-        return not self._session.strip() == DEFAULT.session
+        return not self.session.strip() == DEFAULT.session
 
 
 
@@ -104,25 +104,32 @@ class Acquisition(object):
     """ Class representing an acquisition
 
     Args:
-        srcRoot (str): The path root (without the extension) of the acquisition
-                that is return by dcm2niix
         participant (Participant): A participant object
         dataType (str): A functional group of MRI data (ex: func, anat ...)
         modalityLabel (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
         customLabels (str): Optional labels (ex: task-rest)
+        srcSidecar (Sidecar): Optional sidecar object
     """
 
-    def __init__(self, srcRoot, participant,
-                 dataType, modalityLabel, customLabels=""):
+    def __init__(self, participant, dataType, modalityLabel, customLabels="",
+            srcSidecar=None, **kwargs):
         self._modalityLabel = ""
         self._customLabels = ""
 
-        self.srcRoot = srcRoot
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
         self.customLabels = customLabels
+        self.srcSidecar = srcSidecar
+
+
+    def __eq__(self, other):
+        return (
+                self.dataType == other.dataType
+                and self.participant.prefix == other.participant.prefix
+                and self.suffix == other.suffix
+                )
 
 
     @property
@@ -173,42 +180,33 @@ class Acquisition(object):
         Returns:
             A string '_<modalityLabel>' or '_<customLabels>_<modalityLabel>'
         """
-        if self._customLabels.strip() == "":
-            return self._modalityLabel
+        if self.customLabels.strip() == "":
+            return self.modalityLabel
         else:
-            return self._customLabels + self._modalityLabel
+            return self.customLabels + self.modalityLabel
 
 
-    def get_src_path(self, extension):
-        """ Build a source path from srcRoot
-
-        Args:
-            extension (str): extension of the file
-
-        Return:
-            A path to a source file with the extension specified
+    @property
+    def srcRoot(self):
         """
-        if not extension.startswith("."):
-            extension = "." + extension
-
-        return self.srcRoot + extension
-
-
-    def get_dst_path(self, extension):
-        """ Build a destination path
-
-        Args:
-            extension (str): extension of the file
-
         Return:
-            A path to a destination file with the extension specified
+            The sidecar source root to move
         """
-        if not extension.startswith("."):
-            extension = "." + extension
+        if self.srcSidecar:
+            return self.srcSidecar.root
+        else:
+            return None
 
+
+    @property
+    def dstRoot(self):
+        """
+        Return:
+            The destination root inside the BIDS structure
+        """
         return opj(
                 self.participant.directory,
                 self.dataType,
-                self.participant.prefix + self.suffix + extension
+                self.participant.prefix + self.suffix
                 )
 

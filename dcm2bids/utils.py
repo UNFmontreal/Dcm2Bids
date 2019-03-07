@@ -26,11 +26,13 @@ class DEFAULT(object):
     logLevel = "WARNING"
 
     #dcm2niix.py
-    options="-b y -ba y -z y -f '%3s_%f_%p_%t'"
-    dcm2niixVersion="v1.0.20181125"
+    options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixVersion = "v1.0.20181125"
 
     #sidecar.py
     keyComp = "SeriesNumber"
+    searchMethod = "fnmatch"
+    runTpl = "_run-{:02d}"
 
     #misc
     tmpDirName = "tmp_dcm2bids"

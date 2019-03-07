@@ -2,10 +2,11 @@
 
 
 import itertools
-import re
 import logging
 import os
+import re
 from collections import defaultdict, OrderedDict
+from fnmatch import fnmatch
 from future.utils import iteritems
 from .structure import Acquisition
 from .utils import DEFAULT, load_json, splitext_
@@ -22,105 +23,191 @@ class Sidecar(object):
     """
 
     def __init__(self, filename, keyComp=DEFAULT.keyComp):
+        self._data = {}
+
         self.filename = filename
         self.root, _ = splitext_(filename)
-        self.data = load_json(filename)
+        self.data = filename
         self.keyComp = keyComp
 
 
     def __lt__(self, other):
-        return self.data[self.keyComp] < other.data[self.keyComp]
+        selfComp = self._data[self.keyComp]
+        otherComp = other.data[self.keyComp]
+        if selfComp == otherComp:
+            return self.root < other.root
+        else:
+            return selfComp < otherComp
 
 
     def __eq__(self, other):
-        return self.data == other.data
+        return self._data == other.data
 
 
-class Sidecarparser(object):
+    @property
+    def data(self):
+        return self._data
+
+
+    @data.setter
+    def data(self, filename):
+        """
+        """
+        try:
+            data = load_json(filename)
+        except:
+            data = {}
+        data["SidecarFilename"] = os.path.basename(filename)
+
+        self._data = data
+
+
+class SidecarPairing(object):
     """
     Args:
         sidecars (list): List of Sidecar objects
         descriptions (list): List of dictionnaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions):
+    def __init__(self, sidecars, descriptions,
+            searchMethod=DEFAULT.searchMethod):
+        self.logger = logging.getLogger(__name__)
+
+        self.graph = OrderedDict()
+        self.aquisitions = []
+
         self.sidecars = sidecars
         self.descriptions = descriptions
-        self.logger = logging.getLogger(__name__)
-        self.graph = self._generateGraph()
-        self.acquisitions = self._generateAcquisitions()
-        self.findRuns()
+        self.searchMethod = searchMethod
 
 
-    def _generateGraph(self):
+    def build_graph(self):
+        """
+        Test all the possible links between the list of sidecars and the
+        description dictionnaries and build a graph from it
+        The graph is in a OrderedDict object. The keys are the Sidecars and
+        the values are a list of possible descriptions
+
+        Returns:
+            A graph (OrderedDict)
+        """
         graph = OrderedDict((_, []) for _ in self.sidecars)
-        for sidecar, index in itertools.product(
-                self.sidecars, range(len(self.descriptions))):
-            self._sidecar = load_json(sidecar)
-            self._sidecar["SidecarFilename"] = os.path.basename(sidecar)
-            criteria = self.descriptions[index]["criteria"]
-            if criteria and self._respect(criteria):
-                graph[sidecar].append(index)
+
+        possibleLinks = itertools.product(self.sidecars, self.descriptions)
+        for sidecar, description in possibleLinks:
+            criteria = description.get("criteria", None)
+            if criteria and self.isLink(sidecar.data, criteria):
+                graph[sidecar].append(description)
+
+        self.graph = graph
         return graph
 
 
-    def _generateAcquisitions(self):
-        rsl = []
-        self.logger.info("")
-        self.logger.info("Sidecars matching:")
-        for sidecar, match_descs in iteritems(self.graph):
-            base = splitext_(sidecar)[0]
-            basename = os.path.basename(sidecar)
+    def isLink(self, data, criteria):
+        """
+        Args:
+            data (dict): Dictionnary data of a sidecar
+            criteria (dict): Dictionnary criteria
 
-            if len(basename) > 48:
-                basename = basename[:22] + ".." + basename[-22:]
+        Returns:
+            boolean
+        """
+        def compare(name, pattern):
+            if self.searchMethod == "fnmatch":
+                return fnmatch(str(name), str(pattern))
+            else:
+                self.logger.error("{} is not a search method implemented".format(
+                    self.searchMethod))
+                self.logger.error("Search method implemented: fnmatch.fnmatch")
 
-            if len(match_descs) == 1:
-                self.logger.info("MATCH           {}".format(basename))
-                acq = self._acquisition(
-                        base, self.descriptions[match_descs[0]])
-                rsl.append(acq)
 
-            elif len(match_descs) == 0:
-                self.logger.info("NO MATCH        {}".format(basename))
+        result = []
+        for tag, pattern in iteritems(criteria):
+            name = data.get(tag)
+
+            if isinstance(name, list):
+                subResult = []
+                for subName in name:
+                    subResult.append(compare(subName, pattern))
+                result.append(any(subResult))
 
             else:
-                self.logger.info("SEVERAL MATCHES {}".format(basename))
-        return rsl
+                result.append(compare(name, pattern))
+
+        return all(result)
 
 
-    def findRuns(self):
-        def list_duplicates(seq):
-            """
-            http://stackoverflow.com/a/5419576
+    def build_acquisitions(self, participant):
+        """
+        Args:
+            participant (Participant): Participant object to create acquisitions
+        Returns:
+            A list of acquisition objects
+        """
+        acquisitions = []
+
+        self.logger.info("Sidecars pairing:")
+        for sidecar, descriptions in iteritems(self.graph):
+
+            #only one description for the sidecar
+            if len(descriptions) == 1:
+                desc = descriptions[0]
+                acq = Acquisition(participant, srcSidecar=sidecar, **desc)
+                acquisitions.append(acq)
+
+                self.logger.info("{} <- {}".format(
+                    acq.dstRoot, sidecar.root))
+
+            #sidecar with no link
+            elif len(match_descs) == 0:
+                self.logger.info("No Pairing <- {}".format(sidecar.root))
+
+            #sidecar with several links
+            else:
+                self.logger.info("Several Pairing <- {}".format(sidecar.root))
+                for desc in descriptions:
+                    acq = Acquisition(participant, **desc)
+                    self.logger.info(acq.dstRoot())
+
+        self.acquisitions = acquisitions
+        return acquisitions
+
+
+    def find_runs(self):
+        """
+        Check if there is duplicate destination roots in the acquisitions
+        and add '_run-' to the customLabels
+        """
+        def duplicates(seq):
+            """ Find duplicate items in a list
+
+            Args:
+                seq (list)
+
+            Yield:
+                A tuple of 2 items (item, list of index)
+
+            ref: http://stackoverflow.com/a/5419576
             """
             tally = defaultdict(list)
             for i, item in enumerate(seq):
                 tally[item].append(i)
-            return ((key,locs) for key,locs in tally.items() if len(locs)>1)
 
-        self.logger.info("")
-        self.logger.info("Checking if a description matches several sidecars ...")
-        suffixes = [_.suffix for _ in self.acquisitions]
-        for suffix, dup in sorted(list_duplicates(suffixes)):
-            self.logger.info("'{}' has several runs".format(suffix))
-            for run, acq_index in enumerate(dup):
-                runStr = "run-{:02d}".format(run+1)
-                acq = self.acquisitions[acq_index]
-                if acq.customLabels:
-                    acq.customLabels += "_" + runStr
-                else:
-                    acq.customLabels = runStr
-        self.logger.info("")
+            for key, locs in iteritems(tally):
+                if len(locs) > 1:
+                    yield key, locs
 
 
-    def _acquisition(self, base, desc):
-        acq = Acquisition(base, desc["dataType"], desc["modalityLabel"])
-        if "customLabels" in desc:
-            acq.customLabels = desc["customLabels"]
-        else:
-            acq.customLabels = None
-        return acq
+        self.logger.info(
+                "Checking if a description is paired with several sidecars")
+
+        dstRoots = [_.dstRoot for _ in self.acquisitions]
+        for dstRoot, dup in duplicates(dstRoots):
+            self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
+
+            for runNum, acqInd in enumerate(dup):
+                runStr = DEFAULT.runTpl.format(runNum+1)
+                self.acquisitions[acqInd].customLabels += runStr
 
 
     def _respect(self, criteria):
