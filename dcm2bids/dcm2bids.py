@@ -1,128 +1,142 @@
 # -*- coding: utf-8 -*-
 
 
-import glob
 import logging
 import os
+import sys
 from datetime import datetime
+from glob import glob
 from .dcm2niix import Dcm2niix
-from .sidecarparser import Sidecarparser
+from .logger import setup_logging
+from .sidecar import Sidecar, SidecarPairing
 from .structure import Participant
 from .utils import (
-        dcm2niix_version,
+        DEFAULT,
         load_json,
-        make_directory_tree,
+        save_json,
         run_shell_command,
         splitext_,
         )
-from subprocess import call
+from .version import __version__
 
 
 class Dcm2bids(object):
-    """
+    """ Object to handle dcm2bids execution steps
+
+    Args:
+        dicom_dir (list): A list of folder with dicoms to convert
+        participant (str): Label of your participant
+        config (path): Path to a dcm2bids configuration file
+        output_dir (path): Path to the BIDS base folder
+        session (str): Optional label of a session
+        clobber (boolean): Overwrite file if already in BIDS folder
+        forceDcm2niix (boolean): Forces a cleaning of a previous execution of
+                                 dcm2niix
+        anonymizer (str):
+        log_level (str): logging level
     """
 
     def __init__(
-            self, dicom_dir, participant, config, output_dir=os.getcwd(),
-            session=None, clobber=False, forceDcm2niix=False, anonymizer=None,
-            log_level="INFO"):
+            self, dicom_dir, participant, config, output_dir=DEFAULT.outputDir,
+            session=DEFAULT.session, clobber=DEFAULT.clobber,
+            forceDcm2niix=DEFAULT.forceDcm2niix, anonymizer=DEFAULT.anonymizer,
+            log_level=DEFAULT.logLevel):
         self.dicomDirs = dicom_dir
         self.bidsDir = output_dir
         self.config = load_json(config)
+        self.participant = Participant(participant, session)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
-        self.participant = Participant(participant, session)
         self.anonymizer = anonymizer
-        self._setLogger(log_level)
+        self.logLevel = log_level
+
+        #logging setup
+        self.set_logger()
 
         self.logger.info("--- dcm2bids start ---")
-        self.logger.info("dcm2niix:version: {}".format(dcm2niix_version()))
-        self.logger.info("participant: {}".format(participant))
-        self.logger.info("session: {}".format(session))
+        self.logger.info("python:version: {}".format(sys.version))
+        self.logger.info("dcm2bids:version: {}".format(__version__))
+        self.logger.info("dcm2niix:version: {}".format(Dcm2niix.version()))
+        self.logger.info("participant: {}".format(self.participant.name))
+        self.logger.info("session: {}".format(self.participant.session))
         self.logger.info("config: {}".format(os.path.realpath(config)))
         self.logger.info(
                 "BIDS directory: {}".format(os.path.realpath(output_dir)))
-        self.logger.info("")
 
 
-    @property
-    def session(self):
-        return self.participant.session
+    def set_logger(self):
+        """ Set a basic logger"""
+        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
+        logFile = os.path.join(logDir, "{}_{}.log".format(
+                self.participant.prefix, datetime.now().isoformat()))
+        os.makedirs(logDir, exist_ok=True)
 
-    @session.setter
-    def session(self, value):
-        self.participant.session = value
-
-
-    def _setLogger(self, log_level):
-        logging.basicConfig()
-
-        logDir = os.path.join(self.bidsDir, "tmp_dcm2bids", "log")
-        logFile = "{0}_{1}.log".format(self.participant.prefix,
-                datetime.now().strftime("%Y%m%dT%H%M%S"))
-        make_directory_tree(logDir)
-
-        #file handler
-        handler = logging.FileHandler(os.path.join(logDir, logFile))
-
-        #logger
-        self.logger = logging.getLogger("dcm2bids")
-        self.logger.setLevel(log_level)
-        self.logger.addHandler(handler)
+        setup_logging(self.logLevel, logFile)
+        self.logger = logging.getLogger(__name__)
 
 
     def run(self):
-        dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant)
+        """
+        """
+        dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant,
+                self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions))
         dcm2niix.run(self.forceDcm2niix)
-        parser = Sidecarparser(dcm2niix.sidecars, self.config["descriptions"])
 
-        self.logger.info("moving acquisitions into BIDS output directory")
+        sidecars = sorted([Sidecar(_) for _ in dcm2niix.sidecarFiles])
+
+        parser = SidecarPairing(sidecars, self.config["descriptions"],
+                self.config.get("searchMethod", DEFAULT.searchMethod))
+        parser.build_graph()
+        parser.build_acquisitions(self.participant)
+        parser.find_runs()
+
+        self.logger.info("moving acquisitions into BIDS folder")
         for acq in parser.acquisitions:
-            self._move(acq)
+            self.move(acq)
 
-        #self.logger.info("updating standard study files")
-        #if parser.acquisitions:
-            #self._updatestudyfiles()
-
-        return 0
+        return os.EX_OK
 
 
-    def _move(self, acquisition):
-        def _anonOrRename():
-            for f in glob.glob(acquisition.base + ".*"):
-                _, ext = splitext_(f)
-                if (self.anonymizer
-                        and acquisition.dataType=='anat'
-                        and ".nii" in ext):
-                    # it's an anat scan - try the anonymizer
-                    self.logger.info("")
-                    cmd = "{0} {1} {2} {3}".format(
-                            self.anonymizer, '--outfile', targetBase+ext, f)
-                    run_shell_command(cmd)
+    def move(self, acquisition):
+        """
+        """
+        for srcFile in glob(acquisition.srcRoot + ".*"):
+            root, ext = splitext_(srcFile)
+            dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
+            os.makedirs(os.path.dirname(dstFile), exist_ok=True)
+
+            #checking if destination file exists
+            if os.path.isfile(dstFile):
+                self.logger.info("'{}' already exists".format(dstFile))
+
+                if self.clobber:
+                    self.logger.info("Overwriting because of 'clobber' option")
+
                 else:
-                    # just move
-                    os.rename(f, targetBase+ext)
+                    self.logger.info("Use clobber option to overwrite")
+                    continue
 
-        targetDir = os.path.join(
-                self.bidsDir, self.participant.directory, acquisition.dataType)
-        filename = "{}_{}".format(self.participant.prefix, acquisition.suffix)
-        targetBase = os.path.join(targetDir, filename)
+            #it's an anat nifti file and the user using anonymizer
+            if (
+                    self.anonymizer
+                    and acquisition.dataType=="anat"
+                    and ".nii" in ext):
+                try:
+                    os.remove(dstFile)
+                except:
+                    pass
+                anonymizerTpl = self.config.get(
+                        "anonymizerTpl", DEFAULT.anonymizerTpl)
+                cmd = anonymizerTpl.format(srcFile=srcFile, dstFile=dstFile)
+                run_shell_command(cmd)
 
-        #need to test for both because dcm2niix sometimes refuses to compress
-        targetExists = (os.path.isfile(targetBase + ".nii.gz")
-                or os.path.isfile(targetBase + ".nii"))
+            #use
+            elif ext == ".json":
+                data = acquisition.dstSidecarData(self.config["descriptions"])
+                save_json(dstFile, data)
+                os.remove(srcFile)
 
-        if targetExists:
-
-            if self.clobber:
-                self.logger.info("overwriting: {}".format(filename))
-                for f in glob.glob(targetBase + ".*"):
-                    os.remove(f)
-                _anonOrRename()
-
+            #just move
             else:
-                self.logger.info("'{}' already exists, use --clobber to overwrite it".format(filename))
+                os.rename(srcFile, dstFile)
 
-        else:
-            make_directory_tree(targetDir)
-            _anonOrRename()
