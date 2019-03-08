@@ -22,13 +22,13 @@ class Dcm2niix(object):
         sidecars (list): A list of sidecar path created by dcm2niix
     """
 
-    def __init__(self, dicomDirs, bidsDir, participant,
-            options=DEFAULT.options):
+    def __init__(self, dicomDirs, bidsDir, participant=None,
+            options=DEFAULT.dcm2niixOptions):
         self.logger = logging.getLogger(__name__)
 
         self.sidecarsFiles = []
 
-        self.dicomDirs = dicomDir
+        self.dicomDirs = dicomDirs
         self.bidsDir = bidsDir
         self.participant = participant
         self.options = options
@@ -43,8 +43,8 @@ class Dcm2niix(object):
         if self.participant:
             tmpDir = self.participant.prefix
         else:
-            tmpDir = "helper"
-        return os.path.join(self.bidsDir, TMP_DIR_NAME, tmpDir)
+            tmpDir = DEFAULT.helperDir
+        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
 
 
     def run(self, force=False):
@@ -62,10 +62,10 @@ class Dcm2niix(object):
         except:
             oldOutput = False
 
-        if oldOutput and forceRun:
+        if oldOutput and force:
             self.logger.warning("Previous dcm2niix directory output found:")
             self.logger.warning(self.outputDir)
-            self.logger.warning("force argument is set to True")
+            self.logger.warning("'force' argument is set to True")
             self.logger.warning("Cleaning the previous directory and run dcm2niix")
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
@@ -93,7 +93,8 @@ class Dcm2niix(object):
         for dicomDir in self.dicomDirs:
             commandTpl = "dcm2niix {} -o {} {}"
             cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
-            run_shell_command(cmd)
+            output = run_shell_command(cmd)
+            self.logger.info("\n" + output.decode())
 
 
     @staticmethod
@@ -116,10 +117,10 @@ class Dcm2niix(object):
                         "Inferior version than the tested version ({})".format(
                             DEFAULT.dcm2niixVersion))
 
-        except OSError:
+        except:
             logger.error("dcm2niix does not appear to be installed")
             logger.error("See: https://github.com/rordenlab/dcm2niix")
-            version = ""
+            raise
 
         return version
 
