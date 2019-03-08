@@ -11,7 +11,7 @@ Info: https://github.com/cbedetti/Dcm2Bids
 
 
 %labels
-Maintainer Christophe Bedetti <christophe.bedetti@criugm.qc.ca>
+Maintainer Christophe Bedetti <christophe.bedetti@montreal.ca>
 
 
 %post
@@ -30,7 +30,7 @@ Maintainer Christophe Bedetti <christophe.bedetti@criugm.qc.ca>
     cd /usr/local/src
     git clone https://github.com/rordenlab/dcm2niix.git
     cd dcm2niix
-    git checkout tags/v1.0.20171215 -b install
+    git checkout tags/v1.0.20181125 -b install
     mkdir build && cd build
     cmake ..
     make install

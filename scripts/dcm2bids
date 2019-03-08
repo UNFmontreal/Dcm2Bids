@@ -5,14 +5,14 @@
 import argparse
 import os
 import sys
-from dcm2bids import Dcm2bids
+from dcm2bids import Dcm2bids, __version__
 from dcm2bids.utils import DEFAULT
 
 
 def get_arguments():
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description="",
+            description="dcm2bids {}".format(__version__),
             epilog="""
             Documentation at https://github.com/cbedetti/Dcm2Bids
             """)

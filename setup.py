@@ -11,12 +11,17 @@ except(IOError, ImportError):
     long_description = open('README.md').read()
 
 import glob
+import os
 from setuptools import setup
+
+
+#Get __version__ from dcm2bids.version
+exec(open(os.path.join("dcm2bids", "version.py")).read())
 
 
 DISTNAME = "dcm2bids"
 DESCRIPTION = description
-VERSION = "1.1.8"
+VERSION = __version__
 AUTHOR = "Christophe Bedetti"
 AUTHOR_EMAIL = "christophe.bedetti@umontreal.ca"
 URL = "https://github.com/cbedetti/Dcm2Bids"

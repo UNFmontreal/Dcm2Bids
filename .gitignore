@@ -50,5 +50,4 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-# Development
-dev/
+idea/
