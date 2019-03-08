@@ -6,7 +6,8 @@ import json
 import logging
 import os
 import shlex
-from subprocess import check_output
+from collections import OrderedDict
+from subprocess import check_output, CalledProcessError
 
 
 class DEFAULT(object):
@@ -14,7 +15,7 @@ class DEFAULT(object):
     #cli dcm2bids
     cliSession = ""
     cliOutputDir = os.getcwd()
-    cliAnonymizer = None
+    cliAnonymizer = False
     cliLogLevel = "INFO"
 
     #dcm2bids.py
@@ -23,19 +24,22 @@ class DEFAULT(object):
     clobber = False
     forceDcm2niix = False
     anonymizer = cliAnonymizer,
+    anonymizerTpl = "pydeface --outfile {dstFile} (srcFile}"
     logLevel = "WARNING"
 
     #dcm2niix.py
-    options = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
     dcm2niixVersion = "v1.0.20181125"
 
     #sidecar.py
     keyComp = "SeriesNumber"
     searchMethod = "fnmatch"
+    searchMethodChoices = ["fnmatch", "re.search"]
     runTpl = "_run-{:02d}"
 
     #misc
     tmpDirName = "tmp_dcm2bids"
+    helperDir = "helper"
 
 
 def load_json(filename):
@@ -48,7 +52,7 @@ def load_json(filename):
         Dictionnary of the JSON file
     """
     with open(filename, 'r') as f:
-        data = json.load(f)
+        data = json.load(f, object_pairs_hook=OrderedDict)
     return data
 
 
@@ -109,9 +113,8 @@ def run_shell_command(commandLine):
     try:
         output = check_output(shlex.split(commandLine))
 
-    #except FileNotFoundError as e:
-    except OSError as e:
-        logger.error(e.strerror, exc_info=True)
-        raise
+    except (OSError, CalledProcessError):
+        #logger.error("Error executing: " + commandLine, exc_info=True)
+        logger.error("Error executing: " + commandLine)
 
     return output
