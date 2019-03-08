@@ -12,7 +12,6 @@ from .structure import Acquisition
 from .utils import DEFAULT, load_json, splitext_
 
 
-
 class Sidecar(object):
     """ A sidecar object
 
@@ -23,6 +22,7 @@ class Sidecar(object):
     """
 
     def __init__(self, filename, keyComp=DEFAULT.keyComp):
+        self._origData = {}
         self._data = {}
 
         self.filename = filename
@@ -44,6 +44,15 @@ class Sidecar(object):
         return self._data == other.data
 
 
+    def __hash__(self):
+        return hash(self.filename)
+
+
+    @property
+    def origData(self):
+        return self._origData
+
+
     @property
     def data(self):
         return self._data
@@ -52,13 +61,18 @@ class Sidecar(object):
     @data.setter
     def data(self, filename):
         """
+        Args:
+            filename (path): path of a JSON file
+
+        Return:
+            A dictionnary of the JSON content plus the SidecarFilename
         """
         try:
             data = load_json(filename)
         except:
             data = {}
+        self._origData = data.copy()
         data["SidecarFilename"] = os.path.basename(filename)
-
         self._data = data
 
 
@@ -73,12 +87,37 @@ class SidecarPairing(object):
             searchMethod=DEFAULT.searchMethod):
         self.logger = logging.getLogger(__name__)
 
+        self._searchMethod = ""
         self.graph = OrderedDict()
         self.aquisitions = []
 
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
+
+
+    @property
+    def searchMethod(self):
+        return self._searchMethod
+
+
+    @searchMethod.setter
+    def searchMethod(self, value):
+        """
+        Checks if the search method is implemented
+        Warns the user if not and fall back to default
+        """
+        if value in DEFAULT.searchMethodChoices:
+            self._searchMethod = value
+
+        else:
+            self._searchMethod = DEFAULT.searchMethod
+            self.logger.warning(
+                    "'{}' is not a search method implemented".format(value))
+            self.logger.warning(
+                    "Falling back to default: {}".format(DEFAULT.searchMethod))
+            self.logger.warning("Search methods implemented: {}".format(
+                    DEFAULT.searchMethodChoices))
 
 
     def build_graph(self):
@@ -113,12 +152,11 @@ class SidecarPairing(object):
             boolean
         """
         def compare(name, pattern):
-            if self.searchMethod == "fnmatch":
-                return fnmatch(str(name), str(pattern))
+            if self.searchMethod == "re":
+                return bool(re.search(pattern, str(name)))
+
             else:
-                self.logger.error("{} is not a search method implemented".format(
-                    self.searchMethod))
-                self.logger.error("Search method implemented: fnmatch.fnmatch")
+                return fnmatch(str(name), str(pattern))
 
 
         result = []
@@ -148,6 +186,7 @@ class SidecarPairing(object):
 
         self.logger.info("Sidecars pairing:")
         for sidecar, descriptions in iteritems(self.graph):
+            sidecarName = os.path.basename(sidecar.root)
 
             #only one description for the sidecar
             if len(descriptions) == 1:
@@ -156,15 +195,15 @@ class SidecarPairing(object):
                 acquisitions.append(acq)
 
                 self.logger.info("{} <- {}".format(
-                    acq.dstRoot, sidecar.root))
+                    acq.dstRoot, sidecarName))
 
             #sidecar with no link
-            elif len(match_descs) == 0:
-                self.logger.info("No Pairing <- {}".format(sidecar.root))
+            elif len(descriptions) == 0:
+                self.logger.info("No Pairing <- {}".format(sidecarName))
 
             #sidecar with several links
             else:
-                self.logger.info("Several Pairing <- {}".format(sidecar.root))
+                self.logger.info("Several Pairing <- {}".format(sidecarName))
                 for desc in descriptions:
                     acq = Acquisition(participant, **desc)
                     self.logger.info(acq.dstRoot())
@@ -176,7 +215,7 @@ class SidecarPairing(object):
     def find_runs(self):
         """
         Check if there is duplicate destination roots in the acquisitions
-        and add '_run-' to the customLabels
+        and add '_run-' to the customLabels of the acquisition
         """
         def duplicates(seq):
             """ Find duplicate items in a list
@@ -209,17 +248,3 @@ class SidecarPairing(object):
                 runStr = DEFAULT.runTpl.format(runNum+1)
                 self.acquisitions[acqInd].customLabels += runStr
 
-
-    def _respect(self, criteria):
-        rsl = []
-        for tag, pattern in iteritems(criteria):
-            name = self._sidecar.get(tag)
-            pat = str(pattern)
-            if isinstance(name, list):
-                subRsl = []
-                for subName in name:
-                    subRsl.append(bool(re.search(pat, str(subName))))
-                rsl.append(any(subRsl))
-            else:
-                rsl.append(bool(re.search(pat, str(name))))
-        return all(rsl)
