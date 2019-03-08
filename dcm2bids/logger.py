@@ -6,17 +6,19 @@ import logging
 
 def setup_logging(logLevel, logFile=None):
     """ Setup logging configuration"""
-    conf = {}
+    logging.basicConfig()
+    logger = logging.getLogger()
 
     #Check level
     level = getattr(logging, logLevel.upper(), None)
     if not isinstance(level, int):
         raise ValueError("Invalid log level: {}".format(logLevel))
-    conf["level"] = level
+    logger.setLevel(level)
 
     #Set filename
     if logFile:
-        conf["filename"] = logFile
-
-    logging.basicConfig(**conf)
+        formatter = logging.Formatter(logging.BASIC_FORMAT)
+        handler = logging.FileHandler(logFile)
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
 
