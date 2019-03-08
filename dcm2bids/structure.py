@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
+from collections import OrderedDict
+from future.utils import iteritems
 from os.path import join as opj
 from .utils import DEFAULT
 
@@ -113,7 +115,7 @@ class Acquisition(object):
     """
 
     def __init__(self, participant, dataType, modalityLabel, customLabels="",
-            srcSidecar=None, **kwargs):
+            srcSidecar=None, sidecarChanges={}, **kwargs):
         self._modalityLabel = ""
         self._customLabels = ""
 
@@ -122,6 +124,7 @@ class Acquisition(object):
         self.modalityLabel = modalityLabel
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
+        self.sidecarChanges = sidecarChanges
 
 
     def __eq__(self, other):
@@ -144,11 +147,7 @@ class Acquisition(object):
     @modalityLabel.setter
     def modalityLabel(self, modalityLabel):
         """ Prepend '_' if necessary"""
-        if modalityLabel.startswith("_"):
-            self._modalityLabel = modalityLabel
-
-        else:
-            self._modalityLabel = "_" + modalityLabel
+        self._modalityLabel = self.prepend(modalityLabel)
 
 
     @property
@@ -163,14 +162,7 @@ class Acquisition(object):
     @customLabels.setter
     def customLabels(self, customLabels):
         """ Prepend '_' if necessary"""
-        if customLabels.strip() == "":
-            self._customLabels = ""
-
-        elif customLabels.startswith("_"):
-            self._customLabels = customLabels
-
-        else:
-            self._customLabels = "_" + customLabels
+        self._customLabels = self.prepend(customLabels)
 
 
     @property
@@ -209,4 +201,46 @@ class Acquisition(object):
                 self.dataType,
                 self.participant.prefix + self.suffix
                 )
+
+
+    def dstSidecarData(self, descriptions):
+        """
+        """
+        data = self.srcSidecar.origData
+
+        for key, value in iteritems(self.sidecarChanges):
+            if key == "IntendedFor":
+                intendedDesc = descriptions[value]
+
+                dataType = intendedDesc["dataType"]
+
+                niiFile = self.participant.prefix
+                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
+                niiFile += self.prepend(intendedDesc["modalityLabel"])
+                niiFile += ".nii.gz"
+
+                data[key] = opj(dataType, niiFile)
+
+            else:
+                data[key] = value
+
+        return data
+
+
+    @staticmethod
+    def prepend(value, char="_"):
+        """ Prepend `char` to `value` if necessary
+
+        Args:
+            value (str)
+            char (str)
+        """
+        if value.strip() == "":
+            return ""
+
+        elif value.startswith(char):
+            return value
+
+        else:
+            return char + value
 

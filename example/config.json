@@ -51,6 +51,16 @@
             "criteria": {
                 "SeriesDescription": "rs_fMRI"
             }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fmap",
+            "criteria": {
+                "SidecarFilename": "*echo-4*"
+            },
+            "sidecarChanges": {
+                "IntendedFor": 5
+            }
         }
     ]
 }
