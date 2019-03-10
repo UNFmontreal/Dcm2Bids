@@ -115,9 +115,11 @@ class Acquisition(object):
     """
 
     def __init__(self, participant, dataType, modalityLabel, customLabels="",
-            srcSidecar=None, sidecarChanges={}, **kwargs):
+            srcSidecar=None, sidecarChanges={},
+            intendedFor=None, IntendedFor=None, **kwargs):
         self._modalityLabel = ""
         self._customLabels = ""
+        self._intendedFor = None
 
         self.participant = participant
         self.dataType = dataType
@@ -125,6 +127,7 @@ class Acquisition(object):
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
         self.sidecarChanges = sidecarChanges
+        self.intendedFor = (intendedFor, IntendedFor)
 
 
     def __eq__(self, other):
@@ -203,26 +206,43 @@ class Acquisition(object):
                 )
 
 
+    @property
+    def intendedFor(self):
+        return self._intendedFor
+
+
+    @intendedFor.setter
+    def intendedFor(self, value):
+        if isinstance(value, tuple):
+            for v in value:
+                if v:
+                    self._intendedFor = v
+                    break
+        else:
+            self._intendedFor = value
+
+
     def dstSidecarData(self, descriptions):
         """
         """
         data = self.srcSidecar.origData
 
+        #IntendedFor key
+        if self.intendedFor:
+            intendedDesc = descriptions[self.intendedFor]
+
+            dataType = intendedDesc["dataType"]
+
+            niiFile = self.participant.prefix
+            niiFile += self.prepend(intendedDesc.get("customLabels", ""))
+            niiFile += self.prepend(intendedDesc["modalityLabel"])
+            niiFile += ".nii.gz"
+
+            data["IntendedFor"] = opj(dataType, niiFile)
+
+        #sidecarChanges
         for key, value in iteritems(self.sidecarChanges):
-            if key == "IntendedFor":
-                intendedDesc = descriptions[value]
-
-                dataType = intendedDesc["dataType"]
-
-                niiFile = self.participant.prefix
-                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
-                niiFile += self.prepend(intendedDesc["modalityLabel"])
-                niiFile += ".nii.gz"
-
-                data[key] = opj(dataType, niiFile)
-
-            else:
-                data[key] = value
+            data[key] = value
 
         return data
 
