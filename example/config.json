@@ -1,4 +1,6 @@
 {
+    "searchMethod": "fnmatch",
+    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "descriptions": [
         {
             "dataType": "anat",
@@ -50,6 +52,9 @@
             "customLabels": "task-rest",
             "criteria": {
                 "SeriesDescription": "rs_fMRI"
+            },
+            "sidecarChanges": {
+                "SeriesDescription": "rsfMRI"
             }
         },
         {
@@ -58,9 +63,7 @@
             "criteria": {
                 "SidecarFilename": "*echo-4*"
             },
-            "sidecarChanges": {
-                "IntendedFor": 5
-            }
+            "IntendedFor": 5
         }
     ]
 }

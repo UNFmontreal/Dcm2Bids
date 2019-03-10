@@ -67,6 +67,9 @@ It is recommended to use an editor with syntax highlighting to build a correct J
             "criteria": {
                 "SeriesDescription": "*T2*",
                 "EchoTime": 0.1
+            },
+            "sidecarChanges": {
+                "ProtocolName": "T2"
             }
         },
         {
@@ -75,6 +78,15 @@ It is recommended to use an editor with syntax highlighting to build a correct J
             "customLabels": "task-rest",
             "criteria": {
                 "SidecarFilename": "006*"
+                "ImageType": ["ORIG*", "PRIMARY", "M", "ND", "MOSAIC"]
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fmap",
+            "intendedFor": 1,
+            "criteria": {
+                "ProtocoleName": "*field_mapping*"
             }
         }
     ]
@@ -110,6 +122,60 @@ For example, in the first description, the pattern `*T2*` will be compared to th
 `dcm2bids` create a `SidecarFilename` key if you prefer to also match with the filename of the sidecar.
 
 You can enter several criteria. **All criteria must match** for a description to be link to a sidecar.
+
+#### `sidecarChanges`
+
+Optional field to change or add information in a sidecar.
+
+#### `intendedFor`
+
+Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index of the description that's intended for. Python index begins at `0` so in the example, `1` means it is intended for `task-rest_bold`.
+
+## Advanced configuration
+
+These optional configurations could be insert in the configuration file at the same level as the `"descriptions"` entry.
+
+```
+{
+    "searchMethod": "fnmatch",
+    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
+    "description": [
+        ...
+    ]
+}
+```
+
+#### `searchMethod`
+
+default: `"searchMethod": "fnmatch"`
+
+fnmatch is the behaviour (See criteria) by default and the fall back if this option is set incorrectly. `re` is the other choice if you want more flexibility to match criteria.
+
+#### `defaceTpl`
+
+default: `"defaceTpl": None`
+
+The anonymizer option no longer exists from the script in this release
+It is still possible to deface the anatomical nifti images
+Please add "defaceTpl" key in the congifuration file
+
+For example, if you use the last version of pydeface, add:
+"defaceTpl": "pydeface --outfile {dstFile} {srcFile}"
+It is a template string and dcm2bids will replace {srcFile} and {dstFile}
+by the source file (input) and the destination file (output)
+"pydeface --outfile {dstFile} (srcFile}",
+
+#### `dcm2niixOptions`
+
+default: `"dcm2niixOptions": "-b y -ba y -z y -f '%3s_%f_%p_%t'"`
+
+Arguments for dcm2niix
+
+#### `compKeys`
+
+default: `"compKeys": ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]`
+
+Acquisitions are sorted using the sidecar data. The default behaviour is to sort by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You can change this behaviour setting this key inside the configuration file.
 
 ## Output
 
