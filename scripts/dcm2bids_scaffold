@@ -6,7 +6,7 @@ import argparse
 import datetime
 import os
 import sys
-from dcm2bids.utils import save_json, make_directory_tree, write_txt
+from dcm2bids.utils import save_json, write_txt
 from future.utils import iteritems
 
 
@@ -82,7 +82,10 @@ def main():
     args = get_arguments()
 
     for _ in ["code", "derivatives", "sourcedata"]:
-        make_directory_tree(os.path.join(args.output_dir, _))
+        #os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
+        #python2 compatibility
+        if not os.path.exists(os.path.join(args.output_dir, _)):
+            os.makedirs(os.path.join(args.output_dir, _))
 
     for filename, data in iteritems(JSON_FILES):
         filepath = os.path.join(args.output_dir, filename)
@@ -94,7 +97,7 @@ def main():
         if not os.path.exists(filepath):
             write_txt(filepath, data)
 
-    return
+    return os.EX_OK
 
 
 if __name__ == '__main__':

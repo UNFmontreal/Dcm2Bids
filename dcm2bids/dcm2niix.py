@@ -66,10 +66,16 @@ class Dcm2niix(object):
             self.logger.warning("Previous dcm2niix directory output found:")
             self.logger.warning(self.outputDir)
             self.logger.warning("'force' argument is set to True")
-            self.logger.warning("Cleaning the previous directory and run dcm2niix")
+            self.logger.warning(
+                    "Cleaning the previous directory and running dcm2niix")
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
-            os.makedirs(self.outputDir, exist_ok=True)
+
+            #os.makedirs(self.outputDir, exist_ok=True)
+            #python2 compatibility
+            if not os.path.exists(self.outputDir):
+                os.makedirs(self.outputDir)
+
             self.execute()
 
         elif oldOutput:
@@ -78,7 +84,11 @@ class Dcm2niix(object):
             self.logger.warning("Use --forceDcm2niix to rerun dcm2niix")
 
         else:
-            os.makedirs(self.outputDir, exist_ok=True)
+            #os.makedirs(self.outputDir, exist_ok=True)
+            #python2 compatibility
+            if not os.path.exists(self.outputDir):
+                os.makedirs(self.outputDir)
+
             self.execute()
 
         self.sidecarFiles = glob(os.path.join(self.outputDir, "*.json"))
