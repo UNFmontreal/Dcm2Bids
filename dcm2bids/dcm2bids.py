@@ -3,6 +3,7 @@
 
 import logging
 import os
+import platform
 import sys
 from datetime import datetime
 from glob import glob
@@ -32,29 +33,29 @@ class Dcm2bids(object):
         clobber (boolean): Overwrite file if already in BIDS folder
         forceDcm2niix (boolean): Forces a cleaning of a previous execution of
                                  dcm2niix
-        anonymizer (str):
         log_level (str): logging level
     """
 
     def __init__(
             self, dicom_dir, participant, config, output_dir=DEFAULT.outputDir,
             session=DEFAULT.session, clobber=DEFAULT.clobber,
-            forceDcm2niix=DEFAULT.forceDcm2niix, anonymizer=DEFAULT.anonymizer,
-            log_level=DEFAULT.logLevel):
+            forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel,
+            **_):
         self.dicomDirs = dicom_dir
         self.bidsDir = output_dir
         self.config = load_json(config)
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
-        self.anonymizer = anonymizer
         self.logLevel = log_level
 
         #logging setup
         self.set_logger()
 
         self.logger.info("--- dcm2bids start ---")
-        self.logger.info("python:version: {}".format(sys.version))
+        self.logger.info("OS:version: {}".format(platform.platform()))
+        self.logger.info("python:version: {}".format(
+            sys.version.replace("\n","")))
         self.logger.info("dcm2bids:version: {}".format(__version__))
         self.logger.info("dcm2niix:version: {}".format(Dcm2niix.version()))
         self.logger.info("participant: {}".format(self.participant.name))
@@ -69,7 +70,11 @@ class Dcm2bids(object):
         logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
         logFile = os.path.join(logDir, "{}_{}.log".format(
                 self.participant.prefix, datetime.now().isoformat()))
-        os.makedirs(logDir, exist_ok=True)
+
+        #os.makedirs(logdir, exist_ok=True)
+        #python2 compatibility
+        if not os.path.exists(logDir):
+            os.makedirs(logDir)
 
         setup_logging(self.logLevel, logFile)
         self.logger = logging.getLogger(__name__)
@@ -82,7 +87,11 @@ class Dcm2bids(object):
                 self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions))
         dcm2niix.run(self.forceDcm2niix)
 
-        sidecars = sorted([Sidecar(_) for _ in dcm2niix.sidecarFiles])
+        sidecars = []
+        for filename in dcm2niix.sidecarFiles:
+            sidecars.append(Sidecar(
+                filename, self.config.get("compKeys", DEFAULT.compKeys)))
+        sidecars = sorted(sidecars)
 
         parser = SidecarPairing(sidecars, self.config["descriptions"],
                 self.config.get("searchMethod", DEFAULT.searchMethod))
@@ -103,7 +112,11 @@ class Dcm2bids(object):
         for srcFile in glob(acquisition.srcRoot + ".*"):
             root, ext = splitext_(srcFile)
             dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
-            os.makedirs(os.path.dirname(dstFile), exist_ok=True)
+
+            #os.makedirs(os.path.dirname(dstFile), exist_ok=True)
+            #python2 compatibility
+            if not os.path.exists(os.path.dirname(dstFile)):
+                os.makedirs(os.path.dirname(dstFile))
 
             #checking if destination file exists
             if os.path.isfile(dstFile):
@@ -116,18 +129,17 @@ class Dcm2bids(object):
                     self.logger.info("Use clobber option to overwrite")
                     continue
 
-            #it's an anat nifti file and the user using anonymizer
+            #it's an anat nifti file and the user using a deface script
             if (
-                    self.anonymizer
+                    self.config.get("defaceTpl")
                     and acquisition.dataType=="anat"
                     and ".nii" in ext):
                 try:
                     os.remove(dstFile)
                 except:
                     pass
-                anonymizerTpl = self.config.get(
-                        "anonymizerTpl", DEFAULT.anonymizerTpl)
-                cmd = anonymizerTpl.format(srcFile=srcFile, dstFile=dstFile)
+                defaceTpl = self.config.get("defaceTpl")
+                cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
                 run_shell_command(cmd)
 
             #use

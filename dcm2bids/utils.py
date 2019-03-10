@@ -15,7 +15,6 @@ class DEFAULT(object):
     #cli dcm2bids
     cliSession = ""
     cliOutputDir = os.getcwd()
-    cliAnonymizer = False
     cliLogLevel = "INFO"
 
     #dcm2bids.py
@@ -23,8 +22,7 @@ class DEFAULT(object):
     session = cliSession #also Participant object
     clobber = False
     forceDcm2niix = False
-    anonymizer = cliAnonymizer,
-    anonymizerTpl = "pydeface --outfile {dstFile} (srcFile}"
+    defaceTpl = None
     logLevel = "WARNING"
 
     #dcm2niix.py
@@ -32,9 +30,9 @@ class DEFAULT(object):
     dcm2niixVersion = "v1.0.20181125"
 
     #sidecar.py
-    keyComp = "SeriesNumber"
+    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
     searchMethod = "fnmatch"
-    searchMethodChoices = ["fnmatch", "re.search"]
+    searchMethodChoices = ["fnmatch", "re"]
     runTpl = "_run-{:02d}"
 
     #misc
