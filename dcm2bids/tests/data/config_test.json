@@ -1,0 +1,84 @@
+{
+    "searchMethod": "fnmatch",
+    "descriptions": [
+        {
+            "dataType": "localizer",
+            "modalityLabel": "localizer",
+            "criteria": {
+                "SeriesDescription": "locali*"
+            },
+            "sidecarChanges": {
+                "ProcedureStepDescription": "Modify by dcm2bids"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+                "SeriesDescription": "*bold",
+                "ImageType": ["ORIG?NAL", "PRIMARY", "M", "ND", "MOSAIC"]
+            }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SidecarFilename": "*MPRAGE*"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DTI"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fmap",
+            "customLabels": "echo-492",
+            "criteria": {
+                "EchoNumber": 1,
+                "EchoTime": 0.00492
+            },
+            "intendedFor": 3
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fmap",
+            "customLabels": "echo-738",
+            "criteria": {
+                "EchoNumber": 2,
+                "EchoTime": 0.00738,
+                "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
+            },
+            "IntendedFor": 3
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "customLabels": "desc-fa00",
+            "criteria": {
+                "SeriesDescription": "DTI_FA"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "customLabels": "desc-fa01",
+            "criteria": {
+                "SeriesDescription": "DTI_FA"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "customLabels": "desc-fa00",
+            "criteria": {
+                "SeriesDescription": ["DTI_FA"],
+                "ImageType": ["DTI_FA", "M"]
+            }
+        }
+    ]
+}

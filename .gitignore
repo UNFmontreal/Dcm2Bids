@@ -50,4 +50,8 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+#tests
 idea/
+dcm2bids/tests/data/*
+!dcm2bids/tests/data/config_test.json
+!dcm2bids/tests/data/sidecars/*
