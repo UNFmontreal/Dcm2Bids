@@ -17,31 +17,39 @@ class Sidecar(object):
 
     Args:
         filename (str): Path of a JSON sidecar
-        keyComp (str): A key from the JSON sidecar to compare sidecars
-                     default="SeriesNumber"
+        keyComp (list): A list of keys from the JSON sidecar to compare sidecars
+                     default=["SeriesNumber","AcquisitionTime","SideCarFilename"]
     """
 
-    def __init__(self, filename, keyComp=DEFAULT.keyComp):
+    def __init__(self, filename, compKeys=DEFAULT.compKeys):
         self._origData = {}
         self._data = {}
 
         self.filename = filename
         self.root, _ = splitext_(filename)
         self.data = filename
-        self.keyComp = keyComp
+        self.compKeys = compKeys
 
 
     def __lt__(self, other):
-        selfComp = self._data[self.keyComp]
-        otherComp = other.data[self.keyComp]
-        if selfComp == otherComp:
-            return self.root < other.root
-        else:
-            return selfComp < otherComp
+        lts = []
+        for key in self.compKeys:
+            try:
+                lts.append(self.data.get(key) < other.data.get(key))
+            except:
+                lts.append(False)
+
+        for lt in lts:
+            if lt:
+                return True
+            else:
+                pass
+
+        return False
 
 
     def __eq__(self, other):
-        return self._data == other.data
+        return self.data == other.data
 
 
     def __hash__(self):
@@ -164,10 +172,14 @@ class SidecarPairing(object):
             name = data.get(tag)
 
             if isinstance(name, list):
-                subResult = []
-                for subName in name:
-                    subResult.append(compare(subName, pattern))
-                result.append(any(subResult))
+                try:
+                    subResult = []
+                    for subName, subPattern in zip(name, pattern):
+                        subResult.append(compare(subName, subPattern))
+                except:
+                    subResult = [False]
+
+                result.append(all(subResult))
 
             else:
                 result.append(compare(name, pattern))
@@ -206,7 +218,7 @@ class SidecarPairing(object):
                 self.logger.info("Several Pairing <- {}".format(sidecarName))
                 for desc in descriptions:
                     acq = Acquisition(participant, **desc)
-                    self.logger.info(acq.dstRoot())
+                    self.logger.info(acq.dstRoot)
 
         self.acquisitions = acquisitions
         return acquisitions
