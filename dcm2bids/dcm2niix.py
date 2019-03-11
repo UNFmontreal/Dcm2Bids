@@ -116,21 +116,23 @@ class Dcm2niix(object):
         logger = logging.getLogger(__name__)
 
         try:
-            output = run_shell_command("dcm2niix").decode()
-            output = output.split("\n")[0].split()
-            version = output[output.index('version')+1]
-            logger.info("Running dcm2niix version " + version)
-
-            #check version
-            if LooseVersion(version) < LooseVersion(DEFAULT.dcm2niixVersion):
-                logger.warning(
-                        "Inferior version than the tested version ({})".format(
-                            DEFAULT.dcm2niixVersion))
+            output = run_shell_command("dcm2niix")
 
         except:
             logger.error("dcm2niix does not appear to be installed")
             logger.error("See: https://github.com/rordenlab/dcm2niix")
             raise
+
+        output = output.decode().split("\n")[0].split()
+        version = output[output.index('version')+1]
+
+        #check version
+        if LooseVersion(version) < LooseVersion(DEFAULT.dcm2niixVersion):
+            logger.error(
+                    "Your version of dcm2niix is older than {}".format(
+                        DEFAULT.dcm2niixVersion))
+            logger.error("See: https://github.com/rordenlab/dcm2niix")
+            raise Exception("Old dcm2niix version")
 
         return version
 

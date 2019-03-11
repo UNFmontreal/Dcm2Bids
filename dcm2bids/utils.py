@@ -114,5 +114,6 @@ def run_shell_command(commandLine):
     except (OSError, CalledProcessError):
         #logger.error("Error executing: " + commandLine, exc_info=True)
         logger.error("Error executing: " + commandLine)
+        raise
 
     return output
