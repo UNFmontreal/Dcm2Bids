@@ -173,7 +173,10 @@ class SidecarPairing(object):
 
             if isinstance(name, list):
                 try:
-                    subResult = []
+                    subResult = [
+                            len(name)==len(pattern),
+                            isinstance(pattern, list),
+                            ]
                     for subName, subPattern in zip(name, pattern):
                         subResult.append(compare(subName, subPattern))
                 except:
