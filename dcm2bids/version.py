@@ -2,7 +2,7 @@
 
 
 #dcm2bids version
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 
 
 import logging
@@ -123,7 +123,7 @@ def check_latest(name="dcm2bids"):
 
     else:
         logger.debug(
-                "Checking latest version of {} was not possible".format(repo))
+                "Checking latest version of {} was not possible".format(name))
         logger.debug("internet: {}, curl: {}".format(
             internet(), is_tool("curl")))
         return
