@@ -1,3 +1,6 @@
+
+[![DOI](https://zenodo.org/badge/59581295.svg)](https://zenodo.org/badge/latestdoi/59581295)
+
 # Dcm2Bids
 
 Dcm2Bids reorganises NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
