@@ -4,7 +4,6 @@
 import logging
 import os
 import shutil
-from distutils.version import LooseVersion
 from glob import glob
 from .utils import DEFAULT, run_shell_command
 
@@ -99,40 +98,9 @@ class Dcm2niix(object):
     def execute(self):
         """ Execute dcm2niix for each directory in dicomDirs
         """
-        self.version()
         for dicomDir in self.dicomDirs:
             commandTpl = "dcm2niix {} -o {} {}"
             cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
             output = run_shell_command(cmd)
             self.logger.info("\n" + output.decode())
-
-
-    @staticmethod
-    def version():
-        """
-        Returns:
-            A string of the version of dcm2niix install on the system
-        """
-        logger = logging.getLogger(__name__)
-
-        try:
-            output = run_shell_command("dcm2niix")
-
-        except:
-            logger.error("dcm2niix does not appear to be installed")
-            logger.error("See: https://github.com/rordenlab/dcm2niix")
-            raise
-
-        output = output.decode().split("\n")[0].split()
-        version = output[output.index('version')+1]
-
-        #check version
-        if LooseVersion(version) < LooseVersion(DEFAULT.dcm2niixVersion):
-            logger.error(
-                    "Your version of dcm2niix is older than {}".format(
-                        DEFAULT.dcm2niixVersion))
-            logger.error("See: https://github.com/rordenlab/dcm2niix")
-            raise Exception("Old dcm2niix version")
-
-        return version
 

@@ -105,15 +105,6 @@ def run_shell_command(commandLine):
         Run command with arguments and return its output
     """
     logger = logging.getLogger(__name__)
-    logger.info("Subprocess:{}".format(commandLine))
+    logger.info("Running {}".format(commandLine))
+    return check_output(shlex.split(commandLine))
 
-    output = None
-    try:
-        output = check_output(shlex.split(commandLine))
-
-    except (OSError, CalledProcessError):
-        #logger.error("Error executing: " + commandLine, exc_info=True)
-        logger.error("Error executing: " + commandLine)
-        raise
-
-    return output

@@ -18,7 +18,7 @@ from .utils import (
         run_shell_command,
         splitext_,
         )
-from .version import __version__
+from .version import __version__, check_latest, dcm2niix_version
 
 
 class Dcm2bids(object):
@@ -57,7 +57,7 @@ class Dcm2bids(object):
         self.logger.info("python:version: {}".format(
             sys.version.replace("\n","")))
         self.logger.info("dcm2bids:version: {}".format(__version__))
-        self.logger.info("dcm2niix:version: {}".format(Dcm2niix.version()))
+        self.logger.info("dcm2niix:version: {}".format(dcm2niix_version()))
         self.logger.info("participant: {}".format(self.participant.name))
         self.logger.info("session: {}".format(self.participant.session))
         self.logger.info("config: {}".format(os.path.realpath(config)))
@@ -102,6 +102,9 @@ class Dcm2bids(object):
         self.logger.info("moving acquisitions into BIDS folder")
         for acq in parser.acquisitions:
             self.move(acq)
+
+        check_latest()
+        check_latest("dcm2niix")
 
         return os.EX_OK
 

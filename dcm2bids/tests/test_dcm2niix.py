@@ -5,7 +5,6 @@ import os
 import pytest
 from dcm2bids.dcm2niix import Dcm2niix
 from dcm2bids.utils import DEFAULT
-from distutils.version import LooseVersion
 from glob import glob
 
 try:
@@ -16,11 +15,6 @@ except:
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
-
-
-def test_dcm2niix_version():
-    version = Dcm2niix.version()
-    assert LooseVersion(version) >= LooseVersion(DEFAULT.dcm2niixVersion)
 
 
 def test_dcm2niix_run():
