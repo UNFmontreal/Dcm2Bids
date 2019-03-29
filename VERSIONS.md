@@ -1,5 +1,11 @@
 ## Versions
 
+2.1.0
+- Checking if a new version of dcm2bids or dcm2niix is available on github
+- dcm2niix output is now log to file as debug
+- Add dcm2bids version to sidecars
+- intendedFor option can also be a list
+
 2.0.0
  - The anonymizer option no longer exists from the script dcm2bids. It is still possible to deface the anatomical nifti images using the "defaceTpl" key in the congifuration file.
  - Acquisitions are now sorted using the sidecar data instead of only the sidecar filename. The default behaviour is to sort by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You can change this behaviour setting the key "compKeys" inside the configuration file.
