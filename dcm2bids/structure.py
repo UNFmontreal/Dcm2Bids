@@ -128,7 +128,7 @@ class Acquisition(object):
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
         self.sidecarChanges = sidecarChanges
-        self.intendedFor = (intendedFor, IntendedFor)
+        self.intendedFor = intendedFor or IntendedFor
 
 
     def __eq__(self, other):
@@ -214,13 +214,10 @@ class Acquisition(object):
 
     @intendedFor.setter
     def intendedFor(self, value):
-        if isinstance(value, tuple):
-            for v in value:
-                if v:
-                    self._intendedFor = v
-                    break
-        else:
+        if isinstance(value, list):
             self._intendedFor = value
+        else:
+            self._intendedFor = [value,]
 
 
     def dstSidecarData(self, descriptions):
@@ -229,18 +226,26 @@ class Acquisition(object):
         data = self.srcSidecar.origData
         data["Dcm2bidsVersion"] = __version__
 
-        #IntendedFor key
-        if self.intendedFor:
-            intendedDesc = descriptions[self.intendedFor]
+        #intendedFor key
+        if self.intendedFor != [None]:
+            intendedValue = []
+            for index in self.intendedFor:
+                intendedDesc = descriptions[index]
 
-            dataType = intendedDesc["dataType"]
+                dataType = intendedDesc["dataType"]
 
-            niiFile = self.participant.prefix
-            niiFile += self.prepend(intendedDesc.get("customLabels", ""))
-            niiFile += self.prepend(intendedDesc["modalityLabel"])
-            niiFile += ".nii.gz"
+                niiFile = self.participant.prefix
+                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
+                niiFile += self.prepend(intendedDesc["modalityLabel"])
+                niiFile += ".nii.gz"
 
-            data["IntendedFor"] = opj(dataType, niiFile)
+                intendedValue.append(
+                        opj(dataType, niiFile).replace("\\", "/"))
+
+            if len(intendedValue) == 1:
+                data["IntendedFor"] = intendedValue[0]
+            else:
+                data["IntendedFor"] = intendedValue
 
         #sidecarChanges
         for key, value in iteritems(self.sidecarChanges):

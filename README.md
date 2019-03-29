@@ -129,7 +129,9 @@ Optional field to change or add information in a sidecar.
 
 #### `intendedFor`
 
-Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index of the description that's intended for. Python index begins at `0` so in the example, `1` means it is intended for `task-rest_bold`.
+Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index or a list of index of the description that's intended for.
+
+Python index begins at `0` so in the example, `1` means it is intended for `task-rest_bold`.
 
 ## Advanced configuration
 
