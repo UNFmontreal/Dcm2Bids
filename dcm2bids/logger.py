@@ -15,10 +15,11 @@ def setup_logging(logLevel, logFile=None):
         raise ValueError("Invalid log level: {}".format(logLevel))
     logger.setLevel(level)
 
-    #Set filename
+    #Set FileHandler
     if logFile:
         formatter = logging.Formatter(logging.BASIC_FORMAT)
         handler = logging.FileHandler(logFile)
         handler.setFormatter(formatter)
+        handler.setLevel("DEBUG")
         logger.addHandler(handler)
 

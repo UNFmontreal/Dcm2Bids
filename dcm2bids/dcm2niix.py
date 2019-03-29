@@ -102,5 +102,12 @@ class Dcm2niix(object):
             commandTpl = "dcm2niix {} -o {} {}"
             cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
             output = run_shell_command(cmd)
-            self.logger.info("\n" + output.decode())
+
+            try:
+                output = output.decode()
+            except:
+                pass
+
+            self.logger.debug("\n" + output)
+            self.logger.info("Check log file for dcm2niix output")
 
