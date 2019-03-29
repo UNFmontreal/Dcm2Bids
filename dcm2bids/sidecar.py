@@ -206,19 +206,20 @@ class SidecarPairing(object):
                 acq = Acquisition(participant, srcSidecar=sidecar, **desc)
                 acquisitions.append(acq)
 
-                self.logger.info("{} <- {}".format(
-                    acq.dstRoot, sidecarName))
+                self.logger.info("{}  <-  {}".format(
+                    acq.suffix, sidecarName))
 
             #sidecar with no link
             elif len(descriptions) == 0:
-                self.logger.info("No Pairing <- {}".format(sidecarName))
+                self.logger.info("No Pairing  <-  {}".format(sidecarName))
 
             #sidecar with several links
             else:
-                self.logger.info("Several Pairing <- {}".format(sidecarName))
+                self.logger.warning(
+                        "Several Pairing  <-  {}".format(sidecarName))
                 for desc in descriptions:
                     acq = Acquisition(participant, **desc)
-                    self.logger.info(acq.dstRoot)
+                    self.logger.warning("    ->  " + acq.suffix)
 
         self.acquisitions = acquisitions
         return acquisitions
@@ -248,13 +249,10 @@ class SidecarPairing(object):
                 if len(locs) > 1:
                     yield key, locs
 
-
-        self.logger.info(
-                "Checking if a description is paired with several sidecars")
-
         dstRoots = [_.dstRoot for _ in self.acquisitions]
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
+            self.logger.info("Adding 'run' information to the acquisition")
 
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum+1)
