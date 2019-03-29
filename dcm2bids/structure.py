@@ -5,6 +5,7 @@ from collections import OrderedDict
 from future.utils import iteritems
 from os.path import join as opj
 from .utils import DEFAULT
+from .version import __version__
 
 
 class Participant(object):
@@ -226,6 +227,7 @@ class Acquisition(object):
         """
         """
         data = self.srcSidecar.origData
+        data["Dcm2bidsVersion"] = __version__
 
         #IntendedFor key
         if self.intendedFor:
