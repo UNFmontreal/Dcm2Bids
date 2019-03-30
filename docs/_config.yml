@@ -1,0 +1,32 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole site, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing these this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+#theme: just-the-docs
+remote_theme: pmarsceill/just-the-docs
+title: dcm2bids Documentation
+description: Dcm2Bids reorganises NIfTI files from dcm2niix into the Brain Imaging Data Structure (BIDS).
+baseurl: "/dcm2bids/" # the subpath of your site, e.g. /blog
+url: "https://cbedetti.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+
+permalink: pretty
+exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile", ".gitignore"]
+
+# Enable or disable the site search
+search_enabled: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "Contribute on GitHub":
+    - "//github.com/cbedetti/Dcm2Bids"
+
+# Color scheme currently only supports "dark" or nil (default)
+color_scheme: nil
