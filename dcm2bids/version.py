@@ -2,7 +2,7 @@
 
 
 #dcm2bids version
-__version__ = "2.1.1"
+__version__ = "2.1.2"
 
 
 import logging
@@ -153,12 +153,23 @@ def dcm2niix_version():
         logger.error("Check https://github.com/rordenlab/dcm2niix")
         return
 
-    output = check_output(shlex.split("dcm2niix -v"))
-
     try:
-        output = output.decode().split("\n")[0].split()
+        output = check_output(shlex.split("dcm2niix"))
     except:
+        logger.error("Running: dcm2niix", exc_info=True)
         return
 
-    version = output[output.index('version')+1]
-    return version
+    try:
+        lines = output.decode().split("\n")
+    except:
+        logger.debug(output, exc_info=True)
+        return
+
+    for line in lines:
+        try:
+            splits = line.split()
+            return splits[splits.index('version')+1]
+        except:
+            continue
+
+    return
