@@ -1,9 +1,6 @@
 ---
-layout: default
 title: Yout title here
-nav_order: 99
-nav_exclude: true
-search_exclude: true
+hidden: true
 ---
 
 # Title
@@ -23,7 +20,7 @@ _Click to see answers_
 
 Link to an image in the assets folder
 
-[![name]({{site.baseurl}}/assets/images/name.jpg)]({{site.baseurl}}/assets/images/name.jpg)
+`[![name](assets/images/name.jpg)](assets/images/name.jpg)`
 
 Back to [Home]({{site.baseurl}}/)
 
