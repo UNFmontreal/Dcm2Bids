@@ -1,8 +1,4 @@
----
-title: Home
----
-
-[![Documentation](https://img.shields.io/badge/docs-read it-succes.svg?logo=python)][dcm2bids-doc] [![DOI](https://zenodo.org/badge/59581295.svg)][zenodo-doi]
+[![Documentation](https://img.shields.io/badge/docs-read it-succes.svg?logo=python)](https://cbedetti.github.io/Dcm2Bids) [![DOI](https://zenodo.org/badge/59581295.svg)](https://zenodo.org/badge/latestdoi/59581295)
 
 <!--
 [![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/544)
@@ -17,7 +13,7 @@ Before using this software, learn more about BIDS:
 - read the BIDS [specifications][bids-spec] and the [paper][bids-nature]
 - some dataset [examples][bids-examples]
 
-Follow the [guide](guide.md)
+Follow the [guide](https://cbedetti.github.io/Dcm2Bids/guide)
 
 ## Install
 
@@ -66,4 +62,3 @@ Other tools to create [BIDS][bids] datasets :
 [link-heudiconv]: https://github.com/nipy/heudiconv
 [link-bidskit]: https://github.com/jmtyszka/bidskit
 [link-dac2bids]: https://github.com/dangom/dac2bids
-[zenodo-doi]: https://zenodo.org/badge/latestdoi/59581295
