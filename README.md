@@ -95,8 +95,26 @@ It is recommended to use an editor with syntax highlighting to build a correct J
     ]
 }
 ```
+The `descriptions` field is a list of descriptions, each describing some acquisition. In this example, the configuration describes two acquisitions, a T2 weighted and resting state fMRI.  
+Each description tells Dcm2Bids how to group a set of acquisitions and how to label them. In this config file, Dcm2Bids is being told to collect files containing 
 
-The `descriptions` field is a list of description, each describing some acquisition. In this example, the configuration describes two acquisitions, a T2 weigthed and resting state fMRI.
+```json
+       "SeriesDescription": "*T2*",
+       "EchoTime": 0.1
+```
+in their dcm2niix sidecars<sup>1</sup> and label them as `anat`, `T2w` type images.
+
+#### `criteria`
+
+dcm2bids will try to match the sidecars<sup>1</sup> of dcm2niix to the descriptions of the configuration file. The values you enter inside the criteria dictionary are patterns that will be compared to the corresponding key of the sidecar.
+
+The pattern matching is shell-style. It's possible to use wildcard `*`, single character `?` etc ... Please have a look at the [GNU documentation][gnu-pattern] to know more.
+
+For example, in the first description, the pattern `*T2*` will be compared to the value of `SeriesDescription` of a sidecar. `AXIAL_T2_SPACE` will be a match, `AXIAL_T1` won't.
+
+`dcm2bids` has a `SidecarFilename` key, as in the second description, if you prefer to also match with the filename of the sidecar.
+
+You can enter several criteria. **All criteria must match** for a description to be linked to a sidecar.
 
 #### `dataType`
 
@@ -106,7 +124,8 @@ It is a mandatory field. Here is a definition from `bids_specs1.0.2` pdf:
 
 #### `modalityLabel`
 
-It is a mandatory field. It describes the modality of the acquisition like `T1w`, `T2w` or `bold`.
+It is a mandatory field. It describes the modality of the acquisition like `T1w`, `T2w` or `bold`.  
+BIDS offers no guidelines on modality labels for dwi images. If you are converting these you can pass `"modalitylabel": "dwi"`.
 
 #### `customLabels`
 
@@ -114,17 +133,12 @@ It is an optional field. For some acquisitions, you need to add information in t
 
 To know more on how to set these fields, read the [BIDS specifications][bids-spec].
 
-#### `criteria`
 
-dcm2bids will try to match the sidecars of dcm2niix to the descriptions of the configuration file. The values you enter inside the criteria dictionnary are patterns. They will be compared to the corresponding key of the sidecar.
+For a longer example of a Dcm2Bids config json, see [here](https://github.com/cbedetti/Dcm2Bids/blob/master/example/config.json).
 
-The pattern matching is shell-style. It's possible to use wildcard `*`, single character `?` etc ... Please have a look at the [GNU documentation][gnu-pattern] to know more.
-
-For example, in the first description, the pattern `*T2*` will be compared to the value of `SeriesDescription` of a sidecar. `AXIAL_T2_SPACE` will be a match, `AXIAL_T1` won't.
-
-`dcm2bids` create a `SidecarFilename` key if you prefer to also match with the filename of the sidecar.
-
-You can enter several criteria. **All criteria must match** for a description to be link to a sidecar.
+### <sup>1</sup>: sidecars
+For each acquisition, __dcm2niix__ creates an associated .json file, containing information from the dicom header. These are known as __sidecars__. These are the sidecars __Dcm2Bids__ uses to filter the groups of acquisitions.  
+To define this filtering you will probably need to review these sidecars. You can generate all the sidecars for an individual participant using [dcm2bids_helper](#tools).
 
 #### `sidecarChanges`
 
