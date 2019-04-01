@@ -1,4 +1,4 @@
-[![Documentation](https://img.shields.io/badge/docs-read it-succes.svg?logo=python)](https://cbedetti.github.io/Dcm2Bids) [![DOI](https://zenodo.org/badge/59581295.svg)](https://zenodo.org/badge/latestdoi/59581295)
+[![Documentation](https://img.shields.io/badge/documentation-read_it-succes.svg?logo=python)](https://cbedetti.github.io/Dcm2Bids) [![DOI](https://zenodo.org/badge/59581295.svg)](https://zenodo.org/badge/latestdoi/59581295)
 
 <!--
 [![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/544)
