@@ -3,7 +3,7 @@ repo_url: https://github.com/cbedetti/Dcm2Bids
 site_description: dcm2bids reorganises NIfTI files from dcm2niix into the Brain Imaging Data Structure (BIDS).
 #google_analytics: ['', '']
 nav:
-    - index.md
+    - Home: index.md
     - guide.md
     - Cite: https://zenodo.org/badge/latestdoi/59581295
 theme: readthedocs
