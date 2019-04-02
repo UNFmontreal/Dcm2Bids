@@ -25,7 +25,7 @@ class Dcm2bids(object):
     """ Object to handle dcm2bids execution steps
 
     Args:
-        dicom_dir (list): A list of folder with dicoms to convert
+        dicom_dir (str or list): A list of folder with dicoms to convert
         participant (str): Label of your participant
         config (path): Path to a dcm2bids configuration file
         output_dir (path): Path to the BIDS base folder
@@ -41,6 +41,8 @@ class Dcm2bids(object):
             session=DEFAULT.session, clobber=DEFAULT.clobber,
             forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel,
             **_):
+        self._dicomDirs = []
+
         self.dicomDirs = dicom_dir
         self.bidsDir = output_dir
         self.config = load_json(config)
@@ -63,6 +65,19 @@ class Dcm2bids(object):
         self.logger.info("config: {}".format(os.path.realpath(config)))
         self.logger.info(
                 "BIDS directory: {}".format(os.path.realpath(output_dir)))
+
+
+    @property
+    def dicomDirs(self):
+        return self._dicomDirs
+
+
+    @dicomDirs.setter
+    def dicomDirs(self, value):
+        if isinstance(value, list):
+            self._dicomDirs = value
+        else:
+            self._dicomDirs = [value,]
 
 
     def set_logger(self):
