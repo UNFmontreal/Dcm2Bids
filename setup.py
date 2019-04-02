@@ -13,11 +13,15 @@ exec(open(os.path.join("dcm2bids", "version.py")).read())
 
 description = """Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure"""
 
+
 try:
-    import pypandoc
-    long_description = pypandoc.convert_file('README.md', 'rst')
-except(IOError, ImportError):
-    long_description = open('README.md').read()
+    with open('README.md', encoding='utf-8') as f:
+        long_description = f.read()
+except:
+    #python2 compatibility
+    from io import open
+    with open('README.md', encoding='utf-8') as f:
+        long_description = f.read()
 
 
 DISTNAME = "dcm2bids"
@@ -35,6 +39,7 @@ if __name__ == "__main__":
             version=VERSION,
             description=description,
             long_description=long_description,
+            long_description_content_type='text/markdown',
             author=AUTHOR,
             author_email=AUTHOR_EMAIL,
             url=URL,

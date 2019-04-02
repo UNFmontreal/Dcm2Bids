@@ -50,8 +50,19 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-#tests
-idea/
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mkdocs documentation
+/site
+
+# dcm2bids
 dcm2bids/tests/data/*
 !dcm2bids/tests/data/config_test.json
 !dcm2bids/tests/data/sidecars/*
