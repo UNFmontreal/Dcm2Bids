@@ -16,3 +16,15 @@ For full documentation visit [mkdocs.org](https://mkdocs.org).
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+
+## Tips
+
+A question with the answer hidden
+
+<details>
+  <summary>Question ? </summary>
+    Answer
+</details>
+
+_Click to see answers_
+
