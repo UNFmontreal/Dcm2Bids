@@ -128,7 +128,10 @@ class Acquisition(object):
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
         self.sidecarChanges = sidecarChanges
-        self.intendedFor = intendedFor or IntendedFor
+        if intendedFor is None:
+            self.intendedFor = IntendedFor
+        else:
+            self.intendedFor = intendedFor
 
 
     def __eq__(self, other):
