@@ -12,7 +12,3 @@ def test_internet():
 
 def test_is_tool():
     assert is_tool("dcm2bids")
-
-
-def test_latest():
-    assert check_github_latest("cbedetti/Dcm2Bids") == __version__
