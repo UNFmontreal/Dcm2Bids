@@ -13,8 +13,6 @@ Before using this software, learn more about BIDS:
 - read the BIDS [specifications][bids-spec] and the [paper][bids-nature]
 - some dataset [examples][bids-examples]
 
-Follow the [guide](https://cbedetti.github.io/Dcm2Bids/guide)
-
 ## Install
 
 `pip install dcm2bids`
@@ -34,6 +32,8 @@ or
 `pip install --upgrade dcm2bids`
 
 # TL;DR
+
+Follow the [tutorial](https://cbedetti.github.io/Dcm2Bids/tutorial)
 
 Steps to get your data in BIDS :
 
