@@ -61,12 +61,16 @@
         
             <li><a class="toctree-l3" href="#dependencies">Dependencies</a></li>
         
+            <li><a class="toctree-l3" href="#upgrading">Upgrading</a></li>
+        
         </ul>
     
 
     <li class="toctree-l2"><a href="#tldr">TL;DR</a></li>
     
         <ul>
+        
+            <li><a class="toctree-l3" href="#bids-validator">bids-validator</a></li>
         
             <li><a class="toctree-l3" href="#similar-projects">Similar projects</a></li>
         
@@ -78,7 +82,31 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="guide/">Guide</a>
+    <span class="caption-text">User Guide</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="usage/">Usage</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="config/">Configuration file</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="advance/">Advanced configuration</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="tutorial/">Tutorial</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="versions/">Versions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -121,7 +149,7 @@
           <div role="main">
             <div class="section">
               
-                <p><a href="https://cbedetti.github.io/Dcm2Bids"><img alt="Documentation" src="https://img.shields.io/badge/documentation-read_it-succes.svg?logo=python" /></a> <a href="https://zenodo.org/badge/latestdoi/59581295"><img alt="DOI" src="https://zenodo.org/badge/59581295.svg" /></a></p>
+                <p><a href="https://pypi.org/project/dcm2bids"><img alt="PyPI version" src="https://badge.fury.io/py/dcm2bids.svg" /></a> <a href="https://cbedetti.github.io/Dcm2Bids"><img alt="Documentation" src="https://img.shields.io/badge/documentation-dcm2bids-succes.svg" /></a> <a href="https://zenodo.org/badge/latestdoi/59581295"><img alt="DOI" src="https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg" /></a></p>
 <!--
 [![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/544)
 -->
@@ -146,6 +174,8 @@
 </ul>
 </li>
 </ul>
+<h2 id="upgrading">Upgrading</h2>
+<p><code>pip install --upgrade dcm2bids</code></p>
 <h1 id="tldr">TL;DR</h1>
 <p>Steps to get your data in BIDS :</p>
 <ul>
@@ -153,10 +183,11 @@
 <li><code>dcm2bids_scaffold</code></li>
 <li><code>dcm2bids_helper -d &lt;FOLDER_WITH_DICOMS_OF_A_TYPICAL_SESSION&gt;</code></li>
 <li>Build your configuration file with the help of the content of <code>tmp_dcm2bids/helper</code></li>
-<li><code>dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE</code></li>
-<li>Run the <a href="https://github.com/bids-standard/bids-validator">bids-validator</a></li>
+<li><code>dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE</code> for each participants of your study</li>
 </ul>
 <p>dcm2bids creates log files inside <code>&lt;YOUR_FUTURE_BIDS_FOLDER&gt;/tmp_dcm2bids/log</code></p>
+<h2 id="bids-validator">bids-validator</h2>
+<p>Run the <a href="https://github.com/bids-standard/bids-validator">bids-validator</a> to check your directory. Don't forget to create a <code>.bidsignore</code> file at the root of your BIDS directory with <code>tmp_dcm2bids/*</code> inside.</p>
 <h2 id="similar-projects">Similar projects</h2>
 <p>Other tools to create <a href="http://bids.neuroimaging.io/">BIDS</a> datasets :</p>
 <ul>
@@ -171,7 +202,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="guide/" class="btn btn-neutral float-right" title="Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -201,7 +232,7 @@
       
       
       
-        <span style="margin-left: 15px"><a href="guide/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="usage/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -214,5 +245,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-04-01 04:29:04
+Build Date UTC : 2019-04-04 14:49:37
 -->
