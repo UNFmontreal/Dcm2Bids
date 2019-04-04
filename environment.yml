@@ -1,3 +1,6 @@
 name: dcm2bids
+channels:
+    - conda-forge
 dependencies:
-    - future>=0.17.1
+    - dcm2niix
+    - pip

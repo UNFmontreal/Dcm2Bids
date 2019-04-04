@@ -8,6 +8,7 @@ nav:
         - usage.md
         - config.md
         - advance.md
+    - tutorial.md
     - Versions: versions.md
     - Cite: https://zenodo.org/badge/latestdoi/59581295
 theme: readthedocs
