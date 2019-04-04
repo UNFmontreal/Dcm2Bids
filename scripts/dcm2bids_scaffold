@@ -33,7 +33,7 @@ def get_arguments():
 JSON_FILES = {
     "dataset_description.json": {
         "Name": "",
-        "BIDSVersion": "1.0.2",
+        "BIDSVersion": "1.2.0",
         "License": "",
         "Authors": [""],
         "Acknowledgments": "",
