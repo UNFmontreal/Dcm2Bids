@@ -36,7 +36,11 @@ class Participant(object):
     @name.setter
     def name(self, name):
         """ Prepend 'sub-' if necessary"""
-        if name.startswith("sub-"):
+
+        if name.strip() == "":
+            self._name = ""
+
+        elif name.startswith("sub-"):
             self._name = name
 
         else:
@@ -273,4 +277,3 @@ class Acquisition(object):
 
         else:
             return char + value
-

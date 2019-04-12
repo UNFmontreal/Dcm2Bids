@@ -16,10 +16,12 @@ class DEFAULT(object):
     cliSession = ""
     cliOutputDir = os.getcwd()
     cliLogLevel = "INFO"
+    cliParticipant = ""
 
     #dcm2bids.py
     outputDir = cliOutputDir
     session = cliSession #also Participant object
+    participant = cliParticipant
     clobber = False
     forceDcm2niix = False
     defaceTpl = None
@@ -27,6 +29,7 @@ class DEFAULT(object):
 
     #dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixOptionsNA = "-b y -ba n -z y -f '%3s_%f_%p_%t'"
     dcm2niixVersion = "v1.0.20181125"
 
     #sidecar.py
@@ -107,4 +110,3 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running {}".format(commandLine))
     return check_output(shlex.split(commandLine))
-

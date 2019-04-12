@@ -4,6 +4,7 @@
 import logging
 import os
 import platform
+import re
 import sys
 from datetime import datetime
 from glob import glob
@@ -37,7 +38,7 @@ class Dcm2bids(object):
     """
 
     def __init__(
-            self, dicom_dir, participant, config, output_dir=DEFAULT.outputDir,
+            self, dicom_dir, config, participant=DEFAULT.participant, output_dir=DEFAULT.outputDir,
             session=DEFAULT.session, clobber=DEFAULT.clobber,
             forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel,
             **_):
@@ -79,7 +80,6 @@ class Dcm2bids(object):
         else:
             self._dicomDirs = [value,]
 
-
     def set_logger(self):
         """ Set a basic logger"""
         logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
@@ -94,12 +94,30 @@ class Dcm2bids(object):
         setup_logging(self.logLevel, logFile)
         self.logger = logging.getLogger(__name__)
 
+    def setParticipant(self, sidecar):
+        """Set participant from config file"""
+        session = self.participant.session
+        participant = self.participant.name
+
+        participant = re.match(self.config["participant"]["expression"], sidecar._data[self.config["participant"]["dcmTag"]])
+        participant = participant.groups()[0]
+
+        if "session" in self.config:
+            session = re.match(self.config["session"]["expression"], sidecar._data[self.config["session"]["dcmTag"]])
+            session = session.groups()[0]
+
+        self.participant = Participant(participant, session)
 
     def run(self):
         """
         """
-        dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant,
-                self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions))
+        if not self.participant.name:
+            dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, "",
+                    self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptionsNA))
+        else:
+            dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant,
+                            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions))
+
         dcm2niix.run(self.forceDcm2niix)
 
         sidecars = []
@@ -107,6 +125,9 @@ class Dcm2bids(object):
             sidecars.append(Sidecar(
                 filename, self.config.get("compKeys", DEFAULT.compKeys)))
         sidecars = sorted(sidecars)
+
+        if not self.participant.name and "participant" in self.config:
+            self.setParticipant(sidecars[0])
 
         parser = SidecarPairing(sidecars, self.config["descriptions"],
                 self.config.get("searchMethod", DEFAULT.searchMethod))
@@ -169,4 +190,3 @@ class Dcm2bids(object):
             #just move
             else:
                 os.rename(srcFile, dstFile)
-

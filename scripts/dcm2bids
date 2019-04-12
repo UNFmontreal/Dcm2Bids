@@ -27,7 +27,7 @@ dcm2bids {}""".format(__version__),
 
     parser.add_argument(
             "-p", "--participant",
-            required=True,
+            required=False, default=DEFAULT.participant,
             help="Participant ID",
             )
 

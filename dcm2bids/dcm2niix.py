@@ -110,4 +110,3 @@ class Dcm2niix(object):
 
             self.logger.debug("\n" + output)
             self.logger.info("Check log file for dcm2niix output")
-
