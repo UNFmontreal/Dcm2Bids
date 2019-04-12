@@ -7,38 +7,38 @@ import logging
 import os
 import shlex
 from collections import OrderedDict
-from subprocess import check_output, CalledProcessError
+from subprocess import check_output
 
 
 class DEFAULT(object):
     """ Default values of the package"""
-    #cli dcm2bids
+    # cli dcm2bids
     cliSession = ""
     cliOutputDir = os.getcwd()
     cliLogLevel = "INFO"
     cliParticipant = ""
 
-    #dcm2bids.py
+    # dcm2bids.py
     outputDir = cliOutputDir
-    session = cliSession #also Participant object
+    session = cliSession  # also Participant object
     participant = cliParticipant
     clobber = False
     forceDcm2niix = False
     defaceTpl = None
     logLevel = "WARNING"
 
-    #dcm2niix.py
+    # dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
     dcm2niixOptionsNA = "-b y -ba n -z y -f '%3s_%f_%p_%t'"
     dcm2niixVersion = "v1.0.20181125"
 
-    #sidecar.py
+    # sidecar.py
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
     searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
     runTpl = "_run-{:02d}"
 
-    #misc
+    # misc
     tmpDirName = "tmp_dcm2bids"
     helperDir = "helper"
 
@@ -68,7 +68,7 @@ def write_txt(filename, lines=[]):
             f.write("%s\n" % row)
 
 
-def write_participants(filename,participants):
+def write_participants(filename, participants):
     with open(filename, 'w') as f:
         writer = csv.DictWriter(f, delimiter='\t',
                                 fieldnames=participants[0].keys())
