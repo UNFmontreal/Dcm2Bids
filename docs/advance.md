@@ -46,3 +46,22 @@ default: `"compKeys": ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]`
 
 Acquisitions are sorted using the sidecar data. The default behaviour is to sort by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You can change this behaviour setting this key inside the configuration file.
 
+## participant and session
+
+There are two ways to give the participant `<PARTICIPANT_ID>` and session `<SESSION_ID>`:
+
+1. Through the command line using the arguments `-p` and `-s`
+2. Through the config file, using a specific sidecar and a REGEX expression to grab the exact string.
+
+```
+ "participant": {
+    "dcmTag": "PatientName",
+    "expression": "[0-9a-zA-Z]*_sub-([0-9a-zA-Z]*)_sess-[0-9a-zA-Z]*"
+    },
+"session": {
+    "dcmTag": "PatientName",
+    "expression": "[0-9a-zA-Z]*_sub-[0-9a-zA-Z]*_sess-([0-9a-zA-Z]*)"
+    }
+```
+
+**WARNING**: if you choose a sidecar that will be removed because of anonymisation you need to use this dcm2niix option: `"dcm2niixOptions": "-b y -ba n -z y -f '%3s_%f_%p_%t'"`
