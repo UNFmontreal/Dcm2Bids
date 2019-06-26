@@ -33,7 +33,11 @@ class DEFAULT(object):
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
     searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
+
+    dupMethod = "run"
+    dupMethodChoices = ["run", "dup"]
     runTpl = "_run-{:02d}"
+    dupTpl = "_dup-{:02d}"
 
     #misc
     tmpDirName = "tmp_dcm2bids"
@@ -107,4 +111,3 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running {}".format(commandLine))
     return check_output(shlex.split(commandLine))
-
