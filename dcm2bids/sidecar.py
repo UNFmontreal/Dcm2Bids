@@ -106,6 +106,7 @@ class SidecarPairing(object):
         self.searchMethod = searchMethod
         self.dupMethod = dupMethod
 
+
     @property
     def searchMethod(self):
         return self._searchMethod
@@ -141,7 +142,7 @@ class SidecarPairing(object):
         if value in DEFAULT.dupMethodChoices:
             self._dupMethod = value
         else:
-            self._dupMethod = DEFAULT.dupMethod
+            self._dupMethod = DEFAULT.duplicateMethod
             self.logger.warning(
                     "'{}' is not a duplicate method implemented".format(value))
             self.logger.warning(
@@ -283,7 +284,7 @@ class SidecarPairing(object):
 
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
-            self.logger.info("Adding 'run' information to the acquisition")
+            self.logger.info("Adding {} information to the acquisition".format(self.dupMethod))
 
             if self.dupMethod == 'dup':
                 dup = dup[0:-1]
