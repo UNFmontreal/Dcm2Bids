@@ -34,7 +34,7 @@ class DEFAULT(object):
     searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
 
-    dupMethod = "run"
+    duplicateMethod = "run"
     dupMethodChoices = ["run", "dup"]
     runTpl = "_run-{:02d}"
     dupTpl = "_dup-{:02d}"

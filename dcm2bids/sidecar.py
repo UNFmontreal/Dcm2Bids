@@ -93,7 +93,7 @@ class SidecarPairing(object):
 
     def __init__(self, sidecars, descriptions,
             searchMethod=DEFAULT.searchMethod,
-            dupMethod=DEFAULT.dupMethod):
+            dupMethod=DEFAULT.duplicateMethod):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
@@ -114,7 +114,7 @@ class SidecarPairing(object):
     def dupMethod(self):
         return self._dupMethod
 
-    @dupMethod.setter
+    @searchMethod.setter
     def searchMethod(self, value):
         """
         Checks if the search method is implemented
@@ -132,10 +132,10 @@ class SidecarPairing(object):
             self.logger.warning("Search methods implemented: {}".format(
                     DEFAULT.searchMethodChoices))
 
-    @searchMethod.setter
+    @dupMethod.setter
     def dupMethod(self, value):
         """
-        Checks if the search method is implemented
+        Checks if the duplicate method is implemented
         Warns the user if not and fall back to default
         """
         if value in DEFAULT.dupMethodChoices:
@@ -143,7 +143,7 @@ class SidecarPairing(object):
         else:
             self._dupMethod = DEFAULT.dupMethod
             self.logger.warning(
-                    "'{}' is not a dup method implemented".format(value))
+                    "'{}' is not a duplicate method implemented".format(value))
             self.logger.warning(
                     "Falling back to default: {}".format(DEFAULT.dupMethod))
             self.logger.warning("Duplicate methods implemented: {}".format(
