@@ -92,22 +92,31 @@ class SidecarPairing(object):
     """
 
     def __init__(self, sidecars, descriptions,
-            searchMethod=DEFAULT.searchMethod):
+            searchMethod=DEFAULT.searchMethod,
+            dcmTagLabel=""):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
+        self._dcmTagLabel = ""
         self.graph = OrderedDict()
         self.aquisitions = []
 
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
-
+        self.dcmTagLabel = dcmTagLabel
 
     @property
     def searchMethod(self):
         return self._searchMethod
 
+    @property
+    def dcmTagLabel(self):
+        return self._dcmTagLabel
+
+    @dcmTagLabel.setter
+    def dcmTagLabel(self, value):
+        self._dcmTagLabel = value
 
     @searchMethod.setter
     def searchMethod(self, value):
@@ -206,7 +215,10 @@ class SidecarPairing(object):
             #only one description for the sidecar
             if len(descriptions) == 1:
                 desc = descriptions[0]
-                acq = Acquisition(participant, srcSidecar=sidecar, **desc)
+                if self._dcmTagLabel:
+                    descWithTask = self.addDcmTagLabel(sidecar, desc)
+                acq = Acquisition(participant, srcSidecar=sidecar,
+                                    **descWithTask)
                 acquisitions.append(acq)
 
                 self.logger.info("{}  <-  {}".format(
@@ -227,6 +239,24 @@ class SidecarPairing(object):
         self.acquisitions = acquisitions
         return acquisitions
 
+    def addDcmTagLabel(self, sidecar, desc):
+        """
+        Add TaskLabel to customLabels
+        """
+        descWithTask = desc.copy()
+        if self.dcmTagLabel["dcmTag"] in sidecar.data.keys():
+            dcmTag = str(sidecar.data.get(self.dcmTagLabel["dcmTag"]))
+            pattern = self.dcmTagLabel["expression"]
+            dcmTagLabel = re.search(pattern, dcmTag)
+
+        if dcmTagLabel:
+            dcmTagLabel = '_'.join(map(str, dcmTagLabel.groups()))
+            if "customLabels" in desc.keys():
+                descWithTask["customLabels"] = dcmTagLabel + '_' + descWithTask["customLabels"]
+            else:
+                descWithTask["customLabels"] = dcmTagLabel
+
+        return descWithTask
 
     def find_runs(self):
         """
@@ -260,4 +290,3 @@ class SidecarPairing(object):
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum+1)
                 self.acquisitions[acqInd].customLabels += runStr
-

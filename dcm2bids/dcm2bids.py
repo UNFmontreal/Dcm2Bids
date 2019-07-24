@@ -109,7 +109,8 @@ class Dcm2bids(object):
         sidecars = sorted(sidecars)
 
         parser = SidecarPairing(sidecars, self.config["descriptions"],
-                self.config.get("searchMethod", DEFAULT.searchMethod))
+                self.config.get("searchMethod", DEFAULT.searchMethod),
+                self.config.get("dcmTagLabel"))
         parser.build_graph()
         parser.build_acquisitions(self.participant)
         parser.find_runs()
@@ -169,4 +170,3 @@ class Dcm2bids(object):
             #just move
             else:
                 os.rename(srcFile, dstFile)
-

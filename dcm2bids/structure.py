@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from collections import OrderedDict
 from future.utils import iteritems
 from os.path import join as opj
@@ -273,4 +272,3 @@ class Acquisition(object):
 
         else:
             return char + value
-
