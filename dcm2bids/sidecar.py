@@ -93,6 +93,7 @@ class SidecarPairing(object):
 
     def __init__(self, sidecars, descriptions,
             searchMethod=DEFAULT.searchMethod,
+            dcmTagLabel="",
             dupMethod=DEFAULT.duplicateMethod):
         self.logger = logging.getLogger(__name__)
 
@@ -268,12 +269,24 @@ class SidecarPairing(object):
         """
         descWithTask = desc.copy()
         if self.dcmTagLabel["dcmTag"] in sidecar.data.keys():
-            dcmTag = str(sidecar.data.get(self.dcmTagLabel["dcmTag"]))
-            pattern = self.dcmTagLabel["expression"]
-            dcmTagLabel = re.search(pattern, dcmTag)
+            dcmTag = sidecar.data.get(self.dcmTagLabel["dcmTag"])
+            patterns = self.dcmTagLabel["expression"]
 
-        if dcmTagLabel:
-            dcmTagLabel = '_'.join(map(str, dcmTagLabel.groups()))
+            if isinstance(patterns, list):
+                tmpDcmTagLabel = []
+                for pattern in patterns :
+                    dcmTagLabel = re.search(pattern, dcmTag)
+                    if dcmTagLabel:
+                        dcmTagLabel = '_'.join(map(str, dcmTagLabel.groups()))
+                        tmpDcmTagLabel.append(dcmTagLabel)
+
+                dcmTagLabel = '_'.join(tmpDcmTagLabel)
+            else:
+                dcmTagLabel = re.search(pattern, dcmTag)
+                if dcmTagLabel:
+                    dcmTagLabel = '_'.join(map(str, dcmTagLabel.groups()))
+
+
             if "customLabels" in desc.keys():
                 descWithTask["customLabels"] = dcmTagLabel + '_' + descWithTask["customLabels"]
             else:
