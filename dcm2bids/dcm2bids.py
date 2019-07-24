@@ -111,6 +111,7 @@ class Dcm2bids(object):
         parser = SidecarPairing(sidecars, self.config["descriptions"],
                 self.config.get("searchMethod", DEFAULT.searchMethod),
                 self.config.get("dcmTagLabel"))
+                self.config.get("dupMethod", DEFAULT.duplicateMethod))
         parser.build_graph()
         parser.build_acquisitions(self.participant)
         parser.find_runs()

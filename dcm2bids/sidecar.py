@@ -93,11 +93,12 @@ class SidecarPairing(object):
 
     def __init__(self, sidecars, descriptions,
             searchMethod=DEFAULT.searchMethod,
-            dcmTagLabel=""):
+            dupMethod=DEFAULT.duplicateMethod):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
         self._dcmTagLabel = ""
+        self._dupMethod = ""
         self.graph = OrderedDict()
         self.aquisitions = []
 
@@ -105,6 +106,8 @@ class SidecarPairing(object):
         self.descriptions = descriptions
         self.searchMethod = searchMethod
         self.dcmTagLabel = dcmTagLabel
+        self.dupMethod = dupMethod
+
 
     @property
     def searchMethod(self):
@@ -117,6 +120,10 @@ class SidecarPairing(object):
     @dcmTagLabel.setter
     def dcmTagLabel(self, value):
         self._dcmTagLabel = value
+
+    @property
+    def dupMethod(self):
+        return self._dupMethod
 
     @searchMethod.setter
     def searchMethod(self, value):
@@ -136,6 +143,22 @@ class SidecarPairing(object):
             self.logger.warning("Search methods implemented: {}".format(
                     DEFAULT.searchMethodChoices))
 
+    @dupMethod.setter
+    def dupMethod(self, value):
+        """
+        Checks if the duplicate method is implemented
+        Warns the user if not and fall back to default
+        """
+        if value in DEFAULT.dupMethodChoices:
+            self._dupMethod = value
+        else:
+            self._dupMethod = DEFAULT.duplicateMethod
+            self.logger.warning(
+                    "'{}' is not a duplicate method implemented".format(value))
+            self.logger.warning(
+                    "Falling back to default: {}".format(DEFAULT.dupMethod))
+            self.logger.warning("Duplicate methods implemented: {}".format(
+                    DEFAULT.dupMethodChoices))
 
     def build_graph(self):
         """
@@ -263,6 +286,8 @@ class SidecarPairing(object):
         Check if there is duplicate destination roots in the acquisitions
         and add '_run-' to the customLabels of the acquisition
         """
+
+
         def duplicates(seq):
             """ Find duplicate items in a list
 
@@ -283,10 +308,21 @@ class SidecarPairing(object):
                     yield key, locs
 
         dstRoots = [_.dstRoot for _ in self.acquisitions]
+
+        templateDup = DEFAULT.runTpl
+        if self.dupMethod == 'dup':
+            templateDup = DEFAULT.dupTpl
+
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
-            self.logger.info("Adding 'run' information to the acquisition")
+            self.logger.info("Adding {} information to the acquisition".format(self.dupMethod))
 
-            for runNum, acqInd in enumerate(dup):
-                runStr = DEFAULT.runTpl.format(runNum+1)
-                self.acquisitions[acqInd].customLabels += runStr
+            if self.dupMethod == 'dup':
+                dup = dup[0:-1]
+                for runNum, acqInd in enumerate(dup):
+                    runStr = templateDup.format(runNum+1)
+                    self.acquisitions[acqInd].modalityLabel += runStr
+            else:
+                for runNum, acqInd in enumerate(dup):
+                    runStr = templateDup.format(runNum+1)
+                    self.acquisitions[acqInd].customLabels += runStr

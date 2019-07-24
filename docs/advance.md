@@ -22,6 +22,14 @@ default: `"searchMethod": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this option is set incorrectly. `re` is the other choice if you want more flexibility to match criteria.
 
+## duplicateMethod
+
+default: `"duplicateMethod": "run"`
+
+When dcm2bids found duplicates, it will add `run` as a suffix by default.
+
+If `"duplicateMethod": "dup"`, dcm2bids will behave as heudiconv (See [documentation](https://heudiconv.readthedocs.io/en/latest/changes.html#id8))
+
 ## defaceTpl
 
 default: `"defaceTpl": None`
@@ -45,4 +53,3 @@ Arguments for dcm2niix
 default: `"compKeys": ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]`
 
 Acquisitions are sorted using the sidecar data. The default behaviour is to sort by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You can change this behaviour setting this key inside the configuration file.
-
