@@ -30,7 +30,7 @@ When dcm2bids found duplicates, it will add `run` as a suffix by default.
 
 If `"duplicateMethod": "dup"`, dcm2bids will behave as heudiconv (See [documentation](https://heudiconv.readthedocs.io/en/latest/changes.html#id8))
 
-## duplicateMethod
+## dcmTagLabel
 
 default: `"dcmTagLabel": "None"`
 
