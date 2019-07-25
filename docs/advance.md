@@ -30,6 +30,33 @@ When dcm2bids found duplicates, it will add `run` as a suffix by default.
 
 If `"duplicateMethod": "dup"`, dcm2bids will behave as heudiconv (See [documentation](https://heudiconv.readthedocs.io/en/latest/changes.html#id8))
 
+## duplicateMethod
+
+default: `"dcmTagLabel": "None"`
+
+Instead of using `customLabel` and add tasks or runs for each of your acquisition, you can have a generic customLabel using `dcmTagLabel`. You need two keys within `dcmTagLabel`.
+
+1. `dcmTag` tells dcm2bids which dicom tag you want the generic custom label to look at.
+2. `expression` is one or multiple regex expression (here: tasks and runs) used to grab the different custom labels for all your acquisitions.
+3. Finally, you only need to filter your acquisitions with something more generic `*task*` instead of `*task-memory*`.
+
+
+```
+"dcmTagLabel": {
+		"dcmTag": "SeriesDescription",
+		"expression": [".*(task-[0-9a-zA-Z]*).*",
+			       ".*(run-[0-9]*).*"]
+                },
+"descriptions": [
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "criteria": {
+                "SeriesDescription": "*task*"
+            }
+        }
+```
+
 ## defaceTpl
 
 default: `"defaceTpl": None`
