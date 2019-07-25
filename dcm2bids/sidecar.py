@@ -9,7 +9,7 @@ from collections import defaultdict, OrderedDict
 from fnmatch import fnmatch
 from future.utils import iteritems
 from .structure import Acquisition
-from .utils import DEFAULT, load_json, splitext_
+from .utils import DEFAULT, load_json, splitext_, isDictsEqual
 
 
 class Sidecar(object):
@@ -102,6 +102,7 @@ class SidecarPairing(object):
         self._dupMethod = ""
         self.graph = OrderedDict()
         self.aquisitions = []
+        self.dstImage = [[] for i in itertools.repeat(None, len(descriptions))]
 
         self.sidecars = sidecars
         self.descriptions = descriptions
@@ -231,7 +232,6 @@ class SidecarPairing(object):
             A list of acquisition objects
         """
         acquisitions = []
-
         self.logger.info("Sidecars pairing:")
         for sidecar, descriptions in iteritems(self.graph):
             sidecarName = os.path.basename(sidecar.root)
@@ -239,14 +239,22 @@ class SidecarPairing(object):
             #only one description for the sidecar
             if len(descriptions) == 1:
                 desc = descriptions[0]
+
                 if self._dcmTagLabel:
-                    descWithTask = self.addDcmTagLabel(sidecar, desc)
+                    desc = self.addDcmTagLabel(sidecar, desc)
+
                 acq = Acquisition(participant, srcSidecar=sidecar,
-                                    **descWithTask)
+                                    **desc)
+
+                if acq.intendedFor == [None]:
+                    acqIndex = self.getAcqIndex(desc)
+                    dst = acq.dstRoot.split(os.path.sep)[1:]
+                    dst = os.path.sep.join(dst)
+                    self.dstImage[acqIndex].append(dst)
+
                 acquisitions.append(acq)
 
-                self.logger.info("{}  <-  {}".format(
-                    acq.suffix, sidecarName))
+                self.logger.info("{}  <-  {}".format(acq.suffix, sidecarName))
 
             #sidecar with no link
             elif len(descriptions) == 0:
@@ -259,6 +267,11 @@ class SidecarPairing(object):
                 for desc in descriptions:
                     acq = Acquisition(participant, **desc)
                     self.logger.warning("    ->  " + acq.suffix)
+
+        #fmap dataType at the end of acquisitions
+        for idx, acq in enumerate(acquisitions):
+            if acq.dataType == "fmap":
+                 acquisitions.append(acquisitions.pop(idx))
 
         self.acquisitions = acquisitions
         return acquisitions
@@ -339,3 +352,8 @@ class SidecarPairing(object):
                 for runNum, acqInd in enumerate(dup):
                     runStr = templateDup.format(runNum+1)
                     self.acquisitions[acqInd].customLabels += runStr
+
+    def getAcqIndex(self, description):
+        for idx, desc in enumerate(self.descriptions):
+            if isDictsEqual(desc, description):
+                return idx

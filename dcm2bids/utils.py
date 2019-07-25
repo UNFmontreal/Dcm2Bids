@@ -111,3 +111,10 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running {}".format(commandLine))
     return check_output(shlex.split(commandLine))
+
+def isDictsEqual(dict_a, dict_b):
+    for i, j in zip(dict_a.items(), dict_b.items()):
+        if i != j:
+            return False
+
+    return True
