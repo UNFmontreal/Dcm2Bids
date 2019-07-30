@@ -27,7 +27,14 @@ class DEFAULT(object):
 
     #dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixOptionsInternalCompression = "-b y -ba y -z i -f '%3s_%f_%p_%t'"
+    dcm2niixOptionsNoCompression = "-b y -ba y -z n -f '%3s_%f_%p_%t'"
     dcm2niixVersion = "v1.0.20181125"
+
+    #dcm2niix compression type
+    pigz = 'y'
+    internal = 'i'
+    doNotCompress = 'n'
 
     #sidecar.py
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]

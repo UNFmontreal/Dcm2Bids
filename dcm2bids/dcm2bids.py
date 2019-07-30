@@ -39,7 +39,7 @@ class Dcm2bids(object):
     def __init__(
             self, dicom_dir, participant, config, output_dir=DEFAULT.outputDir,
             session=DEFAULT.session, clobber=DEFAULT.clobber,
-            forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel,
+            forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel, compression=DEFAULT.pigz
             **_):
         self._dicomDirs = []
 
@@ -50,6 +50,7 @@ class Dcm2bids(object):
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
         self.logLevel = log_level
+        self.compression = compression
 
         #logging setup
         self.set_logger()
@@ -98,8 +99,22 @@ class Dcm2bids(object):
     def run(self):
         """
         """
+        # if not pigz compression flag/option options resemble their counterparts in dcm2niix
+        if self.compression == 'i':
+            default_dcm2niix_options = ('dcm2niixOptionsInternalCompression',
+                                        DEFAULT.dcm2niixOptionsInternalCompression)
+        # if no compression
+        elif self.compression == 'n':
+            default_dcm2niix_options = ('dcm2niixOptionsNoCompression',
+                                        DEFAULT.dcm2niixOptionsNoCompression)
+        # default to using pigz and original default options as specified in utils.DEFAULT
+        else:
+            default_dcm2niix_options = ('dcm2niixOptions',
+                                        DEFAULT.dcm2niixOptions)
+
+        # if default with pigz compression
         dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant,
-                self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions))
+                self.config.get(default_dcm2niix_options))
         dcm2niix.run(self.forceDcm2niix)
 
         sidecars = []
