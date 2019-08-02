@@ -17,7 +17,7 @@ class DEFAULT(object):
     cliOutputDir = os.getcwd()
     cliLogLevel = "INFO"
 
-    #dcm2bids.py
+    #dcm2bids.pyls
     outputDir = cliOutputDir
     session = cliSession #also Participant object
     clobber = False

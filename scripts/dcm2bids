@@ -76,7 +76,7 @@ dcm2bids {}""".format(__version__),
                     See:https://github.com/cbedetti/Dcm2Bids/blob/master/README.md#defaceTpl")
 
     parser.add_argument(
-            "-z", "--gz_compress_images",
+            "-z", "--compression",
             required=False, default=DEFAULT.pigz,
             help="Chose compression option, default uses pigz -> 'y' if installed, other options are to use" +
                  " system's internal compression with 'i', or to use no compression 'n'. Any options chose other than" +
