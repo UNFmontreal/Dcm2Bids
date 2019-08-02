@@ -92,8 +92,8 @@ class Dcm2bids(object):
         logFile = os.path.join(logDir, "{}_{}.log".format(
                 self.participant.prefix, datetime.now().isoformat()))
 
-        #os.makedirs(logdir, exist_ok=True)
-        #python2 compatibility
+        # os.makedirs(logdir, exist_ok=True)
+        # python2 compatibility
         if not os.path.exists(logDir):
             os.makedirs(logDir)
 
