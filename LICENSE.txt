@@ -1,4 +1,4 @@
-dcm2bids Copyright (C) 2017 Christophe Bedetti
+dcm2bids Copyright (C) 2019 Anthony Galassi
 
 Text of GPLv3 License:
 ======================

@@ -8,6 +8,8 @@
 
 `dcm2bids` reorganises NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
+This is a DCAN Labs fork of the software dcm2bids created by Christophe Bedetti located [here](https://github.com/cbedetti/Dcm2Bids)
+
 Before using this software, learn more about BIDS:
 
 - read the BIDS [specifications][bids-spec] and the [paper][bids-nature]
@@ -15,11 +17,11 @@ Before using this software, learn more about BIDS:
 
 ## Install
 
-`pip install dcm2bids`
+`pip install dcan-labs-dcm2bids`
 
 or
 
-`pip install --user dcm2bids`
+`pip install --user dcan-labs-dcm2bids`
 
 ## Dependencies
 
