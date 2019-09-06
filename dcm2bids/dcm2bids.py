@@ -121,8 +121,6 @@ class Dcm2bids(object):
         check_latest()
         check_latest("dcm2niix")
 
-        return os.EX_OK
-
 
     def move(self, acquisition):
         """
