@@ -34,6 +34,7 @@ class DEFAULT(object):
     searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
     runTpl = "_run-{:02d}"
+    lowerCase = False
 
     #misc
     tmpDirName = "tmp_dcm2bids"
@@ -107,4 +108,3 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running {}".format(commandLine))
     return check_output(shlex.split(commandLine))
-

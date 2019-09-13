@@ -92,7 +92,8 @@ class SidecarPairing(object):
     """
 
     def __init__(self, sidecars, descriptions,
-            searchMethod=DEFAULT.searchMethod):
+            searchMethod=DEFAULT.searchMethod,
+            lowerCase=DEFAULT.lowerCase):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
@@ -102,6 +103,8 @@ class SidecarPairing(object):
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
+        self.lowerCase = lowerCase
+
 
 
     @property
@@ -162,16 +165,24 @@ class SidecarPairing(object):
         def compare(name, pattern):
             if self.searchMethod == "re":
                 return bool(re.search(pattern, str(name)))
-
             else:
                 return fnmatch(str(name), str(pattern))
 
-
         result = []
+
         for tag, pattern in iteritems(criteria):
             name = data.get(tag)
 
+            if self.lowerCase:
+                if isinstance(pattern, list):
+                    pattern = [x.lower() for x in pattern]
+                elif isinstance(pattern, str):
+                    pattern = pattern.lower()
+
             if isinstance(name, list):
+                if self.lowerCase:
+                    name = [x.lower() for x in name]
+
                 try:
                     subResult = [
                             len(name)==len(pattern),
@@ -185,6 +196,8 @@ class SidecarPairing(object):
                 result.append(all(subResult))
 
             else:
+                if self.lowerCase and isinstance(name, str):
+                    name = name.lower()
                 result.append(compare(name, pattern))
 
         return all(result)
@@ -260,4 +273,3 @@ class SidecarPairing(object):
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum+1)
                 self.acquisitions[acqInd].customLabels += runStr
-
