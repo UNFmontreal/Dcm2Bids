@@ -162,31 +162,49 @@ class SidecarPairing(object):
         def compare(name, pattern):
             if self.searchMethod == "re":
                 return bool(re.search(pattern, str(name)))
-
             else:
                 return fnmatch(str(name), str(pattern))
 
+        def compare_list(name, pattern):
+            try:
+                subResult = [
+                        len(name)==len(pattern),
+                        isinstance(pattern, list),
+                        ]
+                for subName, subPattern in zip(name, pattern):
+                    subResult.append(compare(subName, subPattern))
+            except:
+                subResult = [False]
+            return all(subResult)
+
+        def compare_complex(name, pattern):
+            sub_result = []
+            compare_type = None
+            try:
+                for compare_type, patterns in pattern.items():
+                    for sub_pattern in patterns:
+                        if isinstance(name, list):
+                            sub_result.append(compare_list(name,sub_pattern))
+                        else:
+                            sub_result.append(compare(name, sub_pattern))
+            except:
+                sub_result = [False]
+            if compare_type == "any":
+                return any(sub_result)
+            elif compare_type == "all":
+                return all(sub_result)
+            else:
+                return False
 
         result = []
         for tag, pattern in iteritems(criteria):
             name = data.get(tag)
-
-            if isinstance(name, list):
-                try:
-                    subResult = [
-                            len(name)==len(pattern),
-                            isinstance(pattern, list),
-                            ]
-                    for subName, subPattern in zip(name, pattern):
-                        subResult.append(compare(subName, subPattern))
-                except:
-                    subResult = [False]
-
-                result.append(all(subResult))
-
+            if isinstance(pattern, dict):
+                result.append(compare_complex(name, pattern))
+            elif isinstance(name, list):
+                result.append(compare_list(name, pattern))
             else:
                 result.append(compare(name, pattern))
-
         return all(result)
 
 
