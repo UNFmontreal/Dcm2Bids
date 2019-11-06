@@ -24,6 +24,7 @@ class DEFAULT(object):
     forceDcm2niix = False
     defaceTpl = None
     logLevel = "WARNING"
+    fixIntendedFor = False
 
     #dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
@@ -107,4 +108,3 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running {}".format(commandLine))
     return check_output(shlex.split(commandLine))
-
