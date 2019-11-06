@@ -238,22 +238,14 @@ class Acquisition(object):
                 session = self.participant.session
                 dataType = intendedDesc["dataType"]
 
-                niiBase = self.participant.prefix
-                niiBase += self.prepend(intendedDesc.get("customLabels", ""))
-                if intendedDesc.get("__num_runs",0) < 2:
-                    niiFile = niiBase + self.prepend(intendedDesc["modalityLabel"])
-                    niiFile += ".nii.gz"
+                niiFile = self.participant.prefix
+                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
+                niiFile += self.prepend(intendedDesc["modalityLabel"])
+                niiFile += ".nii.gz"
 
-                    intendedValue.append(
-                            opj(session, dataType, niiFile).replace("\\", "/"))
-                else:
-                    for n_run in range(0,intendedDesc.get("__num_runs")):
-                        niiFile = niiBase + DEFAULT.runTpl.format(n_run + 1)
-                        niiFile += self.prepend(intendedDesc["modalityLabel"])
-                        niiFile += ".nii.gz"
+                intendedValue.append(
+                        opj(session, dataType, niiFile).replace("\\", "/"))
 
-                        intendedValue.append(
-                                opj(session, dataType, niiFile).replace("\\", "/"))
             if len(intendedValue) == 1:
                 data["IntendedFor"] = intendedValue[0]
             else:

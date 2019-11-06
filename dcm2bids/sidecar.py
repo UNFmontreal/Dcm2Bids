@@ -7,10 +7,9 @@ import os
 import re
 from collections import defaultdict, OrderedDict
 from fnmatch import fnmatch
-from fnmatch import filter as fnfilter
 from future.utils import iteritems
 from .structure import Acquisition
-from .utils import DEFAULT, load_json, save_json, splitext_
+from .utils import DEFAULT, load_json, splitext_
 
 
 class Sidecar(object):
@@ -146,7 +145,6 @@ class SidecarPairing(object):
             criteria = description.get("criteria", None)
             if criteria and self.isLink(sidecar.data, criteria):
                 graph[sidecar].append(description)
-                description['__num_runs'] = description.get('__num_runs', 0) + 1
 
         self.graph = graph
         return graph
@@ -281,26 +279,3 @@ class SidecarPairing(object):
                 runStr = DEFAULT.runTpl.format(runNum+1)
                 self.acquisitions[acqInd].customLabels += runStr
 
-    def fix_intended_for(self, bids_dir):
-        tmp, base = os.path.split(bids_dir)
-        if base[0:4] == "ses-":
-            bids_dir = tmp
-        self.logger.info("Fix Intended For:" + bids_dir)
-        for root, dirs, files in os.walk(bids_dir):
-            for fn in fnfilter(files, '*.json'):
-                json_fn = os.path.join(root,fn)
-                data = load_json(json_fn)
-                intended_for = data.get('IntendedFor')
-                if intended_for:
-                    if not isinstance(intended_for,list):
-                        intended_for = [intended_for]
-                    data['_IntendedFor'] = intended_for[:]
-                    for intended_file in intended_for:
-                        if os.path.exists(os.path.join(bids_dir,intended_file)):
-                            continue
-                        self.logger.info('remove missing IntendedFor: ' + intended_file)
-                        intended_for.remove(intended_file)
-                    data['IntendedFor'] = intended_for
-                    if data['_IntendedFor'] != data['IntendedFor']:
-                        self.logger.info('write updated json: ' + json_fn)
-                        save_json(json_fn, data)

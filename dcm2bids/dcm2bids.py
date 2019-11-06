@@ -16,7 +16,7 @@ from .utils import (
         load_json,
         save_json,
         run_shell_command,
-        splitext_
+        splitext_,
         )
 from .version import __version__, check_latest, dcm2niix_version
 
@@ -34,14 +34,12 @@ class Dcm2bids(object):
         forceDcm2niix (boolean): Forces a cleaning of a previous execution of
                                  dcm2niix
         log_level (str): logging level
-        fixIntendedFor (boolean): Fix intendedfor field in BIDS sidecar
     """
 
     def __init__(
             self, dicom_dir, participant, config, output_dir=DEFAULT.outputDir,
             session=DEFAULT.session, clobber=DEFAULT.clobber,
             forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel,
-            fixIntendedFor=DEFAULT.fixIntendedFor,
             **_):
         self._dicomDirs = []
 
@@ -52,7 +50,6 @@ class Dcm2bids(object):
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
         self.logLevel = log_level
-        self.fixIntendedFor = fixIntendedFor
 
         #logging setup
         self.set_logger()
@@ -120,11 +117,6 @@ class Dcm2bids(object):
         self.logger.info("moving acquisitions into BIDS folder")
         for acq in parser.acquisitions:
             self.move(acq)
-
-        if self.fixIntendedFor:
-            parser.fix_intended_for(os.path.join(self.bidsDir,
-                                                 self.participant.directory))
-
 
         check_latest()
         check_latest("dcm2niix")
