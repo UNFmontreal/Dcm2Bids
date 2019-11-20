@@ -300,10 +300,11 @@ class SidecarPairing(object):
                     dcmTagLabel = '_'.join(map(str, dcmTagLabel.groups()))
 
 
-            if "customLabels" in desc.keys():
-                descWithTask["customLabels"] = dcmTagLabel + '_' + descWithTask["customLabels"]
-            else:
-                descWithTask["customLabels"] = dcmTagLabel
+            if dcmTagLabel:
+                if "customLabels" in desc.keys():
+                    descWithTask["customLabels"] = dcmTagLabel + '_' + descWithTask["customLabels"]
+                else:
+                    descWithTask["customLabels"] = dcmTagLabel
 
         return descWithTask
 
