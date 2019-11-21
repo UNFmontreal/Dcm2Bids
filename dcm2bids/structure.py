@@ -244,7 +244,11 @@ class Acquisition(object):
             if len(intendedValue) == 1:
                 data["IntendedFor"] = intendedValue[0]
             elif len(intendedValue) > 1:
-                data["IntendedFor"] = intendedValue
+                res = [i for i in intendedValue if self.customLabels in i]
+                if res:
+                    data["IntendedFor"] = res
+                else:
+                    data["IntendedFor"] = intendedValue
 
         #sidecarChanges
         for key, value in iteritems(self.sidecarChanges):
