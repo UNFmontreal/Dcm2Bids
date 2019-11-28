@@ -63,6 +63,6 @@ venv.bak/
 /site
 
 # dcm2bids
-dcm2bids/tests/data/*
-!dcm2bids/tests/data/config_test.json
-!dcm2bids/tests/data/sidecars/*
+tests/data/*
+!tests/data/config_test.json
+!tests/data/sidecars/*
