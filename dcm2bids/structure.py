@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""k"""
 
-from collections import OrderedDict
+
 from future.utils import iteritems
 from os.path import join as opj
 from .utils import DEFAULT
@@ -23,7 +24,6 @@ class Participant(object):
         self.name = name
         self.session = session
 
-
     @property
     def name(self):
         """
@@ -31,7 +31,6 @@ class Participant(object):
             A string 'sub-<subject_label>'
         """
         return self._name
-
 
     @name.setter
     def name(self, name):
@@ -42,7 +41,6 @@ class Participant(object):
         else:
             self._name = "sub-" + name
 
-
     @property
     def session(self):
         """
@@ -50,7 +48,6 @@ class Participant(object):
             A string 'ses-<session_label>'
         """
         return self._session
-
 
     @session.setter
     def session(self, session):
@@ -63,7 +60,6 @@ class Participant(object):
 
         else:
             self._session = "ses-" + session
-
 
     @property
     def directory(self):
@@ -78,7 +74,6 @@ class Participant(object):
         else:
             return self.name
 
-
     @property
     def prefix(self):
         """ The prefix to build filenames
@@ -92,7 +87,6 @@ class Participant(object):
         else:
             return self.name
 
-
     def hasSession(self):
         """ Check if a session is set
 
@@ -100,7 +94,6 @@ class Participant(object):
             Boolean
         """
         return not self.session.strip() == DEFAULT.session
-
 
 
 class Acquisition(object):
@@ -115,9 +108,18 @@ class Acquisition(object):
         srcSidecar (Sidecar): Optional sidecar object
     """
 
-    def __init__(self, participant, dataType, modalityLabel, customLabels="",
-            srcSidecar=None, sidecarChanges={},
-            intendedFor=None, IntendedFor=None, **kwargs):
+    def __init__(
+        self,
+        participant,
+        dataType,
+        modalityLabel,
+        customLabels="",
+        srcSidecar=None,
+        sidecarChanges={},
+        intendedFor=None,
+        IntendedFor=None,
+        **kwargs
+    ):
         self._modalityLabel = ""
         self._customLabels = ""
         self._intendedFor = None
@@ -133,14 +135,12 @@ class Acquisition(object):
         else:
             self.intendedFor = intendedFor
 
-
     def __eq__(self, other):
         return (
-                self.dataType == other.dataType
-                and self.participant.prefix == other.participant.prefix
-                and self.suffix == other.suffix
-                )
-
+            self.dataType == other.dataType
+            and self.participant.prefix == other.participant.prefix
+            and self.suffix == other.suffix
+        )
 
     @property
     def modalityLabel(self):
@@ -150,12 +150,10 @@ class Acquisition(object):
         """
         return self._modalityLabel
 
-
     @modalityLabel.setter
     def modalityLabel(self, modalityLabel):
         """ Prepend '_' if necessary"""
         self._modalityLabel = self.prepend(modalityLabel)
-
 
     @property
     def customLabels(self):
@@ -165,12 +163,10 @@ class Acquisition(object):
         """
         return self._customLabels
 
-
     @customLabels.setter
     def customLabels(self, customLabels):
         """ Prepend '_' if necessary"""
         self._customLabels = self.prepend(customLabels)
-
 
     @property
     def suffix(self):
@@ -184,7 +180,6 @@ class Acquisition(object):
         else:
             return self.customLabels + self.modalityLabel
 
-
     @property
     def srcRoot(self):
         """
@@ -196,7 +191,6 @@ class Acquisition(object):
         else:
             return None
 
-
     @property
     def dstRoot(self):
         """
@@ -204,24 +198,21 @@ class Acquisition(object):
             The destination root inside the BIDS structure
         """
         return opj(
-                self.participant.directory,
-                self.dataType,
-                self.participant.prefix + self.suffix
-                )
-
+            self.participant.directory,
+            self.dataType,
+            self.participant.prefix + self.suffix,
+        )
 
     @property
     def intendedFor(self):
         return self._intendedFor
-
 
     @intendedFor.setter
     def intendedFor(self, value):
         if isinstance(value, list):
             self._intendedFor = value
         else:
-            self._intendedFor = [value,]
-
+            self._intendedFor = [value]
 
     def dstSidecarData(self, descriptions):
         """
@@ -229,7 +220,7 @@ class Acquisition(object):
         data = self.srcSidecar.origData
         data["Dcm2bidsVersion"] = __version__
 
-        #intendedFor key
+        # intendedFor key
         if self.intendedFor != [None]:
             intendedValue = []
             for index in self.intendedFor:
@@ -243,20 +234,18 @@ class Acquisition(object):
                 niiFile += self.prepend(intendedDesc["modalityLabel"])
                 niiFile += ".nii.gz"
 
-                intendedValue.append(
-                        opj(session, dataType, niiFile).replace("\\", "/"))
+                intendedValue.append(opj(session, dataType, niiFile).replace("\\", "/"))
 
             if len(intendedValue) == 1:
                 data["IntendedFor"] = intendedValue[0]
             else:
                 data["IntendedFor"] = intendedValue
 
-        #sidecarChanges
+        # sidecarChanges
         for key, value in iteritems(self.sidecarChanges):
             data[key] = value
 
         return data
-
 
     @staticmethod
     def prepend(value, char="_"):

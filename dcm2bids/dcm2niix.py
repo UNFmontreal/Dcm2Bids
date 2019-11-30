@@ -21,8 +21,9 @@ class Dcm2niix(object):
         sidecars (list): A list of sidecar path created by dcm2niix
     """
 
-    def __init__(self, dicomDirs, bidsDir, participant=None,
-            options=DEFAULT.dcm2niixOptions):
+    def __init__(
+        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
+    ):
         self.logger = logging.getLogger(__name__)
 
         self.sidecarsFiles = []
@@ -31,7 +32,6 @@ class Dcm2niix(object):
         self.bidsDir = bidsDir
         self.participant = participant
         self.options = options
-
 
     @property
     def outputDir(self):
@@ -44,7 +44,6 @@ class Dcm2niix(object):
         else:
             tmpDir = DEFAULT.helperDir
         return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
-
 
     def run(self, force=False):
         """ Run dcm2niix if necessary
@@ -65,13 +64,12 @@ class Dcm2niix(object):
             self.logger.warning("Previous dcm2niix directory output found:")
             self.logger.warning(self.outputDir)
             self.logger.warning("'force' argument is set to True")
-            self.logger.warning(
-                    "Cleaning the previous directory and running dcm2niix")
+            self.logger.warning("Cleaning the previous directory and running dcm2niix")
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            #os.makedirs(self.outputDir, exist_ok=True)
-            #python2 compatibility
+            # os.makedirs(self.outputDir, exist_ok=True)
+            # python2 compatibility
             if not os.path.exists(self.outputDir):
                 os.makedirs(self.outputDir)
 
@@ -83,8 +81,8 @@ class Dcm2niix(object):
             self.logger.warning("Use --forceDcm2niix to rerun dcm2niix")
 
         else:
-            #os.makedirs(self.outputDir, exist_ok=True)
-            #python2 compatibility
+            # os.makedirs(self.outputDir, exist_ok=True)
+            # python2 compatibility
             if not os.path.exists(self.outputDir):
                 os.makedirs(self.outputDir)
 
@@ -93,7 +91,6 @@ class Dcm2niix(object):
         self.sidecarFiles = glob(os.path.join(self.outputDir, "*.json"))
 
         return os.EX_OK
-
 
     def execute(self):
         """ Execute dcm2niix for each directory in dicomDirs
@@ -110,4 +107,3 @@ class Dcm2niix(object):
 
             self.logger.debug("\n" + output)
             self.logger.info("Check log file for dcm2niix output")
-

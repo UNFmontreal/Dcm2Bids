@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""This module take care of the versioning"""
 
-#dcm2bids version
+# dcm2bids version
 __version__ = "2.1.4"
 
 
@@ -15,9 +16,11 @@ from subprocess import check_output
 try:
     from shutil import which
 except:
-    #python2 compatibility
+    # python2 compatibility
     from distutils.spawn import find_executable as which
 
+
+REQUIRED_MODULE_METADATA = (("future", {"min_version": "0.17.1"}),)
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +41,7 @@ def internet(host="8.8.8.8", port=53, timeout=3):
     """
     try:
         socket.setdefaulttimeout(timeout)
-        socket.socket(
-                socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
         return True
 
     except:
@@ -71,19 +73,24 @@ def check_github_latest(githubRepo):
         output = check_output(shlex.split("curl --silent " + url))
     except:
         logger.debug(
-                "Checking latest version of {} was not possible".format(
-                    githubRepo), exc_info=True)
+            "Checking latest version of {} was not possible".format(githubRepo),
+            exc_info=True,
+        )
         return
 
-    #The output should have this format
-    #<html><body>You are being <a href="https://github.com/{gitRepo}/releases/tag/{version}">redirected</a>.</body></html>
+    # The output should have this format
+    # <html><body>You are being <a href="https://github.com/{gitRepo}/releases/tag/{version}">redirected</a>.</body></html>
     try:
-        return output.decode().split(
-                "{}/releases/tag/".format(githubRepo))[1].split('"')[0]
+        return (
+            output.decode()
+            .split("{}/releases/tag/".format(githubRepo))[1]
+            .split('"')[0]
+        )
     except:
         logger.debug(
-                "Checking latest version of {} was not possible".format(
-                    githubRepo), exc_info=True)
+            "Checking latest version of {} was not possible".format(githubRepo),
+            exc_info=True,
+        )
         return
 
 
@@ -98,17 +105,17 @@ def check_latest(name="dcm2bids"):
         None
     """
     data = {
-            "dcm2bids": {
-                "repo": "cbedetti/Dcm2Bids",
-                "host": "https://github.com",
-                "current": __version__,
-                },
-            "dcm2niix": {
-                "repo": "rordenlab/dcm2niix",
-                "host": "https://github.com",
-                "current": dcm2niix_version,
-                },
-            }
+        "dcm2bids": {
+            "repo": "cbedetti/Dcm2Bids",
+            "host": "https://github.com",
+            "current": __version__,
+        },
+        "dcm2niix": {
+            "repo": "rordenlab/dcm2niix",
+            "host": "https://github.com",
+            "current": dcm2niix_version,
+        },
+    }
 
     if internet() and is_tool("curl"):
         host = data.get(name)["host"]
@@ -118,14 +125,12 @@ def check_latest(name="dcm2bids"):
             latest = check_github_latest(repo)
 
         else:
-            #Not implemented
+            # Not implemented
             return
 
     else:
-        logger.debug(
-                "Checking latest version of {} was not possible".format(name))
-        logger.debug("internet: {}, curl: {}".format(
-            internet(), is_tool("curl")))
+        logger.debug("Checking latest version of {} was not possible".format(name))
+        logger.debug("internet: {}, curl: {}".format(internet(), is_tool("curl")))
         return
 
     current = data.get(name)["current"]
@@ -168,7 +173,7 @@ def dcm2niix_version():
     for line in lines:
         try:
             splits = line.split()
-            return splits[splits.index('version')+1]
+            return splits[splits.index("version") + 1]
         except:
             continue
 

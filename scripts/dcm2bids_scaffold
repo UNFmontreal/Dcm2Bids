@@ -18,11 +18,14 @@ def get_arguments():
             """,
             epilog="""
             Documentation at https://github.com/cbedetti/Dcm2Bids
-            """)
+            """,
+    )
 
     parser.add_argument(
-            "-o", "--output_dir",
-            required=False, default=os.getcwd(),
+        "-o",
+        "--output_dir",
+        required=False,
+        default=os.getcwd(),
             help="Output BIDS directory, Default: current directory",
             )
 
@@ -68,12 +71,9 @@ TEXT_FILES = {
         "",
         "1.0.0 " + datetime.date.today().strftime("%Y-%m-%d"),
         "",
-        " - Initialised study directory"
+        " - Initialised study directory",
         ],
-    "participants.tsv": [
-        "participant_id\teducation\tbmi",
-        "sub-01\tn/a\tn/a",
-        ],
+    "participants.tsv": ["participant_id\teducation\tbmi", "sub-01\tn/a\tn/a"],
     }
 
 
@@ -82,8 +82,8 @@ def main():
     args = get_arguments()
 
     for _ in ["code", "derivatives", "sourcedata"]:
-        #os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
-        #python2 compatibility
+        # os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
+        # python2 compatibility
         if not os.path.exists(os.path.join(args.output_dir, _)):
             os.makedirs(os.path.join(args.output_dir, _))
 
@@ -100,5 +100,5 @@ def main():
     return os.EX_OK
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

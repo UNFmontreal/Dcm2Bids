@@ -10,7 +10,7 @@ from glob import glob
 try:
     from tempfile import TemporaryDirectory
 except:
-    #python2 compatibility
+    # python2 compatibility
     from backports.tempfile import TemporaryDirectory
 
 
@@ -21,24 +21,23 @@ def test_dcm2niix_run():
     dicomDir = os.path.join(TEST_DATA_DIR, "sourcedata", "sub-01")
     tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
 
-    #tmpDir = TemporaryDirectory(dir=tmpBase)
+    # tmpDir = TemporaryDirectory(dir=tmpBase)
     tmpDir = TemporaryDirectory()
 
     app = Dcm2niix([dicomDir], tmpDir.name)
     app.run()
 
-    helperDir = os.path.join(
-            tmpDir.name, DEFAULT.tmpDirName, DEFAULT.helperDir, "*")
+    helperDir = os.path.join(tmpDir.name, DEFAULT.tmpDirName, DEFAULT.helperDir, "*")
     ls = sorted(glob(helperDir))
     firstMtime = [os.stat(_).st_mtime for _ in ls]
-    assert 'localizer_20100603125600' in ls[0]
+    assert "localizer_20100603125600" in ls[0]
 
-    #files should not be change after a rerun
+    # files should not be change after a rerun
     app.run()
     secondMtime = [os.stat(_).st_mtime for _ in ls]
     assert firstMtime == secondMtime
 
-    #files should be change after a forced rerun
+    # files should be change after a forced rerun
     app.run(force=True)
     thirdMtime = [os.stat(_).st_mtime for _ in ls]
     assert firstMtime != thirdMtime
