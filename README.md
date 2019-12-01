@@ -1,10 +1,14 @@
-[![PyPI version](https://badge.fury.io/py/dcm2bids.svg)](https://pypi.org/project/dcm2bids) [![Documentation](https://img.shields.io/badge/documentation-dcm2bids-succes.svg)](https://cbedetti.github.io/Dcm2Bids) [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg)](https://zenodo.org/badge/latestdoi/59581295)
-
-<!--
-[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/544)
--->
-
 # dcm2bids
+
+<p>
+<a href="https://pypi.org/project/dcm2bids"><img alt="PyPI version" src="https://badge.fury.io/py/dcm2bids.svg"></a>
+<a href="https://cbedetti.github.io/Dcm2Bids"><img alt="Documentation" src="https://img.shields.io/badge/documentation-dcm2bids-succes.svg"></a>
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+<a href="https://zenodo.org/badge/latestdoi/59581295"><img alt="DOI" src="https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg"></a>
+<!--
+<a href="https://singularity-hub.org/collections/544"><img alt="Singularity Hub" src="https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg"></a>
+-->
+</p>
 
 `dcm2bids` reorganises NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
