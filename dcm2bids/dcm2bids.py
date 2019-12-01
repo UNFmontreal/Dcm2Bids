@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""dcm2bids module"""
 
+import argparse
 import logging
 import os
 import platform
@@ -174,3 +176,106 @@ class Dcm2bids(object):
             # just move
             else:
                 os.rename(srcFile, dstFile)
+
+
+def get_arguments():
+    """Load arguments for main"""
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description="""
+Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
+dcm2bids {}""".format(
+            __version__
+        ),
+        epilog="""
+            Documentation at https://github.com/cbedetti/Dcm2Bids
+            """,
+    )
+
+    parser.add_argument(
+        "-d", "--dicom_dir", required=True, nargs="+", help="DICOM directory(ies)"
+    )
+
+    parser.add_argument("-p", "--participant", required=True, help="Participant ID")
+
+    parser.add_argument(
+        "-s", "--session", required=False, default=DEFAULT.cliSession, help="Session ID"
+    )
+
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=True,
+        help="JSON configuration file (see example/config.json)",
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output_dir",
+        required=False,
+        default=DEFAULT.cliOutputDir,
+        help="Output BIDS directory, Default: current directory ({})".format(
+            DEFAULT.cliOutputDir
+        ),
+    )
+
+    parser.add_argument(
+        "--forceDcm2niix",
+        required=False,
+        action="store_true",
+        help="Overwrite previous temporary dcm2niix output if it exists",
+    )
+
+    parser.add_argument(
+        "--clobber",
+        required=False,
+        action="store_true",
+        help="Overwrite output if it exists",
+    )
+
+    parser.add_argument(
+        "-l",
+        "--log_level",
+        required=False,
+        default=DEFAULT.cliLogLevel,
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        help="Set logging level",
+    )
+
+    parser.add_argument(
+        "-a",
+        "--anonymizer",
+        required=False,
+        action="store_true",
+        help="This option no longer exists from the script in this release\
+                    See:https://github.com/cbedetti/Dcm2Bids/blob/master/README.md#defaceTpl",
+    )
+
+    args = parser.parse_args()
+    return args
+
+def main():
+    """Let's go"""
+    args = get_arguments()
+
+    if args.anonymizer:
+        print(
+            """
+        The anonymizer option no longer exists from the script in this release
+        It is still possible to deface the anatomical nifti images
+        Please add "defaceTpl" key in the congifuration file
+
+        For example, if you use the last version of pydeface, add:
+        "defaceTpl": "pydeface --outfile {dstFile} {srcFile}"
+        It is a template string and dcm2bids will replace {srcFile} and {dstFile}
+        by the source file (input) and the destination file (output)
+        """
+        )
+        return 1
+
+    app = Dcm2bids(**vars(args))
+    return app.run()
+
+
+if __name__ == "__main__":
+    sys.exit(main())

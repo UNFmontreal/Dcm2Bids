@@ -1,16 +1,17 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""scaffold module"""
 
 import argparse
 import datetime
 import os
 import sys
-from dcm2bids.utils import save_json, write_txt
 from future.utils import iteritems
+from .utils import save_json, write_txt
 
 
 def get_arguments():
+    """Load arguments for main"""
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description="""
@@ -26,8 +27,8 @@ def get_arguments():
         "--output_dir",
         required=False,
         default=os.getcwd(),
-            help="Output BIDS directory, Default: current directory",
-            )
+        help="Output BIDS directory, Default: current directory",
+        )
 
     args = parser.parse_args()
     return args

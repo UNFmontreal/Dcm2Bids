@@ -1,15 +1,16 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""helper module"""
 
 import argparse
 import os
 import sys
-from dcm2bids.dcm2niix import Dcm2niix
-from dcm2bids.utils import DEFAULT
+from .dcm2niix import Dcm2niix
+from .utils import DEFAULT
 
 
 def get_arguments():
+    """Load arguments for main"""
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description="",
