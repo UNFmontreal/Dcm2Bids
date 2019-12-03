@@ -1,8 +1,6 @@
----
-title: Usage
----
+# Usage
 
-# Introduction
+## Introduction
 
 dcm2bids converts one session at a time. A session is all the acquisitions between the entry and exit of the participant in the scanner.
 
@@ -14,7 +12,7 @@ dcm2bids configuration file uses also the `JSON` format. One example is provided
 
 It is recommended to use an editor with syntax highlighting to build a correct JSON file. Here is an [online][json-editor] one.
 
-# Usage
+## CLI
 
 How to launch dcm2bids when you have build your configuration file ? First `cd` in your BIDS directory.
 
@@ -28,7 +26,7 @@ dcm2bids creates log files inside `tmp_dcm2bids/log`
 
 See `dcm2bids -h` for more informations
 
-# Output
+## Output
 
 dcm2bids creates a `sub-<PARTICIPANT_ID>` directory in the output directory (by default the folder where the script is launched).
 
@@ -38,7 +36,7 @@ If a description matches several sidecars, dcm2bids will add automatically the c
 
 Sidecars with no or more than one matching descriptions are kept in `tmp_dcm2bids` directory. Users can review these mismatches to change the configuration file accordingly.
 
-# Tools
+## Tools
 
 - Helper
 

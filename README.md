@@ -17,25 +17,21 @@ Before using this software, learn more about BIDS:
 - read the BIDS [specifications][bids-spec] and the [paper][bids-nature]
 - some dataset [examples][bids-examples]
 
-## Install
-
-`pip install dcm2bids`
-
-or
-
-`pip install --user dcm2bids`
-
 ## Dependencies
 
 - [dcm2niix][dcm2niix-github] to convert DICOM to NIfTI. **You need to install it**
     - [install instructions][dcm2niix-install]
     - [Recent release][dcm2niix-release]
 
+## Install
+
+`pip install dcm2bids`
+
 ## Upgrading
 
 `pip install --upgrade dcm2bids`
 
-# TL;DR
+## TL;DR
 
 Follow the [tutorial](https://cbedetti.github.io/Dcm2Bids/tutorial)
 
