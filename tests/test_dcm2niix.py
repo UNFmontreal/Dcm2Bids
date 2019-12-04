@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
 
-import os
-import pytest
 from glob import glob
 from tempfile import TemporaryDirectory
+import os
+import pytest
 from dcm2bids.dcm2niix import Dcm2niix
 from dcm2bids.utils import DEFAULT
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+
 
 @pytest.mark.skip(reason="Too long for now")
 def test_dcm2niix_run():
@@ -36,4 +37,5 @@ def test_dcm2niix_run():
     thirdMtime = [os.stat(_).st_mtime for _ in ls]
     assert firstMtime != thirdMtime
 
-    tmpDir.cleanup()
+    if os.name != 'nt':
+        tmpDir.cleanup()

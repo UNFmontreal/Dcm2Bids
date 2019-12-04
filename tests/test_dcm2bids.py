@@ -69,4 +69,5 @@ def test_dcm2bids():
     fmapMtimeRerun = os.stat(fmapFile).st_mtime
     assert fmapMtime == fmapMtimeRerun
 
-    bidsDir.cleanup()
+    if os.name != 'nt':
+        bidsDir.cleanup()
