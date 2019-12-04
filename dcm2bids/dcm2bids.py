@@ -96,7 +96,9 @@ class Dcm2bids(object):
         logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
         logFile = os.path.join(
             logDir,
-            "{}_{}.log".format(self.participant.prefix, datetime.now().isoformat()),
+            "{}_{}.log".format(
+                self.participant.prefix, datetime.now().isoformat().replace(":", "")
+            ),
         )
 
         # os.makedirs(logdir, exist_ok=True)
