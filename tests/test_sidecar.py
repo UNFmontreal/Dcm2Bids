@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
+from glob import glob
 import os
 import pytest
 from dcm2bids.sidecar import Sidecar
-from glob import glob
 
 
 @pytest.fixture

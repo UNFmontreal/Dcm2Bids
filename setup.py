@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # type: ignore
+# pylint: disable=exec-used
 
 """Setup file for the dcm2bids package"""
 
-import glob
 import os
 from setuptools import setup
 
@@ -28,6 +28,14 @@ def install_requires():
 _VERSION = load_version()
 DISTNAME = "dcm2bids"
 VERSION = _VERSION["__version__"]
+ENTRY_POINTS = {
+    "console_scripts": [
+        "dcm2bids = dcm2bids.dcm2bids:main",
+        "dcm2bids_helper = dcm2bids.helper:main",
+        "dcm2bids_scaffold = dcm2bids.scaffold:main",
+    ],
+    # "configurations": [],
+}
 AUTHOR = "Christophe Bedetti"
 AUTHOR_EMAIL = "christophe.bedetti@umontreal.ca"
 DESCRIPTION = (
@@ -62,15 +70,7 @@ if __name__ == "__main__":
         name=DISTNAME,
         version=VERSION,
         packages=[DISTNAME],
-        scripts=glob.glob("scripts/dcm2bids*"),
-        entry_points={
-            "console_scripts": [
-                "dcm2bids = dcm2bids.dcm2bids:main",
-                "dcm2bids_helper = dcm2bids.helper:main",
-                "dcm2bids_scaffold = dcm2bids.scaffold:main",
-            ],
-            # "configurations": [],
-        },
+        entry_points=ENTRY_POINTS,
         python_requires=">=3.5",
         install_requires=install_requires(),
         package_data={"": ["README.md", "LICENSE.txt"]},

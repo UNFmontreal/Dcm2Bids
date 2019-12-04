@@ -3,8 +3,8 @@
 """k"""
 
 
-from future.utils import iteritems
 from os.path import join as opj
+from future.utils import iteritems
 from .utils import DEFAULT
 from .version import __version__
 
@@ -93,7 +93,7 @@ class Participant(object):
         Returns:
             Boolean
         """
-        return not self.session.strip() == DEFAULT.session
+        return self.session.strip() != DEFAULT.session
 
 
 class Acquisition(object):
@@ -115,7 +115,7 @@ class Acquisition(object):
         modalityLabel,
         customLabels="",
         srcSidecar=None,
-        sidecarChanges={},
+        sidecarChanges=None,
         intendedFor=None,
         IntendedFor=None,
         **kwargs
@@ -129,7 +129,10 @@ class Acquisition(object):
         self.modalityLabel = modalityLabel
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
-        self.sidecarChanges = sidecarChanges
+        if sidecarChanges is None:
+            self.sidecarChanges = {}
+        else:
+            self.sidecarChanges = sidecarChanges
         if intendedFor is None:
             self.intendedFor = IntendedFor
         else:

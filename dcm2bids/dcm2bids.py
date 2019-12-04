@@ -58,25 +58,38 @@ class Dcm2bids(object):
         self.set_logger()
 
         self.logger.info("--- dcm2bids start ---")
-        self.logger.info("OS:version: {}".format(platform.platform()))
-        self.logger.info("python:version: {}".format(sys.version.replace("\n", "")))
-        self.logger.info("dcm2bids:version: {}".format(__version__))
-        self.logger.info("dcm2niix:version: {}".format(dcm2niix_version()))
-        self.logger.info("participant: {}".format(self.participant.name))
-        self.logger.info("session: {}".format(self.participant.session))
-        self.logger.info("config: {}".format(os.path.realpath(config)))
-        self.logger.info("BIDS directory: {}".format(os.path.realpath(output_dir)))
+        self.logger.info("OS:version: %s", platform.platform())
+        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
+        self.logger.info("dcm2bids:version: %s", __version__)
+        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
+        self.logger.info("participant: %s", self.participant.name)
+        self.logger.info("session: %s", self.participant.session)
+        self.logger.info("config: %s", os.path.realpath(config))
+        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
 
     @property
     def dicomDirs(self):
+        """List of DICOMs directories"""
         return self._dicomDirs
 
     @dicomDirs.setter
     def dicomDirs(self, value):
         if isinstance(value, list):
-            self._dicomDirs = value
+            dicom_dirs = value
         else:
-            self._dicomDirs = [value]
+            dicom_dirs = [value]
+
+        dir_not_found = []
+        for _dir in dicom_dirs:
+            if os.path.isdir(_dir):
+                pass
+            else:
+                dir_not_found.append(_dir)
+
+        if dir_not_found:
+            raise FileNotFoundError(dir_not_found)
+
+        self._dicomDirs = dicom_dirs
 
     def set_logger(self):
         """ Set a basic logger"""
@@ -95,8 +108,7 @@ class Dcm2bids(object):
         self.logger = logging.getLogger(__name__)
 
     def run(self):
-        """
-        """
+        """Run dcm2bids"""
         dcm2niix = Dcm2niix(
             self.dicomDirs,
             self.bidsDir,
@@ -131,10 +143,9 @@ class Dcm2bids(object):
         return os.EX_OK
 
     def move(self, acquisition):
-        """
-        """
+        """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
-            root, ext = splitext_(srcFile)
+            _, ext = splitext_(srcFile)
             dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
 
             # os.makedirs(os.path.dirname(dstFile), exist_ok=True)
@@ -144,7 +155,7 @@ class Dcm2bids(object):
 
             # checking if destination file exists
             if os.path.isfile(dstFile):
-                self.logger.info("'{}' already exists".format(dstFile))
+                self.logger.info("'%s' already exists", dstFile)
 
                 if self.clobber:
                     self.logger.info("Overwriting because of 'clobber' option")
@@ -161,7 +172,7 @@ class Dcm2bids(object):
             ):
                 try:
                     os.remove(dstFile)
-                except:
+                except FileNotFoundError:
                     pass
                 defaceTpl = self.config.get("defaceTpl")
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
@@ -247,12 +258,14 @@ dcm2bids {}""".format(
         "--anonymizer",
         required=False,
         action="store_true",
-        help="This option no longer exists from the script in this release\
-                    See:https://github.com/cbedetti/Dcm2Bids/blob/master/README.md#defaceTpl",
+        help="""
+        This option no longer exists from the script in this release.
+        See:https://github.com/cbedetti/Dcm2Bids/blob/master/README.md#defaceTpl""",
     )
 
     args = parser.parse_args()
     return args
+
 
 def main():
     """Let's go"""

@@ -9,15 +9,9 @@ __version__ = "2.1.4"
 import logging
 import shlex
 import socket
-
 from distutils.version import LooseVersion
 from subprocess import check_output
-
-try:
-    from shutil import which
-except:
-    # python2 compatibility
-    from distutils.spawn import find_executable as which
+from shutil import which
 
 
 REQUIRED_MODULE_METADATA = (("future", {"min_version": "0.17.1"}),)
@@ -73,7 +67,7 @@ def check_github_latest(githubRepo):
         output = check_output(shlex.split("curl --silent " + url))
     except:
         logger.debug(
-            "Checking latest version of {} was not possible".format(githubRepo),
+            "Checking latest version of %s was not possible", githubRepo,
             exc_info=True,
         )
         return
@@ -88,7 +82,7 @@ def check_github_latest(githubRepo):
         )
     except:
         logger.debug(
-            "Checking latest version of {} was not possible".format(githubRepo),
+            "Checking latest version of %s was not possible", githubRepo,
             exc_info=True,
         )
         return
@@ -129,8 +123,8 @@ def check_latest(name="dcm2bids"):
             return
 
     else:
-        logger.debug("Checking latest version of {} was not possible".format(name))
-        logger.debug("internet: {}, curl: {}".format(internet(), is_tool("curl")))
+        logger.debug("Checking latest version of %s was not possible", name)
+        logger.debug("internet: %s, curl: %s", internet(), is_tool("curl"))
         return
 
     current = data.get(name)["current"]
@@ -143,9 +137,9 @@ def check_latest(name="dcm2bids"):
         news = None
 
     if news:
-        logger.warning("Your using {} version {}".format(name, current))
-        logger.warning("A new version exists : {}".format(latest))
-        logger.warning("Check {}/{}".format(host, repo))
+        logger.warning("Your using %s version %s", name, current)
+        logger.warning("A new version exists : %s", latest)
+        logger.warning("Check %s/%s", host, repo)
 
 
 def dcm2niix_version():

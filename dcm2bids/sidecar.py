@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+"""sidecars classes"""
 
 import itertools
 import logging
@@ -111,12 +112,12 @@ class SidecarPairing(object):
 
         else:
             self._searchMethod = DEFAULT.searchMethod
-            self.logger.warning("'{}' is not a search method implemented".format(value))
+            self.logger.warning("'%s' is not a search method implemented", value)
             self.logger.warning(
-                "Falling back to default: {}".format(DEFAULT.searchMethod)
+                "Falling back to default: %s", DEFAULT.searchMethod
             )
             self.logger.warning(
-                "Search methods implemented: {}".format(DEFAULT.searchMethodChoices)
+                "Search methods implemented: %s", DEFAULT.searchMethodChoices
             )
 
     def build_graph(self):
@@ -195,18 +196,18 @@ class SidecarPairing(object):
                 acq = Acquisition(participant, srcSidecar=sidecar, **desc)
                 acquisitions.append(acq)
 
-                self.logger.info("{}  <-  {}".format(acq.suffix, sidecarName))
+                self.logger.info("%s  <-  %s", acq.suffix, sidecarName)
 
             # sidecar with no link
             elif len(descriptions) == 0:
-                self.logger.info("No Pairing  <-  {}".format(sidecarName))
+                self.logger.info("No Pairing  <-  %s", sidecarName)
 
             # sidecar with several links
             else:
-                self.logger.warning("Several Pairing  <-  {}".format(sidecarName))
+                self.logger.warning("Several Pairing  <-  %s", sidecarName)
                 for desc in descriptions:
                     acq = Acquisition(participant, **desc)
-                    self.logger.warning("    ->  " + acq.suffix)
+                    self.logger.warning("    ->  %s", acq.suffix)
 
         self.acquisitions = acquisitions
         return acquisitions
@@ -238,7 +239,7 @@ class SidecarPairing(object):
 
         dstRoots = [_.dstRoot for _ in self.acquisitions]
         for dstRoot, dup in duplicates(dstRoots):
-            self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
+            self.logger.info("%s has %s runs", dstRoot, len(dup))
             self.logger.info("Adding 'run' information to the acquisition")
 
             for runNum, acqInd in enumerate(dup):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+"""Setup logging configuration"""
 
 import logging
 

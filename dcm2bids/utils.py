@@ -7,7 +7,7 @@ import logging
 import os
 import shlex
 from collections import OrderedDict
-from subprocess import check_output, CalledProcessError
+from subprocess import check_output
 
 
 class DEFAULT(object):
@@ -60,7 +60,7 @@ def save_json(filename, data):
         json.dump(data, f, indent=4)
 
 
-def write_txt(filename, lines=[]):
+def write_txt(filename, lines):
     with open(filename, "a") as f:
         for row in lines:
             f.write("%s\n" % row)
@@ -81,7 +81,7 @@ def read_participants(filename):
         return [row for row in reader]
 
 
-def splitext_(path, extensions=[".nii.gz"]):
+def splitext_(path, extensions=None):
     """ Split the extension from a pathname
     Handle case with extensions with '.' in it
 
@@ -92,6 +92,9 @@ def splitext_(path, extensions=[".nii.gz"]):
     Returns:
         (root, ext): ext may be empty
     """
+    if extensions is None:
+        extensions = [".nii.gz"]
+
     for ext in extensions:
         if path.endswith(ext):
             return path[: -len(ext)], path[-len(ext) :]
@@ -105,5 +108,5 @@ def run_shell_command(commandLine):
         Run command with arguments and return its output
     """
     logger = logging.getLogger(__name__)
-    logger.info("Running {}".format(commandLine))
+    logger.info("Running %s", commandLine)
     return check_output(shlex.split(commandLine))

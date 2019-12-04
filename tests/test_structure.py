@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
+from os.path import join as opj
 import pytest
 from dcm2bids.structure import Participant, Acquisition
-from os.path import join as opj
 
 
 @pytest.mark.parametrize(

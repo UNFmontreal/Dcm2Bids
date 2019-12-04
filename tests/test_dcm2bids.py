@@ -2,24 +2,18 @@
 
 
 import os
-import pytest
 import shutil
+from tempfile import TemporaryDirectory
 from bids import BIDSLayout
 from dcm2bids import Dcm2bids
 from dcm2bids.utils import DEFAULT, load_json
-
-try:
-    from tempfile import TemporaryDirectory
-except:
-    # python2 compatibility
-    from backports.tempfile import TemporaryDirectory
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 
 def test_dcm2bids():
-    tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
+    # tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
     # bidsDir = TemporaryDirectory(dir=tmpBase)
     bidsDir = TemporaryDirectory()
 

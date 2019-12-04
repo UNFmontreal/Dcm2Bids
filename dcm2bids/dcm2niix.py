@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+"""Dcm2niix class"""
 
 import logging
 import os
@@ -105,5 +106,5 @@ class Dcm2niix(object):
             except:
                 pass
 
-            self.logger.debug("\n" + output)
+            self.logger.debug("\n%s", output)
             self.logger.info("Check log file for dcm2niix output")

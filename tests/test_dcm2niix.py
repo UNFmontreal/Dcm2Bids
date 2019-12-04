@@ -3,24 +3,18 @@
 
 import os
 import pytest
+from glob import glob
+from tempfile import TemporaryDirectory
 from dcm2bids.dcm2niix import Dcm2niix
 from dcm2bids.utils import DEFAULT
-from glob import glob
-
-try:
-    from tempfile import TemporaryDirectory
-except:
-    # python2 compatibility
-    from backports.tempfile import TemporaryDirectory
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
-
+@pytest.mark.skip(reason="Too long for now")
 def test_dcm2niix_run():
     dicomDir = os.path.join(TEST_DATA_DIR, "sourcedata", "sub-01")
-    tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
-
+    # tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
     # tmpDir = TemporaryDirectory(dir=tmpBase)
     tmpDir = TemporaryDirectory()
 
