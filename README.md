@@ -33,15 +33,14 @@ Before using this software, learn more about BIDS:
 
 ## TL;DR
 
+1. `mkdir <YOUR_FUTURE_BIDS_FOLDER>`
+2. `cd <YOUR_FUTURE_BIDS_FOLDER>`
+3. `dcm2bids_scaffold`
+4. `dcm2bids_helper -d <FOLDER_WITH_DICOMS_OF_A_TYPICAL_SESSION>`
+5. Build your configuration file with the help of the content of `tmp_dcm2bids/helper`
+6. `dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE` for each participants of your study
+
 Follow the [tutorial](https://cbedetti.github.io/Dcm2Bids/tutorial)
-
-Steps to get your data in BIDS :
-
-- `cd <YOUR_FUTURE_BIDS_FOLDER>`
-- `dcm2bids_scaffold`
-- `dcm2bids_helper -d <FOLDER_WITH_DICOMS_OF_A_TYPICAL_SESSION>`
-- Build your configuration file with the help of the content of `tmp_dcm2bids/helper`
-- `dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE` for each participants of your study
 
 dcm2bids creates log files inside `<YOUR_FUTURE_BIDS_FOLDER>/tmp_dcm2bids/log`
 
