@@ -21,7 +21,7 @@ def install_requires():
     """Get list of required modules"""
     required = []
     for module, meta in _VERSION["REQUIRED_MODULE_METADATA"]:
-        required.append(f"{module}>={meta['min_version']}")
+        required.append("{}>={}".format(module, meta['min_version']))
     return required
 
 
