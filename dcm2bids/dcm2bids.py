@@ -142,8 +142,6 @@ class Dcm2bids(object):
         check_latest()
         check_latest("dcm2niix")
 
-        return os.EX_OK
-
     def move(self, acquisition):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):

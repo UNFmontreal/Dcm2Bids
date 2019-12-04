@@ -91,8 +91,6 @@ class Dcm2niix(object):
 
         self.sidecarFiles = glob(os.path.join(self.outputDir, "*.json"))
 
-        return os.EX_OK
-
     def execute(self):
         """ Execute dcm2niix for each directory in dicomDirs
         """

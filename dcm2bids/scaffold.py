@@ -98,8 +98,6 @@ def main():
         if not os.path.exists(filepath):
             write_txt(filepath, data)
 
-    return os.EX_OK
-
 
 if __name__ == "__main__":
     sys.exit(main())
