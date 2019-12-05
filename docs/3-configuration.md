@@ -1,8 +1,6 @@
----
-title: Configuration file
----
+# Configuration file
 
-# Configuration file example
+## Configuration file example
 
 ```json
 {

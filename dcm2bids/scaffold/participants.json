@@ -1,0 +1,17 @@
+{
+    "education": {
+        "LongName": "Education level",
+        "Description": "Education level, self-rated by participant",
+        "Levels": {
+            "1": "Finished primary school",
+            "2": "Finished secondary school",
+            "3": "Student at university",
+            "4": "Has degree from university"
+        }
+    },
+    "bmi": {
+        "LongName": "Body mass index",
+        "Units": "kilograms per squared meters",
+        "TermURL": "http://purl.bioontology.org/ontology/SNOMEDCT/60621009"
+    }
+}

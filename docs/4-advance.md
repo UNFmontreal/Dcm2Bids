@@ -1,7 +1,3 @@
----
-title: Advanced configuration
----
-
 # Advanced configuration
 
 These optional configurations could be insert in the configuration file at the same level as the `"descriptions"` entry.

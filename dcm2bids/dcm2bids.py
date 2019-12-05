@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""dcm2bids module"""
 
+import argparse
 import logging
 import os
 import platform
@@ -11,13 +13,7 @@ from .dcm2niix import Dcm2niix
 from .logger import setup_logging
 from .sidecar import Sidecar, SidecarPairing
 from .structure import Participant
-from .utils import (
-        DEFAULT,
-        load_json,
-        save_json,
-        run_shell_command,
-        splitext_,
-        )
+from .utils import DEFAULT, load_json, save_json, run_shell_command, splitext_
 from .version import __version__, check_latest, dcm2niix_version
 
 
@@ -37,10 +33,17 @@ class Dcm2bids(object):
     """
 
     def __init__(
-            self, dicom_dir, participant, config, output_dir=DEFAULT.outputDir,
-            session=DEFAULT.session, clobber=DEFAULT.clobber,
-            forceDcm2niix=DEFAULT.forceDcm2niix, log_level=DEFAULT.logLevel,
-            **_):
+        self,
+        dicom_dir,
+        participant,
+        config,
+        output_dir=DEFAULT.outputDir,
+        session=DEFAULT.session,
+        clobber=DEFAULT.clobber,
+        forceDcm2niix=DEFAULT.forceDcm2niix,
+        log_level=DEFAULT.logLevel,
+        **_
+    ):
         self._dicomDirs = []
 
         self.dicomDirs = dicom_dir
@@ -51,61 +54,76 @@ class Dcm2bids(object):
         self.forceDcm2niix = forceDcm2niix
         self.logLevel = log_level
 
-        #logging setup
+        # logging setup
         self.set_logger()
 
         self.logger.info("--- dcm2bids start ---")
-        self.logger.info("OS:version: {}".format(platform.platform()))
-        self.logger.info("python:version: {}".format(
-            sys.version.replace("\n","")))
-        self.logger.info("dcm2bids:version: {}".format(__version__))
-        self.logger.info("dcm2niix:version: {}".format(dcm2niix_version()))
-        self.logger.info("participant: {}".format(self.participant.name))
-        self.logger.info("session: {}".format(self.participant.session))
-        self.logger.info("config: {}".format(os.path.realpath(config)))
-        self.logger.info(
-                "BIDS directory: {}".format(os.path.realpath(output_dir)))
-
+        self.logger.info("OS:version: %s", platform.platform())
+        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
+        self.logger.info("dcm2bids:version: %s", __version__)
+        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
+        self.logger.info("participant: %s", self.participant.name)
+        self.logger.info("session: %s", self.participant.session)
+        self.logger.info("config: %s", os.path.realpath(config))
+        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
 
     @property
     def dicomDirs(self):
+        """List of DICOMs directories"""
         return self._dicomDirs
-
 
     @dicomDirs.setter
     def dicomDirs(self, value):
         if isinstance(value, list):
-            self._dicomDirs = value
+            dicom_dirs = value
         else:
-            self._dicomDirs = [value,]
+            dicom_dirs = [value]
 
+        dir_not_found = []
+        for _dir in dicom_dirs:
+            if os.path.isdir(_dir):
+                pass
+            else:
+                dir_not_found.append(_dir)
+
+        if dir_not_found:
+            raise FileNotFoundError(dir_not_found)
+
+        self._dicomDirs = dicom_dirs
 
     def set_logger(self):
         """ Set a basic logger"""
         logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
-        logFile = os.path.join(logDir, "{}_{}.log".format(
-                self.participant.prefix, datetime.now().isoformat()))
+        logFile = os.path.join(
+            logDir,
+            "{}_{}.log".format(
+                self.participant.prefix, datetime.now().isoformat().replace(":", "")
+            ),
+        )
 
-        #os.makedirs(logdir, exist_ok=True)
-        #python2 compatibility
+        # os.makedirs(logdir, exist_ok=True)
+        # python2 compatibility
         if not os.path.exists(logDir):
             os.makedirs(logDir)
 
         setup_logging(self.logLevel, logFile)
         self.logger = logging.getLogger(__name__)
 
-
     def run(self):
-        """
-        """
-        dcm2niix = Dcm2niix(self.dicomDirs, self.bidsDir, self.participant,
-                self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions))
+        """Run dcm2bids"""
+        dcm2niix = Dcm2niix(
+            self.dicomDirs,
+            self.bidsDir,
+            self.participant,
+            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
+        )
         dcm2niix.run(self.forceDcm2niix)
 
         sidecars = []
         for filename in dcm2niix.sidecarFiles:
-            sidecars.append(Sidecar(
-                filename, self.config.get("compKeys", DEFAULT.compKeys)))
+            sidecars.append(
+                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
+            )
         sidecars = sorted(sidecars)
 
         parser = SidecarPairing(sidecars, self.config["descriptions"],
@@ -122,24 +140,20 @@ class Dcm2bids(object):
         check_latest()
         check_latest("dcm2niix")
 
-        return os.EX_OK
-
-
     def move(self, acquisition):
-        """
-        """
+        """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
-            root, ext = splitext_(srcFile)
+            _, ext = splitext_(srcFile)
             dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
 
-            #os.makedirs(os.path.dirname(dstFile), exist_ok=True)
-            #python2 compatibility
+            # os.makedirs(os.path.dirname(dstFile), exist_ok=True)
+            # python2 compatibility
             if not os.path.exists(os.path.dirname(dstFile)):
                 os.makedirs(os.path.dirname(dstFile))
 
-            #checking if destination file exists
+            # checking if destination file exists
             if os.path.isfile(dstFile):
-                self.logger.info("'{}' already exists".format(dstFile))
+                self.logger.info("'%s' already exists", dstFile)
 
                 if self.clobber:
                     self.logger.info("Overwriting because of 'clobber' option")
@@ -148,25 +162,26 @@ class Dcm2bids(object):
                     self.logger.info("Use clobber option to overwrite")
                     continue
 
-            #it's an anat nifti file and the user using a deface script
+            # it's an anat nifti file and the user using a deface script
             if (
-                    self.config.get("defaceTpl")
-                    and acquisition.dataType=="anat"
-                    and ".nii" in ext):
+                self.config.get("defaceTpl")
+                and acquisition.dataType == "anat"
+                and ".nii" in ext
+            ):
                 try:
                     os.remove(dstFile)
-                except:
+                except FileNotFoundError:
                     pass
                 defaceTpl = self.config.get("defaceTpl")
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
                 run_shell_command(cmd)
 
-            #use
+            # use
             elif ext == ".json":
                 data = acquisition.dstSidecarData(self.config["descriptions"])
                 save_json(dstFile, data)
                 os.remove(srcFile)
 
-            #just move
+            # just move
             else:
                 os.rename(srcFile, dstFile)

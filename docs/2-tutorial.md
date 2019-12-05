@@ -1,8 +1,6 @@
----
-title: Tutorial
----
+# Tutorial
 
-# Setup
+## Setup
 
 Create a new folder for this tutorial.
 
@@ -38,19 +36,19 @@ pip install dcm2bids
 
 We should have access to dcm2bids now. Test it with `dcm2bids --help`.
 
-# Scaffolding
+## Scaffolding
 
 We can now run the command `dcm2bids_scaffold`. This gives us several generics folders and files. We can have a look at these files and consult the [BIDS specification][bids-spec] for more information.
 
 One of the created folders is named `sourcedata`, this is the folder to put your DICOMs
 
-# Downloading test data
+## Downloading test data
 
 For this tutorial, we will use DICOMs from [neurolabusc](https://github.com/neurolabusc) on github.
 
 Go to : [https://github.com/neurolabusc/dcm_qa_nih](https://github.com/neurolabusc/dcm_qa_nih) and click on the *Clone or download* button to download as ZIP.
 
-![dcm_qa_nih_repo](assets/images/dcm_qa_nih_repo.png)
+![dcm_qa_nih_repo](../art/dcm_qa_nih_repo.png)
 
 Move the zip file to the sourcedata folder and unzip it. Here is how to do it in the terminal but we could do it the way we want.
 
@@ -63,7 +61,7 @@ cd ..
 
 We should have now a `dcm_qa_nih-master` folder inside sourcedata.
 
-# DICOM to NIfTI conversion
+## DICOM to NIfTI conversion
 
 `dcm2bids_helper -d sourcedata/dcm_qa_nih-master/In/`
 
@@ -79,7 +77,7 @@ The first will be our resting state fMRI, the second and third our fieldmap EPI.
 
 When you will do it with your DICOMs, you should do it with a typical session of one of your participant.
 
-# Building the configuration file
+## Building the configuration file
 
 Now we will create a configuration file called `dcm2bids_config.json` (this is just an example, it could be whatever we want) in the `code/` folder. Use any text editor to create the file with the contents:
 
@@ -155,7 +153,7 @@ We could then update our configuration file.
 
 For fieldmap, we added an `"intendedFor"` field to show that these fieldmaps should be use with our fMRI acquisition. Have a look at the explanation of [intendedFor](../config/#intendedfor) in the documentation or in the [BIDS specification][bids-fmap].
 
-# Running dcm2bids
+## Running dcm2bids
 
 We can now run dcm2bids:
 
