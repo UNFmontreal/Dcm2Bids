@@ -176,9 +176,9 @@ class SidecarPairing(object):
                 return bool(re.search(pattern, str(name)))
             else:
                 if not self.caseSensitive:
-                    name = name.lower()
+                    name = str(name).lower()
                     pattern = pattern.lower()
-                return fnmatch(str(name), str(pattern))
+                return fnmatch(name, pattern)
 
         result = []
 
