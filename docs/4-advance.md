@@ -5,6 +5,7 @@ These optional configurations could be insert in the configuration file at the s
 ```
 {
     "searchMethod": "fnmatch",
+    "duplicateMethod": "run",
     "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "description": [
         ...

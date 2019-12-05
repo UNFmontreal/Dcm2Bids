@@ -1,6 +1,6 @@
 name: Tests
 
-on: push
+on: [push, pull_request]
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
         pip install tox tox-gh-actions
     - name: Test with tox
       run: tox
-    - name: Upload coverage  
+    - name: Upload coverage
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
