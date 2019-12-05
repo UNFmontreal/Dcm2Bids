@@ -117,17 +117,12 @@ class SidecarPairing(object):
         """
         if value in DEFAULT.searchMethodChoices:
             self._searchMethod = value
-
         else:
             self._searchMethod = DEFAULT.searchMethod
             self.logger.warning("'%s' is not a search method implemented", value)
             self.logger.warning(
                 "Falling back to default: %s", DEFAULT.searchMethod
             )
-            self.logger.warning(
-                    "Falling back to default: %s", DEFAULT.searchMethod)
-            self.logger.warning("Search methods implemented: %s",
-                    DEFAULT.searchMethodChoices)
 
     @dupMethod.setter
     def dupMethod(self, value):

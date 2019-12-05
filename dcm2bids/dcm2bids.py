@@ -188,6 +188,7 @@ class Dcm2bids(object):
             else:
                 os.rename(srcFile, dstFile)
 
+
 def get_arguments():
     """Load arguments for main"""
     parser = argparse.ArgumentParser(
