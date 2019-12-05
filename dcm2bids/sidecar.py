@@ -125,9 +125,9 @@ class SidecarPairing(object):
                 "Falling back to default: %s", DEFAULT.searchMethod
             )
             self.logger.warning(
-                    "Falling back to default: {}".format(DEFAULT.searchMethod))
-            self.logger.warning("Search methods implemented: {}".format(
-                    DEFAULT.searchMethodChoices))
+                    "Falling back to default: %s", DEFAULT.searchMethod)
+            self.logger.warning("Search methods implemented: %s",
+                    DEFAULT.searchMethodChoices)
 
     @dupMethod.setter
     def dupMethod(self, value):
@@ -140,11 +140,11 @@ class SidecarPairing(object):
         else:
             self._dupMethod = DEFAULT.duplicateMethod
             self.logger.warning(
-                    "'{}' is not a duplicate method implemented".format(value))
+                    "%s is not a duplicate method implemented", value)
             self.logger.warning(
-                    "Falling back to default: {}".format(DEFAULT.dupMethod))
-            self.logger.warning("Duplicate methods implemented: {}".format(
-                    DEFAULT.dupMethodChoices))
+                    "Falling back to default: %s", DEFAULT.dupMethod)
+            self.logger.warning("Duplicate methods implemented: %s",
+                    DEFAULT.dupMethodChoices)
 
     def build_graph(self):
         """
@@ -271,8 +271,8 @@ class SidecarPairing(object):
             templateDup = DEFAULT.dupTpl
 
         for dstRoot, dup in duplicates(dstRoots):
-            self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
-            self.logger.info("Adding {} information to the acquisition".format(self.dupMethod))
+            self.logger.info("%s has %s runs", dstRoot, len(dup))
+            self.logger.info("Adding %s information to the acquisition", self.dupMethod)
 
             if self.dupMethod == 'dup':
                 dup = dup[0:-1]
