@@ -1,0 +1,4 @@
+participant_id	age	sex	group
+sub-control01	34	M	control
+sub-control02	12	F	control
+sub-patient01	33	F	patient

@@ -21,7 +21,7 @@ def install_requires():
     """Get list of required modules"""
     required = []
     for module, meta in _VERSION["REQUIRED_MODULE_METADATA"]:
-        required.append("{}>={}".format(module, meta['min_version']))
+        required.append("{}>={}".format(module, meta["min_version"]))
     return required
 
 
@@ -32,7 +32,7 @@ ENTRY_POINTS = {
     "console_scripts": [
         "dcm2bids = dcm2bids.dcm2bids:main",
         "dcm2bids_helper = dcm2bids.helper:main",
-        "dcm2bids_scaffold = dcm2bids.scaffold:main",
+        "dcm2bids_scaffold = dcm2bids:scaffold",
     ],
     # "configurations": [],
 }
@@ -51,10 +51,9 @@ PROJECT_URLS = {
 CLASSIFIERS = [
     "Intended Audience :: Healthcare Industry",
     "Intended Audience :: Science/Research",
-    # 'Operating System :: MacOS',
-    # 'Operating System :: Microsoft :: Windows',
-    # 'Operating System :: POSIX',
-    # 'Operating System :: Unix',
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: Unix",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",

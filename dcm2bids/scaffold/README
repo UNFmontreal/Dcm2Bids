@@ -1,0 +1,33 @@
+You should replace the content of this file and describe your dataset.
+
+---
+
+BIDS Specification: https://bids-specification.readthedocs.io/en/stable/
+
+---
+
+BIDS directory overview
+https://bids-specification.readthedocs.io/en/stable/02-common-principles.html#single-session-example
+
+---
+
+participants.tsv and participants.json
+https://bids-specification.readthedocs.io/en/stable/02-common-principles.html#tabular-files
+https://bids-specification.readthedocs.io/en/stable/03-modality-agnostic-files.html#participants-file
+
+---
+
+dataset_description.json
+https://bids-specification.readthedocs.io/en/stable/03-modality-agnostic-files.html#dataset_description
+
+---
+
+README
+https://bids-specification.readthedocs.io/en/stable/03-modality-agnostic-files.html#readme
+
+---
+
+CHANGES
+https://bids-specification.readthedocs.io/en/stable/03-modality-agnostic-files.html#changes
+
+---
