@@ -1,7 +1,3 @@
----
-title: Advanced configuration
----
-
 # Advanced configuration
 
 These optional configurations could be insert in the configuration file at the same level as the `"descriptions"` entry.
@@ -45,4 +41,3 @@ Arguments for dcm2niix
 default: `"compKeys": ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]`
 
 Acquisitions are sorted using the sidecar data. The default behaviour is to sort by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You can change this behaviour setting this key inside the configuration file.
-

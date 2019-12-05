@@ -1,0 +1,6 @@
+[tool.portray]
+modules = ["dcm2bids"]
+
+[tool.portray.mkdocs.theme]
+name = "material"
+palette = {primary = "teal", accent = "deep-orange"}

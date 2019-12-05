@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+"""sidecars classes"""
 
 import itertools
 import logging
@@ -30,7 +31,6 @@ class Sidecar(object):
         self.data = filename
         self.compKeys = compKeys
 
-
     def __lt__(self, other):
         lts = []
         for key in self.compKeys:
@@ -47,24 +47,19 @@ class Sidecar(object):
 
         return False
 
-
     def __eq__(self, other):
         return self.data == other.data
 
-
     def __hash__(self):
         return hash(self.filename)
-
 
     @property
     def origData(self):
         return self._origData
 
-
     @property
     def data(self):
         return self._data
-
 
     @data.setter
     def data(self, filename):
@@ -91,9 +86,7 @@ class SidecarPairing(object):
         descriptions (list): List of dictionnaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions,
-            searchMethod=DEFAULT.searchMethod,
-            lowerCase=DEFAULT.lowerCase):
+    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
@@ -106,11 +99,9 @@ class SidecarPairing(object):
         self.lowerCase = lowerCase
 
 
-
     @property
     def searchMethod(self):
         return self._searchMethod
-
 
     @searchMethod.setter
     def searchMethod(self, value):
@@ -123,13 +114,13 @@ class SidecarPairing(object):
 
         else:
             self._searchMethod = DEFAULT.searchMethod
+            self.logger.warning("'%s' is not a search method implemented", value)
             self.logger.warning(
-                    "'{}' is not a search method implemented".format(value))
+                "Falling back to default: %s", DEFAULT.searchMethod
+            )
             self.logger.warning(
-                    "Falling back to default: {}".format(DEFAULT.searchMethod))
-            self.logger.warning("Search methods implemented: {}".format(
-                    DEFAULT.searchMethodChoices))
-
+                "Search methods implemented: %s", DEFAULT.searchMethodChoices
+            )
 
     def build_graph(self):
         """
@@ -152,7 +143,6 @@ class SidecarPairing(object):
         self.graph = graph
         return graph
 
-
     def isLink(self, data, criteria):
         """
         Args:
@@ -162,8 +152,11 @@ class SidecarPairing(object):
         Returns:
             boolean
         """
+
         def compare(name, pattern):
             if self.searchMethod == "re":
+                name = name.lower()
+                pattern = pattern.lower()
                 return bool(re.search(pattern, str(name)))
             else:
                 return fnmatch(str(name), str(pattern))
@@ -173,21 +166,9 @@ class SidecarPairing(object):
         for tag, pattern in iteritems(criteria):
             name = data.get(tag)
 
-            if self.lowerCase:
-                if isinstance(pattern, list):
-                    pattern = [x.lower() for x in pattern]
-                elif isinstance(pattern, str):
-                    pattern = pattern.lower()
-
             if isinstance(name, list):
-                if self.lowerCase:
-                    name = [x.lower() for x in name]
-
                 try:
-                    subResult = [
-                            len(name)==len(pattern),
-                            isinstance(pattern, list),
-                            ]
+                    subResult = [len(name) == len(pattern), isinstance(pattern, list)]
                     for subName, subPattern in zip(name, pattern):
                         subResult.append(compare(subName, subPattern))
                 except:
@@ -196,12 +177,9 @@ class SidecarPairing(object):
                 result.append(all(subResult))
 
             else:
-                if self.lowerCase and isinstance(name, str):
-                    name = name.lower()
                 result.append(compare(name, pattern))
 
         return all(result)
-
 
     def build_acquisitions(self, participant):
         """
@@ -216,36 +194,34 @@ class SidecarPairing(object):
         for sidecar, descriptions in iteritems(self.graph):
             sidecarName = os.path.basename(sidecar.root)
 
-            #only one description for the sidecar
+            # only one description for the sidecar
             if len(descriptions) == 1:
                 desc = descriptions[0]
                 acq = Acquisition(participant, srcSidecar=sidecar, **desc)
                 acquisitions.append(acq)
 
-                self.logger.info("{}  <-  {}".format(
-                    acq.suffix, sidecarName))
+                self.logger.info("%s  <-  %s", acq.suffix, sidecarName)
 
-            #sidecar with no link
+            # sidecar with no link
             elif len(descriptions) == 0:
-                self.logger.info("No Pairing  <-  {}".format(sidecarName))
+                self.logger.info("No Pairing  <-  %s", sidecarName)
 
-            #sidecar with several links
+            # sidecar with several links
             else:
-                self.logger.warning(
-                        "Several Pairing  <-  {}".format(sidecarName))
+                self.logger.warning("Several Pairing  <-  %s", sidecarName)
                 for desc in descriptions:
                     acq = Acquisition(participant, **desc)
-                    self.logger.warning("    ->  " + acq.suffix)
+                    self.logger.warning("    ->  %s", acq.suffix)
 
         self.acquisitions = acquisitions
         return acquisitions
-
 
     def find_runs(self):
         """
         Check if there is duplicate destination roots in the acquisitions
         and add '_run-' to the customLabels of the acquisition
         """
+
         def duplicates(seq):
             """ Find duplicate items in a list
 
@@ -267,9 +243,9 @@ class SidecarPairing(object):
 
         dstRoots = [_.dstRoot for _ in self.acquisitions]
         for dstRoot, dup in duplicates(dstRoots):
-            self.logger.info("{} has {} runs".format(dstRoot, len(dup)))
+            self.logger.info("%s has %s runs", dstRoot, len(dup))
             self.logger.info("Adding 'run' information to the acquisition")
 
             for runNum, acqInd in enumerate(dup):
-                runStr = DEFAULT.runTpl.format(runNum+1)
+                runStr = DEFAULT.runTpl.format(runNum + 1)
                 self.acquisitions[acqInd].customLabels += runStr
