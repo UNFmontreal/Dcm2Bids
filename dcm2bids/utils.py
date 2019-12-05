@@ -35,7 +35,7 @@ class DEFAULT(object):
     searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
     runTpl = "_run-{:02d}"
-    lowerCase = False
+    caseSensitive = False
 
     # misc
     tmpDirName = "tmp_dcm2bids"

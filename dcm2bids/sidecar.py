@@ -86,7 +86,8 @@ class SidecarPairing(object):
         descriptions (list): List of dictionnaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod):
+    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
+                 caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
@@ -96,8 +97,7 @@ class SidecarPairing(object):
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
-        self.lowerCase = lowerCase
-
+        self.caseSensitive = caseSensitive
 
     @property
     def searchMethod(self):
@@ -120,6 +120,24 @@ class SidecarPairing(object):
             )
             self.logger.warning(
                 "Search methods implemented: %s", DEFAULT.searchMethodChoices
+            )
+
+    @property
+    def caseSensitive(self):
+        return self._caseSensitive
+
+    @caseSensitive.setter
+    def caseSensitive(self, value):
+        if isinstance(value, bool):
+            self._caseSensitive = value
+        else:
+            self._caseSensitive = DEFAULT.caseSensitive
+            self.logger.warning("'%s' is not a boolean", value)
+            self.logger.warning(
+                "Falling back to default: %s", DEFAULT.caseSensitive
+            )
+            self.logger.warning(
+                "Search methods implemented: %s", DEFAULT.caseSensitive
             )
 
     def build_graph(self):
@@ -155,10 +173,11 @@ class SidecarPairing(object):
 
         def compare(name, pattern):
             if self.searchMethod == "re":
-                name = name.lower()
-                pattern = pattern.lower()
                 return bool(re.search(pattern, str(name)))
             else:
+                if not self.caseSensitive:
+                    name = name.lower()
+                    pattern = pattern.lower()
                 return fnmatch(str(name), str(pattern))
 
         result = []
