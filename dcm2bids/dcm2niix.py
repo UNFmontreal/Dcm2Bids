@@ -95,7 +95,7 @@ class Dcm2niix(object):
         """ Execute dcm2niix for each directory in dicomDirs
         """
         for dicomDir in self.dicomDirs:
-            commandTpl = "dcm2niix {} -o {} {}"
+            commandTpl = "dcm2niix {} -o '{}' '{}'"
             cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
             output = run_shell_command(cmd)
 
