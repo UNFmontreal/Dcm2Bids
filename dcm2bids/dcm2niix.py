@@ -4,9 +4,11 @@
 
 import logging
 import os
+import shlex
 import shutil
+import subprocess
 from glob import glob
-from .utils import DEFAULT, run_shell_command
+from .utils import DEFAULT
 
 
 class Dcm2niix(object):
@@ -95,14 +97,6 @@ class Dcm2niix(object):
         """ Execute dcm2niix for each directory in dicomDirs
         """
         for dicomDir in self.dicomDirs:
-            commandTpl = "dcm2niix {} -o {} {}"
-            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
-            output = run_shell_command(cmd)
-
-            try:
-                output = output.decode()
-            except:
-                pass
-
-            self.logger.debug("\n%s", output)
-            self.logger.info("Check log file for dcm2niix output")
+            cmd = ['dcm2niix', *shlex.split(self.options), '-o', self.outputDir, dicomDir]
+            self.logger.info("Running %s" % (shlex.join(cmd),))
+            subprocess.run(cmd, check=True)

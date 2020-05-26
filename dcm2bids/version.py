@@ -3,7 +3,7 @@
 """This module take care of the versioning"""
 
 # dcm2bids version
-__version__ = "2.1.5"
+__version__ = "3.0.0"
 
 
 import logging
@@ -64,7 +64,7 @@ def check_github_latest(githubRepo):
     """
     url = "https://github.com/{}/releases/latest".format(githubRepo)
     try:
-        output = check_output(shlex.split("curl --silent " + url))
+        output = check_output(["curl", "--silent", url])
     except:
         logger.debug(
             "Checking latest version of %s was not possible", githubRepo,
@@ -153,7 +153,7 @@ def dcm2niix_version():
         return
 
     try:
-        output = check_output(shlex.split("dcm2niix"))
+        output = check_output(["dcm2niix"])
     except:
         logger.error("Running: dcm2niix", exc_info=True)
         return

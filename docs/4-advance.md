@@ -5,7 +5,7 @@ These optional configurations could be insert in the configuration file at the s
 ```
 {
     "searchMethod": "fnmatch",
-    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
+    "deface": true,
     "description": [
         ...
     ]
@@ -18,17 +18,11 @@ default: `"searchMethod": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this option is set incorrectly. `re` is the other choice if you want more flexibility to match criteria.
 
-## defaceTpl
+## deface
 
-default: `"defaceTpl": None`
+default: `"deface": False`
 
-The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
-
-For example, if you use the last version of pydeface, add:
-
-`"defaceTpl": "pydeface --outfile {dstFile} {srcFile}"`
-
-It is a template string and dcm2bids will replace {srcFile} and {dstFile} by the source file (input) and the destination file (output).
+To anonymize images with `pydeface`, set this to `True`.
 
 ## dcm2niixOptions
 

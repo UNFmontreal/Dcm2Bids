@@ -7,13 +7,14 @@ import logging
 import os
 import platform
 import sys
+import subprocess
 from datetime import datetime
 from glob import glob
 from .dcm2niix import Dcm2niix
 from .logger import setup_logging
 from .sidecar import Sidecar, SidecarPairing
 from .structure import Participant
-from .utils import DEFAULT, load_json, save_json, run_shell_command, splitext_
+from .utils import DEFAULT, load_json, save_json, splitext_
 from .version import __version__, check_latest, dcm2niix_version
 
 
@@ -166,7 +167,7 @@ class Dcm2bids(object):
 
             # it's an anat nifti file and the user using a deface script
             if (
-                self.config.get("defaceTpl")
+                self.config.get("deface")
                 and acquisition.dataType == "anat"
                 and ".nii" in ext
             ):
@@ -174,9 +175,9 @@ class Dcm2bids(object):
                     os.remove(dstFile)
                 except FileNotFoundError:
                     pass
-                defaceTpl = self.config.get("defaceTpl")
-                cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
-                run_shell_command(cmd)
+                cmd = ["pydeface", "--outfile", dstFile, srcFile]
+                self.logger.info("Running %s" % (shlex.join(cmd),))
+                subprocess.run(cmd, check=True)
 
             # use
             elif ext == ".json":
@@ -260,7 +261,7 @@ dcm2bids {}""".format(
         action="store_true",
         help="""
         This option no longer exists from the script in this release.
-        See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl""",
+        See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#deface""",
     )
 
     args = parser.parse_args()
@@ -276,12 +277,10 @@ def main():
             """
         The anonymizer option no longer exists from the script in this release
         It is still possible to deface the anatomical nifti images
-        Please add "defaceTpl" key in the congifuration file
+        Please add "deface" key in the configuration file
 
         For example, if you use the last version of pydeface, add:
-        "defaceTpl": "pydeface --outfile {dstFile} {srcFile}"
-        It is a template string and dcm2bids will replace {srcFile} and {dstFile}
-        by the source file (input) and the destination file (output)
+        "deface": true
         """
         )
         return 1

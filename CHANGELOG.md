@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.0
+
+- The anonymizer option is back
+
 ## 2.1.5
 
 ## 2.1.4 - 2019-04-04

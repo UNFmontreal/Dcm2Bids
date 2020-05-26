@@ -7,7 +7,6 @@ import logging
 import os
 import shlex
 from collections import OrderedDict
-from subprocess import check_output
 
 
 class DEFAULT(object):
@@ -23,7 +22,7 @@ class DEFAULT(object):
     session = cliSession  # also Participant object
     clobber = False
     forceDcm2niix = False
-    defaceTpl = None
+    deface = False
     logLevel = "WARNING"
 
     # dcm2niix.py
@@ -99,14 +98,3 @@ def splitext_(path, extensions=None):
         if path.endswith(ext):
             return path[: -len(ext)], path[-len(ext) :]
     return os.path.splitext(path)
-
-
-def run_shell_command(commandLine):
-    """ Wrapper of subprocess.check_output
-
-    Returns:
-        Run command with arguments and return its output
-    """
-    logger = logging.getLogger(__name__)
-    logger.info("Running %s", commandLine)
-    return check_output(shlex.split(commandLine))
