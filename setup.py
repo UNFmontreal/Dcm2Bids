@@ -6,7 +6,7 @@
 """Setup file for the dcm2bids package"""
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def load_version():
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     setup(
         name=DISTNAME,
         version=VERSION,
-        packages=[DISTNAME],
+        packages=find_packages(),
         entry_points=ENTRY_POINTS,
         python_requires=">=3.5",
         install_requires=install_requires(),
