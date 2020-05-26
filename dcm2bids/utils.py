@@ -109,4 +109,4 @@ def run_shell_command(commandLine):
     """
     logger = logging.getLogger(__name__)
     logger.info("Running %s", commandLine)
-    return check_output(shlex.split(commandLine))
+    return check_output(shlex.split(commandLine, posix=False))
