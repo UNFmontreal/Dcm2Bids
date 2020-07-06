@@ -10,7 +10,7 @@
             "modalityLabel": "bold",
             "customLabels": "task-rest",
             "criteria": {
-                "SidecarFilename": "006*"
+                "SidecarFilename": "006*",
                 "ImageType": ["ORIG*", "PRIMARY", "M", "ND", "MOSAIC"]
             }
         },
