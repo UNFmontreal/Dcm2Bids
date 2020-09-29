@@ -174,12 +174,12 @@ class SidecarPairing(object):
                 if not self.caseSensitive:
                     name = str(name).lower()
                     pattern = str(pattern).lower()
-                return fnmatch(name, pattern)
+
+                return fnmatch(str(name), str(pattern))
 
         result = []
         for tag, pattern in iteritems(criteria):
             name = data.get(tag)
-
             if isinstance(name, list):
                 try:
                     subResult = [len(name) == len(pattern), isinstance(pattern, list)]
