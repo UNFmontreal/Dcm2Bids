@@ -1,0 +1,13 @@
+{
+    "caseSensitive": false,
+    "searchMethod": "fnmatch",
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SidecarFilename": "*mprage*"
+            }
+        }
+    ]
+}
