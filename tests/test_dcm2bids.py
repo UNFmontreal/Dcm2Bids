@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+import glob
 import os
 import shutil
 from tempfile import TemporaryDirectory
@@ -13,11 +14,9 @@ TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 
 def test_dcm2bids():
-    # tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
-    # bidsDir = TemporaryDirectory(dir=tmpBase)
     bidsDir = TemporaryDirectory()
-
     tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
+
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
     app = Dcm2bids(
@@ -68,6 +67,44 @@ def test_dcm2bids():
 
     fmapMtimeRerun = os.stat(fmapFile).st_mtime
     assert fmapMtime == fmapMtimeRerun
+
+    # Validate duplicateMethod: dup
+    shutil.rmtree(tmpSubDir)
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+
+    app = Dcm2bids(
+        [TEST_DATA_DIR],
+        "01",
+        os.path.join(TEST_DATA_DIR, "config_test_dup_option.json"),
+        bidsDir.name,
+    )
+    app.run()
+
+    dupLocalizerFile = os.path.join(bidsDir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_localizer_dup-01.json")
+
+    assert os.path.exists(dupLocalizerFile)
+
+    # Validate duplicateMethod: dup
+    shutil.rmtree(tmpSubDir)
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+
+    app = Dcm2bids(
+        [TEST_DATA_DIR],
+        "01",
+        os.path.join(TEST_DATA_DIR,
+                     "config_test_not_case_sensitive_option.json"),
+                     bidsDir.name)
+    app.run()
+
+    dupLocalizerFile = os.path.join(bidsDir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_localizer_dup-01.json")
+
+    assert os.path.exists(dupLocalizerFile)
 
     if os.name != 'nt':
         bidsDir.cleanup()
