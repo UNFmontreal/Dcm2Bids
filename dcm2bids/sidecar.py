@@ -207,9 +207,10 @@ class SidecarPairing(object):
                     subResult = []
                     for subPattern in pattern:
                         subResult.append(False)
-                        if subPattern in name:
-                            subResult[-1] = True
-                            break
+                        for subName in name:
+                            if compare(subName, subPattern):
+                                subResult[-1] = True
+                                break
                 except:
                     subResult = [False]
 
