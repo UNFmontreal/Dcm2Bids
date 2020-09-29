@@ -204,14 +204,16 @@ class SidecarPairing(object):
             name = data.get(tag)
             if isinstance(name, list):
                 try:
-                    subResult = [len(name) == len(pattern), isinstance(pattern, list)]
-                    for subName, subPattern in zip(name, pattern):
-                        subResult.append(compare(subName, subPattern))
+                    subResult = []
+                    for subPattern in pattern:
+                        subResult.append(False)
+                        if subPattern in name:
+                            subResult[-1] = True
+                            break
                 except:
                     subResult = [False]
 
                 result.append(all(subResult))
-
             else:
                 result.append(compare(name, pattern))
 
