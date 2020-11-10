@@ -69,5 +69,18 @@ def test_dcm2bids():
     fmapMtimeRerun = os.stat(fmapFile).st_mtime
     assert fmapMtime == fmapMtimeRerun
 
+    # Validate caseSensitive false
+    shutil.rmtree(tmpSubDir)
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+
+    app = Dcm2bids(
+        [TEST_DATA_DIR],
+        "01",
+        os.path.join(TEST_DATA_DIR,
+                     "config_test_not_case_sensitive_option.json"),
+                     bidsDir.name)
+    app.run()
+
+
     if os.name != 'nt':
         bidsDir.cleanup()
