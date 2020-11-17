@@ -11,8 +11,7 @@ Info: https://github.com/unfmontreal/Dcm2Bids
 
 
 %labels
-Maintainer Christophe Bedetti <christophe.bedetti@montreal.ca>
-
+Maintainer Arnaud Boré <arnaud.bore@gmail.com>
 
 %post
     #Dependencies
