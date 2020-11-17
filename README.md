@@ -4,7 +4,7 @@
 <a href="https://pypi.org/project/dcm2bids">
 <img alt="PyPI version" src="https://badge.fury.io/py/dcm2bids.svg">
 </a>
-<a href="https://cbedetti.github.io/Dcm2Bids">
+<a href="https://unfmontreal.github.io/Dcm2Bids">
 <img alt="Documentation" src="https://img.shields.io/badge/documentation-dcm2bids-succes.svg">
 </a>
 <a href="https://zenodo.org/badge/latestdoi/59581295">
@@ -18,11 +18,11 @@
 </p>
 
 <p>
-<a href="https://github.com/cbedetti/Dcm2Bids/actionsk">
-<img alt="" src="https://github.com/cbedetti/Dcm2Bids/workflows/Tests/badge.svg">
+<a href="https://github.com/unfmontreal/Dcm2Bids/actionsk">
+<img alt="" src="https://github.com/unfmontreal/Dcm2Bids/workflows/Tests/badge.svg">
 </a>
-<a href="https://codecov.io/gh/cbedetti/Dcm2Bids">
-<img src="https://codecov.io/gh/cbedetti/Dcm2Bids/branch/master/graph/badge.svg"/>
+<a href="https://codecov.io/gh/unfmontreal/Dcm2Bids">
+<img src="https://codecov.io/gh/unfmontreal/Dcm2Bids/branch/master/graph/badge.svg"/>
 </a>
 <a href="https://github.com/psf/black">
 <img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
@@ -59,7 +59,7 @@ Before using this software, learn more about BIDS:
 5. Build your configuration file with the help of the content of `tmp_dcm2bids/helper`
 6. `dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE` for each participants of your study
 
-Follow the [tutorial](https://cbedetti.github.io/Dcm2Bids/tutorial)
+Follow the [tutorial](https://unfmontreal.github.io/Dcm2Bids/tutorial)
 
 dcm2bids creates log files inside `<YOUR_FUTURE_BIDS_FOLDER>/tmp_dcm2bids/log`
 
@@ -80,7 +80,7 @@ Other tools to create [BIDS][bids] datasets :
 [bids-nature]: https://www.nature.com/articles/sdata201644
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [bids-validator]: https://github.com/bids-standard/bids-validator
-[dcm2bids-doc]: https://cbedetti.github.io/Dcm2Bids
+[dcm2bids-doc]: https://unfmontreal.github.io/Dcm2Bids
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
 [dcm2niix-release]: https://github.com/rordenlab/dcm2niix/releases

@@ -7,12 +7,11 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 Launching dcm2bids with singularity:
     singularity exec <container>.simg dcm2bids [args]
 
-Info: https://github.com/cbedetti/Dcm2Bids
+Info: https://github.com/unfmontreal/Dcm2Bids
 
 
 %labels
-Maintainer Christophe Bedetti <christophe.bedetti@montreal.ca>
-
+Maintainer Arnaud Boré <arnaud.bore@gmail.com>
 
 %post
     #Dependencies
@@ -37,7 +36,7 @@ Maintainer Christophe Bedetti <christophe.bedetti@montreal.ca>
 
     #Install dcm2bids from github
     cd /usr/local/src
-    git clone https://github.com/cbedetti/Dcm2Bids.git
+    git clone https://github.com/unfmontreal/Dcm2Bids.git
     cd Dcm2Bids && pip install .
 
 

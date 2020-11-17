@@ -45,8 +45,8 @@ with open("README.md", encoding="utf-8") as _:
     LONG_DESCRIPTION = _.read()
 LICENSE = "GPLv3+"
 PROJECT_URLS = {
-    "Documentation": "https://cbedetti.github.io/Dcm2Bids",
-    "Source Code": "https://github.com/cbedetti/Dcm2Bids",
+    "Documentation": "https://unfmontreal.github.io/Dcm2Bids",
+    "Source Code": "https://github.com/unfmontreal/Dcm2Bids",
 }
 CLASSIFIERS = [
     "Intended Audience :: Healthcare Industry",

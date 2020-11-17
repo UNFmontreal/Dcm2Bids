@@ -15,7 +15,7 @@ def get_arguments():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description="",
         epilog="""
-            Documentation at https://github.com/cbedetti/Dcm2Bids
+            Documentation at https://github.com/unfmontreal/Dcm2Bids
             """,
     )
 
