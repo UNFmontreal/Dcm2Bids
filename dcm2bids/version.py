@@ -100,7 +100,7 @@ def check_latest(name="dcm2bids"):
     """
     data = {
         "dcm2bids": {
-            "repo": "cbedetti/Dcm2Bids",
+            "repo": "unfmontreal/Dcm2Bids",
             "host": "https://github.com",
             "current": __version__,
         },
