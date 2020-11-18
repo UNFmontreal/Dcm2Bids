@@ -23,7 +23,7 @@ fnmatch is the behaviour (See criteria) by default and the fall back if this opt
 
 default: `"caseSensitive": "false"`
 
-If true, comparaisons between strings/list will be case sensitive. False is the default behavior.
+If true, comparaisons between strings/list will be case sensitive.
 
 ## defaceTpl
 

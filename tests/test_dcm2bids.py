@@ -69,8 +69,14 @@ def test_dcm2bids():
     fmapMtimeRerun = os.stat(fmapFile).st_mtime
     assert fmapMtime == fmapMtimeRerun
 
+    if os.name != 'nt':
+        bidsDir.cleanup()
+
+def test_caseSensitive_false():
     # Validate caseSensitive false
-    shutil.rmtree(tmpSubDir)
+    bidsDir = TemporaryDirectory()
+
+    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
     app = Dcm2bids(
@@ -81,6 +87,46 @@ def test_dcm2bids():
                      bidsDir.name)
     app.run()
 
+    layout = BIDSLayout(bidsDir.name,
+                        validate=False,
+                        ignore='tmp_dcm2bids')
+
+    # Input T1 is UPPER CASE (json)
+    json_t1 = layout.get(subject='01',
+                         datatype='anat',
+                         extension='json',
+                         suffix='T1w')
+
+    # Input  localizer is lowercase (json)
+    json_localizer = layout.get(subject='01',
+                                extension='json',
+                                suffix='localizer')
+
+    # Asking for something with low and up cases (config file)
+    json_dwi = layout.get(subject='01',
+                          datatype='dwi',
+                          extension='json',
+                          suffix='dwi')
+
+    path_t1 = os.path.join(bidsDir.name,
+                           "sub-01",
+                           "anat",
+                           "sub-01_T1w.json")
+
+    path_localizer = os.path.join(bidsDir.name,
+                                  "sub-01",
+                                  "localizer",
+                                  "sub-01_run-01_localizer.json")
+
+    path_dwi = os.path.join(bidsDir.name,
+                            "sub-01",
+                            "dwi",
+                            "sub-01_dwi.json")
+
+    assert layout.get_subjects() == ["01"]
+    assert json_t1[0].path == path_t1
+    assert json_localizer[0].path == path_localizer
+    assert json_dwi[0].path == path_dwi
 
     if os.name != 'nt':
         bidsDir.cleanup()
