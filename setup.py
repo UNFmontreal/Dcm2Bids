@@ -17,12 +17,10 @@ def load_version():
     return global_dict
 
 
-def install_requires():
-    """Get list of required modules"""
-    required = []
-    for module, meta in _VERSION["REQUIRED_MODULE_METADATA"]:
-        required.append("{}>={}".format(module, meta["min_version"]))
-    return required
+install_requires = [
+ "future>=0.17.1",
+ "pydeface",
+]
 
 
 _VERSION = load_version()
@@ -71,7 +69,7 @@ if __name__ == "__main__":
         packages=find_packages(),
         entry_points=ENTRY_POINTS,
         python_requires=">=3.5",
-        install_requires=install_requires(),
+        install_requires=install_requires,
         package_data={"": ["README.md", "LICENSE.txt"]},
         author=AUTHOR,
         author_email=AUTHOR_EMAIL,

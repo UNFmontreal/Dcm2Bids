@@ -14,8 +14,6 @@ from subprocess import check_output
 from shutil import which
 
 
-REQUIRED_MODULE_METADATA = (("future", {"min_version": "0.17.1"}),)
-
 logger = logging.getLogger(__name__)
 
 
