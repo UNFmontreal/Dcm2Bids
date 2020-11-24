@@ -183,8 +183,9 @@ class SidecarPairing(object):
 
         result = []
 
+
         for tag, pattern in iteritems(criteria):
-            name = data.get(tag)
+            name = data.get(tag) or ''
 
             if isinstance(name, list):
                 try:
@@ -195,7 +196,6 @@ class SidecarPairing(object):
                     subResult = [False]
 
                 result.append(all(subResult))
-
             else:
                 result.append(compare(name, pattern))
 
