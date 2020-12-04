@@ -24,12 +24,6 @@ def compare_json(original_file, converted_file):
 
     converted_json.pop('Dcm2bidsVersion', None)
 
-    print(original_file)
-    print(original_json)
-
-    print(converted_file)
-    print(converted_json)
-
     return original_json == converted_json
 
 
@@ -168,10 +162,12 @@ def test_caseSensitive_false():
     assert json_01_localizer[0].path == path_localizer
     assert json_dwi[0].path == path_dwi
 
-    # Check order runs
+    # Check order runs when same number
+    # i00001 no AcquisitionTime
+    # i00002 AcquisitionTime after i00003
     assert compare_json(original_01_localizer,
                         json_01_localizer[0].path)
     assert compare_json(original_02_localizer,
-                        json_02_localizer[0].path)
-    assert compare_json(original_03_localizer,
                         json_03_localizer[0].path)
+    assert compare_json(original_03_localizer,
+                        json_02_localizer[0].path)
