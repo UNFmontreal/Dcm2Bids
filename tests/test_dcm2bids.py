@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 
+import json
 import os
 import shutil
 from tempfile import TemporaryDirectory
+
 from bids import BIDSLayout
+
 from dcm2bids import Dcm2bids
 from dcm2bids.utils import DEFAULT, load_json
-import json
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+
 
 def compare_json(original_file, converted_file):
     with open(original_file) as f:
@@ -78,8 +81,6 @@ def test_dcm2bids():
     fmapMtimeRerun = os.stat(fmapFile).st_mtime
     assert fmapMtime == fmapMtimeRerun
 
-    if os.name != 'nt':
-        bidsDir.cleanup()
 
 def test_caseSensitive_false():
     # Validate caseSensitive false
@@ -113,9 +114,17 @@ def test_caseSensitive_false():
                                   "localizer",
                                   "sub-01_run-01_localizer.json")
 
-    original_localizer = os.path.join(TEST_DATA_DIR,
-                                      "sidecars",
-                                      "001_localizer_20100603125600_i00001.json")
+    original_01_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00001.json")
+
+    original_02_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00002.json")
+
+    original_03_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00003.json")
 
     # Input T1 is UPPER CASE (json)
     json_t1 = layout.get(subject='01',
@@ -124,10 +133,20 @@ def test_caseSensitive_false():
                          suffix='T1w')
 
     # Input localizer is lowercase (json)
-    json_localizer = layout.get(subject='01',
-                                extension='json',
-                                suffix='localizer',
-                                run='01')
+    json_01_localizer = layout.get(subject='01',
+                                   extension='json',
+                                   suffix='localizer',
+                                   run='01')
+
+    json_02_localizer = layout.get(subject='01',
+                                   extension='json',
+                                   suffix='localizer',
+                                   run='02')
+
+    json_03_localizer = layout.get(subject='01',
+                                   extension='json',
+                                   suffix='localizer',
+                                   run='03')
 
     # Asking for something with low and up cases (config file)
     json_dwi = layout.get(subject='01',
@@ -135,8 +154,18 @@ def test_caseSensitive_false():
                           extension='json',
                           suffix='dwi')
 
-    assert set(os.listdir(os.path.join(bidsDir.name,'sub-01'))) == {'anat','dwi','localizer'}
+    assert set(os.listdir(os.path.join(bidsDir.name,
+                                       'sub-01'))) == {'anat',
+                                                       'dwi',
+                                                       'localizer'}
     assert json_t1[0].path == path_t1
-    assert json_localizer[0].path == path_localizer
+    assert json_01_localizer[0].path == path_localizer
     assert json_dwi[0].path == path_dwi
-    assert compare_json(original_localizer, json_localizer[0].path)
+
+    # Check order runs
+    assert compare_json(original_01_localizer,
+                        json_01_localizer[0].path)
+    assert compare_json(original_02_localizer,
+                        json_02_localizer[0].path)
+    assert compare_json(original_03_localizer,
+                        json_03_localizer[0].path)
