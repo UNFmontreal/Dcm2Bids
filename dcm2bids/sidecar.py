@@ -33,12 +33,15 @@ class Sidecar(object):
 
     def __lt__(self, other):
         lts = []
+        print('self ' + self.data.get('SidecarFilename'))
+        print('other ' + other.data.get('SidecarFilename'))
         for key in self.compKeys:
             try:
                 lts.append(self.data.get(key) < other.data.get(key))
             except:
                 lts.append(None)
 
+        print(lts)
         for lt in lts:
             if lt is not None:
                 return lt
