@@ -37,15 +37,11 @@ class Sidecar(object):
             try:
                 lts.append(self.data.get(key) < other.data.get(key))
             except:
-                lts.append(False)
+                lts.append(None)
 
         for lt in lts:
-            if lt:
-                return True
-            else:
-                pass
-
-        return False
+            if lt is not None:
+                return lt
 
     def __eq__(self, other):
         return self.data == other.data
