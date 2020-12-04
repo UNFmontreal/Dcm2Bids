@@ -7,9 +7,21 @@ from tempfile import TemporaryDirectory
 from bids import BIDSLayout
 from dcm2bids import Dcm2bids
 from dcm2bids.utils import DEFAULT, load_json
+import json
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+
+def compare_json(original_file, converted_file):
+    with open(original_file) as f:
+        original_json = json.load(f)
+
+    with open(converted_file) as f:
+        converted_json = json.load(f)
+
+    converted_json.pop('Dcm2bidsVersion', None)
+
+    return original_json == converted_json
 
 
 def test_dcm2bids():
@@ -34,12 +46,9 @@ def test_dcm2bids():
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2, 3]
 
-    app = Dcm2bids(
-        [TEST_DATA_DIR],
-        "01",
-        os.path.join(TEST_DATA_DIR, "config_test.json"),
-        bidsDir.name,
-    )
+    app = Dcm2bids(TEST_DATA_DIR, "01",
+                   os.path.join(TEST_DATA_DIR, "config_test.json"),
+                   bidsDir.name)
     app.run()
 
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
@@ -79,34 +88,20 @@ def test_caseSensitive_false():
     tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(
-        [TEST_DATA_DIR],
-        "01",
-        os.path.join(TEST_DATA_DIR,
-                     "config_test_not_case_sensitive_option.json"),
-                     bidsDir.name)
+    app = Dcm2bids(TEST_DATA_DIR, "01",
+                   os.path.join(TEST_DATA_DIR,
+                                "config_test_not_case_sensitive_option.json"),
+                   bidsDir.name)
     app.run()
 
     layout = BIDSLayout(bidsDir.name,
                         validate=False,
                         ignore='tmp_dcm2bids')
 
-    # Input T1 is UPPER CASE (json)
-    json_t1 = layout.get(subject='01',
-                         datatype='anat',
-                         extension='json',
-                         suffix='T1w')
-
-    # Input  localizer is lowercase (json)
-    json_localizer = layout.get(subject='01',
-                                extension='json',
-                                suffix='localizer')
-
-    # Asking for something with low and up cases (config file)
-    json_dwi = layout.get(subject='01',
-                          datatype='dwi',
-                          extension='json',
-                          suffix='dwi')
+    path_dwi = os.path.join(bidsDir.name,
+                            "sub-01",
+                            "dwi",
+                            "sub-01_dwi.json")
 
     path_t1 = os.path.join(bidsDir.name,
                            "sub-01",
@@ -118,15 +113,30 @@ def test_caseSensitive_false():
                                   "localizer",
                                   "sub-01_run-01_localizer.json")
 
-    path_dwi = os.path.join(bidsDir.name,
-                            "sub-01",
-                            "dwi",
-                            "sub-01_dwi.json")
+    original_localizer = os.path.join(TEST_DATA_DIR,
+                                      "sidecars",
+                                      "001_localizer_20100603125600_i00001.json")
 
-    assert layout.get_subjects() == ["01"]
+    # Input T1 is UPPER CASE (json)
+    json_t1 = layout.get(subject='01',
+                         datatype='anat',
+                         extension='json',
+                         suffix='T1w')
+
+    # Input localizer is lowercase (json)
+    json_localizer = layout.get(subject='01',
+                                extension='json',
+                                suffix='localizer',
+                                run='01')
+
+    # Asking for something with low and up cases (config file)
+    json_dwi = layout.get(subject='01',
+                          datatype='dwi',
+                          extension='json',
+                          suffix='dwi')
+
+    assert set(os.listdir(os.path.join(bidsDir.name,'sub-01'))) == {'anat','dwi','localizer'}
     assert json_t1[0].path == path_t1
     assert json_localizer[0].path == path_localizer
     assert json_dwi[0].path == path_dwi
-
-    if os.name != 'nt':
-        bidsDir.cleanup()
+    assert compare_json(original_localizer, json_localizer[0].path)

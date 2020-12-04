@@ -172,13 +172,15 @@ class SidecarPairing(object):
         """
 
         def compare(name, pattern):
-            if not self.caseSensitive:
-                name = str(name).lower()
-                pattern = str(pattern).lower()
-
             if self.searchMethod == "re":
                 return bool(re.search(pattern, name))
             else:
+                name = str(name)
+                pattern = str(pattern)
+                if not self.caseSensitive:
+                    name = name.lower()
+                    pattern = pattern.lower()
+
                 return fnmatch(name, pattern)
 
         result = []

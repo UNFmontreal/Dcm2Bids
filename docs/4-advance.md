@@ -21,9 +21,10 @@ fnmatch is the behaviour (See criteria) by default and the fall back if this opt
 
 ## caseSensitive
 
-default: `"caseSensitive": "false"`
+default: `"caseSensitive": "true"`
 
-If true, comparaisons between strings/list will be case sensitive.
+If false, comparisons between strings/lists will be not case sensitive.
+It's only disabled when used with `"searchMethod": "fnmatch"`.
 
 ## defaceTpl
 
