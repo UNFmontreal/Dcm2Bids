@@ -33,15 +33,19 @@ class Sidecar(object):
 
     def __lt__(self, other):
         lts = []
-        print('self ' + self.data.get('SidecarFilename'))
-        print('other ' + other.data.get('SidecarFilename'))
         for key in self.compKeys:
             try:
-                lts.append(self.data.get(key) < other.data.get(key))
+                if all(key in d for d in (self.data, other.data)):
+                    if self.data.get(key) == other.data.get(key):
+                        lts.append(None)
+                    else:
+                        lts.append(self.data.get(key) < other.data.get(key))
+                else:
+                    lts.append(None)
+
             except:
                 lts.append(None)
 
-        print(lts)
         for lt in lts:
             if lt is not None:
                 return lt
@@ -263,7 +267,6 @@ class SidecarPairing(object):
                     yield key, locs
 
         dstRoots = [_.dstRoot for _ in self.acquisitions]
-
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("%s has %s runs", dstRoot, len(dup))
             self.logger.info("Adding 'run' information to the acquisition")
