@@ -188,7 +188,6 @@ class SidecarPairing(object):
 
         result = []
 
-
         for tag, pattern in iteritems(criteria):
             name = data.get(tag) or ''
 
