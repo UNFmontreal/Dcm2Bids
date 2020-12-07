@@ -124,6 +124,7 @@ class Dcm2bids(object):
             sidecars.append(
                 Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
             )
+        sidecars = sorted(sidecars)
 
         parser = SidecarPairing(
             sidecars,
