@@ -23,7 +23,11 @@ def compare_json(original_file, converted_file):
         converted_json = json.load(f)
 
     converted_json.pop('Dcm2bidsVersion', None)
+    print('original_json')
+    print(original_json)
 
+    print('converted_json')
+    print(converted_json)
     return original_json == converted_json
 
 
