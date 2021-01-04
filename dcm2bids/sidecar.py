@@ -189,7 +189,7 @@ class SidecarPairing(object):
         result = []
 
         for tag, pattern in iteritems(criteria):
-            name = data.get(tag) or ''
+            name = data.get(tag, '')# or ''
 
             if isinstance(name, list):
                 try:
