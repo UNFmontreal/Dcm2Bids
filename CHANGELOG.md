@@ -1,6 +1,9 @@
 # CHANGELOG
 
-## 2.1.5
+## 2.1.5 - 2021-01-04
+
+- Add possibility to be not case sensitive
+- Fix issue 34: dcm2bids not ordering runs chronologically 
 
 ## 2.1.4 - 2019-04-04
 

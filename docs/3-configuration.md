@@ -10,7 +10,7 @@
             "modalityLabel": "bold",
             "customLabels": "task-rest",
             "criteria": {
-                "SidecarFilename": "006*"
+                "SidecarFilename": "006*",
                 "ImageType": ["ORIG*", "PRIMARY", "M", "ND", "MOSAIC"]
             }
         },
@@ -78,7 +78,7 @@ It is an optional field. For some acquisitions, you need to add information in t
 
 To know more on how to set these fields, read the [BIDS specifications][bids-spec].
 
-For a longer example of a Dcm2Bids config json, see [here](https://github.com/cbedetti/Dcm2Bids/blob/master/example/config.json).
+For a longer example of a Dcm2Bids config json, see [here](https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json).
 
 ## sidecarChanges
 

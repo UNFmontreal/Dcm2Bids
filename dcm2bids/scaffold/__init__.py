@@ -19,7 +19,7 @@ def _get_arguments():
             Create basic BIDS files and directories
             """,
         epilog="""
-            Documentation at https://github.com/cbedetti/Dcm2Bids
+            Documentation at https://github.com/unfmontreal/Dcm2Bids
             """,
     )
 

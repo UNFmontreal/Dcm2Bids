@@ -6,6 +6,7 @@ These optional configurations could be insert in the configuration file at the s
 {
     "searchMethod": "fnmatch",
     "duplicateMethod": "run",
+    "caseSensitive": true,
     "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "description": [
         ...
@@ -26,6 +27,14 @@ default: `"duplicateMethod": "run"`
 When dcm2bids found duplicates, it will add `run` as a suffix by default.
 
 If `"duplicateMethod": "dup"`, dcm2bids will behave as heudiconv (See [documentation](https://heudiconv.readthedocs.io/en/latest/changes.html#id8))
+
+
+## caseSensitive
+
+default: `"caseSensitive": "true"`
+
+If false, comparisons between strings/lists will be not case sensitive.
+It's only disabled when used with `"searchMethod": "fnmatch"`.
 
 ## defaceTpl
 

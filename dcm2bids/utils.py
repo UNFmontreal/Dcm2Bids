@@ -38,6 +38,7 @@ class DEFAULT(object):
     duplicateMethod = "run"
     dupMethodChoices = ["run", "dup"]
     runTpl = "_run-{:02d}"
+    caseSensitive = True
     dupTpl = "_dup-{:02d}"
 
     # misc

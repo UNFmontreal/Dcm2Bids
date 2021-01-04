@@ -127,10 +127,11 @@ class Dcm2bids(object):
         sidecars = sorted(sidecars)
 
         parser = SidecarPairing(
-                sidecars,
-                self.config["descriptions"],
-                self.config.get("searchMethod", DEFAULT.searchMethod),
-                self.config.get("dupMethod", DEFAULT.duplicateMethod))
+            sidecars,
+            self.config["descriptions"],
+            self.config.get("searchMethod", DEFAULT.searchMethod),
+            self.config.get("caseSensitive", DEFAULT.caseSensitive)
+        )
         parser.build_graph()
         parser.build_acquisitions(self.participant)
         parser.find_runs()
@@ -199,7 +200,7 @@ dcm2bids {}""".format(
             __version__
         ),
         epilog="""
-            Documentation at https://github.com/cbedetti/Dcm2Bids
+            Documentation at https://github.com/unfmontreal/Dcm2Bids
             """,
     )
 
@@ -260,7 +261,7 @@ dcm2bids {}""".format(
         action="store_true",
         help="""
         This option no longer exists from the script in this release.
-        See:https://github.com/cbedetti/Dcm2Bids/blob/master/README.md#defaceTpl""",
+        See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl""",
     )
 
     args = parser.parse_args()

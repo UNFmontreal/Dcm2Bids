@@ -6,7 +6,7 @@
 """Setup file for the dcm2bids package"""
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def load_version():
@@ -45,8 +45,8 @@ with open("README.md", encoding="utf-8") as _:
     LONG_DESCRIPTION = _.read()
 LICENSE = "GPLv3+"
 PROJECT_URLS = {
-    "Documentation": "https://cbedetti.github.io/Dcm2Bids",
-    "Source Code": "https://github.com/cbedetti/Dcm2Bids",
+    "Documentation": "https://unfmontreal.github.io/Dcm2Bids",
+    "Source Code": "https://github.com/unfmontreal/Dcm2Bids",
 }
 CLASSIFIERS = [
     "Intended Audience :: Healthcare Industry",
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     setup(
         name=DISTNAME,
         version=VERSION,
-        packages=[DISTNAME],
+        packages=find_packages(),
         entry_points=ENTRY_POINTS,
         python_requires=">=3.5",
         install_requires=install_requires(),
