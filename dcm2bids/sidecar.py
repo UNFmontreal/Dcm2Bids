@@ -35,17 +35,20 @@ class Sidecar(object):
         lts = []
         for key in self.compKeys:
             try:
-                lts.append(self.data.get(key) < other.data.get(key))
+                if all(key in d for d in (self.data, other.data)):
+                    if self.data.get(key) == other.data.get(key):
+                        lts.append(None)
+                    else:
+                        lts.append(self.data.get(key) < other.data.get(key))
+                else:
+                    lts.append(None)
+
             except:
-                lts.append(False)
+                lts.append(None)
 
         for lt in lts:
-            if lt:
-                return True
-            else:
-                pass
-
-        return False
+            if lt is not None:
+                return lt
 
     def __eq__(self, other):
         return self.data == other.data
@@ -86,7 +89,8 @@ class SidecarPairing(object):
         descriptions (list): List of dictionnaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod):
+    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
+                 caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
@@ -96,6 +100,7 @@ class SidecarPairing(object):
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
+        self.caseSensitive = caseSensitive
 
     @property
     def searchMethod(self):
@@ -118,6 +123,24 @@ class SidecarPairing(object):
             )
             self.logger.warning(
                 "Search methods implemented: %s", DEFAULT.searchMethodChoices
+            )
+
+    @property
+    def caseSensitive(self):
+        return self._caseSensitive
+
+    @caseSensitive.setter
+    def caseSensitive(self, value):
+        if isinstance(value, bool):
+            self._caseSensitive = value
+        else:
+            self._caseSensitive = DEFAULT.caseSensitive
+            self.logger.warning("'%s' is not a boolean", value)
+            self.logger.warning(
+                "Falling back to default: %s", DEFAULT.caseSensitive
+            )
+            self.logger.warning(
+                "Search methods implemented: %s", DEFAULT.caseSensitive
             )
 
     def build_graph(self):
@@ -153,14 +176,20 @@ class SidecarPairing(object):
 
         def compare(name, pattern):
             if self.searchMethod == "re":
-                return bool(re.search(pattern, str(name)))
-
+                return bool(re.search(pattern, name))
             else:
-                return fnmatch(str(name), str(pattern))
+                name = str(name)
+                pattern = str(pattern)
+                if not self.caseSensitive:
+                    name = name.lower()
+                    pattern = pattern.lower()
+
+                return fnmatch(name, pattern)
 
         result = []
+
         for tag, pattern in iteritems(criteria):
-            name = data.get(tag)
+            name = data.get(tag, '')# or ''
 
             if isinstance(name, list):
                 try:
@@ -171,7 +200,6 @@ class SidecarPairing(object):
                     subResult = [False]
 
                 result.append(all(subResult))
-
             else:
                 result.append(compare(name, pattern))
 
@@ -241,7 +269,6 @@ class SidecarPairing(object):
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("%s has %s runs", dstRoot, len(dup))
             self.logger.info("Adding 'run' information to the acquisition")
-
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum + 1)
                 self.acquisitions[acqInd].customLabels += runStr

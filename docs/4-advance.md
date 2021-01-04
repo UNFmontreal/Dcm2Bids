@@ -5,6 +5,7 @@ These optional configurations could be insert in the configuration file at the s
 ```
 {
     "searchMethod": "fnmatch",
+    "caseSensitive": true,
     "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "description": [
         ...
@@ -17,6 +18,13 @@ These optional configurations could be insert in the configuration file at the s
 default: `"searchMethod": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this option is set incorrectly. `re` is the other choice if you want more flexibility to match criteria.
+
+## caseSensitive
+
+default: `"caseSensitive": "true"`
+
+If false, comparisons between strings/lists will be not case sensitive.
+It's only disabled when used with `"searchMethod": "fnmatch"`.
 
 ## defaceTpl
 

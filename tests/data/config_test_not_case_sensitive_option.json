@@ -1,0 +1,27 @@
+{
+    "caseSensitive": false,
+    "searchMethod": "fnmatch",
+    "descriptions": [
+        {
+          "dataType": "localizer",
+          "modalityLabel": "localizer",
+          "criteria": {
+              "SeriesDescription": "LOCALIZER"
+          }
+        },
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SidecarFilename": "*mprage*"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DtI"
+            }
+        }
+    ]
+}
