@@ -130,7 +130,8 @@ class Dcm2bids(object):
             sidecars,
             self.config["descriptions"],
             self.config.get("searchMethod", DEFAULT.searchMethod),
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
+            self.config.get("caseSensitive", DEFAULT.caseSensitive),
+            self.config.get("duplicateMethod", DEFAULT.dupMethod),
         )
         parser.build_graph()
         parser.build_acquisitions(self.participant)

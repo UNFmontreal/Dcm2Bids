@@ -172,16 +172,17 @@ def test_caseSensitive_false():
     assert compare_json(original_03_localizer,
                         json_02_localizer[0].path)
 
-def test_dup(bidsDir, tmpSubDir):
+def test_dup():
     # Validate duplicateMethod: dup
-    shutil.rmtree(tmpSubDir)
+    bidsDir = TemporaryDirectory()
+    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
     app = Dcm2bids(
         [TEST_DATA_DIR],
         "01",
         os.path.join(TEST_DATA_DIR, "config_test_dup_option.json"),
-        bidsDir.name,
+        bidsDir.name
     )
     app.run()
 
@@ -190,4 +191,43 @@ def test_dup(bidsDir, tmpSubDir):
                                     "localizer",
                                     "sub-01_localizer_dup-01.json")
 
-    assert os.path.exists(dupLocalizerFile)
+    layout = BIDSLayout(bidsDir.name,
+                        validate=False,
+                        ignore='tmp_dcm2bids')
+
+    original_01_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00001.json")
+
+    original_02_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00002.json")
+
+    original_03_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00003.json")
+
+    # Input localizer is lowercase (json)
+    json_01_localizer = layout.get(subject="01",
+                                   extension="json",
+                                   suffix="localizer")
+
+    assert len(json_01_localizer)==1
+    assert compare_json(original_02_localizer,
+                        json_01_localizer[0].path)
+
+    json_dup_01_localizer = os.path.join(bidsDir.name,
+                                        "sub-01",
+                                        "localizer",
+                                        "sub-01_localizer_dup-01.json")
+
+    json_dup_02_localizer = os.path.join(bidsDir.name,
+                                        "sub-01",
+                                        "localizer",
+                                        "sub-01_localizer_dup-02.json")
+
+    assert compare_json(original_01_localizer,
+                        json_dup_01_localizer)
+
+    assert compare_json(original_03_localizer,
+                        json_dup_02_localizer)

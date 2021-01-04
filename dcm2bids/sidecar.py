@@ -91,7 +91,7 @@ class SidecarPairing(object):
 
     def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
                  caseSensitive=DEFAULT.caseSensitive,
-                 dupMethod=DEFAULT.duplicateMethod):
+                 dupMethod=DEFAULT.dupMethod):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
@@ -137,7 +137,7 @@ class SidecarPairing(object):
         if value in DEFAULT.dupMethodChoices:
             self._dupMethod = value
         else:
-            self._dupMethod = DEFAULT.duplicateMethod
+            self._dupMethod = DEFAULT.dupMethod
             self.logger.warning(
                     "%s is not a duplicate method implemented", value)
             self.logger.warning(

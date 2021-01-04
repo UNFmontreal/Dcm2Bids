@@ -35,11 +35,11 @@ class DEFAULT(object):
     searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
 
-    duplicateMethod = "run"
+    dupMethod = "run"
     dupMethodChoices = ["run", "dup"]
     runTpl = "_run-{:02d}"
-    caseSensitive = True
     dupTpl = "_dup-{:02d}"
+    caseSensitive = True
 
     # misc
     tmpDirName = "tmp_dcm2bids"
