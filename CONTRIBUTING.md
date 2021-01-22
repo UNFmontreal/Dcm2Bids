@@ -26,13 +26,13 @@ If you already know what you are looking for, you can select one of the section 
 * [Recognizing your contribution](#recognizing-your-contribution)
 
 Don't know where to get started?
-Read [Joining the conversation](#joining-the-conversation) and pop into
+Read [Welcome](#welcome) and pop into
 this [thread][dcm2bids-introduce-yourself] to introduce yourself! Let us know what your interests are and we
 will help you find an issue to contribute to. Thanks so much!
 
 ## Welcome
 
-dcm2bids is a small project started in 2017 by Christophe Bedetti(@cbedetti).
+dcm2bids is a small project started in 2017 by Christophe Bedetti([@cbedetti](https://github.com/cbedetti)).
 Now 2021, we are starting a new initiative and we're excited to have you join!
 You can introduce yourself on the open issue [welcome][dcm2bids-welcome] and
 tell us how you would like to contribute in the `dcm2bids` community.
@@ -49,9 +49,9 @@ Helping users on Neurostars forum is one of them.
 Neurostars has a `dcm2bids` tag that helps us following any question regarding
 the project. You can ask for Neurostars to send you notifications when a new
  message has been posted. If you know the answer, you can reply following
- our [code of conduct][dcm2bids-coc].
+ our [Code of Conduct][dcm2bids-coc].
 
-## Contributing through Github
+## Contributing through GitHub
 
 [git][link_git] is a really useful tool for version control.
 [GitHub][link_github] sits on top of git and supports collaborative and distributed working.
@@ -81,7 +81,7 @@ Before starting to work on a new pull request we highly recommend you open an
  interesting to see how others approach your issue and give their opinion and
  maybe give you advice to find the best way to code it. Finally, it will prevent
  you to start working on something that is already in progress.
- Keep it mind the [scope][dcm2bids-scope] of the `dcm2bids` project.
+ Keep in mind the [scope][dcm2bids-scope] of the `dcm2bids` project.
 
 #### Fork the `dcm2bids` repository
 
@@ -98,7 +98,8 @@ git merge upstream/master
 
 Then create a new branch for each issue. Using a new branch allows you to
 follow the standard GitHub workflow when making changes.
-[This guide][git-guide] provides a useful overview for this workflow.
+[This guide][git-guide] provides a useful overview for this workflow. 
+Please keep the name of your branch short and self explanatory.
 
 ```
 git checkout -b MYBRANCH
@@ -136,6 +137,7 @@ Pull Request Checklist (For Fastest Review):
 - [ ] Make sure you have docstrings for any new functions
 - [ ] Make sure that docstrings are updated for edited functions
 - [ ] Make sure you note any issues that will be closed by your PR
+- [ ] Add a clear description of the purpose of you PR
 
 #### Submit and tag your pull request
 
@@ -163,7 +165,7 @@ The current list of labels are [here][dcm2bids-labels] and include:
 
     If you feel that you can contribute to one of these issues, we especially encourage you to do so!
 
-* [![Bugs](https://img.shields.io/badge/-bugs-fc2929.svg)][link_bugs] *These issues point to problems in the project.*
+* [![Bug](https://img.shields.io/badge/-bug-fc2929.svg)][link_bugs] *These issues point to problems in the project.*
 
     If you find new a bug, please give as much detail as possible in your issue, including steps to recreate the error.
     If you experience the same bug as one already listed, please add any additional information that you have as a comment.
@@ -178,7 +180,7 @@ The current list of labels are [here][dcm2bids-labels] and include:
 
 We welcome and recognize [all contributions][link_all-contributors-spec]
 from documentation to testing to code development.
-You can see a list of current contributors in the README
+You can see a list of current contributors in the [README](/README.md)
 (kept up to date by the [all contributors bot][link_all-contributors-bot]).
 You can see [here][link_all-contributors-bot-usage] for instructions on
 how to use the bot.
@@ -187,7 +189,7 @@ how to use the bot.
 
 You're amazing. :wave::smiley:
 
-*&mdash; Based on contributing guidelines from the [STEMMRoleModels][link_stemmrolemodels] and [tedana][link_tedana]projects.*
+*&mdash; Based on contributing guidelines from the [STEMMRoleModels][link_stemmrolemodels] and [tedana][link_tedana] projects.*
 
 [link_git]: https://git-scm.com/
 [link_github]: http://github.com/
