@@ -3,11 +3,10 @@
 
 import argparse
 import datetime
-import json
 import os
 import shutil
 from ..utils import write_txt
-from ..version import check_github_latest
+
 
 SELF_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -50,16 +49,6 @@ def scaffold():
         "README",
     ]:
         shutil.copyfile(os.path.join(SELF_DIR, _), os.path.join(args.output_dir, _))
-
-
-    with open(os.path.join(args.output_dir, "dataset_description.json")) as f:
-        data = json.load(f)
-
-    bids_version = check_github_latest("bids-standard/bids-specification")
-    data['BIDSVersion'] = bids_version.replace('v', '')
-
-    with open(os.path.join(args.output_dir, "dataset_description.json"), 'w') as f:
-        json.dump(data, f, indent=4)
 
     with open(os.path.join(SELF_DIR, "CHANGES")) as _:
         data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
