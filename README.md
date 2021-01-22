@@ -34,7 +34,7 @@ Your friendly DICOM converter.
 
 ## Scope
 
-`dcm2bids` is a community centered project. It aims to be a friendly,
+`dcm2bids` is a community-centered project. It aims to be a friendly,
 easy-to-use tool to convert your dicoms. Our main goal is to make the dicom
 to BIDS conversion as effortless as possible. Even if in the near future
 more advanced features will be added, we'll keep the focus on your day
@@ -52,13 +52,12 @@ Please take a look at the [documentation][dcm2bids-doc] to:
 
 ## Issues
 
-We work hard to make sure `dcm2bids` is robust.
-Nevertheless there are two ways of reporting an issue:
+We work hard to make sure `dcm2bids` is robust and we welcome comments and questions to make sure it meets your use case! Here's our preferred workflow:
 
-- You are a github user we encourage you to use [issue][dcm2bids-issues].
+- If you have a usage question, please post your issue on Neurostars with `dcm2bids` as an optional tag. The tag is really important because Neurostars will only notify us if the tag is present.
 
-- You are not a github user you can post your issue on [Neurostars][neurostars] with `dcm2bids` as an optional tag. The tag is really important otherwise it will be difficult
-for us to find your post.
+- If you think you've found a bug, please open an issue here. To do this, you'll need a GitHub account. See our [contributing guide][dcm2bids-contributing] for more details.
+
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/bids-standard/bids-examples
@@ -71,3 +70,4 @@ for us to find your post.
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
 [neurostars]: https://neurostars.org/
+[dcm2bids-contributing]: https://unfmontreal.github.io/Dcm2Bids/CONTRIBUTING.md
