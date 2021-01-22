@@ -25,7 +25,7 @@ We do **NOT** tolerate harassment or inappropriate behavior in the dcm2bids
 community.
 
 
-## Our responsabilities
+## Our responsibilities
 
 Project maintainers are responsible for clarifying the standards of acceptable
 behavior and are expected to take appropriate and fair corrective action in
