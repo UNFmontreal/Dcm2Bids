@@ -70,7 +70,6 @@ available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.ht
 as well as Code of Conduct from the [tedana][tedana-repo] and
 [STEMMRoleModels][stem-repo] projects.
 
-
 [stem-repo]: https://github.com/KirstieJane/STEMMRoleModels
 [tedana-repo]: https://github.com/ME-ICA/tedana
 [homepage]: https://www.contributor-covenant.org/
