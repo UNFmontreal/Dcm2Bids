@@ -83,7 +83,7 @@ Before starting to work on a new pull request we highly recommend you open an
  you to start working on something that is already in progress.
  Keep in mind the [scope][dcm2bids-scope] of the `dcm2bids` project.
 
-#### Fork the `dcm2bids` repository
+### Fork the `dcm2bids` repository
 
 This way you'll be able to work on your own instance of `dcm2bids`. It will be
 a safe place where nothing can affect the main repository. Make sure your
@@ -105,7 +105,7 @@ Please keep the name of your branch short and self explanatory.
 git checkout -b MYBRANCH
 ```
 
-#### Test your branch
+### Test your branch
 
 If you are proposing new features, you'll need to add new tests as well.
 In any case, you have to test your branch prior to submit your PR.
@@ -129,7 +129,7 @@ integration tests.
 If you have propose a PR about a modification on the documentation you can
 have a preview from an editor like Atom using `CTRL+SHIFT+M`.
 
-#### Pull request: check list
+### Pull request: check list
 
 Pull Request Checklist (For Fastest Review):
 
@@ -139,7 +139,7 @@ Pull Request Checklist (For Fastest Review):
 - [ ] Make sure you note any issues that will be closed by your PR
 - [ ] Add a clear description of the purpose of you PR
 
-#### Submit and tag your pull request
+### Submit and tag your pull request
 
 When you submit a pull request we ask you to follow the tag specification. In order to simplify reviewers work, we ask you to use at least one of the following tags:
 
