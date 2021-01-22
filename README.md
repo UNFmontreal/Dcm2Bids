@@ -1,4 +1,5 @@
 # dcm2bids
+Your friendly DICOM converter.
 
 <p>
 <a href="https://pypi.org/project/dcm2bids">
@@ -29,61 +30,44 @@
 </a>
 </p>
 
-`dcm2bids` reorganises NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
+`dcm2bids` reorganises NIfTI files using [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
-Before using this software, learn more about BIDS:
+## Scope
 
-- read the BIDS [specifications][bids-spec] and the [paper][bids-nature]
-- some dataset [examples][bids-examples]
+`dcm2bids` is a community centered project. It aims to be a friendly,
+easy-to-use tool to convert your dicoms. Our main goal is to make the dicom
+to BIDS conversion as effortless as possible. Even if in the near future
+more advanced features will be added, we'll keep the focus on your day
+to day use case without complicating anything. That's the promise of the `dcm2bids` project.
 
-## Dependencies
+## Documentation
 
-- [dcm2niix][dcm2niix-github] to convert DICOM to NIfTI. **You need to install it**
-    - [install instructions][dcm2niix-install]
-    - [Recent release][dcm2niix-release]
+Please take a look at the [documentation][dcm2bids-doc] to:
 
-## Install
+* [Learn about bids][bids-spec] with some dataset [examples][bids-examples]
+* [Install dcm2niix][dcm2niix-install]
+* [Install dcm2bids][dcm2bids-install]
+* [Follow the tutorial][dcm2bids-tutorial]
+* [Seek for more advanced usage][dcm2bids-advanced]
 
-`pip install dcm2bids`
+## Issues
 
-## Upgrading
+We work hard to make sure `dcm2bids` is robust.
+Nevertheless there are two ways of reporting an issue:
 
-`pip install --upgrade dcm2bids`
+- You are a github user we encourage you to use [issue][dcm2bids-issues].
 
-## TL;DR
-
-1. `mkdir <YOUR_FUTURE_BIDS_FOLDER>`
-2. `cd <YOUR_FUTURE_BIDS_FOLDER>`
-3. `dcm2bids_scaffold`
-4. `dcm2bids_helper -d <FOLDER_WITH_DICOMS_OF_A_TYPICAL_SESSION>`
-5. Build your configuration file with the help of the content of `tmp_dcm2bids/helper`
-6. `dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE` for each participants of your study
-
-Follow the [tutorial](https://unfmontreal.github.io/Dcm2Bids/tutorial)
-
-dcm2bids creates log files inside `<YOUR_FUTURE_BIDS_FOLDER>/tmp_dcm2bids/log`
-
-## bids-validator
-
-Run the [bids-validator][bids-validator] to check your directory. Don't forget to create a `.bidsignore` file at the root of your BIDS directory with `tmp_dcm2bids/*` inside.
-
-## Similar projects
-
-Other tools to create [BIDS][bids] datasets :
-
-- [heudiconv][link-heudiconv]
-- [bidskit][link-bidskit]
-- [dac2bids][link-dac2bids]
+- You are not a github user you can post your issue on [Neurostars][neurostars] with `dcm2bids` as an optional tag. The tag is really important otherwise it will be difficult
+for us to find your post.
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/bids-standard/bids-examples
-[bids-nature]: https://www.nature.com/articles/sdata201644
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
-[bids-validator]: https://github.com/bids-standard/bids-validator
 [dcm2bids-doc]: https://unfmontreal.github.io/Dcm2Bids
-[dcm2niix-github]: https://github.com/rordenlab/dcm2niix
+[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/#install
+[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/tutorial
+[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/advance/
+[dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
-[dcm2niix-release]: https://github.com/rordenlab/dcm2niix/releases
-[link-heudiconv]: https://github.com/nipy/heudiconv
-[link-bidskit]: https://github.com/jmtyszka/bidskit
-[link-dac2bids]: https://github.com/dangom/dac2bids
+[dcm2niix-github]: https://github.com/rordenlab/dcm2niix
+[neurostars]: https://neurostars.org/
