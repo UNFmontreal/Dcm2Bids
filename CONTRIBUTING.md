@@ -9,7 +9,7 @@ This document has been written in such a way you feel at ease to find your way
 We tried to cover as much as possible in few words possible. If you have any
 questions don't hesitate to share them in the section below.
 
-There are multiple ways to be helpful to the dcm2bids community
+There are multiple ways to be helpful to the dcm2bids community.
 
 If you already know what you are looking for, you can select one of the section below:
 

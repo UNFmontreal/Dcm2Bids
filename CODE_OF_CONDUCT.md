@@ -1,10 +1,12 @@
 # Code of Conduct
 
 Each of us as a member of the dcm2bids community we ensure that every
-contributer enjoy their time contributing and helping people. Accordingly,
+contributors enjoy their time contributing and helping people. Accordingly,
+
 everyone who participates in the development in any way possible is
  expected to show respect, courtesy to other community members including
- end-users who are seeking help on neurostars.
+ end-users who are seeking help on [Neurostars](https://neurostars.org/) or on [GitHub](https://github.com/UNFmontreal/Dcm2Bids/issues).
+
 
 We also encourage everybody regardless of age, gender identity, level of
 experience, nativa langage, race or religion to be involved in the project.
