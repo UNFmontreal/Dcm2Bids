@@ -5,6 +5,7 @@ import argparse
 import datetime
 import os
 import shutil
+import importlib.resources
 from ..utils import write_txt
 
 
@@ -48,7 +49,9 @@ def scaffold():
         "participants.tsv",
         "README",
     ]:
-        shutil.copyfile(os.path.join(SELF_DIR, _), os.path.join(args.output_dir, _))
+        dest = os.path.join(args.output_dir, _)
+        with importlib.resources.path(__name__, _) as src:
+            shutil.copyfile(src, dest)
 
     with open(os.path.join(SELF_DIR, "CHANGES")) as _:
         data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
