@@ -1,11 +1,17 @@
 """scaffold module"""
 
 
+import sys
 import argparse
 import datetime
 import os
 import shutil
-import importlib.resources
+if sys.version_info >= (3,7,0):
+  import importlib.resources as resources
+else:
+  # backport: https://pypi.org/project/importlib-resources/
+  # TODO: drop this when py3.6 is end-of-life
+  import importlib_resources as resources
 from ..utils import write_txt
 
 
@@ -50,7 +56,7 @@ def scaffold():
         "README",
     ]:
         dest = os.path.join(args.output_dir, _)
-        with importlib.resources.path(__name__, _) as src:
+        with resources.path(__name__, _) as src:
             shutil.copyfile(src, dest)
 
     with open(os.path.join(SELF_DIR, "CHANGES")) as _:

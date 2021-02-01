@@ -74,7 +74,11 @@ if __name__ == "__main__":
         python_requires=">=3.6",
         use_scm_version=True,
         setup_requires=['setuptools_scm'],
-        install_requires=install_requires(),
+        install_requires=[
+          'future>=0.17.1',
+          # TODO: drop this when py3.6 is end-of-life
+          'importlib_resources ; python_version<"3.7"',
+          ],
         include_package_data=True,
         author=AUTHOR,
         author_email=AUTHOR_EMAIL,
