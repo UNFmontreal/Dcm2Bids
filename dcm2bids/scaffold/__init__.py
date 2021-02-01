@@ -15,9 +15,6 @@ else:
 from ..utils import write_txt
 
 
-SELF_DIR = os.path.dirname(os.path.realpath(__file__))
-
-
 def _get_arguments():
     """Load arguments for main"""
     parser = argparse.ArgumentParser(
@@ -59,9 +56,10 @@ def scaffold():
         with resources.path(__name__, _) as src:
             shutil.copyfile(src, dest)
 
-    with open(os.path.join(SELF_DIR, "CHANGES")) as _:
-        data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
-    write_txt(
-        os.path.join(args.output_dir, "CHANGES"),
-        data.split("\n")[:-1],
+    with resources.path(__name__, "CHANGES") as changes_template:
+        with open(changes_template) as _:
+            data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
+        write_txt(
+            os.path.join(args.output_dir, "CHANGES"),
+            data.split("\n")[:-1],
     )
