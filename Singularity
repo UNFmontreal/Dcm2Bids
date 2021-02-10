@@ -1,5 +1,5 @@
 Bootstrap: debootstrap
-OSVersion: xenial
+OSVersion: focal
 MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
 
@@ -18,9 +18,9 @@ Maintainer Arnaud Boré <arnaud.bore@gmail.com>
     sed -i 's/$/ universe/' /etc/apt/sources.list
     apt update && apt upgrade
     apt install -y build-essential cmake git pigz \
-                   nodejs-legacy npm python python-pip
+                   nodejs npm python3 python3-pip
     apt clean && apt autoclean && apt autoremove -y
-    pip install --upgrade pip
+    pip3 install --upgrade pip
 
     #Install bids-validator
     npm install -g bids-validator
