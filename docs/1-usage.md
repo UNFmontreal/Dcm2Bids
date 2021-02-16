@@ -55,10 +55,15 @@ Create basic BIDS files and directories in the output directory (by default fold
 
 # Containers
 
-You can also use dcm2bids through docker or singularity images.
+You can also use all the tools through docker or singularity images.
 
+## Docker
 Download the latest release of the Docker container for dcm2bids:
+
 `docker pull unfmontreal/dcm2bids:latest`
 
-You can build the singularity image:
+## Singularity
+
+Build the latest singularity image:
+
 `singularity build dcm2bids.sif containers/singularity.def`
