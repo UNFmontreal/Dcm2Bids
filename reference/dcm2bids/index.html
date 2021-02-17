@@ -1,0 +1,1484 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Index - dcm2bids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff6e42">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-dcm2bids" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            dcm2bids
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Index
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dcm2bids
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CODE_OF_CONDUCT/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CONTRIBUTING/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../docs/1-usage/" title="1. Usage" class="md-nav__link">
+      1. Usage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../docs/2-tutorial/" title="2. Tutorial" class="md-nav__link">
+      2. Tutorial
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../docs/3-configuration/" title="3. Configuration" class="md-nav__link">
+      3. Configuration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../docs/4-advance/" title="4. Advance" class="md-nav__link">
+      4. Advance
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+    
+    <label class="md-nav__link" for="nav-9">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1" checked>
+    
+    <label class="md-nav__link" for="nav-9-1">
+      Dcm2Bids
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-1">
+        <span class="md-nav__icon md-icon"></span>
+        Dcm2Bids
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="dcm2bids/" title="Dcm2Bids" class="md-nav__link">
+      Dcm2Bids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="dcm2niix/" title="Dcm2Niix" class="md-nav__link">
+      Dcm2Niix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="helper/" title="Helper" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Index
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Index" class="md-nav__link md-nav__link--active">
+      Index
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sub-modules" class="md-nav__link">
+    Sub-modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaffold" class="md-nav__link">
+    scaffold
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dcm2bids" class="md-nav__link">
+    Dcm2bids
+  </a>
+  
+    <nav class="md-nav" aria-label="Dcm2bids">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_logger" class="md-nav__link">
+    set_logger
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="scaffold/" title="Scaffold" class="md-nav__link">
+      Scaffold
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="sidecar/" title="Sidecar" class="md-nav__link">
+      Sidecar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="structure/" title="Structure" class="md-nav__link">
+      Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="version/" title="Version" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sub-modules" class="md-nav__link">
+    Sub-modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaffold" class="md-nav__link">
+    scaffold
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dcm2bids" class="md-nav__link">
+    Dcm2bids
+  </a>
+  
+    <nav class="md-nav" aria-label="Dcm2bids">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    run
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_logger" class="md-nav__link">
+    set_logger
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-dcm2bids">Module dcm2bids</h1>
+<p>dcm2bids</p>
+<hr />
+<p>Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">dcm2bids</span>
+
+<span class="sd">--------</span>
+
+<span class="sd">Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.dcm2bids</span> <span class="kn">import</span> <span class="n">Dcm2bids</span>
+
+<span class="kn">from</span> <span class="nn">.scaffold</span> <span class="kn">import</span> <span class="n">scaffold</span>
+
+<span class="kn">from</span> <span class="nn">.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;__version__&quot;</span><span class="p">,</span> <span class="s2">&quot;Dcm2bids&quot;</span><span class="p">,</span> <span class="s2">&quot;scaffold&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+</details>
+<h2 id="sub-modules">Sub-modules</h2>
+<ul>
+<li><a href="dcm2bids/">dcm2bids.dcm2bids</a></li>
+<li><a href="dcm2niix/">dcm2bids.dcm2niix</a></li>
+<li><a href="helper/">dcm2bids.helper</a></li>
+<li><a href="logger/">dcm2bids.logger</a></li>
+<li><a href="scaffold/">dcm2bids.scaffold</a></li>
+<li><a href="sidecar/">dcm2bids.sidecar</a></li>
+<li><a href="structure/">dcm2bids.structure</a></li>
+<li><a href="utils/">dcm2bids.utils</a></li>
+<li><a href="version/">dcm2bids.version</a></li>
+</ul>
+<h2 id="variables">Variables</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">__version__</span>
+</code></pre></div>
+
+<h2 id="functions">Functions</h2>
+<h3 id="scaffold">scaffold</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">scaffold</span><span class="p">(</span>
+
+<span class="p">)</span>
+</code></pre></div>
+
+<p>scaffold entry point</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="s s-Atom">def</span> <span class="nf">scaffold</span><span class="p">()</span><span class="s s-Atom">:</span>
+
+    <span class="s2">&quot;&quot;&quot;scaffold entry point&quot;&quot;&quot;</span>
+
+    <span class="s s-Atom">args</span> <span class="o">=</span> <span class="k">_</span><span class="nf">get_arguments</span><span class="p">()</span>
+
+    <span class="s s-Atom">for</span> <span class="k">_</span> <span class="s s-Atom">in</span> <span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">,</span> <span class="s2">&quot;derivatives&quot;</span><span class="p">,</span> <span class="s2">&quot;sourcedata&quot;</span><span class="p">]</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s s-Atom">args</span><span class="p">.</span><span class="s s-Atom">output_dir</span><span class="p">,</span> <span class="k">_</span><span class="p">),</span> <span class="s s-Atom">exist_ok</span><span class="o">=</span><span class="nv">True</span><span class="p">)</span>
+
+    <span class="s s-Atom">for</span> <span class="k">_</span> <span class="s s-Atom">in</span> <span class="p">[</span>
+
+        <span class="s2">&quot;dataset_description.json&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;participants.json&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;participants.tsv&quot;</span><span class="p">,</span>
+
+        <span class="s2">&quot;README&quot;</span><span class="p">,</span>
+
+    <span class="p">]</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">dest</span> <span class="o">=</span> <span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s s-Atom">args</span><span class="p">.</span><span class="s s-Atom">output_dir</span><span class="p">,</span> <span class="k">_</span><span class="p">)</span>
+
+        <span class="s s-Atom">with</span> <span class="s s-Atom">resources</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="k">__</span><span class="s s-Atom">name__</span><span class="p">,</span> <span class="k">_</span><span class="p">)</span> <span class="s s-Atom">as</span> <span class="nn">src</span><span class="p">:</span>
+
+            <span class="s s-Atom">shutil</span><span class="p">.</span><span class="nf">copyfile</span><span class="p">(</span><span class="s s-Atom">src</span><span class="p">,</span> <span class="s s-Atom">dest</span><span class="p">)</span>
+
+    <span class="s s-Atom">with</span> <span class="s s-Atom">resources</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="k">__</span><span class="s s-Atom">name__</span><span class="p">,</span> <span class="s2">&quot;CHANGES&quot;</span><span class="p">)</span> <span class="s s-Atom">as</span> <span class="s s-Atom">changes_template:</span>
+
+        <span class="s s-Atom">with</span> <span class="nf">open</span><span class="p">(</span><span class="s s-Atom">changes_template</span><span class="p">)</span> <span class="s s-Atom">as</span> <span class="k">_</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">data</span> <span class="o">=</span> <span class="k">_</span><span class="p">.</span><span class="nf">read</span><span class="p">().</span><span class="nf">format</span><span class="p">(</span><span class="s s-Atom">datetime</span><span class="p">.</span><span class="s s-Atom">date</span><span class="p">.</span><span class="nf">today</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-%d&quot;</span><span class="p">))</span>
+
+        <span class="nf">write_txt</span><span class="p">(</span>
+
+            <span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s s-Atom">args</span><span class="p">.</span><span class="s s-Atom">output_dir</span><span class="p">,</span> <span class="s2">&quot;CHANGES&quot;</span><span class="p">),</span>
+
+            <span class="s s-Atom">data</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">&quot;\n&quot;</span><span class="p">)[:-</span><span class="mi">1</span><span class="p">],</span>
+
+    <span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="dcm2bids">Dcm2bids</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2bids</span><span class="p">(</span>
+    <span class="n">dicom_dir</span><span class="p">,</span>
+    <span class="n">participant</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;/home/bore/s/dcm2bids&#39;</span><span class="p">,</span>
+    <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">clobber</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">forceDcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">_</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h4 id="attributes">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dicom_dir</td>
+<td>str or list</td>
+<td>A list of folder with dicoms to convert</td>
+<td>None</td>
+</tr>
+<tr>
+<td>participant</td>
+<td>str</td>
+<td>Label of your participant</td>
+<td>None</td>
+</tr>
+<tr>
+<td>config</td>
+<td>path</td>
+<td>Path to a dcm2bids configuration file</td>
+<td>None</td>
+</tr>
+<tr>
+<td>output_dir</td>
+<td>path</td>
+<td>Path to the BIDS base folder</td>
+<td>None</td>
+</tr>
+<tr>
+<td>session</td>
+<td>str</td>
+<td>Optional label of a session</td>
+<td>None</td>
+</tr>
+<tr>
+<td>clobber</td>
+<td>boolean</td>
+<td>Overwrite file if already in BIDS folder</td>
+<td>None</td>
+</tr>
+<tr>
+<td>forceDcm2niix</td>
+<td>boolean</td>
+<td>Forces a cleaning of a previous execution of</td>
+<td></td>
+</tr>
+<tr>
+<td>dcm2niix</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>log_level</td>
+<td>str</td>
+<td>logging level</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Dcm2bids</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; Object to handle dcm2bids execution steps</span>
+
+<span class="ss">    Args:</span>
+
+<span class="ss">        dicom_dir (str or list): A list of folder with dicoms to convert</span>
+
+<span class="ss">        participant (str): Label of your participant</span>
+
+<span class="ss">        config (path): Path to a dcm2bids configuration file</span>
+
+<span class="ss">        output_dir (path): Path to the BIDS base folder</span>
+
+<span class="ss">        session (str): Optional label of a session</span>
+
+<span class="ss">        clobber (boolean): Overwrite file if already in BIDS folder</span>
+
+<span class="ss">        forceDcm2niix (boolean): Forces a cleaning of a previous execution of</span>
+
+<span class="ss">                                 dcm2niix</span>
+
+<span class="ss">        log_level (str): logging level</span>
+
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dicom_dir</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">participant</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">config</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">output_dir</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">outputDir</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">session</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="k">session</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">clobber</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">clobber</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">forceDcm2niix</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">forceDcm2niix</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">log_level</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">logLevel</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="o">**</span><span class="n">_</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_dicomDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">dicomDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dicom_dir</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">bidsDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output_dir</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load_json</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Participant</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span><span class="w"> </span><span class="k">session</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">clobber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clobber</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">forceDcm2niix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">forceDcm2niix</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log_level</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">logging</span><span class="w"> </span><span class="n">setup</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">set_logger</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;--- dcm2bids start ---&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;OS:version: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">platform</span><span class="p">.</span><span class="n">platform</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;python:version: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">version</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;dcm2bids:version: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__version__</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;dcm2niix:version: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dcm2niix_version</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;participant: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;session: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">session</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;config: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">config</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;BIDS directory: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">output_dir</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dicomDirs</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;List of DICOMs directories&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_dicomDirs</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@dicomDirs</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dicomDirs</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">dicom_dirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">dicom_dirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dir_not_found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">_dir</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">dicom_dirs</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">_dir</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">dir_not_found</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">_dir</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nl">dir_not_found</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">FileNotFoundError</span><span class="p">(</span><span class="n">dir_not_found</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_dicomDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dicom_dirs</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">set_logger</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">logDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bidsDir</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">tmpDirName</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;log&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">logFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">logDir</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="ss">&quot;{}_{}.log&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="p">,</span><span class="w"> </span><span class="nc">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">isoformat</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;:&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">logdir</span><span class="p">,</span><span class="w"> </span><span class="n">exist_ok</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">python2</span><span class="w"> </span><span class="n">compatibility</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="ow">exists</span><span class="p">(</span><span class="n">logDir</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">logDir</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">setup_logging</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">logLevel</span><span class="p">,</span><span class="w"> </span><span class="n">logFile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">run</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dcm2niix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dcm2niix</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">dicomDirs</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">bidsDir</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;dcm2niixOptions&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">dcm2niixOptions</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dcm2niix</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">forceDcm2niix</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">sidecars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">dcm2niix</span><span class="p">.</span><span class="nl">sidecarFiles</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">sidecars</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">Sidecar</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;compKeys&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">compKeys</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">            </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">sidecars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sorted</span><span class="p">(</span><span class="n">sidecars</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SidecarPairing</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">sidecars</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="o">[</span><span class="n">&quot;descriptions&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;searchMethod&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">searchMethod</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;caseSensitive&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">caseSensitive</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">parser</span><span class="p">.</span><span class="n">build_graph</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">parser</span><span class="p">.</span><span class="n">build_acquisitions</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">parser</span><span class="p">.</span><span class="n">find_runs</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;moving acquisitions into BIDS folder&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">acq</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">parser</span><span class="p">.</span><span class="nl">acquisitions</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">acq</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">check_latest</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">check_latest</span><span class="p">(</span><span class="ss">&quot;dcm2niix&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">acquisition</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">srcFile</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">glob</span><span class="p">(</span><span class="n">acquisition</span><span class="p">.</span><span class="n">srcRoot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot;.*&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">splitext_</span><span class="p">(</span><span class="n">srcFile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">dstFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bidsDir</span><span class="p">,</span><span class="w"> </span><span class="n">acquisition</span><span class="p">.</span><span class="n">dstRoot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ext</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">dstFile</span><span class="p">),</span><span class="w"> </span><span class="n">exist_ok</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">python2</span><span class="w"> </span><span class="n">compatibility</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="ow">exists</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">dstFile</span><span class="p">))</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">dstFile</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">destination</span><span class="w"> </span><span class="k">file</span><span class="w"> </span><span class="ow">exists</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dstFile</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;&#39;%s&#39; already exists&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dstFile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">clobber</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;Overwriting because of &#39;clobber&#39; option&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;Use clobber option to overwrite&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                    </span><span class="k">continue</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">it</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">anat</span><span class="w"> </span><span class="n">nifti</span><span class="w"> </span><span class="k">file</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">deface</span><span class="w"> </span><span class="n">script</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;defaceTpl&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="ow">and</span><span class="w"> </span><span class="n">acquisition</span><span class="p">.</span><span class="n">dataType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;anat&quot;</span><span class="w"></span>
+
+<span class="w">                </span><span class="ow">and</span><span class="w"> </span><span class="ss">&quot;.nii&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">ext</span><span class="w"></span>
+
+<span class="w">            </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">os</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">dstFile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="nl">FileNotFoundError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">defaceTpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;defaceTpl&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaceTpl</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">srcFile</span><span class="o">=</span><span class="n">srcFile</span><span class="p">,</span><span class="w"> </span><span class="n">dstFile</span><span class="o">=</span><span class="n">dstFile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">run_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">use</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">elif</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;.json&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acquisition</span><span class="p">.</span><span class="n">dstSidecarData</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">config</span><span class="o">[</span><span class="n">&quot;descriptions&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">save_json</span><span class="p">(</span><span class="n">dstFile</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">os</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">srcFile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">move</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">os</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">srcFile</span><span class="p">,</span><span class="w"> </span><span class="n">dstFile</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="instance-variables">Instance variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">dicomDirs</span>
+</code></pre></div>
+
+<p>List of DICOMs directories</p>
+<h4 id="methods">Methods</h4>
+<h4 id="move">move</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">acquisition</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Move an acquisition to BIDS format</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">move</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">acquisition</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Move an acquisition to BIDS format</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="nv">srcFile</span> <span class="nv">in</span> <span class="nv">glob</span><span class="ss">(</span><span class="nv">acquisition</span>.<span class="nv">srcRoot</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="s">.*</span><span class="s2">&quot;</span><span class="ss">)</span>:
+
+            <span class="nv">_</span>, <span class="nv">ext</span> <span class="o">=</span> <span class="nv">splitext_</span><span class="ss">(</span><span class="nv">srcFile</span><span class="ss">)</span>
+
+            <span class="nv">dstFile</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">bidsDir</span>, <span class="nv">acquisition</span>.<span class="nv">dstRoot</span> <span class="o">+</span> <span class="nv">ext</span><span class="ss">)</span>
+
+            # <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">dstFile</span><span class="ss">)</span>, <span class="nv">exist_ok</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+
+            # <span class="nv">python2</span> <span class="nv">compatibility</span>
+
+            <span class="k">if</span> <span class="nv">not</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">exists</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">dstFile</span><span class="ss">))</span>:
+
+                <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="k">dirname</span><span class="ss">(</span><span class="nv">dstFile</span><span class="ss">))</span>
+
+            # <span class="nv">checking</span> <span class="k">if</span> <span class="nv">destination</span> <span class="nv">file</span> <span class="nv">exists</span>
+
+            <span class="k">if</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">isfile</span><span class="ss">(</span><span class="nv">dstFile</span><span class="ss">)</span>:
+
+                <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">info</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">&#39;%s&#39; already exists</span><span class="s2">&quot;</span>, <span class="nv">dstFile</span><span class="ss">)</span>
+
+                <span class="k">if</span> <span class="nv">self</span>.<span class="nv">clobber</span>:
+
+                    <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">info</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Overwriting because of &#39;clobber&#39; option</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+                <span class="k">else</span>:
+
+                    <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">info</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Use clobber option to overwrite</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+                    <span class="k">continue</span>
+
+            # <span class="nv">it</span><span class="s1">&#39;</span><span class="s">s an anat nifti file and the user using a deface script</span>
+
+            <span class="k">if</span> <span class="ss">(</span>
+
+                <span class="nv">self</span>.<span class="nv">config</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">defaceTpl</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+                <span class="nv">and</span> <span class="nv">acquisition</span>.<span class="nv">dataType</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">anat</span><span class="s2">&quot;</span>
+
+                <span class="nv">and</span> <span class="s2">&quot;</span><span class="s">.nii</span><span class="s2">&quot;</span> <span class="nv">in</span> <span class="nv">ext</span>
+
+            <span class="ss">)</span>:
+
+                <span class="nv">try</span>:
+
+                    <span class="nv">os</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">dstFile</span><span class="ss">)</span>
+
+                <span class="nv">except</span> <span class="nv">FileNotFoundError</span>:
+
+                    <span class="nv">pass</span>
+
+                <span class="nv">defaceTpl</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">config</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">defaceTpl</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+                <span class="nv">cmd</span> <span class="o">=</span> <span class="nv">defaceTpl</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">srcFile</span><span class="o">=</span><span class="nv">srcFile</span>, <span class="nv">dstFile</span><span class="o">=</span><span class="nv">dstFile</span><span class="ss">)</span>
+
+                <span class="nv">run_shell_command</span><span class="ss">(</span><span class="nv">cmd</span><span class="ss">)</span>
+
+            # <span class="nv">use</span>
+
+            <span class="nv">elif</span> <span class="nv">ext</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">.json</span><span class="s2">&quot;</span>:
+
+                <span class="nv">data</span> <span class="o">=</span> <span class="nv">acquisition</span>.<span class="nv">dstSidecarData</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">config</span>[<span class="s2">&quot;</span><span class="s">descriptions</span><span class="s2">&quot;</span>]<span class="ss">)</span>
+
+                <span class="nv">save_json</span><span class="ss">(</span><span class="nv">dstFile</span>, <span class="nv">data</span><span class="ss">)</span>
+
+                <span class="nv">os</span>.<span class="nv">remove</span><span class="ss">(</span><span class="nv">srcFile</span><span class="ss">)</span>
+
+            # <span class="nv">just</span> <span class="nv">move</span>
+
+            <span class="k">else</span>:
+
+                <span class="nv">os</span>.<span class="nv">rename</span><span class="ss">(</span><span class="nv">srcFile</span>, <span class="nv">dstFile</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h4 id="run">run</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Run dcm2bids</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">run</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Run dcm2bids</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="nv">dcm2niix</span> <span class="o">=</span> <span class="nv">Dcm2niix</span><span class="ss">(</span>
+
+            <span class="nv">self</span>.<span class="nv">dicomDirs</span>,
+
+            <span class="nv">self</span>.<span class="nv">bidsDir</span>,
+
+            <span class="nv">self</span>.<span class="nv">participant</span>,
+
+            <span class="nv">self</span>.<span class="nv">config</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">dcm2niixOptions</span><span class="s2">&quot;</span>, <span class="nv">DEFAULT</span>.<span class="nv">dcm2niixOptions</span><span class="ss">)</span>,
+
+        <span class="ss">)</span>
+
+        <span class="nv">dcm2niix</span>.<span class="nv">run</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">forceDcm2niix</span><span class="ss">)</span>
+
+        <span class="nv">sidecars</span> <span class="o">=</span> []
+
+        <span class="k">for</span> <span class="nv">filename</span> <span class="nv">in</span> <span class="nv">dcm2niix</span>.<span class="nv">sidecarFiles</span>:
+
+            <span class="nv">sidecars</span>.<span class="nv">append</span><span class="ss">(</span>
+
+                <span class="nv">Sidecar</span><span class="ss">(</span><span class="nv">filename</span>, <span class="nv">self</span>.<span class="nv">config</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">compKeys</span><span class="s2">&quot;</span>, <span class="nv">DEFAULT</span>.<span class="nv">compKeys</span><span class="ss">))</span>
+
+            <span class="ss">)</span>
+
+        <span class="nv">sidecars</span> <span class="o">=</span> <span class="nv">sorted</span><span class="ss">(</span><span class="nv">sidecars</span><span class="ss">)</span>
+
+        <span class="nv">parser</span> <span class="o">=</span> <span class="nv">SidecarPairing</span><span class="ss">(</span>
+
+            <span class="nv">sidecars</span>,
+
+            <span class="nv">self</span>.<span class="nv">config</span>[<span class="s2">&quot;</span><span class="s">descriptions</span><span class="s2">&quot;</span>],
+
+            <span class="nv">self</span>.<span class="nv">config</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">searchMethod</span><span class="s2">&quot;</span>, <span class="nv">DEFAULT</span>.<span class="nv">searchMethod</span><span class="ss">)</span>,
+
+            <span class="nv">self</span>.<span class="nv">config</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">caseSensitive</span><span class="s2">&quot;</span>, <span class="nv">DEFAULT</span>.<span class="nv">caseSensitive</span><span class="ss">)</span>
+
+        <span class="ss">)</span>
+
+        <span class="nv">parser</span>.<span class="nv">build_graph</span><span class="ss">()</span>
+
+        <span class="nv">parser</span>.<span class="nv">build_acquisitions</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">participant</span><span class="ss">)</span>
+
+        <span class="nv">parser</span>.<span class="nv">find_runs</span><span class="ss">()</span>
+
+        <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">info</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">moving acquisitions into BIDS folder</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+        <span class="k">for</span> <span class="nv">acq</span> <span class="nv">in</span> <span class="nv">parser</span>.<span class="nv">acquisitions</span>:
+
+            <span class="nv">self</span>.<span class="nv">move</span><span class="ss">(</span><span class="nv">acq</span><span class="ss">)</span>
+
+        <span class="nv">check_latest</span><span class="ss">()</span>
+
+        <span class="nv">check_latest</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">dcm2niix</span><span class="s2">&quot;</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h4 id="set_logger">set_logger</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Set a basic logger</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">set_logger</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s"> Set a basic logger</span><span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="nv">logDir</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">bidsDir</span>, <span class="nv">DEFAULT</span>.<span class="nv">tmpDirName</span>, <span class="s2">&quot;</span><span class="s">log</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+        <span class="nv">logFile</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span>
+
+            <span class="nv">logDir</span>,
+
+            <span class="s2">&quot;</span><span class="s">{}_{}.log</span><span class="s2">&quot;</span>.<span class="nv">format</span><span class="ss">(</span>
+
+                <span class="nv">self</span>.<span class="nv">participant</span>.<span class="nv">prefix</span>, <span class="nv">datetime</span>.<span class="nv">now</span><span class="ss">()</span>.<span class="nv">isoformat</span><span class="ss">()</span>.<span class="nv">replace</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">:</span><span class="s2">&quot;</span>, <span class="s2">&quot;&quot;</span><span class="ss">)</span>
+
+            <span class="ss">)</span>,
+
+        <span class="ss">)</span>
+
+        # <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">logdir</span>, <span class="nv">exist_ok</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+
+        # <span class="nv">python2</span> <span class="nv">compatibility</span>
+
+        <span class="k">if</span> <span class="nv">not</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">exists</span><span class="ss">(</span><span class="nv">logDir</span><span class="ss">)</span>:
+
+            <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">logDir</span><span class="ss">)</span>
+
+        <span class="nv">setup_logging</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">logLevel</span>, <span class="nv">logFile</span><span class="ss">)</span>
+
+        <span class="nv">self</span>.<span class="nv">logger</span> <span class="o">=</span> <span class="nv">logging</span>.<span class="nv">getLogger</span><span class="ss">(</span><span class="nv">__name__</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="helper/" title="Helper" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Helper
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="logger/" title="Logger" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Logger
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

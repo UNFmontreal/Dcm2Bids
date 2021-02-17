@@ -1,0 +1,1986 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Structure - dcm2bids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff6e42">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-dcm2bidsstructure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            dcm2bids
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Structure
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dcm2bids
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CODE_OF_CONDUCT/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CONTRIBUTING/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/1-usage/" title="1. Usage" class="md-nav__link">
+      1. Usage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/2-tutorial/" title="2. Tutorial" class="md-nav__link">
+      2. Tutorial
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/3-configuration/" title="3. Configuration" class="md-nav__link">
+      3. Configuration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/4-advance/" title="4. Advance" class="md-nav__link">
+      4. Advance
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+    
+    <label class="md-nav__link" for="nav-9">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1" checked>
+    
+    <label class="md-nav__link" for="nav-9-1">
+      Dcm2Bids
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-1">
+        <span class="md-nav__icon md-icon"></span>
+        Dcm2Bids
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcm2bids/" title="Dcm2Bids" class="md-nav__link">
+      Dcm2Bids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcm2niix/" title="Dcm2Niix" class="md-nav__link">
+      Dcm2Niix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../helper/" title="Helper" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scaffold/" title="Scaffold" class="md-nav__link">
+      Scaffold
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sidecar/" title="Sidecar" class="md-nav__link">
+      Sidecar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Structure
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Structure" class="md-nav__link md-nav__link--active">
+      Structure
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acquisition" class="md-nav__link">
+    Acquisition
+  </a>
+  
+    <nav class="md-nav" aria-label="Acquisition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepend" class="md-nav__link">
+    prepend
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dstsidecardata" class="md-nav__link">
+    dstSidecarData
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#participant" class="md-nav__link">
+    Participant
+  </a>
+  
+    <nav class="md-nav" aria-label="Participant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_1" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables_1" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hassession" class="md-nav__link">
+    hasSession
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/" title="Version" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acquisition" class="md-nav__link">
+    Acquisition
+  </a>
+  
+    <nav class="md-nav" aria-label="Acquisition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepend" class="md-nav__link">
+    prepend
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dstsidecardata" class="md-nav__link">
+    dstSidecarData
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#participant" class="md-nav__link">
+    Participant
+  </a>
+  
+    <nav class="md-nav" aria-label="Participant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes_1" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables_1" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hassession" class="md-nav__link">
+    hasSession
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/structure.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-dcm2bidsstructure">Module dcm2bids.structure</h1>
+<p>k</p>
+<p>None</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;k&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span> <span class="k">as</span> <span class="n">opj</span>
+
+<span class="kn">from</span> <span class="nn">future.utils</span> <span class="kn">import</span> <span class="n">iteritems</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">DEFAULT</span>
+
+<span class="kn">from</span> <span class="nn">.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+
+<span class="k">class</span> <span class="nc">Participant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Class representing a participant</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        name (str): Label of your participant</span>
+
+<span class="sd">        session (str): Optional label of a session</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">session</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A string &#39;sub-&lt;subject_label&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;sub-&quot;</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;sub-&quot;</span> <span class="o">+</span> <span class="n">name</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">session</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A string &#39;ses-&lt;session_label&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span>
+
+    <span class="nd">@session</span><span class="o">.</span><span class="n">setter</span>
+
+    <span class="k">def</span> <span class="nf">session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">elif</span> <span class="n">session</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ses-&quot;</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">session</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="s2">&quot;ses-&quot;</span> <span class="o">+</span> <span class="n">session</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">directory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; The directory of the participant</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A path &#39;sub-&lt;subject_label&gt;&#39; or</span>
+
+<span class="sd">            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasSession</span><span class="p">():</span>
+
+            <span class="k">return</span> <span class="n">opj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; The prefix to build filenames</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A string &#39;sub-&lt;subject_label&gt;&#39; or</span>
+
+<span class="sd">            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasSession</span><span class="p">():</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">hasSession</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Check if a session is set</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            Boolean</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">session</span>
+
+<span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Class representing an acquisition</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        participant (Participant): A participant object</span>
+
+<span class="sd">        dataType (str): A functional group of MRI data (ex: func, anat ...)</span>
+
+<span class="sd">        modalityLabel (str): The modality of the acquisition</span>
+
+<span class="sd">                (ex: T1w, T2w, bold ...)</span>
+
+<span class="sd">        customLabels (str): Optional labels (ex: task-rest)</span>
+
+<span class="sd">        srcSidecar (Sidecar): Optional sidecar object</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="p">,</span>
+
+        <span class="n">participant</span><span class="p">,</span>
+
+        <span class="n">dataType</span><span class="p">,</span>
+
+        <span class="n">modalityLabel</span><span class="p">,</span>
+
+        <span class="n">customLabels</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+
+        <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+        <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+        <span class="n">intendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+        <span class="n">IntendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+        <span class="o">**</span><span class="n">kwargs</span>
+
+    <span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modalityLabel</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_customLabels</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">participant</span> <span class="o">=</span> <span class="n">participant</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">=</span> <span class="n">dataType</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">modalityLabel</span> <span class="o">=</span> <span class="n">modalityLabel</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">customLabels</span> <span class="o">=</span> <span class="n">customLabels</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span> <span class="o">=</span> <span class="n">srcSidecar</span>
+
+        <span class="k">if</span> <span class="n">sidecarChanges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">sidecarChanges</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">sidecarChanges</span> <span class="o">=</span> <span class="n">sidecarChanges</span>
+
+        <span class="k">if</span> <span class="n">intendedFor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span> <span class="o">=</span> <span class="n">IntendedFor</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span> <span class="o">=</span> <span class="n">intendedFor</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">dataType</span>
+
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span>
+
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">suffix</span>
+
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">modalityLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A string &#39;_&lt;modalityLabel&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modalityLabel</span>
+
+    <span class="nd">@modalityLabel</span><span class="o">.</span><span class="n">setter</span>
+
+    <span class="k">def</span> <span class="nf">modalityLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modalityLabel</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modalityLabel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">modalityLabel</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">customLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A string &#39;_&lt;customLabels&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_customLabels</span>
+
+    <span class="nd">@customLabels</span><span class="o">.</span><span class="n">setter</span>
+
+    <span class="k">def</span> <span class="nf">customLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customLabels</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_customLabels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">customLabels</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; The suffix to build filenames</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">customLabels</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modalityLabel</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">customLabels</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">modalityLabel</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">srcRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Return:</span>
+
+<span class="sd">            The sidecar source root to move</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span><span class="o">.</span><span class="n">root</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">dstRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Return:</span>
+
+<span class="sd">            The destination root inside the BIDS structure</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">opj</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span><span class="p">,</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">suffix</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">intendedFor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span>
+
+    <span class="nd">@intendedFor</span><span class="o">.</span><span class="n">setter</span>
+
+    <span class="k">def</span> <span class="nf">intendedFor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">descriptions</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span><span class="o">.</span><span class="n">origData</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Dcm2bidsVersion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__version__</span>
+
+        <span class="c1"># intendedFor key</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span> <span class="o">!=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+
+            <span class="n">intendedValue</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span><span class="p">:</span>
+
+                <span class="n">intendedDesc</span> <span class="o">=</span> <span class="n">descriptions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+                <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">session</span>
+
+                <span class="n">dataType</span> <span class="o">=</span> <span class="n">intendedDesc</span><span class="p">[</span><span class="s2">&quot;dataType&quot;</span><span class="p">]</span>
+
+                <span class="n">niiFile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span>
+
+                <span class="n">niiFile</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;customLabels&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+                <span class="n">niiFile</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="p">[</span><span class="s2">&quot;modalityLabel&quot;</span><span class="p">])</span>
+
+                <span class="n">niiFile</span> <span class="o">+=</span> <span class="s2">&quot;.nii.gz&quot;</span>
+
+                <span class="n">intendedValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">dataType</span><span class="p">,</span> <span class="n">niiFile</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intendedValue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;IntendedFor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">intendedValue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;IntendedFor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">intendedValue</span>
+
+        <span class="c1"># sidecarChanges</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidecarChanges</span><span class="p">):</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="nd">@staticmethod</span>
+
+    <span class="k">def</span> <span class="nf">prepend</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">char</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot; Prepend `char` to `value` if necessary</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            value (str)</span>
+
+<span class="sd">            char (str)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">char</span><span class="p">):</span>
+
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="n">char</span> <span class="o">+</span> <span class="n">value</span>
+</code></pre></div>
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="acquisition">Acquisition</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span>
+    <span class="n">participant</span><span class="p">,</span>
+    <span class="n">dataType</span><span class="p">,</span>
+    <span class="n">modalityLabel</span><span class="p">,</span>
+    <span class="n">customLabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">intendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">IntendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h4 id="attributes">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>participant</td>
+<td>Participant</td>
+<td>A participant object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td>str</td>
+<td>A functional group of MRI data (ex: func, anat ...)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>modalityLabel</td>
+<td>str</td>
+<td>The modality of the acquisition</td>
+<td></td>
+</tr>
+<tr>
+<td>(ex: T1w, T2w, bold ...)</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>customLabels</td>
+<td>str</td>
+<td>Optional labels (ex: task-rest)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>srcSidecar</td>
+<td>Sidecar</td>
+<td>Optional sidecar object</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Acquisition</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; Class representing an acquisition</span>
+
+<span class="ss">    Args:</span>
+
+<span class="ss">        participant (Participant): A participant object</span>
+
+<span class="ss">        dataType (str): A functional group of MRI data (ex: func, anat ...)</span>
+
+<span class="ss">        modalityLabel (str): The modality of the acquisition</span>
+
+<span class="ss">                (ex: T1w, T2w, bold ...)</span>
+
+<span class="ss">        customLabels (str): Optional labels (ex: task-rest)</span>
+
+<span class="ss">        srcSidecar (Sidecar): Optional sidecar object</span>
+
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">participant</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dataType</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">modalityLabel</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">customLabels</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">srcSidecar</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">sidecarChanges</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">intendedFor</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">IntendedFor</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="o">**</span><span class="n">kwargs</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_modalityLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_customLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">participant</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataType</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">modalityLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modalityLabel</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">customLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customLabels</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcSidecar</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntendedFor</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">dataType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">dataType</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">and</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">and</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">suffix</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">suffix</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modalityLabel</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A string &#39;_&lt;modalityLabel&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_modalityLabel</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@modalityLabel</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modalityLabel</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">modalityLabel</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_modalityLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">modalityLabel</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">customLabels</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A string &#39;_&lt;customLabels&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_customLabels</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@customLabels</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">customLabels</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">customLabels</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_customLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">customLabels</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">suffix</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; The suffix to build filenames</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">customLabels</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">modalityLabel</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">customLabels</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">modalityLabel</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">srcRoot</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        Return:</span>
+
+<span class="ss">            The sidecar source root to move</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">srcSidecar</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="p">.</span><span class="n">root</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dstRoot</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        Return:</span>
+
+<span class="ss">            The destination root inside the BIDS structure</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">opj</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="n">directory</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">dataType</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">suffix</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">intendedFor</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@intendedFor</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">intendedFor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dstSidecarData</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">descriptions</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="p">.</span><span class="n">origData</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;Dcm2bidsVersion&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__version__</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"> </span><span class="k">key</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">intendedValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">intendedFor</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">intendedDesc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descriptions</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;dataType&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;customLabels&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;modalityLabel&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="ss">&quot;.nii.gz&quot;</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">intendedValue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="k">session</span><span class="p">,</span><span class="w"> </span><span class="n">dataType</span><span class="p">,</span><span class="w"> </span><span class="n">niiFile</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;\\&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;/&quot;</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">intendedValue</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">iteritems</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">data</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@staticmethod</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">prepend</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="nc">char</span><span class="o">=</span><span class="ss">&quot;_&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend `char` to `value` if necessary</span>
+
+<span class="ss">        Args:</span>
+
+<span class="ss">            value (str)</span>
+
+<span class="ss">            char (str)</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="nc">char</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nc">char</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="static-methods">Static methods</h4>
+<h4 id="prepend">prepend</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">prepend</span><span class="p">(</span>
+    <span class="n">value</span><span class="p">,</span>
+    <span class="n">char</span><span class="o">=</span><span class="s1">&#39;_&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Prepend <code>char</code> to <code>value</code> if necessary</p>
+<p>Args:
+    value (str)
+    char (str)</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">@staticmethod</span>
+
+    <span class="n">def</span> <span class="n">prepend</span><span class="p">(</span><span class="k">value</span><span class="p">,</span> <span class="kt">char</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2"> Prepend `char` to `value` if necessary</span>
+
+<span class="s2">        Args:</span>
+
+<span class="s2">            value (str)</span>
+
+<span class="s2">            char (str)</span>
+
+<span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="k">value</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="o">:</span>
+
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">elif</span> <span class="k">value</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="o">:</span>
+
+            <span class="k">return</span> <span class="k">value</span>
+
+        <span class="k">else</span><span class="o">:</span>
+
+            <span class="k">return</span> <span class="kt">char</span> <span class="o">+</span> <span class="k">value</span>
+</code></pre></div>
+
+</details>
+<h4 id="instance-variables">Instance variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">customLabels</span>
+</code></pre></div>
+
+<p>Returns:</p>
+<p>A string '_<customLabels>'</p>
+<div class="codehilite"><pre><span></span><code><span class="n">dstRoot</span>
+</code></pre></div>
+
+<p>Return:</p>
+<p>The destination root inside the BIDS structure</p>
+<div class="codehilite"><pre><span></span><code><span class="n">intendedFor</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">modalityLabel</span>
+</code></pre></div>
+
+<p>Returns:</p>
+<p>A string '_<modalityLabel>'</p>
+<div class="codehilite"><pre><span></span><code><span class="n">srcRoot</span>
+</code></pre></div>
+
+<p>Return:</p>
+<p>The sidecar source root to move</p>
+<div class="codehilite"><pre><span></span><code><span class="n">suffix</span>
+</code></pre></div>
+
+<p>The suffix to build filenames</p>
+<h4 id="methods">Methods</h4>
+<h4 id="dstsidecardata">dstSidecarData</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">descriptions</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dstSidecarData</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">descriptions</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="p">.</span><span class="n">origData</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;Dcm2bidsVersion&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__version__</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"> </span><span class="k">key</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">intendedValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">intendedFor</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">intendedDesc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descriptions</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;dataType&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;customLabels&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;modalityLabel&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="ss">&quot;.nii.gz&quot;</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">intendedValue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="k">session</span><span class="p">,</span><span class="w"> </span><span class="n">dataType</span><span class="p">,</span><span class="w"> </span><span class="n">niiFile</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;\\&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;/&quot;</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">intendedValue</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">iteritems</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">data</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h3 id="participant">Participant</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Participant</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">,</span>
+    <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h4 id="attributes_1">Attributes</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>str</td>
+<td>Label of your participant</td>
+<td>None</td>
+</tr>
+<tr>
+<td>session</td>
+<td>str</td>
+<td>Optional label of a session</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Participant</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; Class representing a participant</span>
+
+<span class="ss">    Args:</span>
+
+<span class="ss">        name (str): Label of your participant</span>
+
+<span class="ss">        session (str): Optional label of a session</span>
+
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">session</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="k">session</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">session</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">name</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A string &#39;sub-&lt;subject_label&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@name</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">name</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="ss">&quot;sub-&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;sub-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">session</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A string &#39;ses-&lt;session_label&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@session</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">session</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">session</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">session</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="k">session</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="ss">&quot;ses-&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">session</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ses-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">session</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">directory</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; The directory of the participant</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A path &#39;sub-&lt;subject_label&gt;&#39; or</span>
+
+<span class="ss">            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">hasSession</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">opj</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">prefix</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; The prefix to build filenames</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            A string &#39;sub-&lt;subject_label&gt;&#39; or</span>
+
+<span class="ss">            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">hasSession</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">hasSession</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot; Check if a session is set</span>
+
+<span class="ss">        Returns:</span>
+
+<span class="ss">            Boolean</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="instance-variables_1">Instance variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">directory</span>
+</code></pre></div>
+
+<p>The directory of the participant</p>
+<div class="codehilite"><pre><span></span><code><span class="n">name</span>
+</code></pre></div>
+
+<p>Returns:</p>
+<p>A string 'sub-<subject_label>'</p>
+<div class="codehilite"><pre><span></span><code><span class="n">prefix</span>
+</code></pre></div>
+
+<p>The prefix to build filenames</p>
+<div class="codehilite"><pre><span></span><code><span class="n">session</span>
+</code></pre></div>
+
+<p>Returns:</p>
+<p>A string 'ses-<session_label>'</p>
+<h4 id="methods_1">Methods</h4>
+<h4 id="hassession">hasSession</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hasSession</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Check if a session is set</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">hasSession</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+
+        <span class="s2">&quot;&quot;&quot;</span><span class="s"> Check if a session is set</span>
+
+        <span class="nv">Returns</span>:
+
+            <span class="nv">Boolean</span>
+
+        <span class="s2">&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">session</span>.<span class="nv">strip</span><span class="ss">()</span> <span class="o">!=</span> <span class="nv">DEFAULT</span>.<span class="nv">session</span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../sidecar/" title="Sidecar" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Sidecar
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../utils/" title="Utils" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Utils
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

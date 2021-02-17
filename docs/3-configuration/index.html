@@ -1,0 +1,803 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>3. Configuration - dcm2bids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff6e42">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration-file" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            dcm2bids
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              3. Configuration
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dcm2bids
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CODE_OF_CONDUCT/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CONTRIBUTING/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1-usage/" title="1. Usage" class="md-nav__link">
+      1. Usage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2-tutorial/" title="2. Tutorial" class="md-nav__link">
+      2. Tutorial
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3. Configuration
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="3. Configuration" class="md-nav__link md-nav__link--active">
+      3. Configuration
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-file-example" class="md-nav__link">
+    Configuration file example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criteria" class="md-nav__link">
+    criteria
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datatype" class="md-nav__link">
+    dataType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modalitylabel" class="md-nav__link">
+    modalityLabel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customlabels" class="md-nav__link">
+    customLabels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecarchanges" class="md-nav__link">
+    sidecarChanges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intendedfor" class="md-nav__link">
+    intendedFor
+  </a>
+  
+    <nav class="md-nav" aria-label="intendedFor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-sidecars" class="md-nav__link">
+    1: sidecars
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4-advance/" title="4. Advance" class="md-nav__link">
+      4. Advance
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1">
+    
+    <label class="md-nav__link" for="nav-9-1">
+      Dcm2Bids
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-1">
+        <span class="md-nav__icon md-icon"></span>
+        Dcm2Bids
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/dcm2bids/" title="Dcm2Bids" class="md-nav__link">
+      Dcm2Bids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/dcm2niix/" title="Dcm2Niix" class="md-nav__link">
+      Dcm2Niix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/helper/" title="Helper" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/scaffold/" title="Scaffold" class="md-nav__link">
+      Scaffold
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/sidecar/" title="Sidecar" class="md-nav__link">
+      Sidecar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/structure/" title="Structure" class="md-nav__link">
+      Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/dcm2bids/version/" title="Version" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-file-example" class="md-nav__link">
+    Configuration file example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criteria" class="md-nav__link">
+    criteria
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datatype" class="md-nav__link">
+    dataType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modalitylabel" class="md-nav__link">
+    modalityLabel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customlabels" class="md-nav__link">
+    customLabels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecarchanges" class="md-nav__link">
+    sidecarChanges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intendedfor" class="md-nav__link">
+    intendedFor
+  </a>
+  
+    <nav class="md-nav" aria-label="intendedFor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-sidecars" class="md-nav__link">
+    1: sidecars
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/docs/3-configuration.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="configuration-file">Configuration file</h1>
+<h2 id="configuration-file-example">Configuration file example</h2>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;descriptions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;func&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;customLabels&quot;</span><span class="p">:</span> <span class="s2">&quot;task-rest&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span> <span class="s2">&quot;006*&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;ImageType&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ORIG*&quot;</span><span class="p">,</span> <span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;ND&quot;</span><span class="p">,</span> <span class="s2">&quot;MOSAIC&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;anat&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;T2w&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;*T2*&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;EchoTime&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;ProtocolName&quot;</span><span class="p">:</span> <span class="s2">&quot;T2&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;fmap&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;fmap&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;ProtocoleName&quot;</span><span class="p">:</span> <span class="s2">&quot;*field_mapping*&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The <code>descriptions</code> field is a list of descriptions, each describing some acquisition. In this example, the configuration describes three acquisitions, a T2 weighted, resting state fMRI and a fieldmap.</p>
+<p>Each description tells dcm2bids how to group a set of acquisitions and how to label them. In this config file, Dcm2Bids is being told to collect files containing</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;AXIAL_T2_SPACE&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;EchoTime&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>in their sidecars<sup>1</sup> and label them as <code>anat</code>, <code>T2w</code> type images.</p>
+<h2 id="criteria">criteria</h2>
+<p>dcm2bids will try to match the sidecars<sup>1</sup> of dcm2niix to the descriptions of the configuration file. The values you enter inside the criteria dictionary are patterns that will be compared to the corresponding key of the sidecar.</p>
+<p>The pattern matching is shell-style. It's possible to use wildcard <code>*</code>, single character <code>?</code> etc ... Please have a look at the <a href="https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html">GNU documentation</a> to know more.</p>
+<p>For example, in the second description, the pattern <code>*T2*</code> will be compared to the value of <code>SeriesDescription</code> of a sidecar. <code>AXIAL_T2_SPACE</code> will be a match, <code>AXIAL_T1</code> won't.</p>
+<p><code>dcm2bids</code> has a <code>SidecarFilename</code> key, as in the first description, if you prefer to also match with the filename of the sidecar.</p>
+<p>You can enter several criteria. <strong>All criteria must match</strong> for a description to be linked to a sidecar.</p>
+<h2 id="datatype">dataType</h2>
+<p>It is a mandatory field. Here is a definition from <code>bids v1.2.0</code> :</p>
+<blockquote>
+<p>Data type - a functional group of different types of data. In BIDS we define six data types: func (task based and resting state functional MRI), dwi (diffusion weighted imaging), fmap (field inhomogeneity mapping data such as field maps), anat (structural imaging such as T1, T2, etc.), meg (magnetoencephalography), beh (behavioral).</p>
+</blockquote>
+<h2 id="modalitylabel">modalityLabel</h2>
+<p>It is a mandatory field. It describes the modality of the acquisition like <code>T1w</code>, <code>T2w</code> or <code>dwi</code>, <code>bold</code>.</p>
+<h2 id="customlabels">customLabels</h2>
+<p>It is an optional field. For some acquisitions, you need to add information in the file name. For resting state fMRI, it is usally <code>task-rest</code>.</p>
+<p>To know more on how to set these fields, read the <a href="https://bids-specification.readthedocs.io/en/stable/">BIDS specifications</a>.</p>
+<p>For a longer example of a Dcm2Bids config json, see <a href="https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json">here</a>.</p>
+<h2 id="sidecarchanges">sidecarChanges</h2>
+<p>Optional field to change or add information in a sidecar.</p>
+<h2 id="intendedfor">intendedFor</h2>
+<p>Optional field to add an <code>IntendedFor</code> entry in the sidecar of a fieldmap. Just put the index or a list of index of the description(s) that's intended for.</p>
+<p>Python index begins at <code>0</code> so in the example, <code>0</code> means it is intended for <code>task-rest_bold</code>.</p>
+<h4 id="1-sidecars"><sup>1</sup>: sidecars</h4>
+<p>For each acquisition, <strong>dcm2niix</strong> creates an associated .json file, containing information from the dicom header. These are known as <strong>sidecars</strong>. These are the sidecars <strong>dcm2bids</strong> uses to filter the groups of acquisitions.</p>
+<p>To define this filtering you will probably need to review these sidecars. You can generate all the sidecars for an individual participant using <a href="../1-usage/#tools">dcm2bids_helper</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../2-tutorial/" title="2. Tutorial" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                2. Tutorial
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../4-advance/" title="4. Advance" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                4. Advance
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

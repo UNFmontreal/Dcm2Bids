@@ -1,0 +1,1441 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Version - dcm2bids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff6e42">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-dcm2bidsversion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            dcm2bids
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Version
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dcm2bids
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CODE_OF_CONDUCT/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CONTRIBUTING/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/1-usage/" title="1. Usage" class="md-nav__link">
+      1. Usage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/2-tutorial/" title="2. Tutorial" class="md-nav__link">
+      2. Tutorial
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/3-configuration/" title="3. Configuration" class="md-nav__link">
+      3. Configuration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../docs/4-advance/" title="4. Advance" class="md-nav__link">
+      4. Advance
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+    
+    <label class="md-nav__link" for="nav-9">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1" checked>
+    
+    <label class="md-nav__link" for="nav-9-1">
+      Dcm2Bids
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-1">
+        <span class="md-nav__icon md-icon"></span>
+        Dcm2Bids
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcm2bids/" title="Dcm2Bids" class="md-nav__link">
+      Dcm2Bids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcm2niix/" title="Dcm2Niix" class="md-nav__link">
+      Dcm2Niix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../helper/" title="Helper" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scaffold/" title="Scaffold" class="md-nav__link">
+      Scaffold
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sidecar/" title="Sidecar" class="md-nav__link">
+      Sidecar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../structure/" title="Structure" class="md-nav__link">
+      Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Version
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Version" class="md-nav__link md-nav__link--active">
+      Version
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check_github_latest" class="md-nav__link">
+    check_github_latest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check_latest" class="md-nav__link">
+    check_latest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcm2niix_version" class="md-nav__link">
+    dcm2niix_version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internet" class="md-nav__link">
+    internet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_tool" class="md-nav__link">
+    is_tool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check_github_latest" class="md-nav__link">
+    check_github_latest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check_latest" class="md-nav__link">
+    check_latest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcm2niix_version" class="md-nav__link">
+    dcm2niix_version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internet" class="md-nav__link">
+    internet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_tool" class="md-nav__link">
+    is_tool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/version.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-dcm2bidsversion">Module dcm2bids.version</h1>
+<p>This module take care of the versioning</p>
+<p>None</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;This module take care of the versioning&quot;&quot;&quot;</span>
+
+<span class="c1"># dcm2bids version</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;2.1.6&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">import</span> <span class="nn">shlex</span>
+
+<span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">LooseVersion</span>
+
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">check_output</span>
+
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">which</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">internet</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Check if user has internet</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        host (string): 8.8.8.8 (google-public-dns-a.google.com)</span>
+
+<span class="sd">        port (int): OpenPort 53/tcp</span>
+
+<span class="sd">                    Service: domain (DNS/TCP)</span>
+
+<span class="sd">        timeout (int): default=3</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        boolean</span>
+
+<span class="sd">    Source: https://stackoverflow.com/a/33117579</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">socket</span><span class="o">.</span><span class="n">setdefaulttimeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">except</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">def</span> <span class="nf">is_tool</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Check if a program is in PATH</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        name (string): program name</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        boolean</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">which</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">check_github_latest</span><span class="p">(</span><span class="n">githubRepo</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Check the latest version of a github repository</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        githubRepo (string): a github repository (&quot;username/repository&quot;)</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        A string of the version</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/</span><span class="si">{}</span><span class="s2">/releases/latest&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">githubRepo</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;curl --silent &quot;</span> <span class="o">+</span> <span class="n">url</span><span class="p">))</span>
+
+    <span class="k">except</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+
+            <span class="s2">&quot;Checking latest version of </span><span class="si">%s</span><span class="s2"> was not possible&quot;</span><span class="p">,</span> <span class="n">githubRepo</span><span class="p">,</span>
+
+            <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="c1"># The output should have this format</span>
+
+    <span class="c1"># &lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+
+            <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+            <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/releases/tag/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">githubRepo</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="p">)</span>
+
+    <span class="k">except</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+
+            <span class="s2">&quot;Checking latest version of </span><span class="si">%s</span><span class="s2"> was not possible&quot;</span><span class="p">,</span> <span class="n">githubRepo</span><span class="p">,</span>
+
+            <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+        <span class="p">)</span>
+
+        <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">check_latest</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dcm2bids&quot;</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Check if a new version of a software exists and print some details</span>
+
+<span class="sd">    Implemented for dcm2bids, dcm2niix</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        name (string): name of the software</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        None</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+
+        <span class="s2">&quot;dcm2bids&quot;</span><span class="p">:</span> <span class="p">{</span>
+
+            <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="s2">&quot;unfmontreal/Dcm2Bids&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
+
+        <span class="p">},</span>
+
+        <span class="s2">&quot;dcm2niix&quot;</span><span class="p">:</span> <span class="p">{</span>
+
+            <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="s2">&quot;rordenlab/dcm2niix&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="n">dcm2niix_version</span><span class="p">,</span>
+
+        <span class="p">},</span>
+
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">internet</span><span class="p">()</span> <span class="ow">and</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;curl&quot;</span><span class="p">):</span>
+
+        <span class="n">host</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;host&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">host</span> <span class="o">==</span> <span class="s2">&quot;https://github.com&quot;</span><span class="p">:</span>
+
+            <span class="n">repo</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;repo&quot;</span><span class="p">]</span>
+
+            <span class="n">latest</span> <span class="o">=</span> <span class="n">check_github_latest</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># Not implemented</span>
+
+            <span class="k">return</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Checking latest version of </span><span class="si">%s</span><span class="s2"> was not possible&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;internet: </span><span class="si">%s</span><span class="s2">, curl: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">internet</span><span class="p">(),</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;curl&quot;</span><span class="p">))</span>
+
+        <span class="k">return</span>
+
+    <span class="n">current</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">news</span> <span class="o">=</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">latest</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+    <span class="k">except</span><span class="p">:</span>
+
+        <span class="n">news</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">news</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Your using </span><span class="si">%s</span><span class="s2"> version </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;A new version exists : </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">latest</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Check </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dcm2niix_version</span><span class="p">():</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        A string of the version of dcm2niix install on the system</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">):</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;dcm2niix is not in your PATH or not installed&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Check https://github.com/rordenlab/dcm2niix&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">))</span>
+
+    <span class="k">except</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Running: dcm2niix&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">splits</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="n">splits</span><span class="p">[</span><span class="n">splits</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">except</span><span class="p">:</span>
+
+            <span class="k">continue</span>
+
+    <span class="k">return</span>
+</code></pre></div>
+
+</details>
+<h2 id="variables">Variables</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">logger</span>
+</code></pre></div>
+
+<h2 id="functions">Functions</h2>
+<h3 id="check_github_latest">check_github_latest</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">check_github_latest</span><span class="p">(</span>
+    <span class="n">githubRepo</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Check the latest version of a github repository</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>githubRepo</td>
+<td>string</td>
+<td>a github repository ("username/repository")</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>A string of the version</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>def check_github_latest(githubRepo):
+
+    &quot;&quot;&quot; Check the latest version of a github repository
+
+    Args:
+
+        githubRepo (string): a github repository (&quot;username/repository&quot;)
+
+    Returns:
+
+        A string of the version
+
+    &quot;&quot;&quot;
+
+    url = &quot;https://github.com/{}/releases/latest&quot;.format(githubRepo)
+
+    try:
+
+        output = check_output(shlex.split(&quot;curl --silent &quot; + url))
+
+    except:
+
+        logger.debug(
+
+            &quot;Checking latest version of %s was not possible&quot;, githubRepo,
+
+            exc_info=True,
+
+        )
+
+        return
+
+    # The output should have this format
+
+    # <span class="nt">&lt;html&gt;&lt;body&gt;</span>You are being <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;</span><span class="nt">&gt;</span>redirected<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
+
+    try:
+
+        return (
+
+            output.decode()
+
+            .split(&quot;{}/releases/tag/&quot;.format(githubRepo))[1]
+
+            .split(&#39;&quot;&#39;)[0]
+
+        )
+
+    except:
+
+        logger.debug(
+
+            &quot;Checking latest version of %s was not possible&quot;, githubRepo,
+
+            exc_info=True,
+
+        )
+
+        return
+</code></pre></div>
+
+</details>
+<h3 id="check_latest">check_latest</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">check_latest</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dcm2bids&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Check if a new version of a software exists and print some details</p>
+<p>Implemented for dcm2bids, dcm2niix</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>name of the software</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">check_latest</span>(<span class="nb">name</span>=<span class="s">&quot;dcm2bids&quot;</span>):
+
+    <span class="s">&quot;&quot;&quot; Check if a new version of a software exists and print some details</span>
+
+<span class="s">    Implemented for dcm2bids, dcm2niix</span>
+
+<span class="s">    Args:</span>
+
+<span class="s">        name (string): name of the software</span>
+
+<span class="s">    Returns:</span>
+
+<span class="s">        None</span>
+
+<span class="s">    &quot;&quot;&quot;</span>
+
+    <span class="n">data</span> = {
+
+        <span class="s">&quot;dcm2bids&quot;</span>: {
+
+            <span class="s">&quot;repo&quot;</span>: <span class="s">&quot;unfmontreal/Dcm2Bids&quot;</span>,
+
+            <span class="s">&quot;host&quot;</span>: <span class="s">&quot;https://github.com&quot;</span>,
+
+            <span class="s">&quot;current&quot;</span>: <span class="n">__version__</span>,
+
+        },
+
+        <span class="s">&quot;dcm2niix&quot;</span>: {
+
+            <span class="s">&quot;repo&quot;</span>: <span class="s">&quot;rordenlab/dcm2niix&quot;</span>,
+
+            <span class="s">&quot;host&quot;</span>: <span class="s">&quot;https://github.com&quot;</span>,
+
+            <span class="s">&quot;current&quot;</span>: <span class="n">dcm2niix_version</span>,
+
+        },
+
+    }
+
+    <span class="k">if</span> <span class="n">internet</span>() <span class="o">and</span> <span class="n">is_tool</span>(<span class="s">&quot;curl&quot;</span>):
+
+        <span class="n">host</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="nb">name</span>)[<span class="s">&quot;host&quot;</span>]
+
+        <span class="k">if</span> <span class="n">host</span> == <span class="s">&quot;https://github.com&quot;</span>:
+
+            <span class="n">repo</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="nb">name</span>)[<span class="s">&quot;repo&quot;</span>]
+
+            <span class="n">latest</span> = <span class="n">check_github_latest</span>(<span class="n">repo</span>)
+
+        <span class="n">else:</span>
+
+            <span class="c1"># Not implemented</span>
+
+            <span class="k">return</span>
+
+    <span class="n">else:</span>
+
+        <span class="n">logger</span>.<span class="n">debug</span>(<span class="s">&quot;Checking latest version of %s was not possible&quot;</span>, <span class="nb">name</span>)
+
+        <span class="n">logger</span>.<span class="n">debug</span>(<span class="s">&quot;internet: %s, curl: %s&quot;</span>, <span class="n">internet</span>(), <span class="n">is_tool</span>(<span class="s">&quot;curl&quot;</span>))
+
+        <span class="k">return</span>
+
+    <span class="n">current</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="nb">name</span>)[<span class="s">&quot;current&quot;</span>]
+
+    <span class="k">if</span> <span class="n">callable</span>(<span class="n">current</span>):
+
+        <span class="n">current</span> = <span class="n">current</span>()
+
+    <span class="n">try:</span>
+
+        <span class="n">news</span> = <span class="n">LooseVersion</span>(<span class="n">latest</span>) &gt; <span class="n">LooseVersion</span>(<span class="n">current</span>)
+
+    <span class="n">except:</span>
+
+        <span class="n">news</span> = <span class="n">None</span>
+
+    <span class="k">if</span> <span class="n">news:</span>
+
+        <span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;Your using %s version %s&quot;</span>, <span class="nb">name</span>, <span class="n">current</span>)
+
+        <span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;A new version exists : %s&quot;</span>, <span class="n">latest</span>)
+
+        <span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;Check %s/%s&quot;</span>, <span class="n">host</span>, <span class="n">repo</span>)
+</code></pre></div>
+
+</details>
+<h3 id="dcm2niix_version">dcm2niix_version</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dcm2niix_version</span><span class="p">(</span>
+
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Returns:</p>
+<p>A string of the version of dcm2niix install on the system</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">dcm2niix_version</span><span class="p">():</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        A string of the version of dcm2niix install on the system</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">):</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;dcm2niix is not in your PATH or not installed&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Check https://github.com/rordenlab/dcm2niix&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="n">try</span><span class="p">:</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">))</span>
+
+    <span class="n">except</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Running: dcm2niix&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="n">try</span><span class="p">:</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">except</span><span class="p">:</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="n">splits</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="n">splits</span><span class="p">[</span><span class="n">splits</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">except</span><span class="p">:</span>
+
+            <span class="k">continue</span>
+
+    <span class="k">return</span>
+</code></pre></div>
+
+</details>
+<h3 id="internet">internet</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">internet</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s1">&#39;8.8.8.8&#39;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Check if user has internet</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>8.8.8.8 (google-public-dns-a.google.com)</td>
+<td>None</td>
+</tr>
+<tr>
+<td>port</td>
+<td>int</td>
+<td>OpenPort 53/tcp</td>
+<td></td>
+</tr>
+<tr>
+<td>Service: domain (DNS/TCP)</td>
+<td>None</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>int</td>
+<td>default=3</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Source: https://stackoverflow.com/a/33117579 |</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span> <span class="nv">internet</span><span class="ss">(</span><span class="nv">host</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">8.8.8.8</span><span class="s2">&quot;</span>, <span class="nv">port</span><span class="o">=</span><span class="mi">53</span>, <span class="nb">timeout</span><span class="o">=</span><span class="mi">3</span><span class="ss">)</span>:
+
+    <span class="s2">&quot;&quot;&quot;</span><span class="s"> Check if user has internet</span>
+
+    <span class="nv">Args</span>:
+
+        <span class="nv">host</span> <span class="ss">(</span><span class="nv">string</span><span class="ss">)</span>: <span class="mi">8</span>.<span class="mi">8</span>.<span class="mi">8</span>.<span class="mi">8</span> <span class="ss">(</span><span class="nv">google</span><span class="o">-</span><span class="nv">public</span><span class="o">-</span><span class="nv">dns</span><span class="o">-</span><span class="nv">a</span>.<span class="nv">google</span>.<span class="nv">com</span><span class="ss">)</span>
+
+        <span class="nv">port</span> <span class="ss">(</span><span class="nv">int</span><span class="ss">)</span>: <span class="nv">OpenPort</span> <span class="mi">53</span><span class="o">/</span><span class="nv">tcp</span>
+
+                    <span class="nv">Service</span>: <span class="nv">domain</span> <span class="ss">(</span><span class="nv">DNS</span><span class="o">/</span><span class="nv">TCP</span><span class="ss">)</span>
+
+        <span class="nb">timeout</span> <span class="ss">(</span><span class="nv">int</span><span class="ss">)</span>: <span class="nv">default</span><span class="o">=</span><span class="mi">3</span>
+
+    <span class="nv">Returns</span>:
+
+        <span class="nv">boolean</span>
+
+    <span class="nv">Source</span>: <span class="nv">https</span>:<span class="o">//</span><span class="nv">stackoverflow</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">a</span><span class="o">/</span><span class="mi">33117579</span>
+
+    <span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="nv">try</span>:
+
+        <span class="nv">socket</span>.<span class="nv">setdefaulttimeout</span><span class="ss">(</span><span class="nb">timeout</span><span class="ss">)</span>
+
+        <span class="nv">socket</span>.<span class="nv">socket</span><span class="ss">(</span><span class="nv">socket</span>.<span class="nv">AF_INET</span>, <span class="nv">socket</span>.<span class="nv">SOCK_STREAM</span><span class="ss">)</span>.<span class="k">connect</span><span class="ss">((</span><span class="nv">host</span>, <span class="nv">port</span><span class="ss">))</span>
+
+        <span class="k">return</span> <span class="nv">True</span>
+
+    <span class="nv">except</span>:
+
+        <span class="k">return</span> <span class="nv">False</span>
+</code></pre></div>
+
+</details>
+<h3 id="is_tool">is_tool</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_tool</span><span class="p">(</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Check if a program is in PATH</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>program name</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">is_tool</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; Check if a program is in PATH</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        name (string): program name</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        boolean</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">which</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">is</span> <span class="ow">not</span> <span class="n">None</span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../utils/" title="Utils" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Utils
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

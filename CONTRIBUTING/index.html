@@ -1,0 +1,937 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Contributing - dcm2bids</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff6e42">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#contributing-to-dcm2bids" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            dcm2bids
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Contributing
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    dcm2bids
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Dcm2Bids
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../CODE_OF_CONDUCT/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Contributing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Contributing" class="md-nav__link md-nav__link--active">
+      Contributing
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcome" class="md-nav__link">
+    Welcome
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-through-neurostars" class="md-nav__link">
+    Contributing through Neurostars
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-through-github" class="md-nav__link">
+    Contributing through GitHub
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing through GitHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-pull-request" class="md-nav__link">
+    Create a pull request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-issue" class="md-nav__link">
+    Create an issue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fork-the-dcm2bids-repository" class="md-nav__link">
+    Fork the dcm2bids repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-your-branch" class="md-nav__link">
+    Test your branch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-list" class="md-nav__link">
+    Check list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submit-and-tag-your-pull-request" class="md-nav__link">
+    Submit and tag your pull request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-issue-tag-with-labels-and-contribute" class="md-nav__link">
+    Create an issue, tag with labels and contribute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recognizing-your-contribution" class="md-nav__link">
+    Recognizing your contribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thank-you" class="md-nav__link">
+    Thank you!
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../docs/1-usage/" title="1. Usage" class="md-nav__link">
+      1. Usage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../docs/2-tutorial/" title="2. Tutorial" class="md-nav__link">
+      2. Tutorial
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../docs/3-configuration/" title="3. Configuration" class="md-nav__link">
+      3. Configuration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../docs/4-advance/" title="4. Advance" class="md-nav__link">
+      4. Advance
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1">
+    
+    <label class="md-nav__link" for="nav-9-1">
+      Dcm2Bids
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-1">
+        <span class="md-nav__icon md-icon"></span>
+        Dcm2Bids
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/dcm2bids/" title="Dcm2Bids" class="md-nav__link">
+      Dcm2Bids
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/dcm2niix/" title="Dcm2Niix" class="md-nav__link">
+      Dcm2Niix
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/helper/" title="Helper" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/scaffold/" title="Scaffold" class="md-nav__link">
+      Scaffold
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/sidecar/" title="Sidecar" class="md-nav__link">
+      Sidecar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/structure/" title="Structure" class="md-nav__link">
+      Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/dcm2bids/version/" title="Version" class="md-nav__link">
+      Version
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcome" class="md-nav__link">
+    Welcome
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-through-neurostars" class="md-nav__link">
+    Contributing through Neurostars
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-through-github" class="md-nav__link">
+    Contributing through GitHub
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing through GitHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-pull-request" class="md-nav__link">
+    Create a pull request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-issue" class="md-nav__link">
+    Create an issue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fork-the-dcm2bids-repository" class="md-nav__link">
+    Fork the dcm2bids repository
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-your-branch" class="md-nav__link">
+    Test your branch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-list" class="md-nav__link">
+    Check list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submit-and-tag-your-pull-request" class="md-nav__link">
+    Submit and tag your pull request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-issue-tag-with-labels-and-contribute" class="md-nav__link">
+    Create an issue, tag with labels and contribute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recognizing-your-contribution" class="md-nav__link">
+    Recognizing your contribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thank-you" class="md-nav__link">
+    Thank you!
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/CONTRIBUTING.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="contributing-to-dcm2bids">Contributing to dcm2bids</h1>
+<p>Welcome to the dcm2bids repository and thank you for thinking about
+ contributing! :heart:</p>
+<p>This document has been written in such a way you feel at ease to find your way
+ on how you can make a difference for the <code>dcm2bids</code> community.</p>
+<p>We tried to cover as much as possible in few words possible. If you have any
+questions don't hesitate to share them in the section below.</p>
+<p>There are multiple ways to be helpful to the dcm2bids community.</p>
+<p>If you already know what you are looking for, you can select one of the section below:</p>
+<ul>
+<li><a href="#welcome">Welcome</a></li>
+<li><a href="#contributing-through-neurostars">Contributing through Neurostars</a></li>
+<li><a href="#contributing-through-github">Contributing through Github </a></li>
+<li><a href="#create-a-pull-request">Create a pull request</a></li>
+<li><a href="#create-a-pull-request">Create an issue</a></li>
+<li><a href="#fork-the-dcm2bids-repository">Fork the dcm2bids repository</a></li>
+<li><a href="#test-your-branch">Test your branch</a></li>
+<li><a href="#check-list">Check list</a></li>
+<li><a href="#submit-and-tag-your-pull-request">Submit and tag your pull request</a></li>
+<li><a href="#create-an-issue,-tag-with-labels-and-contribute">Create an issue, tag with labels and contribute</a></li>
+<li><a href="#recognizing-your-contribution">Recognizing your contribution</a></li>
+</ul>
+<p>Don't know where to get started?
+Read <a href="#welcome">Welcome</a> and pop into
+this <a href="https://github.com/UNFmontreal/Dcm2Bids/issues">thread</a> to introduce yourself! Let us know what your interests are and we
+will help you find an issue to contribute to. Thanks so much!</p>
+<h2 id="welcome">Welcome</h2>
+<p>dcm2bids is a small project started in 2017 by Christophe Bedetti(<a href="https://github.com/cbedetti">@cbedetti</a>).
+Now 2021, we are starting a new initiative and we're excited to have you join!
+You can introduce yourself on the open issue [welcome][dcm2bids-welcome] and
+tell us how you would like to contribute in the <code>dcm2bids</code> community.
+Most of our discussions will take place on open <a href="https://github.com/UNFmontreal/Dcm2Bids/issues">issues</a>.</p>
+<p>As a reminder, we expect all contributions to <code>dcm2bids</code> to adhere
+to our <a href="https://unfmontreal.github.io/Dcm2Bids/CODE_OF_CONDUCT">code of conduct</a>.</p>
+<h2 id="contributing-through-neurostars">Contributing through Neurostars</h2>
+<p>The dcm2bids community highlight all contributions to <code>dcm2bids</code>.
+Helping users on Neurostars forum is one of them.</p>
+<p>Neurostars has a <code>dcm2bids</code> tag that helps us following any question regarding
+the project. You can ask for Neurostars to send you notifications when a new
+ message has been posted. If you know the answer, you can reply following
+ our <a href="https://unfmontreal.github.io/Dcm2Bids/CODE_OF_CONDUCT">code of conduct</a>.</p>
+<h2 id="contributing-through-github">Contributing through GitHub</h2>
+<p><a href="https://git-scm.com/">Git</a> is a really useful tool for version control.
+<a href="http://github.com/">GitHub</a> sits on top of git and supports collaborative and distributed working.</p>
+<p>Before you start you'll need to set up a free <a href="http://github.com/">GitHub</a> account and sign in.
+Here are some [instructions][link_signupinstructions].</p>
+<p>You'll use [Markdown][markdown] to chat in issues and pull requests on GitHub.
+You can think of Markdown as a few little symbols around your text that will allow GitHub
+to render the text with a little bit of formatting.
+For example you could write words as bold (<code>**bold**</code>), or in italics (<code>*italics*</code>),
+or as a [link][rick_roll] (<code>[link](https://https://youtu.be/dQw4w9WgXcQ)</code>) to another webpage.</p>
+<p>GitHub has a helpful page on
+<a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github">getting started with writing and formatting Markdown on GitHub</a>.</p>
+<h3 id="create-a-pull-request">Create a pull request</h3>
+<p>We will be excited when you'll suggest a new PR to fix, enhance or develop <code>dcm2bids</code>.
+In order to make this as fluid as possible we recommend to follow this workflow:</p>
+<h3 id="create-an-issue">Create an issue</h3>
+<p>Before starting to work on a new pull request we highly recommend you open an
+ issue with the label <em>enhancement</em> to explain what you want to do and how it
+ echoes a specific demand from the community. Moreover, it will be
+ interesting to see how others approach your issue and give their opinion and
+ maybe give you advice to find the best way to code it. Finally, it will prevent
+ you to start working on something that is already in progress.
+ Keep in mind the [scope][dcm2bids-scope] of the <code>dcm2bids</code> project.</p>
+<h3 id="fork-the-dcm2bids-repository">Fork the <code>dcm2bids</code> repository</h3>
+<p>This way you'll be able to work on your own instance of <code>dcm2bids</code>. It will be
+a safe place where nothing can affect the main repository. Make sure your
+master is always <a href="https://help.github.com/articles/syncing-a-fork/">up-to-date</a>. You can also follow these
+command lines.</p>
+<div class="codehilite"><pre><span></span><code>git checkout master
+git fetch upstream master
+git merge upstream/master
+</code></pre></div>
+
+<p>Then create a new branch for each issue. Using a new branch allows you to
+follow the standard GitHub workflow when making changes.
+<a href="https://guides.github.com/introduction/flow/">This guide</a> provides a useful overview for this workflow.
+Please keep the name of your branch short and self explanatory.</p>
+<div class="codehilite"><pre><span></span><code>git checkout -b MYBRANCH
+</code></pre></div>
+
+<h3 id="test-your-branch">Test your branch</h3>
+<p>If you are proposing new features, you'll need to add new tests as well.
+In any case, you have to test your branch prior to submit your PR.</p>
+<p>If you have new code you will have to run pytest:</p>
+<div class="codehilite"><pre><span></span><code>pytest -v tests/test_dcm2bids.py
+</code></pre></div>
+
+<p><code>dcm2bids</code> project is following <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> convention whenever possible.
+You can check your code using this command line:</p>
+<div class="codehilite"><pre><span></span><code>flake8 FileIWantToCheck
+</code></pre></div>
+
+<p>Regardless, when you open a Pull Request, we use <a href="https://tox.readthedocs.io/">Tox</a> to run all unit and
+integration tests.</p>
+<p>If you have propose a PR about a modification on the documentation you can
+have a preview from an editor like Atom using <code>CTRL+SHIFT+M</code>.</p>
+<h3 id="check-list">Check list</h3>
+<p>Pull Request Checklist (For Fastest Review):</p>
+<ul>
+<li>Check that all tests are passing ("All tests passsed")</li>
+<li>Make sure you have docstrings for any new functions</li>
+<li>Make sure that docstrings are updated for edited functions</li>
+<li>Make sure you note any issues that will be closed by your PR</li>
+<li>Add a clear description of the purpose of you PR</li>
+</ul>
+<h3 id="submit-and-tag-your-pull-request">Submit and tag your pull request</h3>
+<p>When you submit a pull request we ask you to follow the tag specification. In order to simplify reviewers work, we ask you to use at least one of the following tags:</p>
+<ul>
+<li>[BRK] for changes which break existing builds or tests</li>
+<li>[DOC] for new or updated documentation</li>
+<li>[ENH] for enhancements</li>
+<li>[FIX] for bug fixes</li>
+<li>[TST] for new or updated tests</li>
+<li>[REF] for refactoring existing code</li>
+<li>[MAINT] for maintenance of code</li>
+<li>[WIP] for work in progress</li>
+</ul>
+<p>You can also combine the tags above, for example if you are updating both a test and the documentation: [TST, DOC].</p>
+<h3 id="create-an-issue-tag-with-labels-and-contribute">Create an issue, tag with labels and contribute</h3>
+<p>Issues are individual pieces of work that need to be completed to move the project forwards. A general guideline: if you find yourself tempted to write a great big issue that is difficult to describe as one unit of work, please consider splitting it into two or more.</p>
+<p>The current list of labels are <a href="https://github.com/UNFmontreal/Dcm2Bids/labels">here</a> and include:</p>
+<ul>
+<li>
+<p><a href="https://github.com/UNFmontreal/Dcm2Bids/labels/help%20wanted"><img alt="Help Wanted" src="https://img.shields.io/badge/-help%20wanted-159818.svg" /></a> <em>These issues contain a task that a member of the team has determined we need additional help with.</em></p>
+<p>If you feel that you can contribute to one of these issues, we especially encourage you to do so!</p>
+</li>
+<li>
+<p><a href="https://github.com/UNFmontreal/Dcm2Bids/labels/bug"><img alt="Bug" src="https://img.shields.io/badge/-bug-fc2929.svg" /></a> <em>These issues point to problems in the project.</em></p>
+<p>If you find new a bug, please give as much detail as possible in your issue, including steps to recreate the error.
+If you experience the same bug as one already listed, please add any additional information that you have as a comment.</p>
+</li>
+<li>
+<p><a href="https://github.com/UNFmontreal/Dcm2Bids/labels/enhancement"><img alt="Enhancement" src="https://img.shields.io/badge/-enhancement-84b6eb.svg" /></a> <em>These issues are asking for enhancements to be added to the project.</em></p>
+<p>Please try to make sure that your enhancement is distinct from any others that have already been requested or implemented.
+If you find one that's similar but there are subtle differences please reference the other request in your issue.</p>
+</li>
+</ul>
+<h2 id="recognizing-your-contribution">Recognizing your contribution</h2>
+<p>We welcome and recognize <a href="https://allcontributors.org/docs/en/specification">all contributions</a>
+from documentation to testing to code development.
+You can see a list of current contributors in the <a href="/README.md">README</a>
+(kept up to date by the <a href="https://allcontributors.org/docs/en/bot/overview">all contributors bot</a>).
+You can see <a href="https://allcontributors.org/docs/en/bot/usage">here</a> for instructions on
+how to use the bot.</p>
+<h2 id="thank-you">Thank you!</h2>
+<p>You're amazing. :wave::smiley:</p>
+<p><em>&mdash; Based on contributing guidelines from the <a href="https://github.com/KirstieJane/STEMMRoleModels">STEMMRoleModels</a> and <a href="https://github.com/ME-ICA/tedana">tedana</a> projects.</em></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../CODE_OF_CONDUCT/" title="Code of conduct" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Code of conduct
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../docs/1-usage/" title="1. Usage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1. Usage
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
