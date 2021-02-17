@@ -7,24 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Advanced configuration - dcm2bids</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
     var mkdocs_page_name = "Advanced configuration";
-    var mkdocs_page_input_path = "advance.md";
+    var mkdocs_page_input_path = "4-advance.md";
     var mkdocs_page_url = null;
   </script>
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -35,6 +36,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> dcm2bids</a>
         <div role="search">
@@ -45,69 +47,33 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">User Guide</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../usage/">Usage</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../config/">Configuration file</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">Advanced configuration</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#advanced-configuration">Advanced configuration</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#searchmethod">searchMethod</a></li>
-        
-            <li><a class="toctree-l4" href="#defacetpl">defaceTpl</a></li>
-        
-            <li><a class="toctree-l4" href="#dcm2niixoptions">dcm2niixOptions</a></li>
-        
-            <li><a class="toctree-l4" href="#compkeys">compKeys</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../tutorial/">Tutorial</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../versions/">Versions</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="https://zenodo.org/badge/latestdoi/59581295">Cite</a>
-	    </li>
-          
-        </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../index.md">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../usage.md">None</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../config.md">None</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../advance.md">None</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../tutorial.md">None</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../versions.md">Versions</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="https://zenodo.org/badge/latestdoi/59581295">Cite</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -126,19 +92,16 @@
     <li><a href="..">Docs</a> &raquo;</li>
     
       
-        
-          <li>User Guide &raquo;</li>
-        
-      
     
     <li>Advanced configuration</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/cbedetti/Dcm2Bids/edit/master/docs/advance.md"
+        <a href="https://github.com/unfmontreal/Dcm2Bids/edit/master/docs/4-advance.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -148,16 +111,20 @@
 <p>These optional configurations could be insert in the configuration file at the same level as the <code>"descriptions"</code> entry.</p>
 <pre><code>{
     &quot;searchMethod&quot;: &quot;fnmatch&quot;,
+    &quot;caseSensitive&quot;: true,
     &quot;defaceTpl&quot;: &quot;pydeface --outfile {dstFile} {srcFile}&quot;,
     &quot;description&quot;: [
         ...
     ]
 }
 </code></pre>
-
 <h2 id="searchmethod">searchMethod</h2>
 <p>default: <code>"searchMethod": "fnmatch"</code></p>
 <p>fnmatch is the behaviour (See criteria) by default and the fall back if this option is set incorrectly. <code>re</code> is the other choice if you want more flexibility to match criteria.</p>
+<h2 id="casesensitive">caseSensitive</h2>
+<p>default: <code>"caseSensitive": "true"</code></p>
+<p>If false, comparisons between strings/lists will be not case sensitive.
+It's only disabled when used with <code>"searchMethod": "fnmatch"</code>.</p>
 <h2 id="defacetpl">defaceTpl</h2>
 <p>default: <code>"defaceTpl": None</code></p>
 <p>The anonymizer option no longer exists from <code>v2.0.0</code>. It is still possible to deface the anatomical nifti images.</p>
@@ -175,15 +142,6 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../tutorial/" class="btn btn-neutral float-right" title="Tutorial">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../config/" class="btn btn-neutral" title="Configuration file"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
@@ -192,7 +150,7 @@
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -202,22 +160,23 @@
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/cbedetti/Dcm2Bids/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/unfmontreal/Dcm2Bids/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../config/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
     <script>var base_url = '..';</script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
