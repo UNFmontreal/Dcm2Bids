@@ -94,7 +94,7 @@ Python index begins at `0` so in the example, `0` means it is intended for `task
 
 For each acquisition, __dcm2niix__ creates an associated .json file, containing information from the dicom header. These are known as __sidecars__. These are the sidecars __dcm2bids__ uses to filter the groups of acquisitions.
 
-To define this filtering you will probably need to review these sidecars. You can generate all the sidecars for an individual participant using [dcm2bids_helper](usage.md#tools).
+To define this filtering you will probably need to review these sidecars. You can generate all the sidecars for an individual participant using [dcm2bids_helper](1-usage.md#tools).
 
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [gnu-pattern]: https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html

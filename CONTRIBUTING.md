@@ -49,11 +49,11 @@ Helping users on Neurostars forum is one of them.
 Neurostars has a `dcm2bids` tag that helps us following any question regarding
 the project. You can ask for Neurostars to send you notifications when a new
  message has been posted. If you know the answer, you can reply following
- our [Code of Conduct][dcm2bids-coc].
+ our [code of conduct][dcm2bids-coc].
 
 ## Contributing through GitHub
 
-[git][link_git] is a really useful tool for version control.
+[Git][link_git] is a really useful tool for version control.
 [GitHub][link_github] sits on top of git and supports collaborative and distributed working.
 
 Before you start you'll need to set up a free [GitHub][link_github] account and sign in.
@@ -98,7 +98,7 @@ git merge upstream/master
 
 Then create a new branch for each issue. Using a new branch allows you to
 follow the standard GitHub workflow when making changes.
-[This guide][git-guide] provides a useful overview for this workflow. 
+[This guide][git-guide] provides a useful overview for this workflow.
 Please keep the name of your branch short and self explanatory.
 
 ```
@@ -129,15 +129,15 @@ integration tests.
 If you have propose a PR about a modification on the documentation you can
 have a preview from an editor like Atom using `CTRL+SHIFT+M`.
 
-### Pull request: check list
+### Check list
 
 Pull Request Checklist (For Fastest Review):
 
-- [ ] Check that all tests are passing ("All tests passsed")
-- [ ] Make sure you have docstrings for any new functions
-- [ ] Make sure that docstrings are updated for edited functions
-- [ ] Make sure you note any issues that will be closed by your PR
-- [ ] Add a clear description of the purpose of you PR
+- Check that all tests are passing ("All tests passsed")
+- Make sure you have docstrings for any new functions
+- Make sure that docstrings are updated for edited functions
+- Make sure you note any issues that will be closed by your PR
+- Add a clear description of the purpose of you PR
 
 ### Submit and tag your pull request
 
@@ -200,10 +200,14 @@ You're amazing. :wave::smiley:
 [link_helpwanted]: https://github.com/UNFmontreal/Dcm2Bids/labels/help%20wanted
 [link_enhancement]: https://github.com/UNFmontreal/Dcm2Bids/labels/enhancement
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
-[dcm2bids-coc]: https://github.com/UNFmontreal/Dcm2Bids/CODE_OF_CONDUCT.md
+[dcm2bids-coc]: https://unfmontreal.github.io/Dcm2Bids/CODE_OF_CONDUCT
 [dcm2bids-introduce-yourself]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [writing_formatting_github]: https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github
 [git-fork-update]: https://help.github.com/articles/syncing-a-fork/
 [git-guide]: https://guides.github.com/introduction/flow/
 [pep8]: https://www.python.org/dev/peps/pep-0008/
 [tox]: https://tox.readthedocs.io/
+
+[link_all-contributors-spec]: https://allcontributors.org/docs/en/specification
+[link_all-contributors-bot]: https://allcontributors.org/docs/en/bot/overview
+[link_all-contributors-bot-usage]: https://allcontributors.org/docs/en/bot/usage
