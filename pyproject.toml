@@ -9,6 +9,12 @@ palette = {primary = "deep-orange"}
 Home = "README.md"
 
 [[tool.portray.mkdocs.nav]]
+"Code of conduct" = "CODE_OF_CONDUCT.md"
+
+[[tool.portray.mkdocs.nav]]
+"Contributing" = "CONTRIBUTING.md"
+
+[[tool.portray.mkdocs.nav]]
 "1. Usage" = "docs/1-usage.md"
 
 [[tool.portray.mkdocs.nav]]
