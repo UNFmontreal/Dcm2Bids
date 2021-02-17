@@ -3,4 +3,22 @@ modules = ["dcm2bids"]
 
 [tool.portray.mkdocs.theme]
 name = "material"
-palette = {primary = "teal", accent = "deep-orange"}
+palette = {primary = "deep-orange"}
+
+[[tool.portray.mkdocs.nav]]
+Home = "README.md"
+
+[[tool.portray.mkdocs.nav]]
+"1. Usage" = "docs/1-usage.md"
+
+[[tool.portray.mkdocs.nav]]
+"2. Tutorial" = "docs/2-tutorial.md"
+
+[[tool.portray.mkdocs.nav]]
+"3. Configuration" = "docs/3-configuration.md"
+
+[[tool.portray.mkdocs.nav]]
+"4. Advance" = "docs/4-advance.md"
+
+[[tool.portray.mkdocs.nav]]
+"Changelog" = "CHANGELOG.md"
