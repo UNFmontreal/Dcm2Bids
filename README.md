@@ -1,34 +1,24 @@
 # dcm2bids
 Your friendly DICOM converter.
 
-<p>
-<a href="https://pypi.org/project/dcm2bids">
-<img alt="PyPI version" src="https://badge.fury.io/py/dcm2bids.svg">
-</a>
-<a href="https://unfmontreal.github.io/Dcm2Bids">
-<img alt="Documentation" src="https://img.shields.io/badge/documentation-dcm2bids-succes.svg">
-</a>
-<a href="https://zenodo.org/badge/latestdoi/59581295">
-<img alt="DOI" src="https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg">
-</a>
-<!--
-<a href="https://singularity-hub.org/collections/544">
-<img alt="Singularity Hub" src="https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg">
-</a>
--->
-</p>
+[![Documentation](https://img.shields.io/badge/Documentation-dcm2bids-succes.svg)](https://unfmontreal.github.io/Dcm2Bids)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg)](https://zenodo.org/badge/latestdoi/59581295)
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dcm2bids/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/dcm2bids)
 
-<p>
-<a href="https://github.com/unfmontreal/Dcm2Bids/actionsk">
-<img alt="" src="https://github.com/unfmontreal/Dcm2Bids/workflows/Tests/badge.svg">
-</a>
-<a href="https://codecov.io/gh/unfmontreal/Dcm2Bids">
-<img src="https://codecov.io/gh/unfmontreal/Dcm2Bids/branch/master/graph/badge.svg"/>
-</a>
-<a href="https://github.com/psf/black">
-<img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
-</a>
-</p>
+
+[![](https://github.com/unfmontreal/Dcm2Bids/workflows/Tests/badge.svg)](https://github.com/unfmontreal/Dcm2Bids/actionsk)
+[![](https://codecov.io/gh/unfmontreal/Dcm2Bids/branch/master/graph/badge.svg)](https://codecov.io/gh/unfmontreal/Dcm2Bids)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+
+[![PyPI version](https://img.shields.io/pypi/v/dcm2bids)](https://pypi.org/project/dcm2bids)
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dcm2bids/badges/version.svg)](https://anaconda.org/conda-forge/dcm2bids)
+[![Docker container](https://badgen.net/docker/pulls/unfmontreal/dcm2bids?icon=docker&label=pulls)](https://hub.docker.com/r/unfmontreal/dcm2bids)
+
+
+[![](https://img.shields.io/pypi/l/dcm2bids)](LICENSE.txt)
+
+---
 
 `dcm2bids` reorganises NIfTI files using [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
