@@ -40,24 +40,27 @@ Please take a look at the [documentation][dcm2bids-doc] to:
 * [Follow the tutorial][dcm2bids-tutorial]
 * [Seek for more advanced usage][dcm2bids-advanced]
 
-## Issues
+## Issues and Questions
 
 We work hard to make sure `dcm2bids` is robust and we welcome comments and questions to make sure it meets your use case! Here's our preferred workflow:
 
-- If you have a usage question, please post your issue on Neurostars with `dcm2bids` as an optional tag. The tag is really important because Neurostars will only notify us if the tag is present.
+- If you have a usage question, we encourage you to post your question on [Neurostars][neurostars] with [dcm2bids][neurostars-dcm2bids] as an optional tag. The tag is really important because [Neurostars][neurostars-dcm2bids] will notify the `dcm2bids` team only if the tag is present. [Neurostars][neurostars-dcm2bids] is a question and answer forum for neuroscience researchers, infrastructure providers and software developers and free to access.
+  
+  Before posting your question, you may want to first browse through questions that were tagged with the [dcm2bids tag][neurostars-dcm2bids]. If your question persists, feel free to comment on previous questions or ask your own question.
 
-- If you think you've found a bug, please open an issue here. To do this, you'll need a GitHub account. See our [contributing guide][dcm2bids-contributing] for more details.
+- If you think you've found a bug, please open an issue on [our repository][dcm2bids-issues]. To do this, you'll need a GitHub account. See our [contributing guide](/CONTRIBUTING) for more details.
 
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/bids-standard/bids-examples
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [dcm2bids-doc]: https://unfmontreal.github.io/Dcm2Bids
-[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/#install
-[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/tutorial
-[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/advance/
+[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/docs/2-tutorial/#setup
+[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/2-tutorial
+[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/4-advance/
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
 [neurostars]: https://neurostars.org/
-[dcm2bids-contributing]: https://unfmontreal.github.io/Dcm2Bids/CONTRIBUTING.md
+[neurostars-dcm2bids]: https://neurostars.org/tag/dcm2bids
+[dcm2bids-contributing]:  https://unfmontreal.github.io/Dcm2Bids/CONTRIBUTING

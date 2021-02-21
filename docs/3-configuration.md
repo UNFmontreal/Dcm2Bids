@@ -48,11 +48,11 @@ Each description tells dcm2bids how to group a set of acquisitions and how to la
 }
 ```
 
-in their sidecars<sup>1</sup> and label them as `anat`, `T2w` type images.
+in their sidecars[^1] and label them as `anat`, `T2w` type images.
 
 ## criteria
 
-dcm2bids will try to match the sidecars<sup>1</sup> of dcm2niix to the descriptions of the configuration file. The values you enter inside the criteria dictionary are patterns that will be compared to the corresponding key of the sidecar.
+dcm2bids will try to match the sidecars[^1] of dcm2niix to the descriptions of the configuration file. The values you enter inside the criteria dictionary are patterns that will be compared to the corresponding key of the sidecar.
 
 The pattern matching is shell-style. It's possible to use wildcard `*`, single character `?` etc ... Please have a look at the [GNU documentation][gnu-pattern] to know more.
 
@@ -86,15 +86,32 @@ Optional field to change or add information in a sidecar.
 
 ## intendedFor
 
-Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index or a list of index of the description(s) that's intended for.
+Optional[^2] field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index or a list of index of the description(s) that's intended for.
 
-Python index begins at `0` so in the example, `0` means it is intended for `task-rest_bold`.
+Python index begins at `0` so in the example, `0` means[^3] it is intended for `task-rest_bold`.
 
-#### <sup>1</sup>: sidecars
+[^1]: For each acquisition, `dcm2niix` creates an associated `.json` file,
+    containing information from the dicom header. These are known as
+    __sidecars__. These are the sidecars `dcm2bids` uses to filter the groups
+    of acquisitions.
 
-For each acquisition, __dcm2niix__ creates an associated .json file, containing information from the dicom header. These are known as __sidecars__. These are the sidecars __dcm2bids__ uses to filter the groups of acquisitions.
+    To define this filtering you will probably need to review these sidecars.
+    You can generate all the sidecars for an individual participant using [dcm2bids_helper](1-usage.md#tools).
 
-To define this filtering you will probably need to review these sidecars. You can generate all the sidecars for an individual participant using [dcm2bids_helper](1-usage.md#tools).
+[^2]: For each acquisition, `dcm2niix` creates an associated `.json` file,
+    containing information from the dicom header. These are known as
+    __sidecars__. These are the sidecars `dcm2bids` uses to filter the groups
+    of acquisitions.
 
+    To define this filtering you will probably need to review these sidecars.
+    You can generate all the sidecars for an individual participant using [dcm2bids_helper](1-usage.md#tools).
+
+[^3]: For each acquisition, `dcm2niix` creates an associated `.json` file,
+    containing information from the dicom header. These are known as
+    __sidecars__. These are the sidecars `dcm2bids` uses to filter the groups
+    of acquisitions.
+
+    To define this filtering you will probably need to review these sidecars.
+    You can generate all the sidecars for an individual participant using [dcm2bids_helper](1-usage.md#tools).
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [gnu-pattern]: https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html

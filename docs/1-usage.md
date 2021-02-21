@@ -6,25 +6,29 @@ dcm2bids converts one session at a time. A session is all the acquisitions betwe
 
 You need to build a configuration file of your study to let dcm2bids associates your acquisitions through BIDS sidecar. Every study is different and this step needs a little bit of work. The scanner parameters should not change too much for one study (several MRI sessions), so a few configuration files should work.
 
-BIDS sidecar<sup>1</sup> files are `JSON` files with meta informations about the acquisition. `dcm2niix` (DICOM to NIfTI converter used by dcm2bids) creates automatically one BIDS sidecar for each NIfTI file.
+BIDS sidecar[^1] files are `JSON` files with meta informations about the acquisition. `dcm2niix` (DICOM to NIfTI converter used by dcm2bids) creates automatically one BIDS sidecar for each NIfTI file.
 
 dcm2bids configuration file uses also the `JSON` format. One example is provided in the `example` folder on the github repository.
 
 It is recommended to use an editor with syntax highlighting to build a correct JSON file. Here is an [online][json-editor] one.
 
-## CLI
+## Command Line Interface (CLI)
 
 How to launch dcm2bids when you have build your configuration file ? First `cd` in your BIDS directory.
 
-`dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE`
+```bash
+dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE
+```
 
 If your participant have a session ID:
 
-`dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID -c CONFIG_FILE`
+```bash
+dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID -c CONFIG_FILE
+```
 
 dcm2bids creates log files inside `tmp_dcm2bids/log`
 
-See `dcm2bids -h` for more informations
+See `dcm2bids -h` or `dcm2bids --help` to show the help message that contains more information.
 
 ## Output
 
@@ -40,13 +44,17 @@ Sidecars with no or more than one matching descriptions are kept in `tmp_dcm2bid
 
 - Helper
 
-`dcm2bids_helper -d DICOM_DIR [-o OUTPUT_DIR]`
+```bash
+dcm2bids_helper -d DICOM_DIR [-o OUTPUT_DIR]
+```
 
 To build the configuration file, you need to have a example of the sidecars. You can use `dcm2bids_helper` with the DICOMs of one participant. It will launch dcm2niix and save the result inside the `tmp_dcm2bids/helper` of the output directory.
 
 - Scaffold
 
-`dcm2bids_scaffold [-o OUTPUT_DIR]`
+```bash
+dcm2bids_scaffold [-o OUTPUT_DIR]
+```
 
 Create basic BIDS files and directories in the output directory (by default folder where the script is launched).
 
@@ -57,13 +65,20 @@ Create basic BIDS files and directories in the output directory (by default fold
 
 You can also use all the tools through docker or singularity images.
 
-## Docker
-Download the latest release of the Docker container for dcm2bids:
+=== "Docker"
+    ```console
+    docker pull unfmontreal/dcm2bids:latest
+    ```
 
-`docker pull unfmontreal/dcm2bids:latest`
+=== "Singularity"
+    ```console
+    singularity pull dcm2bids_latest.sif docker://unfmontreal/dcm2bids:latest
+    ```
+   
+[^1]: For each acquisition, `dcm2niix` creates an associated `.json` file,
+    containing information from the dicom header. These are known as
+    __sidecars__. These are the sidecars `dcm2bids` uses to filter the groups
+    of acquisitions.
 
-## Singularity
-
-Build the latest singularity image:
-
-`singularity build dcm2bids.sif containers/singularity.def`
+    To define this filtering you will probably need to review these sidecars.
+    You can generate all the sidecars for an individual participant using [dcm2bids_helper](1-usage.md#tools).
