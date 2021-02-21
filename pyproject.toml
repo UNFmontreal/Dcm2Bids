@@ -1,30 +1,95 @@
 [tool.portray]
 modules = ["dcm2bids"]
+# docs_dir = ["docs"]
+# extra_dirs = ["media", "art"]
+# extra_markdown_extensions:
+
+[tool.portray.mkdocs]
+extra_css = ["docs/stylesheets/extra.css"]
+markdown_extensions = ["toc", "admonition", "footnotes", "pymdownx.emoji", "pymdownx.caret", "pymdownx.mark", "pymdownx.tilde", "pymdownx.highlight", "pymdownx.superfences"]
+# Repository
+repo_name = "UNFmontreal/dcm2bids"
+repo_url = "https://github.com/UNFmontreal/Dcm2Bids"
+edit_uri = "blob/master/"
+
+# a list of mappings of {LABEL: FILENAME or LIST_OF_MAPPING} but not a mix of
+# both. This still allows as much customization as is permitted by mkdocs 
+# just with more consistency enforced.
+
+# plugins = ["git-revision-date-localized"] 
+
+nav = [{  Home = "README.md"},
+       {  "Code of conduct" = "CODE_OF_CONDUCT.md" },
+       {  "Contributing" = "CONTRIBUTING.md"},
+       {  "1. Usage" = "docs/1-usage.md"},
+       {  "2. Tutorial" = "docs/2-tutorial.md"},
+       {  "3. Configuration" = "docs/3-configuration.md"},
+       {  "4. Advance" = "docs/4-advance.md"},
+       {  "Changelog" = "CHANGELOG.md"}]
 
 [tool.portray.mkdocs.theme]
 name = "material"
-palette = {primary = "deep-orange"}
+icon = {repo = "fontawesome/brands/github"}
+# favicon = "art/logo_small.png"
+# logo = "art/logo_small.png"
 
-[[tool.portray.mkdocs.nav]]
-Home = "README.md"
 
-[[tool.portray.mkdocs.nav]]
-"Code of conduct" = "CODE_OF_CONDUCT.md"
 
-[[tool.portray.mkdocs.nav]]
-"Contributing" = "CONTRIBUTING.md"
+# palette = {scheme = "preference"}
 
-[[tool.portray.mkdocs.nav]]
-"1. Usage" = "docs/1-usage.md"
+site_description = """
+  This is the documentation for dcm2bids, a community-centered project
+  that aims to be an easy-to-use tool to automate the process of 1- converting
+  DICOM files to NIfTI files with dcm2niix and 2- reorganising NIfTI files into the Brain
+  Imaging Data Structure (BIDS).
+  """
 
-[[tool.portray.mkdocs.nav]]
-"2. Tutorial" = "docs/2-tutorial.md"
+# Additional settings for plugins
 
-[[tool.portray.mkdocs.nav]]
-"3. Configuration" = "docs/3-configuration.md"
+[[tool.portray.mkdocs.markdown_extensions]]
+[tool.portray.mkdocs.markdown_extensions.toc]
+permalink = true
 
-[[tool.portray.mkdocs.nav]]
-"4. Advance" = "docs/4-advance.md"
+# [[tool.portray.mkdocs.markdown_extensions]]
+# [tool.portray.mkdocs.markdown_extensions."pymdownx.highlight"]
+# linenums = true
 
-[[tool.portray.mkdocs.nav]]
-"Changelog" = "CHANGELOG.md"
+[[tool.portray.mkdocs.theme.palette]]
+scheme = "preference"
+
+
+[[tool.portray.mkdocs.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/UNFmontreal/Dcm2Bids"
+name = "dcm2bids on GitHub"
+
+[[tool.portray.mkdocs.extra.social]]
+icon = "fontawesome/brands/docker"
+link = "https://hub.docker.com/r/unfmontreal/dcm2bids"
+name = "dcm2bids on docker"
+
+# [[tool.portray.mkdocs.nav]]
+# Home = "README.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "Code of conduct" = "CODE_OF_CONDUCT.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "Contributing" = "CONTRIBUTING.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "1. Usage" = "docs/1-usage.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "2. Tutorial" = "docs/2-tutorial.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "3. Configuration" = "docs/3-configuration.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "4. Advance" = "docs/4-advance.md"
+
+# [[tool.portray.mkdocs.nav]]
+# "Changelog" = "CHANGELOG.md"
+
+

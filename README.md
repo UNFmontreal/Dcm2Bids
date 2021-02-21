@@ -16,7 +16,7 @@ Your friendly DICOM converter.
 [![Docker container](https://badgen.net/docker/pulls/unfmontreal/dcm2bids?icon=docker&label=pulls)](https://hub.docker.com/r/unfmontreal/dcm2bids)
 
 
-[![](https://img.shields.io/pypi/l/dcm2bids)](LICENSE.txt)
+[![](https://img.shields.io/pypi/l/dcm2bids)](/docs/LICENSE.txt)
 
 ---
 
