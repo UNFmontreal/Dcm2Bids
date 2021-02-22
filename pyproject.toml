@@ -25,14 +25,12 @@ extra_css = ["docs/stylesheets/extra.css"] # To fix some colors in light vs slat
 # Add a bunch of markdown extensions to improve the documentation (and the look ;)).
 # See https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
 # for full list of extensions.
-markdown_extensions = ["toc",
-                       "admonition",
+markdown_extensions = ["admonition",
                        "footnotes",
                        "pymdownx.emoji",
                        "pymdownx.caret",
                        "pymdownx.mark",
                        "pymdownx.tilde",
-                       "pymdownx.highlight",
                        "pymdownx.details",
                        "pymdownx.superfences",
                        "pymdownx.tabbed"]
@@ -72,6 +70,11 @@ permalink = "⚓︎"
 [[tool.portray.mkdocs.markdown_extensions]]
 [tool.portray.mkdocs.markdown_extensions."pymdownx.highlight"]
 linenums = true # Always add line numbers in code blocks
+
+[[tool.portray.mkdocs.markdown_extensions]]
+[tool.portray.mkdocs.markdown_extensions."pymdownx.tasklist"]
+custom_checkbox = true
+clickable_checkbox = false
 
 # [[tool.portray.mkdocs.plugins]]
 # [tool.portray.mkdocs.plugins.git-revision-date]

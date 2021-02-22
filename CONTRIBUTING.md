@@ -80,7 +80,7 @@ example you can write words as **bold** (`**bold**`), or in _italics_
 !!! info "Did you know?"
     Most software documentation websites are written in Markdown. Even the `dcm2bids` [documentation website][dcm2bids-doc] is written in Markdown!
 
-    GitHub has a helpful page on [getting started with writing and formatting Markdown on GitHub][writing_formatting_github].
+    GitHub has a helpful guide to [get you started with writing and formatting Markdown][writing_formatting_github].
 
 ## Recommended workflow
 
@@ -177,11 +177,11 @@ a preview from an editor like Atom using `CTRL+SHIFT+M`.
 
 Pull Request Checklist (For Fastest Review):
 
-- Check that all tests are passing ("All tests passsed")
-- Make sure you have docstrings for any new functions
-- Make sure that docstrings are updated for edited functions
-- Make sure you note any issues that will be closed by your PR
-- Add a clear description of the purpose of you PR
+- [x] Check that all tests are passing ("All tests passsed")
+- [x] Make sure you have docstrings for any new functions
+- [x] Make sure that docstrings are updated for edited functions
+- [x] Make sure you note any issues that will be closed by your PR
+- [x] Add a clear description of the purpose of you PR
 
 ### Submit and tag your pull request
 
@@ -189,14 +189,14 @@ When you submit a pull request we ask you to follow the tag specification. In
 order to simplify reviewers work, we ask you to use at least one of the
 following tags:
 
-- [BRK] for changes which break existing builds or tests
-- [DOC] for new or updated documentation
-- [ENH] for enhancements
-- [FIX] for bug fixes
-- [TST] for new or updated tests
-- [REF] for refactoring existing code
-- [MAINT] for maintenance of code
-- [WIP] for work in progress
+- ==[BRK]== for changes which break existing builds or tests
+- ==[DOC]== for new or updated documentation
+- ==[ENH]== for enhancements
+- ==[FIX]== for bug fixes
+- ==[TST]== for new or updated tests
+- ==[REF]== for refactoring existing code
+- ==[MAINT]== for maintenance of code
+- ==[WIP]== for work in progress
 
 You can also combine the tags above, for example if you are updating both a test
 and the documentation: [TST, DOC].
@@ -217,14 +217,6 @@ _&mdash; Based on contributing guidelines from the
 [STEMMRoleModels][link_stemmrolemodels] and [tedana][link_tedana] projects._
 
 ---
-
-Help guide to write the documentation:
-
-- H~2~0
-- A^T^A
-- ==This was marked==
-- ^^This was inserted^^
-- ~~This was deleted~~
 
 [markdown]: https://en.wikipedia.org/wiki/Markdown
 [link_git]: https://git-scm.com/

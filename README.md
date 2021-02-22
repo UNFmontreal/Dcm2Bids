@@ -35,7 +35,6 @@ to day use case without complicating anything. That's the promise of the `dcm2bi
 Please take a look at the [documentation][dcm2bids-doc] to:
 
 * [Learn about bids][bids-spec] with some dataset [examples][bids-examples]
-* [Install dcm2niix][dcm2niix-install]
 * [Install dcm2bids][dcm2bids-install]
 * [Follow the tutorial][dcm2bids-tutorial]
 * [Seek for more advanced usage][dcm2bids-advanced]
@@ -44,11 +43,10 @@ Please take a look at the [documentation][dcm2bids-doc] to:
 
 We work hard to make sure `dcm2bids` is robust and we welcome comments and questions to make sure it meets your use case! Here's our preferred workflow:
 
-- If you have a usage question, we encourage you to post your question on [Neurostars][neurostars] with [dcm2bids][neurostars-dcm2bids] as an optional tag. The tag is really important because [Neurostars][neurostars-dcm2bids] will notify the `dcm2bids` team only if the tag is present. [Neurostars][neurostars-dcm2bids] is a question and answer forum for neuroscience researchers, infrastructure providers and software developers and free to access.
-  
-  Before posting your question, you may want to first browse through questions that were tagged with the [dcm2bids tag][neurostars-dcm2bids]. If your question persists, feel free to comment on previous questions or ask your own question.
+- If you have a usage question :raising_hand:, we encourage you to post your question on [Neurostars][neurostars] with [dcm2bids][neurostars-dcm2bids] as an optional tag. The tag is really important because [Neurostars][neurostars-dcm2bids] will notify the `dcm2bids` team only if the tag is present. [Neurostars][neurostars-dcm2bids] is a question and answer forum for neuroscience researchers, infrastructure providers and software developers, and free to access.  
+Before posting your question, you may want to first browse through questions that were tagged with the [dcm2bids tag][neurostars-dcm2bids]. If your question persists, feel free to comment on previous questions or ask your own question.
 
-- If you think you've found a bug, please open an issue on [our repository][dcm2bids-issues]. To do this, you'll need a GitHub account. See our [contributing guide](/CONTRIBUTING) for more details.
+- If you think you've found a bug :bug:, please open an issue on [our repository][dcm2bids-issues]. To do this, you'll need a GitHub account. See our [contributing guide](CONTRIBUTING/#open-an-issue-or-choose-one-to-fix) for more details.
 
 
 [bids]: http://bids.neuroimaging.io/
