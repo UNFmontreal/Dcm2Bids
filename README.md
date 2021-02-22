@@ -1,22 +1,22 @@
 # dcm2bids
 Your friendly DICOM converter.
 
-[![Documentation](https://img.shields.io/badge/Documentation-dcm2bids-succes.svg)](https://unfmontreal.github.io/Dcm2Bids)
+[![Documentation badge](https://img.shields.io/badge/Documentation-dcm2bids-succes.svg)](https://unfmontreal.github.io/Dcm2Bids)
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg)](https://zenodo.org/badge/latestdoi/59581295)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dcm2bids/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/dcm2bids)
+[![Last update badge](https://anaconda.org/conda-forge/dcm2bids/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/dcm2bids)
 
 
-[![](https://github.com/unfmontreal/Dcm2Bids/workflows/Tests/badge.svg)](https://github.com/unfmontreal/Dcm2Bids/actionsk)
-[![](https://codecov.io/gh/unfmontreal/Dcm2Bids/branch/master/graph/badge.svg)](https://codecov.io/gh/unfmontreal/Dcm2Bids)
+[![Test status badge](https://github.com/unfmontreal/Dcm2Bids/workflows/Tests/badge.svg)](https://github.com/unfmontreal/Dcm2Bids/actionsk)
+[![Code coverage badge](https://codecov.io/gh/unfmontreal/Dcm2Bids/branch/master/graph/badge.svg)](https://codecov.io/gh/unfmontreal/Dcm2Bids)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
-[![PyPI version](https://img.shields.io/pypi/v/dcm2bids)](https://pypi.org/project/dcm2bids)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/dcm2bids/badges/version.svg)](https://anaconda.org/conda-forge/dcm2bids)
-[![Docker container](https://badgen.net/docker/pulls/unfmontreal/dcm2bids?icon=docker&label=pulls)](https://hub.docker.com/r/unfmontreal/dcm2bids)
+[![PyPI version badge](https://img.shields.io/pypi/v/dcm2bids?logo=pypi&logoColor=white)](https://pypi.org/project/dcm2bids)
+[![Anaconda-Server Badge](https://img.shields.io/conda/vn/conda-forge/dcm2bids?logo=anaconda&logoColor=white)](https://anaconda.org/conda-forge/dcm2bids)
+[![Docker container badge](https://img.shields.io/docker/v/unfmontreal/dcm2bids?label=docker&logo=docker&logoColor=white)](https://hub.docker.com/r/unfmontreal/dcm2bids)
 
 
-[![](https://img.shields.io/pypi/l/dcm2bids)](/docs/LICENSE.txt)
+[![License badge](https://img.shields.io/pypi/l/dcm2bids)](/docs/LICENSE.txt)
 
 ---
 
