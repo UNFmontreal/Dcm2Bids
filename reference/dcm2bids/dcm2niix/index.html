@@ -16,7 +16,7 @@
     
     
       
-        <title>Dcm2Niix - dcm2bids</title>
+        <title>Dcm2Niix - Dcm2Bids</title>
       
     
     
@@ -24,10 +24,6 @@
       
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ff0a5ce4.min.css">
       
-      
-        
-        
-        <meta name="theme-color" content="#ff6e42">
       
     
     
@@ -40,6 +36,8 @@
     
     
     
+      <link rel="stylesheet" href="../../../docs/stylesheets/extra.css">
+    
     
       
     
@@ -50,8 +48,10 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
   
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -70,7 +70,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-header-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -83,7 +83,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            dcm2bids
+            Dcm2Bids
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -130,10 +130,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
       </div>
@@ -157,13 +157,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    dcm2bids
+    Dcm2Bids
   </label>
   
     <div class="md-nav__source">
@@ -171,10 +171,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
     </div>
@@ -641,7 +641,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/dcm2niix.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/dcm2niix.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -649,190 +649,361 @@
                   
                 
                 
-                <h1 id="module-dcm2bidsdcm2niix">Module dcm2bids.dcm2niix</h1>
+                <h1 id="module-dcm2bidsdcm2niix">Module dcm2bids.dcm2niix<a class="headerlink" href="#module-dcm2bidsdcm2niix" title="Permanent link">⚓︎</a></h1>
 <p>Dcm2niix class</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
-<span class="sd">&quot;&quot;&quot;Dcm2niix class&quot;&quot;&quot;</span>
+&quot;&quot;&quot;Dcm2niix class&quot;&quot;&quot;
 
-<span class="kn">import</span> <span class="nn">logging</span>
+import logging
 
-<span class="kn">import</span> <span class="nn">os</span>
+import os
 
-<span class="kn">import</span> <span class="nn">shutil</span>
+import shutil
 
-<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+from glob import glob
 
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">DEFAULT</span><span class="p">,</span> <span class="n">run_shell_command</span>
+from .utils import DEFAULT, run_shell_command
 
-<span class="k">class</span> <span class="nc">Dcm2niix</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+class Dcm2niix(object):
 
-    <span class="sd">&quot;&quot;&quot; Object to handle dcm2niix execution</span>
+    &quot;&quot;&quot; Object to handle dcm2niix execution
 
-<span class="sd">    Args:</span>
+    Args:
 
-<span class="sd">        dicomDirs (list): A list of folder with dicoms to convert</span>
+        dicomDirs (list): A list of folder with dicoms to convert
 
-<span class="sd">        bidsDir (str): A path to the root BIDS directory</span>
+        bidsDir (str): A path to the root BIDS directory
 
-<span class="sd">        participant: Optional Participant object</span>
+        participant: Optional Participant object
 
-<span class="sd">        options (str): Optional arguments for dcm2niix</span>
+        options (str): Optional arguments for dcm2niix
 
-<span class="sd">    Properties:</span>
+    Properties:
 
-<span class="sd">        sidecars (list): A list of sidecar path created by dcm2niix</span>
+        sidecars (list): A list of sidecar path created by dcm2niix
 
-<span class="sd">    &quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    def __init__(
 
-        <span class="bp">self</span><span class="p">,</span> <span class="n">dicomDirs</span><span class="p">,</span> <span class="n">bidsDir</span><span class="p">,</span> <span class="n">participant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">dcm2niixOptions</span>
+        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
 
-    <span class="p">):</span>
+    ):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+        self.logger = logging.getLogger(__name__)
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sidecarsFiles</span> <span class="o">=</span> <span class="p">[]</span>
+        self.sidecarsFiles = []
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">dicomDirs</span> <span class="o">=</span> <span class="n">dicomDirs</span>
+        self.dicomDirs = dicomDirs
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">bidsDir</span> <span class="o">=</span> <span class="n">bidsDir</span>
+        self.bidsDir = bidsDir
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">participant</span> <span class="o">=</span> <span class="n">participant</span>
+        self.participant = participant
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
+        self.options = options
 
-    <span class="nd">@property</span>
+    @property
 
-    <span class="k">def</span> <span class="nf">outputDir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    def outputDir(self):
 
-        <span class="sd">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="sd">        Returns:</span>
+        Returns:
 
-<span class="sd">            A directory to save all the output files of dcm2niix</span>
+            A directory to save all the output files of dcm2niix
 
-<span class="sd">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="p">:</span>
+        if self.participant:
 
-            <span class="n">tmpDir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span>
+            tmpDir = self.participant.prefix
 
-        <span class="k">else</span><span class="p">:</span>
+        else:
 
-            <span class="n">tmpDir</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">helperDir</span>
+            tmpDir = DEFAULT.helperDir
 
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bidsDir</span><span class="p">,</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">tmpDirName</span><span class="p">,</span> <span class="n">tmpDir</span><span class="p">)</span>
+        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
 
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    def run(self, force=False):
 
-        <span class="sd">&quot;&quot;&quot; Run dcm2niix if necessary</span>
+        &quot;&quot;&quot; Run dcm2niix if necessary
 
-<span class="sd">        Args:</span>
+        Args:
 
-<span class="sd">            force (boolean): Forces a cleaning of a previous execution of</span>
+            force (boolean): Forces a cleaning of a previous execution of
 
-<span class="sd">                             dcm2niix</span>
+                             dcm2niix
 
-<span class="sd">        Sets:</span>
+        Sets:
 
-<span class="sd">            sidecarsFiles (list): A list of sidecar path created by dcm2niix</span>
+            sidecarsFiles (list): A list of sidecar path created by dcm2niix
 
-<span class="sd">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">try</span><span class="p">:</span>
+        try:
 
-            <span class="n">oldOutput</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">)</span> <span class="o">!=</span> <span class="p">[]</span>
+            oldOutput = os.listdir(self.outputDir) != []
 
-        <span class="k">except</span><span class="p">:</span>
+        except:
 
-            <span class="n">oldOutput</span> <span class="o">=</span> <span class="kc">False</span>
+            oldOutput = False
 
-        <span class="k">if</span> <span class="n">oldOutput</span> <span class="ow">and</span> <span class="n">force</span><span class="p">:</span>
+        if oldOutput and force:
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Previous dcm2niix directory output found:&quot;</span><span class="p">)</span>
+            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">)</span>
+            self.logger.warning(self.outputDir)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;&#39;force&#39; argument is set to True&quot;</span><span class="p">)</span>
+            self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Cleaning the previous directory and running dcm2niix&quot;</span><span class="p">)</span>
+            self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
 
-            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            <span class="c1"># os.makedirs(self.outputDir, exist_ok=True)</span>
+            # os.makedirs(self.outputDir, exist_ok=True)
 
-            <span class="c1"># python2 compatibility</span>
+            # python2 compatibility
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">):</span>
+            if not os.path.exists(self.outputDir):
 
-                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">)</span>
+                os.makedirs(self.outputDir)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+            self.execute()
 
-        <span class="k">elif</span> <span class="n">oldOutput</span><span class="p">:</span>
+        elif oldOutput:
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Previous dcm2niix directory output found:&quot;</span><span class="p">)</span>
+            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">)</span>
+            self.logger.warning(self.outputDir)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Use --forceDcm2niix to rerun dcm2niix&quot;</span><span class="p">)</span>
+            self.logger.warning(&quot;Use --forceDcm2niix to rerun dcm2niix&quot;)
 
-        <span class="k">else</span><span class="p">:</span>
+        else:
 
-            <span class="c1"># os.makedirs(self.outputDir, exist_ok=True)</span>
+            # os.makedirs(self.outputDir, exist_ok=True)
 
-            <span class="c1"># python2 compatibility</span>
+            # python2 compatibility
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">):</span>
+            if not os.path.exists(self.outputDir):
 
-                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">)</span>
+                os.makedirs(self.outputDir)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+            self.execute()
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sidecarFiles</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">,</span> <span class="s2">&quot;*.json&quot;</span><span class="p">))</span>
+        self.sidecarFiles = glob(os.path.join(self.outputDir, &quot;*.json&quot;))
 
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    def execute(self):
 
-        <span class="sd">&quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs</span>
+        &quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs
 
-<span class="sd">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">for</span> <span class="n">dicomDir</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dicomDirs</span><span class="p">:</span>
+        for dicomDir in self.dicomDirs:
 
-            <span class="n">commandTpl</span> <span class="o">=</span> <span class="s2">&quot;dcm2niix </span><span class="si">{}</span><span class="s2"> -o </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span>
+            commandTpl = &quot;dcm2niix {} -o {} {}&quot;
 
-            <span class="n">cmd</span> <span class="o">=</span> <span class="n">commandTpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputDir</span><span class="p">,</span> <span class="n">dicomDir</span><span class="p">)</span>
+            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
 
-            <span class="n">output</span> <span class="o">=</span> <span class="n">run_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            output = run_shell_command(cmd)
 
-            <span class="k">try</span><span class="p">:</span>
+            try:
 
-                <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                output = output.decode()
 
-            <span class="k">except</span><span class="p">:</span>
+            except:
 
-                <span class="k">pass</span>
+                pass
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+            self.logger.debug(&quot;\n%s&quot;, output)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Check log file for dcm2niix output&quot;</span><span class="p">)</span>
+            self.logger.info(&quot;Check log file for dcm2niix output&quot;)
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h2 id="classes">Classes</h2>
-<h3 id="dcm2niix">Dcm2niix</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niix</span><span class="p">(</span>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="dcm2niix">Dcm2niix<a class="headerlink" href="#dcm2niix" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niix</span><span class="p">(</span>
     <span class="n">dicomDirs</span><span class="p">,</span>
     <span class="n">bidsDir</span><span class="p">,</span>
     <span class="n">participant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">options</span><span class="o">=</span><span class="s2">&quot;-b y -ba y -z y -f &#39;</span><span class="si">%3s</span><span class="s2">_</span><span class="si">%f</span><span class="s2">_%p_%t&#39;&quot;</span>
 <span class="p">)</span>
 </code></pre></div>
-
-<h4 id="attributes">Attributes</h4>
+</td></tr></table>
+<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
 <table>
 <thead>
 <tr>
@@ -881,212 +1052,393 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Dcm2niix</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2niix(object):
 
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; Object to handle dcm2niix execution</span>
+    &quot;&quot;&quot; Object to handle dcm2niix execution
 
-<span class="ss">    Args:</span>
+    Args:
 
-<span class="ss">        dicomDirs (list): A list of folder with dicoms to convert</span>
+        dicomDirs (list): A list of folder with dicoms to convert
 
-<span class="ss">        bidsDir (str): A path to the root BIDS directory</span>
+        bidsDir (str): A path to the root BIDS directory
 
-<span class="ss">        participant: Optional Participant object</span>
+        participant: Optional Participant object
 
-<span class="ss">        options (str): Optional arguments for dcm2niix</span>
+        options (str): Optional arguments for dcm2niix
 
-<span class="ss">    Properties:</span>
+    Properties:
 
-<span class="ss">        sidecars (list): A list of sidecar path created by dcm2niix</span>
+        sidecars (list): A list of sidecar path created by dcm2niix
 
-<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+    &quot;&quot;&quot;
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="w"></span>
+    def __init__(
 
-<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">dicomDirs</span><span class="p">,</span><span class="w"> </span><span class="n">bidsDir</span><span class="p">,</span><span class="w"> </span><span class="n">participant</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">dcm2niixOptions</span><span class="w"></span>
+        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
 
-<span class="w">    </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    ):
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span><span class="w"></span>
+        self.logger = logging.getLogger(__name__)
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">sidecarsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+        self.sidecarsFiles = []
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">dicomDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dicomDirs</span><span class="w"></span>
+        self.dicomDirs = dicomDirs
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">bidsDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bidsDir</span><span class="w"></span>
+        self.bidsDir = bidsDir
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">participant</span><span class="w"></span>
+        self.participant = participant
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options</span><span class="w"></span>
+        self.options = options
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+    @property
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">outputDir</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def outputDir(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            A directory to save all the output files of dcm2niix</span>
+            A directory to save all the output files of dcm2niix
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">participant</span><span class="p">:</span><span class="w"></span>
+        if self.participant:
 
-<span class="w">            </span><span class="n">tmpDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
+            tmpDir = self.participant.prefix
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="n">tmpDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">helperDir</span><span class="w"></span>
+            tmpDir = DEFAULT.helperDir
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bidsDir</span><span class="p">,</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="n">tmpDirName</span><span class="p">,</span><span class="w"> </span><span class="n">tmpDir</span><span class="p">)</span><span class="w"></span>
+        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">run</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">force</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def run(self, force=False):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Run dcm2niix if necessary</span>
+        &quot;&quot;&quot; Run dcm2niix if necessary
 
-<span class="ss">        Args:</span>
+        Args:
 
-<span class="ss">            force (boolean): Forces a cleaning of a previous execution of</span>
+            force (boolean): Forces a cleaning of a previous execution of
 
-<span class="ss">                             dcm2niix</span>
+                             dcm2niix
 
-<span class="ss">        Sets:</span>
+        Sets:
 
-<span class="ss">            sidecarsFiles (list): A list of sidecar path created by dcm2niix</span>
+            sidecarsFiles (list): A list of sidecar path created by dcm2niix
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+        try:
 
-<span class="w">            </span><span class="n">oldOutput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+            oldOutput = os.listdir(self.outputDir) != []
 
-<span class="w">        </span><span class="ow">except</span><span class="err">:</span><span class="w"></span>
+        except:
 
-<span class="w">            </span><span class="n">oldOutput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+            oldOutput = False
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">oldOutput</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">force</span><span class="p">:</span><span class="w"></span>
+        if oldOutput and force:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="ss">&quot;Previous dcm2niix directory output found:&quot;</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(self.outputDir)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="ss">&quot;&#39;force&#39; argument is set to True&quot;</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="ss">&quot;Cleaning the previous directory and running dcm2niix&quot;</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
 
-<span class="w">            </span><span class="n">shutil</span><span class="p">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="n">ignore_errors</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
+            shutil.rmtree(self.outputDir, ignore_errors=True)
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="n">exist_ok</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
+            # os.makedirs(self.outputDir, exist_ok=True)
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">python2</span><span class="w"> </span><span class="n">compatibility</span><span class="w"></span>
+            # python2 compatibility
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="ow">exists</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+            if not os.path.exists(self.outputDir):
 
-<span class="w">                </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="w"></span>
+                os.makedirs(self.outputDir)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="k">execute</span><span class="p">()</span><span class="w"></span>
+            self.execute()
 
-<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="nl">oldOutput</span><span class="p">:</span><span class="w"></span>
+        elif oldOutput:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="ss">&quot;Previous dcm2niix directory output found:&quot;</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(self.outputDir)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="ss">&quot;Use --forceDcm2niix to rerun dcm2niix&quot;</span><span class="p">)</span><span class="w"></span>
+            self.logger.warning(&quot;Use --forceDcm2niix to rerun dcm2niix&quot;)
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="n">exist_ok</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
+            # os.makedirs(self.outputDir, exist_ok=True)
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">python2</span><span class="w"> </span><span class="n">compatibility</span><span class="w"></span>
+            # python2 compatibility
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="ow">exists</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+            if not os.path.exists(self.outputDir):
 
-<span class="w">                </span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">)</span><span class="w"></span>
+                os.makedirs(self.outputDir)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="k">execute</span><span class="p">()</span><span class="w"></span>
+            self.execute()
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">sidecarFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="k">path</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;*.json&quot;</span><span class="p">))</span><span class="w"></span>
+        self.sidecarFiles = glob(os.path.join(self.outputDir, &quot;*.json&quot;))
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">execute</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def execute(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs</span>
+        &quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">dicomDir</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">dicomDirs</span><span class="p">:</span><span class="w"></span>
+        for dicomDir in self.dicomDirs:
 
-<span class="w">            </span><span class="n">commandTpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;dcm2niix {} -o {} {}&quot;</span><span class="w"></span>
+            commandTpl = &quot;dcm2niix {} -o {} {}&quot;
 
-<span class="w">            </span><span class="n">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">commandTpl</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="n">dicomDir</span><span class="p">)</span><span class="w"></span>
+            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
 
-<span class="w">            </span><span class="k">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run_shell_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="w"></span>
+            output = run_shell_command(cmd)
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+            try:
 
-<span class="w">                </span><span class="k">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">output</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span><span class="w"></span>
+                output = output.decode()
 
-<span class="w">            </span><span class="ow">except</span><span class="err">:</span><span class="w"></span>
+            except:
 
-<span class="w">                </span><span class="n">pass</span><span class="w"></span>
+                pass
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">debug</span><span class="p">(</span><span class="ss">&quot;\n%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="p">)</span><span class="w"></span>
+            self.logger.debug(&quot;\n%s&quot;, output)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="ss">&quot;Check log file for dcm2niix output&quot;</span><span class="p">)</span><span class="w"></span>
+            self.logger.info(&quot;Check log file for dcm2niix output&quot;)
 </code></pre></div>
-
+</td></tr></table>
 </details>
 <hr />
-<h4 id="instance-variables">Instance variables</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">outputDir</span>
+<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">outputDir</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Returns:</p>
 <p>A directory to save all the output files of dcm2niix</p>
-<h4 id="methods">Methods</h4>
-<h4 id="execute">execute</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="execute">execute<a class="headerlink" href="#execute" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Execute dcm2niix for each directory in dicomDirs</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">execute</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def execute(self):
 
-        <span class="s2">&quot;&quot;&quot;</span><span class="s"> Execute dcm2niix for each directory in dicomDirs</span>
+        &quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs
 
-        <span class="s2">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">for</span> <span class="nv">dicomDir</span> <span class="nv">in</span> <span class="nv">self</span>.<span class="nv">dicomDirs</span>:
+        for dicomDir in self.dicomDirs:
 
-            <span class="nv">commandTpl</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">dcm2niix {} -o {} {}</span><span class="s2">&quot;</span>
+            commandTpl = &quot;dcm2niix {} -o {} {}&quot;
 
-            <span class="nv">cmd</span> <span class="o">=</span> <span class="nv">commandTpl</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">options</span>, <span class="nv">self</span>.<span class="nv">outputDir</span>, <span class="nv">dicomDir</span><span class="ss">)</span>
+            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
 
-            <span class="nv">output</span> <span class="o">=</span> <span class="nv">run_shell_command</span><span class="ss">(</span><span class="nv">cmd</span><span class="ss">)</span>
+            output = run_shell_command(cmd)
 
-            <span class="nv">try</span>:
+            try:
 
-                <span class="nv">output</span> <span class="o">=</span> <span class="nv">output</span>.<span class="nv">decode</span><span class="ss">()</span>
+                output = output.decode()
 
-            <span class="nv">except</span>:
+            except:
 
-                <span class="nv">pass</span>
+                pass
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">debug</span><span class="ss">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s">%s</span><span class="s2">&quot;</span>, <span class="nv">output</span><span class="ss">)</span>
+            self.logger.debug(&quot;\n%s&quot;, output)
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">info</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Check log file for dcm2niix output</span><span class="s2">&quot;</span><span class="ss">)</span>
+            self.logger.info(&quot;Check log file for dcm2niix output&quot;)
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h4 id="run">run</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">force</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Run dcm2niix if necessary</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1115,75 +1467,141 @@
 </table>
 <p>Sets: | None |
 | sidecarsFiles | list | A list of sidecar path created by dcm2niix | None |</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">run</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">force</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self, force=False):
 
-        <span class="s2">&quot;&quot;&quot;</span><span class="s"> Run dcm2niix if necessary</span>
+        &quot;&quot;&quot; Run dcm2niix if necessary
 
-        <span class="nv">Args</span>:
+        Args:
 
-            <span class="nv">force</span> <span class="ss">(</span><span class="nv">boolean</span><span class="ss">)</span>: <span class="nv">Forces</span> <span class="nv">a</span> <span class="nv">cleaning</span> <span class="nv">of</span> <span class="nv">a</span> <span class="nv">previous</span> <span class="nv">execution</span> <span class="nv">of</span>
+            force (boolean): Forces a cleaning of a previous execution of
 
-                             <span class="nv">dcm2niix</span>
+                             dcm2niix
 
-        <span class="nv">Sets</span>:
+        Sets:
 
-            <span class="nv">sidecarsFiles</span> <span class="ss">(</span><span class="nv">list</span><span class="ss">)</span>: <span class="nv">A</span> <span class="nv">list</span> <span class="nv">of</span> <span class="nv">sidecar</span> <span class="nv">path</span> <span class="nv">created</span> <span class="nv">by</span> <span class="nv">dcm2niix</span>
+            sidecarsFiles (list): A list of sidecar path created by dcm2niix
 
-        <span class="s2">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="nv">try</span>:
+        try:
 
-            <span class="nv">oldOutput</span> <span class="o">=</span> <span class="nv">os</span>.<span class="nv">listdir</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span> <span class="o">!=</span> []
+            oldOutput = os.listdir(self.outputDir) != []
 
-        <span class="nv">except</span>:
+        except:
 
-            <span class="nv">oldOutput</span> <span class="o">=</span> <span class="nv">False</span>
+            oldOutput = False
 
-        <span class="k">if</span> <span class="nv">oldOutput</span> <span class="nv">and</span> <span class="nv">force</span>:
+        if oldOutput and force:
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Previous dcm2niix directory output found:</span><span class="s2">&quot;</span><span class="ss">)</span>
+            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span>
+            self.logger.warning(self.outputDir)
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">&#39;force&#39; argument is set to True</span><span class="s2">&quot;</span><span class="ss">)</span>
+            self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Cleaning the previous directory and running dcm2niix</span><span class="s2">&quot;</span><span class="ss">)</span>
+            self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
 
-            <span class="nv">shutil</span>.<span class="nv">rmtree</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span>, <span class="nv">ignore_errors</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+            shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            # <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span>, <span class="nv">exist_ok</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+            # os.makedirs(self.outputDir, exist_ok=True)
 
-            # <span class="nv">python2</span> <span class="nv">compatibility</span>
+            # python2 compatibility
 
-            <span class="k">if</span> <span class="nv">not</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">exists</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span>:
+            if not os.path.exists(self.outputDir):
 
-                <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span>
+                os.makedirs(self.outputDir)
 
-            <span class="nv">self</span>.<span class="nv">execute</span><span class="ss">()</span>
+            self.execute()
 
-        <span class="nv">elif</span> <span class="nv">oldOutput</span>:
+        elif oldOutput:
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Previous dcm2niix directory output found:</span><span class="s2">&quot;</span><span class="ss">)</span>
+            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span>
+            self.logger.warning(self.outputDir)
 
-            <span class="nv">self</span>.<span class="nv">logger</span>.<span class="nv">warning</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">Use --forceDcm2niix to rerun dcm2niix</span><span class="s2">&quot;</span><span class="ss">)</span>
+            self.logger.warning(&quot;Use --forceDcm2niix to rerun dcm2niix&quot;)
 
-        <span class="k">else</span>:
+        else:
 
-            # <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span>, <span class="nv">exist_ok</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+            # os.makedirs(self.outputDir, exist_ok=True)
 
-            # <span class="nv">python2</span> <span class="nv">compatibility</span>
+            # python2 compatibility
 
-            <span class="k">if</span> <span class="nv">not</span> <span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">exists</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span>:
+            if not os.path.exists(self.outputDir):
 
-                <span class="nv">os</span>.<span class="nv">makedirs</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span><span class="ss">)</span>
+                os.makedirs(self.outputDir)
 
-            <span class="nv">self</span>.<span class="nv">execute</span><span class="ss">()</span>
+            self.execute()
 
-        <span class="nv">self</span>.<span class="nv">sidecarFiles</span> <span class="o">=</span> <span class="nv">glob</span><span class="ss">(</span><span class="nv">os</span>.<span class="nv">path</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">outputDir</span>, <span class="s2">&quot;</span><span class="s">*.json</span><span class="s2">&quot;</span><span class="ss">))</span>
+        self.sidecarFiles = glob(os.path.join(self.outputDir, &quot;*.json&quot;))
 </code></pre></div>
-
+</td></tr></table>
 </details>
                 
               
@@ -1247,6 +1665,22 @@
         your Python project well using automatic documentation.
       </div>
       
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/UNFmontreal/Dcm2Bids" target="_blank" rel="noopener" title="dcm2bids on GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://hub.docker.com/r/unfmontreal/dcm2bids" target="_blank" rel="noopener" title="dcm2bids on docker" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+  </div>
+
     </div>
   </div>
 </footer>

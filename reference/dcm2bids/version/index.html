@@ -16,7 +16,7 @@
     
     
       
-        <title>Version - dcm2bids</title>
+        <title>Version - Dcm2Bids</title>
       
     
     
@@ -24,10 +24,6 @@
       
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ff0a5ce4.min.css">
       
-      
-        
-        
-        <meta name="theme-color" content="#ff6e42">
       
     
     
@@ -40,6 +36,8 @@
     
     
     
+      <link rel="stylesheet" href="../../../docs/stylesheets/extra.css">
+    
     
       
     
@@ -50,8 +48,10 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
   
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -70,7 +70,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-header-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -83,7 +83,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            dcm2bids
+            Dcm2Bids
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -130,10 +130,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
       </div>
@@ -157,13 +157,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    dcm2bids
+    Dcm2Bids
   </label>
   
     <div class="md-nav__source">
@@ -171,10 +171,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
     </div>
@@ -629,7 +629,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/version.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/version.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -637,292 +637,569 @@
                   
                 
                 
-                <h1 id="module-dcm2bidsversion">Module dcm2bids.version</h1>
+                <h1 id="module-dcm2bidsversion">Module dcm2bids.version<a class="headerlink" href="#module-dcm2bidsversion" title="Permanent link">⚓︎</a></h1>
 <p>This module take care of the versioning</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;This module take care of the versioning&quot;&quot;&quot;
+
+# dcm2bids version
+
+__version__ = &quot;2.1.5&quot;
+
+import logging
+
+import shlex
+
+import socket
+
+from distutils.version import LooseVersion
+
+from subprocess import check_output
+
+from shutil import which
+
+REQUIRED_MODULE_METADATA = ((&quot;future&quot;, {&quot;min_version&quot;: &quot;0.17.1&quot;}),)
+
+logger = logging.getLogger(__name__)
+
+def internet(host=&quot;8.8.8.8&quot;, port=53, timeout=3):
+
+    &quot;&quot;&quot; Check if user has internet
+
+    Args:
+
+        host (string): 8.8.8.8 (google-public-dns-a.google.com)
+
+        port (int): OpenPort 53/tcp
+
+                    Service: domain (DNS/TCP)
+
+        timeout (int): default=3
+
+    Returns:
+
+        boolean
+
+    Source: https://stackoverflow.com/a/33117579
+
+    &quot;&quot;&quot;
+
+    try:
+
+        socket.setdefaulttimeout(timeout)
+
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+
+        return True
+
+    except:
+
+        return False
+
+def is_tool(name):
+
+    &quot;&quot;&quot; Check if a program is in PATH
+
+    Args:
+
+        name (string): program name
+
+    Returns:
+
+        boolean
+
+    &quot;&quot;&quot;
+
+    return which(name) is not None
 
-<span class="sd">&quot;&quot;&quot;This module take care of the versioning&quot;&quot;&quot;</span>
+def check_github_latest(githubRepo):
 
-<span class="c1"># dcm2bids version</span>
+    &quot;&quot;&quot; Check the latest version of a github repository
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;2.1.6&quot;</span>
+    Args:
 
-<span class="kn">import</span> <span class="nn">logging</span>
+        githubRepo (string): a github repository (&quot;username/repository&quot;)
 
-<span class="kn">import</span> <span class="nn">shlex</span>
+    Returns:
 
-<span class="kn">import</span> <span class="nn">socket</span>
+        A string of the version
 
-<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">LooseVersion</span>
+    &quot;&quot;&quot;
 
-<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">check_output</span>
+    url = &quot;https://github.com/{}/releases/latest&quot;.format(githubRepo)
 
-<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">which</span>
+    try:
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+        output = check_output(shlex.split(&quot;curl --silent &quot; + url))
 
-<span class="k">def</span> <span class="nf">internet</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    except:
 
-    <span class="sd">&quot;&quot;&quot; Check if user has internet</span>
+        logger.debug(
 
-<span class="sd">    Args:</span>
+            &quot;Checking latest version of %s was not possible&quot;, githubRepo,
 
-<span class="sd">        host (string): 8.8.8.8 (google-public-dns-a.google.com)</span>
+            exc_info=True,
 
-<span class="sd">        port (int): OpenPort 53/tcp</span>
+        )
 
-<span class="sd">                    Service: domain (DNS/TCP)</span>
+        return
 
-<span class="sd">        timeout (int): default=3</span>
+    # The output should have this format
 
-<span class="sd">    Returns:</span>
+    # &lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;
 
-<span class="sd">        boolean</span>
+    try:
 
-<span class="sd">    Source: https://stackoverflow.com/a/33117579</span>
+        return (
 
-<span class="sd">    &quot;&quot;&quot;</span>
+            output.decode()
 
-    <span class="k">try</span><span class="p">:</span>
+            .split(&quot;{}/releases/tag/&quot;.format(githubRepo))[1]
 
-        <span class="n">socket</span><span class="o">.</span><span class="n">setdefaulttimeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+            .split(&#39;&quot;&#39;)[0]
 
-        <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+        )
 
-        <span class="k">return</span> <span class="kc">True</span>
+    except:
 
-    <span class="k">except</span><span class="p">:</span>
+        logger.debug(
 
-        <span class="k">return</span> <span class="kc">False</span>
+            &quot;Checking latest version of %s was not possible&quot;, githubRepo,
 
-<span class="k">def</span> <span class="nf">is_tool</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            exc_info=True,
 
-    <span class="sd">&quot;&quot;&quot; Check if a program is in PATH</span>
+        )
 
-<span class="sd">    Args:</span>
+        return
 
-<span class="sd">        name (string): program name</span>
+def check_latest(name=&quot;dcm2bids&quot;):
 
-<span class="sd">    Returns:</span>
+    &quot;&quot;&quot; Check if a new version of a software exists and print some details
 
-<span class="sd">        boolean</span>
+    Implemented for dcm2bids, dcm2niix
 
-<span class="sd">    &quot;&quot;&quot;</span>
+    Args:
 
-    <span class="k">return</span> <span class="n">which</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        name (string): name of the software
 
-<span class="k">def</span> <span class="nf">check_github_latest</span><span class="p">(</span><span class="n">githubRepo</span><span class="p">):</span>
+    Returns:
 
-    <span class="sd">&quot;&quot;&quot; Check the latest version of a github repository</span>
+        None
 
-<span class="sd">    Args:</span>
+    &quot;&quot;&quot;
 
-<span class="sd">        githubRepo (string): a github repository (&quot;username/repository&quot;)</span>
+    data = {
 
-<span class="sd">    Returns:</span>
+        &quot;dcm2bids&quot;: {
 
-<span class="sd">        A string of the version</span>
+            &quot;repo&quot;: &quot;unfmontreal/Dcm2Bids&quot;,
 
-<span class="sd">    &quot;&quot;&quot;</span>
+            &quot;host&quot;: &quot;https://github.com&quot;,
 
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/</span><span class="si">{}</span><span class="s2">/releases/latest&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">githubRepo</span><span class="p">)</span>
+            &quot;current&quot;: __version__,
 
-    <span class="k">try</span><span class="p">:</span>
+        },
 
-        <span class="n">output</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;curl --silent &quot;</span> <span class="o">+</span> <span class="n">url</span><span class="p">))</span>
+        &quot;dcm2niix&quot;: {
 
-    <span class="k">except</span><span class="p">:</span>
+            &quot;repo&quot;: &quot;rordenlab/dcm2niix&quot;,
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            &quot;host&quot;: &quot;https://github.com&quot;,
 
-            <span class="s2">&quot;Checking latest version of </span><span class="si">%s</span><span class="s2"> was not possible&quot;</span><span class="p">,</span> <span class="n">githubRepo</span><span class="p">,</span>
+            &quot;current&quot;: dcm2niix_version,
 
-            <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        },
 
-        <span class="p">)</span>
+    }
 
-        <span class="k">return</span>
+    if internet() and is_tool(&quot;curl&quot;):
 
-    <span class="c1"># The output should have this format</span>
+        host = data.get(name)[&quot;host&quot;]
 
-    <span class="c1"># &lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;</span>
+        if host == &quot;https://github.com&quot;:
 
-    <span class="k">try</span><span class="p">:</span>
+            repo = data.get(name)[&quot;repo&quot;]
 
-        <span class="k">return</span> <span class="p">(</span>
+            latest = check_github_latest(repo)
 
-            <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        else:
 
-            <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/releases/tag/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">githubRepo</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+            # Not implemented
 
-            <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            return
 
-        <span class="p">)</span>
+    else:
 
-    <span class="k">except</span><span class="p">:</span>
+        logger.debug(&quot;Checking latest version of %s was not possible&quot;, name)
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+        logger.debug(&quot;internet: %s, curl: %s&quot;, internet(), is_tool(&quot;curl&quot;))
 
-            <span class="s2">&quot;Checking latest version of </span><span class="si">%s</span><span class="s2"> was not possible&quot;</span><span class="p">,</span> <span class="n">githubRepo</span><span class="p">,</span>
+        return
 
-            <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    current = data.get(name)[&quot;current&quot;]
 
-        <span class="p">)</span>
+    if callable(current):
 
-        <span class="k">return</span>
+        current = current()
 
-<span class="k">def</span> <span class="nf">check_latest</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dcm2bids&quot;</span><span class="p">):</span>
+    try:
 
-    <span class="sd">&quot;&quot;&quot; Check if a new version of a software exists and print some details</span>
+        news = LooseVersion(latest) &gt; LooseVersion(current)
 
-<span class="sd">    Implemented for dcm2bids, dcm2niix</span>
+    except:
 
-<span class="sd">    Args:</span>
+        news = None
 
-<span class="sd">        name (string): name of the software</span>
+    if news:
 
-<span class="sd">    Returns:</span>
+        logger.warning(&quot;Your using %s version %s&quot;, name, current)
 
-<span class="sd">        None</span>
+        logger.warning(&quot;A new version exists : %s&quot;, latest)
 
-<span class="sd">    &quot;&quot;&quot;</span>
+        logger.warning(&quot;Check %s/%s&quot;, host, repo)
 
-    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+def dcm2niix_version():
 
-        <span class="s2">&quot;dcm2bids&quot;</span><span class="p">:</span> <span class="p">{</span>
+    &quot;&quot;&quot;
 
-            <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="s2">&quot;unfmontreal/Dcm2Bids&quot;</span><span class="p">,</span>
+    Returns:
 
-            <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com&quot;</span><span class="p">,</span>
+        A string of the version of dcm2niix install on the system
 
-            <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
+    &quot;&quot;&quot;
 
-        <span class="p">},</span>
+    if not is_tool(&quot;dcm2niix&quot;):
 
-        <span class="s2">&quot;dcm2niix&quot;</span><span class="p">:</span> <span class="p">{</span>
+        logger.error(&quot;dcm2niix is not in your PATH or not installed&quot;)
 
-            <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="s2">&quot;rordenlab/dcm2niix&quot;</span><span class="p">,</span>
+        logger.error(&quot;Check https://github.com/rordenlab/dcm2niix&quot;)
 
-            <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com&quot;</span><span class="p">,</span>
+        return
 
-            <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="n">dcm2niix_version</span><span class="p">,</span>
+    try:
 
-        <span class="p">},</span>
+        output = check_output(shlex.split(&quot;dcm2niix&quot;))
 
-    <span class="p">}</span>
+    except:
 
-    <span class="k">if</span> <span class="n">internet</span><span class="p">()</span> <span class="ow">and</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;curl&quot;</span><span class="p">):</span>
+        logger.error(&quot;Running: dcm2niix&quot;, exc_info=True)
 
-        <span class="n">host</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;host&quot;</span><span class="p">]</span>
+        return
 
-        <span class="k">if</span> <span class="n">host</span> <span class="o">==</span> <span class="s2">&quot;https://github.com&quot;</span><span class="p">:</span>
+    try:
 
-            <span class="n">repo</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;repo&quot;</span><span class="p">]</span>
+        lines = output.decode().split(&quot;\n&quot;)
 
-            <span class="n">latest</span> <span class="o">=</span> <span class="n">check_github_latest</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+    except:
 
-        <span class="k">else</span><span class="p">:</span>
+        logger.debug(output, exc_info=True)
 
-            <span class="c1"># Not implemented</span>
+        return
 
-            <span class="k">return</span>
+    for line in lines:
 
-    <span class="k">else</span><span class="p">:</span>
+        try:
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Checking latest version of </span><span class="si">%s</span><span class="s2"> was not possible&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            splits = line.split()
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;internet: </span><span class="si">%s</span><span class="s2">, curl: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">internet</span><span class="p">(),</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;curl&quot;</span><span class="p">))</span>
+            return splits[splits.index(&quot;version&quot;) + 1]
 
-        <span class="k">return</span>
+        except:
 
-    <span class="n">current</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span>
+            continue
 
-    <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
-
-        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="p">()</span>
-
-    <span class="k">try</span><span class="p">:</span>
-
-        <span class="n">news</span> <span class="o">=</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">latest</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
-
-    <span class="k">except</span><span class="p">:</span>
-
-        <span class="n">news</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">if</span> <span class="n">news</span><span class="p">:</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Your using </span><span class="si">%s</span><span class="s2"> version </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;A new version exists : </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">latest</span><span class="p">)</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Check </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">dcm2niix_version</span><span class="p">():</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    Returns:</span>
-
-<span class="sd">        A string of the version of dcm2niix install on the system</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">):</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;dcm2niix is not in your PATH or not installed&quot;</span><span class="p">)</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Check https://github.com/rordenlab/dcm2niix&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span>
-
-    <span class="k">try</span><span class="p">:</span>
-
-        <span class="n">output</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">))</span>
-
-    <span class="k">except</span><span class="p">:</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Running: dcm2niix&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="k">return</span>
-
-    <span class="k">try</span><span class="p">:</span>
-
-        <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">except</span><span class="p">:</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="k">return</span>
-
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-
-        <span class="k">try</span><span class="p">:</span>
-
-            <span class="n">splits</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-
-            <span class="k">return</span> <span class="n">splits</span><span class="p">[</span><span class="n">splits</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-
-        <span class="k">except</span><span class="p">:</span>
-
-            <span class="k">continue</span>
-
-    <span class="k">return</span>
+    return
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h2 id="variables">Variables</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">logger</span>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">REQUIRED_MODULE_METADATA</span>
 </code></pre></div>
-
-<h2 id="functions">Functions</h2>
-<h3 id="check_github_latest">check_github_latest</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">check_github_latest</span><span class="p">(</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">logger</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="check_github_latest">check_github_latest<a class="headerlink" href="#check_github_latest" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">check_github_latest</span><span class="p">(</span>
     <span class="n">githubRepo</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Check the latest version of a github repository</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -958,7 +1235,65 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>def check_github_latest(githubRepo):
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def check_github_latest(githubRepo):
 
     &quot;&quot;&quot; Check the latest version of a github repository
 
@@ -992,7 +1327,7 @@
 
     # The output should have this format
 
-    # <span class="nt">&lt;html&gt;&lt;body&gt;</span>You are being <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;</span><span class="nt">&gt;</span>redirected<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/body&gt;&lt;/html&gt;</span>
+    # &lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;
 
     try:
 
@@ -1018,14 +1353,16 @@
 
         return
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h3 id="check_latest">check_latest</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">check_latest</span><span class="p">(</span>
+<h3 id="check_latest">check_latest<a class="headerlink" href="#check_latest" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">check_latest</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dcm2bids&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Check if a new version of a software exists and print some details</p>
 <p>Implemented for dcm2bids, dcm2niix</p>
 <p><strong>Parameters:</strong></p>
@@ -1062,164 +1399,304 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">check_latest</span>(<span class="nb">name</span>=<span class="s">&quot;dcm2bids&quot;</span>):
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def check_latest(name=&quot;dcm2bids&quot;):
 
-    <span class="s">&quot;&quot;&quot; Check if a new version of a software exists and print some details</span>
+    &quot;&quot;&quot; Check if a new version of a software exists and print some details
 
-<span class="s">    Implemented for dcm2bids, dcm2niix</span>
+    Implemented for dcm2bids, dcm2niix
 
-<span class="s">    Args:</span>
+    Args:
 
-<span class="s">        name (string): name of the software</span>
+        name (string): name of the software
 
-<span class="s">    Returns:</span>
+    Returns:
 
-<span class="s">        None</span>
+        None
 
-<span class="s">    &quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-    <span class="n">data</span> = {
+    data = {
 
-        <span class="s">&quot;dcm2bids&quot;</span>: {
+        &quot;dcm2bids&quot;: {
 
-            <span class="s">&quot;repo&quot;</span>: <span class="s">&quot;unfmontreal/Dcm2Bids&quot;</span>,
+            &quot;repo&quot;: &quot;unfmontreal/Dcm2Bids&quot;,
 
-            <span class="s">&quot;host&quot;</span>: <span class="s">&quot;https://github.com&quot;</span>,
+            &quot;host&quot;: &quot;https://github.com&quot;,
 
-            <span class="s">&quot;current&quot;</span>: <span class="n">__version__</span>,
+            &quot;current&quot;: __version__,
 
         },
 
-        <span class="s">&quot;dcm2niix&quot;</span>: {
+        &quot;dcm2niix&quot;: {
 
-            <span class="s">&quot;repo&quot;</span>: <span class="s">&quot;rordenlab/dcm2niix&quot;</span>,
+            &quot;repo&quot;: &quot;rordenlab/dcm2niix&quot;,
 
-            <span class="s">&quot;host&quot;</span>: <span class="s">&quot;https://github.com&quot;</span>,
+            &quot;host&quot;: &quot;https://github.com&quot;,
 
-            <span class="s">&quot;current&quot;</span>: <span class="n">dcm2niix_version</span>,
+            &quot;current&quot;: dcm2niix_version,
 
         },
 
     }
 
-    <span class="k">if</span> <span class="n">internet</span>() <span class="o">and</span> <span class="n">is_tool</span>(<span class="s">&quot;curl&quot;</span>):
+    if internet() and is_tool(&quot;curl&quot;):
 
-        <span class="n">host</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="nb">name</span>)[<span class="s">&quot;host&quot;</span>]
+        host = data.get(name)[&quot;host&quot;]
 
-        <span class="k">if</span> <span class="n">host</span> == <span class="s">&quot;https://github.com&quot;</span>:
+        if host == &quot;https://github.com&quot;:
 
-            <span class="n">repo</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="nb">name</span>)[<span class="s">&quot;repo&quot;</span>]
+            repo = data.get(name)[&quot;repo&quot;]
 
-            <span class="n">latest</span> = <span class="n">check_github_latest</span>(<span class="n">repo</span>)
+            latest = check_github_latest(repo)
 
-        <span class="n">else:</span>
+        else:
 
-            <span class="c1"># Not implemented</span>
+            # Not implemented
 
-            <span class="k">return</span>
+            return
 
-    <span class="n">else:</span>
+    else:
 
-        <span class="n">logger</span>.<span class="n">debug</span>(<span class="s">&quot;Checking latest version of %s was not possible&quot;</span>, <span class="nb">name</span>)
+        logger.debug(&quot;Checking latest version of %s was not possible&quot;, name)
 
-        <span class="n">logger</span>.<span class="n">debug</span>(<span class="s">&quot;internet: %s, curl: %s&quot;</span>, <span class="n">internet</span>(), <span class="n">is_tool</span>(<span class="s">&quot;curl&quot;</span>))
+        logger.debug(&quot;internet: %s, curl: %s&quot;, internet(), is_tool(&quot;curl&quot;))
 
-        <span class="k">return</span>
+        return
 
-    <span class="n">current</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="nb">name</span>)[<span class="s">&quot;current&quot;</span>]
+    current = data.get(name)[&quot;current&quot;]
 
-    <span class="k">if</span> <span class="n">callable</span>(<span class="n">current</span>):
+    if callable(current):
 
-        <span class="n">current</span> = <span class="n">current</span>()
+        current = current()
 
-    <span class="n">try:</span>
+    try:
 
-        <span class="n">news</span> = <span class="n">LooseVersion</span>(<span class="n">latest</span>) &gt; <span class="n">LooseVersion</span>(<span class="n">current</span>)
+        news = LooseVersion(latest) &gt; LooseVersion(current)
 
-    <span class="n">except:</span>
+    except:
 
-        <span class="n">news</span> = <span class="n">None</span>
+        news = None
 
-    <span class="k">if</span> <span class="n">news:</span>
+    if news:
 
-        <span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;Your using %s version %s&quot;</span>, <span class="nb">name</span>, <span class="n">current</span>)
+        logger.warning(&quot;Your using %s version %s&quot;, name, current)
 
-        <span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;A new version exists : %s&quot;</span>, <span class="n">latest</span>)
+        logger.warning(&quot;A new version exists : %s&quot;, latest)
 
-        <span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;Check %s/%s&quot;</span>, <span class="n">host</span>, <span class="n">repo</span>)
+        logger.warning(&quot;Check %s/%s&quot;, host, repo)
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h3 id="dcm2niix_version">dcm2niix_version</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dcm2niix_version</span><span class="p">(</span>
+<h3 id="dcm2niix_version">dcm2niix_version<a class="headerlink" href="#dcm2niix_version" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dcm2niix_version</span><span class="p">(</span>
 
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Returns:</p>
 <p>A string of the version of dcm2niix install on the system</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">dcm2niix_version</span><span class="p">():</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def dcm2niix_version():
 
-    <span class="sd">&quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-<span class="sd">    Returns:</span>
+    Returns:
 
-<span class="sd">        A string of the version of dcm2niix install on the system</span>
+        A string of the version of dcm2niix install on the system
 
-<span class="sd">    &quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tool</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">):</span>
+    if not is_tool(&quot;dcm2niix&quot;):
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;dcm2niix is not in your PATH or not installed&quot;</span><span class="p">)</span>
+        logger.error(&quot;dcm2niix is not in your PATH or not installed&quot;)
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Check https://github.com/rordenlab/dcm2niix&quot;</span><span class="p">)</span>
+        logger.error(&quot;Check https://github.com/rordenlab/dcm2niix&quot;)
 
-        <span class="k">return</span>
+        return
 
-    <span class="n">try</span><span class="p">:</span>
+    try:
 
-        <span class="n">output</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;dcm2niix&quot;</span><span class="p">))</span>
+        output = check_output(shlex.split(&quot;dcm2niix&quot;))
 
-    <span class="n">except</span><span class="p">:</span>
+    except:
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Running: dcm2niix&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+        logger.error(&quot;Running: dcm2niix&quot;, exc_info=True)
 
-        <span class="k">return</span>
+        return
 
-    <span class="n">try</span><span class="p">:</span>
+    try:
 
-        <span class="n">lines</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        lines = output.decode().split(&quot;\n&quot;)
 
-    <span class="n">except</span><span class="p">:</span>
+    except:
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+        logger.debug(output, exc_info=True)
 
-        <span class="k">return</span>
+        return
 
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    for line in lines:
 
-        <span class="n">try</span><span class="p">:</span>
+        try:
 
-            <span class="n">splits</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            splits = line.split()
 
-            <span class="k">return</span> <span class="n">splits</span><span class="p">[</span><span class="n">splits</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            return splits[splits.index(&quot;version&quot;) + 1]
 
-        <span class="n">except</span><span class="p">:</span>
+        except:
 
-            <span class="k">continue</span>
+            continue
 
-    <span class="k">return</span>
+    return
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h3 id="internet">internet</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">internet</span><span class="p">(</span>
+<h3 id="internet">internet<a class="headerlink" href="#internet" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">internet</span><span class="p">(</span>
     <span class="n">host</span><span class="o">=</span><span class="s1">&#39;8.8.8.8&#39;</span><span class="p">,</span>
     <span class="n">port</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span>
     <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Check if user has internet</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1274,48 +1751,82 @@
 </tbody>
 </table>
 <p>Source: https://stackoverflow.com/a/33117579 |</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span> <span class="nv">internet</span><span class="ss">(</span><span class="nv">host</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">8.8.8.8</span><span class="s2">&quot;</span>, <span class="nv">port</span><span class="o">=</span><span class="mi">53</span>, <span class="nb">timeout</span><span class="o">=</span><span class="mi">3</span><span class="ss">)</span>:
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def internet(host=&quot;8.8.8.8&quot;, port=53, timeout=3):
 
-    <span class="s2">&quot;&quot;&quot;</span><span class="s"> Check if user has internet</span>
+    &quot;&quot;&quot; Check if user has internet
 
-    <span class="nv">Args</span>:
+    Args:
 
-        <span class="nv">host</span> <span class="ss">(</span><span class="nv">string</span><span class="ss">)</span>: <span class="mi">8</span>.<span class="mi">8</span>.<span class="mi">8</span>.<span class="mi">8</span> <span class="ss">(</span><span class="nv">google</span><span class="o">-</span><span class="nv">public</span><span class="o">-</span><span class="nv">dns</span><span class="o">-</span><span class="nv">a</span>.<span class="nv">google</span>.<span class="nv">com</span><span class="ss">)</span>
+        host (string): 8.8.8.8 (google-public-dns-a.google.com)
 
-        <span class="nv">port</span> <span class="ss">(</span><span class="nv">int</span><span class="ss">)</span>: <span class="nv">OpenPort</span> <span class="mi">53</span><span class="o">/</span><span class="nv">tcp</span>
+        port (int): OpenPort 53/tcp
 
-                    <span class="nv">Service</span>: <span class="nv">domain</span> <span class="ss">(</span><span class="nv">DNS</span><span class="o">/</span><span class="nv">TCP</span><span class="ss">)</span>
+                    Service: domain (DNS/TCP)
 
-        <span class="nb">timeout</span> <span class="ss">(</span><span class="nv">int</span><span class="ss">)</span>: <span class="nv">default</span><span class="o">=</span><span class="mi">3</span>
+        timeout (int): default=3
 
-    <span class="nv">Returns</span>:
+    Returns:
 
-        <span class="nv">boolean</span>
+        boolean
 
-    <span class="nv">Source</span>: <span class="nv">https</span>:<span class="o">//</span><span class="nv">stackoverflow</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">a</span><span class="o">/</span><span class="mi">33117579</span>
+    Source: https://stackoverflow.com/a/33117579
 
-    <span class="s2">&quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-    <span class="nv">try</span>:
+    try:
 
-        <span class="nv">socket</span>.<span class="nv">setdefaulttimeout</span><span class="ss">(</span><span class="nb">timeout</span><span class="ss">)</span>
+        socket.setdefaulttimeout(timeout)
 
-        <span class="nv">socket</span>.<span class="nv">socket</span><span class="ss">(</span><span class="nv">socket</span>.<span class="nv">AF_INET</span>, <span class="nv">socket</span>.<span class="nv">SOCK_STREAM</span><span class="ss">)</span>.<span class="k">connect</span><span class="ss">((</span><span class="nv">host</span>, <span class="nv">port</span><span class="ss">))</span>
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
 
-        <span class="k">return</span> <span class="nv">True</span>
+        return True
 
-    <span class="nv">except</span>:
+    except:
 
-        <span class="k">return</span> <span class="nv">False</span>
+        return False
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h3 id="is_tool">is_tool</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_tool</span><span class="p">(</span>
+<h3 id="is_tool">is_tool<a class="headerlink" href="#is_tool" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_tool</span><span class="p">(</span>
     <span class="n">name</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Check if a program is in PATH</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1351,23 +1862,37 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">is_tool</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def is_tool(name):
 
-    <span class="sd">&quot;&quot;&quot; Check if a program is in PATH</span>
+    &quot;&quot;&quot; Check if a program is in PATH
 
-<span class="sd">    Args:</span>
+    Args:
 
-<span class="sd">        name (string): program name</span>
+        name (string): program name
 
-<span class="sd">    Returns:</span>
+    Returns:
 
-<span class="sd">        boolean</span>
+        boolean
 
-<span class="sd">    &quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-    <span class="k">return</span> <span class="n">which</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">is</span> <span class="ow">not</span> <span class="n">None</span>
+    return which(name) is not None
 </code></pre></div>
-
+</td></tr></table>
 </details>
                 
               
@@ -1417,6 +1942,22 @@
         your Python project well using automatic documentation.
       </div>
       
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/UNFmontreal/Dcm2Bids" target="_blank" rel="noopener" title="dcm2bids on GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://hub.docker.com/r/unfmontreal/dcm2bids" target="_blank" rel="noopener" title="dcm2bids on docker" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+  </div>
+
     </div>
   </div>
 </footer>

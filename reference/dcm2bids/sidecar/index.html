@@ -16,7 +16,7 @@
     
     
       
-        <title>Sidecar - dcm2bids</title>
+        <title>Sidecar - Dcm2Bids</title>
       
     
     
@@ -24,10 +24,6 @@
       
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ff0a5ce4.min.css">
       
-      
-        
-        
-        <meta name="theme-color" content="#ff6e42">
       
     
     
@@ -40,6 +36,8 @@
     
     
     
+      <link rel="stylesheet" href="../../../docs/stylesheets/extra.css">
+    
     
       
     
@@ -50,8 +48,10 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
   
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -70,7 +70,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-header-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -83,7 +83,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            dcm2bids
+            Dcm2Bids
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -130,10 +130,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
       </div>
@@ -157,13 +157,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    dcm2bids
+    Dcm2Bids
   </label>
   
     <div class="md-nav__source">
@@ -171,10 +171,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
     </div>
@@ -709,7 +709,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/sidecar.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/sidecar.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -717,462 +717,905 @@
                   
                 
                 
-                <h1 id="module-dcm2bidssidecar">Module dcm2bids.sidecar</h1>
+                <h1 id="module-dcm2bidssidecar">Module dcm2bids.sidecar<a class="headerlink" href="#module-dcm2bidssidecar" title="Permanent link">⚓︎</a></h1>
 <p>sidecars classes</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
+
+import itertools
+
+import logging
+
+import os
+
+import re
+
+from collections import defaultdict, OrderedDict
+
+from fnmatch import fnmatch
+
+from future.utils import iteritems
+
+from .structure import Acquisition
+
+from .utils import DEFAULT, load_json, splitext_
+
+class Sidecar(object):
+
+    &quot;&quot;&quot; A sidecar object
+
+    Args:
+
+        filename (str): Path of a JSON sidecar
+
+        keyComp (list): A list of keys from the JSON sidecar to compare sidecars
+
+                     default=[&quot;SeriesNumber&quot;,&quot;AcquisitionTime&quot;,&quot;SideCarFilename&quot;]
+
+    &quot;&quot;&quot;
+
+    def __init__(self, filename, compKeys=DEFAULT.compKeys):
+
+        self._origData = {}
+
+        self._data = {}
+
+        self.filename = filename
+
+        self.root, _ = splitext_(filename)
+
+        self.data = filename
+
+        self.compKeys = compKeys
+
+    def __lt__(self, other):
+
+        lts = []
+
+        for key in self.compKeys:
+
+            try:
+
+                if all(key in d for d in (self.data, other.data)):
+
+                    if self.data.get(key) == other.data.get(key):
+
+                        lts.append(None)
+
+                    else:
+
+                        lts.append(self.data.get(key) &lt; other.data.get(key))
+
+                else:
+
+                    lts.append(None)
+
+            except:
+
+                lts.append(None)
+
+        for lt in lts:
+
+            if lt is not None:
+
+                return lt
+
+    def __eq__(self, other):
+
+        return self.data == other.data
+
+    def __hash__(self):
+
+        return hash(self.filename)
+
+    @property
+
+    def origData(self):
+
+        return self._origData
+
+    @property
+
+    def data(self):
+
+        return self._data
+
+    @data.setter
+
+    def data(self, filename):
+
+        &quot;&quot;&quot;
+
+        Args:
+
+            filename (path): path of a JSON file
+
+        Return:
+
+            A dictionnary of the JSON content plus the SidecarFilename
+
+        &quot;&quot;&quot;
+
+        try:
+
+            data = load_json(filename)
+
+        except:
+
+            data = {}
+
+        self._origData = data.copy()
+
+        data[&quot;SidecarFilename&quot;] = os.path.basename(filename)
+
+        self._data = data
+
+class SidecarPairing(object):
+
+    &quot;&quot;&quot;
+
+    Args:
+
+        sidecars (list): List of Sidecar objects
+
+        descriptions (list): List of dictionnaries describing acquisitions
+
+    &quot;&quot;&quot;
+
+    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
+
+                 caseSensitive=DEFAULT.caseSensitive):
+
+        self.logger = logging.getLogger(__name__)
+
+        self._searchMethod = &quot;&quot;
+
+        self.graph = OrderedDict()
+
+        self.aquisitions = []
+
+        self.sidecars = sidecars
+
+        self.descriptions = descriptions
+
+        self.searchMethod = searchMethod
+
+        self.caseSensitive = caseSensitive
+
+    @property
+
+    def searchMethod(self):
+
+        return self._searchMethod
+
+    @searchMethod.setter
+
+    def searchMethod(self, value):
+
+        &quot;&quot;&quot;
+
+        Checks if the search method is implemented
+
+        Warns the user if not and fall back to default
+
+        &quot;&quot;&quot;
+
+        if value in DEFAULT.searchMethodChoices:
+
+            self._searchMethod = value
+
+        else:
+
+            self._searchMethod = DEFAULT.searchMethod
+
+            self.logger.warning(&quot;&#39;%s&#39; is not a search method implemented&quot;, value)
+
+            self.logger.warning(
+
+                &quot;Falling back to default: %s&quot;, DEFAULT.searchMethod
+
+            )
+
+            self.logger.warning(
+
+                &quot;Search methods implemented: %s&quot;, DEFAULT.searchMethodChoices
+
+            )
+
+    @property
+
+    def caseSensitive(self):
+
+        return self._caseSensitive
+
+    @caseSensitive.setter
+
+    def caseSensitive(self, value):
+
+        if isinstance(value, bool):
+
+            self._caseSensitive = value
+
+        else:
+
+            self._caseSensitive = DEFAULT.caseSensitive
+
+            self.logger.warning(&quot;&#39;%s&#39; is not a boolean&quot;, value)
+
+            self.logger.warning(
+
+                &quot;Falling back to default: %s&quot;, DEFAULT.caseSensitive
+
+            )
+
+            self.logger.warning(
+
+                &quot;Search methods implemented: %s&quot;, DEFAULT.caseSensitive
+
+            )
+
+    def build_graph(self):
+
+        &quot;&quot;&quot;
+
+        Test all the possible links between the list of sidecars and the
+
+        description dictionnaries and build a graph from it
 
-<span class="sd">&quot;&quot;&quot;sidecars classes&quot;&quot;&quot;</span>
+        The graph is in a OrderedDict object. The keys are the Sidecars and
 
-<span class="kn">import</span> <span class="nn">itertools</span>
+        the values are a list of possible descriptions
 
-<span class="kn">import</span> <span class="nn">logging</span>
+        Returns:
 
-<span class="kn">import</span> <span class="nn">os</span>
+            A graph (OrderedDict)
 
-<span class="kn">import</span> <span class="nn">re</span>
+        &quot;&quot;&quot;
 
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">OrderedDict</span>
+        graph = OrderedDict((_, []) for _ in self.sidecars)
 
-<span class="kn">from</span> <span class="nn">fnmatch</span> <span class="kn">import</span> <span class="n">fnmatch</span>
+        possibleLinks = itertools.product(self.sidecars, self.descriptions)
 
-<span class="kn">from</span> <span class="nn">future.utils</span> <span class="kn">import</span> <span class="n">iteritems</span>
+        for sidecar, description in possibleLinks:
 
-<span class="kn">from</span> <span class="nn">.structure</span> <span class="kn">import</span> <span class="n">Acquisition</span>
+            criteria = description.get(&quot;criteria&quot;, None)
 
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">DEFAULT</span><span class="p">,</span> <span class="n">load_json</span><span class="p">,</span> <span class="n">splitext_</span>
+            if criteria and self.isLink(sidecar.data, criteria):
 
-<span class="k">class</span> <span class="nc">Sidecar</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+                graph[sidecar].append(description)
 
-    <span class="sd">&quot;&quot;&quot; A sidecar object</span>
+        self.graph = graph
 
-<span class="sd">    Args:</span>
+        return graph
 
-<span class="sd">        filename (str): Path of a JSON sidecar</span>
+    def isLink(self, data, criteria):
 
-<span class="sd">        keyComp (list): A list of keys from the JSON sidecar to compare sidecars</span>
+        &quot;&quot;&quot;
 
-<span class="sd">                     default=[&quot;SeriesNumber&quot;,&quot;AcquisitionTime&quot;,&quot;SideCarFilename&quot;]</span>
+        Args:
 
-<span class="sd">    &quot;&quot;&quot;</span>
+            data (dict): Dictionnary data of a sidecar
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">compKeys</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">compKeys</span><span class="p">):</span>
+            criteria (dict): Dictionnary criteria
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_origData</span> <span class="o">=</span> <span class="p">{}</span>
+        Returns:
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+            boolean
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        &quot;&quot;&quot;
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">splitext_</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        def compare(name, pattern):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">filename</span>
+            if self.searchMethod == &quot;re&quot;:
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">compKeys</span> <span class="o">=</span> <span class="n">compKeys</span>
+                return bool(re.search(pattern, name))
 
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+            else:
 
-        <span class="n">lts</span> <span class="o">=</span> <span class="p">[]</span>
+                name = str(name)
 
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">compKeys</span><span class="p">:</span>
+                pattern = str(pattern)
 
-            <span class="k">try</span><span class="p">:</span>
+                if not self.caseSensitive:
 
-                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+                    name = name.lower()
 
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                    pattern = pattern.lower()
 
-                        <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                return fnmatch(name, pattern)
 
-                    <span class="k">else</span><span class="p">:</span>
+        result = []
 
-                        <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        for tag, pattern in iteritems(criteria):
 
-                <span class="k">else</span><span class="p">:</span>
+            name = data.get(tag, &#39;&#39;)# or &#39;&#39;
 
-                    <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            if isinstance(name, list):
 
-            <span class="k">except</span><span class="p">:</span>
+                try:
 
-                <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                    subResult = [len(name) == len(pattern), isinstance(pattern, list)]
 
-        <span class="k">for</span> <span class="n">lt</span> <span class="ow">in</span> <span class="n">lts</span><span class="p">:</span>
+                    for subName, subPattern in zip(name, pattern):
 
-            <span class="k">if</span> <span class="n">lt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        subResult.append(compare(subName, subPattern))
 
-                <span class="k">return</span> <span class="n">lt</span>
+                except:
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+                    subResult = [False]
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span>
+                result.append(all(subResult))
 
-    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            else:
 
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+                result.append(compare(name, pattern))
 
-    <span class="nd">@property</span>
+        return all(result)
 
-    <span class="k">def</span> <span class="nf">origData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    def build_acquisitions(self, participant):
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_origData</span>
+        &quot;&quot;&quot;
 
-    <span class="nd">@property</span>
+        Args:
 
-    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            participant (Participant): Participant object to create acquisitions
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+        Returns:
 
-    <span class="nd">@data</span><span class="o">.</span><span class="n">setter</span>
+            A list of acquisition objects
 
-    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        &quot;&quot;&quot;
 
-        <span class="sd">&quot;&quot;&quot;</span>
+        acquisitions = []
 
-<span class="sd">        Args:</span>
+        self.logger.info(&quot;Sidecars pairing:&quot;)
 
-<span class="sd">            filename (path): path of a JSON file</span>
+        for sidecar, descriptions in iteritems(self.graph):
 
-<span class="sd">        Return:</span>
+            sidecarName = os.path.basename(sidecar.root)
 
-<span class="sd">            A dictionnary of the JSON content plus the SidecarFilename</span>
+            # only one description for the sidecar
 
-<span class="sd">        &quot;&quot;&quot;</span>
+            if len(descriptions) == 1:
 
-        <span class="k">try</span><span class="p">:</span>
+                desc = descriptions[0]
 
-            <span class="n">data</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                acq = Acquisition(participant, srcSidecar=sidecar, **desc)
 
-        <span class="k">except</span><span class="p">:</span>
+                acquisitions.append(acq)
 
-            <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+                self.logger.info(&quot;%s  &lt;-  %s&quot;, acq.suffix, sidecarName)
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_origData</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            # sidecar with no link
 
-        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;SidecarFilename&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            elif len(descriptions) == 0:
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+                self.logger.info(&quot;No Pairing  &lt;-  %s&quot;, sidecarName)
 
-<span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            # sidecar with several links
 
-    <span class="sd">&quot;&quot;&quot;</span>
+            else:
 
-<span class="sd">    Args:</span>
+                self.logger.warning(&quot;Several Pairing  &lt;-  %s&quot;, sidecarName)
 
-<span class="sd">        sidecars (list): List of Sidecar objects</span>
+                for desc in descriptions:
 
-<span class="sd">        descriptions (list): List of dictionnaries describing acquisitions</span>
+                    acq = Acquisition(participant, **desc)
 
-<span class="sd">    &quot;&quot;&quot;</span>
+                    self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sidecars</span><span class="p">,</span> <span class="n">descriptions</span><span class="p">,</span> <span class="n">searchMethod</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">searchMethod</span><span class="p">,</span>
+        self.acquisitions = acquisitions
 
-                 <span class="n">caseSensitive</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">caseSensitive</span><span class="p">):</span>
+        return acquisitions
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    def find_runs(self):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_searchMethod</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        Check if there is duplicate destination roots in the acquisitions
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">aquisitions</span> <span class="o">=</span> <span class="p">[]</span>
+        and add &#39;_run-&#39; to the customLabels of the acquisition
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sidecars</span> <span class="o">=</span> <span class="n">sidecars</span>
+        &quot;&quot;&quot;
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">descriptions</span>
+        def duplicates(seq):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">searchMethod</span> <span class="o">=</span> <span class="n">searchMethod</span>
+            &quot;&quot;&quot; Find duplicate items in a list
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">caseSensitive</span> <span class="o">=</span> <span class="n">caseSensitive</span>
+            Args:
 
-    <span class="nd">@property</span>
+                seq (list)
 
-    <span class="k">def</span> <span class="nf">searchMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            Yield:
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_searchMethod</span>
+                A tuple of 2 items (item, list of index)
 
-    <span class="nd">@searchMethod</span><span class="o">.</span><span class="n">setter</span>
+            ref: http://stackoverflow.com/a/5419576
 
-    <span class="k">def</span> <span class="nf">searchMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            &quot;&quot;&quot;
 
-        <span class="sd">&quot;&quot;&quot;</span>
+            tally = defaultdict(list)
 
-<span class="sd">        Checks if the search method is implemented</span>
+            for i, item in enumerate(seq):
 
-<span class="sd">        Warns the user if not and fall back to default</span>
+                tally[item].append(i)
 
-<span class="sd">        &quot;&quot;&quot;</span>
+            for key, locs in iteritems(tally):
 
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">searchMethodChoices</span><span class="p">:</span>
+                if len(locs) &gt; 1:
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_searchMethod</span> <span class="o">=</span> <span class="n">value</span>
+                    yield key, locs
 
-        <span class="k">else</span><span class="p">:</span>
+        dstRoots = [_.dstRoot for _ in self.acquisitions]
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_searchMethod</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">searchMethod</span>
+        for dstRoot, dup in duplicates(dstRoots):
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; is not a search method implemented&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            self.logger.info(&quot;%s has %s runs&quot;, dstRoot, len(dup))
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            self.logger.info(&quot;Adding &#39;run&#39; information to the acquisition&quot;)
 
-                <span class="s2">&quot;Falling back to default: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">searchMethod</span>
+            for runNum, acqInd in enumerate(dup):
 
-            <span class="p">)</span>
+                runStr = DEFAULT.runTpl.format(runNum + 1)
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-
-                <span class="s2">&quot;Search methods implemented: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">searchMethodChoices</span>
-
-            <span class="p">)</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">caseSensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_caseSensitive</span>
-
-    <span class="nd">@caseSensitive</span><span class="o">.</span><span class="n">setter</span>
-
-    <span class="k">def</span> <span class="nf">caseSensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_caseSensitive</span> <span class="o">=</span> <span class="n">value</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_caseSensitive</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">caseSensitive</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; is not a boolean&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-
-                <span class="s2">&quot;Falling back to default: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">caseSensitive</span>
-
-            <span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-
-                <span class="s2">&quot;Search methods implemented: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">caseSensitive</span>
-
-            <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Test all the possible links between the list of sidecars and the</span>
-
-<span class="sd">        description dictionnaries and build a graph from it</span>
-
-<span class="sd">        The graph is in a OrderedDict object. The keys are the Sidecars and</span>
-
-<span class="sd">        the values are a list of possible descriptions</span>
-
-<span class="sd">        Returns:</span>
-
-<span class="sd">            A graph (OrderedDict)</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">graph</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">_</span><span class="p">,</span> <span class="p">[])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sidecars</span><span class="p">)</span>
-
-        <span class="n">possibleLinks</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidecars</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">descriptions</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">sidecar</span><span class="p">,</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">possibleLinks</span><span class="p">:</span>
-
-            <span class="n">criteria</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;criteria&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">criteria</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLink</span><span class="p">(</span><span class="n">sidecar</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">criteria</span><span class="p">):</span>
-
-                <span class="n">graph</span><span class="p">[</span><span class="n">sidecar</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
-
-        <span class="k">return</span> <span class="n">graph</span>
-
-    <span class="k">def</span> <span class="nf">isLink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">criteria</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Args:</span>
-
-<span class="sd">            data (dict): Dictionnary data of a sidecar</span>
-
-<span class="sd">            criteria (dict): Dictionnary criteria</span>
-
-<span class="sd">        Returns:</span>
-
-<span class="sd">            boolean</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">searchMethod</span> <span class="o">==</span> <span class="s2">&quot;re&quot;</span><span class="p">:</span>
-
-                <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
-
-            <span class="k">else</span><span class="p">:</span>
-
-                <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-                <span class="n">pattern</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">caseSensitive</span><span class="p">:</span>
-
-                    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-
-                    <span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-
-                <span class="k">return</span> <span class="n">fnmatch</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
-
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="n">criteria</span><span class="p">):</span>
-
-            <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="c1"># or &#39;&#39;</span>
-
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-
-                <span class="k">try</span><span class="p">:</span>
-
-                    <span class="n">subResult</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">list</span><span class="p">)]</span>
-
-                    <span class="k">for</span> <span class="n">subName</span><span class="p">,</span> <span class="n">subPattern</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-
-                        <span class="n">subResult</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">subName</span><span class="p">,</span> <span class="n">subPattern</span><span class="p">))</span>
-
-                <span class="k">except</span><span class="p">:</span>
-
-                    <span class="n">subResult</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span>
-
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">subResult</span><span class="p">))</span>
-
-            <span class="k">else</span><span class="p">:</span>
-
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">pattern</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">build_acquisitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">participant</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Args:</span>
-
-<span class="sd">            participant (Participant): Participant object to create acquisitions</span>
-
-<span class="sd">        Returns:</span>
-
-<span class="sd">            A list of acquisition objects</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">acquisitions</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Sidecars pairing:&quot;</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">sidecar</span><span class="p">,</span> <span class="n">descriptions</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">):</span>
-
-            <span class="n">sidecarName</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sidecar</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
-
-            <span class="c1"># only one description for the sidecar</span>
-
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">descriptions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-
-                <span class="n">desc</span> <span class="o">=</span> <span class="n">descriptions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-                <span class="n">acq</span> <span class="o">=</span> <span class="n">Acquisition</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">srcSidecar</span><span class="o">=</span><span class="n">sidecar</span><span class="p">,</span> <span class="o">**</span><span class="n">desc</span><span class="p">)</span>
-
-                <span class="n">acquisitions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acq</span><span class="p">)</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">  &lt;-  </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">acq</span><span class="o">.</span><span class="n">suffix</span><span class="p">,</span> <span class="n">sidecarName</span><span class="p">)</span>
-
-            <span class="c1"># sidecar with no link</span>
-
-            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">descriptions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No Pairing  &lt;-  </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sidecarName</span><span class="p">)</span>
-
-            <span class="c1"># sidecar with several links</span>
-
-            <span class="k">else</span><span class="p">:</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Several Pairing  &lt;-  </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sidecarName</span><span class="p">)</span>
-
-                <span class="k">for</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">descriptions</span><span class="p">:</span>
-
-                    <span class="n">acq</span> <span class="o">=</span> <span class="n">Acquisition</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="o">**</span><span class="n">desc</span><span class="p">)</span>
-
-                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;    -&gt;  </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">acq</span><span class="o">.</span><span class="n">suffix</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">acquisitions</span> <span class="o">=</span> <span class="n">acquisitions</span>
-
-        <span class="k">return</span> <span class="n">acquisitions</span>
-
-    <span class="k">def</span> <span class="nf">find_runs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Check if there is duplicate destination roots in the acquisitions</span>
-
-<span class="sd">        and add &#39;_run-&#39; to the customLabels of the acquisition</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">def</span> <span class="nf">duplicates</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
-
-            <span class="sd">&quot;&quot;&quot; Find duplicate items in a list</span>
-
-<span class="sd">            Args:</span>
-
-<span class="sd">                seq (list)</span>
-
-<span class="sd">            Yield:</span>
-
-<span class="sd">                A tuple of 2 items (item, list of index)</span>
-
-<span class="sd">            ref: http://stackoverflow.com/a/5419576</span>
-
-<span class="sd">            &quot;&quot;&quot;</span>
-
-            <span class="n">tally</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
-
-                <span class="n">tally</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">locs</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="n">tally</span><span class="p">):</span>
-
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">locs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-
-                    <span class="k">yield</span> <span class="n">key</span><span class="p">,</span> <span class="n">locs</span>
-
-        <span class="n">dstRoots</span> <span class="o">=</span> <span class="p">[</span><span class="n">_</span><span class="o">.</span><span class="n">dstRoot</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">acquisitions</span><span class="p">]</span>
-
-        <span class="k">for</span> <span class="n">dstRoot</span><span class="p">,</span> <span class="n">dup</span> <span class="ow">in</span> <span class="n">duplicates</span><span class="p">(</span><span class="n">dstRoots</span><span class="p">):</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> has </span><span class="si">%s</span><span class="s2"> runs&quot;</span><span class="p">,</span> <span class="n">dstRoot</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dup</span><span class="p">))</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding &#39;run&#39; information to the acquisition&quot;</span><span class="p">)</span>
-
-            <span class="k">for</span> <span class="n">runNum</span><span class="p">,</span> <span class="n">acqInd</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dup</span><span class="p">):</span>
-
-                <span class="n">runStr</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">runTpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">runNum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">acquisitions</span><span class="p">[</span><span class="n">acqInd</span><span class="p">]</span><span class="o">.</span><span class="n">customLabels</span> <span class="o">+=</span> <span class="n">runStr</span>
+                self.acquisitions[acqInd].customLabels += runStr
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h2 id="classes">Classes</h2>
-<h3 id="sidecar">Sidecar</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Sidecar</span><span class="p">(</span>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="sidecar">Sidecar<a class="headerlink" href="#sidecar" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sidecar</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">compKeys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SeriesNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;AcquisitionTime&#39;</span><span class="p">,</span> <span class="s1">&#39;SidecarFilename&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div>
-
-<h4 id="attributes">Attributes</h4>
+</td></tr></table>
+<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
 <table>
 <thead>
 <tr>
@@ -1203,463 +1646,887 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">Sidecar</span><span class="p">(</span><span class="n">object</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Sidecar(object):
 
-    <span class="sd">&quot;&quot;&quot; A sidecar object</span>
+    &quot;&quot;&quot; A sidecar object
 
-<span class="sd">    Args:</span>
+    Args:
 
-<span class="sd">        filename (str): Path of a JSON sidecar</span>
+        filename (str): Path of a JSON sidecar
 
-<span class="sd">        keyComp (list): A list of keys from the JSON sidecar to compare sidecars</span>
+        keyComp (list): A list of keys from the JSON sidecar to compare sidecars
 
-<span class="sd">                     default=[&quot;SeriesNumber&quot;,&quot;AcquisitionTime&quot;,&quot;SideCarFilename&quot;]</span>
+                     default=[&quot;SeriesNumber&quot;,&quot;AcquisitionTime&quot;,&quot;SideCarFilename&quot;]
 
-<span class="sd">    &quot;&quot;&quot;</span>
+    &quot;&quot;&quot;
 
-    <span class="n">def</span> <span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">compKeys</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">compKeys</span><span class="p">):</span>
+    def __init__(self, filename, compKeys=DEFAULT.compKeys):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_origData</span> <span class="o">=</span> <span class="p">{}</span>
+        self._origData = {}
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+        self._data = {}
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        self.filename = filename
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">splitext_</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        self.root, _ = splitext_(filename)
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">filename</span>
+        self.data = filename
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">compKeys</span> <span class="o">=</span> <span class="n">compKeys</span>
+        self.compKeys = compKeys
 
-    <span class="n">def</span> <span class="n">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    def __lt__(self, other):
 
-        <span class="n">lts</span> <span class="o">=</span> <span class="p">[]</span>
+        lts = []
 
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">compKeys</span><span class="p">:</span>
+        for key in self.compKeys:
 
-            <span class="n">try</span><span class="p">:</span>
+            try:
 
-                <span class="k">if</span> <span class="n">all</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+                if all(key in d for d in (self.data, other.data)):
 
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                    if self.data.get(key) == other.data.get(key):
 
-                        <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">None</span><span class="p">)</span>
+                        lts.append(None)
 
-                    <span class="k">else</span><span class="p">:</span>
+                    else:
 
-                        <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+                        lts.append(self.data.get(key) &lt; other.data.get(key))
 
-                <span class="k">else</span><span class="p">:</span>
+                else:
 
-                    <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">None</span><span class="p">)</span>
+                    lts.append(None)
 
-            <span class="n">except</span><span class="p">:</span>
+            except:
 
-                <span class="n">lts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">None</span><span class="p">)</span>
+                lts.append(None)
 
-        <span class="k">for</span> <span class="n">lt</span> <span class="ow">in</span> <span class="n">lts</span><span class="p">:</span>
+        for lt in lts:
 
-            <span class="k">if</span> <span class="n">lt</span> <span class="k">is</span> <span class="ow">not</span> <span class="n">None</span><span class="p">:</span>
+            if lt is not None:
 
-                <span class="k">return</span> <span class="n">lt</span>
+                return lt
 
-    <span class="n">def</span> <span class="n">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    def __eq__(self, other):
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span>
+        return self.data == other.data
 
-    <span class="n">def</span> <span class="n">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    def __hash__(self):
 
-        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        return hash(self.filename)
 
-    <span class="err">@</span><span class="n">property</span>
+    @property
 
-    <span class="n">def</span> <span class="n">origData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    def origData(self):
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_origData</span>
+        return self._origData
 
-    <span class="err">@</span><span class="n">property</span>
+    @property
 
-    <span class="n">def</span> <span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    def data(self):
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+        return self._data
 
-    <span class="err">@</span><span class="n">data</span><span class="o">.</span><span class="n">setter</span>
+    @data.setter
 
-    <span class="n">def</span> <span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    def data(self, filename):
 
-        <span class="sd">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="sd">        Args:</span>
+        Args:
 
-<span class="sd">            filename (path): path of a JSON file</span>
+            filename (path): path of a JSON file
 
-<span class="sd">        Return:</span>
+        Return:
 
-<span class="sd">            A dictionnary of the JSON content plus the SidecarFilename</span>
+            A dictionnary of the JSON content plus the SidecarFilename
 
-<span class="sd">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="n">try</span><span class="p">:</span>
+        try:
 
-            <span class="n">data</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            data = load_json(filename)
 
-        <span class="n">except</span><span class="p">:</span>
+        except:
 
-            <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+            data = {}
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_origData</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        self._origData = data.copy()
 
-        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;SidecarFilename&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        data[&quot;SidecarFilename&quot;] = os.path.basename(filename)
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+        self._data = data
 </code></pre></div>
-
+</td></tr></table>
 </details>
 <hr />
-<h4 id="instance-variables">Instance variables</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">data</span>
+<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">data</span>
 </code></pre></div>
-
-<div class="codehilite"><pre><span></span><code><span class="n">origData</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">origData</span>
 </code></pre></div>
-
-<h3 id="sidecarpairing">SidecarPairing</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span>
+</td></tr></table>
+<h3 id="sidecarpairing">SidecarPairing<a class="headerlink" href="#sidecarpairing" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span>
     <span class="n">sidecars</span><span class="p">,</span>
     <span class="n">descriptions</span><span class="p">,</span>
     <span class="n">searchMethod</span><span class="o">=</span><span class="s1">&#39;fnmatch&#39;</span><span class="p">,</span>
     <span class="n">caseSensitive</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class SidecarPairing(object):
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">SidecarPairing</span>(<span class="n">object</span>):
+    &quot;&quot;&quot;
 
-    <span class="s">&quot;&quot;&quot;</span>
+    Args:
 
-<span class="s">    Args:</span>
+        sidecars (list): List of Sidecar objects
 
-<span class="s">        sidecars (list): List of Sidecar objects</span>
+        descriptions (list): List of dictionnaries describing acquisitions
 
-<span class="s">        descriptions (list): List of dictionnaries describing acquisitions</span>
+    &quot;&quot;&quot;
 
-<span class="s">    &quot;&quot;&quot;</span>
+    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
 
-    <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>, <span class="n">sidecars</span>, <span class="n">descriptions</span>, <span class="n">searchMethod</span>=<span class="n">DEFAULT</span>.<span class="n">searchMethod</span>,
+                 caseSensitive=DEFAULT.caseSensitive):
 
-                 <span class="n">caseSensitive</span>=<span class="n">DEFAULT</span>.<span class="n">caseSensitive</span>):
+        self.logger = logging.getLogger(__name__)
 
-        <span class="nb">self</span>.<span class="n">logger</span> = <span class="n">logging</span>.<span class="n">getLogger</span>(<span class="n">__name__</span>)
+        self._searchMethod = &quot;&quot;
 
-        <span class="nb">self</span>.<span class="n">_searchMethod</span> = <span class="s">&quot;&quot;</span>
+        self.graph = OrderedDict()
 
-        <span class="nb">self</span>.<span class="n">graph</span> = <span class="n">OrderedDict</span>()
+        self.aquisitions = []
 
-        <span class="nb">self</span>.<span class="n">aquisitions</span> = []
+        self.sidecars = sidecars
 
-        <span class="nb">self</span>.<span class="n">sidecars</span> = <span class="n">sidecars</span>
+        self.descriptions = descriptions
 
-        <span class="nb">self</span>.<span class="n">descriptions</span> = <span class="n">descriptions</span>
+        self.searchMethod = searchMethod
 
-        <span class="nb">self</span>.<span class="n">searchMethod</span> = <span class="n">searchMethod</span>
+        self.caseSensitive = caseSensitive
 
-        <span class="nb">self</span>.<span class="n">caseSensitive</span> = <span class="n">caseSensitive</span>
+    @property
 
-    <span class="nv">@property</span>
+    def searchMethod(self):
 
-    <span class="n">def</span> <span class="n">searchMethod</span>(<span class="nb">self</span>):
+        return self._searchMethod
 
-        <span class="k">return</span> <span class="nb">self</span>.<span class="n">_searchMethod</span>
+    @searchMethod.setter
 
-    <span class="nv">@searchMethod</span>.<span class="n">setter</span>
+    def searchMethod(self, value):
 
-    <span class="n">def</span> <span class="n">searchMethod</span>(<span class="nb">self</span>, <span class="nb">value</span>):
+        &quot;&quot;&quot;
 
-        <span class="s">&quot;&quot;&quot;</span>
+        Checks if the search method is implemented
 
-<span class="s">        Checks if the search method is implemented</span>
+        Warns the user if not and fall back to default
 
-<span class="s">        Warns the user if not and fall back to default</span>
+        &quot;&quot;&quot;
 
-<span class="s">        &quot;&quot;&quot;</span>
+        if value in DEFAULT.searchMethodChoices:
 
-        <span class="k">if</span> <span class="nb">value</span> <span class="nb">in</span> <span class="n">DEFAULT</span>.<span class="n">searchMethodChoices:</span>
+            self._searchMethod = value
 
-            <span class="nb">self</span>.<span class="n">_searchMethod</span> = <span class="nb">value</span>
+        else:
 
-        <span class="n">else:</span>
+            self._searchMethod = DEFAULT.searchMethod
 
-            <span class="nb">self</span>.<span class="n">_searchMethod</span> = <span class="n">DEFAULT</span>.<span class="n">searchMethod</span>
+            self.logger.warning(&quot;&#39;%s&#39; is not a search method implemented&quot;, value)
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;&#39;%s&#39; is not a search method implemented&quot;</span>, <span class="nb">value</span>)
+            self.logger.warning(
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(
-
-                <span class="s">&quot;Falling back to default: %s&quot;</span>, <span class="n">DEFAULT</span>.<span class="n">searchMethod</span>
+                &quot;Falling back to default: %s&quot;, DEFAULT.searchMethod
 
             )
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(
+            self.logger.warning(
 
-                <span class="s">&quot;Search methods implemented: %s&quot;</span>, <span class="n">DEFAULT</span>.<span class="n">searchMethodChoices</span>
-
-            )
-
-    <span class="nv">@property</span>
-
-    <span class="n">def</span> <span class="n">caseSensitive</span>(<span class="nb">self</span>):
-
-        <span class="k">return</span> <span class="nb">self</span>.<span class="n">_caseSensitive</span>
-
-    <span class="nv">@caseSensitive</span>.<span class="n">setter</span>
-
-    <span class="n">def</span> <span class="n">caseSensitive</span>(<span class="nb">self</span>, <span class="nb">value</span>):
-
-        <span class="k">if</span> <span class="n">isinstance</span>(<span class="nb">value</span>, <span class="n">bool</span>):
-
-            <span class="nb">self</span>.<span class="n">_caseSensitive</span> = <span class="nb">value</span>
-
-        <span class="n">else:</span>
-
-            <span class="nb">self</span>.<span class="n">_caseSensitive</span> = <span class="n">DEFAULT</span>.<span class="n">caseSensitive</span>
-
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;&#39;%s&#39; is not a boolean&quot;</span>, <span class="nb">value</span>)
-
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(
-
-                <span class="s">&quot;Falling back to default: %s&quot;</span>, <span class="n">DEFAULT</span>.<span class="n">caseSensitive</span>
+                &quot;Search methods implemented: %s&quot;, DEFAULT.searchMethodChoices
 
             )
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(
+    @property
 
-                <span class="s">&quot;Search methods implemented: %s&quot;</span>, <span class="n">DEFAULT</span>.<span class="n">caseSensitive</span>
+    def caseSensitive(self):
+
+        return self._caseSensitive
+
+    @caseSensitive.setter
+
+    def caseSensitive(self, value):
+
+        if isinstance(value, bool):
+
+            self._caseSensitive = value
+
+        else:
+
+            self._caseSensitive = DEFAULT.caseSensitive
+
+            self.logger.warning(&quot;&#39;%s&#39; is not a boolean&quot;, value)
+
+            self.logger.warning(
+
+                &quot;Falling back to default: %s&quot;, DEFAULT.caseSensitive
 
             )
 
-    <span class="n">def</span> <span class="n">build_graph</span>(<span class="nb">self</span>):
+            self.logger.warning(
 
-        <span class="s">&quot;&quot;&quot;</span>
+                &quot;Search methods implemented: %s&quot;, DEFAULT.caseSensitive
 
-<span class="s">        Test all the possible links between the list of sidecars and the</span>
+            )
 
-<span class="s">        description dictionnaries and build a graph from it</span>
+    def build_graph(self):
 
-<span class="s">        The graph is in a OrderedDict object. The keys are the Sidecars and</span>
+        &quot;&quot;&quot;
 
-<span class="s">        the values are a list of possible descriptions</span>
+        Test all the possible links between the list of sidecars and the
 
-<span class="s">        Returns:</span>
+        description dictionnaries and build a graph from it
 
-<span class="s">            A graph (OrderedDict)</span>
+        The graph is in a OrderedDict object. The keys are the Sidecars and
 
-<span class="s">        &quot;&quot;&quot;</span>
+        the values are a list of possible descriptions
 
-        <span class="n">graph</span> = <span class="n">OrderedDict</span>((<span class="n">_</span>, []) <span class="k">for</span> <span class="n">_</span> <span class="nb">in</span> <span class="nb">self</span>.<span class="n">sidecars</span>)
+        Returns:
 
-        <span class="n">possibleLinks</span> = <span class="n">itertools</span>.<span class="n">product</span>(<span class="nb">self</span>.<span class="n">sidecars</span>, <span class="nb">self</span>.<span class="n">descriptions</span>)
+            A graph (OrderedDict)
 
-        <span class="k">for</span> <span class="n">sidecar</span>, <span class="n">description</span> <span class="nb">in</span> <span class="n">possibleLinks:</span>
+        &quot;&quot;&quot;
 
-            <span class="n">criteria</span> = <span class="n">description</span>.<span class="nb">get</span>(<span class="s">&quot;criteria&quot;</span>, <span class="n">None</span>)
+        graph = OrderedDict((_, []) for _ in self.sidecars)
 
-            <span class="k">if</span> <span class="n">criteria</span> <span class="o">and</span> <span class="nb">self</span>.<span class="n">isLink</span>(<span class="n">sidecar</span>.<span class="n">data</span>, <span class="n">criteria</span>):
+        possibleLinks = itertools.product(self.sidecars, self.descriptions)
 
-                <span class="n">graph</span>[<span class="n">sidecar</span>].<span class="nb">append</span>(<span class="n">description</span>)
+        for sidecar, description in possibleLinks:
 
-        <span class="nb">self</span>.<span class="n">graph</span> = <span class="n">graph</span>
+            criteria = description.get(&quot;criteria&quot;, None)
 
-        <span class="k">return</span> <span class="n">graph</span>
+            if criteria and self.isLink(sidecar.data, criteria):
 
-    <span class="n">def</span> <span class="n">isLink</span>(<span class="nb">self</span>, <span class="n">data</span>, <span class="n">criteria</span>):
+                graph[sidecar].append(description)
 
-        <span class="s">&quot;&quot;&quot;</span>
+        self.graph = graph
 
-<span class="s">        Args:</span>
+        return graph
 
-<span class="s">            data (dict): Dictionnary data of a sidecar</span>
+    def isLink(self, data, criteria):
 
-<span class="s">            criteria (dict): Dictionnary criteria</span>
+        &quot;&quot;&quot;
 
-<span class="s">        Returns:</span>
+        Args:
 
-<span class="s">            boolean</span>
+            data (dict): Dictionnary data of a sidecar
 
-<span class="s">        &quot;&quot;&quot;</span>
+            criteria (dict): Dictionnary criteria
 
-        <span class="n">def</span> <span class="n">compare</span>(<span class="nb">name</span>, <span class="n">pattern</span>):
+        Returns:
 
-            <span class="k">if</span> <span class="nb">self</span>.<span class="n">searchMethod</span> == <span class="s">&quot;re&quot;</span>:
+            boolean
 
-                <span class="k">return</span> <span class="n">bool</span>(<span class="nb">re</span>.<span class="n">search</span>(<span class="n">pattern</span>, <span class="nb">name</span>))
+        &quot;&quot;&quot;
 
-            <span class="n">else:</span>
+        def compare(name, pattern):
 
-                <span class="nb">name</span> = <span class="n">str</span>(<span class="nb">name</span>)
+            if self.searchMethod == &quot;re&quot;:
 
-                <span class="n">pattern</span> = <span class="n">str</span>(<span class="n">pattern</span>)
+                return bool(re.search(pattern, name))
 
-                <span class="k">if</span> <span class="nb">not</span> <span class="nb">self</span>.<span class="n">caseSensitive:</span>
+            else:
 
-                    <span class="nb">name</span> = <span class="nb">name</span>.<span class="n">lower</span>()
+                name = str(name)
 
-                    <span class="n">pattern</span> = <span class="n">pattern</span>.<span class="n">lower</span>()
+                pattern = str(pattern)
 
-                <span class="k">return</span> <span class="n">fnmatch</span>(<span class="nb">name</span>, <span class="n">pattern</span>)
+                if not self.caseSensitive:
 
-        <span class="nb">result</span> = []
+                    name = name.lower()
 
-        <span class="k">for</span> <span class="n">tag</span>, <span class="n">pattern</span> <span class="nb">in</span> <span class="n">iteritems</span>(<span class="n">criteria</span>):
+                    pattern = pattern.lower()
 
-            <span class="nb">name</span> = <span class="n">data</span>.<span class="nb">get</span>(<span class="n">tag</span>, <span class="s">&#39;&#39;</span>)<span class="c1"># or &#39;&#39;</span>
+                return fnmatch(name, pattern)
 
-            <span class="k">if</span> <span class="n">isinstance</span>(<span class="nb">name</span>, <span class="n">list</span>):
+        result = []
 
-                <span class="n">try:</span>
+        for tag, pattern in iteritems(criteria):
 
-                    <span class="n">subResult</span> = [<span class="n">len</span>(<span class="nb">name</span>) == <span class="n">len</span>(<span class="n">pattern</span>), <span class="n">isinstance</span>(<span class="n">pattern</span>, <span class="n">list</span>)]
+            name = data.get(tag, &#39;&#39;)# or &#39;&#39;
 
-                    <span class="k">for</span> <span class="n">subName</span>, <span class="n">subPattern</span> <span class="nb">in</span> <span class="nb">zip</span>(<span class="nb">name</span>, <span class="n">pattern</span>):
+            if isinstance(name, list):
 
-                        <span class="n">subResult</span>.<span class="nb">append</span>(<span class="n">compare</span>(<span class="n">subName</span>, <span class="n">subPattern</span>))
+                try:
 
-                <span class="n">except:</span>
+                    subResult = [len(name) == len(pattern), isinstance(pattern, list)]
 
-                    <span class="n">subResult</span> = [<span class="nb">False</span>]
+                    for subName, subPattern in zip(name, pattern):
 
-                <span class="nb">result</span>.<span class="nb">append</span>(<span class="nb">all</span>(<span class="n">subResult</span>))
+                        subResult.append(compare(subName, subPattern))
 
-            <span class="n">else:</span>
+                except:
 
-                <span class="nb">result</span>.<span class="nb">append</span>(<span class="n">compare</span>(<span class="nb">name</span>, <span class="n">pattern</span>))
+                    subResult = [False]
 
-        <span class="k">return</span> <span class="nb">all</span>(<span class="nb">result</span>)
+                result.append(all(subResult))
 
-    <span class="n">def</span> <span class="n">build_acquisitions</span>(<span class="nb">self</span>, <span class="n">participant</span>):
+            else:
 
-        <span class="s">&quot;&quot;&quot;</span>
+                result.append(compare(name, pattern))
 
-<span class="s">        Args:</span>
+        return all(result)
 
-<span class="s">            participant (Participant): Participant object to create acquisitions</span>
+    def build_acquisitions(self, participant):
 
-<span class="s">        Returns:</span>
+        &quot;&quot;&quot;
 
-<span class="s">            A list of acquisition objects</span>
+        Args:
 
-<span class="s">        &quot;&quot;&quot;</span>
+            participant (Participant): Participant object to create acquisitions
 
-        <span class="n">acquisitions</span> = []
+        Returns:
 
-        <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;Sidecars pairing:&quot;</span>)
+            A list of acquisition objects
 
-        <span class="k">for</span> <span class="n">sidecar</span>, <span class="n">descriptions</span> <span class="nb">in</span> <span class="n">iteritems</span>(<span class="nb">self</span>.<span class="n">graph</span>):
+        &quot;&quot;&quot;
 
-            <span class="n">sidecarName</span> = <span class="n">os</span>.<span class="nb">path</span>.<span class="nb">basename</span>(<span class="n">sidecar</span>.<span class="n">root</span>)
+        acquisitions = []
 
-            <span class="c1"># only one description for the sidecar</span>
+        self.logger.info(&quot;Sidecars pairing:&quot;)
 
-            <span class="k">if</span> <span class="n">len</span>(<span class="n">descriptions</span>) == <span class="mi">1</span>:
+        for sidecar, descriptions in iteritems(self.graph):
 
-                <span class="nb">desc</span> = <span class="n">descriptions</span>[<span class="mi">0</span>]
+            sidecarName = os.path.basename(sidecar.root)
 
-                <span class="n">acq</span> = <span class="n">Acquisition</span>(<span class="n">participant</span>, <span class="n">srcSidecar</span>=<span class="n">sidecar</span>, **<span class="nb">desc</span>)
+            # only one description for the sidecar
 
-                <span class="n">acquisitions</span>.<span class="nb">append</span>(<span class="n">acq</span>)
+            if len(descriptions) == 1:
 
-                <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;%s  &lt;-  %s&quot;</span>, <span class="n">acq</span>.<span class="n">suffix</span>, <span class="n">sidecarName</span>)
+                desc = descriptions[0]
 
-            <span class="c1"># sidecar with no link</span>
+                acq = Acquisition(participant, srcSidecar=sidecar, **desc)
 
-            <span class="n">elif</span> <span class="n">len</span>(<span class="n">descriptions</span>) == <span class="mi">0</span>:
+                acquisitions.append(acq)
 
-                <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;No Pairing  &lt;-  %s&quot;</span>, <span class="n">sidecarName</span>)
+                self.logger.info(&quot;%s  &lt;-  %s&quot;, acq.suffix, sidecarName)
 
-            <span class="c1"># sidecar with several links</span>
+            # sidecar with no link
 
-            <span class="n">else:</span>
+            elif len(descriptions) == 0:
 
-                <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;Several Pairing  &lt;-  %s&quot;</span>, <span class="n">sidecarName</span>)
+                self.logger.info(&quot;No Pairing  &lt;-  %s&quot;, sidecarName)
 
-                <span class="k">for</span> <span class="nb">desc</span> <span class="nb">in</span> <span class="n">descriptions:</span>
+            # sidecar with several links
 
-                    <span class="n">acq</span> = <span class="n">Acquisition</span>(<span class="n">participant</span>, **<span class="nb">desc</span>)
+            else:
 
-                    <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">warning</span>(<span class="s">&quot;    -&gt;  %s&quot;</span>, <span class="n">acq</span>.<span class="n">suffix</span>)
+                self.logger.warning(&quot;Several Pairing  &lt;-  %s&quot;, sidecarName)
 
-        <span class="nb">self</span>.<span class="n">acquisitions</span> = <span class="n">acquisitions</span>
+                for desc in descriptions:
 
-        <span class="k">return</span> <span class="n">acquisitions</span>
+                    acq = Acquisition(participant, **desc)
 
-    <span class="n">def</span> <span class="n">find_runs</span>(<span class="nb">self</span>):
+                    self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
 
-        <span class="s">&quot;&quot;&quot;</span>
+        self.acquisitions = acquisitions
 
-<span class="s">        Check if there is duplicate destination roots in the acquisitions</span>
+        return acquisitions
 
-<span class="s">        and add &#39;_run-&#39; to the customLabels of the acquisition</span>
+    def find_runs(self):
 
-<span class="s">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="n">def</span> <span class="n">duplicates</span>(<span class="n">seq</span>):
+        Check if there is duplicate destination roots in the acquisitions
 
-            <span class="s">&quot;&quot;&quot; Find duplicate items in a list</span>
+        and add &#39;_run-&#39; to the customLabels of the acquisition
 
-<span class="s">            Args:</span>
+        &quot;&quot;&quot;
 
-<span class="s">                seq (list)</span>
+        def duplicates(seq):
 
-<span class="s">            Yield:</span>
+            &quot;&quot;&quot; Find duplicate items in a list
 
-<span class="s">                A tuple of 2 items (item, list of index)</span>
+            Args:
 
-<span class="s">            ref: http://stackoverflow.com/a/5419576</span>
+                seq (list)
 
-<span class="s">            &quot;&quot;&quot;</span>
+            Yield:
 
-            <span class="n">tally</span> = <span class="n">defaultdict</span>(<span class="n">list</span>)
+                A tuple of 2 items (item, list of index)
 
-            <span class="k">for</span> <span class="n">i</span>, <span class="nb">item</span> <span class="nb">in</span> <span class="n">enumerate</span>(<span class="n">seq</span>):
+            ref: http://stackoverflow.com/a/5419576
 
-                <span class="n">tally</span>[<span class="nb">item</span>].<span class="nb">append</span>(<span class="n">i</span>)
+            &quot;&quot;&quot;
 
-            <span class="k">for</span> <span class="nb">key</span>, <span class="n">locs</span> <span class="nb">in</span> <span class="n">iteritems</span>(<span class="n">tally</span>):
+            tally = defaultdict(list)
 
-                <span class="k">if</span> <span class="n">len</span>(<span class="n">locs</span>) &gt; <span class="mi">1</span>:
+            for i, item in enumerate(seq):
 
-                    <span class="nb">yield</span> <span class="nb">key</span>, <span class="n">locs</span>
+                tally[item].append(i)
 
-        <span class="n">dstRoots</span> = [<span class="n">_</span>.<span class="n">dstRoot</span> <span class="k">for</span> <span class="n">_</span> <span class="nb">in</span> <span class="nb">self</span>.<span class="n">acquisitions</span>]
+            for key, locs in iteritems(tally):
 
-        <span class="k">for</span> <span class="n">dstRoot</span>, <span class="n">dup</span> <span class="nb">in</span> <span class="n">duplicates</span>(<span class="n">dstRoots</span>):
+                if len(locs) &gt; 1:
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;%s has %s runs&quot;</span>, <span class="n">dstRoot</span>, <span class="n">len</span>(<span class="n">dup</span>))
+                    yield key, locs
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;Adding &#39;run&#39; information to the acquisition&quot;</span>)
+        dstRoots = [_.dstRoot for _ in self.acquisitions]
 
-            <span class="k">for</span> <span class="n">runNum</span>, <span class="n">acqInd</span> <span class="nb">in</span> <span class="n">enumerate</span>(<span class="n">dup</span>):
+        for dstRoot, dup in duplicates(dstRoots):
 
-                <span class="n">runStr</span> = <span class="n">DEFAULT</span>.<span class="n">runTpl</span>.<span class="nb">format</span>(<span class="n">runNum</span> + <span class="mi">1</span>)
+            self.logger.info(&quot;%s has %s runs&quot;, dstRoot, len(dup))
 
-                <span class="nb">self</span>.<span class="n">acquisitions</span>[<span class="n">acqInd</span>].<span class="n">customLabels</span> += <span class="n">runStr</span>
+            self.logger.info(&quot;Adding &#39;run&#39; information to the acquisition&quot;)
+
+            for runNum, acqInd in enumerate(dup):
+
+                runStr = DEFAULT.runTpl.format(runNum + 1)
+
+                self.acquisitions[acqInd].customLabels += runStr
 </code></pre></div>
-
+</td></tr></table>
 </details>
 <hr />
-<h4 id="instance-variables_1">Instance variables</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">caseSensitive</span>
+<h4 id="instance-variables_1">Instance variables<a class="headerlink" href="#instance-variables_1" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
 </code></pre></div>
-
-<div class="codehilite"><pre><span></span><code><span class="n">searchMethod</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">searchMethod</span>
 </code></pre></div>
-
-<h4 id="methods">Methods</h4>
-<h4 id="build_acquisitions">build_acquisitions</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">build_acquisitions</span><span class="p">(</span>
+</td></tr></table>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="build_acquisitions">build_acquisitions<a class="headerlink" href="#build_acquisitions" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_acquisitions</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">participant</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1694,70 +2561,126 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">build_acquisitions</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">participant</span><span class="p">)</span><span class="o">:</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def build_acquisitions(self, participant):
 
-        <span class="s">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="s">        Args:</span>
+        Args:
 
-<span class="s">            participant (Participant): Participant object to create acquisitions</span>
+            participant (Participant): Participant object to create acquisitions
 
-<span class="s">        Returns:</span>
+        Returns:
 
-<span class="s">            A list of acquisition objects</span>
+            A list of acquisition objects
 
-<span class="s">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="n">acquisitions</span> <span class="o">=</span> <span class="p">[]</span>
+        acquisitions = []
 
-        <span class="nf">self.logger.info</span><span class="p">(</span><span class="s">&quot;Sidecars pairing:&quot;</span><span class="p">)</span>
+        self.logger.info(&quot;Sidecars pairing:&quot;)
 
-        <span class="n">for</span> <span class="n">sidecar</span><span class="p">,</span> <span class="n">descriptions</span> <span class="n">in</span> <span class="nf">iteritems</span><span class="p">(</span><span class="n">self.graph</span><span class="p">)</span><span class="o">:</span>
+        for sidecar, descriptions in iteritems(self.graph):
 
-            <span class="n">sidecarName</span> <span class="o">=</span> <span class="nf">os.path.basename</span><span class="p">(</span><span class="n">sidecar.root</span><span class="p">)</span>
+            sidecarName = os.path.basename(sidecar.root)
 
-            <span class="c1"># only one description for the sidecar</span>
+            # only one description for the sidecar
 
-            <span class="n">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">descriptions</span><span class="p">)</span> <span class="o">==</span> <span class="m">1</span><span class="o">:</span>
+            if len(descriptions) == 1:
 
-                <span class="n">desc</span> <span class="o">=</span> <span class="n">descriptions</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
+                desc = descriptions[0]
 
-                <span class="n">acq</span> <span class="o">=</span> <span class="nf">Acquisition</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">srcSidecar</span><span class="o">=</span><span class="n">sidecar</span><span class="p">,</span> <span class="o">**</span><span class="n">desc</span><span class="p">)</span>
+                acq = Acquisition(participant, srcSidecar=sidecar, **desc)
 
-                <span class="nf">acquisitions.append</span><span class="p">(</span><span class="n">acq</span><span class="p">)</span>
+                acquisitions.append(acq)
 
-                <span class="nf">self.logger.info</span><span class="p">(</span><span class="s">&quot;%s  &lt;-  %s&quot;</span><span class="p">,</span> <span class="n">acq.suffix</span><span class="p">,</span> <span class="n">sidecarName</span><span class="p">)</span>
+                self.logger.info(&quot;%s  &lt;-  %s&quot;, acq.suffix, sidecarName)
 
-            <span class="c1"># sidecar with no link</span>
+            # sidecar with no link
 
-            <span class="n">elif</span> <span class="nf">len</span><span class="p">(</span><span class="n">descriptions</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span><span class="o">:</span>
+            elif len(descriptions) == 0:
 
-                <span class="nf">self.logger.info</span><span class="p">(</span><span class="s">&quot;No Pairing  &lt;-  %s&quot;</span><span class="p">,</span> <span class="n">sidecarName</span><span class="p">)</span>
+                self.logger.info(&quot;No Pairing  &lt;-  %s&quot;, sidecarName)
 
-            <span class="c1"># sidecar with several links</span>
+            # sidecar with several links
 
-            <span class="n">else</span><span class="o">:</span>
+            else:
 
-                <span class="nf">self.logger.warning</span><span class="p">(</span><span class="s">&quot;Several Pairing  &lt;-  %s&quot;</span><span class="p">,</span> <span class="n">sidecarName</span><span class="p">)</span>
+                self.logger.warning(&quot;Several Pairing  &lt;-  %s&quot;, sidecarName)
 
-                <span class="n">for</span> <span class="n">desc</span> <span class="n">in</span> <span class="n">descriptions</span><span class="o">:</span>
+                for desc in descriptions:
 
-                    <span class="n">acq</span> <span class="o">=</span> <span class="nf">Acquisition</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="o">**</span><span class="n">desc</span><span class="p">)</span>
+                    acq = Acquisition(participant, **desc)
 
-                    <span class="nf">self.logger.warning</span><span class="p">(</span><span class="s">&quot;    -&gt;  %s&quot;</span><span class="p">,</span> <span class="n">acq.suffix</span><span class="p">)</span>
+                    self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
 
-        <span class="n">self.acquisitions</span> <span class="o">=</span> <span class="n">acquisitions</span>
+        self.acquisitions = acquisitions
 
-        <span class="n">return</span> <span class="n">acquisitions</span>
+        return acquisitions
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h4 id="build_graph">build_graph</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span>
+<h4 id="build_graph">build_graph<a class="headerlink" href="#build_graph" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Test all the possible links between the list of sidecars and the</p>
 <p>description dictionnaries and build a graph from it
 The graph is in a OrderedDict object. The keys are the Sidecars and
@@ -1777,112 +2700,200 @@ the values are a list of possible descriptions</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">build_graph</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def build_graph(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        Test all the possible links between the list of sidecars and the</span>
+        Test all the possible links between the list of sidecars and the
 
-<span class="ss">        description dictionnaries and build a graph from it</span>
+        description dictionnaries and build a graph from it
 
-<span class="ss">        The graph is in a OrderedDict object. The keys are the Sidecars and</span>
+        The graph is in a OrderedDict object. The keys are the Sidecars and
 
-<span class="ss">        the values are a list of possible descriptions</span>
+        the values are a list of possible descriptions
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            A graph (OrderedDict)</span>
+            A graph (OrderedDict)
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OrderedDict</span><span class="p">((</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="err">[]</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">sidecars</span><span class="p">)</span><span class="w"></span>
+        graph = OrderedDict((_, []) for _ in self.sidecars)
 
-<span class="w">        </span><span class="n">possibleLinks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">itertools</span><span class="p">.</span><span class="n">product</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">sidecars</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">descriptions</span><span class="p">)</span><span class="w"></span>
+        possibleLinks = itertools.product(self.sidecars, self.descriptions)
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">sidecar</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">possibleLinks</span><span class="p">:</span><span class="w"></span>
+        for sidecar, description in possibleLinks:
 
-<span class="w">            </span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">description</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;criteria&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">None</span><span class="p">)</span><span class="w"></span>
+            criteria = description.get(&quot;criteria&quot;, None)
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">criteria</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">isLink</span><span class="p">(</span><span class="n">sidecar</span><span class="p">.</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="n">criteria</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+            if criteria and self.isLink(sidecar.data, criteria):
 
-<span class="w">                </span><span class="n">graph</span><span class="o">[</span><span class="n">sidecar</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">)</span><span class="w"></span>
+                graph[sidecar].append(description)
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="w"></span>
+        self.graph = graph
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">graph</span><span class="w"></span>
+        return graph
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h4 id="find_runs">find_runs</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">find_runs</span><span class="p">(</span>
+<h4 id="find_runs">find_runs<a class="headerlink" href="#find_runs" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">find_runs</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Check if there is duplicate destination roots in the acquisitions</p>
 <p>and add '_run-' to the customLabels of the acquisition</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">find_runs</span>(<span class="nb">self</span>):
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def find_runs(self):
 
-        <span class="s">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="s">        Check if there is duplicate destination roots in the acquisitions</span>
+        Check if there is duplicate destination roots in the acquisitions
 
-<span class="s">        and add &#39;_run-&#39; to the customLabels of the acquisition</span>
+        and add &#39;_run-&#39; to the customLabels of the acquisition
 
-<span class="s">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="n">def</span> <span class="n">duplicates</span>(<span class="n">seq</span>):
+        def duplicates(seq):
 
-            <span class="s">&quot;&quot;&quot; Find duplicate items in a list</span>
+            &quot;&quot;&quot; Find duplicate items in a list
 
-<span class="s">            Args:</span>
+            Args:
 
-<span class="s">                seq (list)</span>
+                seq (list)
 
-<span class="s">            Yield:</span>
+            Yield:
 
-<span class="s">                A tuple of 2 items (item, list of index)</span>
+                A tuple of 2 items (item, list of index)
 
-<span class="s">            ref: http://stackoverflow.com/a/5419576</span>
+            ref: http://stackoverflow.com/a/5419576
 
-<span class="s">            &quot;&quot;&quot;</span>
+            &quot;&quot;&quot;
 
-            <span class="n">tally</span> = <span class="n">defaultdict</span>(<span class="n">list</span>)
+            tally = defaultdict(list)
 
-            <span class="k">for</span> <span class="n">i</span>, <span class="nb">item</span> <span class="nb">in</span> <span class="n">enumerate</span>(<span class="n">seq</span>):
+            for i, item in enumerate(seq):
 
-                <span class="n">tally</span>[<span class="nb">item</span>].<span class="nb">append</span>(<span class="n">i</span>)
+                tally[item].append(i)
 
-            <span class="k">for</span> <span class="nb">key</span>, <span class="n">locs</span> <span class="nb">in</span> <span class="n">iteritems</span>(<span class="n">tally</span>):
+            for key, locs in iteritems(tally):
 
-                <span class="k">if</span> <span class="n">len</span>(<span class="n">locs</span>) &gt; <span class="mi">1</span>:
+                if len(locs) &gt; 1:
 
-                    <span class="nb">yield</span> <span class="nb">key</span>, <span class="n">locs</span>
+                    yield key, locs
 
-        <span class="n">dstRoots</span> = [<span class="n">_</span>.<span class="n">dstRoot</span> <span class="k">for</span> <span class="n">_</span> <span class="nb">in</span> <span class="nb">self</span>.<span class="n">acquisitions</span>]
+        dstRoots = [_.dstRoot for _ in self.acquisitions]
 
-        <span class="k">for</span> <span class="n">dstRoot</span>, <span class="n">dup</span> <span class="nb">in</span> <span class="n">duplicates</span>(<span class="n">dstRoots</span>):
+        for dstRoot, dup in duplicates(dstRoots):
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;%s has %s runs&quot;</span>, <span class="n">dstRoot</span>, <span class="n">len</span>(<span class="n">dup</span>))
+            self.logger.info(&quot;%s has %s runs&quot;, dstRoot, len(dup))
 
-            <span class="nb">self</span>.<span class="n">logger</span>.<span class="n">info</span>(<span class="s">&quot;Adding &#39;run&#39; information to the acquisition&quot;</span>)
+            self.logger.info(&quot;Adding &#39;run&#39; information to the acquisition&quot;)
 
-            <span class="k">for</span> <span class="n">runNum</span>, <span class="n">acqInd</span> <span class="nb">in</span> <span class="n">enumerate</span>(<span class="n">dup</span>):
+            for runNum, acqInd in enumerate(dup):
 
-                <span class="n">runStr</span> = <span class="n">DEFAULT</span>.<span class="n">runTpl</span>.<span class="nb">format</span>(<span class="n">runNum</span> + <span class="mi">1</span>)
+                runStr = DEFAULT.runTpl.format(runNum + 1)
 
-                <span class="nb">self</span>.<span class="n">acquisitions</span>[<span class="n">acqInd</span>].<span class="n">customLabels</span> += <span class="n">runStr</span>
+                self.acquisitions[acqInd].customLabels += runStr
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h4 id="islink">isLink</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">isLink</span><span class="p">(</span>
+<h4 id="islink">isLink<a class="headerlink" href="#islink" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">isLink</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">data</span><span class="p">,</span>
     <span class="n">criteria</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1923,71 +2934,133 @@ the values are a list of possible descriptions</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">isLink</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="n">criteria</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def isLink(self, data, criteria):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        Args:</span>
+        Args:
 
-<span class="ss">            data (dict): Dictionnary data of a sidecar</span>
+            data (dict): Dictionnary data of a sidecar
 
-<span class="ss">            criteria (dict): Dictionnary criteria</span>
+            criteria (dict): Dictionnary criteria
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            boolean</span>
+            boolean
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">compare</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        def compare(name, pattern):
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">searchMethod</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;re&quot;</span><span class="err">:</span><span class="w"></span>
+            if self.searchMethod == &quot;re&quot;:
 
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">bool</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="k">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">))</span><span class="w"></span>
+                return bool(re.search(pattern, name))
 
-<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+            else:
 
-<span class="w">                </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+                name = str(name)
 
-<span class="w">                </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="w"></span>
+                pattern = str(pattern)
 
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">caseSensitive</span><span class="p">:</span><span class="w"></span>
+                if not self.caseSensitive:
 
-<span class="w">                    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span><span class="w"></span>
+                    name = name.lower()
 
-<span class="w">                    </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pattern</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span><span class="w"></span>
+                    pattern = pattern.lower()
 
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">fnmatch</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="p">)</span><span class="w"></span>
+                return fnmatch(name, pattern)
 
-<span class="w">        </span><span class="k">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+        result = []
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">iteritems</span><span class="p">(</span><span class="n">criteria</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        for tag, pattern in iteritems(criteria):
 
-<span class="w">            </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">data</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="err">#</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"></span>
+            name = data.get(tag, &#39;&#39;)# or &#39;&#39;
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+            if isinstance(name, list):
 
-<span class="w">                </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+                try:
 
-<span class="w">                    </span><span class="n">subResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">len(name) == len(pattern), isinstance(pattern, list)</span><span class="o">]</span><span class="w"></span>
+                    subResult = [len(name) == len(pattern), isinstance(pattern, list)]
 
-<span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="n">subName</span><span class="p">,</span><span class="w"> </span><span class="n">subPattern</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">zip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+                    for subName, subPattern in zip(name, pattern):
 
-<span class="w">                        </span><span class="n">subResult</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">subName</span><span class="p">,</span><span class="w"> </span><span class="n">subPattern</span><span class="p">))</span><span class="w"></span>
+                        subResult.append(compare(subName, subPattern))
 
-<span class="w">                </span><span class="ow">except</span><span class="err">:</span><span class="w"></span>
+                except:
 
-<span class="w">                    </span><span class="n">subResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">False</span><span class="o">]</span><span class="w"></span>
+                    subResult = [False]
 
-<span class="w">                </span><span class="k">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="ow">all</span><span class="p">(</span><span class="n">subResult</span><span class="p">))</span><span class="w"></span>
+                result.append(all(subResult))
 
-<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+            else:
 
-<span class="w">                </span><span class="k">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="p">))</span><span class="w"></span>
+                result.append(compare(name, pattern))
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">all</span><span class="p">(</span><span class="k">result</span><span class="p">)</span><span class="w"></span>
+        return all(result)
 </code></pre></div>
-
+</td></tr></table>
 </details>
                 
               
@@ -2051,6 +3124,22 @@ the values are a list of possible descriptions</p>
         your Python project well using automatic documentation.
       </div>
       
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/UNFmontreal/Dcm2Bids" target="_blank" rel="noopener" title="dcm2bids on GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://hub.docker.com/r/unfmontreal/dcm2bids" target="_blank" rel="noopener" title="dcm2bids on docker" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+  </div>
+
     </div>
   </div>
 </footer>

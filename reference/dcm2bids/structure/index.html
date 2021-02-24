@@ -16,7 +16,7 @@
     
     
       
-        <title>Structure - dcm2bids</title>
+        <title>Structure - Dcm2Bids</title>
       
     
     
@@ -24,10 +24,6 @@
       
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ff0a5ce4.min.css">
       
-      
-        
-        
-        <meta name="theme-color" content="#ff6e42">
       
     
     
@@ -40,6 +36,8 @@
     
     
     
+      <link rel="stylesheet" href="../../../docs/stylesheets/extra.css">
+    
     
       
     
@@ -50,8 +48,10 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
   
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -70,7 +70,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="../../.." title="dcm2bids" class="md-header-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-header-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -83,7 +83,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            dcm2bids
+            Dcm2Bids
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -130,10 +130,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
       </div>
@@ -157,13 +157,13 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="dcm2bids" class="md-nav__button md-logo" aria-label="dcm2bids">
+    <a href="../../.." title="Dcm2Bids" class="md-nav__button md-logo" aria-label="Dcm2Bids">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    dcm2bids
+    Dcm2Bids
   </label>
   
     <div class="md-nav__source">
@@ -171,10 +171,10 @@
 <a href="https://github.com/UNFmontreal/Dcm2Bids/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    Dcm2Bids
+    UNFmontreal/dcm2bids
   </div>
 </a>
     </div>
@@ -737,7 +737,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/edit/master/reference/dcm2bids/structure.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/structure.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -745,452 +745,898 @@
                   
                 
                 
-                <h1 id="module-dcm2bidsstructure">Module dcm2bids.structure</h1>
+                <h1 id="module-dcm2bidsstructure">Module dcm2bids.structure<a class="headerlink" href="#module-dcm2bidsstructure" title="Permanent link">⚓︎</a></h1>
 <p>k</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;k&quot;&quot;&quot;
+
+from os.path import join as opj
+
+from future.utils import iteritems
+
+from .utils import DEFAULT
+
+from .version import __version__
+
+class Participant(object):
+
+    &quot;&quot;&quot; Class representing a participant
+
+    Args:
+
+        name (str): Label of your participant
+
+        session (str): Optional label of a session
+
+    &quot;&quot;&quot;
+
+    def __init__(self, name, session=DEFAULT.session):
+
+        self._name = &quot;&quot;
+
+        self._session = &quot;&quot;
+
+        self.name = name
+
+        self.session = session
+
+    @property
+
+    def name(self):
+
+        &quot;&quot;&quot;
+
+        Returns:
+
+            A string &#39;sub-&lt;subject_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        return self._name
+
+    @name.setter
+
+    def name(self, name):
+
+        &quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;
+
+        if name.startswith(&quot;sub-&quot;):
+
+            self._name = name
+
+        else:
+
+            self._name = &quot;sub-&quot; + name
+
+    @property
+
+    def session(self):
+
+        &quot;&quot;&quot;
+
+        Returns:
+
+            A string &#39;ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        return self._session
+
+    @session.setter
+
+    def session(self, session):
+
+        &quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;
+
+        if session.strip() == &quot;&quot;:
+
+            self._session = &quot;&quot;
+
+        elif session.startswith(&quot;ses-&quot;):
+
+            self._session = session
+
+        else:
+
+            self._session = &quot;ses-&quot; + session
+
+    @property
+
+    def directory(self):
+
+        &quot;&quot;&quot; The directory of the participant
+
+        Returns:
+
+            A path &#39;sub-&lt;subject_label&gt;&#39; or
+
+            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        if self.hasSession():
+
+            return opj(self.name, self.session)
+
+        else:
+
+            return self.name
+
+    @property
+
+    def prefix(self):
+
+        &quot;&quot;&quot; The prefix to build filenames
+
+        Returns:
+
+            A string &#39;sub-&lt;subject_label&gt;&#39; or
+
+            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        if self.hasSession():
+
+            return self.name + &quot;_&quot; + self.session
+
+        else:
+
+            return self.name
+
+    def hasSession(self):
+
+        &quot;&quot;&quot; Check if a session is set
+
+        Returns:
+
+            Boolean
+
+        &quot;&quot;&quot;
+
+        return self.session.strip() != DEFAULT.session
+
+class Acquisition(object):
+
+    &quot;&quot;&quot; Class representing an acquisition
+
+    Args:
+
+        participant (Participant): A participant object
+
+        dataType (str): A functional group of MRI data (ex: func, anat ...)
+
+        modalityLabel (str): The modality of the acquisition
+
+                (ex: T1w, T2w, bold ...)
+
+        customLabels (str): Optional labels (ex: task-rest)
+
+        srcSidecar (Sidecar): Optional sidecar object
+
+    &quot;&quot;&quot;
+
+    def __init__(
+
+        self,
+
+        participant,
+
+        dataType,
+
+        modalityLabel,
+
+        customLabels=&quot;&quot;,
+
+        srcSidecar=None,
+
+        sidecarChanges=None,
+
+        intendedFor=None,
+
+        IntendedFor=None,
+
+        **kwargs
+
+    ):
+
+        self._modalityLabel = &quot;&quot;
+
+        self._customLabels = &quot;&quot;
+
+        self._intendedFor = None
+
+        self.participant = participant
+
+        self.dataType = dataType
+
+        self.modalityLabel = modalityLabel
+
+        self.customLabels = customLabels
+
+        self.srcSidecar = srcSidecar
+
+        if sidecarChanges is None:
+
+            self.sidecarChanges = {}
+
+        else:
+
+            self.sidecarChanges = sidecarChanges
+
+        if intendedFor is None:
+
+            self.intendedFor = IntendedFor
+
+        else:
+
+            self.intendedFor = intendedFor
+
+    def __eq__(self, other):
+
+        return (
+
+            self.dataType == other.dataType
+
+            and self.participant.prefix == other.participant.prefix
+
+            and self.suffix == other.suffix
+
+        )
+
+    @property
 
-<span class="sd">&quot;&quot;&quot;k&quot;&quot;&quot;</span>
+    def modalityLabel(self):
 
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span> <span class="k">as</span> <span class="n">opj</span>
+        &quot;&quot;&quot;
 
-<span class="kn">from</span> <span class="nn">future.utils</span> <span class="kn">import</span> <span class="n">iteritems</span>
+        Returns:
 
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">DEFAULT</span>
+            A string &#39;_&lt;modalityLabel&gt;&#39;
 
-<span class="kn">from</span> <span class="nn">.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+        &quot;&quot;&quot;
 
-<span class="k">class</span> <span class="nc">Participant</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        return self._modalityLabel
 
-    <span class="sd">&quot;&quot;&quot; Class representing a participant</span>
+    @modalityLabel.setter
 
-<span class="sd">    Args:</span>
+    def modalityLabel(self, modalityLabel):
 
-<span class="sd">        name (str): Label of your participant</span>
+        &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-<span class="sd">        session (str): Optional label of a session</span>
+        self._modalityLabel = self.prepend(modalityLabel)
 
-<span class="sd">    &quot;&quot;&quot;</span>
+    @property
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">DEFAULT</span><span class="o">.</span><span class="n">session</span><span class="p">):</span>
+    def customLabels(self):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        Returns:
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+            A string &#39;_&lt;customLabels&gt;&#39;
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+        &quot;&quot;&quot;
 
-    <span class="nd">@property</span>
+        return self._customLabels
 
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    @customLabels.setter
 
-        <span class="sd">&quot;&quot;&quot;</span>
+    def customLabels(self, customLabels):
 
-<span class="sd">        Returns:</span>
+        &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-<span class="sd">            A string &#39;sub-&lt;subject_label&gt;&#39;</span>
+        self._customLabels = self.prepend(customLabels)
 
-<span class="sd">        &quot;&quot;&quot;</span>
+    @property
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+    def suffix(self):
 
-    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+        &quot;&quot;&quot; The suffix to build filenames
 
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        Returns:
 
-        <span class="sd">&quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;</span>
+            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;
 
-        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;sub-&quot;</span><span class="p">):</span>
+        &quot;&quot;&quot;
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        if self.customLabels.strip() == &quot;&quot;:
 
-        <span class="k">else</span><span class="p">:</span>
+            return self.modalityLabel
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;sub-&quot;</span> <span class="o">+</span> <span class="n">name</span>
+        else:
 
-    <span class="nd">@property</span>
+            return self.customLabels + self.modalityLabel
 
-    <span class="k">def</span> <span class="nf">session</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    @property
 
-        <span class="sd">&quot;&quot;&quot;</span>
+    def srcRoot(self):
 
-<span class="sd">        Returns:</span>
+        &quot;&quot;&quot;
 
-<span class="sd">            A string &#39;ses-&lt;session_label&gt;&#39;</span>
+        Return:
 
-<span class="sd">        &quot;&quot;&quot;</span>
+            The sidecar source root to move
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span>
+        &quot;&quot;&quot;
 
-    <span class="nd">@session</span><span class="o">.</span><span class="n">setter</span>
+        if self.srcSidecar:
 
-    <span class="k">def</span> <span class="nf">session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+            return self.srcSidecar.root
 
-        <span class="sd">&quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;</span>
+        else:
 
-        <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            return None
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    @property
 
-        <span class="k">elif</span> <span class="n">session</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ses-&quot;</span><span class="p">):</span>
+    def dstRoot(self):
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">session</span>
+        &quot;&quot;&quot;
 
-        <span class="k">else</span><span class="p">:</span>
+        Return:
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="s2">&quot;ses-&quot;</span> <span class="o">+</span> <span class="n">session</span>
+            The destination root inside the BIDS structure
 
-    <span class="nd">@property</span>
+        &quot;&quot;&quot;
 
-    <span class="k">def</span> <span class="nf">directory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        return opj(
 
-        <span class="sd">&quot;&quot;&quot; The directory of the participant</span>
+            self.participant.directory,
 
-<span class="sd">        Returns:</span>
+            self.dataType,
 
-<span class="sd">            A path &#39;sub-&lt;subject_label&gt;&#39; or</span>
+            self.participant.prefix + self.suffix,
 
-<span class="sd">            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;</span>
+        )
 
-<span class="sd">        &quot;&quot;&quot;</span>
+    @property
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasSession</span><span class="p">():</span>
+    def intendedFor(self):
 
-            <span class="k">return</span> <span class="n">opj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
+        return self._intendedFor
 
-        <span class="k">else</span><span class="p">:</span>
+    @intendedFor.setter
 
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+    def intendedFor(self, value):
 
-    <span class="nd">@property</span>
+        if isinstance(value, list):
 
-    <span class="k">def</span> <span class="nf">prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            self._intendedFor = value
 
-        <span class="sd">&quot;&quot;&quot; The prefix to build filenames</span>
+        else:
 
-<span class="sd">        Returns:</span>
+            self._intendedFor = [value]
 
-<span class="sd">            A string &#39;sub-&lt;subject_label&gt;&#39; or</span>
+    def dstSidecarData(self, descriptions):
 
-<span class="sd">            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;</span>
+        &quot;&quot;&quot;
 
-<span class="sd">        &quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasSession</span><span class="p">():</span>
+        data = self.srcSidecar.origData
 
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span>
+        data[&quot;Dcm2bidsVersion&quot;] = __version__
 
-        <span class="k">else</span><span class="p">:</span>
+        # intendedFor key
 
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        if self.intendedFor != [None]:
 
-    <span class="k">def</span> <span class="nf">hasSession</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            intendedValue = []
 
-        <span class="sd">&quot;&quot;&quot; Check if a session is set</span>
+            for index in self.intendedFor:
 
-<span class="sd">        Returns:</span>
+                intendedDesc = descriptions[index]
 
-<span class="sd">            Boolean</span>
+                session = self.participant.session
 
-<span class="sd">        &quot;&quot;&quot;</span>
+                dataType = intendedDesc[&quot;dataType&quot;]
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="n">DEFAULT</span><span class="o">.</span><span class="n">session</span>
+                niiFile = self.participant.prefix
 
-<span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+                niiFile += self.prepend(intendedDesc.get(&quot;customLabels&quot;, &quot;&quot;))
 
-    <span class="sd">&quot;&quot;&quot; Class representing an acquisition</span>
+                niiFile += self.prepend(intendedDesc[&quot;modalityLabel&quot;])
 
-<span class="sd">    Args:</span>
+                niiFile += &quot;.nii.gz&quot;
 
-<span class="sd">        participant (Participant): A participant object</span>
+                intendedValue.append(opj(session, dataType, niiFile).replace(&quot;\\&quot;, &quot;/&quot;))
 
-<span class="sd">        dataType (str): A functional group of MRI data (ex: func, anat ...)</span>
+            if len(intendedValue) == 1:
 
-<span class="sd">        modalityLabel (str): The modality of the acquisition</span>
+                data[&quot;IntendedFor&quot;] = intendedValue[0]
 
-<span class="sd">                (ex: T1w, T2w, bold ...)</span>
+            else:
 
-<span class="sd">        customLabels (str): Optional labels (ex: task-rest)</span>
+                data[&quot;IntendedFor&quot;] = intendedValue
 
-<span class="sd">        srcSidecar (Sidecar): Optional sidecar object</span>
+        # sidecarChanges
 
-<span class="sd">    &quot;&quot;&quot;</span>
+        for key, value in iteritems(self.sidecarChanges):
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            data[key] = value
 
-        <span class="bp">self</span><span class="p">,</span>
+        return data
 
-        <span class="n">participant</span><span class="p">,</span>
+    @staticmethod
 
-        <span class="n">dataType</span><span class="p">,</span>
+    def prepend(value, char=&quot;_&quot;):
 
-        <span class="n">modalityLabel</span><span class="p">,</span>
+        &quot;&quot;&quot; Prepend `char` to `value` if necessary
 
-        <span class="n">customLabels</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        Args:
 
-        <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            value (str)
 
-        <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            char (str)
 
-        <span class="n">intendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        &quot;&quot;&quot;
 
-        <span class="n">IntendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        if value.strip() == &quot;&quot;:
 
-        <span class="o">**</span><span class="n">kwargs</span>
+            return &quot;&quot;
 
-    <span class="p">):</span>
+        elif value.startswith(char):
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_modalityLabel</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            return value
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_customLabels</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        else:
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">participant</span> <span class="o">=</span> <span class="n">participant</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">=</span> <span class="n">dataType</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">modalityLabel</span> <span class="o">=</span> <span class="n">modalityLabel</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">customLabels</span> <span class="o">=</span> <span class="n">customLabels</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span> <span class="o">=</span> <span class="n">srcSidecar</span>
-
-        <span class="k">if</span> <span class="n">sidecarChanges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">sidecarChanges</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">sidecarChanges</span> <span class="o">=</span> <span class="n">sidecarChanges</span>
-
-        <span class="k">if</span> <span class="n">intendedFor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span> <span class="o">=</span> <span class="n">IntendedFor</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span> <span class="o">=</span> <span class="n">intendedFor</span>
-
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-
-        <span class="k">return</span> <span class="p">(</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">dataType</span>
-
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span>
-
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">suffix</span>
-
-        <span class="p">)</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">modalityLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Returns:</span>
-
-<span class="sd">            A string &#39;_&lt;modalityLabel&gt;&#39;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modalityLabel</span>
-
-    <span class="nd">@modalityLabel</span><span class="o">.</span><span class="n">setter</span>
-
-    <span class="k">def</span> <span class="nf">modalityLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modalityLabel</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_modalityLabel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">modalityLabel</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">customLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Returns:</span>
-
-<span class="sd">            A string &#39;_&lt;customLabels&gt;&#39;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_customLabels</span>
-
-    <span class="nd">@customLabels</span><span class="o">.</span><span class="n">setter</span>
-
-    <span class="k">def</span> <span class="nf">customLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customLabels</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_customLabels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">customLabels</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot; The suffix to build filenames</span>
-
-<span class="sd">        Returns:</span>
-
-<span class="sd">            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">customLabels</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modalityLabel</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">customLabels</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">modalityLabel</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">srcRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Return:</span>
-
-<span class="sd">            The sidecar source root to move</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span><span class="o">.</span><span class="n">root</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="kc">None</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">dstRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Return:</span>
-
-<span class="sd">            The destination root inside the BIDS structure</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">return</span> <span class="n">opj</span><span class="p">(</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">dataType</span><span class="p">,</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">suffix</span><span class="p">,</span>
-
-        <span class="p">)</span>
-
-    <span class="nd">@property</span>
-
-    <span class="k">def</span> <span class="nf">intendedFor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span>
-
-    <span class="nd">@intendedFor</span><span class="o">.</span><span class="n">setter</span>
-
-    <span class="k">def</span> <span class="nf">intendedFor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span> <span class="o">=</span> <span class="n">value</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">_intendedFor</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">descriptions</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">srcSidecar</span><span class="o">.</span><span class="n">origData</span>
-
-        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Dcm2bidsVersion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__version__</span>
-
-        <span class="c1"># intendedFor key</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span> <span class="o">!=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
-
-            <span class="n">intendedValue</span> <span class="o">=</span> <span class="p">[]</span>
-
-            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">intendedFor</span><span class="p">:</span>
-
-                <span class="n">intendedDesc</span> <span class="o">=</span> <span class="n">descriptions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-
-                <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">session</span>
-
-                <span class="n">dataType</span> <span class="o">=</span> <span class="n">intendedDesc</span><span class="p">[</span><span class="s2">&quot;dataType&quot;</span><span class="p">]</span>
-
-                <span class="n">niiFile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">prefix</span>
-
-                <span class="n">niiFile</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;customLabels&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
-
-                <span class="n">niiFile</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="p">[</span><span class="s2">&quot;modalityLabel&quot;</span><span class="p">])</span>
-
-                <span class="n">niiFile</span> <span class="o">+=</span> <span class="s2">&quot;.nii.gz&quot;</span>
-
-                <span class="n">intendedValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">dataType</span><span class="p">,</span> <span class="n">niiFile</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">))</span>
-
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intendedValue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-
-                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;IntendedFor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">intendedValue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-            <span class="k">else</span><span class="p">:</span>
-
-                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;IntendedFor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">intendedValue</span>
-
-        <span class="c1"># sidecarChanges</span>
-
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidecarChanges</span><span class="p">):</span>
-
-            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-        <span class="k">return</span> <span class="n">data</span>
-
-    <span class="nd">@staticmethod</span>
-
-    <span class="k">def</span> <span class="nf">prepend</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">char</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot; Prepend `char` to `value` if necessary</span>
-
-<span class="sd">        Args:</span>
-
-<span class="sd">            value (str)</span>
-
-<span class="sd">            char (str)</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
-
-        <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">char</span><span class="p">):</span>
-
-            <span class="k">return</span> <span class="n">value</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="n">char</span> <span class="o">+</span> <span class="n">value</span>
+            return char + value
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h2 id="classes">Classes</h2>
-<h3 id="acquisition">Acquisition</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="acquisition">Acquisition<a class="headerlink" href="#acquisition" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span>
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">dataType</span><span class="p">,</span>
     <span class="n">modalityLabel</span><span class="p">,</span>
@@ -1202,8 +1648,8 @@
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
-
-<h4 id="attributes">Attributes</h4>
+</td></tr></table>
+<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
 <table>
 <thead>
 <tr>
@@ -1252,433 +1698,800 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Acquisition</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Acquisition(object):
+
+    &quot;&quot;&quot; Class representing an acquisition
+
+    Args:
+
+        participant (Participant): A participant object
+
+        dataType (str): A functional group of MRI data (ex: func, anat ...)
+
+        modalityLabel (str): The modality of the acquisition
+
+                (ex: T1w, T2w, bold ...)
+
+        customLabels (str): Optional labels (ex: task-rest)
+
+        srcSidecar (Sidecar): Optional sidecar object
+
+    &quot;&quot;&quot;
+
+    def __init__(
+
+        self,
+
+        participant,
+
+        dataType,
+
+        modalityLabel,
+
+        customLabels=&quot;&quot;,
+
+        srcSidecar=None,
+
+        sidecarChanges=None,
+
+        intendedFor=None,
+
+        IntendedFor=None,
+
+        **kwargs
+
+    ):
+
+        self._modalityLabel = &quot;&quot;
+
+        self._customLabels = &quot;&quot;
+
+        self._intendedFor = None
+
+        self.participant = participant
+
+        self.dataType = dataType
+
+        self.modalityLabel = modalityLabel
+
+        self.customLabels = customLabels
+
+        self.srcSidecar = srcSidecar
+
+        if sidecarChanges is None:
+
+            self.sidecarChanges = {}
+
+        else:
+
+            self.sidecarChanges = sidecarChanges
+
+        if intendedFor is None:
+
+            self.intendedFor = IntendedFor
+
+        else:
+
+            self.intendedFor = intendedFor
+
+    def __eq__(self, other):
+
+        return (
+
+            self.dataType == other.dataType
+
+            and self.participant.prefix == other.participant.prefix
+
+            and self.suffix == other.suffix
+
+        )
+
+    @property
 
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; Class representing an acquisition</span>
+    def modalityLabel(self):
 
-<span class="ss">    Args:</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        participant (Participant): A participant object</span>
+        Returns:
 
-<span class="ss">        dataType (str): A functional group of MRI data (ex: func, anat ...)</span>
+            A string &#39;_&lt;modalityLabel&gt;&#39;
 
-<span class="ss">        modalityLabel (str): The modality of the acquisition</span>
+        &quot;&quot;&quot;
 
-<span class="ss">                (ex: T1w, T2w, bold ...)</span>
+        return self._modalityLabel
 
-<span class="ss">        customLabels (str): Optional labels (ex: task-rest)</span>
+    @modalityLabel.setter
 
-<span class="ss">        srcSidecar (Sidecar): Optional sidecar object</span>
+    def modalityLabel(self, modalityLabel):
 
-<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="w"></span>
+        self._modalityLabel = self.prepend(modalityLabel)
 
-<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
+    @property
 
-<span class="w">        </span><span class="n">participant</span><span class="p">,</span><span class="w"></span>
+    def customLabels(self):
 
-<span class="w">        </span><span class="n">dataType</span><span class="p">,</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="n">modalityLabel</span><span class="p">,</span><span class="w"></span>
+        Returns:
 
-<span class="w">        </span><span class="n">customLabels</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+            A string &#39;_&lt;customLabels&gt;&#39;
 
-<span class="w">        </span><span class="n">srcSidecar</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="n">sidecarChanges</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+        return self._customLabels
 
-<span class="w">        </span><span class="n">intendedFor</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+    @customLabels.setter
 
-<span class="w">        </span><span class="n">IntendedFor</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+    def customLabels(self, customLabels):
 
-<span class="w">        </span><span class="o">**</span><span class="n">kwargs</span><span class="w"></span>
+        &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-<span class="w">    </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        self._customLabels = self.prepend(customLabels)
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_modalityLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+    @property
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_customLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+    def suffix(self):
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
+        &quot;&quot;&quot; The suffix to build filenames
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">participant</span><span class="w"></span>
+        Returns:
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataType</span><span class="w"></span>
+            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">modalityLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modalityLabel</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">customLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customLabels</span><span class="w"></span>
+        if self.customLabels.strip() == &quot;&quot;:
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcSidecar</span><span class="w"></span>
+            return self.modalityLabel
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
+            return self.customLabels + self.modalityLabel
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+    @property
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"></span>
+    def srcRoot(self):
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntendedFor</span><span class="w"></span>
+        Return:
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+            The sidecar source root to move
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__eq__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        if self.srcSidecar:
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+            return self.srcSidecar.root
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">dataType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">dataType</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="ow">and</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
+            return None
 
-<span class="w">            </span><span class="ow">and</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">suffix</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">suffix</span><span class="w"></span>
+    @property
 
-<span class="w">        </span><span class="p">)</span><span class="w"></span>
+    def dstRoot(self):
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modalityLabel</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        Return:
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+            The destination root inside the BIDS structure
 
-<span class="ss">        Returns:</span>
+        &quot;&quot;&quot;
 
-<span class="ss">            A string &#39;_&lt;modalityLabel&gt;&#39;</span>
+        return opj(
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+            self.participant.directory,
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_modalityLabel</span><span class="w"></span>
+            self.dataType,
 
-<span class="w">    </span><span class="nv">@modalityLabel</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+            self.participant.prefix + self.suffix,
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modalityLabel</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">modalityLabel</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        )
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+    @property
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_modalityLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">modalityLabel</span><span class="p">)</span><span class="w"></span>
+    def intendedFor(self):
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+        return self._intendedFor
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">customLabels</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    @intendedFor.setter
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+    def intendedFor(self, value):
 
-<span class="ss">        Returns:</span>
+        if isinstance(value, list):
 
-<span class="ss">            A string &#39;_&lt;customLabels&gt;&#39;</span>
+            self._intendedFor = value
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        else:
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_customLabels</span><span class="w"></span>
+            self._intendedFor = [value]
 
-<span class="w">    </span><span class="nv">@customLabels</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+    def dstSidecarData(self, descriptions):
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">customLabels</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">customLabels</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_customLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">customLabels</span><span class="p">)</span><span class="w"></span>
+        data = self.srcSidecar.origData
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+        data[&quot;Dcm2bidsVersion&quot;] = __version__
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">suffix</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        # intendedFor key
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; The suffix to build filenames</span>
+        if self.intendedFor != [None]:
 
-<span class="ss">        Returns:</span>
+            intendedValue = []
 
-<span class="ss">            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;</span>
+            for index in self.intendedFor:
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+                intendedDesc = descriptions[index]
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">customLabels</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="err">:</span><span class="w"></span>
+                session = self.participant.session
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">modalityLabel</span><span class="w"></span>
+                dataType = intendedDesc[&quot;dataType&quot;]
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+                niiFile = self.participant.prefix
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">customLabels</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">modalityLabel</span><span class="w"></span>
+                niiFile += self.prepend(intendedDesc.get(&quot;customLabels&quot;, &quot;&quot;))
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+                niiFile += self.prepend(intendedDesc[&quot;modalityLabel&quot;])
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">srcRoot</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+                niiFile += &quot;.nii.gz&quot;
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+                intendedValue.append(opj(session, dataType, niiFile).replace(&quot;\\&quot;, &quot;/&quot;))
 
-<span class="ss">        Return:</span>
+            if len(intendedValue) == 1:
 
-<span class="ss">            The sidecar source root to move</span>
+                data[&quot;IntendedFor&quot;] = intendedValue[0]
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+            else:
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">srcSidecar</span><span class="p">:</span><span class="w"></span>
+                data[&quot;IntendedFor&quot;] = intendedValue
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="p">.</span><span class="n">root</span><span class="w"></span>
+        # sidecarChanges
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        for key, value in iteritems(self.sidecarChanges):
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
+            data[key] = value
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+        return data
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dstRoot</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    @staticmethod
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+    def prepend(value, char=&quot;_&quot;):
 
-<span class="ss">        Return:</span>
+        &quot;&quot;&quot; Prepend `char` to `value` if necessary
 
-<span class="ss">            The destination root inside the BIDS structure</span>
+        Args:
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+            value (str)
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">opj</span><span class="p">(</span><span class="w"></span>
+            char (str)
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="n">directory</span><span class="p">,</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">dataType</span><span class="p">,</span><span class="w"></span>
+        if value.strip() == &quot;&quot;:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">suffix</span><span class="p">,</span><span class="w"></span>
+            return &quot;&quot;
 
-<span class="w">        </span><span class="p">)</span><span class="w"></span>
+        elif value.startswith(char):
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+            return value
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">intendedFor</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"></span>
-
-<span class="w">    </span><span class="nv">@intendedFor</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">intendedFor</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_intendedFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dstSidecarData</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">descriptions</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="p">.</span><span class="n">origData</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;Dcm2bidsVersion&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__version__</span><span class="w"></span>
-
-<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"> </span><span class="k">key</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">intendedValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">intendedFor</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">intendedDesc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descriptions</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">                </span><span class="k">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;dataType&quot;</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;customLabels&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">))</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;modalityLabel&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="ss">&quot;.nii.gz&quot;</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">intendedValue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="k">session</span><span class="p">,</span><span class="w"> </span><span class="n">dataType</span><span class="p">,</span><span class="w"> </span><span class="n">niiFile</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;\\&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;/&quot;</span><span class="p">))</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">intendedValue</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="w"></span>
-
-<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">iteritems</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">data</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
-
-<span class="w">    </span><span class="nv">@staticmethod</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">prepend</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="nc">char</span><span class="o">=</span><span class="ss">&quot;_&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend `char` to `value` if necessary</span>
-
-<span class="ss">        Args:</span>
-
-<span class="ss">            value (str)</span>
-
-<span class="ss">            char (str)</span>
-
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="nc">char</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nc">char</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
+            return char + value
 </code></pre></div>
-
+</td></tr></table>
 </details>
 <hr />
-<h4 id="static-methods">Static methods</h4>
-<h4 id="prepend">prepend</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">prepend</span><span class="p">(</span>
+<h4 id="static-methods">Static methods<a class="headerlink" href="#static-methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="prepend">prepend<a class="headerlink" href="#prepend" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">prepend</span><span class="p">(</span>
     <span class="n">value</span><span class="p">,</span>
     <span class="n">char</span><span class="o">=</span><span class="s1">&#39;_&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Prepend <code>char</code> to <code>value</code> if necessary</p>
 <p>Args:
     value (str)
     char (str)</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">@staticmethod</span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    @staticmethod
 
-    <span class="n">def</span> <span class="n">prepend</span><span class="p">(</span><span class="k">value</span><span class="p">,</span> <span class="kt">char</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">:</span>
+    def prepend(value, char=&quot;_&quot;):
 
-        <span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2"> Prepend `char` to `value` if necessary</span>
+        &quot;&quot;&quot; Prepend `char` to `value` if necessary
 
-<span class="s2">        Args:</span>
+        Args:
 
-<span class="s2">            value (str)</span>
+            value (str)
 
-<span class="s2">            char (str)</span>
+            char (str)
 
-<span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">if</span> <span class="k">value</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="o">:</span>
+        if value.strip() == &quot;&quot;:
 
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+            return &quot;&quot;
 
-        <span class="n">elif</span> <span class="k">value</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="o">:</span>
+        elif value.startswith(char):
 
-            <span class="k">return</span> <span class="k">value</span>
+            return value
 
-        <span class="k">else</span><span class="o">:</span>
+        else:
 
-            <span class="k">return</span> <span class="kt">char</span> <span class="o">+</span> <span class="k">value</span>
+            return char + value
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h4 id="instance-variables">Instance variables</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">customLabels</span>
+<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">customLabels</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Returns:</p>
 <p>A string '_<customLabels>'</p>
-<div class="codehilite"><pre><span></span><code><span class="n">dstRoot</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dstRoot</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Return:</p>
 <p>The destination root inside the BIDS structure</p>
-<div class="codehilite"><pre><span></span><code><span class="n">intendedFor</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">intendedFor</span>
 </code></pre></div>
-
-<div class="codehilite"><pre><span></span><code><span class="n">modalityLabel</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">modalityLabel</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Returns:</p>
 <p>A string '_<modalityLabel>'</p>
-<div class="codehilite"><pre><span></span><code><span class="n">srcRoot</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">srcRoot</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Return:</p>
 <p>The sidecar source root to move</p>
-<div class="codehilite"><pre><span></span><code><span class="n">suffix</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">suffix</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>The suffix to build filenames</p>
-<h4 id="methods">Methods</h4>
-<h4 id="dstsidecardata">dstSidecarData</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="dstsidecardata">dstSidecarData<a class="headerlink" href="#dstsidecardata" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">descriptions</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def dstSidecarData(self, descriptions):
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dstSidecarData</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">descriptions</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        data = self.srcSidecar.origData
 
-<span class="w">        </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">srcSidecar</span><span class="p">.</span><span class="n">origData</span><span class="w"></span>
+        data[&quot;Dcm2bidsVersion&quot;] = __version__
 
-<span class="w">        </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;Dcm2bidsVersion&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">__version__</span><span class="w"></span>
+        # intendedFor key
 
-<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">intendedFor</span><span class="w"> </span><span class="k">key</span><span class="w"></span>
+        if self.intendedFor != [None]:
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">intendedFor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">[</span><span class="n">None</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+            intendedValue = []
 
-<span class="w">            </span><span class="n">intendedValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+            for index in self.intendedFor:
 
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">intendedFor</span><span class="p">:</span><span class="w"></span>
+                intendedDesc = descriptions[index]
 
-<span class="w">                </span><span class="n">intendedDesc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descriptions</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"></span>
+                session = self.participant.session
 
-<span class="w">                </span><span class="k">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+                dataType = intendedDesc[&quot;dataType&quot;]
 
-<span class="w">                </span><span class="n">dataType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;dataType&quot;</span><span class="o">]</span><span class="w"></span>
+                niiFile = self.participant.prefix
 
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">participant</span><span class="p">.</span><span class="k">prefix</span><span class="w"></span>
+                niiFile += self.prepend(intendedDesc.get(&quot;customLabels&quot;, &quot;&quot;))
 
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;customLabels&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">))</span><span class="w"></span>
+                niiFile += self.prepend(intendedDesc[&quot;modalityLabel&quot;])
 
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">prepend</span><span class="p">(</span><span class="n">intendedDesc</span><span class="o">[</span><span class="n">&quot;modalityLabel&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+                niiFile += &quot;.nii.gz&quot;
 
-<span class="w">                </span><span class="n">niiFile</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="ss">&quot;.nii.gz&quot;</span><span class="w"></span>
+                intendedValue.append(opj(session, dataType, niiFile).replace(&quot;\\&quot;, &quot;/&quot;))
 
-<span class="w">                </span><span class="n">intendedValue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">opj</span><span class="p">(</span><span class="k">session</span><span class="p">,</span><span class="w"> </span><span class="n">dataType</span><span class="p">,</span><span class="w"> </span><span class="n">niiFile</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;\\&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;/&quot;</span><span class="p">))</span><span class="w"></span>
+            if len(intendedValue) == 1:
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">intendedValue</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"></span>
+                data[&quot;IntendedFor&quot;] = intendedValue[0]
 
-<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+            else:
 
-<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+                data[&quot;IntendedFor&quot;] = intendedValue
 
-<span class="w">                </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;IntendedFor&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intendedValue</span><span class="w"></span>
+        # sidecarChanges
 
-<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">sidecarChanges</span><span class="w"></span>
+        for key, value in iteritems(self.sidecarChanges):
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">iteritems</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">sidecarChanges</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+            data[key] = value
 
-<span class="w">            </span><span class="k">data</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
+        return data
 </code></pre></div>
-
+</td></tr></table>
 </details>
-<h3 id="participant">Participant</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Participant</span><span class="p">(</span>
+<h3 id="participant">Participant<a class="headerlink" href="#participant" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Participant</span><span class="p">(</span>
     <span class="n">name</span><span class="p">,</span>
     <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
-
-<h4 id="attributes_1">Attributes</h4>
+</td></tr></table>
+<h4 id="attributes_1">Attributes<a class="headerlink" href="#attributes_1" title="Permanent link">⚓︎</a></h4>
 <table>
 <thead>
 <tr>
@@ -1703,173 +2516,311 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Participant</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Participant(object):
 
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; Class representing a participant</span>
+    &quot;&quot;&quot; Class representing a participant
 
-<span class="ss">    Args:</span>
+    Args:
 
-<span class="ss">        name (str): Label of your participant</span>
+        name (str): Label of your participant
 
-<span class="ss">        session (str): Optional label of a session</span>
+        session (str): Optional label of a session
 
-<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+    &quot;&quot;&quot;
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">session</span><span class="o">=</span><span class="k">DEFAULT</span><span class="p">.</span><span class="k">session</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def __init__(self, name, session=DEFAULT.session):
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+        self._name = &quot;&quot;
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+        self._session = &quot;&quot;
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+        self.name = name
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">session</span><span class="w"></span>
+        self.session = session
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+    @property
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">name</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def name(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            A string &#39;sub-&lt;subject_label&gt;&#39;</span>
+            A string &#39;sub-&lt;subject_label&gt;&#39;
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"></span>
+        return self._name
 
-<span class="w">    </span><span class="nv">@name</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+    @name.setter
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">name</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def name(self, name):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="ss">&quot;sub-&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        if name.startswith(&quot;sub-&quot;):
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+            self._name = name
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;sub-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+            self._name = &quot;sub-&quot; + name
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+    @property
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">session</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def session(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            A string &#39;ses-&lt;session_label&gt;&#39;</span>
+            A string &#39;ses-&lt;session_label&gt;&#39;
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"></span>
+        return self._session
 
-<span class="w">    </span><span class="nv">@session</span><span class="p">.</span><span class="n">setter</span><span class="w"></span>
+    @session.setter
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">session</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">session</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def session(self, session):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">session</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="err">:</span><span class="w"></span>
+        if session.strip() == &quot;&quot;:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+            self._session = &quot;&quot;
 
-<span class="w">        </span><span class="n">elif</span><span class="w"> </span><span class="k">session</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="ss">&quot;ses-&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+        elif session.startswith(&quot;ses-&quot;):
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">session</span><span class="w"></span>
+            self._session = session
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ses-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">session</span><span class="w"></span>
+            self._session = &quot;ses-&quot; + session
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+    @property
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">directory</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def directory(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; The directory of the participant</span>
+        &quot;&quot;&quot; The directory of the participant
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            A path &#39;sub-&lt;subject_label&gt;&#39; or</span>
+            A path &#39;sub-&lt;subject_label&gt;&#39; or
 
-<span class="ss">            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;</span>
+            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">hasSession</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+        if self.hasSession():
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">opj</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="p">)</span><span class="w"></span>
+            return opj(self.name, self.session)
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+            return self.name
 
-<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+    @property
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">prefix</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def prefix(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; The prefix to build filenames</span>
+        &quot;&quot;&quot; The prefix to build filenames
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            A string &#39;sub-&lt;subject_label&gt;&#39; or</span>
+            A string &#39;sub-&lt;subject_label&gt;&#39; or
 
-<span class="ss">            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;</span>
+            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">hasSession</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+        if self.hasSession():
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+            return self.name + &quot;_&quot; + self.session
 
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+        else:
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+            return self.name
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">hasSession</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+    def hasSession(self):
 
-<span class="w">        </span><span class="ss">&quot;&quot;&quot; Check if a session is set</span>
+        &quot;&quot;&quot; Check if a session is set
 
-<span class="ss">        Returns:</span>
+        Returns:
 
-<span class="ss">            Boolean</span>
+            Boolean
 
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+        &quot;&quot;&quot;
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">DEFAULT</span><span class="p">.</span><span class="k">session</span><span class="w"></span>
+        return self.session.strip() != DEFAULT.session
 </code></pre></div>
-
+</td></tr></table>
 </details>
 <hr />
-<h4 id="instance-variables_1">Instance variables</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">directory</span>
+<h4 id="instance-variables_1">Instance variables<a class="headerlink" href="#instance-variables_1" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">directory</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>The directory of the participant</p>
-<div class="codehilite"><pre><span></span><code><span class="n">name</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">name</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Returns:</p>
 <p>A string 'sub-<subject_label>'</p>
-<div class="codehilite"><pre><span></span><code><span class="n">prefix</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">prefix</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>The prefix to build filenames</p>
-<div class="codehilite"><pre><span></span><code><span class="n">session</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">session</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Returns:</p>
 <p>A string 'ses-<session_label>'</p>
-<h4 id="methods_1">Methods</h4>
-<h4 id="hassession">hasSession</h4>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hasSession</span><span class="p">(</span>
+<h4 id="methods_1">Methods<a class="headerlink" href="#methods_1" title="Permanent link">⚓︎</a></h4>
+<h4 id="hassession">hasSession<a class="headerlink" href="#hassession" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hasSession</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-
+</td></tr></table>
 <p>Check if a session is set</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1886,19 +2837,29 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nv">def</span> <span class="nv">hasSession</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+<details class="example"><summary>View Source</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def hasSession(self):
 
-        <span class="s2">&quot;&quot;&quot;</span><span class="s"> Check if a session is set</span>
+        &quot;&quot;&quot; Check if a session is set
 
-        <span class="nv">Returns</span>:
+        Returns:
 
-            <span class="nv">Boolean</span>
+            Boolean
 
-        <span class="s2">&quot;&quot;&quot;</span>
+        &quot;&quot;&quot;
 
-        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">session</span>.<span class="nv">strip</span><span class="ss">()</span> <span class="o">!=</span> <span class="nv">DEFAULT</span>.<span class="nv">session</span>
+        return self.session.strip() != DEFAULT.session
 </code></pre></div>
-
+</td></tr></table>
 </details>
                 
               
@@ -1962,6 +2923,22 @@
         your Python project well using automatic documentation.
       </div>
       
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/UNFmontreal/Dcm2Bids" target="_blank" rel="noopener" title="dcm2bids on GitHub" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://hub.docker.com/r/unfmontreal/dcm2bids" target="_blank" rel="noopener" title="dcm2bids on docker" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+  </div>
+
     </div>
   </div>
 </footer>
