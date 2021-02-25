@@ -239,7 +239,7 @@ class Acquisition(object):
 
                 intendedValue.append(opj(session, dataType, niiFile).replace("\\", "/"))
 
-            if len(intendedValue) == 1 or len(set(intendedValue)) == 1:
+            if len(intendedValue) == 1:
                 data["IntendedFor"] = intendedValue[0]
             else:
                 data["IntendedFor"] = intendedValue

@@ -3,8 +3,6 @@
     "searchMethod": "fnmatch",
     "descriptions": [
         {
-<<<<<<< HEAD
-=======
           "dataType": "localizer",
           "modalityLabel": "localizer",
           "criteria": {
@@ -12,14 +10,11 @@
           }
         },
         {
->>>>>>> eadd6fcd96ab8f8a5f85448a2c00e4a74be6c8b4
             "dataType": "anat",
             "modalityLabel": "T1w",
             "criteria": {
                 "SidecarFilename": "*mprage*"
             }
-<<<<<<< HEAD
-=======
         },
         {
             "dataType": "dwi",
@@ -27,7 +22,6 @@
             "criteria": {
                 "SeriesDescription": "DtI"
             }
->>>>>>> eadd6fcd96ab8f8a5f85448a2c00e4a74be6c8b4
         }
     ]
 }
