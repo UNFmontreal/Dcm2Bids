@@ -5,8 +5,7 @@ These optional configurations could be insert in the configuration file at the s
 ```
 {
     "searchMethod": "fnmatch",
-    "duplicateMethod": "run",
-    "caseSensitive": false,
+    "caseSensitive": true,
     "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "description": [
         ...
@@ -20,25 +19,19 @@ default: `"searchMethod": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this option is set incorrectly. `re` is the other choice if you want more flexibility to match criteria.
 
-## duplicateMethod
-
-default: `"duplicateMethod": "run"`
-
-When dcm2bids found duplicates, it will add `run` as a suffix by default.
-
-If `"duplicateMethod": "dup"`, dcm2bids will behave as heudiconv (See [documentation](https://heudiconv.readthedocs.io/en/latest/changes.html#id8))
-
 ## caseSensitive
 
 default: `"caseSensitive": "true"`
 
-If false, comparaisons between strings/list will __not__ be case sensitive. True is the default behavior.
+If false, comparisons between strings/lists will be not case sensitive.
+It's only disabled when used with `"searchMethod": "fnmatch"`.
 
 ## defaceTpl
 
 default: `"defaceTpl": None`
 
-The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
+!!! danger
+    The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
 
 For example, if you use the last version of pydeface, add:
 

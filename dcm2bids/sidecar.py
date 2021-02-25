@@ -35,17 +35,20 @@ class Sidecar(object):
         lts = []
         for key in self.compKeys:
             try:
-                lts.append(self.data.get(key) < other.data.get(key))
+                if all(key in d for d in (self.data, other.data)):
+                    if self.data.get(key) == other.data.get(key):
+                        lts.append(None)
+                    else:
+                        lts.append(self.data.get(key) < other.data.get(key))
+                else:
+                    lts.append(None)
+
             except:
-                lts.append(False)
+                lts.append(None)
 
         for lt in lts:
-            if lt:
-                return True
-            else:
-                pass
-
-        return False
+            if lt is not None:
+                return lt
 
     def __eq__(self, other):
         return self.data == other.data
@@ -86,14 +89,11 @@ class SidecarPairing(object):
         descriptions (list): List of dictionnaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions,
-                 searchMethod=DEFAULT.searchMethod,
-                 caseSensitive=DEFAULT.caseSensitive,
-                 dupMethod=DEFAULT.duplicateMethod):
+    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
+                 caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
-        self._dupMethod = ""
         self.graph = OrderedDict()
         self.aquisitions = []
 
@@ -101,7 +101,6 @@ class SidecarPairing(object):
         self.descriptions = descriptions
         self.searchMethod = searchMethod
         self.caseSensitive = caseSensitive
-        self.dupMethod = dupMethod
 
     @property
     def searchMethod(self):
@@ -119,29 +118,12 @@ class SidecarPairing(object):
         else:
             self._searchMethod = DEFAULT.searchMethod
             self.logger.warning("'%s' is not a search method implemented", value)
-            self.logger.warning("Falling back to default: %s",
-                                DEFAULT.searchMethod)
-            self.logger.warning("Search methods implemented: %s",
-                                DEFAULT.searchMethodChoices)
-
-    @property
-    def dupMethod(self):
-        return self._dupMethod
-
-    @dupMethod.setter
-    def dupMethod(self, value):
-        """
-        Checks if the duplicate method is implemented
-        Warns the user if not and fall back to default
-        """
-        if value in DEFAULT.dupMethodChoices:
-            self._dupMethod = value
-        else:
-            self._dupMethod = DEFAULT.duplicateMethod
-            self.logger.warning("Falling back to default: %s",
-                                DEFAULT.duplicateMethod)
-            self.logger.warning("Duplicate methods implemented: %s",
-                                DEFAULT.dupMethodChoices)
+            self.logger.warning(
+                "Falling back to default: %s", DEFAULT.searchMethod
+            )
+            self.logger.warning(
+                "Search methods implemented: %s", DEFAULT.searchMethodChoices
+            )
 
     @property
     def caseSensitive(self):
@@ -154,8 +136,12 @@ class SidecarPairing(object):
         else:
             self._caseSensitive = DEFAULT.caseSensitive
             self.logger.warning("'%s' is not a boolean", value)
-            self.logger.warning("Falling back to default: %s",
-                                DEFAULT.caseSensitive)
+            self.logger.warning(
+                "Falling back to default: %s", DEFAULT.caseSensitive
+            )
+            self.logger.warning(
+                "Search methods implemented: %s", DEFAULT.caseSensitive
+            )
 
     def build_graph(self):
         """
@@ -190,27 +176,26 @@ class SidecarPairing(object):
 
         def compare(name, pattern):
             if self.searchMethod == "re":
-                return bool(re.search(pattern, str(name)))
-
+                return bool(re.search(pattern, name))
             else:
+                name = str(name)
+                pattern = str(pattern)
                 if not self.caseSensitive:
-                    name = str(name).lower()
-                    pattern = str(pattern).lower()
+                    name = name.lower()
+                    pattern = pattern.lower()
 
-                return fnmatch(str(name), str(pattern))
+                return fnmatch(name, pattern)
 
         result = []
+
         for tag, pattern in iteritems(criteria):
-            name = data.get(tag)
+            name = data.get(tag, '')# or ''
+
             if isinstance(name, list):
                 try:
-                    subResult = []
-                    for subPattern in pattern:
-                        subResult.append(False)
-                        for subName in name:
-                            if compare(subName, subPattern):
-                                subResult[-1] = True
-                                break
+                    subResult = [len(name) == len(pattern), isinstance(pattern, list)]
+                    for subName, subPattern in zip(name, pattern):
+                        subResult.append(compare(subName, subPattern))
                 except:
                     subResult = [False]
 
@@ -281,21 +266,9 @@ class SidecarPairing(object):
                     yield key, locs
 
         dstRoots = [_.dstRoot for _ in self.acquisitions]
-
-        templateDup = DEFAULT.runTpl
-        if self.dupMethod == 'dup':
-            templateDup = DEFAULT.dupTpl
-
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("%s has %s runs", dstRoot, len(dup))
-            self.logger.info("Adding %s information to the acquisition", self.dupMethod)
-
-            if self.dupMethod == 'dup':
-                dup = dup[0:-1]
-                for runNum, acqInd in enumerate(dup):
-                    runStr = templateDup.format(runNum+1)
-                    self.acquisitions[acqInd].modalityLabel += runStr
-            else:
-                for runNum, acqInd in enumerate(dup):
-                    runStr = templateDup.format(runNum+1)
-                    self.acquisitions[acqInd].customLabels += runStr
+            self.logger.info("Adding 'run' information to the acquisition")
+            for runNum, acqInd in enumerate(dup):
+                runStr = DEFAULT.runTpl.format(runNum + 1)
+                self.acquisitions[acqInd].customLabels += runStr

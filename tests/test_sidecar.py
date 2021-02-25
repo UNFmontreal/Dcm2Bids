@@ -14,9 +14,17 @@ def sidecarFiles():
 
 
 def test_sidecar_lt(sidecarFiles):
-    sidecarsDcm2bids = sorted([Sidecar(_) for _ in sidecarFiles])
-    sidecarsExpected = [Sidecar(_) for _ in sorted(sidecarFiles)]
 
+    sidecarsDcm2bids = sorted([Sidecar(_) for _ in sidecarFiles])
+    sidecarsExpectedOnlyFilename = [Sidecar(_) for _ in sorted(sidecarFiles)]
+
+    # 001_localizer_20100603125600_i00001.json
+    # 001_localizer_20100603125600_i00003.json
     assert sidecarsDcm2bids[0] < sidecarsDcm2bids[1]
+
+    # 003_MPRAGE_20100603125600.json
+    # 001_localizer_20100603125600_i00002.json
     assert sidecarsDcm2bids[4] > sidecarsDcm2bids[2]
-    assert sidecarsDcm2bids[3] == sidecarsExpected[3]
+
+    # 001_localizer_20100603125600_i00002.json
+    assert sidecarsDcm2bids[2] == sidecarsExpectedOnlyFilename[1]

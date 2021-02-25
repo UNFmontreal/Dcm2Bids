@@ -50,7 +50,6 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-.pep8speaks.yml
 
 # Translations
 *.mo
@@ -132,6 +131,8 @@ dmypy.json
 # dcm2bids
 tests/data/*
 !tests/data/config_test.json
-!tests/data/config_test_dup_option.json
 !tests/data/config_test_not_case_sensitive_option.json
 !tests/data/sidecars/*
+
+# dcm2bids documentation
+/site

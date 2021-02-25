@@ -3,7 +3,7 @@
 """This module take care of the versioning"""
 
 # dcm2bids version
-__version__ = "2.1.4"
+__version__ = "2.1.6"
 
 
 import logging
@@ -13,8 +13,6 @@ from distutils.version import LooseVersion
 from subprocess import check_output
 from shutil import which
 
-
-REQUIRED_MODULE_METADATA = (("future", {"min_version": "0.17.1"}),)
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +98,7 @@ def check_latest(name="dcm2bids"):
     """
     data = {
         "dcm2bids": {
-            "repo": "cbedetti/Dcm2Bids",
+            "repo": "unfmontreal/Dcm2Bids",
             "host": "https://github.com",
             "current": __version__,
         },

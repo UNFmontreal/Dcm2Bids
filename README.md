@@ -1,89 +1,64 @@
 # dcm2bids
+Your friendly DICOM converter.
 
-<p>
-<a href="https://pypi.org/project/dcm2bids">
-<img alt="PyPI version" src="https://badge.fury.io/py/dcm2bids.svg">
-</a>
-<a href="https://cbedetti.github.io/Dcm2Bids">
-<img alt="Documentation" src="https://img.shields.io/badge/documentation-dcm2bids-succes.svg">
-</a>
-<a href="https://zenodo.org/badge/latestdoi/59581295">
-<img alt="DOI" src="https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg">
-</a>
-<!--
-<a href="https://singularity-hub.org/collections/544">
-<img alt="Singularity Hub" src="https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg">
-</a>
--->
-</p>
+[![Documentation badge](https://img.shields.io/badge/Documentation-dcm2bids-succes.svg)](https://unfmontreal.github.io/Dcm2Bids)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.2616548.svg)](https://zenodo.org/badge/latestdoi/59581295)
+[![Last update badge](https://anaconda.org/conda-forge/dcm2bids/badges/latest_release_date.svg)](https://anaconda.org/conda-forge/dcm2bids)
 
-<p>
-<a href="https://github.com/cbedetti/Dcm2Bids/actionsk">
-<img alt="" src="https://github.com/cbedetti/Dcm2Bids/workflows/Tests/badge.svg">
-</a>
-<a href="https://codecov.io/gh/cbedetti/Dcm2Bids">
-<img src="https://codecov.io/gh/cbedetti/Dcm2Bids/branch/master/graph/badge.svg"/>
-</a>
-<a href="https://github.com/psf/black">
-<img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
-</a>
-</p>
 
-`dcm2bids` reorganises NIfTI files from [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
+[![Test status badge](https://github.com/unfmontreal/Dcm2Bids/workflows/Tests/badge.svg)](https://github.com/unfmontreal/Dcm2Bids/actionsk)
+[![Code coverage badge](https://codecov.io/gh/unfmontreal/Dcm2Bids/branch/master/graph/badge.svg)](https://codecov.io/gh/unfmontreal/Dcm2Bids)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Before using this software, learn more about BIDS:
 
-- read the BIDS [specifications][bids-spec] and the [paper][bids-nature]
-- some dataset [examples][bids-examples]
+[![PyPI version badge](https://img.shields.io/pypi/v/dcm2bids?logo=pypi&logoColor=white)](https://pypi.org/project/dcm2bids)
+[![Anaconda-Server Badge](https://img.shields.io/conda/vn/conda-forge/dcm2bids?logo=anaconda&logoColor=white)](https://anaconda.org/conda-forge/dcm2bids)
+[![Docker container badge](https://img.shields.io/docker/v/unfmontreal/dcm2bids?label=docker&logo=docker&logoColor=white)](https://hub.docker.com/r/unfmontreal/dcm2bids)
 
-## Dependencies
 
-- [dcm2niix][dcm2niix-github] to convert DICOM to NIfTI. **You need to install it**
-    - [install instructions][dcm2niix-install]
-    - [Recent release][dcm2niix-release]
+[![License badge](https://img.shields.io/pypi/l/dcm2bids)](/docs/LICENSE.txt)
 
-## Install
+---
 
-`pip install dcm2bids`
+`dcm2bids` reorganises NIfTI files using [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
-## Upgrading
+## Scope
 
-`pip install --upgrade dcm2bids`
+`dcm2bids` is a community-centered project. It aims to be a friendly,
+easy-to-use tool to convert your dicoms. Our main goal is to make the dicom
+to BIDS conversion as effortless as possible. Even if in the near future
+more advanced features will be added, we'll keep the focus on your day
+to day use case without complicating anything. That's the promise of the `dcm2bids` project.
 
-## TL;DR
+## Documentation
 
-1. `mkdir <YOUR_FUTURE_BIDS_FOLDER>`
-2. `cd <YOUR_FUTURE_BIDS_FOLDER>`
-3. `dcm2bids_scaffold`
-4. `dcm2bids_helper -d <FOLDER_WITH_DICOMS_OF_A_TYPICAL_SESSION>`
-5. Build your configuration file with the help of the content of `tmp_dcm2bids/helper`
-6. `dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -c CONFIG_FILE` for each participants of your study
+Please take a look at the [documentation][dcm2bids-doc] to:
 
-Follow the [tutorial](https://cbedetti.github.io/Dcm2Bids/tutorial)
+* [Learn about bids][bids-spec] with some dataset [examples][bids-examples]
+* [Install dcm2bids][dcm2bids-install]
+* [Follow the tutorial][dcm2bids-tutorial]
+* [Seek for more advanced usage][dcm2bids-advanced]
 
-dcm2bids creates log files inside `<YOUR_FUTURE_BIDS_FOLDER>/tmp_dcm2bids/log`
+## Issues and Questions
 
-## bids-validator
+We work hard to make sure `dcm2bids` is robust and we welcome comments and questions to make sure it meets your use case! Here's our preferred workflow:
 
-Run the [bids-validator][bids-validator] to check your directory. Don't forget to create a `.bidsignore` file at the root of your BIDS directory with `tmp_dcm2bids/*` inside.
+- If you have a usage question :raising_hand:, we encourage you to post your question on [Neurostars][neurostars] with [dcm2bids][neurostars-dcm2bids] as an optional tag. The tag is really important because [Neurostars][neurostars-dcm2bids] will notify the `dcm2bids` team only if the tag is present. [Neurostars][neurostars-dcm2bids] is a question and answer forum for neuroscience researchers, infrastructure providers and software developers, and free to access.  
+Before posting your question, you may want to first browse through questions that were tagged with the [dcm2bids tag][neurostars-dcm2bids]. If your question persists, feel free to comment on previous questions or ask your own question.
 
-## Similar projects
+- If you think you've found a bug :bug:, please open an issue on [our repository][dcm2bids-issues]. To do this, you'll need a GitHub account. See our [contributing guide](CONTRIBUTING/#open-an-issue-or-choose-one-to-fix) for more details.
 
-Other tools to create [BIDS][bids] datasets :
-
-- [heudiconv][link-heudiconv]
-- [bidskit][link-bidskit]
-- [dac2bids][link-dac2bids]
 
 [bids]: http://bids.neuroimaging.io/
 [bids-examples]: https://github.com/bids-standard/bids-examples
-[bids-nature]: https://www.nature.com/articles/sdata201644
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
-[bids-validator]: https://github.com/bids-standard/bids-validator
-[dcm2bids-doc]: https://cbedetti.github.io/Dcm2Bids
-[dcm2niix-github]: https://github.com/rordenlab/dcm2niix
+[dcm2bids-doc]: https://unfmontreal.github.io/Dcm2Bids
+[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/docs/2-tutorial/#setup
+[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/2-tutorial
+[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/4-advance/
+[dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
-[dcm2niix-release]: https://github.com/rordenlab/dcm2niix/releases
-[link-heudiconv]: https://github.com/nipy/heudiconv
-[link-bidskit]: https://github.com/jmtyszka/bidskit
-[link-dac2bids]: https://github.com/dangom/dac2bids
+[dcm2niix-github]: https://github.com/rordenlab/dcm2niix
+[neurostars]: https://neurostars.org/
+[neurostars-dcm2bids]: https://neurostars.org/tag/dcm2bids
+[dcm2bids-contributing]:  https://unfmontreal.github.io/Dcm2Bids/CONTRIBUTING

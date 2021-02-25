@@ -6,7 +6,7 @@
 """Setup file for the dcm2bids package"""
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def load_version():
@@ -45,8 +45,8 @@ with open("README.md", encoding="utf-8") as _:
     LONG_DESCRIPTION = _.read()
 LICENSE = "GPLv3+"
 PROJECT_URLS = {
-    "Documentation": "https://cbedetti.github.io/Dcm2Bids",
-    "Source Code": "https://github.com/cbedetti/Dcm2Bids",
+    "Documentation": "https://unfmontreal.github.io/Dcm2Bids",
+    "Source Code": "https://github.com/unfmontreal/Dcm2Bids",
 }
 CLASSIFIERS = [
     "Intended Audience :: Healthcare Industry",
@@ -55,9 +55,10 @@ CLASSIFIERS = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: Unix",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
@@ -68,11 +69,17 @@ if __name__ == "__main__":
     setup(
         name=DISTNAME,
         version=VERSION,
-        packages=[DISTNAME],
+        packages=find_packages(exclude=["tests"]),
         entry_points=ENTRY_POINTS,
-        python_requires=">=3.5",
-        install_requires=install_requires(),
-        package_data={"": ["README.md", "LICENSE.txt"]},
+        python_requires=">=3.6",
+        use_scm_version=True,
+        setup_requires=['setuptools_scm'],
+        install_requires=[
+          'future>=0.17.1',
+          # TODO: drop this when py3.6 is end-of-life
+          'importlib_resources ; python_version<"3.7"',
+          ],
+        include_package_data=True,
         author=AUTHOR,
         author_email=AUTHOR_EMAIL,
         description=DESCRIPTION,
