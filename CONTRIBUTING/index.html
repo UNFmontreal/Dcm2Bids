@@ -715,17 +715,19 @@ below:</p>
 <li><a href="#recognizing-your-contribution">Recognizing your contribution</a></li>
 <li><a href="#thank-you">Thank you!</a></li>
 </ul>
-<p>If you don't know where or how to get started, keep on reading below. </p>
+<p>If you don't know where or how to get started, keep on reading below.</p>
 <h2 id="welcome">Welcome<a class="headerlink" href="#welcome" title="Permanent link">⚓︎</a></h2>
 <p><code>dcm2bids</code> is a small project started in 2017 by Christophe Bedetti
 (<a href="https://github.com/cbedetti">@cbedetti</a>). In 2021, we have started a
 new initiative and we're excited to have you join!</p>
-<p>You can introduce yourself on
-the open issue <a href="https://github.com/UNFmontreal/Dcm2Bids/issues/108">welcome</a> and tell us how you would like to
-contribute in the <code>dcm2bids</code> community. Let us know what your interests are and
-we will help you find an issue to contribute to if you haven't already spotted one yet. Most of our discussions will take place
-on open <a href="https://github.com/UNFmontreal/Dcm2Bids/issues">issues</a>. Thanks so much! As a reminder, we expect all contributions to <code>dcm2bids</code> to adhere to our <a href="https://unfmontreal.github.io/Dcm2Bids/CODE_OF_CONDUCT">Code
-of Conduct</a>.</p>
+<p>You can introduce yourself on our <a href="https://github.com/UNFmontreal/Dcm2Bids/discussions/123">Welcome to Dcm2Bids Discussion</a>
+and tell us how you would like to contribute in the <code>dcm2bids</code> community.
+Let us know what your interests are and we will help you find an issue to
+contribute to if you haven't already spotted one yet. Most of our discussions
+will take place on open <a href="https://github.com/UNFmontreal/Dcm2Bids/issues">issues</a> and in the newly created
+<a href="https://github.com/UNFmontreal/Dcm2Bids/discussions/">GitHub Discussions</a>. Thanks so much!
+As a reminder, we expect all contributions to <code>dcm2bids</code> to adhere to our
+<a href="https://unfmontreal.github.io/Dcm2Bids/CODE_OF_CONDUCT">Code of Conduct</a>.</p>
 <h2 id="contributing-through-neurostars">Contributing through Neurostars<a class="headerlink" href="#contributing-through-neurostars" title="Permanent link">⚓︎</a></h2>
 <p>The <code>dcm2bids</code> community highlight all contributions to <code>dcm2bids</code>. Helping users
 on <a href="https://neurostars.org">Neurostars</a> forum is one of them.</p>
@@ -748,8 +750,8 @@ the project. You can ask Neurostars to notify you when a new message tagged with
 distributed working.</p>
 <p>Before you start you'll need to set up a free <a href="http://github.com/">GitHub</a> account and
 sign in. You can sign up <a href="https://github.com/join">through this link</a> and then <em>interact</em> on our repository at <a href="https://github.io/UNFmontreal/Dcm2Bids">https://github.io/UNFmontreal/Dcm2Bids</a>.</p>
-<p>You'll use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to discuss in issues and pull requests on
-GitHub. You can think of Markdown as a few little symbols around your text that
+<p>You'll use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to discuss on GitHub. You can think of
+Markdown as a few little symbols around your text that
 will allow GitHub to render the text with a little bit of formatting. For
 example you can write words as <strong>bold</strong> (<code>**bold**</code>), or in <em>italics</em>
 (<code>*italics*</code>), or as a <a href="https://youtu.be/dQw4w9WgXcQ">link</a>
@@ -768,7 +770,9 @@ this workflow:</p>
 project forwards. Before starting to work on a new pull request we highly
 recommend you open an issue to explain what you want to do and how it echoes a
 specific demand from the community. Keep in mind the <a href="/#scope">scope</a> of
-the <code>dcm2bids</code> project.</p>
+the <code>dcm2bids</code> project. If you have more an inquiry or suggestion to make 
+than a bug to report, we encourage you to start a conversation in the
+<a href="https://github.com/UNFmontreal/Dcm2Bids/discussions/">Discussions section</a>.</p>
 <p>A general guideline: if you find yourself tempted to write a great big issue
 that is difficult to describe as one unit of work, please consider splitting it
 into two or more. Moreover, it will be interesting to see how others approach
@@ -801,8 +805,14 @@ already in progress.</p>
 <h3 id="fork-the-dcm2bids-repository">Fork the <code>dcm2bids</code> repository<a class="headerlink" href="#fork-the-dcm2bids-repository" title="Permanent link">⚓︎</a></h3>
 <p>This way you'll be able to work on your own instance of <code>dcm2bids</code>. It will be a
 safe place where nothing can affect the main repository. Make sure your master
-branch is always <a href="https://help.github.com/articles/syncing-a-fork/">up-to-date</a> with dcm2bids' master branch. You
+branch is always <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork">up-to-date</a> with dcm2bids' master branch. You
 can also follow these command lines.</p>
+<p>The first time you try to sync your <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-forks">fork</a>, you may have to set the <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork">upstream branch</a>:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>git remote add upstream https://github.com/UNFmontreal/Dcm2Bids.git
+git remote -v <span class="c1"># Verify the new upstream repo appears.</span>
+</code></pre></div>
+</td></tr></table></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>git checkout master
