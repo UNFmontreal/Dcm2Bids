@@ -27,7 +27,7 @@ below:
   - [Recognizing your contribution](#recognizing-your-contribution)
   - [Thank you!](#thank-you)
 
-If you don't know where or how to get started, keep on reading below. 
+If you don't know where or how to get started, keep on reading below.
 
 ## Welcome
 
@@ -35,12 +35,14 @@ If you don't know where or how to get started, keep on reading below.
 ([@cbedetti](https://github.com/cbedetti)). In 2021, we have started a
 new initiative and we're excited to have you join!
 
-You can introduce yourself on
-the open issue [welcome][dcm2bids-introduce-yourself] and tell us how you would like to
-contribute in the `dcm2bids` community. Let us know what your interests are and
-we will help you find an issue to contribute to if you haven't already spotted one yet. Most of our discussions will take place
-on open [issues][dcm2bids-issues]. Thanks so much! As a reminder, we expect all contributions to `dcm2bids` to adhere to our [Code
-of Conduct][dcm2bids-coc].
+You can introduce yourself on our [Welcome to Dcm2Bids Discussion][dcm2bids-introduce-yourself]
+and tell us how you would like to contribute in the `dcm2bids` community.
+Let us know what your interests are and we will help you find an issue to
+contribute to if you haven't already spotted one yet. Most of our discussions
+will take place on open [issues][dcm2bids-issues] and in the newly created
+[GitHub Discussions][dcm2bids-discussions]. Thanks so much!
+As a reminder, we expect all contributions to `dcm2bids` to adhere to our
+[Code of Conduct][dcm2bids-coc].
 
 ## Contributing through Neurostars
 
@@ -70,8 +72,8 @@ distributed working.
 Before you start you'll need to set up a free [GitHub][link_github] account and
 sign in. You can sign up [through this link][link_github_signup] and then _interact_ on our repository at [https://github.io/UNFmontreal/Dcm2Bids](https://github.io/UNFmontreal/Dcm2Bids).
 
-You'll use [Markdown][markdown] to discuss in issues and pull requests on
-GitHub. You can think of Markdown as a few little symbols around your text that
+You'll use [Markdown][markdown] to discuss on GitHub. You can think of
+Markdown as a few little symbols around your text that
 will allow GitHub to render the text with a little bit of formatting. For
 example you can write words as **bold** (`**bold**`), or in _italics_
 (`*italics*`), or as a [link](https://youtu.be/dQw4w9WgXcQ)
@@ -94,7 +96,9 @@ Issues are individual pieces of work that need to be completed to move the
 project forwards. Before starting to work on a new pull request we highly
 recommend you open an issue to explain what you want to do and how it echoes a
 specific demand from the community. Keep in mind the [scope][dcm2bids-scope] of
-the `dcm2bids` project.
+the `dcm2bids` project. If you have more an inquiry or suggestion to make 
+than a bug to report, we encourage you to start a conversation in the
+[Discussions section][dcm2bids-discussions].
 
 A general guideline: if you find yourself tempted to write a great big issue
 that is difficult to describe as one unit of work, please consider splitting it
@@ -133,6 +137,12 @@ This way you'll be able to work on your own instance of `dcm2bids`. It will be a
 safe place where nothing can affect the main repository. Make sure your master
 branch is always [up-to-date][git-fork-update] with dcm2bids' master branch. You
 can also follow these command lines.
+
+The first time you try to sync your [fork][git-fork], you may have to set the [upstream branch][git-fork-remote]:
+```bash
+git remote add upstream https://github.com/UNFmontreal/Dcm2Bids.git
+git remote -v # Verify the new upstream repo appears.
+```
 
 ```bash
 git checkout master
@@ -230,11 +240,14 @@ _&mdash; Based on contributing guidelines from the
 [link_enhancement]: https://github.com/UNFmontreal/Dcm2Bids/labels/enhancement
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2bids-coc]: https://unfmontreal.github.io/Dcm2Bids/CODE_OF_CONDUCT
-[dcm2bids-introduce-yourself]: https://github.com/UNFmontreal/Dcm2Bids/issues/108
+[dcm2bids-discussions]: https://github.com/UNFmontreal/Dcm2Bids/discussions/
+[dcm2bids-introduce-yourself]: https://github.com/UNFmontreal/Dcm2Bids/discussions/123
 [dcm2bids-scope]: /#scope
 [dcm2bids-doc]: /
 [writing_formatting_github]: https://guides.github.com/features/mastering-markdown/
-[git-fork-update]: https://help.github.com/articles/syncing-a-fork/
+[git-fork]: https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-forks
+[git-fork-remote]: https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork
+[git-fork-update]: https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork
 [git-guide]: https://guides.github.com/introduction/flow/
 [pep8]: https://www.python.org/dev/peps/pep-0008/
 [tox]: https://tox.readthedocs.io/
