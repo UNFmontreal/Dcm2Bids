@@ -908,15 +908,13 @@
 <span class="normal">266</span>
 <span class="normal">267</span>
 <span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">269</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;This module take care of the versioning&quot;&quot;&quot;
 
 # dcm2bids version
 
-__version__ = &quot;2.1.5&quot;
+__version__ = &quot;2.1.6&quot;
 
 import logging
 
@@ -929,8 +927,6 @@ from distutils.version import LooseVersion
 from subprocess import check_output
 
 from shutil import which
-
-REQUIRED_MODULE_METADATA = ((&quot;future&quot;, {&quot;min_version&quot;: &quot;0.17.1&quot;}),)
 
 logger = logging.getLogger(__name__)
 
@@ -1185,9 +1181,6 @@ def dcm2niix_version():
 </td></tr></table>
 </details>
 <h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">REQUIRED_MODULE_METADATA</span>
-</code></pre></div>
-</td></tr></table>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">logger</span>
 </code></pre></div>
 </td></tr></table>

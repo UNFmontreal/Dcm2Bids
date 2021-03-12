@@ -835,7 +835,13 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def scaffold():
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def scaffold():
 
     &quot;&quot;&quot;scaffold entry point&quot;&quot;&quot;
 
@@ -857,17 +863,23 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
     ]:
 
-        shutil.copyfile(os.path.join(SELF_DIR, _), os.path.join(args.output_dir, _))
+        dest = os.path.join(args.output_dir, _)
 
-    with open(os.path.join(SELF_DIR, &quot;CHANGES&quot;)) as _:
+        with resources.path(__name__, _) as src:
 
-        data = _.read().format(datetime.date.today().strftime(&quot;%Y-%m-%d&quot;))
+            shutil.copyfile(src, dest)
 
-    write_txt(
+    with resources.path(__name__, &quot;CHANGES&quot;) as changes_template:
 
-        os.path.join(args.output_dir, &quot;CHANGES&quot;),
+        with open(changes_template) as _:
 
-        data.split(&quot;\n&quot;)[:-1],
+            data = _.read().format(datetime.date.today().strftime(&quot;%Y-%m-%d&quot;))
+
+        write_txt(
+
+            os.path.join(args.output_dir, &quot;CHANGES&quot;),
+
+            data.split(&quot;\n&quot;)[:-1],
 
     )
 </code></pre></div>
