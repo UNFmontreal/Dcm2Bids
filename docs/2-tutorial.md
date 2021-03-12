@@ -32,7 +32,6 @@ Finaly, create a new conda environment to install dcm2bids:
 ```bash
 conda env create -f environment.yml
 source activate dcm2bids
-pip install dcm2bids
 ```
 
 We should have access to `dcm2bids` now. Test it with `dcm2bids --help`.
