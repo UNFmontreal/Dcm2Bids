@@ -18,7 +18,7 @@ class Sidecar(object):
 
     Args:
         filename (str): Path of a JSON sidecar
-        keyComp (list): A list of keys from the JSON sidecar to compare sidecars
+        compKeys (list): A list of keys from the JSON sidecar to compare sidecars
                      default=["SeriesNumber","AcquisitionTime","SideCarFilename"]
     """
 
@@ -71,12 +71,14 @@ class Sidecar(object):
             filename (path): path of a JSON file
 
         Return:
-            A dictionnary of the JSON content plus the SidecarFilename
+            A dictionary of the JSON content plus the SidecarFilename
         """
         try:
             data = load_json(filename)
-        except:
+        except ValueError as err:
+            raise err
             data = {}
+
         self._origData = data.copy()
         data["SidecarFilename"] = os.path.basename(filename)
         self._data = data
@@ -86,7 +88,7 @@ class SidecarPairing(object):
     """
     Args:
         sidecars (list): List of Sidecar objects
-        descriptions (list): List of dictionnaries describing acquisitions
+        descriptions (list): List of dictionaries describing acquisitions
     """
 
     def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
@@ -95,7 +97,7 @@ class SidecarPairing(object):
 
         self._searchMethod = ""
         self.graph = OrderedDict()
-        self.aquisitions = []
+        self.acquisitions = []
 
         self.sidecars = sidecars
         self.descriptions = descriptions
@@ -146,7 +148,7 @@ class SidecarPairing(object):
     def build_graph(self):
         """
         Test all the possible links between the list of sidecars and the
-        description dictionnaries and build a graph from it
+        description dictionaries and build a graph from it
         The graph is in a OrderedDict object. The keys are the Sidecars and
         the values are a list of possible descriptions
 
@@ -167,8 +169,8 @@ class SidecarPairing(object):
     def isLink(self, data, criteria):
         """
         Args:
-            data (dict): Dictionnary data of a sidecar
-            criteria (dict): Dictionnary criteria
+            data (dict): Dictionary data of a sidecar
+            criteria (dict): Dictionary criteria
 
         Returns:
             boolean
@@ -177,7 +179,7 @@ class SidecarPairing(object):
         def compare(name, pattern):
             name = str(name)
             if self.searchMethod == "re":
-                return bool(re.search(pattern, name))
+                return bool(re.match(pattern, name))
             else:
                 pattern = str(pattern)
                 if not self.caseSensitive:

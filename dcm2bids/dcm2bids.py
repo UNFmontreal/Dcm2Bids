@@ -176,7 +176,7 @@ class Dcm2bids(object):
                 except FileNotFoundError:
                     pass
                 defaceTpl = self.config.get("defaceTpl")
-                cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
+                cmd = defaceTpl.format(srcFile=str(srcFile), dstFile=str(dstFile))
                 run_shell_command(cmd)
 
             # use
