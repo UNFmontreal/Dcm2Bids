@@ -101,10 +101,10 @@ class Dcm2bids(object):
             ),
         )
 
-        # os.makedirs(logdir, exist_ok=True)
+        os.makedirs(logDir, exist_ok=True)
         # python2 compatibility
-        if not os.path.exists(logDir):
-            os.makedirs(logDir)
+        #if not os.path.exists(logDir):
+        #    os.makedirs(logDir,exist_ok=True)
 
         setup_logging(self.logLevel, logFile)
         self.logger = logging.getLogger(__name__)
