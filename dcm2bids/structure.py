@@ -21,9 +21,6 @@ class Participant(object):
         self._name = ""
         self._session = ""
 
-        self.name = name
-        self.session = session
-
     @property
     def name(self):
         """
@@ -37,7 +34,6 @@ class Participant(object):
         """ Prepend 'sub-' if necessary"""
         if name.startswith("sub-"):
             self._name = name
-
         else:
             self._name = "sub-" + name
 
@@ -83,7 +79,7 @@ class Participant(object):
             'sub-<subject_label>_ses-<session_label>'
         """
         if self.hasSession():
-            return self.name + "_" + self.session
+            return '_'.join([self.name,self.session])
         else:
             return self.name
 
@@ -104,7 +100,7 @@ class Acquisition(object):
         dataType (str): A functional group of MRI data (ex: func, anat ...)
         modalityLabel (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
-        customLabels (str): Optional labels (ex: task-rest)
+        customLabels: Optional labels, either string or dict format (ex: "task-rest" or {"task"':"rest"})
         srcSidecar (Sidecar): Optional sidecar object
     """
 
@@ -113,21 +109,21 @@ class Acquisition(object):
         participant,
         dataType,
         modalityLabel,
-        customLabels="",
+        customLabels,
         srcSidecar=None,
         sidecarChanges=None,
         intendedFor=None,
         IntendedFor=None,
         **kwargs
     ):
-        self._modalityLabel = ""
-        self._customLabels = ""
+
         self._intendedFor = None
 
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
-        self.customLabels = customLabels
+        print(customLabels)
+        self._customLabels = self.verifyBIDSconformity(customLabels)
         self.srcSidecar = srcSidecar
         if sidecarChanges is None:
             self.sidecarChanges = {}
@@ -146,30 +142,46 @@ class Acquisition(object):
         )
 
     @property
-    def modalityLabel(self):
+    def customLabelsString(self):
+        return self.customLabels2string()
+
+    def customLabels2string(self):
         """
         Returns:
-            A string '_<modalityLabel>'
+            A string '<customLabels>'
         """
-        return self._modalityLabel
+        # sort labels alphabetically 
+        sortedLabels = sorted(self._customLabels.keys(), key=lambda x:x.lower())
+        # create list of <entity>-<label> strings
+        labels = ['-'.join([ent, self._customLabels[ent]]) for ent in sortedLabels]
+        #join the string with underscores
+        return '_'.join(labels)
 
-    @modalityLabel.setter
-    def modalityLabel(self, modalityLabel):
-        """ Prepend '_' if necessary"""
-        self._modalityLabel = self.prepend(modalityLabel)
-
-    @property
-    def customLabels(self):
+    def verifyBIDSconformity(self, labels):
         """
         Returns:
-            A string '_<customLabels>'
+            A dictionary for custom labels
         """
-        return self._customLabels
 
-    @customLabels.setter
-    def customLabels(self, customLabels):
-        """ Prepend '_' if necessary"""
-        self._customLabels = self.prepend(customLabels)
+        labelDict = {}
+        if type(labels) == str:
+            if len(labels.split("_")) == 1:
+                #if only one entry and not bids conform, put 'acq' entity 
+                labelDict = {'acq':labels}
+            else:
+                labelDict = dict(x.split("-") for x in labels.split("_"))
+        else:
+            labelDict = labels
+
+        # TODO -> check for entities available in this BIDS version ? 
+        customEntities = ["task","acq","ce","trc","rec","dir","echo","flip","inv","mt","part","recording","proc","space"]
+
+        for k,v in labelDict.items():
+            if k not in customEntities or '_' in v or '-' in v or v == '':
+                #raise warning if label not conform to BIDS specification
+                print("Warning! Output file name might not be BIDS conform..")
+
+        return labelDict
 
     @property
     def suffix(self):
@@ -178,10 +190,10 @@ class Acquisition(object):
         Returns:
             A string '_<modalityLabel>' or '_<customLabels>_<modalityLabel>'
         """
-        if self.customLabels.strip() == "":
-            return self.modalityLabel
+        if self.customLabelsString.strip() == "":
+            return '_'.join(['',self.modalityLabel])
         else:
-            return self.customLabels + self.modalityLabel
+            return '_'.join(['',self.customLabelsString, self.modalityLabel])
 
     @property
     def srcRoot(self):
@@ -233,8 +245,9 @@ class Acquisition(object):
                 dataType = intendedDesc["dataType"]
 
                 niiFile = self.participant.prefix
-                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
-                niiFile += self.prepend(intendedDesc["modalityLabel"])
+                if intendedDesc.get("customLabelsString", "") != "":
+                    niiFile += '_' + intendedDesc.get("customLabelsString", "")
+                niiFile += '_' + intendedDesc["modalityLabel"]
                 niiFile += ".nii.gz"
 
                 intendedValue.append(opj(session, dataType, niiFile).replace("\\", "/"))
@@ -249,20 +262,3 @@ class Acquisition(object):
             data[key] = value
 
         return data
-
-    @staticmethod
-    def prepend(value, char="_"):
-        """ Prepend `char` to `value` if necessary
-
-        Args:
-            value (str)
-            char (str)
-        """
-        if value.strip() == "":
-            return ""
-
-        elif value.startswith(char):
-            return value
-
-        else:
-            return char + value
