@@ -18,8 +18,8 @@ class Participant(object):
     """
 
     def __init__(self, name, session=DEFAULT.session):
-        self._name = ""
-        self._session = ""
+        self._name = name
+        self._session = session
 
     @property
     def name(self):
@@ -27,15 +27,7 @@ class Participant(object):
         Returns:
             A string 'sub-<subject_label>'
         """
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        """ Prepend 'sub-' if necessary"""
-        if name.startswith("sub-"):
-            self._name = name
-        else:
-            self._name = "sub-" + name
+        return 'sub-'+self._name
 
     @property
     def session(self):
@@ -43,19 +35,10 @@ class Participant(object):
         Returns:
             A string 'ses-<session_label>'
         """
-        return self._session
-
-    @session.setter
-    def session(self, session):
-        """ Prepend 'ses-' if necessary"""
-        if session.strip() == "":
-            self._session = ""
-
-        elif session.startswith("ses-"):
-            self._session = session
-
+        if self._session != '':
+            return 'ses-' + self._session
         else:
-            self._session = "ses-" + session
+            return ''
 
     @property
     def directory(self):

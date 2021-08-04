@@ -1,6 +1,6 @@
 {
     "searchMethod": "fnmatch",
-    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
+    "defaceTpl": "pydeface --outfile {dstFile} '{srcFile}'",
     "descriptions": [
         {
             "dataType": "anat",
