@@ -6,7 +6,7 @@ These optional configurations could be insert in the configuration file at the s
 {
     "searchMethod": "fnmatch",
     "caseSensitive": true,
-    "defaceTpl": "pydeface --outfile '{dstFile}' '{srcFile}'",
+    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "description": [
         ...
     ]
@@ -31,7 +31,7 @@ It's only disabled when used with `"searchMethod": "fnmatch"`.
 default: `"defaceTpl": None`
 
 !!! danger
-    The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
+The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
 
 For example, if you use the last version of pydeface, add:
 
