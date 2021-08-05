@@ -25,8 +25,13 @@ extra_css = ["docs/stylesheets/extra.css"] # To fix some colors in light vs slat
 # Add a bunch of markdown extensions to improve the documentation (and the look ;)).
 # See https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
 # for full list of extensions.
-markdown_extensions = ["admonition",
+
+[[tool.portray.mkdocs.markdown_extensions]]
+markdown_extensions = ["toc",
+                       "admonition",
                        "footnotes",
+                       "pymdownx.highlight",
+                       "pymdownx.tasklist",
                        "pymdownx.emoji",
                        "pymdownx.caret",
                        "pymdownx.mark",
@@ -56,11 +61,10 @@ icon = {repo = "fontawesome/brands/github"} # icon in top-right corner.
 # favicon = "art/logo_small.png"
 # logo = "art/logo_small.png"
 
-palette = {scheme = "preference"}
+# palette = {scheme = "preference"}
 # Alternative way of setting multiple option for the palette
-# [[tool.portray.mkdocs.theme.palette]]
-# scheme = "preference"
-
+[[tool.portray.mkdocs.theme.palette]]
+scheme = "preference"
 
 # Additional settings for plugins
 [[tool.portray.mkdocs.markdown_extensions]]
