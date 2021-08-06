@@ -78,6 +78,7 @@ if __name__ == "__main__":
           'future>=0.17.1',
           # TODO: drop this when py3.6 is end-of-life
           'importlib_resources ; python_version<"3.7"',
+          'pydeface@git+https://github.com/1-w/pydeface.git',
           ],
         include_package_data=True,
         author=AUTHOR,
