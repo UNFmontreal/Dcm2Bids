@@ -75,7 +75,7 @@ We should see a list of compressed NIfTI files (`nii.gz`) with their resective s
 
 The first will be our resting state fMRI, the second and third our fieldmap EPI.
 
-When you will do it with your DICOMs, you should do it with a typical session of one of your participant.
+When you will do it with your DICOMs, you should do it with a typical session of one of your participants.
 
 ## Building the configuration file
 

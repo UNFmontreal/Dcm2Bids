@@ -17,7 +17,7 @@ nav = [{  Home = "README.md"},
        {  "1. Usage" = "docs/1-usage.md"},
        {  "2. Tutorial" = "docs/2-tutorial.md"},
        {  "3. Configuration" = "docs/3-configuration.md"},
-       {  "4. Advance" = "docs/4-advance.md"},
+       {  "4. Advanced" = "docs/4-advanced.md"},
        {  "Changelog" = "CHANGELOG.md"}]
 
 extra_css = ["docs/stylesheets/extra.css"] # To fix some colors in light vs slate mode.
