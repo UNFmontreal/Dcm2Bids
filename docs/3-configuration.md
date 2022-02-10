@@ -30,7 +30,7 @@
             "modalityLabel": "fmap",
             "intendedFor": 0,
             "criteria": {
-                "ProtocoleName": "*field_mapping*"
+                "ProtocolName": "*field_mapping*"
             }
         }
     ]
@@ -74,7 +74,7 @@ It is a mandatory field. It describes the modality of the acquisition like `T1w`
 
 ## customLabels
 
-It is an optional field. For some acquisitions, you need to add information in the file name. For resting state fMRI, it is usally `task-rest`.
+It is an optional field. For some acquisitions, you need to add information in the file name. For resting state fMRI, it is usually `task-rest`.
 
 To know more on how to set these fields, read the [BIDS specifications][bids-spec].
 
@@ -86,7 +86,7 @@ Optional field to change or add information in a sidecar.
 
 ## intendedFor
 
-Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index or a list of index of the description(s) that's intended for.
+Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just put the index or a list of indices of the description(s) that's intended for.
 
 Python index begins at `0` so in the example, `0` means it is intended for `task-rest_bold`.
 
