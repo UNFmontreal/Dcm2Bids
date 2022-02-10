@@ -704,13 +704,13 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dcm2bids</span>
-<span class="nt">channels</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-<span class="nt">dependencies</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dcm2niix</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dcm2bids</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2bids</span><span class="w"></span>
+<span class="nt">channels</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
+<span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2niix</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2bids</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>Finaly, create a new conda environment to install dcm2bids:</p>
@@ -753,9 +753,9 @@ unzip dcm_qa_nih-master.zip
 <p>Now we will create a configuration file called <code>dcm2bids_config.json</code> (this is just an example, it could be whatever we want) in the <code>code/</code> folder. Use any text editor to create the file with the contents:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nt">&quot;descriptions&quot;</span><span class="p">:</span> <span class="p">[]</span>
-<span class="p">}</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>For example, with our resting state fMRI we see in its sidecar that the field <code>"SeriesDescription"</code> is equal to <code>"Axial_EPI-FMRI_(Interleaved_I_to_S)"</code>. We can open <code>004_In_Axial_EPI-FMRI_(Interleaved_I_to_S)_20180918114023.json</code> to verify that.</p>
@@ -775,19 +775,19 @@ unzip dcm_qa_nih-master.zip
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nt">&quot;descriptions&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-        <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;func&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;customLabels&quot;</span><span class="p">:</span> <span class="s2">&quot;task-rest&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;Axial_EPI-FMRI*&quot;</span><span class="p">,</span>
-<span class="hll">            <span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span> <span class="s2">&quot;*Interleaved_I_to_S*&quot;</span>
-</span>            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial_EPI-FMRI*&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="hll"><span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Interleaved_I_to_S*&quot;</span><span class="w"></span>
+</span><span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>For the two fieldmaps, we can see that with patterns of <code>"*EPI_PE=AP*"</code> or <code>"*EPI_PE=PA*"</code> on the filename is enough to match the correct acquisition.</p>
@@ -822,37 +822,37 @@ unzip dcm_qa_nih-master.zip
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
-<span class="normal">31</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nt">&quot;descriptions&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-        <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;func&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;customLabels&quot;</span><span class="p">:</span> <span class="s2">&quot;task-rest&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;Axial_EPI-FMRI*&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span> <span class="s2">&quot;*Interleaved_I_to_S*&quot;</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-        <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;fmap&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;epi&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;customLabels&quot;</span><span class="p">:</span> <span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="hll">            <span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span> <span class="s2">&quot;*EPI_PE=AP*&quot;</span>
-</span>            <span class="p">},</span>
-        <span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span> <span class="mi">0</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-        <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;fmap&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;epi&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;customLabels&quot;</span><span class="p">:</span> <span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="hll">            <span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span> <span class="s2">&quot;*EPI_PE=PA*&quot;</span>
-</span>            <span class="p">},</span>
-        <span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span> <span class="mi">0</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial_EPI-FMRI*&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Interleaved_I_to_S*&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*EPI_PE=AP*&quot;</span><span class="w"></span>
+</span><span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*EPI_PE=PA*&quot;</span><span class="w"></span>
+</span><span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>For fieldmap, we added an <code>"intendedFor"</code> field to show that these fieldmaps should be use with our fMRI acquisition. Have a look at the explanation of <a href="/docs/3-configuration/#intendedfor">intendedFor</a> in the documentation or in the <a href="https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#fieldmap-data">BIDS specification</a>.</p>
