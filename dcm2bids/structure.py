@@ -227,7 +227,13 @@ class Acquisition(object):
         if self.intendedFor != [None]:
             intendedValue = []
             for index in self.intendedFor:
-                intendedDesc = descriptions[index]
+                if isinstance(index, str):
+                    matches = [d for d in descriptions if d.get('id') == index]
+                    if len(matches) == 0:
+                        raise ValueError(f'No description with id [{index}]')
+                    intendedDesc = matches[0]
+                else:
+                    intendedDesc = descriptions[index]
 
                 session = self.participant.session
                 dataType = intendedDesc["dataType"]
