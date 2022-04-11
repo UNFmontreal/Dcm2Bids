@@ -17,29 +17,6 @@ from shutil import which
 logger = logging.getLogger(__name__)
 
 
-def internet(host="8.8.8.8", port=53, timeout=3):
-    """ Check if user has internet
-
-    Args:
-        host (string): 8.8.8.8 (google-public-dns-a.google.com)
-        port (int): OpenPort 53/tcp
-                    Service: domain (DNS/TCP)
-        timeout (int): default=3
-
-    Returns:
-        boolean
-
-    Source: https://stackoverflow.com/a/33117579
-    """
-    try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
-        return True
-
-    except:
-        return False
-
-
 def is_tool(name):
     """ Check if a program is in PATH
 
@@ -51,18 +28,19 @@ def is_tool(name):
     return which(name) is not None
 
 
-def check_github_latest(githubRepo):
+def check_github_latest(githubRepo, timeout=3):
     """ Check the latest version of a github repository
 
     Args:
         githubRepo (string): a github repository ("username/repository")
+        timeout (int): time in seconds
 
     Returns:
         A string of the version
     """
     url = "https://github.com/{}/releases/latest".format(githubRepo)
     try:
-        output = check_output(shlex.split("curl --silent " + url))
+        output = check_output(shlex.split("curl --silent " + url), timeout=timeout)
     except:
         logger.debug(
             "Checking latest version of %s was not possible", githubRepo,
@@ -109,7 +87,7 @@ def check_latest(name="dcm2bids"):
         },
     }
 
-    if internet() and is_tool("curl"):
+    if is_tool("curl"):
         host = data.get(name)["host"]
 
         if host == "https://github.com":
@@ -122,7 +100,7 @@ def check_latest(name="dcm2bids"):
 
     else:
         logger.debug("Checking latest version of %s was not possible", name)
-        logger.debug("internet: %s, curl: %s", internet(), is_tool("curl"))
+        logger.debug("curl: %s", is_tool("curl"))
         return
 
     current = data.get(name)["current"]
