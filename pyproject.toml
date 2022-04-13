@@ -1,6 +1,99 @@
 [tool.portray]
 modules = ["dcm2bids"]
+# docs_dir = ["docs"]
+# extra_dirs = ["media", "art"]
+
+[tool.portray.mkdocs]
+# Repository
+repo_name = "UNFmontreal/dcm2bids" # Name in top right corner
+# Set repo_url so anyone running from their own repo can see from true dcm2bids repo.
+repo_url = "https://github.com/UNFmontreal/Dcm2Bids"
+edit_uri = "blob/master/" # Bring to the page on GH, but it won't open the _edit_ mode.
+
+# Left navigation menu
+nav = [{  Home = "README.md"},
+       {  "Code of conduct" = "CODE_OF_CONDUCT.md" },
+       {  "Contributing" = "CONTRIBUTING.md"},
+       {  "1. Usage" = "docs/1-usage.md"},
+       {  "2. Tutorial" = "docs/2-tutorial.md"},
+       {  "3. Configuration" = "docs/3-configuration.md"},
+       {  "4. Advanced" = "docs/4-advanced.md"},
+       {  "Changelog" = "CHANGELOG.md"}]
+
+extra_css = ["docs/stylesheets/extra.css"] # To fix some colors in light vs slate mode.
+
+# Add a bunch of markdown extensions to improve the documentation (and the look ;)).
+# See https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
+# for full list of extensions.
+markdown_extensions = ["admonition",
+                       "footnotes",
+                       "pymdownx.emoji",
+                       "pymdownx.caret",
+                       "pymdownx.mark",
+                       "pymdownx.tilde",
+                       "pymdownx.details",
+                       "pymdownx.superfences",
+                       "pymdownx.tabbed"]
+
+# TODO: Implement plugin so git info is displayed on each page,
+# issue has been open on portray to fix the bug.
+# plugins = ["git-revision-date", "git-revision-date-localized", "bibtext"]
 
 [tool.portray.mkdocs.theme]
 name = "material"
-palette = {primary = "teal", accent = "deep-orange"}
+# Blurb that is output when the doc site is shared on social media or elsewhere.
+site_description = """
+  This is the documentation for dcm2bids, a community-centered project
+  that aims to be an easy-to-use tool to automate the process of 1- converting
+  DICOM files to NIfTI files with dcm2niix and 2- reorganising NIfTI files into the Brain
+  Imaging Data Structure (BIDS).
+  """
+
+# Design related stuff
+
+icon = {repo = "fontawesome/brands/github"} # icon in top-right corner.
+# TODO: Design a logo and/or favicon.
+# favicon = "art/logo_small.png"
+# logo = "art/logo_small.png"
+
+palette = {scheme = "preference"}
+# Alternative way of setting multiple option for the palette
+# [[tool.portray.mkdocs.theme.palette]]
+# scheme = "preference"
+
+
+# Additional settings for plugins
+[[tool.portray.mkdocs.markdown_extensions]]
+[tool.portray.mkdocs.markdown_extensions.toc]
+permalink = "⚓︎"
+
+[[tool.portray.mkdocs.markdown_extensions]]
+[tool.portray.mkdocs.markdown_extensions."pymdownx.highlight"]
+linenums = true # Always add line numbers in code blocks
+
+[[tool.portray.mkdocs.markdown_extensions]]
+[tool.portray.mkdocs.markdown_extensions."pymdownx.tasklist"]
+custom_checkbox = true
+clickable_checkbox = false
+
+# [[tool.portray.mkdocs.plugins]]
+# [tool.portray.mkdocs.plugins.git-revision-date]
+# enabled_if_env = "CI"
+
+# [[tool.portray.mkdocs.plugins]]
+# [tool.portray.mkdocs.plugins.git-revision-date-localized]
+# type = "date"
+# fallback_to_build_date = true
+
+
+## Footer icon in bottom-right corner
+[[tool.portray.mkdocs.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/UNFmontreal/Dcm2Bids"
+name = "dcm2bids on GitHub"
+
+[[tool.portray.mkdocs.extra.social]]
+icon = "fontawesome/brands/docker"
+link = "https://hub.docker.com/r/unfmontreal/dcm2bids"
+name = "dcm2bids on docker"
+

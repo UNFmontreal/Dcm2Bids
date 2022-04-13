@@ -23,6 +23,7 @@ channels:
     - conda-forge
 dependencies:
     - dcm2niix
+    - dcm2bids
     - pip
 ```
 
@@ -31,10 +32,9 @@ Finaly, create a new conda environment to install dcm2bids:
 ```bash
 conda env create -f environment.yml
 source activate dcm2bids
-pip install dcm2bids
 ```
 
-We should have access to dcm2bids now. Test it with `dcm2bids --help`.
+We should have access to `dcm2bids` now. Test it with `dcm2bids --help`.
 
 ## Scaffolding
 
@@ -75,7 +75,7 @@ We should see a list of compressed NIfTI files (`nii.gz`) with their resective s
 
 The first will be our resting state fMRI, the second and third our fieldmap EPI.
 
-When you will do it with your DICOMs, you should do it with a typical session of one of your participant.
+When you will do it with your DICOMs, you should do it with a typical session of one of your participants.
 
 ## Building the configuration file
 
@@ -97,7 +97,7 @@ In this case we could add another criteria to match the acquisition by the filen
 
 With all this information we could then update our configuration file.
 
-```
+```json hl_lines="9"
 {
     "descriptions": [
         {
@@ -117,7 +117,7 @@ For the two fieldmaps, we can see that with patterns of `"*EPI_PE=AP*"` or `"*EP
 
 We could then update our configuration file.
 
-```
+```json hl_lines="17 26"
 {
     "descriptions": [
         {
@@ -151,18 +151,20 @@ We could then update our configuration file.
 }
 ```
 
-For fieldmap, we added an `"intendedFor"` field to show that these fieldmaps should be use with our fMRI acquisition. Have a look at the explanation of [intendedFor](../config/#intendedfor) in the documentation or in the [BIDS specification][bids-fmap].
+For fieldmap, we added an `"intendedFor"` field to show that these fieldmaps should be use with our fMRI acquisition. Have a look at the explanation of [intendedFor](/docs/3-configuration/#intendedfor) in the documentation or in the [BIDS specification][bids-fmap].
 
 ## Running dcm2bids
 
 We can now run dcm2bids:
 
-`dcm2bids -d sourcedata/dcm_qa_nih-master/In/ -p ID01 -c code/dcm2bids_config.json`
+```bash
+dcm2bids -d sourcedata/dcm_qa_nih-master/In/ -p ID01 -c code/dcm2bids_config.json
+```
 
 A bunch of information is print to the terminal and we can verify that the data are now in BIDS.
 
-```bash
-$ ls sub-ID01/*
+```console
+user@pc:data/$ ls sub-ID01/*
 sub-ID01/fmap:
 sub-ID01_dir-AP_epi.json  sub-ID01_dir-AP_epi.nii.gz
 sub-ID01_dir-PA_epi.json  sub-ID01_dir-PA_epi.nii.gz
