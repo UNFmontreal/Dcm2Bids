@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.3.0">
     
     
       
@@ -810,33 +810,15 @@
                   </a>
                 
                 
-                <h1 id="module-dcm2bids">Module dcm2bids<a class="headerlink" href="#module-dcm2bids" title="Permanent link">⚓︎</a></h1>
+                <h1 id="module-dcm2bids">Module dcm2bids</h1>
 <p>dcm2bids</p>
 <hr />
 <p>Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<pre><code># -*- coding: utf-8 -*-
 
-&quot;&quot;&quot;
+"""
 
 dcm2bids
 
@@ -844,7 +826,7 @@ dcm2bids
 
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 
-&quot;&quot;&quot;
+"""
 
 from .dcm2bids import Dcm2bids
 
@@ -852,11 +834,10 @@ from .scaffold import scaffold
 
 from .version import __version__
 
-__all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
-</code></pre></div>
-</td></tr></table>
+__all__ = ["__version__", "Dcm2bids", "scaffold"]
+</code></pre>
 </details>
-<h2 id="sub-modules">Sub-modules<a class="headerlink" href="#sub-modules" title="Permanent link">⚓︎</a></h2>
+<h2 id="sub-modules">Sub-modules</h2>
 <ul>
 <li><a href="dcm2bids/">dcm2bids.dcm2bids</a></li>
 <li><a href="dcm2niix/">dcm2bids.dcm2niix</a></li>
@@ -868,81 +849,37 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <li><a href="utils/">dcm2bids.utils</a></li>
 <li><a href="version/">dcm2bids.version</a></li>
 </ul>
-<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">__version__</span>
+<h2 id="variables">Variables</h2>
+<div class="highlight"><pre><span></span><code><span class="n">__version__</span>
 </code></pre></div>
-</td></tr></table>
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
-<h3 id="scaffold">scaffold<a class="headerlink" href="#scaffold" title="Permanent link">⚓︎</a></h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">scaffold</span><span class="p">(</span>
+<h2 id="functions">Functions</h2>
+<h3 id="scaffold">scaffold</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">scaffold</span><span class="p">(</span>
 
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p>scaffold entry point</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def scaffold():
+<pre><code>def scaffold():
 
-    &quot;&quot;&quot;scaffold entry point&quot;&quot;&quot;
+    """scaffold entry point"""
 
     args = _get_arguments()
 
-    for _ in [&quot;code&quot;, &quot;derivatives&quot;, &quot;sourcedata&quot;]:
+    for _ in ["code", "derivatives", "sourcedata"]:
 
         os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
 
     for _ in [
 
-        &quot;dataset_description.json&quot;,
+        "dataset_description.json",
 
-        &quot;participants.json&quot;,
+        "participants.json",
 
-        &quot;participants.tsv&quot;,
+        "participants.tsv",
 
-        &quot;README&quot;,
+        "README",
 
     ]:
 
@@ -952,35 +889,24 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             shutil.copyfile(src, dest)
 
-    with resources.path(__name__, &quot;CHANGES&quot;) as changes_template:
+    with resources.path(__name__, "CHANGES") as changes_template:
 
         with open(changes_template) as _:
 
-            data = _.read().format(datetime.date.today().strftime(&quot;%Y-%m-%d&quot;))
+            data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
 
         write_txt(
 
-            os.path.join(args.output_dir, &quot;CHANGES&quot;),
+            os.path.join(args.output_dir, "CHANGES"),
 
-            data.split(&quot;\n&quot;)[:-1],
+            data.split("\n")[:-1],
 
     )
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
-<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
-<h3 id="dcm2bids">Dcm2bids<a class="headerlink" href="#dcm2bids" title="Permanent link">⚓︎</a></h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2bids</span><span class="p">(</span>
+<h2 id="classes">Classes</h2>
+<h3 id="dcm2bids">Dcm2bids</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2bids</span><span class="p">(</span>
     <span class="n">dicom_dir</span><span class="p">,</span>
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">config</span><span class="p">,</span>
@@ -992,8 +918,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
     <span class="o">**</span><span class="n">_</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
-<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
+<h4 id="attributes">Attributes</h4>
 <table>
 <thead>
 <tr>
@@ -1062,297 +987,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 </table>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
+<pre><code>class Dcm2bids(object):
 
-    &quot;&quot;&quot; Object to handle dcm2bids execution steps
+    """ Object to handle dcm2bids execution steps
 
     Args:
 
@@ -1374,7 +1011,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         log_level (str): logging level
 
-    &quot;&quot;&quot;
+    """
 
     def __init__(
 
@@ -1420,29 +1057,29 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         self.set_logger()
 
-        self.logger.info(&quot;--- dcm2bids start ---&quot;)
+        self.logger.info("--- dcm2bids start ---")
 
-        self.logger.info(&quot;OS:version: %s&quot;, platform.platform())
+        self.logger.info("OS:version: %s", platform.platform())
 
-        self.logger.info(&quot;python:version: %s&quot;, sys.version.replace(&quot;\n&quot;, &quot;&quot;))
+        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
 
-        self.logger.info(&quot;dcm2bids:version: %s&quot;, __version__)
+        self.logger.info("dcm2bids:version: %s", __version__)
 
-        self.logger.info(&quot;dcm2niix:version: %s&quot;, dcm2niix_version())
+        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
 
-        self.logger.info(&quot;participant: %s&quot;, self.participant.name)
+        self.logger.info("participant: %s", self.participant.name)
 
-        self.logger.info(&quot;session: %s&quot;, self.participant.session)
+        self.logger.info("session: %s", self.participant.session)
 
-        self.logger.info(&quot;config: %s&quot;, os.path.realpath(config))
+        self.logger.info("config: %s", os.path.realpath(config))
 
-        self.logger.info(&quot;BIDS directory: %s&quot;, os.path.realpath(output_dir))
+        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
 
     @property
 
     def dicomDirs(self):
 
-        &quot;&quot;&quot;List of DICOMs directories&quot;&quot;&quot;
+        """List of DICOMs directories"""
 
         return self._dicomDirs
 
@@ -1478,17 +1115,17 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
     def set_logger(self):
 
-        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
+        """ Set a basic logger"""
 
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, &quot;log&quot;)
+        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
 
         logFile = os.path.join(
 
             logDir,
 
-            &quot;{}_{}.log&quot;.format(
+            "{}_{}.log".format(
 
-                self.participant.prefix, datetime.now().isoformat().replace(&quot;:&quot;, &quot;&quot;)
+                self.participant.prefix, datetime.now().isoformat().replace(":", "")
 
             ),
 
@@ -1508,7 +1145,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
     def run(self):
 
-        &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
+        """Run dcm2bids"""
 
         dcm2niix = Dcm2niix(
 
@@ -1518,7 +1155,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             self.participant,
 
-            self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
+            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
 
         )
 
@@ -1530,7 +1167,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             sidecars.append(
 
-                Sidecar(filename, self.config.get(&quot;compKeys&quot;, DEFAULT.compKeys))
+                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
 
             )
 
@@ -1540,11 +1177,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             sidecars,
 
-            self.config[&quot;descriptions&quot;],
+            self.config["descriptions"],
 
-            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
+            self.config.get("searchMethod", DEFAULT.searchMethod),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
+            self.config.get("caseSensitive", DEFAULT.caseSensitive)
 
         )
 
@@ -1554,7 +1191,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         parser.find_runs()
 
-        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
+        self.logger.info("moving acquisitions into BIDS folder")
 
         for acq in parser.acquisitions:
 
@@ -1562,13 +1199,13 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         check_latest()
 
-        check_latest(&quot;dcm2niix&quot;)
+        check_latest("dcm2niix")
 
     def move(self, acquisition):
 
-        &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
+        """Move an acquisition to BIDS format"""
 
-        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
+        for srcFile in glob(acquisition.srcRoot + ".*"):
 
             _, ext = splitext_(srcFile)
 
@@ -1586,27 +1223,27 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             if os.path.isfile(dstFile):
 
-                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
+                self.logger.info("'%s' already exists", dstFile)
 
                 if self.clobber:
 
-                    self.logger.info(&quot;Overwriting because of &#39;clobber&#39; option&quot;)
+                    self.logger.info("Overwriting because of 'clobber' option")
 
                 else:
 
-                    self.logger.info(&quot;Use clobber option to overwrite&quot;)
+                    self.logger.info("Use clobber option to overwrite")
 
                     continue
 
-            # it&#39;s an anat nifti file and the user using a deface script
+            # it's an anat nifti file and the user using a deface script
 
             if (
 
-                self.config.get(&quot;defaceTpl&quot;)
+                self.config.get("defaceTpl")
 
-                and acquisition.dataType == &quot;anat&quot;
+                and acquisition.dataType == "anat"
 
-                and &quot;.nii&quot; in ext
+                and ".nii" in ext
 
             ):
 
@@ -1618,7 +1255,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
                     pass
 
-                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
+                defaceTpl = self.config.get("defaceTpl")
 
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
 
@@ -1626,9 +1263,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             # use
 
-            elif ext == &quot;.json&quot;:
+            elif ext == ".json":
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;])
+                data = acquisition.dstSidecarData(self.config["descriptions"])
 
                 save_json(dstFile, data)
 
@@ -1639,108 +1276,28 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
             else:
 
                 os.rename(srcFile, dstFile)
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
 <hr />
-<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dicomDirs</span>
+<h4 id="instance-variables">Instance variables</h4>
+<div class="highlight"><pre><span></span><code><span class="n">dicomDirs</span>
 </code></pre></div>
-</td></tr></table>
 <p>List of DICOMs directories</p>
-<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
-<h4 id="move">move<a class="headerlink" href="#move" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
+<h4 id="methods">Methods</h4>
+<h4 id="move">move</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">acquisition</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p>Move an acquisition to BIDS format</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition):
+<pre><code>    def move(self, acquisition):
 
-        &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
+        """Move an acquisition to BIDS format"""
 
-        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
+        for srcFile in glob(acquisition.srcRoot + ".*"):
 
             _, ext = splitext_(srcFile)
 
@@ -1758,27 +1315,27 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             if os.path.isfile(dstFile):
 
-                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
+                self.logger.info("'%s' already exists", dstFile)
 
                 if self.clobber:
 
-                    self.logger.info(&quot;Overwriting because of &#39;clobber&#39; option&quot;)
+                    self.logger.info("Overwriting because of 'clobber' option")
 
                 else:
 
-                    self.logger.info(&quot;Use clobber option to overwrite&quot;)
+                    self.logger.info("Use clobber option to overwrite")
 
                     continue
 
-            # it&#39;s an anat nifti file and the user using a deface script
+            # it's an anat nifti file and the user using a deface script
 
             if (
 
-                self.config.get(&quot;defaceTpl&quot;)
+                self.config.get("defaceTpl")
 
-                and acquisition.dataType == &quot;anat&quot;
+                and acquisition.dataType == "anat"
 
-                and &quot;.nii&quot; in ext
+                and ".nii" in ext
 
             ):
 
@@ -1790,7 +1347,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
                     pass
 
-                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
+                defaceTpl = self.config.get("defaceTpl")
 
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
 
@@ -1798,9 +1355,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             # use
 
-            elif ext == &quot;.json&quot;:
+            elif ext == ".json":
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;])
+                data = acquisition.dstSidecarData(self.config["descriptions"])
 
                 save_json(dstFile, data)
 
@@ -1811,79 +1368,19 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
             else:
 
                 os.rename(srcFile, dstFile)
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
-<h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<h4 id="run">run</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p>Run dcm2bids</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self):
+<pre><code>    def run(self):
 
-        &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
+        """Run dcm2bids"""
 
         dcm2niix = Dcm2niix(
 
@@ -1893,7 +1390,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             self.participant,
 
-            self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
+            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
 
         )
 
@@ -1905,7 +1402,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             sidecars.append(
 
-                Sidecar(filename, self.config.get(&quot;compKeys&quot;, DEFAULT.compKeys))
+                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
 
             )
 
@@ -1915,11 +1412,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             sidecars,
 
-            self.config[&quot;descriptions&quot;],
+            self.config["descriptions"],
 
-            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
+            self.config.get("searchMethod", DEFAULT.searchMethod),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
+            self.config.get("caseSensitive", DEFAULT.caseSensitive)
 
         )
 
@@ -1929,7 +1426,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         parser.find_runs()
 
-        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
+        self.logger.info("moving acquisitions into BIDS folder")
 
         for acq in parser.acquisitions:
 
@@ -1937,62 +1434,30 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         check_latest()
 
-        check_latest(&quot;dcm2niix&quot;)
-</code></pre></div>
-</td></tr></table>
+        check_latest("dcm2niix")
+</code></pre>
 </details>
-<h4 id="set_logger">set_logger<a class="headerlink" href="#set_logger" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
+<h4 id="set_logger">set_logger</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p>Set a basic logger</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def set_logger(self):
+<pre><code>    def set_logger(self):
 
-        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
+        """ Set a basic logger"""
 
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, &quot;log&quot;)
+        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
 
         logFile = os.path.join(
 
             logDir,
 
-            &quot;{}_{}.log&quot;.format(
+            "{}_{}.log".format(
 
-                self.participant.prefix, datetime.now().isoformat().replace(&quot;:&quot;, &quot;&quot;)
+                self.participant.prefix, datetime.now().isoformat().replace(":", "")
 
             ),
 
@@ -2009,8 +1474,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
         setup_logging(self.logLevel, logFile)
 
         self.logger = logging.getLogger(__name__)
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
                 
               

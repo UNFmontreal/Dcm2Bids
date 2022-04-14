@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.3.0">
     
     
       
@@ -796,454 +796,14 @@
                   </a>
                 
                 
-                <h1 id="module-dcm2bidssidecar">Module dcm2bids.sidecar<a class="headerlink" href="#module-dcm2bidssidecar" title="Permanent link">⚓︎</a></h1>
+                <h1 id="module-dcm2bidssidecar">Module dcm2bids.sidecar</h1>
 <p>sidecars classes</p>
 <p>None</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
-<span class="normal">349</span>
-<span class="normal">350</span>
-<span class="normal">351</span>
-<span class="normal">352</span>
-<span class="normal">353</span>
-<span class="normal">354</span>
-<span class="normal">355</span>
-<span class="normal">356</span>
-<span class="normal">357</span>
-<span class="normal">358</span>
-<span class="normal">359</span>
-<span class="normal">360</span>
-<span class="normal">361</span>
-<span class="normal">362</span>
-<span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<pre><code># -*- coding: utf-8 -*-
 
-&quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
+"""sidecars classes"""
 
 import itertools
 
@@ -1265,7 +825,7 @@ from .utils import DEFAULT, load_json, splitext_
 
 class Sidecar(object):
 
-    &quot;&quot;&quot; A sidecar object
+    """ A sidecar object
 
     Args:
 
@@ -1273,9 +833,9 @@ class Sidecar(object):
 
         keyComp (list): A list of keys from the JSON sidecar to compare sidecars
 
-                     default=[&quot;SeriesNumber&quot;,&quot;AcquisitionTime&quot;,&quot;SideCarFilename&quot;]
+                     default=["SeriesNumber","AcquisitionTime","SideCarFilename"]
 
-    &quot;&quot;&quot;
+    """
 
     def __init__(self, filename, compKeys=DEFAULT.compKeys):
 
@@ -1347,7 +907,7 @@ class Sidecar(object):
 
     def data(self, filename):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -1357,7 +917,7 @@ class Sidecar(object):
 
             A dictionnary of the JSON content plus the SidecarFilename
 
-        &quot;&quot;&quot;
+        """
 
         try:
 
@@ -1369,13 +929,13 @@ class Sidecar(object):
 
         self._origData = data.copy()
 
-        data[&quot;SidecarFilename&quot;] = os.path.basename(filename)
+        data["SidecarFilename"] = os.path.basename(filename)
 
         self._data = data
 
 class SidecarPairing(object):
 
-    &quot;&quot;&quot;
+    """
 
     Args:
 
@@ -1383,7 +943,7 @@ class SidecarPairing(object):
 
         descriptions (list): List of dictionnaries describing acquisitions
 
-    &quot;&quot;&quot;
+    """
 
     def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
 
@@ -1391,7 +951,7 @@ class SidecarPairing(object):
 
         self.logger = logging.getLogger(__name__)
 
-        self._searchMethod = &quot;&quot;
+        self._searchMethod = ""
 
         self.graph = OrderedDict()
 
@@ -1415,13 +975,13 @@ class SidecarPairing(object):
 
     def searchMethod(self, value):
 
-        &quot;&quot;&quot;
+        """
 
         Checks if the search method is implemented
 
         Warns the user if not and fall back to default
 
-        &quot;&quot;&quot;
+        """
 
         if value in DEFAULT.searchMethodChoices:
 
@@ -1431,17 +991,17 @@ class SidecarPairing(object):
 
             self._searchMethod = DEFAULT.searchMethod
 
-            self.logger.warning(&quot;&#39;%s&#39; is not a search method implemented&quot;, value)
+            self.logger.warning("'%s' is not a search method implemented", value)
 
             self.logger.warning(
 
-                &quot;Falling back to default: %s&quot;, DEFAULT.searchMethod
+                "Falling back to default: %s", DEFAULT.searchMethod
 
             )
 
             self.logger.warning(
 
-                &quot;Search methods implemented: %s&quot;, DEFAULT.searchMethodChoices
+                "Search methods implemented: %s", DEFAULT.searchMethodChoices
 
             )
 
@@ -1463,23 +1023,23 @@ class SidecarPairing(object):
 
             self._caseSensitive = DEFAULT.caseSensitive
 
-            self.logger.warning(&quot;&#39;%s&#39; is not a boolean&quot;, value)
+            self.logger.warning("'%s' is not a boolean", value)
 
             self.logger.warning(
 
-                &quot;Falling back to default: %s&quot;, DEFAULT.caseSensitive
+                "Falling back to default: %s", DEFAULT.caseSensitive
 
             )
 
             self.logger.warning(
 
-                &quot;Search methods implemented: %s&quot;, DEFAULT.caseSensitive
+                "Search methods implemented: %s", DEFAULT.caseSensitive
 
             )
 
     def build_graph(self):
 
-        &quot;&quot;&quot;
+        """
 
         Test all the possible links between the list of sidecars and the
 
@@ -1493,7 +1053,7 @@ class SidecarPairing(object):
 
             A graph (OrderedDict)
 
-        &quot;&quot;&quot;
+        """
 
         graph = OrderedDict((_, []) for _ in self.sidecars)
 
@@ -1501,7 +1061,7 @@ class SidecarPairing(object):
 
         for sidecar, description in possibleLinks:
 
-            criteria = description.get(&quot;criteria&quot;, None)
+            criteria = description.get("criteria", None)
 
             if criteria and self.isLink(sidecar.data, criteria):
 
@@ -1513,7 +1073,7 @@ class SidecarPairing(object):
 
     def isLink(self, data, criteria):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -1525,11 +1085,11 @@ class SidecarPairing(object):
 
             boolean
 
-        &quot;&quot;&quot;
+        """
 
         def compare(name, pattern):
 
-            if self.searchMethod == &quot;re&quot;:
+            if self.searchMethod == "re":
 
                 return bool(re.search(pattern, name))
 
@@ -1551,7 +1111,7 @@ class SidecarPairing(object):
 
         for tag, pattern in iteritems(criteria):
 
-            name = data.get(tag, &#39;&#39;)# or &#39;&#39;
+            name = data.get(tag, '')# or ''
 
             if isinstance(name, list):
 
@@ -1577,7 +1137,7 @@ class SidecarPairing(object):
 
     def build_acquisitions(self, participant):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -1587,11 +1147,11 @@ class SidecarPairing(object):
 
             A list of acquisition objects
 
-        &quot;&quot;&quot;
+        """
 
         acquisitions = []
 
-        self.logger.info(&quot;Sidecars pairing:&quot;)
+        self.logger.info("Sidecars pairing:")
 
         for sidecar, descriptions in iteritems(self.graph):
 
@@ -1607,25 +1167,25 @@ class SidecarPairing(object):
 
                 acquisitions.append(acq)
 
-                self.logger.info(&quot;%s  &lt;-  %s&quot;, acq.suffix, sidecarName)
+                self.logger.info("%s  &lt;-  %s", acq.suffix, sidecarName)
 
             # sidecar with no link
 
             elif len(descriptions) == 0:
 
-                self.logger.info(&quot;No Pairing  &lt;-  %s&quot;, sidecarName)
+                self.logger.info("No Pairing  &lt;-  %s", sidecarName)
 
             # sidecar with several links
 
             else:
 
-                self.logger.warning(&quot;Several Pairing  &lt;-  %s&quot;, sidecarName)
+                self.logger.warning("Several Pairing  &lt;-  %s", sidecarName)
 
                 for desc in descriptions:
 
                     acq = Acquisition(participant, **desc)
 
-                    self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
+                    self.logger.warning("    -&gt;  %s", acq.suffix)
 
         self.acquisitions = acquisitions
 
@@ -1633,17 +1193,17 @@ class SidecarPairing(object):
 
     def find_runs(self):
 
-        &quot;&quot;&quot;
+        """
 
         Check if there is duplicate destination roots in the acquisitions
 
-        and add &#39;_run-&#39; to the customLabels of the acquisition
+        and add '_run-' to the customLabels of the acquisition
 
-        &quot;&quot;&quot;
+        """
 
         def duplicates(seq):
 
-            &quot;&quot;&quot; Find duplicate items in a list
+            """ Find duplicate items in a list
 
             Args:
 
@@ -1655,7 +1215,7 @@ class SidecarPairing(object):
 
             ref: http://stackoverflow.com/a/5419576
 
-            &quot;&quot;&quot;
+            """
 
             tally = defaultdict(list)
 
@@ -1673,30 +1233,25 @@ class SidecarPairing(object):
 
         for dstRoot, dup in duplicates(dstRoots):
 
-            self.logger.info(&quot;%s has %s runs&quot;, dstRoot, len(dup))
+            self.logger.info("%s has %s runs", dstRoot, len(dup))
 
-            self.logger.info(&quot;Adding &#39;run&#39; information to the acquisition&quot;)
+            self.logger.info("Adding 'run' information to the acquisition")
 
             for runNum, acqInd in enumerate(dup):
 
                 runStr = DEFAULT.runTpl.format(runNum + 1)
 
                 self.acquisitions[acqInd].customLabels += runStr
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
-<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
-<h3 id="sidecar">Sidecar<a class="headerlink" href="#sidecar" title="Permanent link">⚓︎</a></h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sidecar</span><span class="p">(</span>
+<h2 id="classes">Classes</h2>
+<h3 id="sidecar">Sidecar</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sidecar</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">compKeys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SeriesNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;AcquisitionTime&#39;</span><span class="p">,</span> <span class="s1">&#39;SidecarFilename&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
-<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
+<h4 id="attributes">Attributes</h4>
 <table>
 <thead>
 <tr>
@@ -1729,117 +1284,9 @@ class SidecarPairing(object):
 </table>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Sidecar(object):
+<pre><code>class Sidecar(object):
 
-    &quot;&quot;&quot; A sidecar object
+    """ A sidecar object
 
     Args:
 
@@ -1847,9 +1294,9 @@ class SidecarPairing(object):
 
         keyComp (list): A list of keys from the JSON sidecar to compare sidecars
 
-                     default=[&quot;SeriesNumber&quot;,&quot;AcquisitionTime&quot;,&quot;SideCarFilename&quot;]
+                     default=["SeriesNumber","AcquisitionTime","SideCarFilename"]
 
-    &quot;&quot;&quot;
+    """
 
     def __init__(self, filename, compKeys=DEFAULT.compKeys):
 
@@ -1921,7 +1368,7 @@ class SidecarPairing(object):
 
     def data(self, filename):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -1931,7 +1378,7 @@ class SidecarPairing(object):
 
             A dictionnary of the JSON content plus the SidecarFilename
 
-        &quot;&quot;&quot;
+        """
 
         try:
 
@@ -1943,347 +1390,30 @@ class SidecarPairing(object):
 
         self._origData = data.copy()
 
-        data[&quot;SidecarFilename&quot;] = os.path.basename(filename)
+        data["SidecarFilename"] = os.path.basename(filename)
 
         self._data = data
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
 <hr />
-<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">data</span>
+<h4 id="instance-variables">Instance variables</h4>
+<div class="highlight"><pre><span></span><code><span class="n">data</span>
 </code></pre></div>
-</td></tr></table>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">origData</span>
+<div class="highlight"><pre><span></span><code><span class="n">origData</span>
 </code></pre></div>
-</td></tr></table>
-<h3 id="sidecarpairing">SidecarPairing<a class="headerlink" href="#sidecarpairing" title="Permanent link">⚓︎</a></h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span>
+<h3 id="sidecarpairing">SidecarPairing</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span>
     <span class="n">sidecars</span><span class="p">,</span>
     <span class="n">descriptions</span><span class="p">,</span>
     <span class="n">searchMethod</span><span class="o">=</span><span class="s1">&#39;fnmatch&#39;</span><span class="p">,</span>
     <span class="n">caseSensitive</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class SidecarPairing(object):
+<pre><code>class SidecarPairing(object):
 
-    &quot;&quot;&quot;
+    """
 
     Args:
 
@@ -2291,7 +1421,7 @@ class SidecarPairing(object):
 
         descriptions (list): List of dictionnaries describing acquisitions
 
-    &quot;&quot;&quot;
+    """
 
     def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
 
@@ -2299,7 +1429,7 @@ class SidecarPairing(object):
 
         self.logger = logging.getLogger(__name__)
 
-        self._searchMethod = &quot;&quot;
+        self._searchMethod = ""
 
         self.graph = OrderedDict()
 
@@ -2323,13 +1453,13 @@ class SidecarPairing(object):
 
     def searchMethod(self, value):
 
-        &quot;&quot;&quot;
+        """
 
         Checks if the search method is implemented
 
         Warns the user if not and fall back to default
 
-        &quot;&quot;&quot;
+        """
 
         if value in DEFAULT.searchMethodChoices:
 
@@ -2339,17 +1469,17 @@ class SidecarPairing(object):
 
             self._searchMethod = DEFAULT.searchMethod
 
-            self.logger.warning(&quot;&#39;%s&#39; is not a search method implemented&quot;, value)
+            self.logger.warning("'%s' is not a search method implemented", value)
 
             self.logger.warning(
 
-                &quot;Falling back to default: %s&quot;, DEFAULT.searchMethod
+                "Falling back to default: %s", DEFAULT.searchMethod
 
             )
 
             self.logger.warning(
 
-                &quot;Search methods implemented: %s&quot;, DEFAULT.searchMethodChoices
+                "Search methods implemented: %s", DEFAULT.searchMethodChoices
 
             )
 
@@ -2371,23 +1501,23 @@ class SidecarPairing(object):
 
             self._caseSensitive = DEFAULT.caseSensitive
 
-            self.logger.warning(&quot;&#39;%s&#39; is not a boolean&quot;, value)
+            self.logger.warning("'%s' is not a boolean", value)
 
             self.logger.warning(
 
-                &quot;Falling back to default: %s&quot;, DEFAULT.caseSensitive
+                "Falling back to default: %s", DEFAULT.caseSensitive
 
             )
 
             self.logger.warning(
 
-                &quot;Search methods implemented: %s&quot;, DEFAULT.caseSensitive
+                "Search methods implemented: %s", DEFAULT.caseSensitive
 
             )
 
     def build_graph(self):
 
-        &quot;&quot;&quot;
+        """
 
         Test all the possible links between the list of sidecars and the
 
@@ -2401,7 +1531,7 @@ class SidecarPairing(object):
 
             A graph (OrderedDict)
 
-        &quot;&quot;&quot;
+        """
 
         graph = OrderedDict((_, []) for _ in self.sidecars)
 
@@ -2409,7 +1539,7 @@ class SidecarPairing(object):
 
         for sidecar, description in possibleLinks:
 
-            criteria = description.get(&quot;criteria&quot;, None)
+            criteria = description.get("criteria", None)
 
             if criteria and self.isLink(sidecar.data, criteria):
 
@@ -2421,7 +1551,7 @@ class SidecarPairing(object):
 
     def isLink(self, data, criteria):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -2433,11 +1563,11 @@ class SidecarPairing(object):
 
             boolean
 
-        &quot;&quot;&quot;
+        """
 
         def compare(name, pattern):
 
-            if self.searchMethod == &quot;re&quot;:
+            if self.searchMethod == "re":
 
                 return bool(re.search(pattern, name))
 
@@ -2459,7 +1589,7 @@ class SidecarPairing(object):
 
         for tag, pattern in iteritems(criteria):
 
-            name = data.get(tag, &#39;&#39;)# or &#39;&#39;
+            name = data.get(tag, '')# or ''
 
             if isinstance(name, list):
 
@@ -2485,7 +1615,7 @@ class SidecarPairing(object):
 
     def build_acquisitions(self, participant):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -2495,11 +1625,11 @@ class SidecarPairing(object):
 
             A list of acquisition objects
 
-        &quot;&quot;&quot;
+        """
 
         acquisitions = []
 
-        self.logger.info(&quot;Sidecars pairing:&quot;)
+        self.logger.info("Sidecars pairing:")
 
         for sidecar, descriptions in iteritems(self.graph):
 
@@ -2515,25 +1645,25 @@ class SidecarPairing(object):
 
                 acquisitions.append(acq)
 
-                self.logger.info(&quot;%s  &lt;-  %s&quot;, acq.suffix, sidecarName)
+                self.logger.info("%s  &lt;-  %s", acq.suffix, sidecarName)
 
             # sidecar with no link
 
             elif len(descriptions) == 0:
 
-                self.logger.info(&quot;No Pairing  &lt;-  %s&quot;, sidecarName)
+                self.logger.info("No Pairing  &lt;-  %s", sidecarName)
 
             # sidecar with several links
 
             else:
 
-                self.logger.warning(&quot;Several Pairing  &lt;-  %s&quot;, sidecarName)
+                self.logger.warning("Several Pairing  &lt;-  %s", sidecarName)
 
                 for desc in descriptions:
 
                     acq = Acquisition(participant, **desc)
 
-                    self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
+                    self.logger.warning("    -&gt;  %s", acq.suffix)
 
         self.acquisitions = acquisitions
 
@@ -2541,17 +1671,17 @@ class SidecarPairing(object):
 
     def find_runs(self):
 
-        &quot;&quot;&quot;
+        """
 
         Check if there is duplicate destination roots in the acquisitions
 
-        and add &#39;_run-&#39; to the customLabels of the acquisition
+        and add '_run-' to the customLabels of the acquisition
 
-        &quot;&quot;&quot;
+        """
 
         def duplicates(seq):
 
-            &quot;&quot;&quot; Find duplicate items in a list
+            """ Find duplicate items in a list
 
             Args:
 
@@ -2563,7 +1693,7 @@ class SidecarPairing(object):
 
             ref: http://stackoverflow.com/a/5419576
 
-            &quot;&quot;&quot;
+            """
 
             tally = defaultdict(list)
 
@@ -2581,37 +1711,30 @@ class SidecarPairing(object):
 
         for dstRoot, dup in duplicates(dstRoots):
 
-            self.logger.info(&quot;%s has %s runs&quot;, dstRoot, len(dup))
+            self.logger.info("%s has %s runs", dstRoot, len(dup))
 
-            self.logger.info(&quot;Adding &#39;run&#39; information to the acquisition&quot;)
+            self.logger.info("Adding 'run' information to the acquisition")
 
             for runNum, acqInd in enumerate(dup):
 
                 runStr = DEFAULT.runTpl.format(runNum + 1)
 
                 self.acquisitions[acqInd].customLabels += runStr
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
 <hr />
-<h4 id="instance-variables_1">Instance variables<a class="headerlink" href="#instance-variables_1" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
+<h4 id="instance-variables_1">Instance variables</h4>
+<div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
 </code></pre></div>
-</td></tr></table>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">searchMethod</span>
+<div class="highlight"><pre><span></span><code><span class="n">searchMethod</span>
 </code></pre></div>
-</td></tr></table>
-<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
-<h4 id="build_acquisitions">build_acquisitions<a class="headerlink" href="#build_acquisitions" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_acquisitions</span><span class="p">(</span>
+<h4 id="methods">Methods</h4>
+<h4 id="build_acquisitions">build_acquisitions</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_acquisitions</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">participant</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2648,63 +1771,9 @@ class SidecarPairing(object):
 </table>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def build_acquisitions(self, participant):
+<pre><code>    def build_acquisitions(self, participant):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -2714,11 +1783,11 @@ class SidecarPairing(object):
 
             A list of acquisition objects
 
-        &quot;&quot;&quot;
+        """
 
         acquisitions = []
 
-        self.logger.info(&quot;Sidecars pairing:&quot;)
+        self.logger.info("Sidecars pairing:")
 
         for sidecar, descriptions in iteritems(self.graph):
 
@@ -2734,40 +1803,36 @@ class SidecarPairing(object):
 
                 acquisitions.append(acq)
 
-                self.logger.info(&quot;%s  &lt;-  %s&quot;, acq.suffix, sidecarName)
+                self.logger.info("%s  &lt;-  %s", acq.suffix, sidecarName)
 
             # sidecar with no link
 
             elif len(descriptions) == 0:
 
-                self.logger.info(&quot;No Pairing  &lt;-  %s&quot;, sidecarName)
+                self.logger.info("No Pairing  &lt;-  %s", sidecarName)
 
             # sidecar with several links
 
             else:
 
-                self.logger.warning(&quot;Several Pairing  &lt;-  %s&quot;, sidecarName)
+                self.logger.warning("Several Pairing  &lt;-  %s", sidecarName)
 
                 for desc in descriptions:
 
                     acq = Acquisition(participant, **desc)
 
-                    self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
+                    self.logger.warning("    -&gt;  %s", acq.suffix)
 
         self.acquisitions = acquisitions
 
         return acquisitions
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
-<h4 id="build_graph">build_graph<a class="headerlink" href="#build_graph" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span>
+<h4 id="build_graph">build_graph</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p>Test all the possible links between the list of sidecars and the</p>
 <p>description dictionnaries and build a graph from it
 The graph is in a OrderedDict object. The keys are the Sidecars and
@@ -2789,41 +1854,9 @@ the values are a list of possible descriptions</p>
 </table>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def build_graph(self):
+<pre><code>    def build_graph(self):
 
-        &quot;&quot;&quot;
+        """
 
         Test all the possible links between the list of sidecars and the
 
@@ -2837,7 +1870,7 @@ the values are a list of possible descriptions</p>
 
             A graph (OrderedDict)
 
-        &quot;&quot;&quot;
+        """
 
         graph = OrderedDict((_, []) for _ in self.sidecars)
 
@@ -2845,7 +1878,7 @@ the values are a list of possible descriptions</p>
 
         for sidecar, description in possibleLinks:
 
-            criteria = description.get(&quot;criteria&quot;, None)
+            criteria = description.get("criteria", None)
 
             if criteria and self.isLink(sidecar.data, criteria):
 
@@ -2854,84 +1887,30 @@ the values are a list of possible descriptions</p>
         self.graph = graph
 
         return graph
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
-<h4 id="find_runs">find_runs<a class="headerlink" href="#find_runs" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">find_runs</span><span class="p">(</span>
+<h4 id="find_runs">find_runs</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">find_runs</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p>Check if there is duplicate destination roots in the acquisitions</p>
 <p>and add '_run-' to the customLabels of the acquisition</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def find_runs(self):
+<pre><code>    def find_runs(self):
 
-        &quot;&quot;&quot;
+        """
 
         Check if there is duplicate destination roots in the acquisitions
 
-        and add &#39;_run-&#39; to the customLabels of the acquisition
+        and add '_run-' to the customLabels of the acquisition
 
-        &quot;&quot;&quot;
+        """
 
         def duplicates(seq):
 
-            &quot;&quot;&quot; Find duplicate items in a list
+            """ Find duplicate items in a list
 
             Args:
 
@@ -2943,7 +1922,7 @@ the values are a list of possible descriptions</p>
 
             ref: http://stackoverflow.com/a/5419576
 
-            &quot;&quot;&quot;
+            """
 
             tally = defaultdict(list)
 
@@ -2961,30 +1940,24 @@ the values are a list of possible descriptions</p>
 
         for dstRoot, dup in duplicates(dstRoots):
 
-            self.logger.info(&quot;%s has %s runs&quot;, dstRoot, len(dup))
+            self.logger.info("%s has %s runs", dstRoot, len(dup))
 
-            self.logger.info(&quot;Adding &#39;run&#39; information to the acquisition&quot;)
+            self.logger.info("Adding 'run' information to the acquisition")
 
             for runNum, acqInd in enumerate(dup):
 
                 runStr = DEFAULT.runTpl.format(runNum + 1)
 
                 self.acquisitions[acqInd].customLabels += runStr
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
-<h4 id="islink">isLink<a class="headerlink" href="#islink" title="Permanent link">⚓︎</a></h4>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">isLink</span><span class="p">(</span>
+<h4 id="islink">isLink</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">isLink</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">data</span><span class="p">,</span>
     <span class="n">criteria</span>
 <span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3027,71 +2000,9 @@ the values are a list of possible descriptions</p>
 </table>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def isLink(self, data, criteria):
+<pre><code>    def isLink(self, data, criteria):
 
-        &quot;&quot;&quot;
+        """
 
         Args:
 
@@ -3103,11 +2014,11 @@ the values are a list of possible descriptions</p>
 
             boolean
 
-        &quot;&quot;&quot;
+        """
 
         def compare(name, pattern):
 
-            if self.searchMethod == &quot;re&quot;:
+            if self.searchMethod == "re":
 
                 return bool(re.search(pattern, name))
 
@@ -3129,7 +2040,7 @@ the values are a list of possible descriptions</p>
 
         for tag, pattern in iteritems(criteria):
 
-            name = data.get(tag, &#39;&#39;)# or &#39;&#39;
+            name = data.get(tag, '')# or ''
 
             if isinstance(name, list):
 
@@ -3152,8 +2063,7 @@ the values are a list of possible descriptions</p>
                 result.append(compare(name, pattern))
 
         return all(result)
-</code></pre></div>
-</td></tr></table>
+</code></pre>
 </details>
                 
               
