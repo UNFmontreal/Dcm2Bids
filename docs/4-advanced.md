@@ -40,7 +40,8 @@ It's only disabled when used with `"searchMethod": "fnmatch"`.
 
 default: `"defaceTpl": None`
 
-The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
+!!! danger
+    The anonymizer option no longer exists from `v2.0.0`. It is still possible to deface the anatomical nifti images.
 
 For example, if you use the last version of pydeface, add:
 

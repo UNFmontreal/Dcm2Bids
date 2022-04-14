@@ -113,6 +113,7 @@ class Acquisition(object):
         participant,
         dataType,
         modalityLabel,
+        indexSidecar=None,
         customLabels="",
         srcSidecar=None,
         sidecarChanges=None,
@@ -123,16 +124,19 @@ class Acquisition(object):
         self._modalityLabel = ""
         self._customLabels = ""
         self._intendedFor = None
+        self._indexSidecar = None
 
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
+
         if sidecarChanges is None:
             self.sidecarChanges = {}
         else:
             self.sidecarChanges = sidecarChanges
+
         if intendedFor is None:
             self.intendedFor = IntendedFor
         else:
@@ -207,6 +211,18 @@ class Acquisition(object):
         )
 
     @property
+    def dstIntendedFor(self):
+        """
+        Return:
+            The destination root inside the BIDS structure for intendedFor
+        """
+        return opj(
+            self.participant.session,
+            self.dataType,
+            self.participant.prefix + self.suffix,
+        )
+
+    @property
     def intendedFor(self):
         return self._intendedFor
 
@@ -217,27 +233,36 @@ class Acquisition(object):
         else:
             self._intendedFor = [value]
 
-    def dstSidecarData(self, descriptions):
+    @property
+    def indexSidecar(self):
+        """
+        Returns:
+            A int '_<indexSidecar>'
+        """
+        return self._indexSidecar
+
+    @indexSidecar.setter
+    def indexSidecar(self, value):
+        """
+        Returns:
+            A int '_<indexSidecar>'
+        """
+        self._indexSidecar = value
+
+
+    def dstSidecarData(self, descriptions, intendedForList):
         """
         """
         data = self.srcSidecar.origData
         data["Dcm2bidsVersion"] = __version__
 
+
         # intendedFor key
         if self.intendedFor != [None]:
             intendedValue = []
+
             for index in self.intendedFor:
-                intendedDesc = descriptions[index]
-
-                session = self.participant.session
-                dataType = intendedDesc["dataType"]
-
-                niiFile = self.participant.prefix
-                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
-                niiFile += self.prepend(intendedDesc["modalityLabel"])
-                niiFile += ".nii.gz"
-
-                intendedValue.append(opj(session, dataType, niiFile).replace("\\", "/"))
+                intendedValue = intendedValue + intendedForList[index]
 
             if len(intendedValue) == 1:
                 data["IntendedFor"] = intendedValue[0]

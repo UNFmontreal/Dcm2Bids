@@ -124,6 +124,7 @@ class Dcm2bids(object):
             sidecars.append(
                 Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
             )
+
         sidecars = sorted(sidecars)
 
         parser = SidecarPairing(
@@ -138,15 +139,18 @@ class Dcm2bids(object):
         parser.find_runs()
 
         self.logger.info("moving acquisitions into BIDS folder")
+
+        intendedForList = [[] for i in range(len(parser.descriptions))]
         for acq in parser.acquisitions:
-            self.move(acq)
+            intendedForList = self.move(acq, intendedForList)
 
         check_latest()
         check_latest("dcm2niix")
 
-    def move(self, acquisition):
+    def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
+
             _, ext = splitext_(srcFile)
             dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
 
@@ -178,11 +182,13 @@ class Dcm2bids(object):
                     pass
                 defaceTpl = self.config.get("defaceTpl")
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
-                run_shell_command(cmd)
 
-            # use
+                run_shell_command(cmd)
+                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
+
             elif ext == ".json":
-                data = acquisition.dstSidecarData(self.config["descriptions"])
+                data = acquisition.dstSidecarData(self.config["descriptions"],
+                                                  intendedForList)
                 save_json(dstFile, data)
                 os.remove(srcFile)
 
@@ -190,6 +196,11 @@ class Dcm2bids(object):
             else:
                 os.rename(srcFile, dstFile)
 
+            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
+            if not intendedFile in intendedForList[acquisition.indexSidecar]:
+                intendedForList[acquisition.indexSidecar].append(intendedFile)
+
+        return intendedForList
 
 def get_arguments():
     """Load arguments for main"""

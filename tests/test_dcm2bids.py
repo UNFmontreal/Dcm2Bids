@@ -57,7 +57,7 @@ def test_dcm2bids():
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
-    assert data["IntendedFor"] == "dwi/sub-01_dwi.nii.gz"
+    assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
