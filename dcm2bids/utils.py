@@ -37,6 +37,12 @@ class DEFAULT(object):
     runTpl = "_run-{:02d}"
     caseSensitive = True
 
+    # Entity table:
+    # https://bids-specification.readthedocs.io/en/latest/99-appendices/04-entity-table.html#appendix-iv-entity-table
+    entityTableKeys = ["sub","ses","task","acq","ce","rec","dir",
+                       "run","mod","echo","flip","inv","mt","part",
+                       "recording"]
+
     # misc
     tmpDirName = "tmp_dcm2bids"
     helperDir = "helper"

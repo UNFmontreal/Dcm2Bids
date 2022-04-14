@@ -207,7 +207,7 @@ class Acquisition(object):
         return opj(
             self.participant.directory,
             self.dataType,
-            self.participant.prefix + self.suffix,
+            self.set_order_entity_table(),
         )
 
     @property
@@ -219,8 +219,26 @@ class Acquisition(object):
         return opj(
             self.participant.session,
             self.dataType,
-            self.participant.prefix + self.suffix,
+            self.set_order_entity_table(),
         )
+
+    def set_order_entity_table(self):
+        curr_name = self.participant.prefix + self.suffix
+        new_name = ''
+        curr_dict = dict(x.split("-")  for x in curr_name.split("_") if len(x.split('-'))==2)
+        ext = [x for x in curr_name.split("_") if len(x.split('-'))==1]
+
+        for curr_key in DEFAULT.entityTableKeys:
+            if curr_key in curr_dict.keys():
+                new_name = '_'.join([new_name, curr_key + '-' +
+                                    curr_dict[curr_key]])
+                curr_dict.pop(curr_key, None)
+        for curr_key in curr_dict.keys():
+            new_name = '_'.join([new_name, curr_key + '-' +
+                                 curr_dict[curr_key]])
+        new_name = new_name[1:]
+        new_name = '_'.join([new_name,ext[0]])
+        return new_name
 
     @property
     def intendedFor(self):
