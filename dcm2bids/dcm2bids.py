@@ -192,7 +192,8 @@ class Dcm2bids(object):
             # just move
             else:
                 os.rename(srcFile, dstFile)
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
+                if ext == ".nii.gz":
+                    intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
 
         return intendedForList
 
