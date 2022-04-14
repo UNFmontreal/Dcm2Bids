@@ -125,6 +125,8 @@ class Dcm2bids(object):
                 Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
             )
 
+        sidecars = sorted(sidecars)
+
         parser = SidecarPairing(
             sidecars,
             self.config["descriptions"],
@@ -192,8 +194,10 @@ class Dcm2bids(object):
             # just move
             else:
                 os.rename(srcFile, dstFile)
-                if ext == ".nii.gz":
-                    intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
+
+            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
+            if not intendedFile in intendedForList[acquisition.indexSidecar]:
+                intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
 

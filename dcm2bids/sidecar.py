@@ -242,7 +242,7 @@ class SidecarPairing(object):
             else:
                 self.logger.warning("Several Pairing  <-  %s", sidecarName)
                 for desc in valid_descriptions:
-                    acq = Acquisition(participant, indexSidecar=index,
+                    acq = Acquisition(participant, indexSidecar=self.descriptions.index(desc),
                                       **desc)
                     self.logger.warning("    ->  %s", acq.suffix)
 
