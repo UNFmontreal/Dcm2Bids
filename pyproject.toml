@@ -63,27 +63,16 @@ palette = {scheme = "preference"}
 
 
 # Additional settings for plugins
-[[tool.portray.mkdocs.markdown_extensions]]
-[tool.portray.mkdocs.markdown_extensions.toc]
-permalink = "⚓︎"
 
-[[tool.portray.mkdocs.markdown_extensions]]
-[tool.portray.mkdocs.markdown_extensions."pymdownx.highlight"]
-linenums = true # Always add line numbers in code blocks
+markdown_extensions.toc = { permalink = "⚓︎" }
+ # Always add line numbers in code blocks
+markdown_extensions."pymdownx.highlight" = { linenums = true }
 
-[[tool.portray.mkdocs.markdown_extensions]]
-[tool.portray.mkdocs.markdown_extensions."pymdownx.tasklist"]
-custom_checkbox = true
-clickable_checkbox = false
+markdown_extensions."pymdownx.tasklist" = {custom_checkbox = true, clickable_checkbox = false }
 
-# [[tool.portray.mkdocs.plugins]]
-# [tool.portray.mkdocs.plugins.git-revision-date]
-# enabled_if_env = "CI"
 
-# [[tool.portray.mkdocs.plugins]]
-# [tool.portray.mkdocs.plugins.git-revision-date-localized]
-# type = "date"
-# fallback_to_build_date = true
+plugins."git-revision-date" = {enabled_if_env = "CI"}
+plugins.git-revision-date-localized = {type = "date", fallback_to_build_date = true}
 
 
 ## Footer icon in bottom-right corner
