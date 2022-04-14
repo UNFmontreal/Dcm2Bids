@@ -223,6 +223,11 @@ class Acquisition(object):
         )
 
     def set_order_entity_table(self):
+        """
+        Return:
+            The destination filename formated following BIDS entity key table
+            https://bids-specification.readthedocs.io/en/latest/99-appendices/04-entity-table.html#appendix-iv-entity-table
+        """
         curr_name = self.participant.prefix + self.suffix
         new_name = ''
         curr_dict = dict(x.split("-")  for x in curr_name.split("_") if len(x.split('-'))==2)
@@ -233,6 +238,7 @@ class Acquisition(object):
                 new_name = '_'.join([new_name, curr_key + '-' +
                                     curr_dict[curr_key]])
                 curr_dict.pop(curr_key, None)
+
         for curr_key in curr_dict.keys():
             new_name = '_'.join([new_name, curr_key + '-' +
                                  curr_dict[curr_key]])
