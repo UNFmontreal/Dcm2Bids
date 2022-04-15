@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""k"""
+"""Participant class"""
 
 import logging
 from os.path import join as opj
@@ -121,6 +121,8 @@ class Acquisition(object):
         IntendedFor=None,
         **kwargs
     ):
+        self.logger = logging.getLogger(__name__)
+
         self._modalityLabel = ""
         self._customLabels = ""
         self._intendedFor = None
@@ -132,8 +134,6 @@ class Acquisition(object):
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
 
-        self.logger = logging.getLogger(__name__)
-
         if sidecarChanges is None:
             self.sidecarChanges = {}
         else:
@@ -143,6 +143,9 @@ class Acquisition(object):
             self.intendedFor = IntendedFor
         else:
             self.intendedFor = intendedFor
+
+        self.bidsCompliant = {}
+        self.dstFile = ''
 
     def __eq__(self, other):
         return (
@@ -209,7 +212,7 @@ class Acquisition(object):
         return opj(
             self.participant.directory,
             self.dataType,
-            self.set_order_entity_table(),
+            self.dstFile,
         )
 
     @property
@@ -221,15 +224,16 @@ class Acquisition(object):
         return opj(
             self.participant.session,
             self.dataType,
-            self.set_order_entity_table(),
+            self.dstFile,
         )
 
-    def set_order_entity_table(self):
+    def setDstFile(self):
         """
         Return:
             The destination filename formatted following the v1.7.0 BIDS entity key table
             https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
         """
+        bidsCompliant = []
         current_name = self.participant.prefix + self.suffix
         new_name = ''
         current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
@@ -243,26 +247,32 @@ class Acquisition(object):
             current_dict.pop(current_key, None)
 
         for current_key in current_dict:
-            self.logger.warning(
-                f"Entity '{current_key}' is not a valid BIDS entity."
-                )
             new_name = f"{new_name}_{current_key}-{current_dict[current_key]}"
 
-        new_name = f"{new_name}_{'_'.join(suffix_list)}" # Allow multiple single key (without value)
+        if current_dict:
+            self.logger.warning("Entity \"{}\"".format(list(current_dict.keys())) +
+                                " is not a valid BIDS entity.")
+
+        new_name = f"{new_name}_{'_'.join(suffix_list)}"  # Allow multiple single key (without value)
 
         if len(suffix_list) != 1:
-            self.logger.warning(
-                f"There was more than one suffix found ({suffix_list}), this is not BIDS compliant. Make sure you know what you are doing."
-                )
+            self.logger.warning("There was more than one suffix found "
+                                "({}), this is not ".format(suffix_list) +
+                                "BIDS compliant. Make sure you know what "
+                                "you are doing.")
 
         if current_name != new_name:
+            bidsCompliant.append({'name': new_name,
+                                  'old_name': current_name})
             self.logger.warning(
                 f"""✅ Filename was reordered according to BIDS entity table order:
                 from:   {current_name}
-                to:     {new_name}"""
-                )
+                to:     {new_name}""")
 
-        return new_name
+        for d in bidsCompliant:
+            self.bidsCompliant.update(d)
+
+        self.dstFile = new_name
 
     @property
     def intendedFor(self):

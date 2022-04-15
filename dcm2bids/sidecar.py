@@ -158,7 +158,7 @@ class SidecarPairing(object):
         for sidecar, description in possibleLinks:
             criteria = description.get("criteria", None)
             if criteria and self.isLink(sidecar.data, criteria):
-                    graph[sidecar].append(description)
+                graph[sidecar].append(description)
 
         self.graph = graph
 
@@ -189,7 +189,7 @@ class SidecarPairing(object):
         result = []
 
         for tag, pattern in iteritems(criteria):
-            name = data.get(tag, '')# or ''
+            name = data.get(tag, '')
 
             if isinstance(name, list):
                 try:
@@ -217,7 +217,6 @@ class SidecarPairing(object):
 
         self.logger.info("Sidecars pairing:")
         for sidecar, valid_descriptions in iteritems(self.graph):
-        #for sidecar, descriptions in iteritems(self.graph):
             sidecarName = os.path.basename(sidecar.root)
 
             # only one description for the sidecar
@@ -242,13 +241,14 @@ class SidecarPairing(object):
             else:
                 self.logger.warning("Several Pairing  <-  %s", sidecarName)
                 for desc in valid_descriptions:
-                    acq = Acquisition(participant, indexSidecar=self.descriptions.index(desc),
+                    acq = Acquisition(participant,
+                                      indexSidecar=self.descriptions.index(desc),
                                       **desc)
                     self.logger.warning("    ->  %s", acq.suffix)
 
         self.acquisitions = acquisitions + acquisitions_intendedFor
 
-        return acquisitions + acquisitions_intendedFor
+        return self.acquisitions
 
     def find_runs(self):
         """

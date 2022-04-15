@@ -141,10 +141,8 @@ class Dcm2bids(object):
 
         intendedForList = [[] for i in range(len(parser.descriptions))]
         for acq in parser.acquisitions:
+            acq.setDstFile()
             intendedForList = self.move(acq, intendedForList)
-
-        check_latest()
-        check_latest("dcm2niix")
 
     def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
@@ -153,8 +151,6 @@ class Dcm2bids(object):
             _, ext = splitext_(srcFile)
             dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
 
-            # os.makedirs(os.path.dirname(dstFile), exist_ok=True)
-            # python2 compatibility
             if not os.path.exists(os.path.dirname(dstFile)):
                 os.makedirs(os.path.dirname(dstFile))
 
@@ -196,10 +192,11 @@ class Dcm2bids(object):
                 os.rename(srcFile, dstFile)
 
             intendedFile = acquisition.dstIntendedFor + ".nii.gz"
-            if not intendedFile in intendedForList[acquisition.indexSidecar]:
+            if intendedFile not in intendedForList[acquisition.indexSidecar]:
                 intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
+
 
 def get_arguments():
     """Load arguments for main"""
@@ -297,6 +294,9 @@ def main():
         """
         )
         return 1
+
+    check_latest()
+    check_latest("dcm2niix")
 
     app = Dcm2bids(**vars(args))
     return app.run()
