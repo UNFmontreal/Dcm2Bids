@@ -232,8 +232,8 @@ class Acquisition(object):
         """
         curr_name = self.participant.prefix + self.suffix
         new_name = ''
-        curr_dict = dict(x.split("-")  for x in curr_name.split("_") if len(x.split('-'))==2)
-        ext = [x for x in curr_name.split("_") if len(x.split('-'))==1]
+        curr_dict = dict(x.split("-") for x in curr_name.split("_") if len(x.split('-')) == 2)
+        ext = [x for x in curr_name.split("_") if len(x.split('-')) == 1]
 
         for curr_key in DEFAULT.entityTableKeys:
             if curr_key in curr_dict.keys():
@@ -248,7 +248,7 @@ class Acquisition(object):
             new_name = '_'.join([new_name, curr_key + '-' +
                                  curr_dict[curr_key]])
         new_name = new_name[1:]
-        new_name = '_'.join([new_name,ext[0]])
+        new_name = '_'.join([new_name, ext[0]])
         return new_name
 
     @property
@@ -278,13 +278,11 @@ class Acquisition(object):
         """
         self._indexSidecar = value
 
-
     def dstSidecarData(self, descriptions, intendedForList):
         """
         """
         data = self.srcSidecar.origData
         data["Dcm2bidsVersion"] = __version__
-
 
         # intendedFor key
         if self.intendedFor != [None]:
