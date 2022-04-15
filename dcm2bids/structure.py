@@ -230,25 +230,38 @@ class Acquisition(object):
             The destination filename formatted following the v1.7.0 BIDS entity key table
             https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
         """
-        curr_name = self.participant.prefix + self.suffix
+        current_name = self.participant.prefix + self.suffix
         new_name = ''
-        curr_dict = dict(x.split("-") for x in curr_name.split("_") if len(x.split('-')) == 2)
-        ext = [x for x in curr_name.split("_") if len(x.split('-')) == 1]
+        current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
+        suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]
 
-        for curr_key in DEFAULT.entityTableKeys:
-            if curr_key in curr_dict.keys():
-                new_name = '_'.join([new_name, curr_key + '-' +
-                                    curr_dict[curr_key]])
-                curr_dict.pop(curr_key, None)
+        for current_key in DEFAULT.entityTableKeys:
+            if current_key in current_dict and new_name != '':
+                new_name += f"_{current_key}-{current_dict[current_key]}"
+            elif current_key in current_dict:
+                new_name = f"{current_key}-{current_dict[current_key]}"
+            current_dict.pop(current_key, None)
 
-        for curr_key in curr_dict.keys():
+        for current_key in current_dict:
             self.logger.warning(
-                "Entity \"%s\" is not a valid BIDS entity.", curr_key
-            )
-            new_name = '_'.join([new_name, curr_key + '-' +
-                                 curr_dict[curr_key]])
-        new_name = new_name[1:]
-        new_name = '_'.join([new_name, ext[0]])
+                f"Entity '{current_key}' is not a valid BIDS entity."
+                )
+            new_name = f"{new_name}_{current_key}-{current_dict[current_key]}"
+
+        new_name = f"{new_name}_{'_'.join(suffix_list)}" # Allow multiple single key (without value)
+
+        if len(suffix_list) != 1:
+            self.logger.warning(
+                f"There was more than one suffix found ({suffix_list}), this is not BIDS compliant. Make sure you know what you are doing."
+                )
+
+        if current_name != new_name:
+            self.logger.warning(
+                f"""✅ Filename was reordered according to BIDS entity table order:
+                from:   {current_name}
+                to:     {new_name}"""
+                )
+
         return new_name
 
     @property
