@@ -227,8 +227,8 @@ class Acquisition(object):
     def set_order_entity_table(self):
         """
         Return:
-            The destination filename formated following BIDS entity key table
-            https://bids-specification.readthedocs.io/en/latest/99-appendices/04-entity-table.html#appendix-iv-entity-table
+            The destination filename formatted following the v1.7.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
         """
         curr_name = self.participant.prefix + self.suffix
         new_name = ''
