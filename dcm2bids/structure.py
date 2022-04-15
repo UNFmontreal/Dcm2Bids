@@ -2,7 +2,7 @@
 
 """k"""
 
-
+import logging
 from os.path import join as opj
 from future.utils import iteritems
 from .utils import DEFAULT
@@ -132,6 +132,8 @@ class Acquisition(object):
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
 
+        self.logger = logging.getLogger(__name__)
+
         if sidecarChanges is None:
             self.sidecarChanges = {}
         else:
@@ -240,6 +242,9 @@ class Acquisition(object):
                 curr_dict.pop(curr_key, None)
 
         for curr_key in curr_dict.keys():
+            self.logger.warning(
+                "Entity \"%s\" is not a valid BIDS entity.", curr_key
+            )
             new_name = '_'.join([new_name, curr_key + '-' +
                                  curr_dict[curr_key]])
         new_name = new_name[1:]
