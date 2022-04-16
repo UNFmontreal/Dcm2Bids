@@ -3,6 +3,20 @@ modules = ["dcm2bids"]
 # docs_dir = ["docs"]
 # extra_dirs = ["media", "art"]
 
+# Set plugins
+[[tool.portray.extra_markdown_extensions]]
+    [tool.portray.extra_markdown_extensions.toc]
+    permalink = "⚓︎"
+
+[[tool.portray.extra_markdown_extensions]]
+    [tool.portray.extra_markdown_extensions."pymdownx.highlight"]
+    linenums = true
+
+[[tool.portray.extra_markdown_extensions]]
+    [tool.portray.extra_markdown_extensions."pymdownx.tasklist"]
+    custom_checkbox = true
+    clickable_checkbox = false
+
 [tool.portray.mkdocs]
 # Repository
 repo_name = "UNFmontreal/dcm2bids" # Name in top right corner
@@ -22,9 +36,6 @@ nav = [{  Home = "README.md"},
 
 extra_css = ["docs/stylesheets/extra.css"] # To fix some colors in light vs slate mode.
 
-# Add a bunch of markdown extensions to improve the documentation (and the look ;)).
-# See https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
-# for full list of extensions.
 markdown_extensions = ["admonition",
                        "footnotes",
                        "pymdownx.emoji",
@@ -35,9 +46,9 @@ markdown_extensions = ["admonition",
                        "pymdownx.superfences",
                        "pymdownx.tabbed"]
 
-# TODO: Implement plugin so git info is displayed on each page,
-# issue has been open on portray to fix the bug.
-# plugins = ["git-revision-date", "git-revision-date-localized", "bibtext"]
+# Add a bunch of markdown extensions to improve the documentation (and the look ;)).
+# See https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
+# for full list of extensions.
 
 [tool.portray.mkdocs.theme]
 name = "material"
@@ -49,31 +60,36 @@ site_description = """
   Imaging Data Structure (BIDS).
   """
 
-# Design related stuff
+[[tool.portray.mkdocs.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+
+  [tool.portray.mkdocs.theme.palette.toggle]
+  icon = "material/toggle-switch-off-outline"
+  name = "Switch to dark mode"
+
+[[tool.portray.mkdocs.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+
+  [tool.portray.mkdocs.theme.palette.toggle]
+  icon = "material/toggle-switch"
+  name = "Switch to light mode"
+
+[[tool.portray.mkdocs.plugins]]
+[tool.portray.mkdocs.plugins.search]
+
+[[tool.portray.mkdocs.plugins]]
+[tool.portray.mkdocs.plugins.git-revision-date-localized]
+type = "timeago"
+enable_creation_date = true
+fallback_to_build_date = true
 
 icon = {repo = "fontawesome/brands/github"} # icon in top-right corner.
+
 # TODO: Design a logo and/or favicon.
 # favicon = "art/logo_small.png"
 # logo = "art/logo_small.png"
-
-palette = {scheme = "preference"}
-# Alternative way of setting multiple option for the palette
-# [[tool.portray.mkdocs.theme.palette]]
-# scheme = "preference"
-
-
-# Additional settings for plugins
-
-markdown_extensions.toc = { permalink = "⚓︎" }
- # Always add line numbers in code blocks
-markdown_extensions."pymdownx.highlight" = { linenums = true }
-
-markdown_extensions."pymdownx.tasklist" = {custom_checkbox = true, clickable_checkbox = false }
-
-
-plugins."git-revision-date" = {enabled_if_env = "CI"}
-plugins.git-revision-date-localized = {type = "date", fallback_to_build_date = true}
-
 
 ## Footer icon in bottom-right corner
 [[tool.portray.mkdocs.extra.social]]
@@ -85,4 +101,3 @@ name = "dcm2bids on GitHub"
 icon = "fontawesome/brands/docker"
 link = "https://hub.docker.com/r/unfmontreal/dcm2bids"
 name = "dcm2bids on docker"
-
