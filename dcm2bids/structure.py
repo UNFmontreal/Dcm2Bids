@@ -232,7 +232,6 @@ class Acquisition(object):
             The destination filename formatted following the v1.7.0 BIDS entity key table
             https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
         """
-        bidsCompliant = []
         current_name = self.participant.prefix + self.suffix
         new_name = ''
         current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
@@ -261,8 +260,6 @@ class Acquisition(object):
                                 "you are doing.")
 
         if current_name != new_name:
-            bidsCompliant.append({'name': new_name,
-                                  'old_name': current_name})
             self.logger.warning(
                 f"""✅ Filename was reordered according to BIDS entity table order:
                 from:   {current_name}
