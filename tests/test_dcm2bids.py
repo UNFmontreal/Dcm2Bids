@@ -96,8 +96,7 @@ def test_caseSensitive_false():
     app.run()
 
     layout = BIDSLayout(bidsDir.name,
-                        validate=False,
-                        ignore='tmp_dcm2bids')
+                        validate=False)
 
     path_dwi = os.path.join(bidsDir.name,
                             "sub-01",

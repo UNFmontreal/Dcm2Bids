@@ -144,7 +144,6 @@ class Acquisition(object):
         else:
             self.intendedFor = intendedFor
 
-        self.bidsCompliant = {}
         self.dstFile = ''
 
     def __eq__(self, other):
@@ -268,9 +267,6 @@ class Acquisition(object):
                 f"""✅ Filename was reordered according to BIDS entity table order:
                 from:   {current_name}
                 to:     {new_name}""")
-
-        for d in bidsCompliant:
-            self.bidsCompliant.update(d)
 
         self.dstFile = new_name
 

@@ -225,6 +225,7 @@ class SidecarPairing(object):
                 acq = Acquisition(participant,
                                   srcSidecar=sidecar, **desc)
                 acq.indexSidecar = self.descriptions.index(desc)
+                acq.setDstFile()
 
                 if acq.intendedFor != [None]:
                     acquisitions_intendedFor.append(acq)
