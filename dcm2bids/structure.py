@@ -245,7 +245,7 @@ class Acquisition(object):
             current_dict.pop(current_key, None)
 
         for current_key in current_dict:
-            new_name = f"{new_name}_{current_key}-{current_dict[current_key]}"
+            new_name += f"_current_key}-{current_dict[current_key]}"
 
         if current_dict:
             self.logger.warning("Entity \"{}\"".format(list(current_dict.keys())) +
