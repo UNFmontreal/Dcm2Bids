@@ -1,7 +1,7 @@
 [tool.portray]
 modules = ["dcm2bids"]
-# docs_dir = ["docs"]
-# extra_dirs = ["media", "art"]
+docs_dir = "docs"
+extra_dirs = ["docs_helper/assets"]
 
 # Set plugins
 [[tool.portray.extra_markdown_extensions]]
@@ -15,7 +15,7 @@ modules = ["dcm2bids"]
 [[tool.portray.extra_markdown_extensions]]
     [tool.portray.extra_markdown_extensions."pymdownx.tasklist"]
     custom_checkbox = true
-    clickable_checkbox = false
+    clickable_checkbox = true
 
 [tool.portray.mkdocs]
 # Repository
@@ -36,22 +36,24 @@ nav = [{  Home = "README.md"},
 
 extra_css = ["docs/stylesheets/extra.css"] # To fix some colors in light vs slate mode.
 
+# Refer to https://squidfunk.github.io/mkdocs-material/reference/
+# for the full list of extensions and config.
 markdown_extensions = ["admonition",
-                       "footnotes",
-                       "pymdownx.emoji",
+                       "pymdownx.extra", # combines a bunch together
                        "pymdownx.caret",
                        "pymdownx.mark",
                        "pymdownx.tilde",
+                       "pymdownx.critic",
+                       "pymdownx.keys",
                        "pymdownx.details",
-                       "pymdownx.superfences",
-                       "pymdownx.tabbed"]
-
-# Add a bunch of markdown extensions to improve the documentation (and the look ;)).
-# See https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
-# for full list of extensions.
+                       "pymdownx.tabbed",
+                       "pymdownx.snippets",
+                       "pymdownx.inlinehilite"]
 
 [tool.portray.mkdocs.theme]
 name = "material"
+custom_dir = "docs_helper/templates" # dir to put overriding templates
+
 # Blurb that is output when the doc site is shared on social media or elsewhere.
 site_description = """
   This is the documentation for dcm2bids, a community-centered project
@@ -60,6 +62,12 @@ site_description = """
   Imaging Data Structure (BIDS).
   """
 
+icon = {repo = "fontawesome/brands/github"} # icon in top-right corner.
+# TODO: Design a logo and/or favicon.
+# favicon = "art/logo_small.png"
+# logo = "art/logo_small.png"
+
+# Light vs slate mode + switch
 [[tool.portray.mkdocs.theme.palette]]
 media = "(prefers-color-scheme: light)"
 scheme = "default"
@@ -76,21 +84,6 @@ scheme = "slate"
   icon = "material/toggle-switch"
   name = "Switch to light mode"
 
-[[tool.portray.mkdocs.plugins]]
-[tool.portray.mkdocs.plugins.search]
-
-[[tool.portray.mkdocs.plugins]]
-[tool.portray.mkdocs.plugins.git-revision-date-localized]
-type = "timeago"
-enable_creation_date = true
-fallback_to_build_date = true
-
-icon = {repo = "fontawesome/brands/github"} # icon in top-right corner.
-
-# TODO: Design a logo and/or favicon.
-# favicon = "art/logo_small.png"
-# logo = "art/logo_small.png"
-
 ## Footer icon in bottom-right corner
 [[tool.portray.mkdocs.extra.social]]
 icon = "fontawesome/brands/github"
@@ -101,3 +94,16 @@ name = "dcm2bids on GitHub"
 icon = "fontawesome/brands/docker"
 link = "https://hub.docker.com/r/unfmontreal/dcm2bids"
 name = "dcm2bids on docker"
+
+
+# Additional plugins
+[[tool.portray.mkdocs.plugins]]
+[tool.portray.mkdocs.plugins.search]
+
+[[tool.portray.mkdocs.plugins]]
+[tool.portray.mkdocs.plugins.git-revision-date-localized]
+type = "timeago"
+# enable_creation_date = true
+fallback_to_build_date = true
+[[tool.portray.mkdocs.plugins]]
+[tool.portray.mkdocs.plugins.git-authors]
