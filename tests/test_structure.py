@@ -30,4 +30,5 @@ from dcm2bids.structure import Participant, Acquisition
 def test_acquisition_get_dst_path(name, session, modality, custom, expected):
     participant = Participant(name, session)
     acquisition = Acquisition(participant, "anat", modality, customLabels=custom)
+    acquisition.setDstFile()
     assert acquisition.dstRoot == expected
