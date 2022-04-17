@@ -6,7 +6,7 @@ import argparse
 import os
 import sys
 from .dcm2niix import Dcm2niix
-from .utils import DEFAULT
+from .utils import DEFAULT, valid_path
 
 
 def get_arguments():
@@ -38,7 +38,12 @@ def get_arguments():
 def main():
     """Let's go"""
     args = get_arguments()
-    app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
+    valid_dicom_dir = []
+    for _dir in args.dicom_dir:
+        valid_dicom_dir.append(valid_path(_dir))
+
+    app = Dcm2niix(dicomDirs=valid_dicom_dir,
+                   bidsDir=valid_path(args.output_dir))
     rsl = app.run()
     print("Example in:")
     print(os.path.join(args.output_dir, DEFAULT.tmpDirName, DEFAULT.helperDir))
