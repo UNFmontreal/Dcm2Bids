@@ -6,7 +6,7 @@ These optional configurations could be insert in the configuration file at the s
 {
     "searchMethod": "fnmatch",
     "caseSensitive": true,
-    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
+    "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
     "description": [
         ...
     ]

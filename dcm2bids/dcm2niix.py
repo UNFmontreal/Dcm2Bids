@@ -4,6 +4,7 @@
 
 import logging
 import os
+import shlex
 import shutil
 from glob import glob
 from .utils import DEFAULT, run_shell_command
@@ -95,8 +96,8 @@ class Dcm2niix(object):
         """ Execute dcm2niix for each directory in dicomDirs
         """
         for dicomDir in self.dicomDirs:
-            commandTpl = "dcm2niix {} -o {} {}"
-            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
+            cmd = ['dcm2niix', *shlex.split(self.options),
+                   '-o', self.outputDir, dicomDir]
             output = run_shell_command(cmd)
 
             try:

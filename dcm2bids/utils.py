@@ -5,7 +5,8 @@ import csv
 import json
 import logging
 import os
-import shlex
+from pathlib import PurePath
+import re
 from collections import OrderedDict
 from subprocess import check_output
 
@@ -110,10 +111,27 @@ def splitext_(path, extensions=None):
 
 def run_shell_command(commandLine):
     """ Wrapper of subprocess.check_output
-
     Returns:
         Run command with arguments and return its output
     """
     logger = logging.getLogger(__name__)
     logger.info("Running %s", commandLine)
-    return check_output(shlex.split(commandLine))
+    return check_output(commandLine)
+
+
+def valid_path(in_path):
+    """Assert that file exists.
+
+    Parameters
+    ----------
+    required_file: string path
+        Path to be checked.
+    """
+    valid_path = re.sub(r'\\', os.path.sep, in_path)
+    valid_path = re.sub(r'\/', os.path.sep, valid_path)
+    valid_path = str(PurePath(valid_path))
+
+    if os.path.isfile(valid_path) or os.path.isdir(valid_path):
+        if os.path.exists(valid_path):
+            return valid_path
+    raise FileNotFoundError(in_path)

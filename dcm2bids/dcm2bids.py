@@ -13,7 +13,8 @@ from .dcm2niix import Dcm2niix
 from .logger import setup_logging
 from .sidecar import Sidecar, SidecarPairing
 from .structure import Participant
-from .utils import DEFAULT, load_json, save_json, run_shell_command, splitext_
+from .utils import (DEFAULT, load_json, save_json,
+                    splitext_, run_shell_command, valid_path)
 from .version import __version__, check_latest, dcm2niix_version
 
 
@@ -47,8 +48,8 @@ class Dcm2bids(object):
         self._dicomDirs = []
 
         self.dicomDirs = dicom_dir
-        self.bidsDir = output_dir
-        self.config = load_json(config)
+        self.bidsDir = valid_path(output_dir)
+        self.config = load_json(valid_path(config))
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
@@ -74,22 +75,25 @@ class Dcm2bids(object):
 
     @dicomDirs.setter
     def dicomDirs(self, value):
+
         if isinstance(value, list):
             dicom_dirs = value
         else:
             dicom_dirs = [value]
 
         dir_not_found = []
+        valid_dirs = []
         for _dir in dicom_dirs:
+            _dir = valid_path(_dir)
             if os.path.isdir(_dir):
-                pass
+                valid_dirs.append(_dir)
             else:
                 dir_not_found.append(_dir)
 
         if dir_not_found:
             raise FileNotFoundError(dir_not_found)
 
-        self._dicomDirs = dicom_dirs
+        self._dicomDirs = valid_dirs
 
     def set_logger(self):
         """ Set a basic logger"""
@@ -176,9 +180,11 @@ class Dcm2bids(object):
                 except FileNotFoundError:
                     pass
                 defaceTpl = self.config.get("defaceTpl")
-                cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
 
+                cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
+                cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
                 run_shell_command(cmd)
+
                 intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
 
             elif ext == ".json":
@@ -262,16 +268,6 @@ dcm2bids {}""".format(
         help="Set logging level",
     )
 
-    parser.add_argument(
-        "-a",
-        "--anonymizer",
-        required=False,
-        action="store_true",
-        help="""
-        This option no longer exists from the script in this release.
-        See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl""",
-    )
-
     args = parser.parse_args()
     return args
 
@@ -279,21 +275,6 @@ dcm2bids {}""".format(
 def main():
     """Let's go"""
     args = get_arguments()
-
-    if args.anonymizer:
-        print(
-            """
-        The anonymizer option no longer exists from the script in this release
-        It is still possible to deface the anatomical nifti images
-        Please add "defaceTpl" key in the congifuration file
-
-        For example, if you use the last version of pydeface, add:
-        "defaceTpl": "pydeface --outfile {dstFile} {srcFile}"
-        It is a template string and dcm2bids will replace {srcFile} and {dstFile}
-        by the source file (input) and the destination file (output)
-        """
-        )
-        return 1
 
     check_latest()
     check_latest("dcm2niix")
