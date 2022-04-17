@@ -127,11 +127,10 @@ def valid_path(in_path):
     required_file: string path
         Path to be checked.
     """
-    valid_path = re.sub(r'\\', os.path.sep, in_path)
-    valid_path = re.sub(r'\/', os.path.sep, valid_path)
-    valid_path = str(PurePath(valid_path))
+    valid_path = str(PurePath(in_path))
 
     if os.path.isfile(valid_path) or os.path.isdir(valid_path):
         if os.path.exists(valid_path):
             return valid_path
+
     raise FileNotFoundError(in_path)
