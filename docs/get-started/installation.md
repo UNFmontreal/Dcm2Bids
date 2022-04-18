@@ -1,12 +1,11 @@
 ---
-title: Installing dcm2bids and dependencies
 summary: Set of instructions to help install dcm2bids and dependencies.
 authors:
   - Samuel Guay
 date: 2022-04-17
 ---
 
-## Installation
+# Installation
 
 Before you can use dcm2bids, you will need to get it installed. This page guides
 you through a minimal, typical dcm2bids installation workflow that is sufficient
@@ -28,9 +27,9 @@ dcm2bids.
 
     `conda install -c conda-forge dcm2bids`
 
-### Dependencies
+## Dependencies
 
-#### Python
+### Python
 
 As dcm2bids is a Python package, the first prerequisite is that Python must be
 installed on the machine you will use dcm2bids. You will need **Python 3.7 or
@@ -72,20 +71,23 @@ you install Python through [Anaconda][anaconda].
 
     If you unsure what to install read this [section describing the differences between Anaconda and Miniconda][mini-vs-ana] to help you choose.
 
-#### dcm2niix
+### dcm2niix
 
-[dcm2niix](https://github.com/rordenlab/dcm2niix) can also be installed in a
-variety of ways as seen on
-[the main page of the software](https://github.com/rordenlab/dcm2niix#install).
+[dcm2niix][dcm2niix] can also be installed in a variety of ways as seen on
+[the main page of the software][dcm2niix-install].
 
 Whether you want to install the latest compiled executable directly on your
 machine is up to you but you have to **make sure you can call the software from
 any directory**. In other words, you have to make sure it is included in your
 `$PATH`. Otherwise, dcm2bids won't be able to run dcm2niix for you. That's why
-we recommend to install it at the same time in the dedicated environment. Steps
-described below.
+we recommend to install it at the same time in the dedicated environment.
 
-### Recommendations
+As you can see, dcm2niix is available through [conda][conda] so that is the
+approach chosen in this guide. We will benefit from the simplicity of installing
+all software from the same located at. Steps to install dcm2niix 
+are included in the next secton.
+
+## Recommendations
 
 We recommend to install all the dependencies at once when installing dcm2bids on
 a machine or server. As mentioned above the minimal installation requires only
@@ -125,11 +127,12 @@ make your life easier.
     conda env update --file environment.yml --prune
     ```
 
-### Finally, time to install!
+### Install dcm2bids
 
-From now on, it is assume that [conda][conda] (or [Anaconda][anaconda]) is
+From now on, it is assumed that [conda][conda] (or [Anaconda][anaconda]) is
 installed and correctly setup on your computer as it is the easiest way to
-install dcm2bids and its dependencies on any OS.
+install dcm2bids and its dependencies on any OS. We assume that if you want to
+install it in a different way, you have enough skills to do it on your own.
 
 We could install all the software one by one using a series of command:
 
@@ -173,7 +176,7 @@ In short, here's what the fields mean:
   inside. The name is arbitrary, you can name it however you want.
 - The `channels:` key tells conda where to look for the declared dependencies.
   In our case, all our dependencies are located on the
-  [conda-forge channel](https://anaconda.org/conda-forge).
+  [conda-forge channel][conda-forge].
 - The `dependencies:` key lists all the dependencies to be installed inside the
   environment. If you are creating an environment for your analysis project,
   this is where you would list other dependencies such as `nilearn`, `pandas`,
@@ -278,11 +281,13 @@ options:
 Voilà, you are ready to use dcm2bids or at least
 [move onto the tutorial](../tutorial/first-steps.md)!!
 
+[Go to the Tutorial section](../../tutorial){ .md-button }
+
+[Go to the How-to section](../../how-to/){ .md-button }
 ## Containers
 
 We also provide a container image that includes both dcm2niix and dcm2bids which
-you can install using [Docker](https://docker.com) or
-[Apptainer/Singularity](https://apptainer.org/).
+you can install using [Docker][docker] or [Apptainer/Singularity][apptainer].
 
 === "Docker"
 
@@ -292,27 +297,41 @@ you can install using [Docker](https://docker.com) or
 
     `singularity pull dcm2bids_latest.sif docker://unfmontreal/dcm2bids:latest `
 
-## Summary
+## Summary of the steps
 
-Installing dcm2bids is quite easy once you know how. The easiest way to install
-it is to follow the steps below using conda but it is also possible to use other software, including containers:
+In sum, installing dcm2bids is quite easy if you know how to install Python
+packages. The easiest way to install it is to follow the steps below using
+[conda][conda] but it is also possible to use other software, including
+containers:
 
-- [ ] Create [`environment.yml`](#create_environmentyml) file with dependencies
-    - [x] dcm2bids
-    - [x] dcm2niix
+- [ ] Create an [`environment.yml`](#create-environmentyml) file with dependencies
+    - [x] Content:
+
+            name: dcm2bids
+            channels:
+            - conda-forge
+            dependencies:
+            - python>=3.7
+            - dcm2niix
+            - dcm2bids
+            
 - [ ] Create conda environment
     - [x] `conda env create --file environment.yml`
 - [ ] Activate conda environment
     - [x] `conda activate dcm2bids`
-- [ ] Validate a dcm2bids command
+- [ ] Verify a dcm2bids command
     - [x] `dcm2bids --help`
 - [ ] Consult how-to guides or follow the tutorial
 
-[conda]: https://conda.io/en/latest/miniconda.html
-[anaconda]: https://www.anaconda.com/distribution/
+[anaconda]:         https://www.anaconda.com/distribution
+[dcm2niix]:         https://github.com/rordenlab/dcm2niix
+[dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
+[conda]:            https://conda.io/en/latest/miniconda.html
+[conda-forge]:      https://anaconda.org/conda-forge
+[docker]:           https://docker.com
+[apptainer]:        https://apptainer.org
 [mini-vs-ana]:
   https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda
 
-[^1]:
-    To get out of the conda environment, you have to deactivate it with the
+[^1]: To get out of a conda environment, you have to deactivate it with the
     `conda deactivate` or `exit` commands.
