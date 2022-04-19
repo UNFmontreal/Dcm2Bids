@@ -2,3 +2,4 @@ ipython>=7.10.0
 portray>=1.3.1
 tox>=3.14.0
 dcm2bids
+mkdocs-git-revision-date-localized-plugin
