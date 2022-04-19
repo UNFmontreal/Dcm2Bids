@@ -6,32 +6,39 @@ import argparse
 import os
 import sys
 from .dcm2niix import Dcm2niix
-from .utils import DEFAULT
+from .utils import DEFAULT, assert_dirs_empty
+
+EPILOG = """
+    Documentation at https://github.com/unfmontreal/Dcm2Bids
+    """
 
 
-def get_arguments():
-    parser = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.doc,
-                                     formatter_class=argparse.RawTextHelpFormatter)
+def _build_arg_parser():
+    p = argparse.ArgumentParser(description=__doc__, epilog=EPILOG,
+                                formatter_class=argparse.RawTextHelpFormatter)
 
-    parser.add_argument(
-        "-d", "--dicom_dir", required=True, nargs="+", help="DICOM files directory"
-    )
+    p.add_argument("-d", "--dicom_dir",
+                   required=True, nargs="+",
+                   help="DICOM files directory.")
 
-    parser.add_argument(
-        "-o",
-        "--output_dir",
-        required=False,
-        default=DEFAULT.cliOutputDir,
-        help="Output BIDS directory, Default: current directory",
-    )
+    p.add_argument("-o", "--output_dir",
+                   required=False, default=DEFAULT.cliOutputDir,
+                   help="Output BIDS directory."
+                        " (Default: %(default)s)")
 
-    args = parser.parse_args()
-    return args
+    p.add_argument('--force',
+                   dest='overwrite', action='store_true',
+                   help='Force command to overwrite existing output files.')
+
+    return p
 
 
 def main():
     """Let's go"""
-    args = get_arguments()
+    parser = _build_arg_parser()
+    args = parser.parse_args()
+    out_folder = os.path.join(args.output_dir, 'tmp_dcm2bids', 'helper')
+    assert_dirs_empty(parser, args, out_folder)
     app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
     rsl = app.run()
     print("Example in:")

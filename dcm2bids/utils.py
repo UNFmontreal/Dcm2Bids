@@ -11,6 +11,8 @@ import pkg_resources
 import shlex
 import shutil
 from collections import OrderedDict
+import shlex
+import shutil
 from subprocess import check_output
 
 import dcm2bids
@@ -129,7 +131,8 @@ def run_shell_command(commandLine):
 def assert_dirs_empty(parser, args, required):
     """
     Assert that all directories exist are empty.
-    If exists and not empty, and -f used, delete dirs.
+    If dirs exist and not empty, and --force is used, delete dirs.
+
     Parameters
     ----------
     parser: argparse.ArgumentParser object
@@ -145,9 +148,9 @@ def assert_dirs_empty(parser, args, required):
         if os.listdir(path):
             if not args.overwrite:
                 parser.error(
-                    'Output directory {} isn\'t empty and some files could be '
-                    'overwritten or even deleted. Use -f option if you want '
-                    'to continue.'.format(path))
+                    f"Output directory {path} isn't empty, so some files "
+                    "could be overwritten or deleted.\nRerun the command with "
+                    "--force option to overwrite existing output files.")
             else:
                 for the_file in os.listdir(path):
                     file_path = os.path.join(path, the_file)
@@ -168,7 +171,7 @@ def assert_dirs_empty(parser, args, required):
 
 def add_overwrite_arg(parser):
     parser.add_argument(
-        '-f', dest='overwrite', action='store_true',
+        '--force', dest='overwrite', action='store_true',
         help='Force overwriting of the output files.')
 
 
