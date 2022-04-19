@@ -86,7 +86,7 @@ class SidecarPairing(object):
     """
     Args:
         sidecars (list): List of Sidecar objects
-        descriptions (list): List of dictionnaries describing acquisitions
+        descriptions (list): List of dictionaries describing acquisitions
     """
 
     def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
@@ -146,7 +146,7 @@ class SidecarPairing(object):
     def build_graph(self):
         """
         Test all the possible links between the list of sidecars and the
-        description dictionnaries and build a graph from it
+        description dictionaries and build a graph from it
         The graph is in a OrderedDict object. The keys are the Sidecars and
         the values are a list of possible descriptions
 
