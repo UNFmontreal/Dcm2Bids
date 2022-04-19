@@ -1111,7 +1111,7 @@ documentation to find information about the different commands.
 
 !!! cite "Acknowledgment"
 
-    Thanks to @Remi-gau for letting us know that our tutorial needed an updated, and for providing us with a clean and working configuration file through an [issue #142](https://github.com/UNFmontreal/Dcm2Bids/issues/142) on GitHub :pray:.
+    Thanks to @Remi-gau for letting us know that our tutorial needed an update, and for providing us with a clean and working configuration file through an [issue #142](https://github.com/UNFmontreal/Dcm2Bids/issues/142) on GitHub :pray:.
 
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [bids-fmap]:
