@@ -26,7 +26,7 @@ def _build_arg_parser():
                    help="Output BIDS directory."
                         " (Default: %(default)s)")
 
-    p.add_argument('-f',
+    p.add_argument('--force',
                    dest='overwrite', action='store_true',
                    help='Force overwriting of the output files.')
 
