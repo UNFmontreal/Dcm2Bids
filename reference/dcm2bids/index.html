@@ -36,7 +36,9 @@
     
     
     
-      <link rel="stylesheet" href="../../docs/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../docs/assets/extra.css">
     
     
       
@@ -49,13 +51,17 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -101,6 +107,28 @@
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -222,10 +250,58 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../../docs/get-started/">Get started</a>
+          <label for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="Get started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../CODE_OF_CONDUCT/" class="md-nav__link">
-        Code of conduct
+      <a href="../../docs/get-started/install/" class="md-nav__link">
+        Installation
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -234,13 +310,188 @@
       
       
 
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../../docs/tutorial/">Tutorials</a>
+          <label for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/tutorial/first-steps/" class="md-nav__link">
+        First steps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../../docs/how-to/">How-to guides</a>
+          <label for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="How-to guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          How-to guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/how-to/get-help/" class="md-nav__link">
+        Get help and support
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/how-to/use-main-commands/" class="md-nav__link">
+        Use main commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/how-to/create-config-file/" class="md-nav__link">
+        Create a config file
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/how-to/use-advanced-commands/" class="md-nav__link">
+        Use advanced commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
   
   
   
     <li class="md-nav__item">
       <a href="../../CONTRIBUTING/" class="md-nav__link">
-        Contributing
+        Contribute to dcm2bids
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -253,53 +504,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/1-usage/" class="md-nav__link">
-        1. Usage
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../docs/2-tutorial/" class="md-nav__link">
-        2. Tutorial
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../docs/3-configuration/" class="md-nav__link">
-        3. Configuration
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../docs/4-advanced/" class="md-nav__link">
-        4. Advanced
+      <a href="../../CODE_OF_CONDUCT/" class="md-nav__link">
+        Code of conduct
       </a>
     </li>
   
@@ -333,18 +539,22 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
+        
+          
+        
       
-        <label class="md-nav__link" for="__nav_9">
+      
+        <label class="md-nav__link" for="__nav_7">
           Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_9">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           Reference
         </label>
@@ -361,18 +571,46 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
       
       
       
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
-        <label class="md-nav__link" for="__nav_9_1">
-          Dcm2Bids
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container md-nav__link--active">
+          <a href="./">Dcm2Bids</a>
+          <label for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
       
       <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_1">
+        <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
           Dcm2Bids
         </label>
@@ -421,152 +659,6 @@
             
           
             
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Index
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Index
-      </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#sub-modules" class="md-nav__link">
-    Sub-modules
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#variables" class="md-nav__link">
-    Variables
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scaffold" class="md-nav__link">
-    scaffold
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#classes" class="md-nav__link">
-    Classes
-  </a>
-  
-    <nav class="md-nav" aria-label="Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dcm2bids" class="md-nav__link">
-    Dcm2bids
-  </a>
-  
-    <nav class="md-nav" aria-label="Dcm2bids">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instance-variables" class="md-nav__link">
-    Instance variables
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move" class="md-nav__link">
-    move
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run" class="md-nav__link">
-    run
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set_logger" class="md-nav__link">
-    set_logger
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
             
           
             
@@ -810,15 +902,33 @@
                   </a>
                 
                 
-                <h1 id="module-dcm2bids">Module dcm2bids</h1>
+                <h1 id="module-dcm2bids">Module dcm2bids<a class="headerlink" href="#module-dcm2bids" title="Permanent link">⚓︎</a></h1>
 <p>dcm2bids</p>
 <hr />
 <p>Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code># -*- coding: utf-8 -*-
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
-"""
+&quot;&quot;&quot;
 
 dcm2bids
 
@@ -826,7 +936,7 @@ dcm2bids
 
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 
-"""
+&quot;&quot;&quot;
 
 from .dcm2bids import Dcm2bids
 
@@ -834,10 +944,11 @@ from .scaffold import scaffold
 
 from .version import __version__
 
-__all__ = ["__version__", "Dcm2bids", "scaffold"]
-</code></pre>
+__all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
+</code></pre></div>
+</td></tr></table>
 </details>
-<h2 id="sub-modules">Sub-modules</h2>
+<h2 id="sub-modules">Sub-modules<a class="headerlink" href="#sub-modules" title="Permanent link">⚓︎</a></h2>
 <ul>
 <li><a href="dcm2bids/">dcm2bids.dcm2bids</a></li>
 <li><a href="dcm2niix/">dcm2bids.dcm2niix</a></li>
@@ -849,37 +960,81 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 <li><a href="utils/">dcm2bids.utils</a></li>
 <li><a href="version/">dcm2bids.version</a></li>
 </ul>
-<h2 id="variables">Variables</h2>
-<div class="highlight"><pre><span></span><code><span class="n">__version__</span>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">__version__</span>
 </code></pre></div>
-<h2 id="functions">Functions</h2>
-<h3 id="scaffold">scaffold</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">scaffold</span><span class="p">(</span>
+</td></tr></table>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="scaffold">scaffold<a class="headerlink" href="#scaffold" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">scaffold</span><span class="p">(</span>
 
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>scaffold entry point</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def scaffold():
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def scaffold():
 
-    """scaffold entry point"""
+    &quot;&quot;&quot;scaffold entry point&quot;&quot;&quot;
 
     args = _get_arguments()
 
-    for _ in ["code", "derivatives", "sourcedata"]:
+    for _ in [&quot;code&quot;, &quot;derivatives&quot;, &quot;sourcedata&quot;]:
 
         os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
 
     for _ in [
 
-        "dataset_description.json",
+        &quot;dataset_description.json&quot;,
 
-        "participants.json",
+        &quot;participants.json&quot;,
 
-        "participants.tsv",
+        &quot;participants.tsv&quot;,
 
-        "README",
+        &quot;README&quot;,
 
     ]:
 
@@ -889,24 +1044,35 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             shutil.copyfile(src, dest)
 
-    with resources.path(__name__, "CHANGES") as changes_template:
+    with resources.path(__name__, &quot;CHANGES&quot;) as changes_template:
 
         with open(changes_template) as _:
 
-            data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
+            data = _.read().format(datetime.date.today().strftime(&quot;%Y-%m-%d&quot;))
 
         write_txt(
 
-            os.path.join(args.output_dir, "CHANGES"),
+            os.path.join(args.output_dir, &quot;CHANGES&quot;),
 
-            data.split("\n")[:-1],
+            data.split(&quot;\n&quot;)[:-1],
 
     )
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h2 id="classes">Classes</h2>
-<h3 id="dcm2bids">Dcm2bids</h3>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2bids</span><span class="p">(</span>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="dcm2bids">Dcm2bids<a class="headerlink" href="#dcm2bids" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2bids</span><span class="p">(</span>
     <span class="n">dicom_dir</span><span class="p">,</span>
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">config</span><span class="p">,</span>
@@ -918,7 +1084,8 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
     <span class="o">**</span><span class="n">_</span>
 <span class="p">)</span>
 </code></pre></div>
-<h4 id="attributes">Attributes</h4>
+</td></tr></table>
+<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
 <table>
 <thead>
 <tr>
@@ -987,9 +1154,297 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 </table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>class Dcm2bids(object):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
 
-    """ Object to handle dcm2bids execution steps
+    &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
     Args:
 
@@ -1011,7 +1466,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
         log_level (str): logging level
 
-    """
+    &quot;&quot;&quot;
 
     def __init__(
 
@@ -1057,29 +1512,29 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
         self.set_logger()
 
-        self.logger.info("--- dcm2bids start ---")
+        self.logger.info(&quot;--- dcm2bids start ---&quot;)
 
-        self.logger.info("OS:version: %s", platform.platform())
+        self.logger.info(&quot;OS:version: %s&quot;, platform.platform())
 
-        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
+        self.logger.info(&quot;python:version: %s&quot;, sys.version.replace(&quot;\n&quot;, &quot;&quot;))
 
-        self.logger.info("dcm2bids:version: %s", __version__)
+        self.logger.info(&quot;dcm2bids:version: %s&quot;, __version__)
 
-        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
+        self.logger.info(&quot;dcm2niix:version: %s&quot;, dcm2niix_version())
 
-        self.logger.info("participant: %s", self.participant.name)
+        self.logger.info(&quot;participant: %s&quot;, self.participant.name)
 
-        self.logger.info("session: %s", self.participant.session)
+        self.logger.info(&quot;session: %s&quot;, self.participant.session)
 
-        self.logger.info("config: %s", os.path.realpath(config))
+        self.logger.info(&quot;config: %s&quot;, os.path.realpath(config))
 
-        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
+        self.logger.info(&quot;BIDS directory: %s&quot;, os.path.realpath(output_dir))
 
     @property
 
     def dicomDirs(self):
 
-        """List of DICOMs directories"""
+        &quot;&quot;&quot;List of DICOMs directories&quot;&quot;&quot;
 
         return self._dicomDirs
 
@@ -1115,17 +1570,17 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
     def set_logger(self):
 
-        """ Set a basic logger"""
+        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
 
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
+        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, &quot;log&quot;)
 
         logFile = os.path.join(
 
             logDir,
 
-            "{}_{}.log".format(
+            &quot;{}_{}.log&quot;.format(
 
-                self.participant.prefix, datetime.now().isoformat().replace(":", "")
+                self.participant.prefix, datetime.now().isoformat().replace(&quot;:&quot;, &quot;&quot;)
 
             ),
 
@@ -1145,7 +1600,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
     def run(self):
 
-        """Run dcm2bids"""
+        &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
         dcm2niix = Dcm2niix(
 
@@ -1155,7 +1610,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             self.participant,
 
-            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
+            self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
 
@@ -1167,7 +1622,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             sidecars.append(
 
-                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
+                Sidecar(filename, self.config.get(&quot;compKeys&quot;, DEFAULT.compKeys))
 
             )
 
@@ -1177,11 +1632,11 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             sidecars,
 
-            self.config["descriptions"],
+            self.config[&quot;descriptions&quot;],
 
-            self.config.get("searchMethod", DEFAULT.searchMethod),
+            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
+            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
 
         )
 
@@ -1191,7 +1646,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
         parser.find_runs()
 
-        self.logger.info("moving acquisitions into BIDS folder")
+        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
         for acq in parser.acquisitions:
 
@@ -1199,13 +1654,13 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
         check_latest()
 
-        check_latest("dcm2niix")
+        check_latest(&quot;dcm2niix&quot;)
 
     def move(self, acquisition):
 
-        """Move an acquisition to BIDS format"""
+        &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
-        for srcFile in glob(acquisition.srcRoot + ".*"):
+        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
 
             _, ext = splitext_(srcFile)
 
@@ -1223,27 +1678,27 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             if os.path.isfile(dstFile):
 
-                self.logger.info("'%s' already exists", dstFile)
+                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
 
                 if self.clobber:
 
-                    self.logger.info("Overwriting because of 'clobber' option")
+                    self.logger.info(&quot;Overwriting because of &#39;clobber&#39; option&quot;)
 
                 else:
 
-                    self.logger.info("Use clobber option to overwrite")
+                    self.logger.info(&quot;Use clobber option to overwrite&quot;)
 
                     continue
 
-            # it's an anat nifti file and the user using a deface script
+            # it&#39;s an anat nifti file and the user using a deface script
 
             if (
 
-                self.config.get("defaceTpl")
+                self.config.get(&quot;defaceTpl&quot;)
 
-                and acquisition.dataType == "anat"
+                and acquisition.dataType == &quot;anat&quot;
 
-                and ".nii" in ext
+                and &quot;.nii&quot; in ext
 
             ):
 
@@ -1255,7 +1710,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
                     pass
 
-                defaceTpl = self.config.get("defaceTpl")
+                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
 
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
 
@@ -1263,9 +1718,9 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             # use
 
-            elif ext == ".json":
+            elif ext == &quot;.json&quot;:
 
-                data = acquisition.dstSidecarData(self.config["descriptions"])
+                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;])
 
                 save_json(dstFile, data)
 
@@ -1276,28 +1731,108 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
             else:
 
                 os.rename(srcFile, dstFile)
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
 <hr />
-<h4 id="instance-variables">Instance variables</h4>
-<div class="highlight"><pre><span></span><code><span class="n">dicomDirs</span>
+<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dicomDirs</span>
 </code></pre></div>
+</td></tr></table>
 <p>List of DICOMs directories</p>
-<h4 id="methods">Methods</h4>
-<h4 id="move">move</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="move">move<a class="headerlink" href="#move" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">acquisition</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>Move an acquisition to BIDS format</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>    def move(self, acquisition):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition):
 
-        """Move an acquisition to BIDS format"""
+        &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
-        for srcFile in glob(acquisition.srcRoot + ".*"):
+        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
 
             _, ext = splitext_(srcFile)
 
@@ -1315,27 +1850,27 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             if os.path.isfile(dstFile):
 
-                self.logger.info("'%s' already exists", dstFile)
+                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
 
                 if self.clobber:
 
-                    self.logger.info("Overwriting because of 'clobber' option")
+                    self.logger.info(&quot;Overwriting because of &#39;clobber&#39; option&quot;)
 
                 else:
 
-                    self.logger.info("Use clobber option to overwrite")
+                    self.logger.info(&quot;Use clobber option to overwrite&quot;)
 
                     continue
 
-            # it's an anat nifti file and the user using a deface script
+            # it&#39;s an anat nifti file and the user using a deface script
 
             if (
 
-                self.config.get("defaceTpl")
+                self.config.get(&quot;defaceTpl&quot;)
 
-                and acquisition.dataType == "anat"
+                and acquisition.dataType == &quot;anat&quot;
 
-                and ".nii" in ext
+                and &quot;.nii&quot; in ext
 
             ):
 
@@ -1347,7 +1882,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
                     pass
 
-                defaceTpl = self.config.get("defaceTpl")
+                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
 
                 cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
 
@@ -1355,9 +1890,9 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             # use
 
-            elif ext == ".json":
+            elif ext == &quot;.json&quot;:
 
-                data = acquisition.dstSidecarData(self.config["descriptions"])
+                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;])
 
                 save_json(dstFile, data)
 
@@ -1368,19 +1903,79 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
             else:
 
                 os.rename(srcFile, dstFile)
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h4 id="run">run</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>Run dcm2bids</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>    def run(self):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self):
 
-        """Run dcm2bids"""
+        &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
         dcm2niix = Dcm2niix(
 
@@ -1390,7 +1985,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             self.participant,
 
-            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
+            self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
 
@@ -1402,7 +1997,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             sidecars.append(
 
-                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
+                Sidecar(filename, self.config.get(&quot;compKeys&quot;, DEFAULT.compKeys))
 
             )
 
@@ -1412,11 +2007,11 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
             sidecars,
 
-            self.config["descriptions"],
+            self.config[&quot;descriptions&quot;],
 
-            self.config.get("searchMethod", DEFAULT.searchMethod),
+            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
+            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
 
         )
 
@@ -1426,7 +2021,7 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
         parser.find_runs()
 
-        self.logger.info("moving acquisitions into BIDS folder")
+        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
         for acq in parser.acquisitions:
 
@@ -1434,30 +2029,62 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
 
         check_latest()
 
-        check_latest("dcm2niix")
-</code></pre>
+        check_latest(&quot;dcm2niix&quot;)
+</code></pre></div>
+</td></tr></table>
 </details>
-<h4 id="set_logger">set_logger</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
+<h4 id="set_logger">set_logger<a class="headerlink" href="#set_logger" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>Set a basic logger</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>    def set_logger(self):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def set_logger(self):
 
-        """ Set a basic logger"""
+        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
 
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
+        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, &quot;log&quot;)
 
         logFile = os.path.join(
 
             logDir,
 
-            "{}_{}.log".format(
+            &quot;{}_{}.log&quot;.format(
 
-                self.participant.prefix, datetime.now().isoformat().replace(":", "")
+                self.participant.prefix, datetime.now().isoformat().replace(&quot;:&quot;, &quot;&quot;)
 
             ),
 
@@ -1474,8 +2101,23 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
         setup_logging(self.logLevel, logFile)
 
         self.logger = logging.getLogger(__name__)
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-19T19:42:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-19</span>
+      
+    
+  </small>
+</div>
+                  
                 
               
               
@@ -1487,58 +2129,64 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
           </div>
         </div>
         
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
       </main>
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
+    
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
         
-          <a href="helper/" title="Helper" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+          
+          <a href="helper/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Helper" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
                   Previous
                 </span>
                 Helper
-              </span>
+              </div>
             </div>
           </a>
         
         
-          <a href="logger/" title="Logger" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
+          
+          <a href="logger/" class="md-footer__link md-footer__link--next" aria-label="Next: Logger" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
                   Next
                 </span>
                 Logger
-              </span>
+              </div>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
             </div>
           </a>
         
       </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
+    
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+            
+            Powered by
+            <a href="http://timothycrosley.github.io/portray">portray.</a>
+            You too can
+            <a href="http://timothycrosley.github.io/portray">
+              portray</a>
+            your Python project well using automatic documentation.
+          </div>
         
-        Powered by
-        <a href="http://timothycrosley.github.io/portray">portray.</a>
-        You too can
-        <a href="http://timothycrosley.github.io/portray">
-          portray</a>
-        your Python project well using automatic documentation.
-      </div>
-      
+          
   <div class="md-footer-social">
     
       
@@ -1555,18 +2203,23 @@ __all__ = ["__version__", "Dcm2bids", "scaffold"]
     
   </div>
 
+        
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
       
     </div>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>

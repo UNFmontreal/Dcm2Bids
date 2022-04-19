@@ -14,7 +14,7 @@
     
     
       
-        <title>Helper - Dcm2Bids</title>
+        <title>Create a config file - Dcm2Bids</title>
       
     
     
@@ -38,7 +38,7 @@
     
       <link rel="stylesheet" href="../../../css/timeago.css">
     
-      <link rel="stylesheet" href="../../../docs/assets/extra.css">
+      <link rel="stylesheet" href="../../assets/extra.css">
     
     
       
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-dcm2bidshelper" class="md-skip">
+        <a href="#how-to-create-a-configuration-file" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Helper
+              Create a config file
             
           </span>
         </div>
@@ -270,7 +270,7 @@
         
         
         <div class="md-nav__link md-nav__link--container ">
-          <a href="../../../docs/get-started/">Get started</a>
+          <a href="../../get-started/">Get started</a>
           <label for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
           </label>
@@ -292,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docs/get-started/install/" class="md-nav__link">
+      <a href="../../get-started/install/" class="md-nav__link">
         Installation
       </a>
     </li>
@@ -333,7 +333,7 @@
         
         
         <div class="md-nav__link md-nav__link--container ">
-          <a href="../../../docs/tutorial/">Tutorials</a>
+          <a href="../../tutorial/">Tutorials</a>
           <label for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
           </label>
@@ -355,7 +355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docs/tutorial/first-steps/" class="md-nav__link">
+      <a href="../../tutorial/first-steps/" class="md-nav__link">
         First steps
       </a>
     </li>
@@ -375,12 +375,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -404,7 +406,7 @@
         
         
         <div class="md-nav__link md-nav__link--container ">
-          <a href="../../../docs/how-to/">How-to guides</a>
+          <a href="../">How-to guides</a>
           <label for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
           </label>
@@ -426,7 +428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docs/how-to/get-help/" class="md-nav__link">
+      <a href="../get-help/" class="md-nav__link">
         Get help and support
       </a>
     </li>
@@ -440,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docs/how-to/use-main-commands/" class="md-nav__link">
+      <a href="../use-main-commands/" class="md-nav__link">
         Use main commands
       </a>
     </li>
@@ -452,11 +454,100 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../../docs/how-to/create-config-file/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Create a config file
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Create a config file
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-file-example" class="md-nav__link">
+    Configuration file example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criteria" class="md-nav__link">
+    criteria
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datatype" class="md-nav__link">
+    dataType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modalitylabel" class="md-nav__link">
+    modalityLabel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customlabels" class="md-nav__link">
+    customLabels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecarchanges" class="md-nav__link">
+    sidecarChanges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intendedfor" class="md-nav__link">
+    intendedFor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-config-files" class="md-nav__link">
+    Multiple config files
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -468,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docs/how-to/use-advanced-commands/" class="md-nav__link">
+      <a href="../use-advanced-commands/" class="md-nav__link">
         Use advanced commands
       </a>
     </li>
@@ -532,14 +623,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
       
       
       
@@ -564,14 +653,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
       
       
       
@@ -603,7 +690,7 @@
         
         
         <div class="md-nav__link md-nav__link--container ">
-          <a href="../">Dcm2Bids</a>
+          <a href="../../../reference/dcm2bids/">Dcm2Bids</a>
           <label for="__nav_7_1">
             <span class="md-nav__icon md-icon"></span>
           </label>
@@ -622,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dcm2bids/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/dcm2bids/" class="md-nav__link">
         Dcm2Bids
       </a>
     </li>
@@ -636,7 +723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dcm2niix/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/dcm2niix/" class="md-nav__link">
         Dcm2Niix
       </a>
     </li>
@@ -648,71 +735,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Helper
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../reference/dcm2bids/helper/" class="md-nav__link">
         Helper
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_arguments" class="md-nav__link">
-    get_arguments
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#main" class="md-nav__link">
-    main
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -727,7 +754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logger/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/logger/" class="md-nav__link">
         Logger
       </a>
     </li>
@@ -741,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scaffold/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/scaffold/" class="md-nav__link">
         Scaffold
       </a>
     </li>
@@ -755,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sidecar/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/sidecar/" class="md-nav__link">
         Sidecar
       </a>
     </li>
@@ -769,7 +796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../structure/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/structure/" class="md-nav__link">
         Structure
       </a>
     </li>
@@ -783,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/utils/" class="md-nav__link">
         Utils
       </a>
     </li>
@@ -797,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../version/" class="md-nav__link">
+      <a href="../../../reference/dcm2bids/version/" class="md-nav__link">
         Version
       </a>
     </li>
@@ -844,29 +871,58 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_arguments" class="md-nav__link">
-    get_arguments
+  <a href="#configuration-file-example" class="md-nav__link">
+    Configuration file example
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#main" class="md-nav__link">
-    main
+      
+        <li class="md-nav__item">
+  <a href="#criteria" class="md-nav__link">
+    criteria
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#datatype" class="md-nav__link">
+    dataType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modalitylabel" class="md-nav__link">
+    modalityLabel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customlabels" class="md-nav__link">
+    customLabels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecarchanges" class="md-nav__link">
+    sidecarChanges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intendedfor" class="md-nav__link">
+    intendedFor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-config-files" class="md-nav__link">
+    Multiple config files
+  </a>
   
 </li>
       
@@ -882,16 +938,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/helper.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/docs/how-to/create-config-file.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="module-dcm2bidshelper">Module dcm2bids.helper<a class="headerlink" href="#module-dcm2bidshelper" title="Permanent link">⚓︎</a></h1>
-<p>helper module</p>
-<p>None</p>
-<details class="example">
-<summary>View Source</summary>
+                <h1 id="how-to-create-a-configuration-file">How to create a configuration file<a class="headerlink" href="#how-to-create-a-configuration-file" title="Permanent link">⚓︎</a></h1>
+<h2 id="configuration-file-example">Configuration file example<a class="headerlink" href="#configuration-file-example" title="Permanent link">⚓︎</a></h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -945,244 +998,140 @@
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
-
-&quot;&quot;&quot;helper module&quot;&quot;&quot;
-
-import argparse
-
-import os
-
-import sys
-
-from .dcm2niix import Dcm2niix
-
-from .utils import DEFAULT
-
-def get_arguments():
-
-    &quot;&quot;&quot;Load arguments for main&quot;&quot;&quot;
-
-    parser = argparse.ArgumentParser(
-
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-
-        description=&quot;&quot;,
-
-        epilog=&quot;&quot;&quot;
-
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
-
-            &quot;&quot;&quot;,
-
-    )
-
-    parser.add_argument(
-
-        &quot;-d&quot;, &quot;--dicom_dir&quot;, required=True, nargs=&quot;+&quot;, help=&quot;DICOM files directory&quot;
-
-    )
-
-    parser.add_argument(
-
-        &quot;-o&quot;,
-
-        &quot;--output_dir&quot;,
-
-        required=False,
-
-        default=DEFAULT.cliOutputDir,
-
-        help=&quot;Output BIDS directory, Default: current directory&quot;,
-
-    )
-
-    args = parser.parse_args()
-
-    return args
-
-def main():
-
-    &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
-
-    args = get_arguments()
-
-    app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
-
-    rsl = app.run()
-
-    print(&quot;Example in:&quot;)
-
-    print(os.path.join(args.output_dir, DEFAULT.tmpDirName, DEFAULT.helperDir))
-
-    return rsl
-
-if __name__ == &quot;__main__&quot;:
-
-    sys.exit(main())
+<span class="normal">54</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anat&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T2w&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*T2*&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;EchoTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ProtocolName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T2&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ProtocolName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func_task-*&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ImageType&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ORIG*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;M&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ND&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MOSAIC&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ProtocolName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*field_mapping*&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-learning&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold_task-learning&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;learning&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap_task-learning&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;IntendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;learning&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
-</details>
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
-<h3 id="get_arguments">get_arguments<a class="headerlink" href="#get_arguments" title="Permanent link">⚓︎</a></h3>
+<p>The <code>descriptions</code> field is a list of descriptions, each describing some
+acquisition. In this example, the configuration describes five acquisitions, a
+T2-weighted, a resting-state fMRI, a fieldmap, and an fMRI learning task with
+another fieldmap.</p>
+<p>Each description tells dcm2bids how to group a set of acquisitions and how to
+label them. In this config file, Dcm2Bids is being told to collect files
+containing</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_arguments</span><span class="p">(</span>
-
-<span class="p">)</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AXIAL_T2_SPACE&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;EchoTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
-<p>Load arguments for main</p>
-<details class="example">
-<summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def get_arguments():
-
-    &quot;&quot;&quot;Load arguments for main&quot;&quot;&quot;
-
-    parser = argparse.ArgumentParser(
-
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-
-        description=&quot;&quot;,
-
-        epilog=&quot;&quot;&quot;
-
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
-
-            &quot;&quot;&quot;,
-
-    )
-
-    parser.add_argument(
-
-        &quot;-d&quot;, &quot;--dicom_dir&quot;, required=True, nargs=&quot;+&quot;, help=&quot;DICOM files directory&quot;
-
-    )
-
-    parser.add_argument(
-
-        &quot;-o&quot;,
-
-        &quot;--output_dir&quot;,
-
-        required=False,
-
-        default=DEFAULT.cliOutputDir,
-
-        help=&quot;Output BIDS directory, Default: current directory&quot;,
-
-    )
-
-    args = parser.parse_args()
-
-    return args
-</code></pre></div>
-</td></tr></table>
-</details>
-<h3 id="main">main<a class="headerlink" href="#main" title="Permanent link">⚓︎</a></h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
-
-<span class="p">)</span>
-</code></pre></div>
-</td></tr></table>
-<p>Let's go</p>
-<details class="example">
-<summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
-
-    &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
-
-    args = get_arguments()
-
-    app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
-
-    rsl = app.run()
-
-    print(&quot;Example in:&quot;)
-
-    print(os.path.join(args.output_dir, DEFAULT.tmpDirName, DEFAULT.helperDir))
-
-    return rsl
-</code></pre></div>
-</td></tr></table>
-</details>
+<p>in their sidecars<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> and label them as <code>anat</code>, <code>T2w</code> type images.</p>
+<h2 id="criteria">criteria<a class="headerlink" href="#criteria" title="Permanent link">⚓︎</a></h2>
+<p>dcm2bids will try to match the sidecars<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup> of dcm2niix to the descriptions of
+the configuration file. The values you enter inside the criteria dictionary are
+patterns that will be compared to the corresponding key of the sidecar.</p>
+<p>The pattern matching is shell-style. It's possible to use wildcard <code>*</code>, single
+character <code>?</code> etc ... Please have a look at the <a href="https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html">GNU documentation</a>
+to know more.</p>
+<p>For example, in the second description, the pattern <code>*T2*</code> will be compared to
+the value of <code>SeriesDescription</code> of a sidecar. <code>AXIAL_T2_SPACE</code> will be a match,
+<code>AXIAL_T1</code> won't.</p>
+<p><code>dcm2bids</code> has a <code>SidecarFilename</code> key, as in the first description, if you
+prefer to also match with the filename of the sidecar. Note that filename are
+subject to change depending on the dcm2niix version in use.</p>
+<p>You can enter several criteria. <strong>All criteria must match</strong> for a description to
+be linked to a sidecar.</p>
+<h2 id="datatype">dataType<a class="headerlink" href="#datatype" title="Permanent link">⚓︎</a></h2>
+<p>It is a mandatory field. Here is a definition from <code>bids v1.2.0</code> :</p>
+<blockquote>
+<p>Data type - a functional group of different types of data. In BIDS we define
+six data types: func (task based and resting state functional MRI), dwi
+(diffusion weighted imaging), fmap (field inhomogeneity mapping data such as
+field maps), anat (structural imaging such as T1, T2, etc.), meg
+(magnetoencephalography), beh (behavioral).</p>
+</blockquote>
+<h2 id="modalitylabel">modalityLabel<a class="headerlink" href="#modalitylabel" title="Permanent link">⚓︎</a></h2>
+<p>It is a mandatory field. It describes the modality of the acquisition like
+<code>T1w</code>, <code>T2w</code> or <code>dwi</code>, <code>bold</code>.</p>
+<h2 id="customlabels">customLabels<a class="headerlink" href="#customlabels" title="Permanent link">⚓︎</a></h2>
+<p>It is an optional field. For some acquisitions, you need to add information in
+the file name. For resting state fMRI, it is usually <code>task-rest</code>.</p>
+<p>To know more on how to set these fields, read the <a href="https://bids-specification.readthedocs.io/en/stable/">BIDS
+specifications</a>.</p>
+<p>For a longer example of a Dcm2Bids config json, see
+<a href="https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json">here</a>.</p>
+<h2 id="sidecarchanges">sidecarChanges<a class="headerlink" href="#sidecarchanges" title="Permanent link">⚓︎</a></h2>
+<p>Optional field to change or add information in a sidecar.</p>
+<h2 id="intendedfor">intendedFor<a class="headerlink" href="#intendedfor" title="Permanent link">⚓︎</a></h2>
+<p>Optional field to add an <code>IntendedFor</code> entry in the sidecar of a fieldmap. Just
+put the index or a list of indices of the description(s) that's intended for.</p>
+<p>Python index begins at <code>0</code> so in the example, <strong><code>1</code></strong> means it is intended for
+<code>task-rest_bold</code> and <strong><code>2</code></strong> is intended for <code>task-learning</code> which will be
+renamed to only <code>learning</code> because of the
+<code>"sidecarChanges": { "TaskName": "learning" }</code> field.</p>
+<h2 id="multiple-config-files">Multiple config files<a class="headerlink" href="#multiple-config-files" title="Permanent link">⚓︎</a></h2>
+<p>It is possible to create multiple config files and iterate the <code>dcm2bids</code>
+command over the different config files to structure data that have different
+parameters in their sidecar files.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>For each acquisition, <code>dcm2niix</code> creates an associated <code>.json</code> file,
+containing information from the dicom header. These are known as
+<strong>sidecars</strong>. These are the sidecars that <code>dcm2bids</code> uses to filter the
+groups of acquisitions.</p>
+<p>To define the filters you need, you will probably have to review these
+sidecars. You can generate all the sidecars for an individual participant
+using the <a href="../use-main-commands/#tools">dcm2bids_helper</a> command.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
                   
                     
@@ -1221,7 +1170,7 @@ if __name__ == &quot;__main__&quot;:
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="../dcm2niix/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dcm2Niix" rel="prev">
+          <a href="../use-main-commands/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Use main commands" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1230,20 +1179,20 @@ if __name__ == &quot;__main__&quot;:
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                Dcm2Niix
+                Use main commands
               </div>
             </div>
           </a>
         
         
           
-          <a href="../" class="md-footer__link md-footer__link--next" aria-label="Next: Index" rel="next">
+          <a href="../use-advanced-commands/" class="md-footer__link md-footer__link--next" aria-label="Next: Use advanced commands" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                Index
+                Use advanced commands
               </div>
             </div>
             <div class="md-footer__button md-icon">
