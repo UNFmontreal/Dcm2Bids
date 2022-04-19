@@ -9,19 +9,19 @@
       
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.3.0">
     
     
       
-        <title>Code of conduct - Dcm2Bids</title>
+        <title>2. Tutorial - Dcm2Bids</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -36,7 +36,7 @@
     
     
     
-      <link rel="stylesheet" href="../docs/stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
     
       
@@ -55,7 +55,7 @@
     <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#code-of-conduct" class="md-skip">
+        <a href="#tutorial" class="md-skip">
           Skip to content
         </a>
       
@@ -76,7 +76,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Dcm2Bids" class="md-header__button md-logo" aria-label="Dcm2Bids" data-md-component="logo">
+    <a href="../.." title="Dcm2Bids" class="md-header__button md-logo" aria-label="Dcm2Bids" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Code of conduct
+              2. Tutorial
             
           </span>
         </div>
@@ -176,7 +176,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Dcm2Bids" class="md-nav__button md-logo" aria-label="Dcm2Bids" data-md-component="logo">
+    <a href="../.." title="Dcm2Bids" class="md-nav__button md-logo" aria-label="Dcm2Bids" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -208,8 +208,53 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CODE_OF_CONDUCT/" class="md-nav__link">
+        Code of conduct
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CONTRIBUTING/" class="md-nav__link">
+        Contributing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-usage/" class="md-nav__link">
+        1. Usage
       </a>
     </li>
   
@@ -233,12 +278,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Code of conduct
+          2. Tutorial
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Code of conduct
+        2. Tutorial
       </a>
       
         
@@ -256,36 +301,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#our-standards" class="md-nav__link">
-    Our standards
+  <a href="#setup" class="md-nav__link">
+    Setup
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#our-responsibilities" class="md-nav__link">
-    Our responsibilities
+  <a href="#scaffolding" class="md-nav__link">
+    Scaffolding
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#scope" class="md-nav__link">
-    Scope
+  <a href="#downloading-test-data" class="md-nav__link">
+    Downloading test data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enforcement" class="md-nav__link">
-    Enforcement
+  <a href="#dicom-to-nifti-conversion" class="md-nav__link">
+    DICOM to NIfTI conversion
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attribution" class="md-nav__link">
-    Attribution
+  <a href="#building-the-configuration-file" class="md-nav__link">
+    Building the configuration file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-dcm2bids" class="md-nav__link">
+    Running dcm2bids
   </a>
   
 </li>
@@ -306,52 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CONTRIBUTING/" class="md-nav__link">
-        Contributing
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../docs/1-usage/" class="md-nav__link">
-        1. Usage
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../docs/2-tutorial/" class="md-nav__link">
-        2. Tutorial
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../docs/3-configuration/" class="md-nav__link">
+      <a href="../3-configuration/" class="md-nav__link">
         3. Configuration
       </a>
     </li>
@@ -366,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docs/4-advanced/" class="md-nav__link">
+      <a href="../4-advanced/" class="md-nav__link">
         4. Advanced
       </a>
     </li>
@@ -381,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CHANGELOG/" class="md-nav__link">
+      <a href="../../CHANGELOG/" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -448,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/dcm2bids/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/dcm2bids/" class="md-nav__link">
         Dcm2Bids
       </a>
     </li>
@@ -462,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/dcm2niix/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/dcm2niix/" class="md-nav__link">
         Dcm2Niix
       </a>
     </li>
@@ -476,7 +483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/helper/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/helper/" class="md-nav__link">
         Helper
       </a>
     </li>
@@ -490,7 +497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/" class="md-nav__link">
         Index
       </a>
     </li>
@@ -504,7 +511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/logger/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/logger/" class="md-nav__link">
         Logger
       </a>
     </li>
@@ -518,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/scaffold/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/scaffold/" class="md-nav__link">
         Scaffold
       </a>
     </li>
@@ -532,7 +539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/sidecar/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/sidecar/" class="md-nav__link">
         Sidecar
       </a>
     </li>
@@ -546,7 +553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/structure/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/structure/" class="md-nav__link">
         Structure
       </a>
     </li>
@@ -560,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/utils/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/utils/" class="md-nav__link">
         Utils
       </a>
     </li>
@@ -574,7 +581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/dcm2bids/version/" class="md-nav__link">
+      <a href="../../reference/dcm2bids/version/" class="md-nav__link">
         Version
       </a>
     </li>
@@ -621,36 +628,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#our-standards" class="md-nav__link">
-    Our standards
+  <a href="#setup" class="md-nav__link">
+    Setup
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#our-responsibilities" class="md-nav__link">
-    Our responsibilities
+  <a href="#scaffolding" class="md-nav__link">
+    Scaffolding
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#scope" class="md-nav__link">
-    Scope
+  <a href="#downloading-test-data" class="md-nav__link">
+    Downloading test data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enforcement" class="md-nav__link">
-    Enforcement
+  <a href="#dicom-to-nifti-conversion" class="md-nav__link">
+    DICOM to NIfTI conversion
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attribution" class="md-nav__link">
-    Attribution
+  <a href="#building-the-configuration-file" class="md-nav__link">
+    Building the configuration file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-dcm2bids" class="md-nav__link">
+    Running dcm2bids
   </a>
   
 </li>
@@ -667,67 +681,134 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/CODE_OF_CONDUCT.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/docs/2-tutorial.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="code-of-conduct">Code of Conduct</h1>
-<p>Each of us as a member of the dcm2bids community we ensure that every
-contributors enjoy their time contributing and helping people. Accordingly,
-everyone who participates in the development in any way possible is expected to
-show respect, courtesy to other community members including end-users who are
-seeking help on <a href="https://neurostars.org/">Neurostars</a> or on
-<a href="https://github.com/UNFmontreal/Dcm2Bids/issues">GitHub</a>.</p>
-<p>We also encourage everybody regardless of age, gender identity, level of
-experience, native langage, race or religion to be involved in the project. We
-pledge to make participation in the dcm2bids project an harassment-free
-experience for everyone.</p>
-<h2 id="our-standards">Our standards</h2>
-<p>We commit to promote any behavior that contributes to create a positive
-environment including:</p>
+                <h1 id="tutorial">Tutorial</h1>
+<h2 id="setup">Setup</h2>
+<p>Create a new folder for this tutorial.</p>
+<div class="highlight"><pre><span></span><code>mkdir dcm2bids-tutorial
+<span class="nb">cd</span> dcm2bids-tutorial
+</code></pre></div>
+<p>You can skip this part and go to the next <a href="#scaffolding">section</a> if <code>dcm2niix</code> and <code>dcm2bids</code> are already installed.</p>
+<p>The tutorial suppose that <a href="https://conda.io/en/latest/miniconda.html">conda</a> is installed and correctly setup on your computer. It is the easiest way to install dcm2bids and its dependencies on any OS.</p>
+<p>You should know that this is not the best way because conda does not always have the last version of dcm2niix.</p>
+<p>Create a new file <code>environment.yml</code> with your favorite text editor with this content:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2bids</span><span class="w"></span>
+<span class="nt">channels</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
+<span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2niix</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2bids</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span><span class="w"></span>
+</code></pre></div>
+<p>Finaly, create a new conda environment to install dcm2bids:</p>
+<div class="highlight"><pre><span></span><code>conda env create -f environment.yml
+<span class="nb">source</span> activate dcm2bids
+</code></pre></div>
+<p>We should have access to <code>dcm2bids</code> now. Test it with <code>dcm2bids --help</code>.</p>
+<h2 id="scaffolding">Scaffolding</h2>
+<p>We can now run the command <code>dcm2bids_scaffold</code>. This gives us several generics folders and files. We can have a look at these files and consult the <a href="https://bids-specification.readthedocs.io/en/stable/">BIDS specification</a> for more information.</p>
+<p>One of the created folders is named <code>sourcedata</code>, this is the folder to put your DICOMs</p>
+<h2 id="downloading-test-data">Downloading test data</h2>
+<p>For this tutorial, we will use DICOMs from <a href="https://github.com/neurolabusc">neurolabusc</a> on github.</p>
+<p>Go to : <a href="https://github.com/neurolabusc/dcm_qa_nih">https://github.com/neurolabusc/dcm_qa_nih</a> and click on the <em>Clone or download</em> button to download as ZIP.</p>
+<p><img alt="dcm_qa_nih_repo" src="../../art/dcm_qa_nih_repo.png" /></p>
+<p>Move the zip file to the sourcedata folder and unzip it. Here is how to do it in the terminal but we could do it the way we want.</p>
+<div class="highlight"><pre><span></span><code>mv ~/Downloads/dcm_qa_nih-master.zip sourcedata/
+<span class="nb">cd</span> sourcedata
+unzip dcm_qa_nih-master.zip
+<span class="nb">cd</span> ..
+</code></pre></div>
+<p>We should have now a <code>dcm_qa_nih-master</code> folder inside sourcedata.</p>
+<h2 id="dicom-to-nifti-conversion">DICOM to NIfTI conversion</h2>
+<p><code>dcm2bids_helper -d sourcedata/dcm_qa_nih-master/In/</code></p>
+<p>This command will convert the DICOMs files to NIfTI files and save them inside <code>tmp_dcm2bids/helper/</code>.</p>
+<p>We should see a list of compressed NIfTI files (<code>nii.gz</code>) with their resective sidecar files (<code>.json</code>). For this tutorial, we will only be interested in three acquisitions :</p>
 <ul>
-<li>Using welcoming and inclusive language;</li>
-<li>Being respectful;</li>
-<li>Show empathy towards everybody;</li>
-<li>Focusing on what is best for the community.</li>
+<li><code>004_In_Axial_EPI-FMRI_(Interleaved_I_to_S)_20180918114023.nii.gz</code></li>
+<li><code>004_In_EPI_PE=PA_20180918121230.nii.gz</code></li>
+<li><code>003_In_EPI_PE=AP_20180918121230.nii.gz</code></li>
 </ul>
-<p>We do <strong>NOT</strong> tolerate harassment or inappropriate behavior in the dcm2bids
-community.</p>
-<h2 id="our-responsibilities">Our responsibilities</h2>
-<p>Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.</p>
-<p>Project maintainers have the right and responsibility to remove, edit, or reject
-comments, commits, code, wiki edits, issues, and other contributions that are
-not aligned to this Code of Conduct, or to ban temporarily or permanently any
-contributor for other behaviors that they deem inappropriate, threatening,
-offensive, or harmful.</p>
-<h2 id="scope">Scope</h2>
-<p>This Code of Conduct applies both within our online GitHub repository and in
-public spaces when an individual is representing the project or its community.
-Examples of representing a project or community include using an official
-project e-mail address, posting via an official social media account, or acting
-as an appointed representative at an online or offline event.</p>
-<h2 id="enforcement">Enforcement</h2>
-<p>Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting Arnaud Boré at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#114;&#110;&#97;&#117;&#100;&#46;&#98;&#111;&#114;&#101;&#64;&#99;&#114;&#105;&#117;&#103;&#109;&#46;&#113;&#99;&#46;&#99;&#97;">&#97;&#114;&#110;&#97;&#117;&#100;&#46;&#98;&#111;&#114;&#101;&#64;&#99;&#114;&#105;&#117;&#103;&#109;&#46;&#113;&#99;&#46;&#99;&#97;</a>.</p>
-<p>Confidentiality will be respected in reporting.</p>
-<p>As the first interim
-<a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent Dictator for Life (BDFL)</a>,
-Arnaud Boré can take any action he deems appropriate for the safety of the
-dcm2bids community, including but not limited to:</p>
-<ul>
-<li>facilitating a conversation between the two parties involved in the violation
-  of the code of conduct;</li>
-<li>requesting a contributor apologize for their behavior;</li>
-<li>asking a contributor or multiple contributors to enter a cooling off period
-  that puts a time-limited pause on a particular discussion topic;</li>
-<li>asking a contributor to no longer participate in the development of <em>dcm2bids</em>.</li>
-</ul>
-<h2 id="attribution">Attribution</h2>
-<p>This Code of Conduct was adapted from the <a href="https://www.contributor-covenant.org/">Contributor Covenant</a>,
-version 1.4, available at <a href="https://www.contributor-covenant.org/version/1/4/code-of-conduct.html">https://www.contributor-covenant.org/version/1/4/code-of-conduct.html</a> as well as Code of Conduct from the <a href="https://github.com/ME-ICA/tedana">tedana</a> and <a href="https://github.com/KirstieJane/STEMMRoleModels">STEMMRoleModels</a> projects.</p>
+<p>The first will be our resting state fMRI, the second and third our fieldmap EPI.</p>
+<p>When you will do it with your DICOMs, you should do it with a typical session of one of your participants.</p>
+<h2 id="building-the-configuration-file">Building the configuration file</h2>
+<p>Now we will create a configuration file called <code>dcm2bids_config.json</code> (this is just an example, it could be whatever we want) in the <code>code/</code> folder. Use any text editor to create the file with the contents:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>For example, with our resting state fMRI we see in its sidecar that the field <code>"SeriesDescription"</code> is equal to <code>"Axial_EPI-FMRI_(Interleaved_I_to_S)"</code>. We can open <code>004_In_Axial_EPI-FMRI_(Interleaved_I_to_S)_20180918114023.json</code> to verify that.</p>
+<p>This value could be match with a pattern <code>"Axial_EPI-FMRI*"</code>.</p>
+<p>Unfortunately, this criteria is not enough and could match other files. See <code>006_In_Axial_EPI-FMRI_(Interleaved_S_to_I)_20180918114023.json</code>.</p>
+<p>In this case we could add another criteria to match the acquisition by the filename of the sidecar with the pattern <code>"*Interleaved_I_to_S*"</code>.</p>
+<p>With all this information we could then update our configuration file.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial_EPI-FMRI*&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="hll"><span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Interleaved_I_to_S*&quot;</span><span class="w"></span>
+</span><span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>For the two fieldmaps, we can see that with patterns of <code>"*EPI_PE=AP*"</code> or <code>"*EPI_PE=PA*"</code> on the filename is enough to match the correct acquisition.</p>
+<p>We could then update our configuration file.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial_EPI-FMRI*&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Interleaved_I_to_S*&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*EPI_PE=AP*&quot;</span><span class="w"></span>
+</span><span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="w">            </span><span class="nt">&quot;SidecarFilename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*EPI_PE=PA*&quot;</span><span class="w"></span>
+</span><span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>For fieldmap, we added an <code>"intendedFor"</code> field to show that these fieldmaps should be use with our fMRI acquisition. Have a look at the explanation of <a href="/docs/3-configuration/#intendedfor">intendedFor</a> in the documentation or in the <a href="https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#fieldmap-data">BIDS specification</a>.</p>
+<h2 id="running-dcm2bids">Running dcm2bids</h2>
+<p>We can now run dcm2bids:</p>
+<div class="highlight"><pre><span></span><code>dcm2bids -d sourcedata/dcm_qa_nih-master/In/ -p ID01 -c code/dcm2bids_config.json
+</code></pre></div>
+<p>A bunch of information is print to the terminal and we can verify that the data are now in BIDS.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">user@pc:data/$ </span>ls sub-ID01/*
+<span class="go">sub-ID01/fmap:</span>
+<span class="go">sub-ID01_dir-AP_epi.json  sub-ID01_dir-AP_epi.nii.gz</span>
+<span class="go">sub-ID01_dir-PA_epi.json  sub-ID01_dir-PA_epi.nii.gz</span>
+
+<span class="go">sub-ID01/func:</span>
+<span class="go">sub-ID01_task-rest_bold.json  sub-ID01_task-rest_bold.nii.gz</span>
+</code></pre></div>
+<p>Files that were not grabbed stay in a temporary folder <code>tmp_dcm2bids/sub-{participant_id}</code>. In our case : <code>tmp_dcm2bids/sub-ID01</code>.</p>
+<p>Have a look at <code>dcm2bids --help</code> or the other pages of the documentation for more information.</p>
                 
               
               
@@ -747,7 +828,7 @@ version 1.4, available at <a href="https://www.contributor-covenant.org/version/
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../1-usage/" title="1. Usage" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -756,19 +837,19 @@ version 1.4, available at <a href="https://www.contributor-covenant.org/version/
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                1. Usage
               </span>
             </div>
           </a>
         
         
-          <a href="../CONTRIBUTING/" title="Contributing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../3-configuration/" title="3. Configuration" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Contributing
+                3. Configuration
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -815,10 +896,10 @@ version 1.4, available at <a href="https://www.contributor-covenant.org/version/
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
       
     
   </body>
