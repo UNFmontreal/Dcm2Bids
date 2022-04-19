@@ -1,4 +1,5 @@
 ---
+title: Getting started
 summary: How to get started with dcm2bids
 authors:
   - Samuel Guay

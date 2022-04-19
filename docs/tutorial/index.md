@@ -1,3 +1,7 @@
+---
+title: Tutorials
+---
+
 # Tutorials
 
 Get to know dcm2bids through tutorials that describe in depth the dcm2bids
