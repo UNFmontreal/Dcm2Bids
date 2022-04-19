@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""dcm2bids module"""
+"""
+Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
+"""
 
 import argparse
 import logging
@@ -16,6 +18,7 @@ from .structure import Participant
 from .utils import DEFAULT, load_json, save_json, run_shell_command, splitext_
 from .version import __version__, check_latest, dcm2niix_version
 
+EPILOG = DEFAULT.doc
 
 class Dcm2bids(object):
     """ Object to handle dcm2bids execution steps
@@ -199,18 +202,8 @@ class Dcm2bids(object):
 
 
 def get_arguments():
-    """Load arguments for main"""
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        description="""
-Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids {}""".format(
-            __version__
-        ),
-        epilog="""
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
-            """,
-    )
+    parser = argparse.ArgumentParser(description=__doc__, epilog=EPILOG,
+                                     formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument(
         "-d", "--dicom_dir", required=True, nargs="+", help="DICOM directory(ies)"

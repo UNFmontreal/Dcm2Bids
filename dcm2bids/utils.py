@@ -2,16 +2,23 @@
 
 
 import csv
+import inspect
 import json
 import logging
 import os
+import os.path as op
+import pkg_resources
 import shlex
+import shutil
 from collections import OrderedDict
 from subprocess import check_output
 
+import dcm2bids
 
 class DEFAULT(object):
     """ Default values of the package"""
+
+    doc="Documentation at https://github.com/unfmontreal/Dcm2Bids"
 
     # cli dcm2bids
     cliSession = ""
@@ -117,3 +124,71 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running %s", commandLine)
     return check_output(shlex.split(commandLine))
+
+
+def assert_dirs_empty(parser, args, required):
+    """
+    Assert that all directories exist are empty.
+    If exists and not empty, and -f used, delete dirs.
+    Parameters
+    ----------
+    parser: argparse.ArgumentParser object
+        Parser.
+    args: argparse namespace
+        Argument list.
+    required: string or list of paths to files
+        Required paths to be checked.
+    create_dir: bool
+        If true, create the directory if it does not exist.
+    """
+    def check(path):
+        if os.listdir(path):
+            if not args.overwrite:
+                parser.error(
+                    'Output directory {} isn\'t empty and some files could be '
+                    'overwritten or even deleted. Use -f option if you want '
+                    'to continue.'.format(path))
+            else:
+                for the_file in os.listdir(path):
+                    file_path = os.path.join(path, the_file)
+                    try:
+                        if os.path.isfile(file_path):
+                            os.unlink(file_path)
+                        elif os.path.isdir(file_path):
+                            shutil.rmtree(file_path)
+                    except Exception as e:
+                        print(e)
+
+    if isinstance(required, str):
+        required = [required]
+
+    for cur_dir in required:
+        check(cur_dir)
+
+
+def add_overwrite_arg(parser):
+    parser.add_argument(
+        '-f', dest='overwrite', action='store_true',
+        help='Force overwriting of the output files.')
+
+
+def get_scaffold_dir():
+    """
+    Return SCAFFOLD data directory in dcm2bids repository
+
+    Returns
+    -------
+    scaffold_dir: string
+        SCAFFOLD path
+    """
+
+    module_path = os.path.dirname(os.path.dirname(inspect.getfile(dcm2bids)))
+    # module_path = inspect.getfile(dcm2bids)
+    scaffold_dir = op.join(module_path, 'data', 'scaffold')
+    #scaffold_dir = pkg_resources.resource_filename(__name__,  os.path.join("data", "scaffold"))
+    #print(module_path)
+    #scaffold_dir = os.path.join(os.path.dirname(
+#        os.path.dirname(module_path)), "data", "scaffold")
+
+    print(scaffold_dir)
+    return scaffold_dir

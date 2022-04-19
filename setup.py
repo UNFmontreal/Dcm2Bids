@@ -6,13 +6,14 @@
 """Setup file for the dcm2bids package"""
 
 import os
+import os.path as op
 from setuptools import setup, find_packages
 
 
 def load_version():
     """Execute dcm2bids.version in a global dictionary"""
     global_dict = {}
-    with open(os.path.join("dcm2bids", "version.py")) as _:
+    with open(op.join("dcm2bids", "version.py")) as _:
         exec(_.read(), global_dict)
     return global_dict
 
@@ -32,7 +33,7 @@ ENTRY_POINTS = {
     "console_scripts": [
         "dcm2bids = dcm2bids.dcm2bids:main",
         "dcm2bids_helper = dcm2bids.helper:main",
-        "dcm2bids_scaffold = dcm2bids:scaffold",
+        "dcm2bids_scaffold = dcm2bids.scaffold:main",
     ],
     # "configurations": [],
 }
@@ -71,9 +72,14 @@ if __name__ == "__main__":
         packages=find_packages(exclude=["tests"]),
         entry_points=ENTRY_POINTS,
         python_requires=">=3.7",
-        use_scm_version=True,
-        setup_requires=['setuptools_scm'],
         install_requires=['future>=0.17.1'],
+        package_data= {'dcm2bids.data': [op.join("data","*")]},
+        data_files=[(op.join("data", "scaffold"),
+                    [op.join("data", "scaffold", "CHANGES"),
+                     op.join("data", "scaffold", "dataset_description.json"),
+                     op.join("data", "scaffold", "participants.json"),
+                     op.join("data", "scaffold", "participants.tsv"),
+                     op.join("data", "scaffold", "README")])],
         include_package_data=True,
         author=AUTHOR,
         author_email=AUTHOR_EMAIL,
@@ -83,5 +89,5 @@ if __name__ == "__main__":
         # keywords="",
         license=LICENSE,
         project_urls=PROJECT_URLS,
-        classifiers=CLASSIFIERS,
+        classifiers=CLASSIFIERS
     )

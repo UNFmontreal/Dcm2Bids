@@ -10,14 +10,8 @@ from .utils import DEFAULT
 
 
 def get_arguments():
-    """Load arguments for main"""
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        description="",
-        epilog="""
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
-            """,
-    )
+    parser = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.doc,
+                                     formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument(
         "-d", "--dicom_dir", required=True, nargs="+", help="DICOM files directory"
