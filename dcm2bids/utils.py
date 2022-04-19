@@ -123,7 +123,7 @@ def run_shell_command(commandLine):
 def assert_dirs_empty(parser, args, required):
     """
     Assert that all directories exist are empty.
-    If exists and not empty, and -f used, delete dirs.
+    If dirs exist and not empty, and --force is used, delete dirs.
 
     Parameters
     ----------
