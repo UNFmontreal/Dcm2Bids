@@ -73,8 +73,8 @@ you install Python through [Anaconda][anaconda].
 
 ### dcm2niix
 
-[dcm2niix][dcm2niix] can also be installed in a variety of ways as seen on
-[the main page of the software][dcm2niix-install].
+[dcm2niix][dcm2niix] can also be installed in a variety of ways as seen on [the
+main page of the software][dcm2niix-install].
 
 Whether you want to install the latest compiled executable directly on your
 machine is up to you but you have to **make sure you can call the software from
@@ -84,8 +84,8 @@ we recommend to install it at the same time in the dedicated environment.
 
 As you can see, dcm2niix is available through [conda][conda] so that is the
 approach chosen in this guide. We will benefit from the simplicity of installing
-all software from the same located at. Steps to install dcm2niix 
-are included in the next secton.
+all software from the same located at. Steps to install dcm2niix are included in
+the next secton.
 
 ## Recommendations
 
@@ -159,7 +159,7 @@ paste the information below, and save it in your project directory with the name
 You can create a project directory anywhere on your computer, it does not
 matter. You can create `dcm2bids-proj` if you need inspiration.
 
-```yaml
+```yaml title="environment.yml"
 name: dcm2bids
 channels:
   - conda-forge
@@ -175,8 +175,8 @@ In short, here's what the fields mean:
   to use this name to activate your environment and use software installed
   inside. The name is arbitrary, you can name it however you want.
 - The `channels:` key tells conda where to look for the declared dependencies.
-  In our case, all our dependencies are located on the
-  [conda-forge channel][conda-forge].
+  In our case, all our dependencies are located on the [conda-forge
+  channel][conda-forge].
 - The `dependencies:` key lists all the dependencies to be installed inside the
   environment. If you are creating an environment for your analysis project,
   this is where you would list other dependencies such as `nilearn`, `pandas`,
@@ -284,6 +284,7 @@ Voilà, you are ready to use dcm2bids or at least
 [Go to the Tutorial section](../../tutorial){ .md-button }
 
 [Go to the How-to section](../../how-to/){ .md-button }
+
 ## Containers
 
 We also provide a container image that includes both dcm2niix and dcm2bids which
@@ -304,34 +305,38 @@ packages. The easiest way to install it is to follow the steps below using
 [conda][conda] but it is also possible to use other software, including
 containers:
 
-- [ ] Create an [`environment.yml`](#create-environmentyml) file with dependencies
-    - [x] Content:
+- [ ] Create an [`environment.yml`](#create-environmentyml) file with
+      dependencies
 
-            name: dcm2bids
-            channels:
-            - conda-forge
-            dependencies:
-            - python>=3.7
-            - dcm2niix
-            - dcm2bids
-            
+  - [x] Content:
+    <!-- prettier-ignore-start -->
+          name: dcm2bids
+          channels:
+          - conda-forge
+          dependencies:
+          - python>=3.7
+          - dcm2niix
+          - dcm2bids
+    <!-- prettier-ignore-end -->
+
 - [ ] Create conda environment
-    - [x] `conda env create --file environment.yml`
+  - [x] `conda env create --file environment.yml`
 - [ ] Activate conda environment
-    - [x] `conda activate dcm2bids`
+  - [x] `conda activate dcm2bids`
 - [ ] Verify a dcm2bids command
-    - [x] `dcm2bids --help`
+  - [x] `dcm2bids --help`
 - [ ] Consult how-to guides or follow the tutorial
 
-[anaconda]:         https://www.anaconda.com/distribution
-[dcm2niix]:         https://github.com/rordenlab/dcm2niix
+[anaconda]: https://www.anaconda.com/distribution
+[dcm2niix]: https://github.com/rordenlab/dcm2niix
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
-[conda]:            https://conda.io/en/latest/miniconda.html
-[conda-forge]:      https://anaconda.org/conda-forge
-[docker]:           https://docker.com
-[apptainer]:        https://apptainer.org
+[conda]: https://conda.io/en/latest/miniconda.html
+[conda-forge]: https://anaconda.org/conda-forge
+[docker]: https://docker.com
+[apptainer]: https://apptainer.org
 [mini-vs-ana]:
   https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda
 
-[^1]: To get out of a conda environment, you have to deactivate it with the
-    `conda deactivate` or `exit` commands.
+[^1]:
+    To get out of a conda environment, you have to deactivate it with the
+    `conda deactivate` command.
