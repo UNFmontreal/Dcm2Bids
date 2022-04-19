@@ -28,7 +28,7 @@ def _build_arg_parser():
 
     p.add_argument('--force',
                    dest='overwrite', action='store_true',
-                   help='Force overwriting of the output files.')
+                   help='Force command to overwrite existing output files.')
 
     return p
 
