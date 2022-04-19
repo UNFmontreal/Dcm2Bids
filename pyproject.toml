@@ -29,21 +29,16 @@ edit_uri = "blob/master/" # Bring to the page on GH, but it won't open the _edit
 # `index` is a special case for which the parent section will be clickable and
 #  link to the index.md without appending the url
 nav = [{  Home = "README.md"},
-        {  "Get started"    =  [{index = "docs/get-started/index.md"}, 
-                                {"Installation" = "docs/get-started/install.md"}]
-        },
+        {  "Get started"    =  [{index = "docs/get-started/index.md"},
+                                {"Installation" = "docs/get-started/install.md"}]},
         {   "Tutorials"     =   [{index = "docs/tutorial/index.md"},
-                                {"First steps" = "docs/tutorial/first-steps.md"},
-                                ]
-        },
+                                {"First steps" = "docs/tutorial/first-steps.md"}]},
         {   "How-to guides" =   [{index = "docs/how-to/index.md"},
                                 {"Get help and support" = "docs/how-to/get-help.md"},
                                 {"Use main commands" = "docs/how-to/use-main-commands.md"},
                                 {"Create a config file" =   "docs/how-to/create-config-file.md"},
                                 {"Use advanced commands" = "docs/how-to/use-advanced-commands.md"},
-                                # {"Convert multiple subjects" = "docs/tutorial/parallel.md"},
-                                {"Contribute to dcm2bids"  = "CONTRIBUTING.md"}]
-        },
+                                {"Contribute to dcm2bids"  = "CONTRIBUTING.md"}]},
         {"Code of conduct"  =   "CODE_OF_CONDUCT.md" },
         {"Changelog"        =   "CHANGELOG.md"}
         ]
