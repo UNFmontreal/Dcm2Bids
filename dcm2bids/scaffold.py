@@ -10,6 +10,7 @@ import sys
 import argparse
 import datetime
 import os
+import os.path as op
 import shutil
 from .utils import (DEFAULT, add_overwrite_arg, assert_dirs_empty,
                     get_scaffold_dir, write_txt)
@@ -39,20 +40,20 @@ def main():
     assert_dirs_empty(parser, args, args.output_dir)
 
     for _ in ["code", "derivatives", "sourcedata"]:
-        os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
+        os.makedirs(op.join(args.output_dir, _), exist_ok=True)
 
     scaffold_dir = get_scaffold_dir()
 
     for _ in os.listdir(scaffold_dir):
-        dest = os.path.join(args.output_dir, _)
-        src = os.path.join(scaffold_dir, _)
+        dest = op.join(args.output_dir, _)
+        src = op.join(scaffold_dir, _)
         shutil.copyfile(src, dest)
 
-    changes_template = os.path.join(args.output_dir,  "CHANGES")
+    changes_template = op.join(args.output_dir,  "CHANGES")
     with open(changes_template) as _:
         data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
 
-    write_txt(os.path.join(args.output_dir, "CHANGES"),
+    write_txt(op.join(args.output_dir, "CHANGES"),
               data.split("\n")[:-1])
 
 
