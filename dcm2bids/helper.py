@@ -4,25 +4,25 @@
 
 import argparse
 import os
+from pathlib import Path
 import sys
-from .dcm2niix import Dcm2niix
-from .utils import DEFAULT, assert_dirs_empty
 
-EPILOG = """
-    Documentation at https://github.com/unfmontreal/Dcm2Bids
-    """
+from dcm2bids.dcm2niix import Dcm2niix
+from dcm2bids.utils import DEFAULT, assert_dirs_empty
 
 
 def _build_arg_parser():
-    p = argparse.ArgumentParser(description=__doc__, epilog=EPILOG,
+    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.EPILOG,
                                 formatter_class=argparse.RawTextHelpFormatter)
 
     p.add_argument("-d", "--dicom_dir",
+                   type=Path,
                    required=True, nargs="+",
                    help="DICOM files directory.")
 
     p.add_argument("-o", "--output_dir",
                    required=False, default=DEFAULT.cliOutputDir,
+                   type=Path,
                    help="Output BIDS directory."
                         " (Default: %(default)s)")
 

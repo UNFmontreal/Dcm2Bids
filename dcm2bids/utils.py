@@ -5,7 +5,7 @@ import csv
 import json
 import logging
 import os
-from pathlib import PurePath
+from pathlib import Path
 import re
 from collections import OrderedDict
 import shlex
@@ -20,6 +20,7 @@ class DEFAULT(object):
     cliSession = ""
     cliOutputDir = os.getcwd()
     cliLogLevel = "INFO"
+    EPILOG="Documentation at https://github.com/unfmontreal/Dcm2Bids"
 
     # dcm2bids.py
     outputDir = cliOutputDir
@@ -126,14 +127,13 @@ def valid_path(in_path):
 
     Parameters
     ----------
-    required_file: string path
+    required_file: Path
         Path to be checked.
     """
-    valid_path = str(PurePath(in_path))
 
-    if os.path.isfile(valid_path) or os.path.isdir(valid_path):
-        if os.path.exists(valid_path):
-            return valid_path
+    if in_path.isfile() or in_path.isdir():
+        if in_path.exists():
+            return in_path.name
 
     raise FileNotFoundError(in_path)
 

@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 
-"""dcm2bids module"""
+"""
+Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
+"""
 
 import argparse
 import logging
 import os
+from pathlib import Path
 import platform
 import sys
 from datetime import datetime
 from glob import glob
-from .dcm2niix import Dcm2niix
-from .logger import setup_logging
-from .sidecar import Sidecar, SidecarPairing
-from .structure import Participant
-from .utils import (DEFAULT, load_json, save_json,
-                    splitext_, run_shell_command, valid_path)
-from .version import __version__, check_latest, dcm2niix_version
+
+from dcm2bids.dcm2niix import Dcm2niix
+from dcm2bids.logger import setup_logging
+from dcm2bids.sidecar import Sidecar, SidecarPairing
+from dcm2bids.structure import Participant
+from dcm2bids.utils import (DEFAULT, load_json, save_json,
+                            splitext_, run_shell_command, valid_path)
+from dcm2bids.version import __version__, check_latest, dcm2niix_version
 
 
 class Dcm2bids(object):
@@ -204,77 +208,55 @@ class Dcm2bids(object):
         return intendedForList
 
 
-def get_arguments():
-    """Load arguments for main"""
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        description="""
-Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids {}""".format(
-            __version__
-        ),
-        epilog="""
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
-            """,
-    )
+def _build_arg_parser():
+    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.EPILOG,
+                                formatter_class=argparse.RawTextHelpFormatter)
 
-    parser.add_argument(
-        "-d", "--dicom_dir", required=True, nargs="+", help="DICOM directory(ies)"
-    )
+    p.add_argument("-d", "--dicom_dir",
+                   type=Path, required=True, nargs="+",
+                   help="DICOM directory(ies).")
 
-    parser.add_argument("-p", "--participant", required=True, help="Participant ID")
+    p.add_argument("-p", "--participant",
+                   required=True,
+                   help="Participant ID.")
 
-    parser.add_argument(
-        "-s", "--session", required=False, default=DEFAULT.cliSession, help="Session ID"
-    )
+    p.add_argument("-s", "--session",
+                   required=False,
+                   default=DEFAULT.cliSession,
+                   help="Session ID.")
 
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=True,
-        help="JSON configuration file (see example/config.json)",
-    )
+    p.add_argument("-c", "--config",
+                   required=True,
+                   help="JSON configuration file (see example/config.json).")
 
-    parser.add_argument(
-        "-o",
-        "--output_dir",
-        required=False,
-        default=DEFAULT.cliOutputDir,
-        help="Output BIDS directory, Default: current directory ({})".format(
-            DEFAULT.cliOutputDir
-        ),
-    )
+    p.add_argument("-o", "--output_dir",
+                   required=False,
+                   type=Path,
+                   default=DEFAULT.cliOutputDir,
+                   help="Output BIDS directory, [%(default)s]")
 
-    parser.add_argument(
-        "--forceDcm2niix",
-        required=False,
-        action="store_true",
-        help="Overwrite previous temporary dcm2niix output if it exists",
-    )
+    p.add_argument("--forceDcm2niix",
+                   action="store_true",
+                   help="Overwrite previous temporary dcm2niix "
+                        "output if it exists.")
 
-    parser.add_argument(
-        "--clobber",
-        required=False,
-        action="store_true",
-        help="Overwrite output if it exists",
-    )
+    p.add_argument("--clobber",
+                   action="store_true",
+                   help="Overwrite output if it exists.")
 
-    parser.add_argument(
-        "-l",
-        "--log_level",
-        required=False,
-        default=DEFAULT.cliLogLevel,
-        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-        help="Set logging level",
-    )
+    p.add_argument("-l", "--log_level",
+                   required=False,
+                   default=DEFAULT.cliLogLevel,
+                   choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                   help="Set logging level. [%(default)s]")
 
-    args = parser.parse_args()
-    return args
+    return p
 
 
 def main():
     """Let's go"""
-    args = get_arguments()
+    parser = _build_arg_parser()
+    args = parser.parse_args()
 
     check_latest()
     check_latest("dcm2niix")
