@@ -36,7 +36,9 @@
     
     
     
-      <link rel="stylesheet" href="../../../docs/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../../docs/assets/extra.css">
     
     
       
@@ -49,13 +51,17 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="" data-md-color-accent="">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -101,6 +107,28 @@
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -222,10 +250,58 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../../../docs/get-started/">Get started</a>
+          <label for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="Get started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../../CODE_OF_CONDUCT/" class="md-nav__link">
-        Code of conduct
+      <a href="../../../docs/get-started/install/" class="md-nav__link">
+        Installation
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -234,13 +310,188 @@
       
       
 
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../../../docs/tutorial/">Tutorials</a>
+          <label for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/tutorial/first-steps/" class="md-nav__link">
+        First steps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../../../docs/how-to/">How-to guides</a>
+          <label for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="How-to guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          How-to guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/how-to/get-help/" class="md-nav__link">
+        Get help and support
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/how-to/use-main-commands/" class="md-nav__link">
+        Use main commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/how-to/create-config-file/" class="md-nav__link">
+        Create a config file
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/how-to/use-advanced-commands/" class="md-nav__link">
+        Use advanced commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
   
   
   
     <li class="md-nav__item">
       <a href="../../../CONTRIBUTING/" class="md-nav__link">
-        Contributing
+        Contribute to dcm2bids
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -253,53 +504,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docs/1-usage/" class="md-nav__link">
-        1. Usage
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../docs/2-tutorial/" class="md-nav__link">
-        2. Tutorial
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../docs/3-configuration/" class="md-nav__link">
-        3. Configuration
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../docs/4-advanced/" class="md-nav__link">
-        4. Advanced
+      <a href="../../../CODE_OF_CONDUCT/" class="md-nav__link">
+        Code of conduct
       </a>
     </li>
   
@@ -333,18 +539,22 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
+        
+          
+        
       
-        <label class="md-nav__link" for="__nav_9">
+      
+        <label class="md-nav__link" for="__nav_7">
           Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_9">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           Reference
         </label>
@@ -361,18 +571,46 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
       
       
       
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
-        <label class="md-nav__link" for="__nav_9_1">
-          Dcm2Bids
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../">Dcm2Bids</a>
+          <label for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
       
       <nav class="md-nav" aria-label="Dcm2Bids" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_1">
+        <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
           Dcm2Bids
         </label>
@@ -421,17 +659,6 @@
             
           
             
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        Index
-      </a>
-    </li>
-  
-
             
           
             
@@ -796,12 +1023,178 @@
                   </a>
                 
                 
-                <h1 id="module-dcm2bidsutils">Module dcm2bids.utils</h1>
+                <h1 id="module-dcm2bidsutils">Module dcm2bids.utils<a class="headerlink" href="#module-dcm2bidsutils" title="Permanent link">⚓︎</a></h1>
 <p>None</p>
 <p>None</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code># -*- coding: utf-8 -*-
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -819,15 +1212,15 @@ from subprocess import check_output
 
 class DEFAULT(object):
 
-    """ Default values of the package"""
+    &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
     # cli dcm2bids
 
-    cliSession = ""
+    cliSession = &quot;&quot;
 
     cliOutputDir = os.getcwd()
 
-    cliLogLevel = "INFO"
+    cliLogLevel = &quot;INFO&quot;
 
     # dcm2bids.py
 
@@ -841,35 +1234,35 @@ class DEFAULT(object):
 
     defaceTpl = None
 
-    logLevel = "WARNING"
+    logLevel = &quot;WARNING&quot;
 
     # dcm2niix.py
 
-    dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixOptions = &quot;-b y -ba y -z y -f &#39;%3s_%f_%p_%t&#39;&quot;
 
-    dcm2niixVersion = "v1.0.20181125"
+    dcm2niixVersion = &quot;v1.0.20181125&quot;
 
     # sidecar.py
 
-    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
+    compKeys = [&quot;SeriesNumber&quot;, &quot;AcquisitionTime&quot;, &quot;SidecarFilename&quot;]
 
-    searchMethod = "fnmatch"
+    searchMethod = &quot;fnmatch&quot;
 
-    searchMethodChoices = ["fnmatch", "re"]
+    searchMethodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
 
-    runTpl = "_run-{:02d}"
+    runTpl = &quot;_run-{:02d}&quot;
 
     caseSensitive = True
 
     # misc
 
-    tmpDirName = "tmp_dcm2bids"
+    tmpDirName = &quot;tmp_dcm2bids&quot;
 
-    helperDir = "helper"
+    helperDir = &quot;helper&quot;
 
 def load_json(filename):
 
-    """ Load a JSON file
+    &quot;&quot;&quot; Load a JSON file
 
     Args:
 
@@ -879,9 +1272,9 @@ def load_json(filename):
 
         Dictionnary of the JSON file
 
-    """
+    &quot;&quot;&quot;
 
-    with open(filename, "r") as f:
+    with open(filename, &quot;r&quot;) as f:
 
         data = json.load(f, object_pairs_hook=OrderedDict)
 
@@ -889,23 +1282,23 @@ def load_json(filename):
 
 def save_json(filename, data):
 
-    with open(filename, "w") as f:
+    with open(filename, &quot;w&quot;) as f:
 
         json.dump(data, f, indent=4)
 
 def write_txt(filename, lines):
 
-    with open(filename, "a") as f:
+    with open(filename, &quot;a&quot;) as f:
 
         for row in lines:
 
-            f.write("%s\n" % row)
+            f.write(&quot;%s\n&quot; % row)
 
 def write_participants(filename, participants):
 
-    with open(filename, "w") as f:
+    with open(filename, &quot;w&quot;) as f:
 
-        writer = csv.DictWriter(f, delimiter="\t", fieldnames=participants[0].keys())
+        writer = csv.DictWriter(f, delimiter=&quot;\t&quot;, fieldnames=participants[0].keys())
 
         writer.writeheader()
 
@@ -917,17 +1310,17 @@ def read_participants(filename):
 
         return []
 
-    with open(filename, "r") as f:
+    with open(filename, &quot;r&quot;) as f:
 
-        reader = csv.DictReader(f, delimiter="\t")
+        reader = csv.DictReader(f, delimiter=&quot;\t&quot;)
 
         return [row for row in reader]
 
 def splitext_(path, extensions=None):
 
-    """ Split the extension from a pathname
+    &quot;&quot;&quot; Split the extension from a pathname
 
-    Handle case with extensions with '.' in it
+    Handle case with extensions with &#39;.&#39; in it
 
     Args:
 
@@ -939,11 +1332,11 @@ def splitext_(path, extensions=None):
 
         (root, ext): ext may be empty
 
-    """
+    &quot;&quot;&quot;
 
     if extensions is None:
 
-        extensions = [".nii.gz"]
+        extensions = [&quot;.nii.gz&quot;]
 
     for ext in extensions:
 
@@ -955,27 +1348,31 @@ def splitext_(path, extensions=None):
 
 def run_shell_command(commandLine):
 
-    """ Wrapper of subprocess.check_output
+    &quot;&quot;&quot; Wrapper of subprocess.check_output
 
     Returns:
 
         Run command with arguments and return its output
 
-    """
+    &quot;&quot;&quot;
 
     logger = logging.getLogger(__name__)
 
-    logger.info("Running %s", commandLine)
+    logger.info(&quot;Running %s&quot;, commandLine)
 
     return check_output(shlex.split(commandLine))
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h2 id="functions">Functions</h2>
-<h3 id="load_json">load_json</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="load_json">load_json<a class="headerlink" href="#load_json" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span>
     <span class="n">filename</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>Load a JSON file</p>
 <p>Args:
     filename (str): Path of a JSON file</p>
@@ -983,9 +1380,27 @@ def run_shell_command(commandLine):
     Dictionnary of the JSON file</p>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def load_json(filename):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def load_json(filename):
 
-    """ Load a JSON file
+    &quot;&quot;&quot; Load a JSON file
 
     Args:
 
@@ -995,40 +1410,58 @@ def run_shell_command(commandLine):
 
         Dictionnary of the JSON file
 
-    """
+    &quot;&quot;&quot;
 
-    with open(filename, "r") as f:
+    with open(filename, &quot;r&quot;) as f:
 
         data = json.load(f, object_pairs_hook=OrderedDict)
 
     return data
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h3 id="read_participants">read_participants</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_participants</span><span class="p">(</span>
+<h3 id="read_participants">read_participants<a class="headerlink" href="#read_participants" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_participants</span><span class="p">(</span>
     <span class="n">filename</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def read_participants(filename):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def read_participants(filename):
 
     if not os.path.exists(filename):
 
         return []
 
-    with open(filename, "r") as f:
+    with open(filename, &quot;r&quot;) as f:
 
-        reader = csv.DictReader(f, delimiter="\t")
+        reader = csv.DictReader(f, delimiter=&quot;\t&quot;)
 
         return [row for row in reader]
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h3 id="run_shell_command">run_shell_command</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_shell_command</span><span class="p">(</span>
+<h3 id="run_shell_command">run_shell_command<a class="headerlink" href="#run_shell_command" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_shell_command</span><span class="p">(</span>
     <span class="n">commandLine</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>Wrapper of subprocess.check_output</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1047,44 +1480,72 @@ def run_shell_command(commandLine):
 </table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def run_shell_command(commandLine):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def run_shell_command(commandLine):
 
-    """ Wrapper of subprocess.check_output
+    &quot;&quot;&quot; Wrapper of subprocess.check_output
 
     Returns:
 
         Run command with arguments and return its output
 
-    """
+    &quot;&quot;&quot;
 
     logger = logging.getLogger(__name__)
 
-    logger.info("Running %s", commandLine)
+    logger.info(&quot;Running %s&quot;, commandLine)
 
     return check_output(shlex.split(commandLine))
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h3 id="save_json">save_json</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save_json</span><span class="p">(</span>
+<h3 id="save_json">save_json<a class="headerlink" href="#save_json" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save_json</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">data</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def save_json(filename, data):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def save_json(filename, data):
 
-    with open(filename, "w") as f:
+    with open(filename, &quot;w&quot;) as f:
 
         json.dump(data, f, indent=4)
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h3 id="splitext_">splitext_</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">splitext_</span><span class="p">(</span>
+<h3 id="splitext_">splitext_<a class="headerlink" href="#splitext_" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">splitext_</span><span class="p">(</span>
     <span class="n">path</span><span class="p">,</span>
     <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <p>Split the extension from a pathname</p>
 <p>Handle case with extensions with '.' in it</p>
 <p><strong>Parameters:</strong></p>
@@ -1129,11 +1590,39 @@ def run_shell_command(commandLine):
 </table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def splitext_(path, extensions=None):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def splitext_(path, extensions=None):
 
-    """ Split the extension from a pathname
+    &quot;&quot;&quot; Split the extension from a pathname
 
-    Handle case with extensions with '.' in it
+    Handle case with extensions with &#39;.&#39; in it
 
     Args:
 
@@ -1145,11 +1634,11 @@ def run_shell_command(commandLine):
 
         (root, ext): ext may be empty
 
-    """
+    &quot;&quot;&quot;
 
     if extensions is None:
 
-        extensions = [".nii.gz"]
+        extensions = [&quot;.nii.gz&quot;]
 
     for ext in extensions:
 
@@ -1158,65 +1647,143 @@ def run_shell_command(commandLine):
             return path[: -len(ext)], path[-len(ext) :]
 
     return os.path.splitext(path)
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h3 id="write_participants">write_participants</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_participants</span><span class="p">(</span>
+<h3 id="write_participants">write_participants<a class="headerlink" href="#write_participants" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_participants</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">participants</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def write_participants(filename, participants):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def write_participants(filename, participants):
 
-    with open(filename, "w") as f:
+    with open(filename, &quot;w&quot;) as f:
 
-        writer = csv.DictWriter(f, delimiter="\t", fieldnames=participants[0].keys())
+        writer = csv.DictWriter(f, delimiter=&quot;\t&quot;, fieldnames=participants[0].keys())
 
         writer.writeheader()
 
         writer.writerows(participants)
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 </details>
-<h3 id="write_txt">write_txt</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_txt</span><span class="p">(</span>
+<h3 id="write_txt">write_txt<a class="headerlink" href="#write_txt" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_txt</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">lines</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>def write_txt(filename, lines):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def write_txt(filename, lines):
 
-    with open(filename, "a") as f:
+    with open(filename, &quot;a&quot;) as f:
 
         for row in lines:
 
-            f.write("%s\n" % row)
-</code></pre>
+            f.write(&quot;%s\n&quot; % row)
+</code></pre></div>
+</td></tr></table>
 </details>
-<h2 id="classes">Classes</h2>
-<h3 id="default">DEFAULT</h3>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DEFAULT</span><span class="p">(</span>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="default">DEFAULT<a class="headerlink" href="#default" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DEFAULT</span><span class="p">(</span>
     <span class="o">/</span><span class="p">,</span>
     <span class="o">*</span><span class="n">args</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>class DEFAULT(object):
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class DEFAULT(object):
 
-    """ Default values of the package"""
+    &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
     # cli dcm2bids
 
-    cliSession = ""
+    cliSession = &quot;&quot;
 
     cliOutputDir = os.getcwd()
 
-    cliLogLevel = "INFO"
+    cliLogLevel = &quot;INFO&quot;
 
     # dcm2bids.py
 
@@ -1230,71 +1797,104 @@ def run_shell_command(commandLine):
 
     defaceTpl = None
 
-    logLevel = "WARNING"
+    logLevel = &quot;WARNING&quot;
 
     # dcm2niix.py
 
-    dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    dcm2niixOptions = &quot;-b y -ba y -z y -f &#39;%3s_%f_%p_%t&#39;&quot;
 
-    dcm2niixVersion = "v1.0.20181125"
+    dcm2niixVersion = &quot;v1.0.20181125&quot;
 
     # sidecar.py
 
-    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
+    compKeys = [&quot;SeriesNumber&quot;, &quot;AcquisitionTime&quot;, &quot;SidecarFilename&quot;]
 
-    searchMethod = "fnmatch"
+    searchMethod = &quot;fnmatch&quot;
 
-    searchMethodChoices = ["fnmatch", "re"]
+    searchMethodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
 
-    runTpl = "_run-{:02d}"
+    runTpl = &quot;_run-{:02d}&quot;
 
     caseSensitive = True
 
     # misc
 
-    tmpDirName = "tmp_dcm2bids"
+    tmpDirName = &quot;tmp_dcm2bids&quot;
 
-    helperDir = "helper"
-</code></pre>
+    helperDir = &quot;helper&quot;
+</code></pre></div>
+</td></tr></table>
 </details>
 <hr />
-<h4 id="class-variables">Class variables</h4>
-<div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
+<h4 id="class-variables">Class variables<a class="headerlink" href="#class-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">cliLogLevel</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">cliLogLevel</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">cliOutputDir</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">cliOutputDir</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">cliSession</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">cliSession</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">clobber</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">clobber</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">compKeys</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">compKeys</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">dcm2niixOptions</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dcm2niixOptions</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">dcm2niixVersion</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dcm2niixVersion</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">defaceTpl</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">defaceTpl</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">forceDcm2niix</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">forceDcm2niix</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">helperDir</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">helperDir</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">logLevel</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">logLevel</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">outputDir</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">outputDir</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">runTpl</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">runTpl</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">searchMethod</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">searchMethod</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">searchMethodChoices</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">searchMethodChoices</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">session</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">session</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">tmpDirName</span>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tmpDirName</span>
 </code></pre></div>
+</td></tr></table>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-20T00:10:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-20</span>
+      
+    
+  </small>
+</div>
+                  
                 
               
               
@@ -1306,58 +1906,64 @@ def run_shell_command(commandLine):
           </div>
         </div>
         
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
       </main>
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
+    
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
         
-          <a href="../structure/" title="Structure" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+          
+          <a href="../structure/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Structure" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
                   Previous
                 </span>
                 Structure
-              </span>
+              </div>
             </div>
           </a>
         
         
-          <a href="../version/" title="Version" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
+          
+          <a href="../version/" class="md-footer__link md-footer__link--next" aria-label="Next: Version" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
                   Next
                 </span>
                 Version
-              </span>
+              </div>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
             </div>
           </a>
         
       </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
+    
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+            
+            Powered by
+            <a href="http://timothycrosley.github.io/portray">portray.</a>
+            You too can
+            <a href="http://timothycrosley.github.io/portray">
+              portray</a>
+            your Python project well using automatic documentation.
+          </div>
         
-        Powered by
-        <a href="http://timothycrosley.github.io/portray">portray.</a>
-        You too can
-        <a href="http://timothycrosley.github.io/portray">
-          portray</a>
-        your Python project well using automatic documentation.
-      </div>
-      
+          
   <div class="md-footer-social">
     
       
@@ -1374,18 +1980,23 @@ def run_shell_command(commandLine):
     
   </div>
 
+        
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
       
     </div>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>
