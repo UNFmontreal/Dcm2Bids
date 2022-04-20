@@ -137,7 +137,7 @@ def assert_dirs_empty(parser, args, required):
         If true, create the directory if it does not exist.
     """
     def check(path):
-        if os.listdir(path):
+        if os.path.isdir(path):
             if not args.overwrite:
                 parser.error(
                     f"Output directory {path} isn't empty, so some files "
