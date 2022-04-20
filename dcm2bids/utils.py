@@ -122,7 +122,7 @@ def run_shell_command(commandLine):
     return check_output(commandLine)
 
 
-def valid_path(in_path):
+def valid_path(in_path, type="folder"):
     """Assert that file exists.
 
     Parameters
@@ -131,11 +131,12 @@ def valid_path(in_path):
         Path to be checked.
     """
 
-    if in_path.isfile() or in_path.isdir():
-        if in_path.exists():
-            return in_path.name
-
-    raise FileNotFoundError(in_path)
+    if in_path.is_file() or in_path.is_dir():
+        return in_path.name
+    elif type=='folder':
+        raise NotADirectoryError(in_path)
+    else:
+        raise FileNotFoundError(in_path)
 
 
 def assert_dirs_empty(parser, args, required):

@@ -52,8 +52,8 @@ class Dcm2bids(object):
         self._dicomDirs = []
 
         self.dicomDirs = dicom_dir
-        self.bidsDir = valid_path(output_dir)
-        self.config = load_json(valid_path(config))
+        self.bidsDir = valid_path(output_dir, "folder")
+        self.config = load_json(valid_path(config, "folder"))
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
@@ -88,7 +88,7 @@ class Dcm2bids(object):
         dir_not_found = []
         valid_dirs = []
         for _dir in dicom_dirs:
-            _dir = valid_path(_dir)
+            _dir = valid_path(_dir, "folder")
             if os.path.isdir(_dir):
                 valid_dirs.append(_dir)
             else:
@@ -226,6 +226,7 @@ def _build_arg_parser():
                    help="Session ID.")
 
     p.add_argument("-c", "--config",
+                   type=Path,
                    required=True,
                    help="JSON configuration file (see example/config.json).")
 
