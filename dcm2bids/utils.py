@@ -130,14 +130,21 @@ def valid_path(in_path, type="folder"):
     required_file: Path
         Path to be checked.
     """
+    if isinstance(in_path, str):
+        in_path = Path(in_path)
 
-    if in_path.is_file() or in_path.is_dir():
-        return in_path.name
-    elif type=='folder':
-        raise NotADirectoryError(in_path)
-    else:
-        raise FileNotFoundError(in_path)
+    if type=='folder':
+        if in_path.is_dir() or in_path.parent.is_dir():
+            return str(in_path)
+        else:
+            raise NotADirectoryError(in_path)
+    elif type=="file":
+        if in_path.is_file():
+            return str(in_path)
+        else:
+            raise FileNotFoundError(in_path)
 
+    raise TypeError(type)
 
 def assert_dirs_empty(parser, args, required):
     """

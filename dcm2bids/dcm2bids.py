@@ -52,8 +52,8 @@ class Dcm2bids(object):
         self._dicomDirs = []
 
         self.dicomDirs = dicom_dir
-        self.bidsDir = valid_path(output_dir, "folder")
-        self.config = load_json(valid_path(config, "folder"))
+        self.bidsDir = valid_path(output_dir, type="folder")
+        self.config = load_json(valid_path(config, type="file"))
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
@@ -85,17 +85,9 @@ class Dcm2bids(object):
         else:
             dicom_dirs = [value]
 
-        dir_not_found = []
         valid_dirs = []
         for _dir in dicom_dirs:
-            _dir = valid_path(_dir, "folder")
-            if os.path.isdir(_dir):
-                valid_dirs.append(_dir)
-            else:
-                dir_not_found.append(_dir)
-
-        if dir_not_found:
-            raise FileNotFoundError(dir_not_found)
+            valid_dirs.append(valid_path(_dir, "folder"))
 
         self._dicomDirs = valid_dirs
 
