@@ -255,8 +255,8 @@ class Acquisition(object):
 
         if len(suffix_list) != 1:
             self.logger.warning("There was more than one suffix found "
-                                f"({suffix_list}). this is not BIDS "
-                                "compliant. Make sure you know what"
+                                f"({suffix_list}). This is not BIDS "
+                                "compliant. Make sure you know what "
                                 "you are doing.")
 
         if current_name != new_name:
