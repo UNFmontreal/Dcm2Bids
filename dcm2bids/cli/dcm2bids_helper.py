@@ -3,7 +3,7 @@
 """helper module"""
 
 import argparse
-import os.path.join as opj
+from os.path import join as opj
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.utils.args import assert_dirs_empty

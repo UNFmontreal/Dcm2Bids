@@ -13,7 +13,7 @@ import argparse
 import datetime
 import logging
 import os
-import os.path as op
+from os.path import join as opj
 import shutil
 
 from dcm2bids.utils.io import write_txt, get_scaffold_dir
@@ -42,30 +42,30 @@ def main():
     assert_dirs_empty(parser, args, args.output_dir)
 
     for _ in ["code", "derivatives", "sourcedata"]:
-        os.makedirs(op.join(args.output_dir, _), exist_ok=True)
+        os.makedirs(opj(args.output_dir, _), exist_ok=True)
 
     logging.info("The files used to create your BIDS directory comes from"
                  "https://github.com/bids-standard/bids-starter-kit")
     # CHANGES
-    write_txt(op.join(args.output_dir, "CHANGES"),
+    write_txt(opj(args.output_dir, "CHANGES"),
               bids_starter_kit.CHANGES.replace('DATA',
                                                datetime.date.today().strftime("%Y-%m-%d")))
 
     # dataset_description
-    write_txt(op.join(args.output_dir, "dataset_description"),
+    write_txt(opj(args.output_dir, "dataset_description"),
               bids_starter_kit.dataset_description.replace("BIDS_VERSION",
                                                            DEFAULT.bids_version))
 
     # participants.json
-    write_txt(op.join(args.output_dir, "participants.json"),
+    write_txt(opj(args.output_dir, "participants.json"),
               bids_starter_kit.participants_json)
 
     # participants.tsv
-    write_txt(op.join(args.output_dir, "participants.tsv"),
+    write_txt(opj(args.output_dir, "participants.tsv"),
               bids_starter_kit.participants_tsv)
 
     # README
-    write_txt(op.join(args.output_dir, "README"),
+    write_txt(opj(args.output_dir, "README"),
               bids_starter_kit.README)
 
 

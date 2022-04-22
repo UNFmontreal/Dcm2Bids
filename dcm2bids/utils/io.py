@@ -130,7 +130,7 @@ def get_scaffold_dir():
 
     module_path = os.path.dirname(os.path.dirname(inspect.getfile(dcm2bids)))
     # module_path = inspect.getfile(dcm2bids)
-    scaffold_dir = op.join(module_path, 'data', 'scaffold')
+    scaffold_dir = opj(module_path, 'data', 'scaffold')
     # scaffold_dir = pkg_resources.resource_filename(__name__,  os.path.join("data", "scaffold"))
     # print(module_path)
     # scaffold_dir = os.path.join(os.path.dirname(
