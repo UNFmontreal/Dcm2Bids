@@ -7,7 +7,7 @@ import os
 class DEFAULT(object):
     """ Default values of the package"""
 
-    doc = "Documentation at https://github.com/unfmontreal/Dcm2Bids"
+    doc = "Documentation at https://unfmontreal.github.io/Dcm2Bids/"
 
     # cli dcm2bids
     cliSession = ""

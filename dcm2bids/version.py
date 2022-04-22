@@ -53,6 +53,6 @@ MICRO = _version_micro
 VERSION = __version__
 ENTRY_POINTS = {'console_scripts': [
     'dcm2bids=dcm2bids.cli.dcm2bids:main',
-    'dcm2bids_helper=dcm2bids.cli.helper:main',
-    'dcm2bids_scaffold=dcm2bids.cli.scaffold:main',
+    'dcm2bids_helper=dcm2bids.cli.dcm2bids_helper:main',
+    'dcm2bids_scaffold=dcm2bids.cli.dcm2bids_scaffold:main',
 ]}
