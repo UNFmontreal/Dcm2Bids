@@ -159,7 +159,7 @@ paste the information below, and save it in your project directory with the name
 You can create a project directory anywhere on your computer, it does not
 matter. You can create `dcm2bids-proj` if you need inspiration.
 
-```yaml title="environment.yml"
+```yaml
 name: dcm2bids
 channels:
   - conda-forge
