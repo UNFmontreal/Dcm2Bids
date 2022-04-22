@@ -163,25 +163,30 @@ def assert_dirs_empty(parser, args, required):
         If true, create the directory if it does not exist.
     """
     def check(path):
-        if os.path.isdir(path):
-            if not args.overwrite:
-                parser.error(
-                    f"Output directory {path} isn't empty, so some files "
-                    "could be overwritten or deleted.\nRerun the command with "
-                    "--force option to overwrite existing output files.")
-            else:
-                for the_file in os.listdir(path):
-                    file_path = os.path.join(path, the_file)
-                    try:
-                        if os.path.isfile(file_path):
-                            os.unlink(file_path)
-                        elif os.path.isdir(file_path):
-                            shutil.rmtree(file_path)
-                    except Exception as e:
-                        print(e)
+        if not path.is_dir():
+            return
 
-    if isinstance(required, str):
-        required = [required]
+        if not any(path.iterdir()):
+            return
+
+        if not args.overwrite:
+            parser.error(
+                f"Output directory {path} isn't empty, so some files "
+                "could be overwritten or deleted.\nRerun the command with "
+                "--force option to overwrite existing output files.")
+        else:
+            for the_file in path.iterdir():
+                file_path = path / the_file
+                try:
+                    if file_path.is_file():
+                        file_path.unlink()
+                    elif file_path.is_dir():
+                        shutil.rmtree(file_path)
+                except Exception as e:
+                    print(e)
+
+    if isinstance(required, str) or isinstance(required, Path):
+        required = [Path(required)]
 
     for cur_dir in required:
         check(cur_dir)
