@@ -887,6 +887,14 @@ in your BIDS directory.</p>
 <p>dcm2bids creates log files inside <code>tmp_dcm2bids/log</code></p>
 <p>See <code>dcm2bids -h</code> or <code>dcm2bids --help</code> to show the help message that contains
 more information.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If your directory or file names have space in them, we recommend that you
+change all the spaces for another character (<code>_</code> or <code>-</code>) but if you can't
+change the names, you have to wrap each argument with quotes as in the
+exemple below: </p>
+<p><code>dcm2bids -d "DICOM DIR" -p PARTICIPANT_ID -c "path/with spaces to/CONFIG FILE.json"</code></p>
+</div>
 <h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">⚓︎</a></h2>
 <p>dcm2bids creates a <code>sub-&lt;PARTICIPANT_ID&gt;</code> directory in the output directory (by
 default the folder where the script is launched).</p>
@@ -939,7 +947,7 @@ You can generate all the sidecars for an individual participant using
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T19:18:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T22:29:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
       
     
   </small>

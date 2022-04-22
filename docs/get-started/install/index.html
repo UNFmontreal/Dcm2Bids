@@ -1132,6 +1132,32 @@ rest.</p>
 installed and correctly setup on your computer as it is the easiest way to
 install dcm2bids and its dependencies on any OS. We assume that if you want to
 install it in a different way, you have enough skills to do it on your own.</p>
+<p>If you installed Anaconda and want to use the graphical user interface (GUI), you can follow the steps as
+demonstrated below and only read the steps until the end of the installation guide.</p>
+<details class="info">
+<summary>Create your environment with the <strong>Anaconda Navigator</strong> GUI</summary>
+<ol>
+<li>Open Anaconda Navigator</li>
+<li>Click on Environments, then the + button at the bottom
+    <img alt="ana_navigator_1" src="https://user-images.githubusercontent.com/30598330/164787321-3748093a-81af-4368-8afd-12fc5bb2eb78.png#border" /></li>
+<li>Enter the name of the environment, it can be anything. You can call it <strong>dcm2bids</strong> then select <strong>Python</strong>
+    <img alt="ana_navigator_2" src="https://user-images.githubusercontent.com/30598330/164787449-aab75a92-53ff-465a-bb92-7f1016b99ca8.png#border" /></li>
+<li>Click on the new <strong>dcm2bids</strong> environment, then on <strong>Channels</strong></li>
+<li>If you only see defaults, click on <strong>Add...</strong> then enter <strong>conda-forge</strong> then click on <strong>Update channels</strong>
+<img alt="ana_navigator_3" src="https://user-images.githubusercontent.com/30598330/164787845-f2847217-8a6c-421b-9ba1-9369d24f3d27.png#border" /></li>
+<li>You now need to add the two main software, so you need to search for them in the top right corner. You should see them appear as soon as you right <strong>dcm2</strong>. You can select both at the same time.<ul>
+<li>If you don't seem them, you probabble need to select <strong>All</strong> channels instead of <strong>Installed</strong>.
+<img alt="ana_navigator_4" src="https://user-images.githubusercontent.com/30598330/164788061-5dfbdf15-f76e-4548-a8c6-9e0ae2bbff00.png#border" /></li>
+</ul>
+</li>
+<li>It will ask you to install a bunch of packages, <strong>Apply</strong>.
+    <img alt="ana_navigator_5" src="https://user-images.githubusercontent.com/30598330/164788227-a6d733c7-301d-4c9c-8b5f-20559dd32a45.png#border" /></li>
+<li>You environment should now be ready, click on the green circle with the white arrow to start the environment. A terminal window should open.
+<img alt="ana_navigator_6" src="https://user-images.githubusercontent.com/30598330/164788461-371c3744-e91d-4eea-a510-e6b4d4604c80.png#border" /></li>
+<li>You should see the name of your environment <strong>(dcm2bids)</strong> to the left. You can now test that dcm2bids works.
+<img alt="ana_navigator_7" src="https://user-images.githubusercontent.com/30598330/164788542-f076ae52-20f2-4e92-90b7-c27973b6c5ef.png#border" /></li>
+</ol>
+</details>
 <p>We could install all the software one by one using a series of command:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda install -c conda-forge dcm2bids
@@ -1326,33 +1352,49 @@ you can install using <a href="https://docker.com">Docker</a> or <a href="https:
 packages. The easiest way to install it is to follow the steps below using
 <a href="https://conda.io/en/latest/miniconda.html">conda</a> but it is also possible to use other software, including
 containers:</p>
+<!-- prettier-ignore-start -->
+
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create an <a href="#create-environmentyml"><code>environment.yml</code></a> file with
       dependencies</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Content:<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>name: dcm2bids
+channels:
+    - conda-forge
+dependencies:
+    - python&gt;=3.7
+    - dcm2niix
+    - dcm2bids
+</code></pre></div>
+</td></tr></table>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Content:
-    <!-- prettier-ignore-start -->
-          name: dcm2bids
-          channels:
-          - conda-forge
-          dependencies:
-          - python&gt;=3.7
-          - dcm2niix
-          - dcm2bids
-    <!-- prettier-ignore-end --></p>
+</ul>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create conda environment</p>
-</li>
+<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> <code>conda env create --file environment.yml</code></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Activate conda environment</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Activate conda environment<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> <code>conda activate dcm2bids</code></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify a dcm2bids command</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify a dcm2bids command<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> <code>dcm2bids --help</code></li>
+</ul>
+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Consult how-to guides or follow the tutorial</li>
 </ul>
+<!-- prettier-ignore-end -->
+
 <div class="footnote">
 <hr />
 <ol>
@@ -1370,7 +1412,7 @@ containers:</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T19:18:15+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T22:29:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
       
     
   </small>
