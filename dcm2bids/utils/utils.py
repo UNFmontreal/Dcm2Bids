@@ -26,6 +26,7 @@ class DEFAULT(object):
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
     dcm2niixVersion = "v1.0.20181125"
 
+
     # sidecar.py
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
     searchMethod = "fnmatch"
@@ -38,6 +39,8 @@ class DEFAULT(object):
     entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
                        "run", "mod", "echo", "flip", "inv", "mt", "part",
                        "recording"]
+    bids_version = "1.7.0"
+
 
     # misc
     tmpDirName = "tmp_dcm2bids"

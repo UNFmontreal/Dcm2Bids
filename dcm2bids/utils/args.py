@@ -17,16 +17,16 @@ def assert_dirs_empty(parser, args, required):
         Argument list.
     required: string or list of paths to files
         Required paths to be checked.
-    create_dir: bool
-        If true, create the directory if it does not exist.
     """
     def check(path):
         if os.path.isdir(path):
-            if not args.overwrite:
-                parser.error(
-                    f"Output directory {path} isn't empty, so some files "
-                    "could be overwritten or deleted.\nRerun the command with "
-                    "--force option to overwrite existing output files.")
+            if os.listdir(path):
+                if not args.overwrite:
+                    parser.error(
+                        f"Output directory {path} isn't empty, so some files "
+                        "could be overwritten or deleted.\nRerun the command"
+                        " with --force option to overwrite "
+                        "existing output files.")
             else:
                 for the_file in os.listdir(path):
                     file_path = os.path.join(path, the_file)

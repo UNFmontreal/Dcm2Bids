@@ -22,7 +22,6 @@ from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.utils.scaffold import bids_starter_kit
 
 
-
 def _build_arg_parser():
     p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.doc,
                                 formatter_class=argparse.RawTextHelpFormatter)
@@ -55,7 +54,7 @@ def main():
     # dataset_description
     write_txt(op.join(args.output_dir, "dataset_description"),
               bids_starter_kit.dataset_description.replace("BIDS_VERSION",
-                                                         ))
+                                                           DEFAULT.bids_version))
 
     # participants.json
     write_txt(op.join(args.output_dir, "participants.json"),
