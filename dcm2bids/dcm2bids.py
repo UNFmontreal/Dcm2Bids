@@ -80,31 +80,17 @@ class Dcm2bids(object):
     @dicomDirs.setter
     def dicomDirs(self, value):
 
-        if isinstance(value, list):
-            dicom_dirs = value
-        else:
-            dicom_dirs = [value]
+        dicom_dirs = value if isinstance(value, list) else [value]
 
-        valid_dirs = []
-        for _dir in dicom_dirs:
-            valid_dirs.append(valid_path(_dir, "folder"))
+        valid_dirs = [valid_path(_dir, "folder") for _dir in dicom_dirs]
 
         self._dicomDirs = valid_dirs
 
     def set_logger(self):
         """ Set a basic logger"""
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
-        logFile = os.path.join(
-            logDir,
-            "{}_{}.log".format(
-                self.participant.prefix, datetime.now().isoformat().replace(":", "")
-            ),
-        )
-
-        # os.makedirs(logdir, exist_ok=True)
-        # python2 compatibility
-        if not os.path.exists(logDir):
-            os.makedirs(logDir)
+        logDir = self.bidsDir / DEFAULT.tmpDirName / "log"
+        logFile = logDir / f"{self.participant.prefix}_{datetime.now().isoformat().replace(':', '')}.log"
+        logDir.mkdir(parents=True, exist_ok=True)
 
         setup_logging(self.logLevel, logFile)
         self.logger = logging.getLogger(__name__)
@@ -151,18 +137,17 @@ class Dcm2bids(object):
             _, ext = splitext_(srcFile)
             dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
 
-            if not os.path.exists(os.path.dirname(dstFile)):
-                os.makedirs(os.path.dirname(dstFile))
+            dstFile.parent.mkdir(parents = True, exist_ok = True)
 
             # checking if destination file exists
-            if os.path.isfile(dstFile):
+            if dstFile.exists():
                 self.logger.info("'%s' already exists", dstFile)
 
                 if self.clobber:
-                    self.logger.info("Overwriting because of 'clobber' option")
+                    self.logger.info("Overwriting because of --clobber option")
 
                 else:
-                    self.logger.info("Use clobber option to overwrite")
+                    self.logger.info("Use --clobber option to overwrite")
                     continue
 
             # it's an anat nifti file and the user using a deface script

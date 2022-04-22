@@ -251,7 +251,7 @@ class Acquisition(object):
             self.logger.warning("Entity \"{}\"".format(list(current_dict.keys())) +
                                 " is not a valid BIDS entity.")
 
-        new_name += f"_{'_'.join(suffix_list)}"  # Allow multiple single key (without value)
+        new_name += f"_{'_'.join(suffix_list)}"  # Allow multiple single keys (without value)
 
         if len(suffix_list) != 1:
             self.logger.warning("There was more than one suffix found "

@@ -4,6 +4,7 @@
 
 import logging
 import os
+from pathlib import Path
 import shlex
 import shutil
 from glob import glob
@@ -41,11 +42,9 @@ class Dcm2niix(object):
         Returns:
             A directory to save all the output files of dcm2niix
         """
-        if self.participant:
-            tmpDir = self.participant.prefix
-        else:
-            tmpDir = DEFAULT.helperDir
-        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
+        tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
+
+        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
 
     def run(self, force=False):
         """ Run dcm2niix if necessary
