@@ -1,11 +1,19 @@
-import os.path as op
+# -*- coding: utf-8 -*-
 
+from os.path import join as opj
+from os import path
 from setuptools import setup, find_packages
 
 # Get version and release info, which is all stored in dcm2bids/version.py
-ver_file = op.join('dcm2bids', 'version.py')
+ver_file = opj('dcm2bids', 'version.py')
 with open(ver_file) as f:
     exec(f.read())
+
+# Long description will go up on the pypi page
+here = path.abspath(path.dirname(__file__))
+
+with open(opj(here, "README.md"), encoding="utf-8") as _:
+    LONG_DESCRIPTION = _.read()
 
 opts = dict(name=NAME,
             maintainer=MAINTAINER,

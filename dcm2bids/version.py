@@ -32,15 +32,11 @@ CLASSIFIERS = [
 
 # Description should be a one-liner:
 description = "Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure"
-# Long description will go up on the pypi page
-with open("README.md", encoding="utf-8") as _:
-    long_description = _.read()
 
 NAME = "dcm2bids"
 MAINTAINER = "Arnaud Boré"
 MAINTAINER_EMAIL = "arnaud.bore@gmail.com"
 DESCRIPTION = description
-LONG_DESCRIPTION = long_description
 PROJECT_URLS = {
     "Documentation": "https://unfmontreal.github.io/Dcm2Bids",
     "Source Code": "https://github.com/unfmontreal/Dcm2Bids",
