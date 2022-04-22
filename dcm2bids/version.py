@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # Format expected by setup.py and doc/source/conf.py: string of form "X.Y.Z"
-_version_major = 2
-_version_minor = 1
-_version_micro = 6
+_version_major = 3
+_version_minor = 0
+_version_micro = 0
 _version_extra = ''
 
 # Construct full version string from these.
