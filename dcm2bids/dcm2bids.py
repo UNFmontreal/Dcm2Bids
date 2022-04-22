@@ -134,8 +134,8 @@ class Dcm2bids(object):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
 
-            _, ext = splitext_(srcFile)
-            dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
+            ext = Path(srcFile).suffixes
+            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
 
             dstFile.parent.mkdir(parents = True, exist_ok = True)
 
@@ -153,9 +153,9 @@ class Dcm2bids(object):
             # it's an anat nifti file and the user using a deface script
             if (
                 self.config.get("defaceTpl")
-                and acquisition.dataType == "anat"
+                and acquisition.dataType == "func"
                 and ".nii" in ext
-            ):
+                ):
                 try:
                     os.remove(dstFile)
                 except FileNotFoundError:
@@ -166,9 +166,9 @@ class Dcm2bids(object):
                 cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
+                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
 
-            elif ext == ".json":
+            elif ".json" in ext:
                 data = acquisition.dstSidecarData(self.config["descriptions"],
                                                   intendedForList)
                 save_json(dstFile, data)
@@ -199,7 +199,7 @@ def _build_arg_parser():
 
     p.add_argument("-s", "--session",
                    required=False,
-                   default=DEFAULT.cliSession,
+                   default="",
                    help="Session ID.")
 
     p.add_argument("-c", "--config",
@@ -210,8 +210,8 @@ def _build_arg_parser():
     p.add_argument("-o", "--output_dir",
                    required=False,
                    type=Path,
-                   default=DEFAULT.cliOutputDir,
-                   help="Output BIDS directory, [%(default)s]")
+                   default=Path.cwd(),
+                   help="Output BIDS directory. (Default: %(default)s)")
 
     p.add_argument("--forceDcm2niix",
                    action="store_true",

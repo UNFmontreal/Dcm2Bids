@@ -17,14 +17,12 @@ class DEFAULT(object):
     """ Default values of the package"""
 
     # cli dcm2bids
-    cliSession = ""
-    cliOutputDir = os.getcwd()
     cliLogLevel = "INFO"
     EPILOG="Documentation at https://github.com/unfmontreal/Dcm2Bids"
 
     # dcm2bids.py
-    outputDir = cliOutputDir
-    session = cliSession  # also Participant object
+    outputDir = Path.cwd()
+    session = ""  # also Participant object
     clobber = False
     forceDcm2niix = False
     defaceTpl = None
@@ -67,7 +65,7 @@ def load_json(filename):
 
 
 def save_json(filename, data):
-    with open(filename, "w") as f:
+    with filename.open("w") as f:
         json.dump(data, f, indent=4)
 
 
@@ -133,14 +131,14 @@ def valid_path(in_path, type="folder"):
     if isinstance(in_path, str):
         in_path = Path(in_path)
 
-    if type=='folder':
+    if type == 'folder':
         if in_path.is_dir() or in_path.parent.is_dir():
-            return str(in_path)
+            return in_path
         else:
             raise NotADirectoryError(in_path)
-    elif type=="file":
+    elif type == "file":
         if in_path.is_file():
-            return str(in_path)
+            return in_path
         else:
             raise FileNotFoundError(in_path)
 
