@@ -47,6 +47,9 @@ have to activate your dedicated environment for dcm2bids.
 Note that you use `dcm2bids` as the name of the environment but you should use
 the name you gave your environment when you created it.
 
+If you used Anaconda Navigator to install dcm2bids and create you environment,
+make sure to open your environment from Navigator as indicated in [Create your environment with the Anaconda Navigator GUI](../get-started/install.md#install-dcm2bids).
+
 === "Command"
 
     ```sh
