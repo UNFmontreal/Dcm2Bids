@@ -6,21 +6,20 @@
 """
 
 
-import sys
 import argparse
 import datetime
 import os
 import os.path as op
 import shutil
-from .utils import (DEFAULT, add_overwrite_arg, assert_dirs_empty,
-                    get_scaffold_dir, write_txt)
 
+from dcm2bids.utils.io import write_txt, get_scaffold_dir
+from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
+from dcm2bids.utils.utils import DEFAULT
 
-EPILOG = DEFAULT.doc
 
 
 def _build_arg_parser():
-    p = argparse.ArgumentParser(description=__doc__, epilog=EPILOG,
+    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.doc,
                                 formatter_class=argparse.RawTextHelpFormatter)
 
     p.add_argument("-o", "--output_dir",
@@ -29,7 +28,6 @@ def _build_arg_parser():
                    help="Output BIDS directory. Default: [%(default)s]")
 
     add_overwrite_arg(p)
-
     return p
 
 
@@ -58,4 +56,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

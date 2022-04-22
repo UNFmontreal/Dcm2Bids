@@ -7,54 +7,12 @@ import json
 import logging
 import os
 import os.path as op
-import pkg_resources
-import shlex
-import shutil
 from collections import OrderedDict
 import shlex
 import shutil
 from subprocess import check_output
 
 import dcm2bids
-
-class DEFAULT(object):
-    """ Default values of the package"""
-
-    doc="Documentation at https://github.com/unfmontreal/Dcm2Bids"
-
-    # cli dcm2bids
-    cliSession = ""
-    cliOutputDir = os.getcwd()
-    cliLogLevel = "INFO"
-
-    # dcm2bids.py
-    outputDir = cliOutputDir
-    session = cliSession  # also Participant object
-    clobber = False
-    forceDcm2niix = False
-    defaceTpl = None
-    logLevel = "WARNING"
-
-    # dcm2niix.py
-    dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
-    dcm2niixVersion = "v1.0.20181125"
-
-    # sidecar.py
-    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
-    searchMethod = "fnmatch"
-    searchMethodChoices = ["fnmatch", "re"]
-    runTpl = "_run-{:02d}"
-    caseSensitive = True
-
-    # Entity table:
-    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
-    entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
-                       "run", "mod", "echo", "flip", "inv", "mt", "part",
-                       "recording"]
-
-    # misc
-    tmpDirName = "tmp_dcm2bids"
-    helperDir = "helper"
 
 
 def load_json(filename):
@@ -188,10 +146,10 @@ def get_scaffold_dir():
     module_path = os.path.dirname(os.path.dirname(inspect.getfile(dcm2bids)))
     # module_path = inspect.getfile(dcm2bids)
     scaffold_dir = op.join(module_path, 'data', 'scaffold')
-    #scaffold_dir = pkg_resources.resource_filename(__name__,  os.path.join("data", "scaffold"))
-    #print(module_path)
-    #scaffold_dir = os.path.join(os.path.dirname(
-#        os.path.dirname(module_path)), "data", "scaffold")
+    # scaffold_dir = pkg_resources.resource_filename(__name__,  os.path.join("data", "scaffold"))
+    # print(module_path)
+    # scaffold_dir = os.path.join(os.path.dirname(
+    # os.path.dirname(module_path)), "data", "scaffold")
 
     print(scaffold_dir)
     return scaffold_dir

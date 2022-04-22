@@ -1,26 +1,23 @@
 # -*- coding: utf-8 -*-
 
-"""
-Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-"""
-
-import argparse
 import logging
 import os
 import platform
 import sys
 from datetime import datetime
 from glob import glob
-from .dcm2niix import Dcm2niix
-from .logger import setup_logging
-from .sidecar import Sidecar, SidecarPairing
-from .structure import Participant
-from .utils import DEFAULT, load_json, save_json, run_shell_command, splitext_
-from .version import __version__, check_latest, dcm2niix_version
 
-EPILOG = DEFAULT.doc
+from dcm2bids.dcm2niix_gen import Dcm2niixGen
+from dcm2bids.participant import Participant
+from dcm2bids.sidecar import Sidecar, SidecarPairing
+from dcm2bids.utils.io import load_json, save_json
+from dcm2bids.utils.logger import setup_logging
+from dcm2bids.utils.tools import run_shell_command, dcm2niix_version
+from dcm2bids.utils.utils import DEFAULT, splitext_
+from dcm2bids.version import __version__
 
-class Dcm2bids(object):
+
+class Dcm2BidsGen(object):
     """ Object to handle dcm2bids execution steps
 
     Args:
@@ -114,28 +111,27 @@ class Dcm2bids(object):
 
     def run(self):
         """Run dcm2bids"""
-        dcm2niix = Dcm2niix(
-            self.dicomDirs,
-            self.bidsDir,
-            self.participant,
-            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
-        )
+        dcm2niix = Dcm2niixGen(self.dicomDirs,
+                               self.bidsDir,
+                               self.participant,
+                               self.config.get("dcm2niixOptions",
+                                               DEFAULT.dcm2niixOptions))
         dcm2niix.run(self.forceDcm2niix)
 
         sidecars = []
         for filename in dcm2niix.sidecarFiles:
-            sidecars.append(
-                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
-            )
+            sidecars.append(Sidecar(filename,
+                                    self.config.get("compKeys",
+                                                    DEFAULT.compKeys)))
 
         sidecars = sorted(sidecars)
 
-        parser = SidecarPairing(
-            sidecars,
-            self.config["descriptions"],
-            self.config.get("searchMethod", DEFAULT.searchMethod),
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
-        )
+        parser = SidecarPairing(sidecars,
+                                self.config["descriptions"],
+                                self.config.get("searchMethod",
+                                                DEFAULT.searchMethod),
+                                self.config.get("caseSensitive",
+                                                DEFAULT.caseSensitive))
         parser.build_graph()
         parser.build_acquisitions(self.participant)
         parser.find_runs()
@@ -199,101 +195,3 @@ class Dcm2bids(object):
                 intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
-
-
-def get_arguments():
-    parser = argparse.ArgumentParser(description=__doc__, epilog=EPILOG,
-                                     formatter_class=argparse.RawTextHelpFormatter)
-
-    parser.add_argument(
-        "-d", "--dicom_dir", required=True, nargs="+", help="DICOM directory(ies)"
-    )
-
-    parser.add_argument("-p", "--participant", required=True, help="Participant ID")
-
-    parser.add_argument(
-        "-s", "--session", required=False, default=DEFAULT.cliSession, help="Session ID"
-    )
-
-    parser.add_argument(
-        "-c",
-        "--config",
-        required=True,
-        help="JSON configuration file (see example/config.json)",
-    )
-
-    parser.add_argument(
-        "-o",
-        "--output_dir",
-        required=False,
-        default=DEFAULT.cliOutputDir,
-        help="Output BIDS directory, Default: current directory ({})".format(
-            DEFAULT.cliOutputDir
-        ),
-    )
-
-    parser.add_argument(
-        "--forceDcm2niix",
-        required=False,
-        action="store_true",
-        help="Overwrite previous temporary dcm2niix output if it exists",
-    )
-
-    parser.add_argument(
-        "--clobber",
-        required=False,
-        action="store_true",
-        help="Overwrite output if it exists",
-    )
-
-    parser.add_argument(
-        "-l",
-        "--log_level",
-        required=False,
-        default=DEFAULT.cliLogLevel,
-        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-        help="Set logging level",
-    )
-
-    parser.add_argument(
-        "-a",
-        "--anonymizer",
-        required=False,
-        action="store_true",
-        help="""
-        This option no longer exists from the script in this release.
-        See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl""",
-    )
-
-    args = parser.parse_args()
-    return args
-
-
-def main():
-    """Let's go"""
-    args = get_arguments()
-
-    if args.anonymizer:
-        print(
-            """
-        The anonymizer option no longer exists from the script in this release
-        It is still possible to deface the anatomical nifti images
-        Please add "defaceTpl" key in the congifuration file
-
-        For example, if you use the last version of pydeface, add:
-        "defaceTpl": "pydeface --outfile {dstFile} {srcFile}"
-        It is a template string and dcm2bids will replace {srcFile} and {dstFile}
-        by the source file (input) and the destination file (output)
-        """
-        )
-        return 1
-
-    check_latest()
-    check_latest("dcm2niix")
-
-    app = Dcm2bids(**vars(args))
-    return app.run()
-
-
-if __name__ == "__main__":
-    sys.exit(main())

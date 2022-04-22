@@ -3,16 +3,18 @@
 
 import json
 import os
+import os.path as op
 import shutil
 from tempfile import TemporaryDirectory
 
 from bids import BIDSLayout
 
-from dcm2bids import Dcm2bids
-from dcm2bids.utils import DEFAULT, load_json
+from dcm2bids.dcm2bids_gen import Dcm2BidsGen
+from dcm2bids.utils.io import load_json
+from dcm2bids.utils.utils import DEFAULT
 
 
-TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+TEST_DATA_DIR = op.join(op.dirname(__file__), "data")
 
 
 def compare_json(original_file, converted_file):
@@ -28,17 +30,17 @@ def compare_json(original_file, converted_file):
 
 
 def test_dcm2bids():
-    # tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
+    # tmpBase = op.join(TEST_DATA_DIR, "tmp")
     # bidsDir = TemporaryDirectory(dir=tmpBase)
     bidsDir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmpSubDir = op.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
+    shutil.copytree(op.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(
+    app = Dcm2BidsGen(
         [TEST_DATA_DIR],
         "01",
-        os.path.join(TEST_DATA_DIR, "config_test.json"),
+        op.join(TEST_DATA_DIR, "config_test.json"),
         bidsDir.name,
     )
     app.run()
@@ -49,18 +51,18 @@ def test_dcm2bids():
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2, 3]
 
-    app = Dcm2bids(TEST_DATA_DIR, "01",
-                   os.path.join(TEST_DATA_DIR, "config_test.json"),
-                   bidsDir.name)
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      op.join(TEST_DATA_DIR, "config_test.json"),
+                      bidsDir.name)
     app.run()
 
-    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    fmapFile = op.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
-    assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
+    assert data["IntendedFor"] == op.join("dwi", "sub-01_dwi.nii.gz")
 
     data = load_json(
-        os.path.join(
+        op.join(
             bidsDir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json"
         )
     )
@@ -68,12 +70,12 @@ def test_dcm2bids():
 
     # rerun
     shutil.rmtree(tmpSubDir)
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    shutil.copytree(op.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(
+    app = Dcm2BidsGen(
         [TEST_DATA_DIR],
         "01",
-        os.path.join(TEST_DATA_DIR, "config_test.json"),
+        op.join(TEST_DATA_DIR, "config_test.json"),
         bidsDir.name,
     )
     app.run()
@@ -86,44 +88,44 @@ def test_caseSensitive_false():
     # Validate caseSensitive false
     bidsDir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmpSubDir = op.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
+    shutil.copytree(op.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(TEST_DATA_DIR, "01",
-                   os.path.join(TEST_DATA_DIR,
-                                "config_test_not_case_sensitive_option.json"),
-                   bidsDir.name)
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      op.join(TEST_DATA_DIR,
+                              "config_test_not_case_sensitive_option.json"),
+                      bidsDir.name)
     app.run()
 
     layout = BIDSLayout(bidsDir.name,
                         validate=False)
 
-    path_dwi = os.path.join(bidsDir.name,
-                            "sub-01",
-                            "dwi",
-                            "sub-01_dwi.json")
+    path_dwi = op.join(bidsDir.name,
+                       "sub-01",
+                       "dwi",
+                       "sub-01_dwi.json")
 
-    path_t1 = os.path.join(bidsDir.name,
-                           "sub-01",
-                           "anat",
-                           "sub-01_T1w.json")
+    path_t1 = op.join(bidsDir.name,
+                      "sub-01",
+                      "anat",
+                      "sub-01_T1w.json")
 
-    path_localizer = os.path.join(bidsDir.name,
-                                  "sub-01",
-                                  "localizer",
-                                  "sub-01_run-01_localizer.json")
+    path_localizer = op.join(bidsDir.name,
+                             "sub-01",
+                             "localizer",
+                             "sub-01_run-01_localizer.json")
 
-    original_01_localizer = os.path.join(TEST_DATA_DIR,
-                                         "sidecars",
-                                         "001_localizer_20100603125600_i00001.json")
+    original_01_localizer = op.join(TEST_DATA_DIR,
+                                    "sidecars",
+                                    "001_localizer_20100603125600_i00001.json")
 
-    original_02_localizer = os.path.join(TEST_DATA_DIR,
-                                         "sidecars",
-                                         "001_localizer_20100603125600_i00002.json")
+    original_02_localizer = op.join(TEST_DATA_DIR,
+                                    "sidecars",
+                                    "001_localizer_20100603125600_i00002.json")
 
-    original_03_localizer = os.path.join(TEST_DATA_DIR,
-                                         "sidecars",
-                                         "001_localizer_20100603125600_i00003.json")
+    original_03_localizer = op.join(TEST_DATA_DIR,
+                                    "sidecars",
+                                    "001_localizer_20100603125600_i00003.json")
 
     # Input T1 is UPPER CASE (json)
     json_t1 = layout.get(subject='01',
@@ -153,10 +155,10 @@ def test_caseSensitive_false():
                           extension='json',
                           suffix='dwi')
 
-    assert set(os.listdir(os.path.join(bidsDir.name,
-                                       'sub-01'))) == {'anat',
-                                                       'dwi',
-                                                       'localizer'}
+    assert set(os.listdir(op.join(bidsDir.name,
+                                  'sub-01'))) == {'anat',
+                                                  'dwi',
+                                                  'localizer'}
     assert json_t1[0].path == path_t1
     assert json_01_localizer[0].path == path_localizer
     assert json_dwi[0].path == path_dwi

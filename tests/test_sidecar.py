@@ -4,6 +4,7 @@
 from glob import glob
 import os
 import pytest
+
 from dcm2bids.sidecar import Sidecar
 
 

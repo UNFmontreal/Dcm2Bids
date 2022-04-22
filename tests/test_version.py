@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from dcm2bids.version import internet, is_tool, check_github_latest, __version__
+from dcm2bids.utils.tools import internet, is_tool
 
 
 def test_internet():

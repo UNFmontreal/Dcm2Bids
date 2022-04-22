@@ -6,10 +6,12 @@ import logging
 import os
 import shutil
 from glob import glob
-from .utils import DEFAULT, run_shell_command
+
+from dcm2bids.utils.tools import run_shell_command
+from dcm2bids.utils.utils import DEFAULT
 
 
-class Dcm2niix(object):
+class Dcm2niixGen(object):
     """ Object to handle dcm2niix execution
 
     Args:

@@ -2,15 +2,17 @@
 
 """sidecars classes"""
 
+from collections import defaultdict, OrderedDict
+from fnmatch import fnmatch
+from future.utils import iteritems
 import itertools
 import logging
 import os
 import re
-from collections import defaultdict, OrderedDict
-from fnmatch import fnmatch
-from future.utils import iteritems
-from .structure import Acquisition
-from .utils import DEFAULT, load_json, splitext_
+
+from dcm2bids.acquisition import Acquisition
+from dcm2bids.utils.io import load_json
+from dcm2bids.utils.utils import DEFAULT, splitext_
 
 
 class Sidecar(object):
