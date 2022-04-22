@@ -40,21 +40,6 @@ def write_txt(filename, lines):
             f.write("%s\n" % row)
 
 
-def write_participants(filename, participants):
-    with open(filename, "w") as f:
-        writer = csv.DictWriter(f, delimiter="\t", fieldnames=participants[0].keys())
-        writer.writeheader()
-        writer.writerows(participants)
-
-
-def read_participants(filename):
-    if not os.path.exists(filename):
-        return []
-    with open(filename, "r") as f:
-        reader = csv.DictReader(f, delimiter="\t")
-        return [row for row in reader]
-
-
 def splitext_(path, extensions=None):
     """ Split the extension from a pathname
     Handle case with extensions with '.' in it
