@@ -145,6 +145,30 @@ But this would install the software in the main environment instead of a
 dedicated one, assuming none were active. This could have atrocious dependencies
 issues in the long-term if you want to install other software.
 
+
+If you installed Anaconda and want to use the graphical user interface (GUI), you can follow the steps as
+demonstrated below and only read the steps until the end of the installation guide.
+
+??? info "Create your environment with Anaconda Navigator"
+
+    1. Open Anaconda Navigator
+    2. Click on Environments, then the + button at the bottom
+        ![ana_navigator_1](https://user-images.githubusercontent.com/30598330/164787321-3748093a-81af-4368-8afd-12fc5bb2eb78.png)
+    3. Enter the name of the environment, it can be anything. You can call it **dcm2bids** then select **Python**
+        ![ana_navigator_2](https://user-images.githubusercontent.com/30598330/164787449-aab75a92-53ff-465a-bb92-7f1016b99ca8.png)
+    4. Click on the new **dcm2bids** environment, then on **Channels**
+    5. If you only see defaults, click on **Add...** then enter **conda-forge** then click on **Update channels**
+    ![ana_navigator_3](https://user-images.githubusercontent.com/30598330/164787845-f2847217-8a6c-421b-9ba1-9369d24f3d27.png)
+    6. You now need to add the two main software, so you need to search for them in the top right corner. You should see them appear as soon as you right **dcm2**. You can select both at the same time.
+        * If you don't seem them, you probabble need to select **All** channels instead of **Installed**.
+    ![ana_navigator_4](https://user-images.githubusercontent.com/30598330/164788061-5dfbdf15-f76e-4548-a8c6-9e0ae2bbff00.png)
+    7. It will ask you to install a bunch of packages, **Apply**.
+        ![ana_navigator_5](https://user-images.githubusercontent.com/30598330/164788227-a6d733c7-301d-4c9c-8b5f-20559dd32a45.png)
+    8. You environment should now be ready, click on the green circle with the white arrow to start the environment. A terminal window should open.
+    ![ana_navigator_6](https://user-images.githubusercontent.com/30598330/164788461-371c3744-e91d-4eea-a510-e6b4d4604c80.png)
+    9. You should see the name of your environment **(dcm2bids)** to the left. You can now test that dcm2bids works.
+    ![ana_navigator_7](https://user-images.githubusercontent.com/30598330/164788542-f076ae52-20f2-4e92-90b7-c27973b6c5ef.png)
+
 #### Create environment.yml
 
 That is exactly why dedicated environments were invented. To help creating
