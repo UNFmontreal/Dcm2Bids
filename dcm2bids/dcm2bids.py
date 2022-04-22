@@ -80,31 +80,17 @@ class Dcm2bids(object):
     @dicomDirs.setter
     def dicomDirs(self, value):
 
-        if isinstance(value, list):
-            dicom_dirs = value
-        else:
-            dicom_dirs = [value]
+        dicom_dirs = value if isinstance(value, list) else [value]
 
-        valid_dirs = []
-        for _dir in dicom_dirs:
-            valid_dirs.append(valid_path(_dir, "folder"))
+        valid_dirs = [valid_path(_dir, "folder") for _dir in dicom_dirs]
 
         self._dicomDirs = valid_dirs
 
     def set_logger(self):
         """ Set a basic logger"""
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, "log")
-        logFile = os.path.join(
-            logDir,
-            "{}_{}.log".format(
-                self.participant.prefix, datetime.now().isoformat().replace(":", "")
-            ),
-        )
-
-        # os.makedirs(logdir, exist_ok=True)
-        # python2 compatibility
-        if not os.path.exists(logDir):
-            os.makedirs(logDir)
+        logDir = self.bidsDir / DEFAULT.tmpDirName / "log"
+        logFile = logDir / f"{self.participant.prefix}_{datetime.now().isoformat().replace(':', '')}.log"
+        logDir.mkdir(parents=True, exist_ok=True)
 
         setup_logging(self.logLevel, logFile)
         self.logger = logging.getLogger(__name__)
@@ -148,29 +134,28 @@ class Dcm2bids(object):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
 
-            _, ext = splitext_(srcFile)
-            dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
+            ext = Path(srcFile).suffixes
+            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
 
-            if not os.path.exists(os.path.dirname(dstFile)):
-                os.makedirs(os.path.dirname(dstFile))
+            dstFile.parent.mkdir(parents = True, exist_ok = True)
 
             # checking if destination file exists
-            if os.path.isfile(dstFile):
+            if dstFile.exists():
                 self.logger.info("'%s' already exists", dstFile)
 
                 if self.clobber:
-                    self.logger.info("Overwriting because of 'clobber' option")
+                    self.logger.info("Overwriting because of --clobber option")
 
                 else:
-                    self.logger.info("Use clobber option to overwrite")
+                    self.logger.info("Use --clobber option to overwrite")
                     continue
 
             # it's an anat nifti file and the user using a deface script
             if (
                 self.config.get("defaceTpl")
-                and acquisition.dataType == "anat"
+                and acquisition.dataType == "func"
                 and ".nii" in ext
-            ):
+                ):
                 try:
                     os.remove(dstFile)
                 except FileNotFoundError:
@@ -181,9 +166,9 @@ class Dcm2bids(object):
                 cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + ext)
+                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
 
-            elif ext == ".json":
+            elif ".json" in ext:
                 data = acquisition.dstSidecarData(self.config["descriptions"],
                                                   intendedForList)
                 save_json(dstFile, data)
@@ -214,7 +199,7 @@ def _build_arg_parser():
 
     p.add_argument("-s", "--session",
                    required=False,
-                   default=DEFAULT.cliSession,
+                   default="",
                    help="Session ID.")
 
     p.add_argument("-c", "--config",
@@ -225,8 +210,8 @@ def _build_arg_parser():
     p.add_argument("-o", "--output_dir",
                    required=False,
                    type=Path,
-                   default=DEFAULT.cliOutputDir,
-                   help="Output BIDS directory, [%(default)s]")
+                   default=Path.cwd(),
+                   help="Output BIDS directory. (Default: %(default)s)")
 
     p.add_argument("--forceDcm2niix",
                    action="store_true",

@@ -17,14 +17,12 @@ class DEFAULT(object):
     """ Default values of the package"""
 
     # cli dcm2bids
-    cliSession = ""
-    cliOutputDir = os.getcwd()
     cliLogLevel = "INFO"
     EPILOG="Documentation at https://github.com/unfmontreal/Dcm2Bids"
 
     # dcm2bids.py
-    outputDir = cliOutputDir
-    session = cliSession  # also Participant object
+    outputDir = Path.cwd()
+    session = ""  # also Participant object
     clobber = False
     forceDcm2niix = False
     defaceTpl = None
@@ -67,7 +65,7 @@ def load_json(filename):
 
 
 def save_json(filename, data):
-    with open(filename, "w") as f:
+    with filename.open("w") as f:
         json.dump(data, f, indent=4)
 
 
@@ -133,14 +131,14 @@ def valid_path(in_path, type="folder"):
     if isinstance(in_path, str):
         in_path = Path(in_path)
 
-    if type=='folder':
+    if type == 'folder':
         if in_path.is_dir() or in_path.parent.is_dir():
-            return str(in_path)
+            return in_path
         else:
             raise NotADirectoryError(in_path)
-    elif type=="file":
+    elif type == "file":
         if in_path.is_file():
-            return str(in_path)
+            return in_path
         else:
             raise FileNotFoundError(in_path)
 
@@ -163,25 +161,30 @@ def assert_dirs_empty(parser, args, required):
         If true, create the directory if it does not exist.
     """
     def check(path):
-        if os.path.isdir(path):
-            if not args.overwrite:
-                parser.error(
-                    f"Output directory {path} isn't empty, so some files "
-                    "could be overwritten or deleted.\nRerun the command with "
-                    "--force option to overwrite existing output files.")
-            else:
-                for the_file in os.listdir(path):
-                    file_path = os.path.join(path, the_file)
-                    try:
-                        if os.path.isfile(file_path):
-                            os.unlink(file_path)
-                        elif os.path.isdir(file_path):
-                            shutil.rmtree(file_path)
-                    except Exception as e:
-                        print(e)
+        if not path.is_dir():
+            return
 
-    if isinstance(required, str):
-        required = [required]
+        if not any(path.iterdir()):
+            return
+
+        if not args.overwrite:
+            parser.error(
+                f"Output directory {path} isn't empty, so some files "
+                "could be overwritten or deleted.\nRerun the command with "
+                "--force option to overwrite existing output files.")
+        else:
+            for the_file in path.iterdir():
+                file_path = path / the_file
+                try:
+                    if file_path.is_file():
+                        file_path.unlink()
+                    elif file_path.is_dir():
+                        shutil.rmtree(file_path)
+                except Exception as e:
+                    print(e)
+
+    if isinstance(required, str) or isinstance(required, Path):
+        required = [Path(required)]
 
     for cur_dir in required:
         check(cur_dir)
