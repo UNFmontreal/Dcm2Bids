@@ -4,19 +4,19 @@
 from glob import glob
 from tempfile import TemporaryDirectory
 import os
-from os.path import join as opj
+import os.path as op
 import pytest
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.utils.utils import DEFAULT
 
 
-TEST_DATA_DIR = opj(op.dirname(__file__), "data")
+TEST_DATA_DIR = op.join(op.dirname(__file__), "data")
 
 
 @pytest.mark.skip(reason="Too long for now")
 def test_dcm2niix_run():
-    dicomDir = opj(TEST_DATA_DIR, "sourcedata", "sub-01")
+    dicomDir = op.join(TEST_DATA_DIR, "sourcedata", "sub-01")
     # tmpBase = op.join(TEST_DATA_DIR, "tmp")
     # tmpDir = TemporaryDirectory(dir=tmpBase)
     tmpDir = TemporaryDirectory()
@@ -24,7 +24,7 @@ def test_dcm2niix_run():
     app = Dcm2niixGen([dicomDir], tmpDir.name)
     app.run()
 
-    helperDir = opj(tmpDir.name, DEFAULT.tmpDirName, DEFAULT.helperDir, "*")
+    helperDir = op.join(tmpDir.name, DEFAULT.tmpDirName, DEFAULT.helperDir, "*")
     ls = sorted(glob(helperDir))
     firstMtime = [os.stat(_).st_mtime for _ in ls]
     assert "localizer_20100603125600" in ls[0]
