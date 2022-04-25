@@ -42,10 +42,8 @@ def check_github_latest(githubRepo, timeout=3):
     try:
         output = check_output(shlex.split("curl --silent " + url), timeout=timeout)
     except:
-        logger.debug(
-            "Checking latest version of %s was not possible", githubRepo,
-            exc_info=True,
-        )
+        logger.info(f"Checking latest version of {githubRepo} was not possible")
+        logger.debug(f"Error while 'curl --silent {url}'", exc_info=True)
         return
 
     # The output should have this format
