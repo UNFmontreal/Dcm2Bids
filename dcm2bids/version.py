@@ -10,7 +10,7 @@ import logging
 import shlex
 import socket
 from distutils.version import LooseVersion
-from subprocess import check_output
+from subprocess import check_output, CalledProcessError, TimeoutExpired
 from shutil import which
 
 
@@ -41,11 +41,14 @@ def check_github_latest(githubRepo, timeout=3):
     url = "https://github.com/{}/releases/latest".format(githubRepo)
     try:
         output = check_output(shlex.split("curl --silent " + url), timeout=timeout)
-    except:
+    except CalledProcessError:
         logger.info(f"Checking latest version of {githubRepo} was not possible")
         logger.debug(f"Error while 'curl --silent {url}'", exc_info=True)
         return
-
+    except TimeoutExpired:
+        logger.info(f"Checking latest version of {githubRepo} was not possible")
+        logger.debug(f"Command 'curl --silent {url}' timed out after {timeout}s")
+        return
     # The output should have this format
     # <html><body>You are being <a href="https://github.com/{gitRepo}/releases/tag/{version}">redirected</a>.</body></html>
     try:
