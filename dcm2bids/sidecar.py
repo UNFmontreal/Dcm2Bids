@@ -86,7 +86,7 @@ class SidecarPairing(object):
     """
     Args:
         sidecars (list): List of Sidecar objects
-        descriptions (list): List of dictionnaries describing acquisitions
+        descriptions (list): List of dictionaries describing acquisitions
     """
 
     def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
@@ -95,7 +95,7 @@ class SidecarPairing(object):
 
         self._searchMethod = ""
         self.graph = OrderedDict()
-        self.aquisitions = []
+        self.acquisitions = []
 
         self.sidecars = sidecars
         self.descriptions = descriptions
@@ -146,7 +146,7 @@ class SidecarPairing(object):
     def build_graph(self):
         """
         Test all the possible links between the list of sidecars and the
-        description dictionnaries and build a graph from it
+        description dictionaries and build a graph from it
         The graph is in a OrderedDict object. The keys are the Sidecars and
         the values are a list of possible descriptions
 
@@ -154,7 +154,6 @@ class SidecarPairing(object):
             A graph (OrderedDict)
         """
         graph = OrderedDict((_, []) for _ in self.sidecars)
-
         possibleLinks = itertools.product(self.sidecars, self.descriptions)
         for sidecar, description in possibleLinks:
             criteria = description.get("criteria", None)
@@ -162,6 +161,7 @@ class SidecarPairing(object):
                 graph[sidecar].append(description)
 
         self.graph = graph
+
         return graph
 
     def isLink(self, data, criteria):
@@ -189,7 +189,7 @@ class SidecarPairing(object):
         result = []
 
         for tag, pattern in iteritems(criteria):
-            name = data.get(tag, '')# or ''
+            name = data.get(tag, '')
 
             if isinstance(name, list):
                 try:
@@ -213,32 +213,43 @@ class SidecarPairing(object):
             A list of acquisition objects
         """
         acquisitions = []
+        acquisitions_intendedFor = []
 
         self.logger.info("Sidecars pairing:")
-        for sidecar, descriptions in iteritems(self.graph):
+        for sidecar, valid_descriptions in iteritems(self.graph):
             sidecarName = os.path.basename(sidecar.root)
 
             # only one description for the sidecar
-            if len(descriptions) == 1:
-                desc = descriptions[0]
-                acq = Acquisition(participant, srcSidecar=sidecar, **desc)
-                acquisitions.append(acq)
+            if len(valid_descriptions) == 1:
+                desc = valid_descriptions[0]
+                acq = Acquisition(participant,
+                                  srcSidecar=sidecar, **desc)
+                acq.indexSidecar = self.descriptions.index(desc)
+                acq.setDstFile()
+
+                if acq.intendedFor != [None]:
+                    acquisitions_intendedFor.append(acq)
+                else:
+                    acquisitions.append(acq)
 
                 self.logger.info("%s  <-  %s", acq.suffix, sidecarName)
 
             # sidecar with no link
-            elif len(descriptions) == 0:
+            elif len(valid_descriptions) == 0:
                 self.logger.info("No Pairing  <-  %s", sidecarName)
 
             # sidecar with several links
             else:
                 self.logger.warning("Several Pairing  <-  %s", sidecarName)
-                for desc in descriptions:
-                    acq = Acquisition(participant, **desc)
+                for desc in valid_descriptions:
+                    acq = Acquisition(participant,
+                                      indexSidecar=self.descriptions.index(desc),
+                                      **desc)
                     self.logger.warning("    ->  %s", acq.suffix)
 
-        self.acquisitions = acquisitions
-        return acquisitions
+        self.acquisitions = acquisitions + acquisitions_intendedFor
+
+        return self.acquisitions
 
     def find_runs(self):
         """
