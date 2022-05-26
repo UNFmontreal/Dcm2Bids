@@ -4,6 +4,8 @@
 
 import logging
 import os
+from pathlib import Path
+import shlex
 import shutil
 from glob import glob
 from .utils import DEFAULT, run_shell_command
@@ -40,11 +42,9 @@ class Dcm2niix(object):
         Returns:
             A directory to save all the output files of dcm2niix
         """
-        if self.participant:
-            tmpDir = self.participant.prefix
-        else:
-            tmpDir = DEFAULT.helperDir
-        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
+        tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
+
+        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
 
     def run(self, force=False):
         """ Run dcm2niix if necessary
@@ -95,8 +95,8 @@ class Dcm2niix(object):
         """ Execute dcm2niix for each directory in dicomDirs
         """
         for dicomDir in self.dicomDirs:
-            commandTpl = "dcm2niix {} -o {} {}"
-            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
+            cmd = ['dcm2niix', *shlex.split(self.options),
+                   '-o', self.outputDir, dicomDir]
             output = run_shell_command(cmd)
 
             try:

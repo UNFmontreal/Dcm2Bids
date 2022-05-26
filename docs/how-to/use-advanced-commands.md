@@ -7,7 +7,7 @@ same level as the `"descriptions"` entry.
 {
     "searchMethod": "fnmatch",
     "caseSensitive": true,
-    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
+    "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
     "description": [
         ...
     ]
