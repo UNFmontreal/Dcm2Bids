@@ -764,6 +764,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#assert_dirs_empty" class="md-nav__link">
+    assert_dirs_empty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load_json" class="md-nav__link">
     load_json
   </a>
@@ -794,6 +801,13 @@
           <li class="md-nav__item">
   <a href="#splitext_" class="md-nav__link">
     splitext_
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid_path" class="md-nav__link">
+    valid_path
   </a>
   
 </li>
@@ -920,6 +934,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#assert_dirs_empty" class="md-nav__link">
+    assert_dirs_empty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load_json" class="md-nav__link">
     load_json
   </a>
@@ -950,6 +971,13 @@
           <li class="md-nav__item">
   <a href="#splitext_" class="md-nav__link">
     splitext_
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid_path" class="md-nav__link">
+    valid_path
   </a>
   
 </li>
@@ -1194,7 +1222,139 @@
 <span class="normal">164</span>
 <span class="normal">165</span>
 <span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -1204,9 +1364,15 @@ import logging
 
 import os
 
-import shlex
+from pathlib import Path
+
+import re
 
 from collections import OrderedDict
+
+import shlex
+
+import shutil
 
 from subprocess import check_output
 
@@ -1216,17 +1382,15 @@ class DEFAULT(object):
 
     # cli dcm2bids
 
-    cliSession = &quot;&quot;
-
-    cliOutputDir = os.getcwd()
-
     cliLogLevel = &quot;INFO&quot;
+
+    EPILOG=&quot;Documentation at https://github.com/unfmontreal/Dcm2Bids&quot;
 
     # dcm2bids.py
 
-    outputDir = cliOutputDir
+    outputDir = Path.cwd()
 
-    session = cliSession  # also Participant object
+    session = &quot;&quot;  # also Participant object
 
     clobber = False
 
@@ -1253,6 +1417,16 @@ class DEFAULT(object):
     runTpl = &quot;_run-{:02d}&quot;
 
     caseSensitive = True
+
+    # Entity table:
+
+    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+
+    entityTableKeys = [&quot;sub&quot;, &quot;ses&quot;, &quot;task&quot;, &quot;acq&quot;, &quot;ce&quot;, &quot;rec&quot;, &quot;dir&quot;,
+
+                       &quot;run&quot;, &quot;mod&quot;, &quot;echo&quot;, &quot;flip&quot;, &quot;inv&quot;, &quot;mt&quot;, &quot;part&quot;,
+
+                       &quot;recording&quot;]
 
     # misc
 
@@ -1282,7 +1456,7 @@ def load_json(filename):
 
 def save_json(filename, data):
 
-    with open(filename, &quot;w&quot;) as f:
+    with filename.open(&quot;w&quot;) as f:
 
         json.dump(data, f, indent=4)
 
@@ -1360,11 +1534,338 @@ def run_shell_command(commandLine):
 
     logger.info(&quot;Running %s&quot;, commandLine)
 
-    return check_output(shlex.split(commandLine))
+    return check_output(commandLine)
+
+def valid_path(in_path, type=&quot;folder&quot;):
+
+    &quot;&quot;&quot;Assert that file exists.
+
+    Parameters
+
+    ----------
+
+    required_file: Path
+
+        Path to be checked.
+
+    &quot;&quot;&quot;
+
+    if isinstance(in_path, str):
+
+        in_path = Path(in_path)
+
+    if type == &#39;folder&#39;:
+
+        if in_path.is_dir() or in_path.parent.is_dir():
+
+            return in_path
+
+        else:
+
+            raise NotADirectoryError(in_path)
+
+    elif type == &quot;file&quot;:
+
+        if in_path.is_file():
+
+            return in_path
+
+        else:
+
+            raise FileNotFoundError(in_path)
+
+    raise TypeError(type)
+
+def assert_dirs_empty(parser, args, required):
+
+    &quot;&quot;&quot;
+
+    Assert that all directories exist are empty.
+
+    If dirs exist and not empty, and --force is used, delete dirs.
+
+    Parameters
+
+    ----------
+
+    parser: argparse.ArgumentParser object
+
+        Parser.
+
+    args: argparse namespace
+
+        Argument list.
+
+    required: string or list of paths to files
+
+        Required paths to be checked.
+
+    create_dir: bool
+
+        If true, create the directory if it does not exist.
+
+    &quot;&quot;&quot;
+
+    def check(path):
+
+        if not path.is_dir():
+
+            return
+
+        if not any(path.iterdir()):
+
+            return
+
+        if not args.overwrite:
+
+            parser.error(
+
+                f&quot;Output directory {path} isn&#39;t empty, so some files &quot;
+
+                &quot;could be overwritten or deleted.\nRerun the command with &quot;
+
+                &quot;--force option to overwrite existing output files.&quot;)
+
+        else:
+
+            for the_file in path.iterdir():
+
+                file_path = path / the_file
+
+                try:
+
+                    if file_path.is_file():
+
+                        file_path.unlink()
+
+                    elif file_path.is_dir():
+
+                        shutil.rmtree(file_path)
+
+                except Exception as e:
+
+                    print(e)
+
+    if isinstance(required, str) or isinstance(required, Path):
+
+        required = [Path(required)]
+
+    for cur_dir in required:
+
+        check(cur_dir)
 </code></pre></div>
 </td></tr></table>
 </details>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="assert_dirs_empty">assert_dirs_empty<a class="headerlink" href="#assert_dirs_empty" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assert_dirs_empty</span><span class="p">(</span>
+    <span class="n">parser</span><span class="p">,</span>
+    <span class="n">args</span><span class="p">,</span>
+    <span class="n">required</span>
+<span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Assert that all directories exist are empty.</p>
+<p>If dirs exist and not empty, and --force is used, delete dirs.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parser</td>
+<td>argparse.ArgumentParser object</td>
+<td>Parser.</td>
+<td>None</td>
+</tr>
+<tr>
+<td>args</td>
+<td>argparse namespace</td>
+<td>Argument list.</td>
+<td>None</td>
+</tr>
+<tr>
+<td>required</td>
+<td>string or list of paths to files</td>
+<td>Required paths to be checked.</td>
+<td>None</td>
+</tr>
+<tr>
+<td>create_dir</td>
+<td>bool</td>
+<td>If true, create the directory if it does not exist.</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def assert_dirs_empty(parser, args, required):
+
+    &quot;&quot;&quot;
+
+    Assert that all directories exist are empty.
+
+    If dirs exist and not empty, and --force is used, delete dirs.
+
+    Parameters
+
+    ----------
+
+    parser: argparse.ArgumentParser object
+
+        Parser.
+
+    args: argparse namespace
+
+        Argument list.
+
+    required: string or list of paths to files
+
+        Required paths to be checked.
+
+    create_dir: bool
+
+        If true, create the directory if it does not exist.
+
+    &quot;&quot;&quot;
+
+    def check(path):
+
+        if not path.is_dir():
+
+            return
+
+        if not any(path.iterdir()):
+
+            return
+
+        if not args.overwrite:
+
+            parser.error(
+
+                f&quot;Output directory {path} isn&#39;t empty, so some files &quot;
+
+                &quot;could be overwritten or deleted.\nRerun the command with &quot;
+
+                &quot;--force option to overwrite existing output files.&quot;)
+
+        else:
+
+            for the_file in path.iterdir():
+
+                file_path = path / the_file
+
+                try:
+
+                    if file_path.is_file():
+
+                        file_path.unlink()
+
+                    elif file_path.is_dir():
+
+                        shutil.rmtree(file_path)
+
+                except Exception as e:
+
+                    print(e)
+
+    if isinstance(required, str) or isinstance(required, Path):
+
+        required = [Path(required)]
+
+    for cur_dir in required:
+
+        check(cur_dir)
+</code></pre></div>
+</td></tr></table>
+</details>
 <h3 id="load_json">load_json<a class="headerlink" href="#load_json" title="Permanent link">⚓︎</a></h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -1508,7 +2009,7 @@ def run_shell_command(commandLine):
 
     logger.info(&quot;Running %s&quot;, commandLine)
 
-    return check_output(shlex.split(commandLine))
+    return check_output(commandLine)
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1530,7 +2031,7 @@ def run_shell_command(commandLine):
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def save_json(filename, data):
 
-    with open(filename, &quot;w&quot;) as f:
+    with filename.open(&quot;w&quot;) as f:
 
         json.dump(data, f, indent=4)
 </code></pre></div>
@@ -1647,6 +2148,118 @@ def run_shell_command(commandLine):
             return path[: -len(ext)], path[-len(ext) :]
 
     return os.path.splitext(path)
+</code></pre></div>
+</td></tr></table>
+</details>
+<h3 id="valid_path">valid_path<a class="headerlink" href="#valid_path" title="Permanent link">⚓︎</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">valid_path</span><span class="p">(</span>
+    <span class="n">in_path</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;folder&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Assert that file exists.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>required_file</td>
+<td>Path</td>
+<td>Path to be checked.</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def valid_path(in_path, type=&quot;folder&quot;):
+
+    &quot;&quot;&quot;Assert that file exists.
+
+    Parameters
+
+    ----------
+
+    required_file: Path
+
+        Path to be checked.
+
+    &quot;&quot;&quot;
+
+    if isinstance(in_path, str):
+
+        in_path = Path(in_path)
+
+    if type == &#39;folder&#39;:
+
+        if in_path.is_dir() or in_path.parent.is_dir():
+
+            return in_path
+
+        else:
+
+            raise NotADirectoryError(in_path)
+
+    elif type == &quot;file&quot;:
+
+        if in_path.is_file():
+
+            return in_path
+
+        else:
+
+            raise FileNotFoundError(in_path)
+
+    raise TypeError(type)
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1773,23 +2386,29 @@ def run_shell_command(commandLine):
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class DEFAULT(object):
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class DEFAULT(object):
 
     &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
     # cli dcm2bids
 
-    cliSession = &quot;&quot;
-
-    cliOutputDir = os.getcwd()
-
     cliLogLevel = &quot;INFO&quot;
+
+    EPILOG=&quot;Documentation at https://github.com/unfmontreal/Dcm2Bids&quot;
 
     # dcm2bids.py
 
-    outputDir = cliOutputDir
+    outputDir = Path.cwd()
 
-    session = cliSession  # also Participant object
+    session = &quot;&quot;  # also Participant object
 
     clobber = False
 
@@ -1817,6 +2436,16 @@ def run_shell_command(commandLine):
 
     caseSensitive = True
 
+    # Entity table:
+
+    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+
+    entityTableKeys = [&quot;sub&quot;, &quot;ses&quot;, &quot;task&quot;, &quot;acq&quot;, &quot;ce&quot;, &quot;rec&quot;, &quot;dir&quot;,
+
+                       &quot;run&quot;, &quot;mod&quot;, &quot;echo&quot;, &quot;flip&quot;, &quot;inv&quot;, &quot;mt&quot;, &quot;part&quot;,
+
+                       &quot;recording&quot;]
+
     # misc
 
     tmpDirName = &quot;tmp_dcm2bids&quot;
@@ -1827,16 +2456,13 @@ def run_shell_command(commandLine):
 </details>
 <hr />
 <h4 id="class-variables">Class variables<a class="headerlink" href="#class-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">EPILOG</span>
+</code></pre></div>
+</td></tr></table>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
 </code></pre></div>
 </td></tr></table>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">cliLogLevel</span>
-</code></pre></div>
-</td></tr></table>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">cliOutputDir</span>
-</code></pre></div>
-</td></tr></table>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">cliSession</span>
 </code></pre></div>
 </td></tr></table>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">clobber</span>
@@ -1852,6 +2478,9 @@ def run_shell_command(commandLine):
 </code></pre></div>
 </td></tr></table>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">defaceTpl</span>
+</code></pre></div>
+</td></tr></table>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">entityTableKeys</span>
 </code></pre></div>
 </td></tr></table>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">forceDcm2niix</span>
@@ -1889,7 +2518,7 @@ def run_shell_command(commandLine):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T22:29:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-27T15:56:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-27</span>
       
     
   </small>

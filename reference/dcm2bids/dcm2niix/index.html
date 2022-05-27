@@ -1124,15 +1124,17 @@
 <span class="normal">162</span>
 <span class="normal">163</span>
 <span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">165</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Dcm2niix class&quot;&quot;&quot;
 
 import logging
 
 import os
+
+from pathlib import Path
+
+import shlex
 
 import shutil
 
@@ -1190,15 +1192,9 @@ class Dcm2niix(object):
 
         &quot;&quot;&quot;
 
-        if self.participant:
+        tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
 
-            tmpDir = self.participant.prefix
-
-        else:
-
-            tmpDir = DEFAULT.helperDir
-
-        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
+        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
 
     def run(self, force=False):
 
@@ -1276,9 +1272,9 @@ class Dcm2niix(object):
 
         for dicomDir in self.dicomDirs:
 
-            commandTpl = &quot;dcm2niix {} -o {} {}&quot;
+            cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
+                   &#39;-o&#39;, self.outputDir, dicomDir]
 
             output = run_shell_command(cmd)
 
@@ -1508,13 +1504,7 @@ class Dcm2niix(object):
 <span class="normal">144</span>
 <span class="normal">145</span>
 <span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2niix(object):
+<span class="normal">147</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2niix(object):
 
     &quot;&quot;&quot; Object to handle dcm2niix execution
 
@@ -1564,15 +1554,9 @@ class Dcm2niix(object):
 
         &quot;&quot;&quot;
 
-        if self.participant:
+        tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
 
-            tmpDir = self.participant.prefix
-
-        else:
-
-            tmpDir = DEFAULT.helperDir
-
-        return os.path.join(self.bidsDir, DEFAULT.tmpDirName, tmpDir)
+        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
 
     def run(self, force=False):
 
@@ -1650,9 +1634,9 @@ class Dcm2niix(object):
 
         for dicomDir in self.dicomDirs:
 
-            commandTpl = &quot;dcm2niix {} -o {} {}&quot;
+            cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
+                   &#39;-o&#39;, self.outputDir, dicomDir]
 
             output = run_shell_command(cmd)
 
@@ -1721,9 +1705,9 @@ class Dcm2niix(object):
 
         for dicomDir in self.dicomDirs:
 
-            commandTpl = &quot;dcm2niix {} -o {} {}&quot;
+            cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-            cmd = commandTpl.format(self.options, self.outputDir, dicomDir)
+                   &#39;-o&#39;, self.outputDir, dicomDir]
 
             output = run_shell_command(cmd)
 
@@ -1925,7 +1909,7 @@ class Dcm2niix(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T22:29:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-27T15:56:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-27</span>
       
     
   </small>

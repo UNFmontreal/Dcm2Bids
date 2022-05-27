@@ -1076,7 +1076,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
     <span class="n">dicom_dir</span><span class="p">,</span>
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">config</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;/home/runner/work/Dcm2Bids/Dcm2Bids&#39;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;/home/runner/work/Dcm2Bids/Dcm2Bids&#39;</span><span class="p">),</span>
     <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="n">clobber</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">forceDcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1412,37 +1412,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">256</span>
 <span class="normal">257</span>
 <span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
+<span class="normal">259</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -1496,9 +1466,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         self.dicomDirs = dicom_dir
 
-        self.bidsDir = output_dir
+        self.bidsDir = valid_path(output_dir, type=&quot;folder&quot;)
 
-        self.config = load_json(config)
+        self.config = load_json(valid_path(config, type=&quot;file&quot;))
 
         self.participant = Participant(participant, session)
 
@@ -1542,57 +1512,21 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
     def dicomDirs(self, value):
 
-        if isinstance(value, list):
+        dicom_dirs = value if isinstance(value, list) else [value]
 
-            dicom_dirs = value
+        valid_dirs = [valid_path(_dir, &quot;folder&quot;) for _dir in dicom_dirs]
 
-        else:
-
-            dicom_dirs = [value]
-
-        dir_not_found = []
-
-        for _dir in dicom_dirs:
-
-            if os.path.isdir(_dir):
-
-                pass
-
-            else:
-
-                dir_not_found.append(_dir)
-
-        if dir_not_found:
-
-            raise FileNotFoundError(dir_not_found)
-
-        self._dicomDirs = dicom_dirs
+        self._dicomDirs = valid_dirs
 
     def set_logger(self):
 
         &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
 
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, &quot;log&quot;)
+        logDir = self.bidsDir / DEFAULT.tmpDirName / &quot;log&quot;
 
-        logFile = os.path.join(
+        logFile = logDir / f&quot;{self.participant.prefix}_{datetime.now().isoformat().replace(&#39;:&#39;, &#39;&#39;)}.log&quot;
 
-            logDir,
-
-            &quot;{}_{}.log&quot;.format(
-
-                self.participant.prefix, datetime.now().isoformat().replace(&quot;:&quot;, &quot;&quot;)
-
-            ),
-
-        )
-
-        # os.makedirs(logdir, exist_ok=True)
-
-        # python2 compatibility
-
-        if not os.path.exists(logDir):
-
-            os.makedirs(logDir)
+        logDir.mkdir(parents=True, exist_ok=True)
 
         setup_logging(self.logLevel, logFile)
 
@@ -1648,45 +1582,39 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
+        intendedForList = [[] for i in range(len(parser.descriptions))]
+
         for acq in parser.acquisitions:
 
-            self.move(acq)
+            acq.setDstFile()
 
-        check_latest()
+            intendedForList = self.move(acq, intendedForList)
 
-        check_latest(&quot;dcm2niix&quot;)
-
-    def move(self, acquisition):
+    def move(self, acquisition, intendedForList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
         for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
 
-            _, ext = splitext_(srcFile)
+            ext = Path(srcFile).suffixes
 
-            dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
+            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
-            # os.makedirs(os.path.dirname(dstFile), exist_ok=True)
-
-            # python2 compatibility
-
-            if not os.path.exists(os.path.dirname(dstFile)):
-
-                os.makedirs(os.path.dirname(dstFile))
+            dstFile.parent.mkdir(parents = True, exist_ok = True)
 
             # checking if destination file exists
 
-            if os.path.isfile(dstFile):
+            if dstFile.exists():
 
                 self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
 
                 if self.clobber:
 
-                    self.logger.info(&quot;Overwriting because of &#39;clobber&#39; option&quot;)
+                    self.logger.info(&quot;Overwriting because of --clobber option&quot;)
 
                 else:
 
-                    self.logger.info(&quot;Use clobber option to overwrite&quot;)
+                    self.logger.info(&quot;Use --clobber option to overwrite&quot;)
 
                     continue
 
@@ -1696,11 +1624,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
                 self.config.get(&quot;defaceTpl&quot;)
 
-                and acquisition.dataType == &quot;anat&quot;
+                and acquisition.dataType == &quot;func&quot;
 
                 and &quot;.nii&quot; in ext
 
-            ):
+                ):
 
                 try:
 
@@ -1712,15 +1640,19 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
                 defaceTpl = self.config.get(&quot;defaceTpl&quot;)
 
-                cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
+                cmd = [w.replace(&#39;srcFile&#39;, srcFile) for w in defaceTpl]
+
+                cmd = [w.replace(&#39;dstFile&#39;, dstFile) for w in defaceTpl]
 
                 run_shell_command(cmd)
 
-            # use
+                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
 
-            elif ext == &quot;.json&quot;:
+            elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;])
+                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;],
+
+                                                  intendedForList)
 
                 save_json(dstFile, data)
 
@@ -1731,6 +1663,14 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
             else:
 
                 os.rename(srcFile, dstFile)
+
+            intendedFile = acquisition.dstIntendedFor + &quot;.nii.gz&quot;
+
+            if intendedFile not in intendedForList[acquisition.indexSidecar]:
+
+                intendedForList[acquisition.indexSidecar].append(intendedFile)
+
+        return intendedForList
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1745,9 +1685,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">acquisition</span>
+    <span class="n">acquisition</span><span class="p">,</span>
+    <span class="n">intendedForList</span>
 <span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
@@ -1828,37 +1770,37 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition):
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition, intendedForList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
         for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
 
-            _, ext = splitext_(srcFile)
+            ext = Path(srcFile).suffixes
 
-            dstFile = os.path.join(self.bidsDir, acquisition.dstRoot + ext)
+            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
-            # os.makedirs(os.path.dirname(dstFile), exist_ok=True)
-
-            # python2 compatibility
-
-            if not os.path.exists(os.path.dirname(dstFile)):
-
-                os.makedirs(os.path.dirname(dstFile))
+            dstFile.parent.mkdir(parents = True, exist_ok = True)
 
             # checking if destination file exists
 
-            if os.path.isfile(dstFile):
+            if dstFile.exists():
 
                 self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
 
                 if self.clobber:
 
-                    self.logger.info(&quot;Overwriting because of &#39;clobber&#39; option&quot;)
+                    self.logger.info(&quot;Overwriting because of --clobber option&quot;)
 
                 else:
 
-                    self.logger.info(&quot;Use clobber option to overwrite&quot;)
+                    self.logger.info(&quot;Use --clobber option to overwrite&quot;)
 
                     continue
 
@@ -1868,11 +1810,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
                 self.config.get(&quot;defaceTpl&quot;)
 
-                and acquisition.dataType == &quot;anat&quot;
+                and acquisition.dataType == &quot;func&quot;
 
                 and &quot;.nii&quot; in ext
 
-            ):
+                ):
 
                 try:
 
@@ -1884,15 +1826,19 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
                 defaceTpl = self.config.get(&quot;defaceTpl&quot;)
 
-                cmd = defaceTpl.format(srcFile=srcFile, dstFile=dstFile)
+                cmd = [w.replace(&#39;srcFile&#39;, srcFile) for w in defaceTpl]
+
+                cmd = [w.replace(&#39;dstFile&#39;, dstFile) for w in defaceTpl]
 
                 run_shell_command(cmd)
 
-            # use
+                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
 
-            elif ext == &quot;.json&quot;:
+            elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;])
+                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;],
+
+                                                  intendedForList)
 
                 save_json(dstFile, data)
 
@@ -1903,6 +1849,14 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
             else:
 
                 os.rename(srcFile, dstFile)
+
+            intendedFile = acquisition.dstIntendedFor + &quot;.nii.gz&quot;
+
+            if intendedFile not in intendedForList[acquisition.indexSidecar]:
+
+                intendedForList[acquisition.indexSidecar].append(intendedFile)
+
+        return intendedForList
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -2023,13 +1977,13 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
+        intendedForList = [[] for i in range(len(parser.descriptions))]
+
         for acq in parser.acquisitions:
 
-            self.move(acq)
+            acq.setDstFile()
 
-        check_latest()
-
-        check_latest(&quot;dcm2niix&quot;)
+            intendedForList = self.move(acq, intendedForList)
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -2056,47 +2010,15 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def set_logger(self):
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def set_logger(self):
 
         &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
 
-        logDir = os.path.join(self.bidsDir, DEFAULT.tmpDirName, &quot;log&quot;)
+        logDir = self.bidsDir / DEFAULT.tmpDirName / &quot;log&quot;
 
-        logFile = os.path.join(
+        logFile = logDir / f&quot;{self.participant.prefix}_{datetime.now().isoformat().replace(&#39;:&#39;, &#39;&#39;)}.log&quot;
 
-            logDir,
-
-            &quot;{}_{}.log&quot;.format(
-
-                self.participant.prefix, datetime.now().isoformat().replace(&quot;:&quot;, &quot;&quot;)
-
-            ),
-
-        )
-
-        # os.makedirs(logdir, exist_ok=True)
-
-        # python2 compatibility
-
-        if not os.path.exists(logDir):
-
-            os.makedirs(logDir)
+        logDir.mkdir(parents=True, exist_ok=True)
 
         setup_logging(self.logLevel, logFile)
 
@@ -2112,7 +2034,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T22:29:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-27T15:56:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-27</span>
       
     
   </small>

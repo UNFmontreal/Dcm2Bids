@@ -691,13 +691,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_arguments" class="md-nav__link">
-    get_arguments
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#main" class="md-nav__link">
     main
   </a>
@@ -852,13 +845,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_arguments" class="md-nav__link">
-    get_arguments
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#main" class="md-nav__link">
     main
   </a>
@@ -962,11 +948,7 @@
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">71</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;helper module&quot;&quot;&quot;
 
@@ -974,67 +956,63 @@ import argparse
 
 import os
 
+from pathlib import Path
+
 import sys
 
-from .dcm2niix import Dcm2niix
+from dcm2bids.dcm2niix import Dcm2niix
 
-from .utils import DEFAULT
+from dcm2bids.utils import DEFAULT, assert_dirs_empty
 
-def get_arguments():
+def _build_arg_parser():
 
-    &quot;&quot;&quot;Load arguments for main&quot;&quot;&quot;
+    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.EPILOG,
 
-    parser = argparse.ArgumentParser(
+                                formatter_class=argparse.RawTextHelpFormatter)
 
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+    p.add_argument(&quot;-d&quot;, &quot;--dicom_dir&quot;,
 
-        description=&quot;&quot;,
+                   type=Path,
 
-        epilog=&quot;&quot;&quot;
+                   required=True, nargs=&quot;+&quot;,
 
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
+                   help=&quot;DICOM files directory.&quot;)
 
-            &quot;&quot;&quot;,
+    p.add_argument(&quot;-o&quot;, &quot;--output_dir&quot;,
 
-    )
+                   required=False, default=Path.cwd(),
 
-    parser.add_argument(
+                   type=Path,
 
-        &quot;-d&quot;, &quot;--dicom_dir&quot;, required=True, nargs=&quot;+&quot;, help=&quot;DICOM files directory&quot;
+                   help=&quot;Output BIDS directory. &quot;
 
-    )
+                        &quot;(Default: %(default)s)&quot;)
 
-    parser.add_argument(
+    p.add_argument(&#39;--force&#39;,
 
-        &quot;-o&quot;,
+                   dest=&#39;overwrite&#39;, action=&#39;store_true&#39;,
 
-        &quot;--output_dir&quot;,
+                   help=&#39;Force command to overwrite existing output files.&#39;)
 
-        required=False,
-
-        default=DEFAULT.cliOutputDir,
-
-        help=&quot;Output BIDS directory, Default: current directory&quot;,
-
-    )
-
-    args = parser.parse_args()
-
-    return args
+    return p
 
 def main():
 
     &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
 
-    args = get_arguments()
+    parser = _build_arg_parser()
+
+    args = parser.parse_args()
+
+    out_folder = args.output_dir / DEFAULT.tmpDirName / DEFAULT.helperDir
+
+    assert_dirs_empty(parser, args, out_folder)
 
     app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
 
     rsl = app.run()
 
-    print(&quot;Example in:&quot;)
-
-    print(os.path.join(args.output_dir, DEFAULT.tmpDirName, DEFAULT.helperDir))
+    print(f&quot;Example in: {out_folder}&quot;)
 
     return rsl
 
@@ -1045,101 +1023,6 @@ if __name__ == &quot;__main__&quot;:
 </td></tr></table>
 </details>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
-<h3 id="get_arguments">get_arguments<a class="headerlink" href="#get_arguments" title="Permanent link">⚓︎</a></h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_arguments</span><span class="p">(</span>
-
-<span class="p">)</span>
-</code></pre></div>
-</td></tr></table>
-<p>Load arguments for main</p>
-<details class="example">
-<summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def get_arguments():
-
-    &quot;&quot;&quot;Load arguments for main&quot;&quot;&quot;
-
-    parser = argparse.ArgumentParser(
-
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-
-        description=&quot;&quot;,
-
-        epilog=&quot;&quot;&quot;
-
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
-
-            &quot;&quot;&quot;,
-
-    )
-
-    parser.add_argument(
-
-        &quot;-d&quot;, &quot;--dicom_dir&quot;, required=True, nargs=&quot;+&quot;, help=&quot;DICOM files directory&quot;
-
-    )
-
-    parser.add_argument(
-
-        &quot;-o&quot;,
-
-        &quot;--output_dir&quot;,
-
-        required=False,
-
-        default=DEFAULT.cliOutputDir,
-
-        help=&quot;Output BIDS directory, Default: current directory&quot;,
-
-    )
-
-    args = parser.parse_args()
-
-    return args
-</code></pre></div>
-</td></tr></table>
-</details>
 <h3 id="main">main<a class="headerlink" href="#main" title="Permanent link">⚓︎</a></h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -1165,19 +1048,27 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
 
     &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
 
-    args = get_arguments()
+    parser = _build_arg_parser()
+
+    args = parser.parse_args()
+
+    out_folder = args.output_dir / DEFAULT.tmpDirName / DEFAULT.helperDir
+
+    assert_dirs_empty(parser, args, out_folder)
 
     app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
 
     rsl = app.run()
 
-    print(&quot;Example in:&quot;)
-
-    print(os.path.join(args.output_dir, DEFAULT.tmpDirName, DEFAULT.helperDir))
+    print(f&quot;Example in: {out_folder}&quot;)
 
     return rsl
 </code></pre></div>
@@ -1191,7 +1082,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-04-22T22:29:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-04-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-27T15:56:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-27</span>
       
     
   </small>
