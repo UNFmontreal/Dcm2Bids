@@ -39,7 +39,7 @@ def check_github_latest(githubRepo, timeout=3):
     """
     url = "https://github.com/{}/releases/latest".format(githubRepo)
     try:
-        output = check_output(shlex.split("curl --silent " + url), timeout=timeout)
+        output = check_output(shlex.split("curl -L --silent " + url), timeout=timeout)
     except CalledProcessError:
         logger.info(f"Checking latest version of {githubRepo} was not possible")
         logger.debug(f"Error while 'curl --silent {url}'", exc_info=True)
