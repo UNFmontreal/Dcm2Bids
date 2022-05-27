@@ -8,7 +8,6 @@ __version__ = "2.1.6"
 
 import logging
 import shlex
-import socket
 from distutils.version import LooseVersion
 from subprocess import check_output, CalledProcessError, TimeoutExpired
 from shutil import which
