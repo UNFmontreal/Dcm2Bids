@@ -103,6 +103,10 @@ class Dcm2bids(object):
             self.participant,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
+
+        check_latest()
+        check_latest("dcm2niix")
+
         dcm2niix.run(self.forceDcm2niix)
 
         sidecars = []
@@ -235,9 +239,6 @@ def main():
     """Let's go"""
     parser = _build_arg_parser()
     args = parser.parse_args()
-
-    check_latest()
-    check_latest("dcm2niix")
 
     app = Dcm2bids(**vars(args))
     return app.run()
