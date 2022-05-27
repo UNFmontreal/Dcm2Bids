@@ -51,11 +51,12 @@ def check_github_latest(githubRepo, timeout=3):
     # The output should have this format
     # <html><body>You are being <a href="https://github.com/{gitRepo}/releases/tag/{version}">redirected</a>.</body></html>
     try:
-        return (
-            output.decode()
-            .split("{}/releases/tag/".format(githubRepo))[1]
-            .split('"')[0]
-        )
+        version = output.decode().split("{}/releases/tag/".format(githubRepo))[1].split('"')[0]
+
+        # Versions are X.X.X
+        if len(version) > 5:
+            version = version[:5]
+        return version
     except:
         logger.debug(
             "Checking latest version of %s was not possible", githubRepo,
