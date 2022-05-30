@@ -6,12 +6,7 @@ import argparse
 import datetime
 import os
 import shutil
-if sys.version_info >= (3,7,0):
-  import importlib.resources as resources
-else:
-  # backport: https://pypi.org/project/importlib-resources/
-  # TODO: drop this when py3.6 is end-of-life
-  import importlib_resources as resources
+import importlib.resources as resources
 from ..utils import write_txt
 
 

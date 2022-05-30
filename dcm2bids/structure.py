@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""k"""
+"""Participant class"""
 
-
+import logging
 from os.path import join as opj
 from future.utils import iteritems
 from .utils import DEFAULT
@@ -113,6 +113,7 @@ class Acquisition(object):
         participant,
         dataType,
         modalityLabel,
+        indexSidecar=None,
         customLabels="",
         srcSidecar=None,
         sidecarChanges=None,
@@ -120,23 +121,30 @@ class Acquisition(object):
         IntendedFor=None,
         **kwargs
     ):
+        self.logger = logging.getLogger(__name__)
+
         self._modalityLabel = ""
         self._customLabels = ""
         self._intendedFor = None
+        self._indexSidecar = None
 
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
         self.customLabels = customLabels
         self.srcSidecar = srcSidecar
+
         if sidecarChanges is None:
             self.sidecarChanges = {}
         else:
             self.sidecarChanges = sidecarChanges
+
         if intendedFor is None:
             self.intendedFor = IntendedFor
         else:
             self.intendedFor = intendedFor
+
+        self.dstFile = ''
 
     def __eq__(self, other):
         return (
@@ -203,8 +211,61 @@ class Acquisition(object):
         return opj(
             self.participant.directory,
             self.dataType,
-            self.participant.prefix + self.suffix,
+            self.dstFile,
         )
+
+    @property
+    def dstIntendedFor(self):
+        """
+        Return:
+            The destination root inside the BIDS structure for intendedFor
+        """
+        return opj(
+            self.participant.session,
+            self.dataType,
+            self.dstFile,
+        )
+
+    def setDstFile(self):
+        """
+        Return:
+            The destination filename formatted following the v1.7.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+        """
+        current_name = self.participant.prefix + self.suffix
+        new_name = ''
+        current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
+        suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]
+
+        for current_key in DEFAULT.entityTableKeys:
+            if current_key in current_dict and new_name != '':
+                new_name += f"_{current_key}-{current_dict[current_key]}"
+            elif current_key in current_dict:
+                new_name = f"{current_key}-{current_dict[current_key]}"
+            current_dict.pop(current_key, None)
+
+        for current_key in current_dict:
+            new_name += f"_{current_key}-{current_dict[current_key]}"
+
+        if current_dict:
+            self.logger.warning("Entity \"{}\"".format(list(current_dict.keys())) +
+                                " is not a valid BIDS entity.")
+
+        new_name += f"_{'_'.join(suffix_list)}"  # Allow multiple single keys (without value)
+
+        if len(suffix_list) != 1:
+            self.logger.warning("There was more than one suffix found "
+                                f"({suffix_list}). This is not BIDS "
+                                "compliant. Make sure you know what "
+                                "you are doing.")
+
+        if current_name != new_name:
+            self.logger.warning(
+                f"""✅ Filename was reordered according to BIDS entity table order:
+                from:   {current_name}
+                to:     {new_name}""")
+
+        self.dstFile = new_name
 
     @property
     def intendedFor(self):
@@ -217,7 +278,23 @@ class Acquisition(object):
         else:
             self._intendedFor = [value]
 
-    def dstSidecarData(self, descriptions):
+    @property
+    def indexSidecar(self):
+        """
+        Returns:
+            A int '_<indexSidecar>'
+        """
+        return self._indexSidecar
+
+    @indexSidecar.setter
+    def indexSidecar(self, value):
+        """
+        Returns:
+            A int '_<indexSidecar>'
+        """
+        self._indexSidecar = value
+
+    def dstSidecarData(self, descriptions, intendedForList):
         """
         """
         data = self.srcSidecar.origData
@@ -226,18 +303,9 @@ class Acquisition(object):
         # intendedFor key
         if self.intendedFor != [None]:
             intendedValue = []
+
             for index in self.intendedFor:
-                intendedDesc = descriptions[index]
-
-                session = self.participant.session
-                dataType = intendedDesc["dataType"]
-
-                niiFile = self.participant.prefix
-                niiFile += self.prepend(intendedDesc.get("customLabels", ""))
-                niiFile += self.prepend(intendedDesc["modalityLabel"])
-                niiFile += ".nii.gz"
-
-                intendedValue.append(opj(session, dataType, niiFile).replace("\\", "/"))
+                intendedValue = intendedValue + intendedForList[index]
 
             if len(intendedValue) == 1:
                 data["IntendedFor"] = intendedValue[0]
