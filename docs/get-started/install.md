@@ -277,7 +277,7 @@ usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
                 [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids 2.1.6
+dcm2bids 2.1.7
 
 options:
   -h, --help            show this help message and exit
