@@ -1574,6 +1574,10 @@ class Dcm2bids(object):
 
         )
 
+        check_latest()
+
+        check_latest(&quot;dcm2niix&quot;)
+
         dcm2niix.run(self.forceDcm2niix)
 
         sidecars = []
@@ -1776,10 +1780,6 @@ def main():
 
     args = parser.parse_args()
 
-    check_latest()
-
-    check_latest(&quot;dcm2niix&quot;)
-
     app = Dcm2bids(**vars(args))
 
     return app.run()
@@ -1812,21 +1812,13 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
 
     &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
 
     parser = _build_arg_parser()
 
     args = parser.parse_args()
-
-    check_latest()
-
-    check_latest(&quot;dcm2niix&quot;)
 
     app = Dcm2bids(**vars(args))
 
@@ -2186,7 +2178,11 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal">256</span>
 <span class="normal">257</span>
 <span class="normal">258</span>
-<span class="normal">259</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2321,6 +2317,10 @@ if __name__ == &quot;__main__&quot;:
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
+
+        check_latest()
+
+        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.forceDcm2niix)
 
@@ -2701,7 +2701,11 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self):
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
@@ -2716,6 +2720,10 @@ if __name__ == &quot;__main__&quot;:
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
+
+        check_latest()
+
+        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.forceDcm2niix)
 
@@ -2808,7 +2816,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-27T15:57:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-27</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-30T18:38:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-30</span>
       
     
   </small>

@@ -1412,7 +1412,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">256</span>
 <span class="normal">257</span>
 <span class="normal">258</span>
-<span class="normal">259</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -1547,6 +1551,10 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
+
+        check_latest()
+
+        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.forceDcm2niix)
 
@@ -1927,7 +1935,11 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self):
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
@@ -1942,6 +1954,10 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
+
+        check_latest()
+
+        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.forceDcm2niix)
 
@@ -2034,7 +2050,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-27T15:57:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-27</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-30T18:38:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-30</span>
       
     
   </small>
