@@ -1774,13 +1774,13 @@ class SidecarPairing(object):
 
         def compare(name, pattern):
 
+            name = str(name)
+
             if self.searchMethod == &quot;re&quot;:
 
-                return bool(re.search(pattern, name))
+                return bool(re.match(pattern, name))
 
             else:
-
-                name = str(name)
 
                 pattern = str(pattern)
 
@@ -2718,13 +2718,13 @@ class SidecarPairing(object):
 
         def compare(name, pattern):
 
+            name = str(name)
+
             if self.searchMethod == &quot;re&quot;:
 
-                return bool(re.search(pattern, name))
+                return bool(re.match(pattern, name))
 
             else:
-
-                name = str(name)
 
                 pattern = str(pattern)
 
@@ -3442,13 +3442,13 @@ the values are a list of possible descriptions</p>
 
         def compare(name, pattern):
 
+            name = str(name)
+
             if self.searchMethod == &quot;re&quot;:
 
-                return bool(re.search(pattern, name))
+                return bool(re.match(pattern, name))
 
             else:
-
-                name = str(name)
 
                 pattern = str(pattern)
 
@@ -3498,7 +3498,7 @@ the values are a list of possible descriptions</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-30T18:38:19+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-30</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-05-30T19:22:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-05-30</span>
       
     
   </small>
