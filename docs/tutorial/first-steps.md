@@ -83,7 +83,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 2.1.6
+    dcm2bids 2.1.7
 
     options:
     -h, --help            show this help message and exit
@@ -951,7 +951,7 @@ command.
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 2.1.6
+    dcm2bids 2.1.7
 
     options:
     -h, --help            show this help message and exit
@@ -1005,7 +1005,7 @@ That being said, you can run the command:
     INFO:dcm2bids.dcm2bids:--- dcm2bids start ---
     INFO:dcm2bids.dcm2bids:OS:version: Linux-5.13.0-39-generic-x86_64-with-glibc2.31
     INFO:dcm2bids.dcm2bids:python:version: 3.10.4 | packaged by conda-forge | (main, Mar 24 2022, 17:39:04) [GCC 10.3.0]
-    INFO:dcm2bids.dcm2bids:dcm2bids:version: 2.1.6
+    INFO:dcm2bids.dcm2bids:dcm2bids:version: 2.1.7
     INFO:dcm2bids.dcm2bids:dcm2niix:version: v1.0.20211006
     INFO:dcm2bids.dcm2bids:participant: sub-ID01
     INFO:dcm2bids.dcm2bids:session:

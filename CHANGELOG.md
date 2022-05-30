@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2.1.7 - 2022-05-30
+
+Last version before refactoring.
+
+- Major and minor documentation fixes
+- Fix Ìntended for
+- Fix Entity table order
+- Fix Windows paths
+- Fix issue when no internet
+- Remove support to Python 2.6
+
 ## 2.1.6 - 2021-02-16
 
 - New Containers
