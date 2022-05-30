@@ -8,36 +8,12 @@ __version__ = "2.1.6"
 
 import logging
 import shlex
-import socket
 from distutils.version import LooseVersion
-from subprocess import check_output
+from subprocess import check_output, CalledProcessError, TimeoutExpired
 from shutil import which
 
 
 logger = logging.getLogger(__name__)
-
-
-def internet(host="8.8.8.8", port=53, timeout=3):
-    """ Check if user has internet
-
-    Args:
-        host (string): 8.8.8.8 (google-public-dns-a.google.com)
-        port (int): OpenPort 53/tcp
-                    Service: domain (DNS/TCP)
-        timeout (int): default=3
-
-    Returns:
-        boolean
-
-    Source: https://stackoverflow.com/a/33117579
-    """
-    try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
-        return True
-
-    except:
-        return False
 
 
 def is_tool(name):
@@ -51,33 +27,36 @@ def is_tool(name):
     return which(name) is not None
 
 
-def check_github_latest(githubRepo):
+def check_github_latest(githubRepo, timeout=3):
     """ Check the latest version of a github repository
 
     Args:
         githubRepo (string): a github repository ("username/repository")
+        timeout (int): time in seconds
 
     Returns:
         A string of the version
     """
     url = "https://github.com/{}/releases/latest".format(githubRepo)
     try:
-        output = check_output(shlex.split("curl --silent " + url))
-    except:
-        logger.debug(
-            "Checking latest version of %s was not possible", githubRepo,
-            exc_info=True,
-        )
+        output = check_output(shlex.split("curl -L --silent " + url), timeout=timeout)
+    except CalledProcessError:
+        logger.info(f"Checking latest version of {githubRepo} was not possible")
+        logger.debug(f"Error while 'curl --silent {url}'", exc_info=True)
         return
-
+    except TimeoutExpired:
+        logger.info(f"Checking latest version of {githubRepo} was not possible")
+        logger.debug(f"Command 'curl --silent {url}' timed out after {timeout}s")
+        return
     # The output should have this format
     # <html><body>You are being <a href="https://github.com/{gitRepo}/releases/tag/{version}">redirected</a>.</body></html>
     try:
-        return (
-            output.decode()
-            .split("{}/releases/tag/".format(githubRepo))[1]
-            .split('"')[0]
-        )
+        version = output.decode().split("{}/releases/tag/".format(githubRepo))[1].split('"')[0]
+
+        # Versions are X.X.X
+        if len(version) > 5:
+            version = version[:5]
+        return version
     except:
         logger.debug(
             "Checking latest version of %s was not possible", githubRepo,
@@ -109,7 +88,7 @@ def check_latest(name="dcm2bids"):
         },
     }
 
-    if internet() and is_tool("curl"):
+    if is_tool("curl"):
         host = data.get(name)["host"]
 
         if host == "https://github.com":
@@ -122,7 +101,7 @@ def check_latest(name="dcm2bids"):
 
     else:
         logger.debug("Checking latest version of %s was not possible", name)
-        logger.debug("internet: %s, curl: %s", internet(), is_tool("curl"))
+        logger.debug("curl: %s", is_tool("curl"))
         return
 
     current = data.get(name)["current"]
