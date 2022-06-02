@@ -1400,7 +1400,11 @@
 <span class="normal">384</span>
 <span class="normal">385</span>
 <span class="normal">386</span>
-<span class="normal">387</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;
 
@@ -1627,6 +1631,10 @@ class Dcm2bids(object):
         for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
 
             ext = Path(srcFile).suffixes
+
+            ext = [curr_ext for curr_ext in ext if curr_ext in [&#39;.nii&#39;,&#39;.gz&#39;,
+
+                                                                &#39;.json&#39;]]
 
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
@@ -2182,7 +2190,11 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal">260</span>
 <span class="normal">261</span>
 <span class="normal">262</span>
-<span class="normal">263</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2372,6 +2384,10 @@ if __name__ == &quot;__main__&quot;:
 
             ext = Path(srcFile).suffixes
 
+            ext = [curr_ext for curr_ext in ext if curr_ext in [&#39;.nii&#39;,&#39;.gz&#39;,
+
+                                                                &#39;.json&#39;]]
+
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents = True, exist_ok = True)
@@ -2550,13 +2566,21 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition, intendedForList):
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition, intendedForList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
         for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
 
             ext = Path(srcFile).suffixes
+
+            ext = [curr_ext for curr_ext in ext if curr_ext in [&#39;.nii&#39;,&#39;.gz&#39;,
+
+                                                                &#39;.json&#39;]]
 
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
@@ -2816,7 +2840,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-06-02T13:46:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-06-02</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-06-02T14:12:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-06-02</span>
       
     
   </small>
