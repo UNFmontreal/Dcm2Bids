@@ -7,6 +7,7 @@ import datetime
 import os
 import shutil
 import importlib.resources as resources
+from typing import Optional
 from ..utils import write_txt
 
 
@@ -34,12 +35,13 @@ def _get_arguments():
     return args
 
 
-def scaffold():
+def scaffold(output_dir_override: Optional[str] = None):
     """scaffold entry point"""
     args = _get_arguments()
+    output_dir_ = output_dir_override if output_dir_override is not None else args.output_dir
 
     for _ in ["code", "derivatives", "sourcedata"]:
-        os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
+        os.makedirs(os.path.join(output_dir_, _), exist_ok=True)
 
     for _ in [
         "dataset_description.json",
@@ -47,7 +49,7 @@ def scaffold():
         "participants.tsv",
         "README",
     ]:
-        dest = os.path.join(args.output_dir, _)
+        dest = os.path.join(output_dir_, _)
         with resources.path(__name__, _) as src:
             shutil.copyfile(src, dest)
 
@@ -55,6 +57,6 @@ def scaffold():
         with open(changes_template) as _:
             data = _.read().format(datetime.date.today().strftime("%Y-%m-%d"))
         write_txt(
-            os.path.join(args.output_dir, "CHANGES"),
+            os.path.join(output_dir_, "CHANGES"),
             data.split("\n")[:-1],
     )
