@@ -969,7 +969,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">scaffold</span><span class="p">(</span>
-
+    <span class="n">output_dir_override</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
@@ -1016,15 +1016,19 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def scaffold():
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def scaffold(output_dir_override: Optional[str] = None):
 
     &quot;&quot;&quot;scaffold entry point&quot;&quot;&quot;
 
     args = _get_arguments()
 
+    output_dir_ = output_dir_override if output_dir_override is not None else args.output_dir
+
     for _ in [&quot;code&quot;, &quot;derivatives&quot;, &quot;sourcedata&quot;]:
 
-        os.makedirs(os.path.join(args.output_dir, _), exist_ok=True)
+        os.makedirs(os.path.join(output_dir_, _), exist_ok=True)
 
     for _ in [
 
@@ -1038,7 +1042,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
     ]:
 
-        dest = os.path.join(args.output_dir, _)
+        dest = os.path.join(output_dir_, _)
 
         with resources.path(__name__, _) as src:
 
@@ -1052,7 +1056,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
         write_txt(
 
-            os.path.join(args.output_dir, &quot;CHANGES&quot;),
+            os.path.join(output_dir_, &quot;CHANGES&quot;),
 
             data.split(&quot;\n&quot;)[:-1],
 
@@ -2066,7 +2070,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-06-02T14:12:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-06-02</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-06-17T15:51:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-06-17</span>
       
     
   </small>
