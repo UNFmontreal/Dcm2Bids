@@ -53,9 +53,9 @@ Before posting your question, you may want to first browse through questions tha
 [bids-examples]: https://github.com/bids-standard/bids-examples
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [dcm2bids-doc]: https://unfmontreal.github.io/Dcm2Bids
-[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/docs/2-tutorial/#setup
-[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/docs/2-tutorial
-[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/docs/4-advanced/
+[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/docs/get-started/install/
+[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/docs/tutorial/first-steps/#tutorial-first-steps
+[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/docs/advanced/
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix

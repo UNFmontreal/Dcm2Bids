@@ -139,6 +139,9 @@ class Dcm2bids(object):
         for srcFile in glob(acquisition.srcRoot + ".*"):
 
             ext = Path(srcFile).suffixes
+            ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii','.gz',
+                                                                '.json']]
+
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
 
             dstFile.parent.mkdir(parents = True, exist_ok = True)
