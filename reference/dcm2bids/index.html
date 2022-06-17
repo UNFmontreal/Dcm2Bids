@@ -1424,7 +1424,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">264</span>
 <span class="normal">265</span>
 <span class="normal">266</span>
-<span class="normal">267</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Dcm2bids(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -1616,7 +1618,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             ext = [curr_ext for curr_ext in ext if curr_ext in [&#39;.nii&#39;,&#39;.gz&#39;,
 
-                                                                &#39;.json&#39;]]
+                                                                &#39;.json&#39;,
+
+                                                                &#39;.bval&#39;,&#39;.bvec&#39;]]
 
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
@@ -1800,7 +1804,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition, intendedForList):
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def move(self, acquisition, intendedForList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -1810,7 +1816,9 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 
             ext = [curr_ext for curr_ext in ext if curr_ext in [&#39;.nii&#39;,&#39;.gz&#39;,
 
-                                                                &#39;.json&#39;]]
+                                                                &#39;.json&#39;,
+
+                                                                &#39;.bval&#39;,&#39;.bvec&#39;]]
 
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
@@ -2070,7 +2078,7 @@ __all__ = [&quot;__version__&quot;, &quot;Dcm2bids&quot;, &quot;scaffold&quot;]
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-06-17T15:51:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-06-17</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-06-17T20:19:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-06-17</span>
       
     
   </small>
