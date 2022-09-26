@@ -124,6 +124,24 @@ specifications][bids-spec].
 For a longer example of a Dcm2Bids config json, see
 [here](https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json).
 
+Note that the different bids labels must come in a very specific order to be bids valid filenames. 
+If the customLabels fields that are entered that are in the wrong order,
+then dcm2bids will reorder them for you.
+
+For example if you entered:
+
+```json
+"customLabels": "run-01_task-rest"
+```
+
+when running dcm2bids, you will get the following warning:
+
+```bash
+WARNING:dcm2bids.structure:✅ Filename was reordered according to BIDS entity table order:
+                from:   sub-ID01_run-01_task-rest_bold
+                to:     sub-ID01_task-rest_run-01_bold
+```
+
 ## sidecarChanges
 
 Optional field to change or add information in a sidecar.
