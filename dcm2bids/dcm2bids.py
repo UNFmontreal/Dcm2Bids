@@ -46,6 +46,7 @@ class Dcm2bids(object):
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         forceDcm2niix=DEFAULT.forceDcm2niix,
+        search_depth=DEFAULT.search_depth,
         log_level=DEFAULT.logLevel,
         **_
     ):
@@ -57,6 +58,7 @@ class Dcm2bids(object):
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.forceDcm2niix = forceDcm2niix
+        self.search_depth = search_depth
         self.logLevel = log_level
 
         # logging setup
@@ -102,6 +104,7 @@ class Dcm2bids(object):
             self.bidsDir,
             self.participant,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
+            self.search_depth
         )
 
         check_latest()
@@ -225,6 +228,10 @@ def _build_arg_parser():
                    action="store_true",
                    help="Overwrite previous temporary dcm2niix "
                         "output if it exists.")
+
+    p.add_argument("--search_depth",
+                   default=DEFAULT.search_depth,
+                   help="Directory search depth. (Defaults to %(default)s). Valid ranges: 0-9")
 
     p.add_argument("--clobber",
                    action="store_true",

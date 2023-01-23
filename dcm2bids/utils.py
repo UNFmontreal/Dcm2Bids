@@ -25,6 +25,7 @@ class DEFAULT(object):
     session = ""  # also Participant object
     clobber = False
     forceDcm2niix = False
+    search_depth = 5
     defaceTpl = None
     logLevel = "WARNING"
 

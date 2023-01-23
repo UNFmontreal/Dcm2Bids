@@ -25,7 +25,7 @@ class Dcm2niix(object):
     """
 
     def __init__(
-        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
+        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions, search_depth=DEFAULT.search_depth
     ):
         self.logger = logging.getLogger(__name__)
 
@@ -35,6 +35,13 @@ class Dcm2niix(object):
         self.bidsDir = bidsDir
         self.participant = participant
         self.options = options
+        self.search_depth = search_depth
+
+        self.logger.info("search depth: %s", self.search_depth)
+
+        # Add search depth to options if its different from the default.
+        if search_depth != DEFAULT.search_depth:
+            options += f" -d {search_depth}"
 
     @property
     def outputDir(self):
@@ -95,7 +102,7 @@ class Dcm2niix(object):
         """ Execute dcm2niix for each directory in dicomDirs
         """
         for dicomDir in self.dicomDirs:
-            cmd = ['dcm2niix', *shlex.split(self.options),
+            cmd = ['dcm2niix', *shlex.split(self.options), '-d' , self.search_depth,
                    '-o', self.outputDir, dicomDir]
             output = run_shell_command(cmd)
 
