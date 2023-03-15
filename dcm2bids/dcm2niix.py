@@ -44,7 +44,7 @@ class Dcm2niix(object):
         """
         tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
 
-        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
+        return os.getcwd() / DEFAULT.tmpDirName / tmpDir
 
     def run(self, force=False):
         """ Run dcm2niix if necessary
