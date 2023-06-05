@@ -2,15 +2,9 @@
 
 
 import csv
-import json
-import logging
 import os
 from pathlib import Path
-import re
-from collections import OrderedDict
-import shlex
-import shutil
-from subprocess import check_output
+
 
 
 class DEFAULT(object):
@@ -51,8 +45,6 @@ class DEFAULT(object):
     # misc
     tmpDirName = "tmp_dcm2bids"
     helperDir = "helper"
-
-
 
 
 def write_participants(filename, participants):

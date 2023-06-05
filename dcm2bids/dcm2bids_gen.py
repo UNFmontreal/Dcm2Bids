@@ -19,7 +19,7 @@ from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.utils.io import load_json, save_json
 from dcm2bids.utils.logger import setup_logging
 from dcm2bids.utils.tools import run_shell_command, dcm2niix_version
-from dcm2bids.utils.utils import DEFAULT, splitext_
+from dcm2bids.utils.utils import DEFAULT, splitext_, valid_path
 from dcm2bids.version import __version__
 
 
@@ -98,15 +98,12 @@ class Dcm2BidsGen(object):
 
     def run(self):
         """Run dcm2bids"""
-        dcm2niix = Dcm2niix(
+        dcm2niix = Dcm2niixGen(
             self.dicomDirs,
             self.bidsDir,
             self.participant,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
-
-        check_latest()
-        check_latest("dcm2niix")
 
         dcm2niix.run(self.forceDcm2niix)
 

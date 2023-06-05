@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import sys
 
-from Dcm2Bids.dcm2bids.dcm2niix_gen import Dcm2niix
+from Dcm2Bids.dcm2bids.dcm2niix_gen import Dcm2niixGen
 from Dcm2Bids.dcm2bids.utils.utils import DEFAULT, assert_dirs_empty
 
 
@@ -39,7 +39,7 @@ def main():
     args = parser.parse_args()
     out_folder = args.output_dir / DEFAULT.tmpDirName / DEFAULT.helperDir
     assert_dirs_empty(parser, args, out_folder)
-    app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
+    app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
     rsl = app.run()
     print(f"Example in: {out_folder}")
     return rsl
