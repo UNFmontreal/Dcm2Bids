@@ -3,13 +3,15 @@
 
 import json
 import os
+import os.path as op
 import shutil
 from tempfile import TemporaryDirectory
 
 from bids import BIDSLayout
 
-from dcm2bids import Dcm2bids
-from dcm2bids.utils import DEFAULT, load_json
+from dcm2bids.dcm2bids_gen import Dcm2BidsGen
+from dcm2bids.utils.io import load_json
+from dcm2bids.utils.utils import DEFAULT
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")

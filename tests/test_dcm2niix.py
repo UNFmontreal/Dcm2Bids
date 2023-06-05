@@ -4,9 +4,11 @@
 from glob import glob
 from tempfile import TemporaryDirectory
 import os
+import os.path as op
 import pytest
-from dcm2bids.dcm2niix import Dcm2niix
-from dcm2bids.utils import DEFAULT
+
+from dcm2bids.dcm2niix_gen import Dcm2niixGen
+from dcm2bids.utils.utils import DEFAULT
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")

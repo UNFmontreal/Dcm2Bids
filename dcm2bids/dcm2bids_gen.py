@@ -13,16 +13,17 @@ import sys
 from datetime import datetime
 from glob import glob
 
-from dcm2bids.dcm2niix import Dcm2niix
-from dcm2bids.logger import setup_logging
+from dcm2bids.dcm2niix_gen import Dcm2niixGen
+from dcm2bids.participant import Participant
 from dcm2bids.sidecar import Sidecar, SidecarPairing
-from dcm2bids.structure import Participant
-from dcm2bids.utils import (DEFAULT, load_json, save_json,
-                            splitext_, run_shell_command, valid_path)
-from dcm2bids.version import __version__, check_latest, dcm2niix_version
+from dcm2bids.utils.io import load_json, save_json
+from dcm2bids.utils.logger import setup_logging
+from dcm2bids.utils.tools import run_shell_command, dcm2niix_version
+from dcm2bids.utils.utils import DEFAULT, splitext_
+from dcm2bids.version import __version__
 
 
-class Dcm2bids(object):
+class Dcm2BidsGen(object):
     """ Object to handle dcm2bids execution steps
 
     Args:
