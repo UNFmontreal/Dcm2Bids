@@ -140,7 +140,8 @@ class Dcm2bids(object):
 
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii','.gz',
-                                                                '.json']]
+                                                                '.json',
+                                                                '.bval','.bvec']]
 
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
 

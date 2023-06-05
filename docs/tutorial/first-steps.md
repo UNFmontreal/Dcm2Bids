@@ -805,8 +805,8 @@ task name:
       "modalityLabel": "bold",
       "customLabels": "task-rest",
       "criteria": {
-        "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
-      "sidecarChanges": {
+        "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*",
+        "sidecarChanges": {
         "TaskName": "rest"
       }
       }
