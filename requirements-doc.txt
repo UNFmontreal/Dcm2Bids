@@ -41,7 +41,7 @@ pickleshare==0.7.5
 platformdirs==2.5.1
 pluggy==1.0.0
 portray==1.7.0
-prompt-toolkit==3.0.29
+prompt-toolkit==3.0.30
 ptyprocess==0.7.0
 pure-eval==0.2.2
 py==1.11.0
