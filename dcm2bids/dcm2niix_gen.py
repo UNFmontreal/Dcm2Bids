@@ -8,10 +8,12 @@ from pathlib import Path
 import shlex
 import shutil
 from glob import glob
-from .utils import DEFAULT, run_shell_command
 
 
-class Dcm2niix(object):
+from dcm2bids.utils.utils import DEFAULT, run_shell_command
+
+
+class Dcm2niixGen(object):
     """ Object to handle dcm2niix execution
 
     Args:

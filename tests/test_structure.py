@@ -3,7 +3,8 @@
 
 from os.path import join as opj
 import pytest
-from dcm2bids.structure import Participant, Acquisition
+from dcm2bids.participant import Participant
+from dcm2bids.acquisition import Acquisition
 
 
 @pytest.mark.parametrize(

@@ -5,8 +5,8 @@ from glob import glob
 from tempfile import TemporaryDirectory
 import os
 import pytest
-from dcm2bids.dcm2niix import Dcm2niix
-from dcm2bids.utils import DEFAULT
+from dcm2bids.dcm2niix_gen import Dcm2niixGen
+from dcm2bids.utils.utils import DEFAULT
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -19,7 +19,7 @@ def test_dcm2niix_run():
     # tmpDir = TemporaryDirectory(dir=tmpBase)
     tmpDir = TemporaryDirectory()
 
-    app = Dcm2niix([dicomDir], tmpDir.name)
+    app = Dcm2niixGen([dicomDir], tmpDir.name)
     app.run()
 
     helperDir = os.path.join(tmpDir.name, DEFAULT.tmpDirName, DEFAULT.helperDir, "*")
