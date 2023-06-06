@@ -17,7 +17,7 @@ from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.utils.logger import setup_logging
 from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.participant import Participant
-from dcm2bids.utils.utils import DEFAULT, run_shell_command, splitext_
+from dcm2bids.utils.utils import DEFAULT, run_shell_command
 from dcm2bids.utils.io import load_json, save_json, valid_path
 from dcm2bids.utils.tools import __version__, check_latest, dcm2niix_version
 
@@ -139,13 +139,13 @@ class Dcm2BidsGen(object):
         for srcFile in glob(acquisition.srcRoot + ".*"):
 
             ext = Path(srcFile).suffixes
-            ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii','.gz',
+            ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
-                                                                '.bval','.bvec']]
+                                                                '.bval', '.bvec']]
 
             dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
 
-            dstFile.parent.mkdir(parents = True, exist_ok = True)
+            dstFile.parent.mkdir(parents=True, exist_ok=True)
 
             # checking if destination file exists
             if dstFile.exists():
@@ -159,11 +159,7 @@ class Dcm2BidsGen(object):
                     continue
 
             # it's an anat nifti file and the user using a deface script
-            if (
-                self.config.get("defaceTpl")
-                and acquisition.dataType == "func"
-                and ".nii" in ext
-                ):
+            if (self.config.get("defaceTpl") and acquisition.dataType == "func" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
                 except FileNotFoundError:
@@ -244,7 +240,7 @@ def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
 
-    app = Dcm2bids(**vars(args))
+    app = Dcm2BidsGen(**vars(args))
     return app.run()
 
 

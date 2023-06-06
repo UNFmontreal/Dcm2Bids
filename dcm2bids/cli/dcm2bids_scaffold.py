@@ -14,9 +14,8 @@ import datetime
 import logging
 import os
 from os.path import join as opj
-import shutil
 
-from dcm2bids.utils.io import write_txt, get_scaffold_dir
+from dcm2bids.utils.io import write_txt
 from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.utils.scaffold import bids_starter_kit

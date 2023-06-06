@@ -2,14 +2,14 @@
 
 class bids_starter_kit(object):
 
-    CHANGES="""
+    CHANGES = """
 Revision history for your dataset
 
 1.0.0 DATE
  - Initialized study directory
  """
 
-    dataset_description="""
+    dataset_description = """
 {
     "Name": "",
     "BIDSVersion": "BIDS_VERSION",
@@ -29,7 +29,7 @@ Revision history for your dataset
 }
 """
 
-    participants_json="""
+    participants_json = """
 {
     "age": {
         "LongName": "",
@@ -63,14 +63,14 @@ Revision history for your dataset
 }
 """
 
-    participants_tsv="""
+    participants_tsv = """
 participant_id	age	sex	group
 sub-01	34	M	control
 sub-02	12	F	control
 sub-03	33	F	patient
 """
 
-    README="""
+    README = """
 # README
 
 The README is usually the starting point for researchers using your data

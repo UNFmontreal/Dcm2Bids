@@ -5,8 +5,10 @@
 import logging
 from os.path import join as opj
 from future.utils import iteritems
+
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.utils.tools import __version__
+
 
 class Acquisition(object):
     """ Class representing an acquisition

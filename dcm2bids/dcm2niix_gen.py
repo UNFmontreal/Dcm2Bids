@@ -4,11 +4,9 @@
 
 import logging
 import os
-from pathlib import Path
 import shlex
 import shutil
 from glob import glob
-
 
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
 

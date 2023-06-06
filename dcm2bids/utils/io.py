@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
 
-
-import csv
 import inspect
 import json
-import logging
 import os
-import os.path as op
+import os.path as opj
 from pathlib import Path
 from collections import OrderedDict
-import shlex
-import shutil
-from subprocess import check_output
 
 import dcm2bids
 

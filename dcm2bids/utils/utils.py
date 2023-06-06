@@ -2,14 +2,9 @@
 
 
 import csv
-import json
 import logging
 import os
 from pathlib import Path
-import re
-from collections import OrderedDict
-import shlex
-import shutil
 from subprocess import check_output
 
 
@@ -88,7 +83,6 @@ def splitext_(path, extensions=None):
     return os.path.splitext(path)
 
 
-
 def run_shell_command(commandLine):
     """ Wrapper of subprocess.check_output
     Returns:
@@ -97,28 +91,3 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running %s", commandLine)
     return check_output(commandLine)
-
-
-def valid_path(in_path, type="folder"):
-    """Assert that file exists.
-
-    Parameters
-    ----------
-    required_file: Path
-        Path to be checked.
-    """
-    if isinstance(in_path, str):
-        in_path = Path(in_path)
-
-    if type == 'folder':
-        if in_path.is_dir() or in_path.parent.is_dir():
-            return in_path
-        else:
-            raise NotADirectoryError(in_path)
-    elif type == "file":
-        if in_path.is_file():
-            return in_path
-        else:
-            raise FileNotFoundError(in_path)
-
-    raise TypeError(type)
