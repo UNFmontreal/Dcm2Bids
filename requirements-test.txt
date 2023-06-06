@@ -4,3 +4,4 @@ pytest-black>=0.3.7
 pytest-cov>=2.8.1
 pytest-flake8>=1.0.4
 pytest-pylint>=0.14.1
+pytest-console-scripts==1.4.1
