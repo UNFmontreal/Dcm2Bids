@@ -42,7 +42,7 @@
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
             },
-            "intendedFor": 3
+            "intendedFor": [3,2]
         },
         {
             "dataType": "fmap",

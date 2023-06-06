@@ -8,6 +8,7 @@ __version__ = "2.1.9"
 
 import logging
 import shlex
+from packaging import version
 from distutils.version import LooseVersion
 from subprocess import check_output, CalledProcessError, TimeoutExpired
 from shutil import which
@@ -97,7 +98,7 @@ def check_latest(name="dcm2bids"):
 
         else:
             # Not implemented
-            return
+            return False
 
     else:
         logger.debug("Checking latest version of %s was not possible", name)
@@ -109,7 +110,7 @@ def check_latest(name="dcm2bids"):
         current = current()
 
     try:
-        news = LooseVersion(latest) > LooseVersion(current)
+        news = version(latest) > version(current)
     except:
         news = None
 

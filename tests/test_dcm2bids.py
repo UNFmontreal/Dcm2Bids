@@ -3,6 +3,7 @@
 
 import json
 import os
+import pytest
 import shutil
 from tempfile import TemporaryDirectory
 
@@ -14,6 +15,10 @@ from dcm2bids.utils.io import load_json
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
+
+def test_help_option(script_runner):
+    ret = script_runner.run(['dcm2bids', '--help'])
+    assert ret.success
 
 def compare_json(original_file, converted_file):
     with open(original_file) as f:
@@ -55,6 +60,11 @@ def test_dcm2bids():
     app.run()
 
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    data = load_json(fmapFile)
+    assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
+                                   os.path.join("anat", "sub-01_T1w.nii.gz")]
+
+    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
     assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")

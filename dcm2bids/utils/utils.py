@@ -47,6 +47,9 @@ class DEFAULT(object):
     tmpDirName = "tmp_dcm2bids"
     helperDir = "helper"
 
+    # BIDS version
+    bids_version = "v1.8.0"
+
 
 def write_participants(filename, participants):
     with open(filename, "w") as f:
