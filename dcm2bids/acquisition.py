@@ -4,7 +4,6 @@
 
 import logging
 from os.path import join as opj
-from future.utils import iteritems
 
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.utils.tools import __version__
@@ -227,7 +226,7 @@ class Acquisition(object):
                 data["IntendedFor"] = intendedValue
 
         # sidecarChanges
-        for key, value in iteritems(self.sidecarChanges):
+        for key, value in self.sidecarChanges.items():
             data[key] = value
 
         return data
