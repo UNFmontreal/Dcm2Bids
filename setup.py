@@ -26,7 +26,7 @@ opts = dict(name=NAME,
             classifiers=CLASSIFIERS,
             platforms=PLATFORMS,
             python_requires=">=3.7",
-            install_requires=['future>=0.17.1'],
+            install_requires=['future>=0.17.1', 'packaging>=23.1'],
             version=VERSION,
             packages=find_packages(exclude=["tests"]),
             entry_points=ENTRY_POINTS)
