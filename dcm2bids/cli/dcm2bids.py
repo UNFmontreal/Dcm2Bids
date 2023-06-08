@@ -38,6 +38,12 @@ def _build_arg_parser():
                    default=DEFAULT.cliOutputDir,
                    help="Output BIDS directory. [%(default)s]")
 
+    p.add_argument("--bids_validate",
+                   action='store_true',
+                   help="If set, once your conversion is done it"
+                        " will check if your output folder is BIDS valid. [%(default)s]\n"
+                        f"bids-validator needs to be installed check: {DEFAULT.link_bids_validator}")
+
     p.add_argument("--forceDcm2niix",
                    action="store_true",
                    help="Overwrite previous temporary dcm2niix "
