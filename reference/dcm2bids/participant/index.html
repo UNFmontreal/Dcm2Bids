@@ -14,7 +14,7 @@
     
     
       
-        <title>Helper - Dcm2Bids</title>
+        <title>Participant - Dcm2Bids</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-dcm2bidshelper" class="md-skip">
+        <a href="#module-dcm2bidsparticipant" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Helper
+              Participant
             
           </span>
         </div>
@@ -596,8 +596,6 @@
         
           
         
-          
-        
       
       
         
@@ -622,8 +620,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../dcm2bids/" class="md-nav__link">
-        Dcm2Bids
+      <a href="../acquisition/" class="md-nav__link">
+        Acquisition
       </a>
     </li>
   
@@ -636,12 +634,29 @@
   
   
     <li class="md-nav__item">
-      <a href="../dcm2niix/" class="md-nav__link">
-        Dcm2Niix
+      <a href="../dcm2bids_gen/" class="md-nav__link">
+        Dcm2Bids Gen
       </a>
     </li>
   
 
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dcm2niix_gen/" class="md-nav__link">
+        Dcm2Niix Gen
+      </a>
+    </li>
+  
+
+            
+          
+            
             
           
             
@@ -660,12 +675,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Helper
+          Participant
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Helper
+        Participant
       </a>
       
         
@@ -683,17 +698,51 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
+  <a href="#classes" class="md-nav__link">
+    Classes
   </a>
   
-    <nav class="md-nav" aria-label="Functions">
+    <nav class="md-nav" aria-label="Classes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#main" class="md-nav__link">
-    main
+  <a href="#participant" class="md-nav__link">
+    Participant
   </a>
+  
+    <nav class="md-nav" aria-label="Participant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hassession" class="md-nav__link">
+    hasSession
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -706,37 +755,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../logger/" class="md-nav__link">
-        Logger
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../scaffold/" class="md-nav__link">
-        Scaffold
-      </a>
     </li>
   
 
@@ -762,8 +780,64 @@
   
   
     <li class="md-nav__item">
-      <a href="../structure/" class="md-nav__link">
-        Structure
+      <a href="../version/" class="md-nav__link">
+        Version
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_8" type="checkbox" id="__nav_7_1_8" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../cli/">CLI</a>
+          <label for="__nav_7_1_8">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="CLI" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_1_8">
+          <span class="md-nav__icon md-icon"></span>
+          CLI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/dcm2bids/" class="md-nav__link">
+        Dcm2Bids
       </a>
     </li>
   
@@ -776,7 +850,166 @@
   
   
     <li class="md-nav__item">
-      <a href="../utils/" class="md-nav__link">
+      <a href="../cli/dcm2bids_helper/" class="md-nav__link">
+        Dcm2Bids Helper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/dcm2bids_scaffold/" class="md-nav__link">
+        Dcm2Bids Scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1_9" type="checkbox" id="__nav_7_1_9" >
+      
+      
+      
+        
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--container ">
+          <a href="../utils/">Utils</a>
+          <label for="__nav_7_1_9">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        </div>
+      
+      <nav class="md-nav" aria-label="Utils" data-md-level="3">
+        <label class="md-nav__title" for="__nav_7_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Utils
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/args/" class="md-nav__link">
+        Args
+      </a>
+    </li>
+  
+
+            
+          
+            
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/io/" class="md-nav__link">
+        Io
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/scaffold/" class="md-nav__link">
+        Scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/utils/" class="md-nav__link">
         Utils
       </a>
     </li>
@@ -784,15 +1017,8 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../version/" class="md-nav__link">
-        Version
-      </a>
+        </ul>
+      </nav>
     </li>
   
 
@@ -837,17 +1063,51 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
+  <a href="#classes" class="md-nav__link">
+    Classes
   </a>
   
-    <nav class="md-nav" aria-label="Functions">
+    <nav class="md-nav" aria-label="Classes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#main" class="md-nav__link">
-    main
+  <a href="#participant" class="md-nav__link">
+    Participant
   </a>
+  
+    <nav class="md-nav" aria-label="Participant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hassession" class="md-nav__link">
+    hasSession
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -868,170 +1128,671 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/helper.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/reference/dcm2bids/participant.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="module-dcm2bidshelper">Module dcm2bids.helper<a class="headerlink" href="#module-dcm2bidshelper" title="Permanent link">⚓︎</a></h1>
-<p>helper module</p>
+                <h1 id="module-dcm2bidsparticipant">Module dcm2bids.participant<a class="headerlink" href="#module-dcm2bidsparticipant" title="Permanent link">⚓︎</a></h1>
+<p>Participant class</p>
 <p>None</p>
 <details class="example">
 <summary>View Source</summary>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code># -*- coding: utf-8 -*-
 
-&quot;&quot;&quot;helper module&quot;&quot;&quot;
+&quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
-import argparse
+from os.path import join as opj
 
-import os
+from dcm2bids.utils.utils import DEFAULT
 
-from pathlib import Path
+from dcm2bids.version import __version__
 
-import sys
+class Participant(object):
 
-from dcm2bids.dcm2niix import Dcm2niix
+    &quot;&quot;&quot; Class representing a participant
 
-from dcm2bids.utils import DEFAULT, assert_dirs_empty
+    Args:
 
-def _build_arg_parser():
+        name (str): Label of your participant
 
-    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.EPILOG,
+        session (str): Optional label of a session
 
-                                formatter_class=argparse.RawTextHelpFormatter)
+    &quot;&quot;&quot;
 
-    p.add_argument(&quot;-d&quot;, &quot;--dicom_dir&quot;,
+    def __init__(self, name, session=DEFAULT.session):
 
-                   type=Path,
+        self._name = &quot;&quot;
 
-                   required=True, nargs=&quot;+&quot;,
+        self._session = &quot;&quot;
 
-                   help=&quot;DICOM files directory.&quot;)
+        self.name = name
 
-    p.add_argument(&quot;-o&quot;, &quot;--output_dir&quot;,
+        self.session = session
 
-                   required=False, default=Path.cwd(),
+    @property
 
-                   type=Path,
+    def name(self):
 
-                   help=&quot;Output BIDS directory. &quot;
+        &quot;&quot;&quot;
 
-                        &quot;(Default: %(default)s)&quot;)
+        Returns:
 
-    p.add_argument(&#39;--force&#39;,
+            A string &#39;sub-&lt;subject_label&gt;&#39;
 
-                   dest=&#39;overwrite&#39;, action=&#39;store_true&#39;,
+        &quot;&quot;&quot;
 
-                   help=&#39;Force command to overwrite existing output files.&#39;)
+        return self._name
 
-    return p
+    @name.setter
 
-def main():
+    def name(self, name):
 
-    &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
+        &quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;
 
-    parser = _build_arg_parser()
+        if name.startswith(&quot;sub-&quot;):
 
-    args = parser.parse_args()
+            self._name = name
 
-    out_folder = args.output_dir / DEFAULT.tmpDirName / DEFAULT.helperDir
+        else:
 
-    assert_dirs_empty(parser, args, out_folder)
+            self._name = &quot;sub-&quot; + name
 
-    app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
+    @property
 
-    rsl = app.run()
+    def session(self):
 
-    print(f&quot;Example in: {out_folder}&quot;)
+        &quot;&quot;&quot;
 
-    return rsl
+        Returns:
 
-if __name__ == &quot;__main__&quot;:
+            A string &#39;ses-&lt;session_label&gt;&#39;
 
-    sys.exit(main())
+        &quot;&quot;&quot;
+
+        return self._session
+
+    @session.setter
+
+    def session(self, session):
+
+        &quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;
+
+        if session.strip() == &quot;&quot;:
+
+            self._session = &quot;&quot;
+
+        elif session.startswith(&quot;ses-&quot;):
+
+            self._session = session
+
+        else:
+
+            self._session = &quot;ses-&quot; + session
+
+    @property
+
+    def directory(self):
+
+        &quot;&quot;&quot; The directory of the participant
+
+        Returns:
+
+            A path &#39;sub-&lt;subject_label&gt;&#39; or
+
+            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        if self.hasSession():
+
+            return opj(self.name, self.session)
+
+        else:
+
+            return self.name
+
+    @property
+
+    def prefix(self):
+
+        &quot;&quot;&quot; The prefix to build filenames
+
+        Returns:
+
+            A string &#39;sub-&lt;subject_label&gt;&#39; or
+
+            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        if self.hasSession():
+
+            return self.name + &quot;_&quot; + self.session
+
+        else:
+
+            return self.name
+
+    def hasSession(self):
+
+        &quot;&quot;&quot; Check if a session is set
+
+        Returns:
+
+            Boolean
+
+        &quot;&quot;&quot;
+
+        return self.session.strip() != DEFAULT.session
 </code></pre></div>
 </td></tr></table>
 </details>
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
-<h3 id="main">main<a class="headerlink" href="#main" title="Permanent link">⚓︎</a></h3>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
+<h3 id="participant">Participant<a class="headerlink" href="#participant" title="Permanent link">⚓︎</a></h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
-
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Participant</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">,</span>
+    <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
-<p>Let's go</p>
+<h4 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>str</td>
+<td>Label of your participant</td>
+<td>None</td>
+</tr>
+<tr>
+<td>session</td>
+<td>str</td>
+<td>Optional label of a session</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>class Participant(object):
+
+    &quot;&quot;&quot; Class representing a participant
+
+    Args:
+
+        name (str): Label of your participant
+
+        session (str): Optional label of a session
+
+    &quot;&quot;&quot;
+
+    def __init__(self, name, session=DEFAULT.session):
+
+        self._name = &quot;&quot;
+
+        self._session = &quot;&quot;
+
+        self.name = name
+
+        self.session = session
+
+    @property
+
+    def name(self):
+
+        &quot;&quot;&quot;
+
+        Returns:
+
+            A string &#39;sub-&lt;subject_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        return self._name
+
+    @name.setter
+
+    def name(self, name):
+
+        &quot;&quot;&quot; Prepend &#39;sub-&#39; if necessary&quot;&quot;&quot;
+
+        if name.startswith(&quot;sub-&quot;):
+
+            self._name = name
+
+        else:
+
+            self._name = &quot;sub-&quot; + name
+
+    @property
+
+    def session(self):
+
+        &quot;&quot;&quot;
+
+        Returns:
+
+            A string &#39;ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        return self._session
+
+    @session.setter
+
+    def session(self, session):
+
+        &quot;&quot;&quot; Prepend &#39;ses-&#39; if necessary&quot;&quot;&quot;
+
+        if session.strip() == &quot;&quot;:
+
+            self._session = &quot;&quot;
+
+        elif session.startswith(&quot;ses-&quot;):
+
+            self._session = session
+
+        else:
+
+            self._session = &quot;ses-&quot; + session
+
+    @property
+
+    def directory(self):
+
+        &quot;&quot;&quot; The directory of the participant
+
+        Returns:
+
+            A path &#39;sub-&lt;subject_label&gt;&#39; or
+
+            &#39;sub-&lt;subject_label&gt;/ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        if self.hasSession():
+
+            return opj(self.name, self.session)
+
+        else:
+
+            return self.name
+
+    @property
+
+    def prefix(self):
+
+        &quot;&quot;&quot; The prefix to build filenames
+
+        Returns:
+
+            A string &#39;sub-&lt;subject_label&gt;&#39; or
+
+            &#39;sub-&lt;subject_label&gt;_ses-&lt;session_label&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        if self.hasSession():
+
+            return self.name + &quot;_&quot; + self.session
+
+        else:
+
+            return self.name
+
+    def hasSession(self):
+
+        &quot;&quot;&quot; Check if a session is set
+
+        Returns:
+
+            Boolean
+
+        &quot;&quot;&quot;
+
+        return self.session.strip() != DEFAULT.session
+</code></pre></div>
+</td></tr></table>
+</details>
+<hr />
+<h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">directory</span>
+</code></pre></div>
+</td></tr></table>
+<p>The directory of the participant</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">name</span>
+</code></pre></div>
+</td></tr></table>
+<p>Returns:</p>
+<p>A string 'sub-<subject_label>'</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">prefix</span>
+</code></pre></div>
+</td></tr></table>
+<p>The prefix to build filenames</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">session</span>
+</code></pre></div>
+</td></tr></table>
+<p>Returns:</p>
+<p>A string 'ses-<session_label>'</p>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
+<h4 id="hassession">hasSession<a class="headerlink" href="#hassession" title="Permanent link">⚓︎</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hasSession</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Check if a session is set</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
 <details class="example">
 <summary>View Source</summary>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -1044,33 +1805,17 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    def hasSession(self):
 
-    &quot;&quot;&quot;Let&#39;s go&quot;&quot;&quot;
+        &quot;&quot;&quot; Check if a session is set
 
-    parser = _build_arg_parser()
+        Returns:
 
-    args = parser.parse_args()
+            Boolean
 
-    out_folder = args.output_dir / DEFAULT.tmpDirName / DEFAULT.helperDir
+        &quot;&quot;&quot;
 
-    assert_dirs_empty(parser, args, out_folder)
-
-    app = Dcm2niix(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
-
-    rsl = app.run()
-
-    print(f&quot;Example in: {out_folder}&quot;)
-
-    return rsl
+        return self.session.strip() != DEFAULT.session
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1082,7 +1827,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-09-30T14:18:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-09-30</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-08T13:22:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-08</span>
       
     
   </small>
@@ -1112,7 +1857,7 @@ if __name__ == &quot;__main__&quot;:
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="../dcm2niix/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dcm2Niix" rel="prev">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Index" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1121,20 +1866,20 @@ if __name__ == &quot;__main__&quot;:
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                Dcm2Niix
+                Index
               </div>
             </div>
           </a>
         
         
           
-          <a href="../" class="md-footer__link md-footer__link--next" aria-label="Next: Index" rel="next">
+          <a href="../sidecar/" class="md-footer__link md-footer__link--next" aria-label="Next: Sidecar" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                Index
+                Sidecar
               </div>
             </div>
             <div class="md-footer__button md-icon">
