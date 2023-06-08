@@ -19,8 +19,8 @@ from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.participant import Participant
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
 from dcm2bids.utils.io import load_json, save_json, valid_path
-from dcm2bids.utils.tools import __version__, check_latest, dcm2niix_version
-
+from dcm2bids.utils.tools import check_latest, dcm2niix_version
+from dcm2bids.version import __version__
 
 class Dcm2BidsGen(object):
     """ Object to handle dcm2bids execution steps

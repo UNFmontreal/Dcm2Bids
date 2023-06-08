@@ -47,7 +47,7 @@ def main():
                  "https://github.com/bids-standard/bids-starter-kit")
     # CHANGES
     write_txt(opj(args.output_dir, "CHANGES"),
-              bids_starter_kit.CHANGES.replace('DATA',
+              bids_starter_kit.CHANGES.replace('DATE',
                                                datetime.date.today().strftime("%Y-%m-%d")))
 
     # dataset_description

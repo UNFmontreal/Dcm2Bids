@@ -47,5 +47,5 @@ def assert_dirs_empty(parser, args, required):
 
 def add_overwrite_arg(parser):
     parser.add_argument(
-        '-f', dest='overwrite', action='store_true',
+        '--force', dest='overwrite', action='store_true',
         help='Force overwriting of the output files.')
