@@ -17,7 +17,7 @@ from os.path import join as opj
 
 from dcm2bids.utils.io import write_txt
 from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
-from dcm2bids.utils.utils import DEFAULT
+from dcm2bids.utils.utils import DEFAULT, run_shell_command
 from dcm2bids.utils.scaffold import bids_starter_kit
 
 
@@ -64,8 +64,12 @@ def main():
               bids_starter_kit.participants_tsv)
 
     # README
-    write_txt(opj(args.output_dir, "README"),
-              bids_starter_kit.README)
+    try:
+        run_shell_command(['wget', '-q', '-O', opj(args.output_dir, "README"),
+                           'https://github.com/bids-standard/bids-starter-kit/blob/main/templates/README.MD'])
+    except:
+        write_txt(opj(args.output_dir, "README"),
+                  bids_starter_kit.README)
 
 
 if __name__ == "__main__":
