@@ -1175,7 +1175,15 @@ https://github.com/bids-standard/bids-starter-kit</p>
 <span class="normal">100</span>
 <span class="normal">101</span>
 <span class="normal">102</span>
-<span class="normal">103</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>#!/usr/bin/env python3
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 
@@ -1203,7 +1211,7 @@ from dcm2bids.utils.io import write_txt
 
 from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
 
-from dcm2bids.utils.utils import DEFAULT
+from dcm2bids.utils.utils import DEFAULT, run_shell_command
 
 from dcm2bids.utils.scaffold import bids_starter_kit
 
@@ -1271,9 +1279,17 @@ def main():
 
     # README
 
-    write_txt(opj(args.output_dir, &quot;README&quot;),
+    try:
 
-              bids_starter_kit.README)
+        run_shell_command([&#39;wget&#39;, &#39;-q&#39;, &#39;-O&#39;, opj(args.output_dir, &quot;README&quot;),
+
+                           &#39;https://github.com/bids-standard/bids-starter-kit/blob/main/templates/README.MD&#39;])
+
+    except:
+
+        write_txt(opj(args.output_dir, &quot;README&quot;),
+
+                  bids_starter_kit.README)
 
 if __name__ == &quot;__main__&quot;:
 
@@ -1340,7 +1356,15 @@ if __name__ == &quot;__main__&quot;:
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>def main():
 
     parser = _build_arg_parser()
 
@@ -1386,9 +1410,17 @@ if __name__ == &quot;__main__&quot;:
 
     # README
 
-    write_txt(opj(args.output_dir, &quot;README&quot;),
+    try:
 
-              bids_starter_kit.README)
+        run_shell_command([&#39;wget&#39;, &#39;-q&#39;, &#39;-O&#39;, opj(args.output_dir, &quot;README&quot;),
+
+                           &#39;https://github.com/bids-standard/bids-starter-kit/blob/main/templates/README.MD&#39;])
+
+    except:
+
+        write_txt(opj(args.output_dir, &quot;README&quot;),
+
+                  bids_starter_kit.README)
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1400,7 +1432,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-08T13:22:03+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-08</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-08T13:52:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-08</span>
       
     
   </small>
