@@ -13,8 +13,6 @@ import sys
 from datetime import datetime
 from glob import glob
 
-from bids_validator import BIDSValidator
-
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.utils.logger import setup_logging
 from dcm2bids.sidecar import Sidecar, SidecarPairing
