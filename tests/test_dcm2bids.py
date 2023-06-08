@@ -3,17 +3,22 @@
 
 import json
 import os
+import pytest
 import shutil
 from tempfile import TemporaryDirectory
 
 from bids import BIDSLayout
 
-from dcm2bids import Dcm2bids
-from dcm2bids.utils import DEFAULT, load_json
-
+from dcm2bids.dcm2bids_gen import Dcm2BidsGen
+from dcm2bids.utils.utils import DEFAULT
+from dcm2bids.utils.io import load_json
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
+
+def test_help_option(script_runner):
+    ret = script_runner.run(['dcm2bids', '--help'])
+    assert ret.success
 
 def compare_json(original_file, converted_file):
     with open(original_file) as f:
@@ -35,7 +40,7 @@ def test_dcm2bids():
     tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(
+    app = Dcm2BidsGen(
         [TEST_DATA_DIR],
         "01",
         os.path.join(TEST_DATA_DIR, "config_test.json"),
@@ -49,12 +54,17 @@ def test_dcm2bids():
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2, 3]
 
-    app = Dcm2bids(TEST_DATA_DIR, "01",
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                    os.path.join(TEST_DATA_DIR, "config_test.json"),
                    bidsDir.name)
     app.run()
 
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    data = load_json(fmapFile)
+    assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
+                                   os.path.join("anat", "sub-01_T1w.nii.gz")]
+
+    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
     assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
@@ -70,7 +80,7 @@ def test_dcm2bids():
     shutil.rmtree(tmpSubDir)
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(
+    app = Dcm2BidsGen(
         [TEST_DATA_DIR],
         "01",
         os.path.join(TEST_DATA_DIR, "config_test.json"),
@@ -89,7 +99,7 @@ def test_caseSensitive_false():
     tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
-    app = Dcm2bids(TEST_DATA_DIR, "01",
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                    os.path.join(TEST_DATA_DIR,
                                 "config_test_not_case_sensitive_option.json"),
                    bidsDir.name)

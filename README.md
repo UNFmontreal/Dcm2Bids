@@ -12,6 +12,8 @@ Your friendly DICOM converter.
 
 
 [![PyPI version badge](https://img.shields.io/pypi/v/dcm2bids?logo=pypi&logoColor=white)](https://pypi.org/project/dcm2bids)
+[![PyPI - Downloads](https://static.pepy.tech/badge/dcm2bids)](https://pypi.org/project/dcm2bids)
+
 [![Anaconda-Server Badge](https://img.shields.io/conda/vn/conda-forge/dcm2bids?logo=anaconda&logoColor=white)](https://anaconda.org/conda-forge/dcm2bids)
 [![Docker container badge](https://img.shields.io/docker/v/unfmontreal/dcm2bids?label=docker&logo=docker&logoColor=white)](https://hub.docker.com/r/unfmontreal/dcm2bids)
 

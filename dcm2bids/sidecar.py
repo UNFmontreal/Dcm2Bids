@@ -8,9 +8,10 @@ import os
 import re
 from collections import defaultdict, OrderedDict
 from fnmatch import fnmatch
-from future.utils import iteritems
-from .structure import Acquisition
-from .utils import DEFAULT, load_json, splitext_
+
+from dcm2bids.acquisition import Acquisition
+from dcm2bids.utils.utils import DEFAULT, splitext_
+from dcm2bids.utils.io import load_json
 
 
 class Sidecar(object):
@@ -189,7 +190,7 @@ class SidecarPairing(object):
 
         result = []
 
-        for tag, pattern in iteritems(criteria):
+        for tag, pattern in criteria.items():
             name = data.get(tag, '')
 
             if isinstance(name, list):
@@ -217,7 +218,7 @@ class SidecarPairing(object):
         acquisitions_intendedFor = []
 
         self.logger.info("Sidecars pairing:")
-        for sidecar, valid_descriptions in iteritems(self.graph):
+        for sidecar, valid_descriptions in self.graph.items():
             sidecarName = os.path.basename(sidecar.root)
 
             # only one description for the sidecar
@@ -273,7 +274,7 @@ class SidecarPairing(object):
             for i, item in enumerate(seq):
                 tally[item].append(i)
 
-            for key, locs in iteritems(tally):
+            for key, locs in tally.items():
                 if len(locs) > 1:
                     yield key, locs
 
