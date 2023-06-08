@@ -8,5 +8,5 @@ def test_help_option(script_runner):
     assert ret.success
 
 def test_run_scaffold(script_runner):
-    ret = script_runner.run(['dcm2bids_scaffold', '-o', 'o_scaffold', '-f'])
+    ret = script_runner.run(['dcm2bids_scaffold', '-o', 'o_scaffold', '--force'])
     assert ret.success

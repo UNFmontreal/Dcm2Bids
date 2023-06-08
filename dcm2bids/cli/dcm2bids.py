@@ -10,7 +10,7 @@ import argparse
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
 from dcm2bids.utils.tools import check_latest
 from dcm2bids.utils.utils import DEFAULT
-
+from dcm2bids.version import __version__
 
 def _build_arg_parser():
     p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.doc,
@@ -52,6 +52,11 @@ def _build_arg_parser():
                    default=DEFAULT.cliLogLevel,
                    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                    help="Set logging level. [%(default)s]")
+
+    p.add_argument("-v", "--version",
+                   action="version",
+                   version=f"dcm2bids version:\t{__version__}\nBased on BIDS version:\t{DEFAULT.bids_version}",
+                   help="Report dcm2bids version and the BIDS version.")
 
     return p
 

@@ -2,17 +2,14 @@
 
 """This module take care of the versioning"""
 
-# dcm2bids version
-__version__ = "2.1.9"
-
 
 import logging
 import shlex
 from packaging import version
-from distutils.version import LooseVersion
 from subprocess import check_output, CalledProcessError, TimeoutExpired
 from shutil import which
 
+from dcm2bids.version import __version__
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +35,7 @@ def check_github_latest(githubRepo, timeout=3):
     Returns:
         A string of the version
     """
-    url = "https://github.com/{}/releases/latest".format(githubRepo)
+    url = f"https://github.com/{githubRepo}/releases/latest"
     try:
         output = check_output(shlex.split("curl -L --silent " + url), timeout=timeout)
     except CalledProcessError:
@@ -52,7 +49,7 @@ def check_github_latest(githubRepo, timeout=3):
     # The output should have this format
     # <html><body>You are being <a href="https://github.com/{gitRepo}/releases/tag/{version}">redirected</a>.</body></html>
     try:
-        version = output.decode().split("{}/releases/tag/".format(githubRepo))[1].split('"')[0]
+        version = output.decode().split(f"{githubRepo}/releases/tag/")[1].split('"')[0]
 
         # Versions are X.X.X
         if len(version) > 5:

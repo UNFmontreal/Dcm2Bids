@@ -30,9 +30,8 @@ def save_json(filename, data):
 
 
 def write_txt(filename, lines):
-    with open(filename, "a") as f:
-        for row in lines:
-            f.write("%s\n" % row)
+    with open(filename, "a+") as f:
+        f.write(f"{lines}\n")
 
 
 def get_scaffold_dir():
