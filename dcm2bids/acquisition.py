@@ -32,6 +32,7 @@ class Acquisition(object):
         sidecarChanges=None,
         intendedFor=None,
         IntendedFor=None,
+        id=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
@@ -207,7 +208,7 @@ class Acquisition(object):
         """
         self._indexSidecar = value
 
-    def dstSidecarData(self, descriptions, intendedForList):
+    def dstSidecarData(self, intendedForList):
         """
         """
         data = self.srcSidecar.origData

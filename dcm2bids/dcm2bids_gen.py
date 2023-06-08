@@ -136,7 +136,7 @@ class Dcm2BidsGen(object):
         intendedForList = [[] for i in range(len(parser.descriptions))]
         for acq in parser.acquisitions:
             acq.setDstFile()
-            intendedForList = self.move(acq, intendedForList)
+            intendedForList = self.move(acq, intendedForList, dcm2niix.options)
 
         if self.bids_validate:
             try:
@@ -149,7 +149,7 @@ class Dcm2BidsGen(object):
                                  "bids-validator may not been installed on your computer"
                                  f"Please check: https://github.com/bids-standard/bids-validator#quickstart")
 
-    def move(self, acquisition, intendedForList):
+    def move(self, acquisition, intendedForList, dcm2niix_options):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
 
@@ -188,8 +188,7 @@ class Dcm2BidsGen(object):
                 intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
 
             elif ".json" in ext:
-                data = acquisition.dstSidecarData(self.config["descriptions"],
-                                                  intendedForList)
+                data = acquisition.dstSidecarData(intendedForList)
                 save_json(dstFile, data)
                 os.remove(srcFile)
 
@@ -197,7 +196,11 @@ class Dcm2BidsGen(object):
             else:
                 os.rename(srcFile, dstFile)
 
-            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
+            curr_img_ext = '.nii.gz'
+            if '-z n' in dcm2niix_options:
+                curr_img_ext = '.nii'
+
+            intendedFile = acquisition.dstIntendedFor + curr_img_ext
             if intendedFile not in intendedForList[acquisition.indexSidecar]:
                 intendedForList[acquisition.indexSidecar].append(intendedFile)
 
