@@ -887,6 +887,7 @@ file with the appropriate info.
 {
   "descriptions": [
     {
+      "id": "id_task-rest",
       "dataType": "func",
       "modalityLabel": "bold",
       "customLabels": "task-rest",
@@ -904,7 +905,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "EPI PE=AP*"
       },
-      "intendedFor": 0
+      "intendedFor": "id_task-rest"
     },
     {
       "dataType": "fmap",
@@ -913,7 +914,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "EPI PE=PA*"
       },
-      "intendedFor": 0
+      "intendedFor": "id_task-rest"
     }
   ]
 }

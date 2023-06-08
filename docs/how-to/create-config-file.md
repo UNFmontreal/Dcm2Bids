@@ -17,6 +17,7 @@
       }
     },
     {
+      "id": "task-rest",
       "dataType": "func",
       "modalityLabel": "bold",
       "customLabels": "task-rest",
@@ -28,12 +29,13 @@
     {
       "dataType": "fmap",
       "modalityLabel": "fmap",
-      "intendedFor": 1,
+      "intendedFor": "task_rest",
       "criteria": {
         "ProtocolName": "*field_mapping*"
       }
     },
     {
+      "id": "id_task_learning",
       "dataType": "func",
       "modalityLabel": "bold",
       "customLabels": "task-learning",
@@ -50,7 +52,7 @@
       "criteria": {
         "SeriesDescription": "fmap_task-learning"
       },
-      "IntendedFor": 2,
+      "IntendedFor": "id_task_learning",
       "sidecarChanges": {
         "TaskName": "learning"
       }
@@ -148,13 +150,11 @@ Optional field to change or add information in a sidecar.
 
 ## intendedFor
 
-Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just
-put the index or a list of indices of the description(s) that's intended for.
-
-Python index begins at `0` so in the example, **`1`** means it is intended for
-`task-rest_bold` and **`2`** is intended for `task-learning` which will be
-renamed to only `learning` because of the
-`"sidecarChanges": { "TaskName": "learning" }` field.
+Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. 
+You will need to set an id to the corresponding description and put the same id in the `IntendedFor` field.
+Fo example, **`task_rest`** means it is intended for `task-rest_bold` 
+and **`id_task_learning`** is intended for `task-learning` which will be
+renamed to only `learning` because of the `"sidecarChanges": { "TaskName": "learning" }` field.
 
 ## Multiple config files
 
