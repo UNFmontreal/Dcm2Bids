@@ -4,7 +4,6 @@
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 """
 
-import argparse
 import logging
 import os
 from pathlib import Path
@@ -133,10 +132,10 @@ class Dcm2BidsGen(object):
 
         self.logger.info("moving acquisitions into BIDS folder")
 
-        intendedForList = [[] for i in range(len(parser.descriptions))]
+        intendedForList = {}
         for acq in parser.acquisitions:
             acq.setDstFile()
-            intendedForList = self.move(acq, intendedForList, dcm2niix.options)
+            self.move(acq, intendedForList, dcm2niix.options)
 
         if self.bids_validate:
             try:
@@ -152,7 +151,6 @@ class Dcm2BidsGen(object):
     def move(self, acquisition, intendedForList, dcm2niix_options):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
-
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
@@ -174,7 +172,7 @@ class Dcm2BidsGen(object):
                     continue
 
             # it's an anat nifti file and the user using a deface script
-            if (self.config.get("defaceTpl") and acquisition.dataType == "func" and ".nii" in ext):
+            if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
                 except FileNotFoundError:
@@ -185,7 +183,7 @@ class Dcm2BidsGen(object):
                 cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
+                intendedForList[acquisition.id] = acquisition.dstIntendedFor + "".join(ext)
 
             elif ".json" in ext:
                 data = acquisition.dstSidecarData(intendedForList)
@@ -201,7 +199,11 @@ class Dcm2BidsGen(object):
                 curr_img_ext = '.nii'
 
             intendedFile = acquisition.dstIntendedFor + curr_img_ext
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
+            if acquisition.id:
+                if acquisition.id in intendedForList:
+                    if intendedFile not in intendedForList[acquisition.id]:
+                        intendedForList[acquisition.id] =  intendedForList[acquisition.id] + intendedFile
+                else:
+                    intendedForList[acquisition.id] = [intendedFile]
 
         return intendedForList

@@ -26,22 +26,21 @@ class Acquisition(object):
         participant,
         dataType,
         modalityLabel,
-        indexSidecar=None,
         customLabels="",
+        id=None,
         srcSidecar=None,
         sidecarChanges=None,
         intendedFor=None,
         IntendedFor=None,
-        id=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
 
         self._modalityLabel = ""
         self._customLabels = ""
+        self._id = ""
         self._intendedFor = None
-        self._indexSidecar = None
-
+        
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
@@ -57,6 +56,11 @@ class Acquisition(object):
             self.intendedFor = IntendedFor
         else:
             self.intendedFor = intendedFor
+
+        if id is None:
+            self.id = None
+        else:
+            self.id = id
 
         self.dstFile = ''
 
@@ -79,6 +83,18 @@ class Acquisition(object):
     def modalityLabel(self, modalityLabel):
         """ Prepend '_' if necessary"""
         self._modalityLabel = self.prepend(modalityLabel)
+
+    @property
+    def id(self):
+        """
+        Returns:
+            A string '_<id>'
+        """
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     @property
     def customLabels(self):
@@ -191,22 +207,6 @@ class Acquisition(object):
             self._intendedFor = value
         else:
             self._intendedFor = [value]
-
-    @property
-    def indexSidecar(self):
-        """
-        Returns:
-            A int '_<indexSidecar>'
-        """
-        return self._indexSidecar
-
-    @indexSidecar.setter
-    def indexSidecar(self, value):
-        """
-        Returns:
-            A int '_<indexSidecar>'
-        """
-        self._indexSidecar = value
 
     def dstSidecarData(self, intendedForList):
         """

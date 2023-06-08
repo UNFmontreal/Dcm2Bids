@@ -12,6 +12,7 @@
             }
         },
         {
+            "id": "func_task-rest",
             "dataType": "func",
             "modalityLabel": "bold",
             "customLabels": "task-rest",
@@ -21,6 +22,7 @@
             }
         },
         {
+            "id": "T1",
             "dataType": "anat",
             "modalityLabel": "T1w",
             "criteria": {
@@ -28,6 +30,7 @@
             }
         },
         {
+            "id": "id_dwi",
             "dataType": "dwi",
             "modalityLabel": "dwi",
             "criteria": {
@@ -42,7 +45,7 @@
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
             },
-            "intendedFor": [3,2]
+            "intendedFor": ["id_dwi", "T1"]
         },
         {
             "dataType": "fmap",
@@ -53,7 +56,7 @@
                 "EchoTime": 0.00738,
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             },
-            "IntendedFor": 3
+            "IntendedFor": "id_dwi"
         },
         {
             "dataType": "dwi",
