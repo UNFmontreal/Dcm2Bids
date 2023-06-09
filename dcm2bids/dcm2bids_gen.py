@@ -144,9 +144,9 @@ class Dcm2BidsGen(object):
                 run_shell_command(['bids-validator', '-v'])
                 run_shell_command(['bids-validator', self.bidsDir])
             except:
-                self.logger.info("bids-validator does not seem to work properly"
-                                 "bids-validator may not been installed on your computer"
-                                 f"Please check: https://github.com/bids-standard/bids-validator#quickstart")
+                self.logger.info("The bids-validator does not seem to work properly. "
+                                 "The bids-validator may not been installed on your computer. "
+                                 f"Please check: https://github.com/bids-standard/bids-validator#quickstart.")
 
     def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
