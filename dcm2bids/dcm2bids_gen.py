@@ -172,6 +172,9 @@ class Dcm2BidsGen(object):
                     continue
 
             # it's an anat nifti file and the user using a deface script
+            if '.nii' in ext:
+                intendedForList[acquisition.id] = acquisition.dstIntendedFor + "".join(ext)
+
             if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
@@ -182,8 +185,6 @@ class Dcm2BidsGen(object):
                 cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
                 cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
                 run_shell_command(cmd)
-
-                intendedForList[acquisition.id] = acquisition.dstIntendedFor + "".join(ext)
 
             elif ".json" in ext:
                 data = acquisition.dstSidecarData(intendedForList)
