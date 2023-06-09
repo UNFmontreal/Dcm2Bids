@@ -254,7 +254,7 @@ class SidecarPairing(object):
     def find_runs(self):
         """
         Check if there is duplicate destination roots in the acquisitions
-        and add '_run-' to the customLabels of the acquisition
+        and add '_run-' to the customEntities of the acquisition
         """
 
         def duplicates(seq):
@@ -282,4 +282,4 @@ class SidecarPairing(object):
             self.logger.info("Adding 'run' information to the acquisition")
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum + 1)
-                self.acquisitions[acqInd].customLabels += runStr
+                self.acquisitions[acqInd].customEntities += runStr

@@ -15,7 +15,7 @@
             "id": "func_task-rest",
             "dataType": "func",
             "modalityLabel": "bold",
-            "customLabels": "task-rest",
+            "customEntities": "task-rest",
             "criteria": {
                 "SeriesDescription": "*bold",
                 "ImageType": ["ORIG?NAL", "PRIMARY", "M", "ND", "MOSAIC"]
@@ -40,7 +40,7 @@
         {
             "dataType": "fmap",
             "modalityLabel": "fmap",
-            "customLabels": "echo-492",
+            "customEntities": "echo-492",
             "criteria": {
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
@@ -50,7 +50,7 @@
         {
             "dataType": "fmap",
             "modalityLabel": "fmap",
-            "customLabels": "echo-738",
+            "customEntities": "echo-738",
             "criteria": {
                 "EchoNumber": 2,
                 "EchoTime": 0.00738,
@@ -61,7 +61,7 @@
         {
             "dataType": "dwi",
             "modalityLabel": "dwi",
-            "customLabels": "desc-fa00",
+            "customEntities": "desc-fa00",
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             }
@@ -69,7 +69,7 @@
         {
             "dataType": "dwi",
             "modalityLabel": "dwi",
-            "customLabels": "desc-fa01",
+            "customEntities": "desc-fa01",
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             }
@@ -77,7 +77,7 @@
         {
             "dataType": "dwi",
             "modalityLabel": "dwi",
-            "customLabels": "desc-fa00",
+            "customEntities": "desc-fa00",
             "criteria": {
                 "SeriesDescription": ["DTI_FA"],
                 "ImageType": ["DTI_FA", "M"]
