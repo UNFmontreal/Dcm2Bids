@@ -220,7 +220,7 @@ class Acquisition(object):
 
             for index in self.intendedFor:
                 if (isinstance(index, int)):
-                    logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
+                    logging.warning('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
                                   f'Please check {DEFAULT.link_doc_intended_for}')
                 else:
                     intendedValue = intendedValue + [intendedForList[index]]
