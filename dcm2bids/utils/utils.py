@@ -13,6 +13,8 @@ class DEFAULT(object):
 
     doc = "Documentation at https://unfmontreal.github.io/Dcm2Bids/"
 
+    link_bids_validator = "https://github.com/bids-standard/bids-validator#quickstart"
+
     # cli dcm2bids
     cliSession = ""
     cliOutputDir = os.getcwd()
@@ -21,6 +23,7 @@ class DEFAULT(object):
     # dcm2bids.py
     outputDir = Path.cwd()
     session = ""  # also Participant object
+    bids_validate = False
     clobber = False
     forceDcm2niix = False
     defaceTpl = None

@@ -83,7 +83,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 2.1.7
+    dcm2bids 3.0.0
 
     options:
     -h, --help            show this help message and exit
@@ -98,6 +98,8 @@ You can test it with any command but a safe way is to use the `--help` command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory
                             (/home/sam)
+    --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
+                          bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
@@ -951,7 +953,7 @@ command.
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 2.1.7
+    dcm2bids 3.0.0
 
     options:
     -h, --help            show this help message and exit
@@ -965,6 +967,8 @@ command.
                             JSON configuration file (see example/config.json)
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
+    --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
+                          bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}

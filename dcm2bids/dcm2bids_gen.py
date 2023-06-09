@@ -43,6 +43,7 @@ class Dcm2BidsGen(object):
         participant,
         config,
         output_dir=DEFAULT.outputDir,
+        bids_validate=DEFAULT.bids_validate,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         forceDcm2niix=DEFAULT.forceDcm2niix,
@@ -56,6 +57,7 @@ class Dcm2BidsGen(object):
         self.config = load_json(valid_path(config, type="file"))
         self.participant = Participant(participant, session)
         self.clobber = clobber
+        self.bids_validate = bids_validate
         self.forceDcm2niix = forceDcm2niix
         self.logLevel = log_level
 
@@ -71,6 +73,8 @@ class Dcm2BidsGen(object):
         self.logger.info("session: %s", self.participant.session)
         self.logger.info("config: %s", os.path.realpath(config))
         self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
+        self.logger.info("Validate BIDS: %s", self.bids_validate)
+
 
     @property
     def dicomDirs(self):
@@ -134,6 +138,17 @@ class Dcm2BidsGen(object):
             acq.setDstFile()
             intendedForList = self.move(acq, intendedForList)
 
+        if self.bids_validate:
+            try:
+                self.logger.info(f"Validate if { self.output_dir} is BIDS valid.")
+                self.logger.info("Use bids-validator version: ")
+                run_shell_command(['bids-validator', '-v'])
+                run_shell_command(['bids-validator', self.bidsDir])
+            except:
+                self.logger.info("The bids-validator does not seem to work properly. "
+                                 "The bids-validator may not been installed on your computer. "
+                                 f"Please check: https://github.com/bids-standard/bids-validator#quickstart.")
+
     def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
@@ -187,62 +202,3 @@ class Dcm2BidsGen(object):
                 intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
-
-
-def _build_arg_parser():
-    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.EPILOG,
-                                formatter_class=argparse.RawTextHelpFormatter)
-
-    p.add_argument("-d", "--dicom_dir",
-                   type=Path, required=True, nargs="+",
-                   help="DICOM directory(ies).")
-
-    p.add_argument("-p", "--participant",
-                   required=True,
-                   help="Participant ID.")
-
-    p.add_argument("-s", "--session",
-                   required=False,
-                   default="",
-                   help="Session ID.")
-
-    p.add_argument("-c", "--config",
-                   type=Path,
-                   required=True,
-                   help="JSON configuration file (see example/config.json).")
-
-    p.add_argument("-o", "--output_dir",
-                   required=False,
-                   type=Path,
-                   default=Path.cwd(),
-                   help="Output BIDS directory. (Default: %(default)s)")
-
-    p.add_argument("--forceDcm2niix",
-                   action="store_true",
-                   help="Overwrite previous temporary dcm2niix "
-                        "output if it exists.")
-
-    p.add_argument("--clobber",
-                   action="store_true",
-                   help="Overwrite output if it exists.")
-
-    p.add_argument("-l", "--log_level",
-                   required=False,
-                   default=DEFAULT.cliLogLevel,
-                   choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                   help="Set logging level. [%(default)s]")
-
-    return p
-
-
-def main():
-    """Let's go"""
-    parser = _build_arg_parser()
-    args = parser.parse_args()
-
-    app = Dcm2BidsGen(**vars(args))
-    return app.run()
-
-
-if __name__ == "__main__":
-    sys.exit(main())
