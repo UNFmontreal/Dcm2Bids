@@ -251,6 +251,8 @@ class SidecarPairing(object):
                                       **desc)
                     self.logger.warning("    ->  %s", acq.suffix)
 
+        print(len(acquisitions_intendedFor))
+
         self.acquisitions = acquisitions + acquisitions_intendedFor
 
         return self.acquisitions
@@ -260,10 +262,14 @@ class SidecarPairing(object):
         Add DCM Tag to customEntities
         """
         descWithTask = desc.copy()
-
+        
         concatenated_matches = {}
 
         if "customEntities" in desc.keys():
+            
+            if isinstance(descWithTask["customEntities"], str):
+                descWithTask["customEntities"] = [descWithTask["customEntities"]]
+
             for dcmTag in self.extractors:
                 if dcmTag in sidecar.data.keys():
                     dcmInfo = sidecar.data.get(dcmTag)
@@ -275,8 +281,13 @@ class SidecarPairing(object):
                             concatenated_matches.update(compile_regex.search(dcmInfo).groupdict())
         
             entities = set(concatenated_matches.keys()).intersection(set(descWithTask["customEntities"]))
+            left_entities = entities.symmetric_difference(set(descWithTask["customEntities"]))
             for curr_entity in entities:
                 descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+            
+            for curr_left_entities in left_entities:
+                if not '-' in curr_left_entities:
+                    descWithTask["customEntities"].remove(curr_left_entities)
                 
         return descWithTask
 
