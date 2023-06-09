@@ -135,7 +135,7 @@ class Dcm2BidsGen(object):
         intendedForList = {}
         for acq in parser.acquisitions:
             acq.setDstFile()
-            self.move(acq, intendedForList, dcm2niix.options)
+            intendedForList = self.move(acq, intendedForList)
 
         if self.bids_validate:
             try:
@@ -148,7 +148,7 @@ class Dcm2BidsGen(object):
                                  "bids-validator may not been installed on your computer"
                                  f"Please check: https://github.com/bids-standard/bids-validator#quickstart")
 
-    def move(self, acquisition, intendedForList, dcm2niix_options):
+    def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
@@ -171,10 +171,14 @@ class Dcm2BidsGen(object):
                     self.logger.info("Use --clobber option to overwrite")
                     continue
 
-            # it's an anat nifti file and the user using a deface script
+            # Populate intendedFor
             if '.nii' in ext:
-                intendedForList[acquisition.id] = acquisition.dstIntendedFor + "".join(ext)
+                if acquisition.id in intendedForList:
+                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + "".join(ext))
+                else:
+                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + "".join(ext)]
 
+            # it's an anat nifti file and the user using a deface script
             if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
@@ -194,17 +198,5 @@ class Dcm2BidsGen(object):
             # just move
             else:
                 os.rename(srcFile, dstFile)
-
-            curr_img_ext = '.nii.gz'
-            if '-z n' in dcm2niix_options:
-                curr_img_ext = '.nii'
-
-            intendedFile = acquisition.dstIntendedFor + curr_img_ext
-            if acquisition.id:
-                if acquisition.id in intendedForList:
-                    if intendedFile not in intendedForList[acquisition.id]:
-                        intendedForList[acquisition.id] =  intendedForList[acquisition.id] + intendedFile
-                else:
-                    intendedForList[acquisition.id] = [intendedFile]
 
         return intendedForList

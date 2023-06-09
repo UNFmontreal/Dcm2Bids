@@ -223,12 +223,12 @@ class Acquisition(object):
                     logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
                                   f'Please check {DEFAULT.link_doc_intended_for}')
                 else:
-                    intendedValue = intendedValue + intendedForList[index]
+                    intendedValue = intendedValue + [intendedForList[index]]
 
             if len(intendedValue) == 1:
-                data["IntendedFor"] = intendedValue[0]
+                data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
             else:
-                data["IntendedFor"] = intendedValue
+                data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
 
         # sidecarChanges
         for key, value in self.sidecarChanges.items():
