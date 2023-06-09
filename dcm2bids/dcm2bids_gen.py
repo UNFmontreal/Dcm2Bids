@@ -123,6 +123,7 @@ class Dcm2BidsGen(object):
         parser = SidecarPairing(
             sidecars,
             self.config["descriptions"],
+            self.config.get("extractors", DEFAULT.extractors),
             self.config.get("searchMethod", DEFAULT.searchMethod),
             self.config.get("caseSensitive", DEFAULT.caseSensitive)
         )

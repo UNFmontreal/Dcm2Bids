@@ -90,14 +90,15 @@ class SidecarPairing(object):
         descriptions (list): List of dictionaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
-                 caseSensitive=DEFAULT.caseSensitive):
+    def __init__(self, sidecars, descriptions, extractors=DEFAULT.extractors, 
+                 searchMethod=DEFAULT.searchMethod, caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
         self.graph = OrderedDict()
         self.acquisitions = []
 
+        self.extractors = extractors
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
@@ -224,6 +225,9 @@ class SidecarPairing(object):
             # only one description for the sidecar
             if len(valid_descriptions) == 1:
                 desc = valid_descriptions[0]
+
+                desc = self.searchDcmTagEntity(sidecar, desc)
+
                 acq = Acquisition(participant,
                                   srcSidecar=sidecar, **desc)
                 acq.setDstFile()
@@ -250,6 +254,31 @@ class SidecarPairing(object):
         self.acquisitions = acquisitions + acquisitions_intendedFor
 
         return self.acquisitions
+
+    def searchDcmTagEntity(self, sidecar, desc):
+        """
+        Add DCM Tag to customEntities
+        """
+        descWithTask = desc.copy()
+
+        concatenated_matches = {}
+
+        if "customEntities" in desc.keys():
+            for dcmTag in self.extractors:
+                if dcmTag in sidecar.data.keys():
+                    dcmInfo = sidecar.data.get(dcmTag)
+                    for regex in self.extractors[dcmTag]:
+                        print(regex)
+                        print(dcmInfo)
+                        compile_regex = re.compile(regex)
+                        if compile_regex.search(dcmInfo) is not None:
+                            concatenated_matches.update(compile_regex.search(dcmInfo).groupdict())
+        
+            entities = set(concatenated_matches.keys()).intersection(set(descWithTask["customEntities"]))
+            for curr_entity in entities:
+                descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                
+        return descWithTask
 
     def find_runs(self):
         """

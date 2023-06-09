@@ -17,7 +17,7 @@ class Acquisition(object):
         dataType (str): A functional group of MRI data (ex: func, anat ...)
         modalityLabel (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
-        customEntities (str): Optional labels (ex: task-rest)
+        customEntities (str): Optional entities (ex: task-rest)
         srcSidecar (Sidecar): Optional sidecar object
     """
 
@@ -107,8 +107,11 @@ class Acquisition(object):
     @customEntities.setter
     def customEntities(self, customEntities):
         """ Prepend '_' if necessary"""
-        self._customEntities = self.prepend(customEntities)
-
+        if isinstance(customEntities, list):
+            self._customEntities = self.prepend('_'.join(customEntities))
+        else:
+            self._customEntities = self.prepend(customEntities)
+                                                
     @property
     def suffix(self):
         """ The suffix to build filenames

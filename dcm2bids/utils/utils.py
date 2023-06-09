@@ -34,9 +34,11 @@ class DEFAULT(object):
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
 
     # sidecar.py
+    extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)", "dir-(?P<dir>(AP|PA|LR|RL))"],
+                  'BodyPartExamined': ["(?P<bodypart>[a-zA-Z]+)"]}
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
-    searchMethod = "fnmatch"
     searchMethodChoices = ["fnmatch", "re"]
+    searchMethod = "fnmatch"
     runTpl = "_run-{:02d}"
     caseSensitive = True
 
