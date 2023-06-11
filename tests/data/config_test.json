@@ -45,7 +45,7 @@
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
             },
-            "intendedFor": ["id_dwi", "T1"]
+            "intendedFor": ["id_dwi", "T1", "dummy"]
         },
         {
             "dataType": "fmap",
@@ -64,7 +64,8 @@
             "customLabels": "desc-fa00",
             "criteria": {
                 "SeriesDescription": "DTI_FA"
-            }
+            },
+            "IntendedFor": ["id_dwi", "T1"]
         },
         {
             "dataType": "dwi",
