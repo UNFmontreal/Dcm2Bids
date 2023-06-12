@@ -1185,13 +1185,7 @@
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 
@@ -1204,8 +1198,6 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 import argparse
 
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
-
-from dcm2bids.utils.tools import check_latest
 
 from dcm2bids.utils.utils import DEFAULT
 
@@ -1301,10 +1293,6 @@ def main():
 
     args = parser.parse_args()
 
-    check_latest()
-
-    check_latest(&quot;dcm2niix&quot;)
-
     app = Dcm2BidsGen(**vars(args))
 
     return app.run()
@@ -1324,27 +1312,19 @@ if __name__ == &quot;__main__&quot;:
 </code></pre></div></td></tr></table></div>
 <details class="example">
 <summary>View Source</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>def main():
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>def main():
 
     parser = _build_arg_parser()
 
     args = parser.parse_args()
-
-    check_latest()
-
-    check_latest(&quot;dcm2niix&quot;)
 
     app = Dcm2BidsGen(**vars(args))
 
@@ -1359,7 +1339,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T19:50:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
     
   </small>

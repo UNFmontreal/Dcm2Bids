@@ -2077,7 +2077,7 @@ example, with the resting-state fMRI data
 file and look for the <code>"SeriesDescription"</code> field for example. It is often a
 good unique identifier.</p>
 <div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">Command</label><div class="tabbed-content">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cat code/dcm2bids_config.json
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cat tmp_dcm2bids/helper/004_In_DCM2NIIX_regression_test_20180918114023.json
 </code></pre></div></td></tr></table></div>
 </div>
 <input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">Output</label><div class="tabbed-content">
@@ -2286,10 +2286,10 @@ task name:</p>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-</span><span class="hll"><span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="p">,</span><span class="w"></span>
-</span><span class="hll"><span class="w">        </span><span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-</span><span class="hll"><span class="w">        </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rest&quot;</span><span class="w"></span>
-</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+</span><span class="w">        </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rest&quot;</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
@@ -2405,9 +2405,11 @@ file with the appropriate info.</p>
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
@@ -2424,18 +2426,18 @@ file with the appropriate info.</p>
 <span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=AP*&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">},</span><span class="w"></span>
-<span class="hll"><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-</span><span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
+</span><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=PA*&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">},</span><span class="w"></span>
-<span class="hll"><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
+</span><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div></td></tr></table></div>
@@ -2710,7 +2712,7 @@ documentation to find information about the different commands.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T19:50:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
     
   </small>

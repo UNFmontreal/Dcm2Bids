@@ -1673,11 +1673,7 @@
 <span class="normal">452</span>
 <span class="normal">453</span>
 <span class="normal">454</span>
-<span class="normal">455</span>
-<span class="normal">456</span>
-<span class="normal">457</span>
-<span class="normal">458</span>
-<span class="normal">459</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">455</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
 
@@ -2045,8 +2041,6 @@ class SidecarPairing(object):
 
                                   srcSidecar=sidecar, **desc)
 
-                acq.indexSidecar = self.descriptions.index(desc)
-
                 acq.setDstFile()
 
                 if acq.intendedFor != [None]:
@@ -2074,8 +2068,6 @@ class SidecarPairing(object):
                 for desc in valid_descriptions:
 
                     acq = Acquisition(participant,
-
-                                      indexSidecar=self.descriptions.index(desc),
 
                                       **desc)
 
@@ -2741,11 +2733,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 <span class="normal">320</span>
 <span class="normal">321</span>
 <span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
+<span class="normal">323</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
 
     &quot;&quot;&quot;
 
@@ -2981,8 +2969,6 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                   srcSidecar=sidecar, **desc)
 
-                acq.indexSidecar = self.descriptions.index(desc)
-
                 acq.setDstFile()
 
                 if acq.intendedFor != [None]:
@@ -3010,8 +2996,6 @@ descriptions (list): List of dictionaries describing acquisitions</p>
                 for desc in valid_descriptions:
 
                     acq = Acquisition(participant,
-
-                                      indexSidecar=self.descriptions.index(desc),
 
                                       **desc)
 
@@ -3194,11 +3178,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 <span class="normal">66</span>
 <span class="normal">67</span>
 <span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code>    def build_acquisitions(self, participant):
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code>    def build_acquisitions(self, participant):
 
         &quot;&quot;&quot;
 
@@ -3232,8 +3212,6 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                   srcSidecar=sidecar, **desc)
 
-                acq.indexSidecar = self.descriptions.index(desc)
-
                 acq.setDstFile()
 
                 if acq.intendedFor != [None]:
@@ -3261,8 +3239,6 @@ descriptions (list): List of dictionaries describing acquisitions</p>
                 for desc in valid_descriptions:
 
                     acq = Acquisition(participant,
-
-                                      indexSidecar=self.descriptions.index(desc),
 
                                       **desc)
 
@@ -3670,7 +3646,7 @@ the values are a list of possible descriptions</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T19:50:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
     
   </small>

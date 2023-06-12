@@ -1587,7 +1587,11 @@
 <span class="normal">406</span>
 <span class="normal">407</span>
 <span class="normal">408</span>
-<span class="normal">409</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
@@ -1629,9 +1633,9 @@ class Acquisition(object):
 
         modalityLabel,
 
-        indexSidecar=None,
-
         customLabels=&quot;&quot;,
+
+        id=None,
 
         srcSidecar=None,
 
@@ -1651,9 +1655,9 @@ class Acquisition(object):
 
         self._customLabels = &quot;&quot;
 
-        self._intendedFor = None
+        self._id = &quot;&quot;
 
-        self._indexSidecar = None
+        self._intendedFor = None
 
         self.participant = participant
 
@@ -1680,6 +1684,14 @@ class Acquisition(object):
         else:
 
             self.intendedFor = intendedFor
+
+        if id is None:
+
+            self.id = None
+
+        else:
+
+            self.id = id
 
         self.dstFile = &#39;&#39;
 
@@ -1716,6 +1728,26 @@ class Acquisition(object):
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
         self._modalityLabel = self.prepend(modalityLabel)
+
+    @property
+
+    def id(self):
+
+        &quot;&quot;&quot;
+
+        Returns:
+
+            A string &#39;_&lt;id&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        return self._id
+
+    @id.setter
+
+    def id(self, value):
+
+        self._id = value
 
     @property
 
@@ -1907,35 +1939,7 @@ class Acquisition(object):
 
             self._intendedFor = [value]
 
-    @property
-
-    def indexSidecar(self):
-
-        &quot;&quot;&quot;
-
-        Returns:
-
-            A int &#39;_&lt;indexSidecar&gt;&#39;
-
-        &quot;&quot;&quot;
-
-        return self._indexSidecar
-
-    @indexSidecar.setter
-
-    def indexSidecar(self, value):
-
-        &quot;&quot;&quot;
-
-        Returns:
-
-            A int &#39;_&lt;indexSidecar&gt;&#39;
-
-        &quot;&quot;&quot;
-
-        self._indexSidecar = value
-
-    def dstSidecarData(self, descriptions, intendedForList):
+    def dstSidecarData(self, intendedForList):
 
         &quot;&quot;&quot;
 
@@ -1953,15 +1957,19 @@ class Acquisition(object):
 
             for index in self.intendedFor:
 
-                intendedValue = intendedValue + intendedForList[index]
+                if index in intendedForList:
 
-            if len(intendedValue) == 1:
+                    intendedValue = intendedValue + [intendedForList[index]]
 
-                data[&quot;IntendedFor&quot;] = intendedValue[0]
+                else:
 
-            else:
+                    logging.warning(f&quot;No id found for IntendedFor value &#39;{index}&#39;.&quot;)
 
-                data[&quot;IntendedFor&quot;] = intendedValue
+                    logging.warning(f&quot;No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.&quot;)
+
+                    logging.warning(&quot;Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n&quot;)
+
+            data[&quot;IntendedFor&quot;] = [item for sublist in intendedValue for item in sublist]
 
         # sidecarChanges
 
@@ -2015,8 +2023,8 @@ class Acquisition(object):
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">dataType</span><span class="p">,</span>
     <span class="n">modalityLabel</span><span class="p">,</span>
-    <span class="n">indexSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">customLabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">intendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2466,7 +2474,11 @@ class Acquisition(object):
 <span class="normal">394</span>
 <span class="normal">395</span>
 <span class="normal">396</span>
-<span class="normal">397</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
 
     &quot;&quot;&quot; Class representing an acquisition
 
@@ -2496,9 +2508,9 @@ class Acquisition(object):
 
         modalityLabel,
 
-        indexSidecar=None,
-
         customLabels=&quot;&quot;,
+
+        id=None,
 
         srcSidecar=None,
 
@@ -2518,9 +2530,9 @@ class Acquisition(object):
 
         self._customLabels = &quot;&quot;
 
-        self._intendedFor = None
+        self._id = &quot;&quot;
 
-        self._indexSidecar = None
+        self._intendedFor = None
 
         self.participant = participant
 
@@ -2547,6 +2559,14 @@ class Acquisition(object):
         else:
 
             self.intendedFor = intendedFor
+
+        if id is None:
+
+            self.id = None
+
+        else:
+
+            self.id = id
 
         self.dstFile = &#39;&#39;
 
@@ -2583,6 +2603,26 @@ class Acquisition(object):
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
         self._modalityLabel = self.prepend(modalityLabel)
+
+    @property
+
+    def id(self):
+
+        &quot;&quot;&quot;
+
+        Returns:
+
+            A string &#39;_&lt;id&gt;&#39;
+
+        &quot;&quot;&quot;
+
+        return self._id
+
+    @id.setter
+
+    def id(self, value):
+
+        self._id = value
 
     @property
 
@@ -2774,35 +2814,7 @@ class Acquisition(object):
 
             self._intendedFor = [value]
 
-    @property
-
-    def indexSidecar(self):
-
-        &quot;&quot;&quot;
-
-        Returns:
-
-            A int &#39;_&lt;indexSidecar&gt;&#39;
-
-        &quot;&quot;&quot;
-
-        return self._indexSidecar
-
-    @indexSidecar.setter
-
-    def indexSidecar(self, value):
-
-        &quot;&quot;&quot;
-
-        Returns:
-
-            A int &#39;_&lt;indexSidecar&gt;&#39;
-
-        &quot;&quot;&quot;
-
-        self._indexSidecar = value
-
-    def dstSidecarData(self, descriptions, intendedForList):
+    def dstSidecarData(self, intendedForList):
 
         &quot;&quot;&quot;
 
@@ -2820,15 +2832,19 @@ class Acquisition(object):
 
             for index in self.intendedFor:
 
-                intendedValue = intendedValue + intendedForList[index]
+                if index in intendedForList:
 
-            if len(intendedValue) == 1:
+                    intendedValue = intendedValue + [intendedForList[index]]
 
-                data[&quot;IntendedFor&quot;] = intendedValue[0]
+                else:
 
-            else:
+                    logging.warning(f&quot;No id found for IntendedFor value &#39;{index}&#39;.&quot;)
 
-                data[&quot;IntendedFor&quot;] = intendedValue
+                    logging.warning(f&quot;No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.&quot;)
+
+                    logging.warning(&quot;Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n&quot;)
+
+            data[&quot;IntendedFor&quot;] = [item for sublist in intendedValue for item in sublist]
 
         # sidecarChanges
 
@@ -2946,10 +2962,10 @@ class Acquisition(object):
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
 <p>The destination root inside the BIDS structure</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">indexSidecar</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">id</span>
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
-<p>A int '_<indexSidecar>'</p>
+<p>A string '_<id>'</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">intendedFor</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">modalityLabel</span>
@@ -2968,10 +2984,8 @@ class Acquisition(object):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">descriptions</span><span class="p">,</span>
     <span class="n">intendedForList</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -3011,7 +3025,11 @@ class Acquisition(object):
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, descriptions, intendedForList):
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, intendedForList):
 
         &quot;&quot;&quot;
 
@@ -3029,15 +3047,19 @@ class Acquisition(object):
 
             for index in self.intendedFor:
 
-                intendedValue = intendedValue + intendedForList[index]
+                if index in intendedForList:
 
-            if len(intendedValue) == 1:
+                    intendedValue = intendedValue + [intendedForList[index]]
 
-                data[&quot;IntendedFor&quot;] = intendedValue[0]
+                else:
 
-            else:
+                    logging.warning(f&quot;No id found for IntendedFor value &#39;{index}&#39;.&quot;)
 
-                data[&quot;IntendedFor&quot;] = intendedValue
+                    logging.warning(f&quot;No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.&quot;)
+
+                    logging.warning(&quot;Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n&quot;)
+
+            data[&quot;IntendedFor&quot;] = [item for sublist in intendedValue for item in sublist]
 
         # sidecarChanges
 
@@ -3199,7 +3221,7 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T19:50:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
     
   </small>

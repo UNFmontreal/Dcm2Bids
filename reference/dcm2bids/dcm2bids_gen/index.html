@@ -1499,8 +1499,6 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 
 &quot;&quot;&quot;
 
-import argparse
-
 import logging
 
 import os
@@ -1711,7 +1709,7 @@ class Dcm2BidsGen(object):
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
-        intendedForList = [[] for i in range(len(parser.descriptions))]
+        intendedForList = {}
 
         for acq in parser.acquisitions:
 
@@ -1737,7 +1735,7 @@ class Dcm2BidsGen(object):
 
                                  &quot;The bids-validator may not been installed on your computer. &quot;
 
-                                 f&quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
+                                 &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
 
     def move(self, acquisition, intendedForList):
 
@@ -1773,9 +1771,21 @@ class Dcm2BidsGen(object):
 
                     continue
 
+            # Populate intendedFor
+
+            if &#39;.nii&#39; in ext:
+
+                if acquisition.id in intendedForList:
+
+                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
+
+                else:
+
+                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
+
             # it&#39;s an anat nifti file and the user using a deface script
 
-            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;func&quot; and &quot;.nii&quot; in ext):
+            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
                 try:
 
@@ -1793,13 +1803,9 @@ class Dcm2BidsGen(object):
 
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
-
             elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;],
-
-                                                  intendedForList)
+                data = acquisition.dstSidecarData(intendedForList)
 
                 save_json(dstFile, data)
 
@@ -1810,12 +1816,6 @@ class Dcm2BidsGen(object):
             else:
 
                 os.rename(srcFile, dstFile)
-
-            intendedFile = acquisition.dstIntendedFor + &quot;.nii.gz&quot;
-
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
 </code></pre></div></td></tr></table></div>
@@ -2196,7 +2196,9 @@ class Dcm2BidsGen(object):
 <span class="normal">284</span>
 <span class="normal">285</span>
 <span class="normal">286</span>
-<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2376,7 +2378,7 @@ class Dcm2BidsGen(object):
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
-        intendedForList = [[] for i in range(len(parser.descriptions))]
+        intendedForList = {}
 
         for acq in parser.acquisitions:
 
@@ -2402,7 +2404,7 @@ class Dcm2BidsGen(object):
 
                                  &quot;The bids-validator may not been installed on your computer. &quot;
 
-                                 f&quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
+                                 &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
 
     def move(self, acquisition, intendedForList):
 
@@ -2438,9 +2440,21 @@ class Dcm2BidsGen(object):
 
                     continue
 
+            # Populate intendedFor
+
+            if &#39;.nii&#39; in ext:
+
+                if acquisition.id in intendedForList:
+
+                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
+
+                else:
+
+                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
+
             # it&#39;s an anat nifti file and the user using a deface script
 
-            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;func&quot; and &quot;.nii&quot; in ext):
+            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
                 try:
 
@@ -2458,13 +2472,9 @@ class Dcm2BidsGen(object):
 
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
-
             elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;],
-
-                                                  intendedForList)
+                data = acquisition.dstSidecarData(intendedForList)
 
                 save_json(dstFile, data)
 
@@ -2475,12 +2485,6 @@ class Dcm2BidsGen(object):
             else:
 
                 os.rename(srcFile, dstFile)
-
-            intendedFile = acquisition.dstIntendedFor + &quot;.nii.gz&quot;
-
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
 </code></pre></div></td></tr></table></div>
@@ -2583,7 +2587,9 @@ class Dcm2BidsGen(object):
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, intendedForList):
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, intendedForList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -2617,9 +2623,21 @@ class Dcm2BidsGen(object):
 
                     continue
 
+            # Populate intendedFor
+
+            if &#39;.nii&#39; in ext:
+
+                if acquisition.id in intendedForList:
+
+                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
+
+                else:
+
+                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
+
             # it&#39;s an anat nifti file and the user using a deface script
 
-            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;func&quot; and &quot;.nii&quot; in ext):
+            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
                 try:
 
@@ -2637,13 +2655,9 @@ class Dcm2BidsGen(object):
 
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
-
             elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(self.config[&quot;descriptions&quot;],
-
-                                                  intendedForList)
+                data = acquisition.dstSidecarData(intendedForList)
 
                 save_json(dstFile, data)
 
@@ -2654,12 +2668,6 @@ class Dcm2BidsGen(object):
             else:
 
                 os.rename(srcFile, dstFile)
-
-            intendedFile = acquisition.dstIntendedFor + &quot;.nii.gz&quot;
-
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList
 </code></pre></div></td></tr></table></div>
@@ -2808,7 +2816,7 @@ class Dcm2BidsGen(object):
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
-        intendedForList = [[] for i in range(len(parser.descriptions))]
+        intendedForList = {}
 
         for acq in parser.acquisitions:
 
@@ -2834,7 +2842,7 @@ class Dcm2BidsGen(object):
 
                                  &quot;The bids-validator may not been installed on your computer. &quot;
 
-                                 f&quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
+                                 &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
 </code></pre></div></td></tr></table></div>
 </details>
 <h4 id="set_logger">set_logger<a class="headerlink" href="#set_logger" title="Permanent link">⚓︎</a></h4>
@@ -2882,7 +2890,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-09T19:50:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-09</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
       
     
   </small>
