@@ -40,7 +40,7 @@ class Acquisition(object):
         self._customEntities = ""
         self._id = ""
         self._intendedFor = None
-        
+
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
@@ -222,16 +222,14 @@ class Acquisition(object):
             intendedValue = []
 
             for index in self.intendedFor:
-                if (isinstance(index, int)):
-                    logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
-                                  f'Please check {DEFAULT.link_doc_intended_for}')
+                if index in intendedForList:
+                    intendedValue = intendedValue + [intendedForList[index]]
                 else:
-                    intendedValue = intendedValue + intendedForList[index]
+                    logging.warning(f"No id found for IntendedFor value '{index}'.")
+                    logging.warning(f"No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.")
+                    logging.warning("Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n")
 
-            if len(intendedValue) == 1:
-                data["IntendedFor"] = intendedValue[0]
-            else:
-                data["IntendedFor"] = intendedValue
+            data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
 
         # sidecarChanges
         for key, value in self.sidecarChanges.items():

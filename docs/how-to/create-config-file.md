@@ -148,10 +148,11 @@ WARNING:dcm2bids.structure:✅ Filename was reordered according to BIDS entity t
 
 Optional field to change or add information in a sidecar.
 
-## intendedFor
+## id and intendedFor
 
 Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. 
 You will need to set an id to the corresponding description and put the same id in the `IntendedFor` field.
+
 Fo example, **`task_rest`** means it is intended for `task-rest_bold` 
 and **`id_task_learning`** is intended for `task-learning` which will be
 renamed to only `learning` because of the `"sidecarChanges": { "TaskName": "learning" }` field.

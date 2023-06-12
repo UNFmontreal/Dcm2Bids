@@ -21,6 +21,7 @@ from dcm2bids.utils.io import load_json, save_json, valid_path
 from dcm2bids.utils.tools import check_latest, dcm2niix_version
 from dcm2bids.version import __version__
 
+
 class Dcm2BidsGen(object):
     """ Object to handle dcm2bids execution steps
 
@@ -73,7 +74,6 @@ class Dcm2BidsGen(object):
         self.logger.info("config: %s", os.path.realpath(config))
         self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
         self.logger.info("Validate BIDS: %s", self.bids_validate)
-
 
     @property
     def dicomDirs(self):
@@ -136,7 +136,7 @@ class Dcm2BidsGen(object):
         intendedForList = {}
         for acq in parser.acquisitions:
             acq.setDstFile()
-            self.move(acq, intendedForList, dcm2niix.options)
+            intendedForList = self.move(acq, intendedForList)
 
         if self.bids_validate:
             try:
@@ -145,11 +145,11 @@ class Dcm2BidsGen(object):
                 run_shell_command(['bids-validator', '-v'])
                 run_shell_command(['bids-validator', self.bidsDir])
             except:
-                self.logger.info("bids-validator does not seem to work properly"
-                                 "bids-validator may not been installed on your computer"
-                                 f"Please check: https://github.com/bids-standard/bids-validator#quickstart")
+                self.logger.info("The bids-validator does not seem to work properly. "
+                                 "The bids-validator may not been installed on your computer. "
+                                 "Please check: https://github.com/bids-standard/bids-validator#quickstart.")
 
-    def move(self, acquisition, intendedForList, dcm2niix_options):
+    def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
@@ -172,9 +172,12 @@ class Dcm2BidsGen(object):
                     self.logger.info("Use --clobber option to overwrite")
                     continue
 
-            # it's an anat nifti file and the user using a deface script
-            if ".nii" in ext:
-                intendedForList[acquisition.id] = acquisition.dstIntendedFor + "".join(ext)
+            # Populate intendedFor
+            if '.nii' in ext:
+                if acquisition.id in intendedForList:
+                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + "".join(ext))
+                else:
+                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + "".join(ext)]
 
             if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
@@ -185,7 +188,6 @@ class Dcm2BidsGen(object):
 
                 cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
                 cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
-
                 run_shell_command(cmd)
 
             elif ".json" in ext:
@@ -196,17 +198,5 @@ class Dcm2BidsGen(object):
             # just move
             else:
                 os.rename(srcFile, dstFile)
-
-            curr_img_ext = '.nii.gz'
-            if '-z n' in dcm2niix_options:
-                curr_img_ext = '.nii'
-
-            intendedFile = acquisition.dstIntendedFor + curr_img_ext
-            if acquisition.id:
-                if acquisition.id in intendedForList:
-                    if intendedFile not in intendedForList[acquisition.id]:
-                        intendedForList[acquisition.id] =  intendedForList[acquisition.id] + intendedFile
-                else:
-                    intendedForList[acquisition.id] = [intendedFile]
 
         return intendedForList
