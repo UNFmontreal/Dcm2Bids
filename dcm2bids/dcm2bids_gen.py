@@ -21,6 +21,7 @@ from dcm2bids.utils.io import load_json, save_json, valid_path
 from dcm2bids.utils.tools import check_latest, dcm2niix_version
 from dcm2bids.version import __version__
 
+
 class Dcm2BidsGen(object):
     """ Object to handle dcm2bids execution steps
 
@@ -74,7 +75,6 @@ class Dcm2BidsGen(object):
         self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
         self.logger.info("Validate BIDS: %s", self.bids_validate)
 
-
     @property
     def dicomDirs(self):
         """List of DICOMs directories"""
@@ -106,6 +106,14 @@ class Dcm2BidsGen(object):
             self.participant,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
+
+        """Check ids"""
+        ids = [desc['intendedFor'] for desc in self.config['descriptions'] if 'intendedFor' in desc]
+        flat_ids = [item for sublist in ids for item in sublist]
+        if any([id for id in flat_ids if isinstance(id, int)]):
+            logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
+                          f'Please check {DEFAULT.link_doc_intended_for}')
+            return
 
         check_latest()
         check_latest("dcm2niix")
@@ -146,7 +154,7 @@ class Dcm2BidsGen(object):
             except:
                 self.logger.info("The bids-validator does not seem to work properly. "
                                  "The bids-validator may not been installed on your computer. "
-                                 f"Please check: https://github.com/bids-standard/bids-validator#quickstart.")
+                                 "Please check: https://github.com/bids-standard/bids-validator#quickstart.")
 
     def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""

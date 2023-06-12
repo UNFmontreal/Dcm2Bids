@@ -5,7 +5,6 @@
 from os.path import join as opj
 
 from dcm2bids.utils.utils import DEFAULT
-from dcm2bids.version import __version__
 
 
 class Participant(object):

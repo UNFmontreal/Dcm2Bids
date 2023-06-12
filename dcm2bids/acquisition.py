@@ -219,10 +219,7 @@ class Acquisition(object):
             intendedValue = []
 
             for index in self.intendedFor:
-                if (isinstance(index, int)):
-                    logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
-                                  f'Please check {DEFAULT.link_doc_intended_for}')
-                elif index in intendedForList:
+                if index in intendedForList:
                     intendedValue = intendedValue + [intendedForList[index]]
                 else:
                     logging.warning(f"No id found for IntendedFor value '{index}'.")
