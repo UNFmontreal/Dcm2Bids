@@ -40,7 +40,7 @@ class Acquisition(object):
         self._customLabels = ""
         self._id = ""
         self._intendedFor = None
-        
+
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
@@ -220,7 +220,7 @@ class Acquisition(object):
 
             for index in self.intendedFor:
                 if (isinstance(index, int)):
-                    logging.warning('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
+                    logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
                                   f'Please check {DEFAULT.link_doc_intended_for}')
                 elif index in intendedForList:
                     intendedValue = intendedValue + [intendedForList[index]]
