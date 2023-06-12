@@ -26,8 +26,8 @@ class Acquisition(object):
         participant,
         dataType,
         modalityLabel,
-        indexSidecar=None,
         customLabels="",
+        id=None,
         srcSidecar=None,
         sidecarChanges=None,
         intendedFor=None,
@@ -38,8 +38,8 @@ class Acquisition(object):
 
         self._modalityLabel = ""
         self._customLabels = ""
+        self._id = ""
         self._intendedFor = None
-        self._indexSidecar = None
 
         self.participant = participant
         self.dataType = dataType
@@ -56,6 +56,11 @@ class Acquisition(object):
             self.intendedFor = IntendedFor
         else:
             self.intendedFor = intendedFor
+
+        if id is None:
+            self.id = None
+        else:
+            self.id = id
 
         self.dstFile = ''
 
@@ -78,6 +83,18 @@ class Acquisition(object):
     def modalityLabel(self, modalityLabel):
         """ Prepend '_' if necessary"""
         self._modalityLabel = self.prepend(modalityLabel)
+
+    @property
+    def id(self):
+        """
+        Returns:
+            A string '_<id>'
+        """
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     @property
     def customLabels(self):
@@ -191,23 +208,7 @@ class Acquisition(object):
         else:
             self._intendedFor = [value]
 
-    @property
-    def indexSidecar(self):
-        """
-        Returns:
-            A int '_<indexSidecar>'
-        """
-        return self._indexSidecar
-
-    @indexSidecar.setter
-    def indexSidecar(self, value):
-        """
-        Returns:
-            A int '_<indexSidecar>'
-        """
-        self._indexSidecar = value
-
-    def dstSidecarData(self, descriptions, intendedForList):
+    def dstSidecarData(self, intendedForList):
         """
         """
         data = self.srcSidecar.origData
@@ -218,12 +219,14 @@ class Acquisition(object):
             intendedValue = []
 
             for index in self.intendedFor:
-                intendedValue = intendedValue + intendedForList[index]
+                if index in intendedForList:
+                    intendedValue = intendedValue + [intendedForList[index]]
+                else:
+                    logging.warning(f"No id found for IntendedFor value '{index}'.")
+                    logging.warning(f"No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.")
+                    logging.warning("Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n")
 
-            if len(intendedValue) == 1:
-                data["IntendedFor"] = intendedValue[0]
-            else:
-                data["IntendedFor"] = intendedValue
+            data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
 
         # sidecarChanges
         for key, value in self.sidecarChanges.items():

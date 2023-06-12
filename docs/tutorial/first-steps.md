@@ -671,7 +671,7 @@ good unique identifier.
 === "Command"
 
     ```sh
-    cat code/dcm2bids_config.json
+    cat tmp_dcm2bids/helper/004_In_DCM2NIIX_regression_test_20180918114023.json
     ```
 
 === "Output"
@@ -807,10 +807,10 @@ task name:
       "modalityLabel": "bold",
       "customLabels": "task-rest",
       "criteria": {
-        "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*",
-        "sidecarChanges": {
+        "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
+      },
+      "sidecarChanges": {
         "TaskName": "rest"
-      }
       }
     }
   ]
@@ -887,6 +887,7 @@ file with the appropriate info.
 {
   "descriptions": [
     {
+      "id": "id_task-rest",
       "dataType": "func",
       "modalityLabel": "bold",
       "customLabels": "task-rest",
@@ -904,7 +905,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "EPI PE=AP*"
       },
-      "intendedFor": 0
+      "intendedFor": "id_task-rest"
     },
     {
       "dataType": "fmap",
@@ -913,7 +914,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "EPI PE=PA*"
       },
-      "intendedFor": 0
+      "intendedFor": "id_task-rest"
     }
   ]
 }

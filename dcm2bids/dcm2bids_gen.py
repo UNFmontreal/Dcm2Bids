@@ -4,7 +4,6 @@
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 """
 
-import argparse
 import logging
 import os
 from pathlib import Path
@@ -21,6 +20,7 @@ from dcm2bids.utils.utils import DEFAULT, run_shell_command
 from dcm2bids.utils.io import load_json, save_json, valid_path
 from dcm2bids.utils.tools import check_latest, dcm2niix_version
 from dcm2bids.version import __version__
+
 
 class Dcm2BidsGen(object):
     """ Object to handle dcm2bids execution steps
@@ -74,7 +74,6 @@ class Dcm2BidsGen(object):
         self.logger.info("config: %s", os.path.realpath(config))
         self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
         self.logger.info("Validate BIDS: %s", self.bids_validate)
-
 
     @property
     def dicomDirs(self):
@@ -133,7 +132,7 @@ class Dcm2BidsGen(object):
 
         self.logger.info("moving acquisitions into BIDS folder")
 
-        intendedForList = [[] for i in range(len(parser.descriptions))]
+        intendedForList = {}
         for acq in parser.acquisitions:
             acq.setDstFile()
             intendedForList = self.move(acq, intendedForList)
@@ -147,12 +146,11 @@ class Dcm2BidsGen(object):
             except:
                 self.logger.info("The bids-validator does not seem to work properly. "
                                  "The bids-validator may not been installed on your computer. "
-                                 f"Please check: https://github.com/bids-standard/bids-validator#quickstart.")
+                                 "Please check: https://github.com/bids-standard/bids-validator#quickstart.")
 
     def move(self, acquisition, intendedForList):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
-
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
@@ -173,8 +171,15 @@ class Dcm2BidsGen(object):
                     self.logger.info("Use --clobber option to overwrite")
                     continue
 
+            # Populate intendedFor
+            if '.nii' in ext:
+                if acquisition.id in intendedForList:
+                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + "".join(ext))
+                else:
+                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + "".join(ext)]
+
             # it's an anat nifti file and the user using a deface script
-            if (self.config.get("defaceTpl") and acquisition.dataType == "func" and ".nii" in ext):
+            if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
                 except FileNotFoundError:
@@ -185,20 +190,13 @@ class Dcm2BidsGen(object):
                 cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
                 run_shell_command(cmd)
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
-
             elif ".json" in ext:
-                data = acquisition.dstSidecarData(self.config["descriptions"],
-                                                  intendedForList)
+                data = acquisition.dstSidecarData(intendedForList)
                 save_json(dstFile, data)
                 os.remove(srcFile)
 
             # just move
             else:
                 os.rename(srcFile, dstFile)
-
-            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
 
         return intendedForList

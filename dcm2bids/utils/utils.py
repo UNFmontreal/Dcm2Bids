@@ -14,6 +14,7 @@ class DEFAULT(object):
     doc = "Documentation at https://unfmontreal.github.io/Dcm2Bids/"
 
     link_bids_validator = "https://github.com/bids-standard/bids-validator#quickstart"
+    link_doc_intended_for = "https://unfmontreal.github.io/Dcm2Bids/docs/tutorial/first-steps/#populating-the-config-file"
 
     # cli dcm2bids
     cliSession = ""

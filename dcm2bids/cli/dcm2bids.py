@@ -8,9 +8,9 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 import argparse
 
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
-from dcm2bids.utils.tools import check_latest
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.version import __version__
+
 
 def _build_arg_parser():
     p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.doc,
@@ -70,9 +70,6 @@ def _build_arg_parser():
 def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
-
-    check_latest()
-    check_latest("dcm2niix")
 
     app = Dcm2BidsGen(**vars(args))
     return app.run()
