@@ -223,6 +223,8 @@ class Acquisition(object):
                     intendedValue = intendedValue + [intendedForList[index]]
                 else:
                     logging.warning(f"No id found for IntendedFor value '{index}'.")
+                    logging.warning(f"No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.")
+                    logging.warning("Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n")
 
             data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
 

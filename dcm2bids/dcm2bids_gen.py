@@ -107,14 +107,6 @@ class Dcm2BidsGen(object):
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
 
-        """Check ids"""
-        ids = [desc['intendedFor'] for desc in self.config['descriptions'] if 'intendedFor' in desc]
-        flat_ids = [item for sublist in ids for item in sublist]
-        if any([id for id in flat_ids if isinstance(id, int)]):
-            logging.error('Dcm2bids (>=3.0.0) does not support indexing anymore for intendedFor field.\n'
-                          f'Please check {DEFAULT.link_doc_intended_for}')
-            return
-
         check_latest()
         check_latest("dcm2niix")
 
