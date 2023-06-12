@@ -251,8 +251,6 @@ class SidecarPairing(object):
                                       **desc)
                     self.logger.warning("    ->  %s", acq.suffix)
 
-        print(len(acquisitions_intendedFor))
-
         self.acquisitions = acquisitions + acquisitions_intendedFor
 
         return self.acquisitions
@@ -274,8 +272,6 @@ class SidecarPairing(object):
                 if dcmTag in sidecar.data.keys():
                     dcmInfo = sidecar.data.get(dcmTag)
                     for regex in self.extractors[dcmTag]:
-                        print(regex)
-                        print(dcmInfo)
                         compile_regex = re.compile(regex)
                         if compile_regex.search(dcmInfo) is not None:
                             concatenated_matches.update(compile_regex.search(dcmInfo).groupdict())
