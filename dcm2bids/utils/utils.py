@@ -32,7 +32,11 @@ class DEFAULT(object):
     directions = {"j-": "AP",
                   "j": "PA",
                   "i-": "LR",
-                  "i": "RL"}
+                  "i": "RL",
+                  "AP": "AP",
+                  "PA": "PA",
+                  "LR": "LR",
+                  "RL": "RL"}
     # dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
 
