@@ -10,8 +10,8 @@ from collections import defaultdict, OrderedDict
 from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
-from dcm2bids.utils.utils import DEFAULT, splitext_
 from dcm2bids.utils.io import load_json
+from dcm2bids.utils.utils import DEFAULT, convert_dir, splitext_
 
 
 class Sidecar(object):
@@ -90,7 +90,7 @@ class SidecarPairing(object):
         descriptions (list): List of dictionaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions, extractors=DEFAULT.extractors, 
+    def __init__(self, sidecars, descriptions, extractors=DEFAULT.extractors,
                  searchMethod=DEFAULT.searchMethod, caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
 
@@ -226,7 +226,7 @@ class SidecarPairing(object):
             if len(valid_descriptions) == 1:
                 desc = valid_descriptions[0]
 
-                desc = self.searchDcmTagEntity(sidecar, desc)
+                desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
 
                 acq = Acquisition(participant,
                                   srcSidecar=sidecar, **desc)
@@ -260,11 +260,11 @@ class SidecarPairing(object):
         Add DCM Tag to customEntities
         """
         descWithTask = desc.copy()
-        
+
         concatenated_matches = {}
 
         if "customEntities" in desc.keys():
-            
+
             if isinstance(descWithTask["customEntities"], str):
                 descWithTask["customEntities"] = [descWithTask["customEntities"]]
 
@@ -275,17 +275,23 @@ class SidecarPairing(object):
                         compile_regex = re.compile(regex)
                         if compile_regex.search(dcmInfo) is not None:
                             concatenated_matches.update(compile_regex.search(dcmInfo).groupdict())
-        
+
             entities = set(concatenated_matches.keys()).intersection(set(descWithTask["customEntities"]))
             left_entities = entities.symmetric_difference(set(descWithTask["customEntities"]))
             for curr_entity in entities:
-                descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
-            
+                if curr_entity == 'dir':
+                    descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask["customEntities"]))
+                elif curr_entity == 'task':
+                    sidecar.data['TaskName'] = concatenated_matches[curr_entity]
+                    descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                else:
+                    descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+
             for curr_left_entities in left_entities:
-                if not '-' in curr_left_entities:
+                if '-' not in curr_left_entities:
                     descWithTask["customEntities"].remove(curr_left_entities)
-                
-        return descWithTask
+
+        return descWithTask, sidecar
 
     def find_runs(self):
         """

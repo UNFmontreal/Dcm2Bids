@@ -29,7 +29,10 @@ class DEFAULT(object):
     forceDcm2niix = False
     defaceTpl = None
     logLevel = "WARNING"
-
+    directions = {"j-": "AP",
+                  "j": "PA",
+                  "i-": "LR",
+                  "i": "RL"}
     # dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
 
@@ -99,3 +102,14 @@ def run_shell_command(commandLine):
     logger = logging.getLogger(__name__)
     logger.info("Running %s", commandLine)
     return check_output(commandLine)
+
+
+def convert_dir(dir):
+    """ Convert Direction
+    Args:
+        dir (str): direction - dcm format
+
+    Returns:
+        str: direction - bids format
+    """
+    return DEFAULT.directions[dir]

@@ -111,7 +111,7 @@ class Acquisition(object):
             self._customEntities = self.prepend('_'.join(customEntities))
         else:
             self._customEntities = self.prepend(customEntities)
-                                                
+
     @property
     def suffix(self):
         """ The suffix to build filenames
@@ -216,6 +216,10 @@ class Acquisition(object):
         """
         data = self.srcSidecar.origData
         data["Dcm2bidsVersion"] = __version__
+
+        # TaskName
+        if 'TaskName' in self.srcSidecar.data:
+            data["TaskName"] = self.srcSidecar.data["TaskName"]
 
         # intendedFor key
         if self.intendedFor != [None]:
