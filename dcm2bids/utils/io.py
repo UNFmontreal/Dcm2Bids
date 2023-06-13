@@ -30,9 +30,8 @@ def save_json(filename, data):
 
 
 def write_txt(filename, lines):
-    with open(filename, "a+") as f:
+    with open(filename, "w") as f:
         f.write(f"{lines}\n")
-
 
 def valid_path(in_path, type="folder"):
     """Assert that file exists.
