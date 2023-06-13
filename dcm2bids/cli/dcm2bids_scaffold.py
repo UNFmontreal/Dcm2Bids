@@ -66,7 +66,7 @@ def main():
     # README
     try:
         run_shell_command(['wget', '-q', '-O', opj(args.output_dir, "README"),
-                           'https://github.com/bids-standard/bids-starter-kit/blob/main/templates/README.MD'])
+                           'https://raw.githubusercontent.com/bids-standard/bids-starter-kit/main/templates/README.MD'])
     except:
         write_txt(opj(args.output_dir, "README"),
                   bids_starter_kit.README)
