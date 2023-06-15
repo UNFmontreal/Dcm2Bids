@@ -7,7 +7,7 @@
 	"PatientPosition": "HFS",
 	"ProcedureStepDescription": "fMRI",
 	"MRAcquisitionType": "2D",
-	"SeriesDescription": "localizer",
+	"SeriesDescription": "localizer2",
 	"ProtocolName": "localizer",
 	"ScanningSequence": "GR",
 	"SequenceVariant": "SP_OSP",

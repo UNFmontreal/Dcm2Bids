@@ -25,11 +25,13 @@ class DEFAULT(object):
     outputDir = Path.cwd()
     session = ""  # also Participant object
     bids_validate = False
+    auto_extract_entities = False
     clobber = False
     forceDcm2niix = False
     defaceTpl = None
     logLevel = "WARNING"
-    directions = {"j-": "AP",
+
+    entity_dir = {"j-": "AP",
                   "j": "PA",
                   "i-": "LR",
                   "i": "RL",
@@ -37,12 +39,23 @@ class DEFAULT(object):
                   "PA": "PA",
                   "LR": "LR",
                   "RL": "RL"}
+
     # dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
 
     # sidecar.py
-    extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)", "dir-(?P<dir>(AP|PA|LR|RL))"],
-                  'BodyPartExamined': ["(?P<bodypart>[a-zA-Z]+)"]}
+    auto_extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)"],
+                       'PhaseEncodingDirection': ["(?P<dir>-?j|i)"],
+                       'EchoNumber': ["(?P<echo>[0-9])"]}
+
+    extractors = {}
+
+    auto_entities = {"anat_MEGRE": ["echo"],
+                     "func_cbv": ["task"],
+                     "func_bold": ["task"],
+                     "func_sbref": ["task"],
+                     "fmap_epi": ["dir"]}
+
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
     searchMethodChoices = ["fnmatch", "re"]
     searchMethod = "fnmatch"
@@ -116,4 +129,4 @@ def convert_dir(dir):
     Returns:
         str: direction - bids format
     """
-    return DEFAULT.directions[dir]
+    return DEFAULT.entity_dir[dir]

@@ -44,6 +44,7 @@ class Dcm2BidsGen(object):
         config,
         output_dir=DEFAULT.outputDir,
         bids_validate=DEFAULT.bids_validate,
+        auto_extract_entities=DEFAULT.auto_extract_entities,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         forceDcm2niix=DEFAULT.forceDcm2niix,
@@ -58,6 +59,7 @@ class Dcm2BidsGen(object):
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.bids_validate = bids_validate
+        self.auto_extract_entities = auto_extract_entities
         self.forceDcm2niix = forceDcm2niix
         self.logLevel = log_level
 
@@ -124,6 +126,7 @@ class Dcm2BidsGen(object):
             sidecars,
             self.config["descriptions"],
             self.config.get("extractors", DEFAULT.extractors),
+            self.auto_extract_entities,
             self.config.get("searchMethod", DEFAULT.searchMethod),
             self.config.get("caseSensitive", DEFAULT.caseSensitive)
         )

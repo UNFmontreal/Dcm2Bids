@@ -1,5 +1,6 @@
 {
     "searchMethod": "fnmatch",
+    "extractors": {"SeriesDescription": ["task-(?P<task>[a-zA-Z0-9]+)"]},
     "descriptions": [
         {
             "dataType": "localizer",

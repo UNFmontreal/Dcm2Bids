@@ -38,6 +38,11 @@ def _build_arg_parser():
                    default=DEFAULT.cliOutputDir,
                    help="Output BIDS directory. [%(default)s]")
 
+    p.add_argument("--auto_extract_entities",
+                   action='store_true',
+                   help="If set, it will automatically try to extract entity information"
+                        " depending on the suffix and dataType. [%(default)s]")
+
     p.add_argument("--bids_validate",
                    action='store_true',
                    help="If set, once your conversion is done it"
