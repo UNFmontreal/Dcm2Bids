@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import pytest
+from tempfile import TemporaryDirectory
+import os
 
 
 def test_help_option(script_runner):
@@ -8,5 +9,10 @@ def test_help_option(script_runner):
     assert ret.success
 
 def test_run_scaffold(script_runner):
-    ret = script_runner.run(['dcm2bids_scaffold', '-o', 'o_scaffold', '--force'])
+    bidsDir = TemporaryDirectory()
+    scaffold_dir = os.path.join(bidsDir.name, "scaffold_dir")
+    ret = script_runner.run(['dcm2bids_scaffold', '-o', scaffold_dir])
+    assert ret.success
+
+    ret = script_runner.run(['dcm2bids_scaffold', '-o', scaffold_dir, '--force'])
     assert ret.success

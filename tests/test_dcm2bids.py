@@ -52,6 +52,11 @@ def test_dcm2bids():
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2, 3]
 
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test.json"),
+                      bidsDir.name)
+    app.run()   
+
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
