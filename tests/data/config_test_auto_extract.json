@@ -1,0 +1,54 @@
+{
+    "searchMethod": "re",
+    "descriptions": [
+        {
+            "dataType": "localizer",
+            "modalityLabel": "localizer",
+            "criteria": {
+                "SeriesDescription": "localizer(1|2)"
+            }
+        },
+        {
+            "id": "func_task-rest",
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customEntities": ["acq-highres"],
+            "criteria": {
+                "SeriesDescription": ".*bold.*"
+            }
+        },
+        {
+            "id": "T1",
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SeriesDescription": "MPRAGE"
+            }
+        },
+        {
+            "id": "id_dwi",
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "DTI$"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "epi",
+            "criteria": {
+                "SeriesDescription": "gre_field_mapping"
+            },
+            "intendedFor": ["id_dwi", "T1", "dummy"]
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "customEntities": "desc-fa00",
+            "criteria": {
+                "SeriesDescription": "DTI_FA"
+            },
+            "IntendedFor": ["id_dwi", "T1"]
+        }
+    ]
+}
