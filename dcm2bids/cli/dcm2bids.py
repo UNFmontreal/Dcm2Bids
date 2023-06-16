@@ -49,7 +49,7 @@ def _build_arg_parser():
                         " will check if your output folder is BIDS valid. [%(default)s]\n"
                         f"bids-validator needs to be installed check: {DEFAULT.link_bids_validator}")
 
-    p.add_argument("--forceDcm2niix",
+    p.add_argument("--force_dcm2niix",
                    action="store_true",
                    help="Overwrite previous temporary dcm2niix "
                         "output if it exists.")
