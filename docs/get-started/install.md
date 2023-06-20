@@ -189,7 +189,7 @@ name: dcm2bids
 channels:
   - conda-forge
 dependencies:
-  - python>=3.7
+  - python>=3.8
   - dcm2niix
   - dcm2bids
 ```
@@ -292,6 +292,8 @@ options:
   -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
                         (/home/sam/dcm2bids-proj)
+  --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
+                          depending on the suffix and dataType. [False]
   --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                         bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
   --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
@@ -343,7 +345,7 @@ containers:
             channels:
                 - conda-forge
             dependencies:
-                - python>=3.7
+                - python>=3.8
                 - dcm2niix
                 - dcm2bids
 
