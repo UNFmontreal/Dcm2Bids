@@ -46,22 +46,9 @@ class Acquisition(object):
         self.modalityLabel = modalityLabel
         self.customEntities = customEntities
         self.srcSidecar = srcSidecar
-
-        if sidecarChanges is None:
-            self.sidecarChanges = {}
-        else:
-            self.sidecarChanges = sidecarChanges
-
-        if intendedFor is None:
-            self.intendedFor = IntendedFor
-        else:
-            self.intendedFor = intendedFor
-
-        if id is None:
-            self.id = None
-        else:
-            self.id = id
-
+        self.sidecarChanges = {} if sidecarChanges is None else sidecarChanges
+        self.intendedFor = IntendedFor if intendedFor is None else intendedFor
+        self.id = None if id is None else id
         self.dstFile = ''
 
     def __eq__(self, other):
@@ -237,8 +224,9 @@ class Acquisition(object):
 
         # sidecarChanges
         for key, value in self.sidecarChanges.items():
-            data[key] = value
-
+          # Inject IntendedFor id if "Sources" key is found in sidecarChanges and
+          # one of id key is also found.
+            data[key] = [item for sublist in [intendedForList.get(val) for val in value] for item in sublist] if key == "Sources" else value
         return data
 
     @staticmethod
