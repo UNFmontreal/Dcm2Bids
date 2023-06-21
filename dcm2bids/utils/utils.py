@@ -51,6 +51,7 @@ class DEFAULT(object):
     extractors = {}
 
     auto_entities = {"anat_MEGRE": ["echo"],
+                     "anat_MESE": ["echo"],
                      "func_cbv": ["task"],
                      "func_bold": ["task"],
                      "func_sbref": ["task"],

@@ -128,7 +128,7 @@ command.
 
 ## --auto_extract_entities
 
-This option will automatically try to find 3 entities (task, dir and echo).
+This option will automatically try to find 3 entities (task, dir and echo) for specific dataType/modalityLabel.
 
 * `task` in the SeriesDescription field
 
@@ -146,6 +146,24 @@ If found, it will try to feed the filename with this entity if they are mandator
 
 For example, a "pepolar" fieldmap data requires the entity `dir` (See [BIDS specification](https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#case-4-multiple-phase-encoded-directions-pepolar)). 
 If you set this parameter, it will automatically try to find this entity and add it to the filename.
+
+So far and accordingly to the BIDS specification 5 dataType/modalityLabel automatically look for this 3 entities.
+
+| dataType |  modalityLabel | Entities |
+|:--------:|:----------:|:--------:|
+| anat | MEGRE | echo |
+| anat | MESE | echo |
+| func | cbv | task |
+| func | bold | task |
+| func | sbref | task |
+| fmap | epi | dir |
+
+Using the `--auto_extract_entitie`, if you want another combination of dataType/modalityLabel to be able to 
+extract one or more of these 3 entities you need to add the key of the entities needed using the field customEntities like this within your description:
+
+```
+"customEntities": ["echo", "dir"]
+```
 
 :warning: If task is found, it will automatically add the field `TaskName` into the sidecar file. 
 It means you don't have to add the field in the config file like this.
