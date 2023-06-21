@@ -280,10 +280,10 @@ class SidecarPairing(object):
                     dcmInfo = sidecar.data.get(dcmTag)
                     for regex in self.extractors[dcmTag]:
                         compile_regex = re.compile(regex)
-                        if isinstance(dcmInfo, str):
-                            if compile_regex.search(dcmInfo) is not None:
-                                concatenated_matches.update(compile_regex.search(dcmInfo).groupdict())
-                        elif isinstance(dcmInfo, list):
+                        if not isinstance(dcmInfo, list):
+                            if compile_regex.search(str(dcmInfo)) is not None:
+                                concatenated_matches.update(compile_regex.search(str(dcmInfo)).groupdict())
+                        else:
                             for curr_dcmInfo in dcmInfo:
                                 if compile_regex.search(curr_dcmInfo) is not None:
                                     concatenated_matches.update(compile_regex.search(curr_dcmInfo).groupdict())
