@@ -6,7 +6,7 @@ same level as the `"descriptions"` entry.
 ```
 {
     "extractors": {"SeriesDescription": ["run-(?P<run>[0-9]+)", "task-(?P<task>[0-9]+)"], 
-                   "BodyPartExamined": "["(?P<bodypart>[a-zA-Z]+)"]},
+                   "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
     "searchMethod": "fnmatch",
     "caseSensitive": true,
     "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
@@ -14,7 +14,7 @@ same level as the `"descriptions"` entry.
     {
       "dataType": "anat",
       "modalityLabel": "T2w",
-      "customEntities": ["acq-highres, "bodypart", "run", "task],
+      "customEntities": ["acq-highres", "bodypart", "run", "task"],
       }
     ]
     ...
