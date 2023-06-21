@@ -69,6 +69,10 @@ def main():
     write_txt(opj(args.output_dir, "participants.tsv"),
               bids_starter_kit.participants_tsv)
 
+    # .bidsignore
+    write_txt(opj(args.output_dir, ".bidsignore"),
+              "tmp_dcm2bids")
+
     # README
     try:
         run_shell_command(['wget', '-q', '-O', opj(args.output_dir, "README"),
