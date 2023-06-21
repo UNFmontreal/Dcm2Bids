@@ -224,9 +224,20 @@ class Acquisition(object):
 
         # sidecarChanges
         for key, value in self.sidecarChanges.items():
-          # Inject IntendedFor id if "Sources" key is found in sidecarChanges and
-          # one of id key is also found.
-            data[key] = [item for sublist in [intendedForList.get(val) for val in value] for item in sublist] if key == "Sources" else value
+            if key == "Sources":
+                values = [intendedForList.get(val, val) for val in value]
+                # handle if nested list vs str
+                flat_value_list = []
+                for item in values:
+                    if isinstance(item, list):
+                        flat_value_list += item
+                    else:
+                        flat_value_list.append(item)
+                data[key] = flat_value_list
+            else:
+                data[key] = value
+
+
         return data
 
     @staticmethod
