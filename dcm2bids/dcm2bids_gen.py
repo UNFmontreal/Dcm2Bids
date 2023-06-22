@@ -75,6 +75,7 @@ class Dcm2BidsGen(object):
         self.logger.info("session: %s", self.participant.session)
         self.logger.info("config: %s", os.path.realpath(config))
         self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
+        self.logger.info("Auto extract entities: %s", self.auto_extract_entities)
         self.logger.info("Validate BIDS: %s", self.bids_validate)
 
     @property
