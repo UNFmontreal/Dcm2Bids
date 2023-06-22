@@ -965,6 +965,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#convert_dir" class="md-nav__link">
+    convert_dir
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#read_participants" class="md-nav__link">
     read_participants
   </a>
@@ -1091,6 +1098,13 @@
   
     <nav class="md-nav" aria-label="Functions">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#convert_dir" class="md-nav__link">
+    convert_dir
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#read_participants" class="md-nav__link">
@@ -1326,7 +1340,61 @@
 <span class="normal">146</span>
 <span class="normal">147</span>
 <span class="normal">148</span>
-<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -1364,6 +1432,8 @@ class DEFAULT(object):
 
     bids_validate = False
 
+    auto_extract_entities = False
+
     clobber = False
 
     forceDcm2niix = False
@@ -1372,17 +1442,53 @@ class DEFAULT(object):
 
     logLevel = &quot;WARNING&quot;
 
+    entity_dir = {&quot;j-&quot;: &quot;AP&quot;,
+
+                  &quot;j&quot;: &quot;PA&quot;,
+
+                  &quot;i-&quot;: &quot;LR&quot;,
+
+                  &quot;i&quot;: &quot;RL&quot;,
+
+                  &quot;AP&quot;: &quot;AP&quot;,
+
+                  &quot;PA&quot;: &quot;PA&quot;,
+
+                  &quot;LR&quot;: &quot;LR&quot;,
+
+                  &quot;RL&quot;: &quot;RL&quot;}
+
     # dcm2niix.py
 
     dcm2niixOptions = &quot;-b y -ba y -z y -f &#39;%3s_%f_%p_%t&#39;&quot;
 
     # sidecar.py
 
+    auto_extractors = {&#39;SeriesDescription&#39;: [&quot;task-(?P&lt;task&gt;[a-zA-Z0-9]+)&quot;],
+
+                       &#39;PhaseEncodingDirection&#39;: [&quot;(?P&lt;dir&gt;(j|i)-?)&quot;],
+
+                       &#39;EchoNumber&#39;: [&quot;(?P&lt;echo&gt;[0-9])&quot;]}
+
+    extractors = {}
+
+    auto_entities = {&quot;anat_MEGRE&quot;: [&quot;echo&quot;],
+
+                     &quot;anat_MESE&quot;: [&quot;echo&quot;],
+
+                     &quot;func_cbv&quot;: [&quot;task&quot;],
+
+                     &quot;func_bold&quot;: [&quot;task&quot;],
+
+                     &quot;func_sbref&quot;: [&quot;task&quot;],
+
+                     &quot;fmap_epi&quot;: [&quot;dir&quot;]}
+
     compKeys = [&quot;SeriesNumber&quot;, &quot;AcquisitionTime&quot;, &quot;SidecarFilename&quot;]
 
-    searchMethod = &quot;fnmatch&quot;
-
     searchMethodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
+
+    searchMethod = &quot;fnmatch&quot;
 
     runTpl = &quot;_run-{:02d}&quot;
 
@@ -1475,9 +1581,100 @@ def run_shell_command(commandLine):
     logger.info(&quot;Running %s&quot;, commandLine)
 
     return check_output(commandLine)
+
+def convert_dir(dir):
+
+    &quot;&quot;&quot; Convert Direction
+
+    Args:
+
+        dir (str): direction - dcm format
+
+    Returns:
+
+        str: direction - bids format
+
+    &quot;&quot;&quot;
+
+    return DEFAULT.entity_dir[dir]
 </code></pre></div></td></tr></table></div>
 </details>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="convert_dir">convert_dir<a class="headerlink" href="#convert_dir" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">convert_dir</span><span class="p">(</span>
+    <span class="nb">dir</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Convert Direction</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dir</td>
+<td>str</td>
+<td>direction - dcm format</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>direction - bids format</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>def convert_dir(dir):
+
+    &quot;&quot;&quot; Convert Direction
+
+    Args:
+
+        dir (str): direction - dcm format
+
+    Returns:
+
+        str: direction - bids format
+
+    &quot;&quot;&quot;
+
+    return DEFAULT.entity_dir[dir]
+</code></pre></div></td></tr></table></div>
+</details>
 <h3 id="read_participants">read_participants<a class="headerlink" href="#read_participants" title="Permanent link">⚓︎</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -1723,75 +1920,113 @@ def run_shell_command(commandLine):
 <p>Default values of the package</p>
 <details class="example">
 <summary>View Source</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
 
     &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
@@ -1817,6 +2052,8 @@ def run_shell_command(commandLine):
 
     bids_validate = False
 
+    auto_extract_entities = False
+
     clobber = False
 
     forceDcm2niix = False
@@ -1825,17 +2062,53 @@ def run_shell_command(commandLine):
 
     logLevel = &quot;WARNING&quot;
 
+    entity_dir = {&quot;j-&quot;: &quot;AP&quot;,
+
+                  &quot;j&quot;: &quot;PA&quot;,
+
+                  &quot;i-&quot;: &quot;LR&quot;,
+
+                  &quot;i&quot;: &quot;RL&quot;,
+
+                  &quot;AP&quot;: &quot;AP&quot;,
+
+                  &quot;PA&quot;: &quot;PA&quot;,
+
+                  &quot;LR&quot;: &quot;LR&quot;,
+
+                  &quot;RL&quot;: &quot;RL&quot;}
+
     # dcm2niix.py
 
     dcm2niixOptions = &quot;-b y -ba y -z y -f &#39;%3s_%f_%p_%t&#39;&quot;
 
     # sidecar.py
 
+    auto_extractors = {&#39;SeriesDescription&#39;: [&quot;task-(?P&lt;task&gt;[a-zA-Z0-9]+)&quot;],
+
+                       &#39;PhaseEncodingDirection&#39;: [&quot;(?P&lt;dir&gt;(j|i)-?)&quot;],
+
+                       &#39;EchoNumber&#39;: [&quot;(?P&lt;echo&gt;[0-9])&quot;]}
+
+    extractors = {}
+
+    auto_entities = {&quot;anat_MEGRE&quot;: [&quot;echo&quot;],
+
+                     &quot;anat_MESE&quot;: [&quot;echo&quot;],
+
+                     &quot;func_cbv&quot;: [&quot;task&quot;],
+
+                     &quot;func_bold&quot;: [&quot;task&quot;],
+
+                     &quot;func_sbref&quot;: [&quot;task&quot;],
+
+                     &quot;fmap_epi&quot;: [&quot;dir&quot;]}
+
     compKeys = [&quot;SeriesNumber&quot;, &quot;AcquisitionTime&quot;, &quot;SidecarFilename&quot;]
 
-    searchMethod = &quot;fnmatch&quot;
-
     searchMethodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
+
+    searchMethod = &quot;fnmatch&quot;
 
     runTpl = &quot;_run-{:02d}&quot;
 
@@ -1864,6 +2137,12 @@ def run_shell_command(commandLine):
 </details>
 <hr />
 <h4 id="class-variables">Class variables<a class="headerlink" href="#class-variables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">auto_entities</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">auto_extract_entities</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">auto_extractors</span>
+</code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">bids_validate</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">bids_version</span>
@@ -1887,6 +2166,10 @@ def run_shell_command(commandLine):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">doc</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">entityTableKeys</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">entity_dir</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">extractors</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">forceDcm2niix</span>
 </code></pre></div></td></tr></table></div>
@@ -1918,7 +2201,7 @@ def run_shell_command(commandLine):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

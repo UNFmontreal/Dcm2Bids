@@ -1375,7 +1375,7 @@ matter. You can create <code>dcm2bids-proj</code> if you need inspiration.</p>
 <span class="nt">channels</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span><span class="w"></span>
 <span class="nt">dependencies</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python&gt;=3.7</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python&gt;=3.8</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2niix</span><span class="w"></span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcm2bids</span><span class="w"></span>
 </code></pre></div></td></tr></table></div>
@@ -1486,7 +1486,9 @@ dcm2bids command such as <code>dcm2bids --help</code>:</p>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-proj$ dcm2bids --help
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-proj$ dcm2bids --help
 </span>usage: dcm2bids <span class="o">[</span>-h<span class="o">]</span> -d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span> -p PARTICIPANT <span class="o">[</span>-s SESSION<span class="o">]</span> -c
                 CONFIG <span class="o">[</span>-o OUTPUT_DIR<span class="o">]</span> <span class="o">[</span>--forceDcm2niix<span class="o">]</span> <span class="o">[</span>--clobber<span class="o">]</span>
                 <span class="o">[</span>-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
@@ -1507,6 +1509,8 @@ options:
   -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
                         <span class="o">(</span>/home/sam/dcm2bids-proj<span class="o">)</span>
+  --auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
+                          depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>
   --bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
                         bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
   --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
@@ -1555,7 +1559,7 @@ containers:</p>
 channels:
     - conda-forge
 dependencies:
-    - python&gt;=3.7
+    - python&gt;=3.8
     - dcm2niix
     - dcm2bids
 </code></pre></div></td></tr></table></div>
@@ -1597,7 +1601,7 @@ dependencies:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

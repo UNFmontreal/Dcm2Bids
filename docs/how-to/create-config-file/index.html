@@ -517,8 +517,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#customlabels" class="md-nav__link">
-    customLabels
+  <a href="#customentities" class="md-nav__link">
+    customEntities
   </a>
   
 </li>
@@ -1091,8 +1091,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#customlabels" class="md-nav__link">
-    customLabels
+  <a href="#customentities" class="md-nav__link">
+    customEntities
   </a>
   
 </li>
@@ -1209,7 +1209,7 @@
 <span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;ProtocolName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func_task-*&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;ImageType&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ORIG*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;M&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ND&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MOSAIC&quot;</span><span class="p">]</span><span class="w"></span>
@@ -1227,7 +1227,7 @@
 <span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task_learning&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-learning&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-learning&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold_task-learning&quot;</span><span class="w"></span>
 <span class="w">      </span><span class="p">},</span><span class="w"></span>
@@ -1292,7 +1292,7 @@ field maps), anat (structural imaging such as T1, T2, etc.), meg
 <h2 id="modalitylabel">modalityLabel<a class="headerlink" href="#modalitylabel" title="Permanent link">⚓︎</a></h2>
 <p>It is a mandatory field. It describes the modality of the acquisition like
 <code>T1w</code>, <code>T2w</code> or <code>dwi</code>, <code>bold</code>.</p>
-<h2 id="customlabels">customLabels<a class="headerlink" href="#customlabels" title="Permanent link">⚓︎</a></h2>
+<h2 id="customentities">customEntities<a class="headerlink" href="#customentities" title="Permanent link">⚓︎</a></h2>
 <p>It is an optional field. For some acquisitions, you need to add information in
 the file name. For resting state fMRI, it is usually <code>task-rest</code>.</p>
 <p>To know more on how to set these fields, read the <a href="https://bids-specification.readthedocs.io/en/stable/">BIDS
@@ -1300,10 +1300,10 @@ specifications</a>.</p>
 <p>For a longer example of a Dcm2Bids config json, see
 <a href="https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json">here</a>.</p>
 <p>Note that the different bids labels must come in a very specific order to be bids valid filenames. 
-If the customLabels fields that are entered that are in the wrong order,
+If the customEntities fields that are entered that are in the wrong order,
 then dcm2bids will reorder them for you.</p>
 <p>For example if you entered:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run-01_task-rest&quot;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run-01_task-rest&quot;</span><span class="w"></span>
 </code></pre></div></td></tr></table></div>
 <p>when running dcm2bids, you will get the following warning:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -1312,6 +1312,8 @@ then dcm2bids will reorder them for you.</p>
                 from:   sub-ID01_run-01_task-rest_bold
                 to:     sub-ID01_task-rest_run-01_bold
 </code></pre></div></td></tr></table></div>
+<p>customEntities could also be combined with extractors. 
+See <a href="../use-advanced-commands/#customEntities-combined-with-extractors">customEntities combined with extractors</a></p>
 <h2 id="sidecarchanges">sidecarChanges<a class="headerlink" href="#sidecarchanges" title="Permanent link">⚓︎</a></h2>
 <p>Optional field to change or add information in a sidecar.</p>
 <h2 id="id-and-intendedfor">id and intendedFor<a class="headerlink" href="#id-and-intendedfor" title="Permanent link">⚓︎</a></h2>
@@ -1346,7 +1348,7 @@ using the <a href="../use-main-commands/#tools">dcm2bids_helper</a> command.&#16
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

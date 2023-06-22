@@ -1185,7 +1185,15 @@
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 
@@ -1242,6 +1250,14 @@ def _build_arg_parser():
                    default=DEFAULT.cliOutputDir,
 
                    help=&quot;Output BIDS directory. [%(default)s]&quot;)
+
+    p.add_argument(&quot;--auto_extract_entities&quot;,
+
+                   action=&#39;store_true&#39;,
+
+                   help=&quot;If set, it will automatically try to extract entity information [task, dir, echo]&quot;
+
+                        &quot; depending on the suffix and dataType. [%(default)s]&quot;)
 
     p.add_argument(&quot;--bids_validate&quot;,
 
@@ -1339,7 +1355,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

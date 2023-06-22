@@ -1491,7 +1491,13 @@
 <span class="normal">324</span>
 <span class="normal">325</span>
 <span class="normal">326</span>
-<span class="normal">327</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;
 
@@ -1569,6 +1575,8 @@ class Dcm2BidsGen(object):
 
         bids_validate=DEFAULT.bids_validate,
 
+        auto_extract_entities=DEFAULT.auto_extract_entities,
+
         session=DEFAULT.session,
 
         clobber=DEFAULT.clobber,
@@ -1595,6 +1603,8 @@ class Dcm2BidsGen(object):
 
         self.bids_validate = bids_validate
 
+        self.auto_extract_entities = auto_extract_entities
+
         self.forceDcm2niix = forceDcm2niix
 
         self.logLevel = log_level
@@ -1620,6 +1630,8 @@ class Dcm2BidsGen(object):
         self.logger.info(&quot;config: %s&quot;, os.path.realpath(config))
 
         self.logger.info(&quot;BIDS directory: %s&quot;, os.path.realpath(output_dir))
+
+        self.logger.info(&quot;Auto extract entities: %s&quot;, self.auto_extract_entities)
 
         self.logger.info(&quot;Validate BIDS: %s&quot;, self.bids_validate)
 
@@ -1695,6 +1707,10 @@ class Dcm2BidsGen(object):
 
             self.config[&quot;descriptions&quot;],
 
+            self.config.get(&quot;extractors&quot;, DEFAULT.extractors),
+
+            self.auto_extract_entities,
+
             self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
             self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
@@ -1712,8 +1728,6 @@ class Dcm2BidsGen(object):
         intendedForList = {}
 
         for acq in parser.acquisitions:
-
-            acq.setDstFile()
 
             intendedForList = self.move(acq, intendedForList)
 
@@ -1783,8 +1797,6 @@ class Dcm2BidsGen(object):
 
                     intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
 
-            # it&#39;s an anat nifti file and the user using a deface script
-
             if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
                 try:
@@ -1833,12 +1845,14 @@ class Dcm2BidsGen(object):
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2BidsGen</span><span class="p">(</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2BidsGen</span><span class="p">(</span>
     <span class="n">dicom_dir</span><span class="p">,</span>
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">config</span><span class="p">,</span>
     <span class="n">output_dir</span><span class="o">=</span><span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;/home/runner/work/Dcm2Bids/Dcm2Bids&#39;</span><span class="p">),</span>
     <span class="n">bids_validate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">auto_extract_entities</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="n">clobber</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">forceDcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2198,7 +2212,13 @@ class Dcm2BidsGen(object):
 <span class="normal">286</span>
 <span class="normal">287</span>
 <span class="normal">288</span>
-<span class="normal">289</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2238,6 +2258,8 @@ class Dcm2BidsGen(object):
 
         bids_validate=DEFAULT.bids_validate,
 
+        auto_extract_entities=DEFAULT.auto_extract_entities,
+
         session=DEFAULT.session,
 
         clobber=DEFAULT.clobber,
@@ -2264,6 +2286,8 @@ class Dcm2BidsGen(object):
 
         self.bids_validate = bids_validate
 
+        self.auto_extract_entities = auto_extract_entities
+
         self.forceDcm2niix = forceDcm2niix
 
         self.logLevel = log_level
@@ -2289,6 +2313,8 @@ class Dcm2BidsGen(object):
         self.logger.info(&quot;config: %s&quot;, os.path.realpath(config))
 
         self.logger.info(&quot;BIDS directory: %s&quot;, os.path.realpath(output_dir))
+
+        self.logger.info(&quot;Auto extract entities: %s&quot;, self.auto_extract_entities)
 
         self.logger.info(&quot;Validate BIDS: %s&quot;, self.bids_validate)
 
@@ -2364,6 +2390,10 @@ class Dcm2BidsGen(object):
 
             self.config[&quot;descriptions&quot;],
 
+            self.config.get(&quot;extractors&quot;, DEFAULT.extractors),
+
+            self.auto_extract_entities,
+
             self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
             self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
@@ -2381,8 +2411,6 @@ class Dcm2BidsGen(object):
         intendedForList = {}
 
         for acq in parser.acquisitions:
-
-            acq.setDstFile()
 
             intendedForList = self.move(acq, intendedForList)
 
@@ -2451,8 +2479,6 @@ class Dcm2BidsGen(object):
                 else:
 
                     intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
-
-            # it&#39;s an anat nifti file and the user using a deface script
 
             if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
@@ -2587,9 +2613,7 @@ class Dcm2BidsGen(object):
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, intendedForList):
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, intendedForList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -2634,8 +2658,6 @@ class Dcm2BidsGen(object):
                 else:
 
                     intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
-
-            # it&#39;s an anat nifti file and the user using a deface script
 
             if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
@@ -2762,7 +2784,9 @@ class Dcm2BidsGen(object):
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
@@ -2802,6 +2826,10 @@ class Dcm2BidsGen(object):
 
             self.config[&quot;descriptions&quot;],
 
+            self.config.get(&quot;extractors&quot;, DEFAULT.extractors),
+
+            self.auto_extract_entities,
+
             self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
             self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
@@ -2819,8 +2847,6 @@ class Dcm2BidsGen(object):
         intendedForList = {}
 
         for acq in parser.acquisitions:
-
-            acq.setDstFile()
 
             intendedForList = self.move(acq, intendedForList)
 
@@ -2890,7 +2916,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

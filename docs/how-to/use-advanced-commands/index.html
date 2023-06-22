@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-use-advanced-commands-and-configuration" class="md-skip">
+        <a href="#how-to-use-advanced-configuration" class="md-skip">
           Skip to content
         </a>
       
@@ -501,6 +501,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#customentities-combined-with-extractors" class="md-nav__link">
+    customEntities combined with extractors
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#searchmethod" class="md-nav__link">
@@ -1042,6 +1049,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#customentities-combined-with-extractors" class="md-nav__link">
+    customEntities combined with extractors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#searchmethod" class="md-nav__link">
     searchMethod
   </a>
@@ -1093,25 +1107,47 @@
                   </a>
                 
                 
-                <h1 id="how-to-use-advanced-commands-and-configuration">How to use advanced commands and configuration<a class="headerlink" href="#how-to-use-advanced-commands-and-configuration" title="Permanent link">⚓︎</a></h1>
+                <h1 id="how-to-use-advanced-configuration">How to use advanced configuration<a class="headerlink" href="#how-to-use-advanced-configuration" title="Permanent link">⚓︎</a></h1>
 <p>These optional configurations could be insert in the configuration file at the
 same level as the <code>"descriptions"</code> entry.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>{
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code>{
+    &quot;extractors&quot;: {&quot;SeriesDescription&quot;: [&quot;run-(?P&lt;run&gt;[0-9]+)&quot;, &quot;task-(?P&lt;task&gt;[0-9]+)&quot;], 
+                   &quot;BodyPartExamined&quot;: [&quot;(?P&lt;bodypart&gt;[a-zA-Z]+)&quot;]},
     &quot;searchMethod&quot;: &quot;fnmatch&quot;,
     &quot;caseSensitive&quot;: true,
     &quot;defaceTpl&quot;: [&quot;pydeface&quot;, &quot;--outfile&quot;, &quot;dstFile&quot;, &quot;srcFile&quot;],
     &quot;description&quot;: [
-        ...
+    {
+      &quot;dataType&quot;: &quot;anat&quot;,
+      &quot;modalityLabel&quot;: &quot;T2w&quot;,
+      &quot;customEntities&quot;: [&quot;acq-highres&quot;, &quot;bodypart&quot;, &quot;run&quot;, &quot;task&quot;],
+      }
     ]
+    ...
 }
 </code></pre></div></td></tr></table></div>
+<h2 id="customentities-combined-with-extractors">customEntities combined with extractors<a class="headerlink" href="#customentities-combined-with-extractors" title="Permanent link">⚓︎</a></h2>
+<p>default: None</p>
+<p>extractors will allow you to extract information embeded into sidecar files. 
+In the example above, it will try to match 2 different regex expressions (keys: task, run) within the 
+SeriesDescription field and bodypart in BodyPartExamined field.</p>
+<p>By using the same keys in customEntities and if found, it will add this new entities directly into the final filename.
+customEntities can be a list that combined extractor keys and regular entities. 
+If key is <code>task</code> it will automatically add the field "TaskName" inside the sidecase file.</p>
 <h2 id="searchmethod">searchMethod<a class="headerlink" href="#searchmethod" title="Permanent link">⚓︎</a></h2>
 <p>default: <code>"searchMethod": "fnmatch"</code></p>
 <p>fnmatch is the behaviour (See criteria) by default and the fall back if this
@@ -1137,6 +1173,161 @@ source file (input) and the destination file (output).</p>
 <p>Acquisitions are sorted using the sidecar data. The default behaviour is to sort
 by <code>SeriesNumber</code> then by <code>AcquisitionTime</code> then by the <code>SidecarFilename</code>. You
 can change this behaviour setting this key inside the configuration file.</p>
+<h1 id="how-to-use-advanced-commands">How to use advanced commands<a class="headerlink" href="#how-to-use-advanced-commands" title="Permanent link">⚓︎</a></h1>
+<h2 id="dcm2bids-advanced-options">dcm2bids advanced options<a class="headerlink" href="#dcm2bids-advanced-options" title="Permanent link">⚓︎</a></h2>
+<p>By now, you should be used to getting the <code>--help</code> information before running a
+command.</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Command</label><div class="tabbed-content">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>dcm2bids --help
+</code></pre></div></td></tr></table></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Output</label><div class="tabbed-content">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
+<span class="hll">usage: dcm2bids <span class="o">[</span>-h<span class="o">]</span> -d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span> -p PARTICIPANT <span class="o">[</span>-s SESSION<span class="o">]</span> -c CONFIG <span class="o">[</span>-o OUTPUT_DIR<span class="o">]</span> <span class="o">[</span>--forceDcm2niix<span class="o">]</span> <span class="o">[</span>--clobber<span class="o">]</span>
+</span><span class="hll">                <span class="o">[</span>-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
+</span>
+Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
+dcm2bids <span class="m">3</span>.0.0
+
+options:
+-h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
+-d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span>, --dicom_dir DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span>
+                        DICOM directory<span class="o">(</span>ies<span class="o">)</span>
+-p PARTICIPANT, --participant PARTICIPANT
+                        Participant ID
+-s SESSION, --session SESSION
+                        Session ID
+-c CONFIG, --config CONFIG
+                        JSON configuration file <span class="o">(</span>see example/config.json<span class="o">)</span>
+-o OUTPUT_DIR, --output_dir OUTPUT_DIR
+                        Output BIDS directory, Default: current directory <span class="o">(</span>/home/sam/dcm2bids-tutorial/bids_project<span class="o">)</span>
+--auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
+                        depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>
+--bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
+                      bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
+--forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
+--clobber             Overwrite output <span class="k">if</span> it exists
+-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>, --log_level <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
+                        Set logging level
+-a, --anonymizer      This option no longer exists from the script <span class="k">in</span> this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
+
+            Documentation at https://github.com/unfmontreal/Dcm2Bids
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+<h2 id="-auto_extract_entities">--auto_extract_entities<a class="headerlink" href="#-auto_extract_entities" title="Permanent link">⚓︎</a></h2>
+<p>This option will automatically try to find 3 entities (task, dir and echo) for specific dataType/modalityLabel.</p>
+<ul>
+<li>
+<p><code>task</code> in the SeriesDescription field</p>
+<p>Regex expression <code>task-(?P&lt;task&gt;[a-zA-Z0-9]+)</code></p>
+</li>
+<li>
+<p><code>dir</code> in the PhaseEncodedDirection field</p>
+<p>Regex expression <code>(?P&lt;dir&gt;-?j|i)</code></p>
+</li>
+<li>
+<p><code>echo</code> in the EchoNumber field </p>
+<p>Regex expression <code>(?P&lt;echo&gt;[0-9])</code></p>
+</li>
+</ul>
+<p>If found, it will try to feed the filename with this entity if they are mandatory.</p>
+<p>For example, a "pepolar" fieldmap data requires the entity <code>dir</code> (See <a href="https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#case-4-multiple-phase-encoded-directions-pepolar">BIDS specification</a>). 
+If you set this parameter, it will automatically try to find this entity and add it to the filename.</p>
+<p>So far and accordingly to the BIDS specification 5 dataType/modalityLabel automatically look for this 3 entities.</p>
+<table>
+<thead>
+<tr>
+<th align="center">dataType</th>
+<th align="center">modalityLabel</th>
+<th align="center">Entities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">anat</td>
+<td align="center">MEGRE</td>
+<td align="center">echo</td>
+</tr>
+<tr>
+<td align="center">anat</td>
+<td align="center">MESE</td>
+<td align="center">echo</td>
+</tr>
+<tr>
+<td align="center">func</td>
+<td align="center">cbv</td>
+<td align="center">task</td>
+</tr>
+<tr>
+<td align="center">func</td>
+<td align="center">bold</td>
+<td align="center">task</td>
+</tr>
+<tr>
+<td align="center">func</td>
+<td align="center">sbref</td>
+<td align="center">task</td>
+</tr>
+<tr>
+<td align="center">fmap</td>
+<td align="center">epi</td>
+<td align="center">dir</td>
+</tr>
+</tbody>
+</table>
+<p>Using the <code>--auto_extract_entitie</code>, if you want another combination of dataType/modalityLabel to be able to 
+extract one or more of these 3 entities you need to add the key of the entities needed using the field customEntities like this within your description:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>&quot;customEntities&quot;: [&quot;echo&quot;, &quot;dir&quot;]
+</code></pre></div></td></tr></table></div>
+<p><img alt="⚠️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" /> If task is found, it will automatically add the field <code>TaskName</code> into the sidecar file. 
+It means you don't have to add the field in the config file like this.</p>
+<p><strike></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>{
+     &quot;sidecarChanges&quot;: {
+        &quot;TaskName&quot;: &quot;learning&quot;
+    }
+}
+</code></pre></div></td></tr></table></div>
+<p></strike></p>
+<p><img alt="☢️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/2622.png" title=":radioactive:" /> You can find more detailed information by looking at the file <code>dcm2bids/utils/utils.py</code> and 
+more specifically auto_extractors and auto_entities variables.</p>
+<h2 id="-bids_validate">--bids_validate<a class="headerlink" href="#-bids_validate" title="Permanent link">⚓︎</a></h2>
+<p>By default, Dcm2bids will not validate your final BIDS structure.
+If needed, you can install <a href="https://github.com/bids-standard/bids-validator#quickstart">bids-validator</a> and activate this option.</p>
                 
                   
                     
@@ -1145,7 +1336,7 @@ can change this behaviour setting this key inside the configuration file.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

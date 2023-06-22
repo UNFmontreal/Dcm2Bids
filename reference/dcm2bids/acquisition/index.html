@@ -1591,7 +1591,19 @@
 <span class="normal">410</span>
 <span class="normal">411</span>
 <span class="normal">412</span>
-<span class="normal">413</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
@@ -1617,7 +1629,7 @@ class Acquisition(object):
 
                 (ex: T1w, T2w, bold ...)
 
-        customLabels (str): Optional labels (ex: task-rest)
+        customEntities (str): Optional entities (ex: task-rest)
 
         srcSidecar (Sidecar): Optional sidecar object
 
@@ -1633,7 +1645,7 @@ class Acquisition(object):
 
         modalityLabel,
 
-        customLabels=&quot;&quot;,
+        customEntities=&quot;&quot;,
 
         id=None,
 
@@ -1653,7 +1665,7 @@ class Acquisition(object):
 
         self._modalityLabel = &quot;&quot;
 
-        self._customLabels = &quot;&quot;
+        self._customEntities = &quot;&quot;
 
         self._id = &quot;&quot;
 
@@ -1665,7 +1677,7 @@ class Acquisition(object):
 
         self.modalityLabel = modalityLabel
 
-        self.customLabels = customLabels
+        self.customEntities = customEntities
 
         self.srcSidecar = srcSidecar
 
@@ -1751,25 +1763,31 @@ class Acquisition(object):
 
     @property
 
-    def customLabels(self):
+    def customEntities(self):
 
         &quot;&quot;&quot;
 
         Returns:
 
-            A string &#39;_&lt;customLabels&gt;&#39;
+            A string &#39;_&lt;customEntities&gt;&#39;
 
         &quot;&quot;&quot;
 
-        return self._customLabels
+        return self._customEntities
 
-    @customLabels.setter
+    @customEntities.setter
 
-    def customLabels(self, customLabels):
+    def customEntities(self, customEntities):
 
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-        self._customLabels = self.prepend(customLabels)
+        if isinstance(customEntities, list):
+
+            self._customEntities = self.prepend(&#39;_&#39;.join(customEntities))
+
+        else:
+
+            self._customEntities = self.prepend(customEntities)
 
     @property
 
@@ -1779,17 +1797,17 @@ class Acquisition(object):
 
         Returns:
 
-            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;
+            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;modalityLabel&gt;&#39;
 
         &quot;&quot;&quot;
 
-        if self.customLabels.strip() == &quot;&quot;:
+        if self.customEntities.strip() == &quot;&quot;:
 
             return self.modalityLabel
 
         else:
 
-            return self.customLabels + self.modalityLabel
+            return self.customEntities + self.modalityLabel
 
     @property
 
@@ -1949,6 +1967,12 @@ class Acquisition(object):
 
         data[&quot;Dcm2bidsVersion&quot;] = __version__
 
+        # TaskName
+
+        if &#39;TaskName&#39; in self.srcSidecar.data:
+
+            data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
+
         # intendedFor key
 
         if self.intendedFor != [None]:
@@ -2023,7 +2047,7 @@ class Acquisition(object):
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">dataType</span><span class="p">,</span>
     <span class="n">modalityLabel</span><span class="p">,</span>
-    <span class="n">customLabels</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">customEntities</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2063,9 +2087,9 @@ class Acquisition(object):
 <td>None</td>
 </tr>
 <tr>
-<td>customLabels</td>
+<td>customEntities</td>
 <td>str</td>
-<td>Optional labels (ex: task-rest)</td>
+<td>Optional entities (ex: task-rest)</td>
 <td>None</td>
 </tr>
 <tr>
@@ -2478,7 +2502,19 @@ class Acquisition(object):
 <span class="normal">398</span>
 <span class="normal">399</span>
 <span class="normal">400</span>
-<span class="normal">401</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
 
     &quot;&quot;&quot; Class representing an acquisition
 
@@ -2492,7 +2528,7 @@ class Acquisition(object):
 
                 (ex: T1w, T2w, bold ...)
 
-        customLabels (str): Optional labels (ex: task-rest)
+        customEntities (str): Optional entities (ex: task-rest)
 
         srcSidecar (Sidecar): Optional sidecar object
 
@@ -2508,7 +2544,7 @@ class Acquisition(object):
 
         modalityLabel,
 
-        customLabels=&quot;&quot;,
+        customEntities=&quot;&quot;,
 
         id=None,
 
@@ -2528,7 +2564,7 @@ class Acquisition(object):
 
         self._modalityLabel = &quot;&quot;
 
-        self._customLabels = &quot;&quot;
+        self._customEntities = &quot;&quot;
 
         self._id = &quot;&quot;
 
@@ -2540,7 +2576,7 @@ class Acquisition(object):
 
         self.modalityLabel = modalityLabel
 
-        self.customLabels = customLabels
+        self.customEntities = customEntities
 
         self.srcSidecar = srcSidecar
 
@@ -2626,25 +2662,31 @@ class Acquisition(object):
 
     @property
 
-    def customLabels(self):
+    def customEntities(self):
 
         &quot;&quot;&quot;
 
         Returns:
 
-            A string &#39;_&lt;customLabels&gt;&#39;
+            A string &#39;_&lt;customEntities&gt;&#39;
 
         &quot;&quot;&quot;
 
-        return self._customLabels
+        return self._customEntities
 
-    @customLabels.setter
+    @customEntities.setter
 
-    def customLabels(self, customLabels):
+    def customEntities(self, customEntities):
 
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-        self._customLabels = self.prepend(customLabels)
+        if isinstance(customEntities, list):
+
+            self._customEntities = self.prepend(&#39;_&#39;.join(customEntities))
+
+        else:
+
+            self._customEntities = self.prepend(customEntities)
 
     @property
 
@@ -2654,17 +2696,17 @@ class Acquisition(object):
 
         Returns:
 
-            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customLabels&gt;_&lt;modalityLabel&gt;&#39;
+            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;modalityLabel&gt;&#39;
 
         &quot;&quot;&quot;
 
-        if self.customLabels.strip() == &quot;&quot;:
+        if self.customEntities.strip() == &quot;&quot;:
 
             return self.modalityLabel
 
         else:
 
-            return self.customLabels + self.modalityLabel
+            return self.customEntities + self.modalityLabel
 
     @property
 
@@ -2824,6 +2866,12 @@ class Acquisition(object):
 
         data[&quot;Dcm2bidsVersion&quot;] = __version__
 
+        # TaskName
+
+        if &#39;TaskName&#39; in self.srcSidecar.data:
+
+            data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
+
         # intendedFor key
 
         if self.intendedFor != [None]:
@@ -2950,10 +2998,10 @@ class Acquisition(object):
 </code></pre></div></td></tr></table></div>
 </details>
 <h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">customLabels</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">customEntities</span>
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
-<p>A string '_<customLabels>'</p>
+<p>A string '_<customEntities>'</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstIntendedFor</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
@@ -3029,7 +3077,13 @@ class Acquisition(object):
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
-<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, intendedForList):
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, intendedForList):
 
         &quot;&quot;&quot;
 
@@ -3038,6 +3092,12 @@ class Acquisition(object):
         data = self.srcSidecar.origData
 
         data[&quot;Dcm2bidsVersion&quot;] = __version__
+
+        # TaskName
+
+        if &#39;TaskName&#39; in self.srcSidecar.data:
+
+            data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
 
         # intendedFor key
 
@@ -3221,7 +3281,7 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>

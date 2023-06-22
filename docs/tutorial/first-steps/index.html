@@ -1385,7 +1385,9 @@ You can test it with any command but a safe way is to use the <code>--help</code
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~$ dcm2bids --help
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~$ dcm2bids --help
 usage: dcm2bids <span class="o">[</span>-h<span class="o">]</span> -d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span> -p PARTICIPANT <span class="o">[</span>-s SESSION<span class="o">]</span> -c
                 CONFIG <span class="o">[</span>-o OUTPUT_DIR<span class="o">]</span> <span class="o">[</span>--forceDcm2niix<span class="o">]</span> <span class="o">[</span>--clobber<span class="o">]</span>
                 <span class="o">[</span>-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
@@ -1406,6 +1408,8 @@ options:
 -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
                         <span class="o">(</span>/home/sam<span class="o">)</span>
+--auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
+                        depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>                            
 --bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
                       bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
@@ -2284,7 +2288,7 @@ task name:</p>
 <span class="hll"><span class="w">    </span><span class="p">{</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 </span><span class="hll"><span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
@@ -2323,7 +2327,7 @@ task name:</p>
     <span class="o">{</span>
       <span class="s2">&quot;dataType&quot;</span>: <span class="s2">&quot;func&quot;</span>,
       <span class="s2">&quot;modalityLabel&quot;</span>: <span class="s2">&quot;bold&quot;</span>,
-      <span class="s2">&quot;customLabels&quot;</span>: <span class="s2">&quot;task-rest&quot;</span>,
+      <span class="s2">&quot;customEntities&quot;</span>: <span class="s2">&quot;task-rest&quot;</span>,
       <span class="s2">&quot;criteria&quot;</span>: <span class="o">{</span>
         <span class="s2">&quot;SeriesDescription&quot;</span>: <span class="s2">&quot;*Axial EPI-FMRI (Interleaved I to S)*&quot;</span>
       <span class="o">}</span>,
@@ -2412,7 +2416,7 @@ file with the appropriate info.</p>
 <span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
 <span class="w">      </span><span class="p">},</span><span class="w"></span>
@@ -2423,7 +2427,7 @@ file with the appropriate info.</p>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=AP*&quot;</span><span class="w"></span>
 <span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
@@ -2432,7 +2436,7 @@ file with the appropriate info.</p>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=PA*&quot;</span><span class="w"></span>
 <span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
@@ -2489,7 +2493,9 @@ command.</p>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
 <span class="hll">usage: dcm2bids <span class="o">[</span>-h<span class="o">]</span> -d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span> -p PARTICIPANT <span class="o">[</span>-s SESSION<span class="o">]</span> -c CONFIG <span class="o">[</span>-o OUTPUT_DIR<span class="o">]</span> <span class="o">[</span>--forceDcm2niix<span class="o">]</span> <span class="o">[</span>--clobber<span class="o">]</span>
 </span><span class="hll">                <span class="o">[</span>-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
 </span>
@@ -2508,6 +2514,8 @@ options:
                         JSON configuration file <span class="o">(</span>see example/config.json<span class="o">)</span>
 -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory <span class="o">(</span>/home/sam/dcm2bids-tutorial/bids_project<span class="o">)</span>
+--auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
+                        depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>
 --bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
                       bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
@@ -2712,7 +2720,7 @@ documentation to find information about the different commands.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-12T19:25:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-12</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
       
     
   </small>
