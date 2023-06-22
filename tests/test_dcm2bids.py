@@ -248,14 +248,14 @@ def test_dcm2bids_auto_extract():
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2]
 
-    epi_file = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_dir-PA_epi.json")
+    epi_file = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_dir-AP_epi.json")
     data = load_json(epi_file)
 
     assert os.path.exists(epi_file)
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
                                    os.path.join("anat", "sub-01_T1w.nii")]
 
-    func_task = os.path.join(bidsDir.name, "sub-01", "func", "sub-01_task-rest_bold.json")
+    func_task = os.path.join(bidsDir.name, "sub-01", "func", "sub-01_task-rest_acq-highres_bold.json")
     data = load_json(func_task)
 
     assert os.path.exists(func_task)
