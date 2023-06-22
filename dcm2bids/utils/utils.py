@@ -45,7 +45,7 @@ class DEFAULT(object):
 
     # sidecar.py
     auto_extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)"],
-                       'PhaseEncodingDirection': ["(?P<dir>-?j|i)"],
+                       'PhaseEncodingDirection': ["(?P<dir>(j|i)-?)"],
                        'EchoNumber': ["(?P<echo>[0-9])"]}
 
     extractors = {}

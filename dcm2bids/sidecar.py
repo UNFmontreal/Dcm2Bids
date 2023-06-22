@@ -227,7 +227,6 @@ class SidecarPairing(object):
             # only one description for the sidecar
             if len(valid_descriptions) == 1:
                 desc = valid_descriptions[0]
-
                 desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
 
                 acq = Acquisition(participant,
@@ -290,7 +289,8 @@ class SidecarPairing(object):
                                     break
 
             if "customEntities" in desc.keys():
-                entities = set(concatenated_matches.keys()).intersection(set(descWithTask["customEntities"]))
+                entities = set(concatenated_matches.keys()).union(set(descWithTask["customEntities"]))
+                    #entities_left = set(concatenated_matches.keys()).symmetric_difference(set(descWithTask["customEntities"]))
 
             if self.auto_extract_entities:
                 auto_acq = '_'.join([descWithTask['dataType'], descWithTask["modalityLabel"]])
@@ -307,18 +307,20 @@ class SidecarPairing(object):
                         descWithTask["customEntities"] = entities
 
             for curr_entity in entities:
-                if curr_entity == 'dir':
-                    descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask["customEntities"]))
-                elif curr_entity == 'task':
-                    sidecar.data['TaskName'] = concatenated_matches[curr_entity]
-                    descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
-                else:
-                    descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                if curr_entity in concatenated_matches.keys():
+                    if curr_entity == 'dir':
+                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask["customEntities"]))
+                    elif curr_entity == 'task':
+                        sidecar.data['TaskName'] = concatenated_matches[curr_entity]
+                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                    else:
+                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
 
             # Remove entities without -
-            for curr_entities in descWithTask["customEntities"]:
-                if '-' not in curr_entities:
-                    descWithTask["customEntities"].remove(curr_entities)
+            for curr_entity in descWithTask["customEntities"]:
+                if '-' not in curr_entity:
+                    logging.info(f"Removing entity '{curr_entity}' since it does not fit the basic BIDS specification (Entity-Value)")
+                    descWithTask["customEntities"].remove(curr_entity)
 
         return descWithTask, sidecar
 
