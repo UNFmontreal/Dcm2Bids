@@ -356,3 +356,4 @@ class SidecarPairing(object):
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum + 1)
                 self.acquisitions[acqInd].customEntities += runStr
+                self.acquisitions[acqInd].setDstFile()
