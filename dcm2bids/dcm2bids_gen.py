@@ -139,7 +139,6 @@ class Dcm2BidsGen(object):
 
         intendedForList = {}
         for acq in parser.acquisitions:
-            acq.setDstFile()
             intendedForList = self.move(acq, intendedForList)
 
         if self.bids_validate:

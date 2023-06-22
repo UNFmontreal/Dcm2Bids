@@ -238,7 +238,7 @@ class SidecarPairing(object):
                 else:
                     acquisitions.append(acq)
 
-                self.logger.info("%s  <-  %s", acq.suffix, sidecarName)
+                self.logger.info("%s  <-  %s", acq.dstFile.replace(acq.participant.prefix + "-", ""), sidecarName)
 
             # sidecar with no link
             elif len(valid_descriptions) == 0:
@@ -319,7 +319,7 @@ class SidecarPairing(object):
             # Remove entities without -
             for curr_entity in descWithTask["customEntities"]:
                 if '-' not in curr_entity:
-                    logging.info(f"Removing entity '{curr_entity}' since it does not fit the basic BIDS specification (Entity-Value)")
+                    self.logger.info(f"Removing entity '{curr_entity}' since it does not fit the basic BIDS specification (Entity-Value)")
                     descWithTask["customEntities"].remove(curr_entity)
 
         return descWithTask, sidecar
