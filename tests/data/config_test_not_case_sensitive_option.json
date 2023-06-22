@@ -6,14 +6,14 @@
           "dataType": "localizer",
           "modalityLabel": "localizer",
           "criteria": {
-              "SeriesDescription": "LOCALIZER"
+              "ProtocolName": "LOCALIZER"
           }
         },
         {
             "dataType": "anat",
             "modalityLabel": "T1w",
             "criteria": {
-                "SidecarFilename": "*mprage*"
+                "SeriesDescription": "*mprage*"
             }
         },
         {

@@ -10,8 +10,8 @@ from collections import defaultdict, OrderedDict
 from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
-from dcm2bids.utils.utils import DEFAULT, splitext_
 from dcm2bids.utils.io import load_json
+from dcm2bids.utils.utils import DEFAULT, convert_dir, splitext_
 
 
 class Sidecar(object):
@@ -90,14 +90,17 @@ class SidecarPairing(object):
         descriptions (list): List of dictionaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions, searchMethod=DEFAULT.searchMethod,
-                 caseSensitive=DEFAULT.caseSensitive):
+    def __init__(self, sidecars, descriptions, extractors=DEFAULT.extractors,
+                 auto_extractor=DEFAULT.auto_extract_entities,
+                 searchMethod=DEFAULT.searchMethod, caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
 
         self._searchMethod = ""
         self.graph = OrderedDict()
         self.acquisitions = []
 
+        self.extractors = extractors
+        self.auto_extract_entities = auto_extractor
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.searchMethod = searchMethod
@@ -224,6 +227,8 @@ class SidecarPairing(object):
             # only one description for the sidecar
             if len(valid_descriptions) == 1:
                 desc = valid_descriptions[0]
+                desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
+
                 acq = Acquisition(participant,
                                   srcSidecar=sidecar, **desc)
                 acq.setDstFile()
@@ -233,7 +238,7 @@ class SidecarPairing(object):
                 else:
                     acquisitions.append(acq)
 
-                self.logger.info("%s  <-  %s", acq.suffix, sidecarName)
+                self.logger.info("%s  <-  %s", acq.dstFile.replace(acq.participant.prefix + "-", ""), sidecarName)
 
             # sidecar with no link
             elif len(valid_descriptions) == 0:
@@ -251,10 +256,78 @@ class SidecarPairing(object):
 
         return self.acquisitions
 
+    def searchDcmTagEntity(self, sidecar, desc):
+        """
+        Add DCM Tag to customEntities
+        """
+        descWithTask = desc.copy()
+        concatenated_matches = {}
+        entities = []
+
+        if "customEntities" in desc.keys() or self.auto_extract_entities:
+            if 'customEntities' in desc.keys():
+                if isinstance(descWithTask["customEntities"], str):
+                    descWithTask["customEntities"] = [descWithTask["customEntities"]]
+            else:
+                descWithTask["customEntities"] = []
+
+            if self.auto_extract_entities:
+                self.extractors.update(DEFAULT.auto_extractors)
+
+            for dcmTag in self.extractors:
+                if dcmTag in sidecar.data.keys():
+                    dcmInfo = sidecar.data.get(dcmTag)
+                    for regex in self.extractors[dcmTag]:
+                        compile_regex = re.compile(regex)
+                        if not isinstance(dcmInfo, list):
+                            if compile_regex.search(str(dcmInfo)) is not None:
+                                concatenated_matches.update(compile_regex.search(str(dcmInfo)).groupdict())
+                        else:
+                            for curr_dcmInfo in dcmInfo:
+                                if compile_regex.search(curr_dcmInfo) is not None:
+                                    concatenated_matches.update(compile_regex.search(curr_dcmInfo).groupdict())
+                                    break
+
+            if "customEntities" in desc.keys():
+                entities = set(concatenated_matches.keys()).union(set(descWithTask["customEntities"]))
+                    #entities_left = set(concatenated_matches.keys()).symmetric_difference(set(descWithTask["customEntities"]))
+
+            if self.auto_extract_entities:
+                auto_acq = '_'.join([descWithTask['dataType'], descWithTask["modalityLabel"]])
+                if auto_acq in DEFAULT.auto_entities:
+                    # Check if these auto entities have been found before merging
+                    auto_entities = set(concatenated_matches.keys()).intersection(set(DEFAULT.auto_entities[auto_acq]))
+                    left_auto_entities = auto_entities.symmetric_difference(set(DEFAULT.auto_entities[auto_acq]))
+                    if left_auto_entities:
+                        self.logger.warning(f"{left_auto_entities} have not been found for dataType '{descWithTask['dataType']}' "
+                                            f"and suffix '{descWithTask['modalityLabel']}'.")
+                    else:
+                        entities = list(entities) + DEFAULT.auto_entities[auto_acq]
+                        entities = list(set(entities))
+                        descWithTask["customEntities"] = entities
+
+            for curr_entity in entities:
+                if curr_entity in concatenated_matches.keys():
+                    if curr_entity == 'dir':
+                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask["customEntities"]))
+                    elif curr_entity == 'task':
+                        sidecar.data['TaskName'] = concatenated_matches[curr_entity]
+                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                    else:
+                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+
+            # Remove entities without -
+            for curr_entity in descWithTask["customEntities"]:
+                if '-' not in curr_entity:
+                    self.logger.info(f"Removing entity '{curr_entity}' since it does not fit the basic BIDS specification (Entity-Value)")
+                    descWithTask["customEntities"].remove(curr_entity)
+
+        return descWithTask, sidecar
+
     def find_runs(self):
         """
         Check if there is duplicate destination roots in the acquisitions
-        and add '_run-' to the customLabels of the acquisition
+        and add '_run-' to the customEntities of the acquisition
         """
 
         def duplicates(seq):
@@ -282,4 +355,5 @@ class SidecarPairing(object):
             self.logger.info("Adding 'run' information to the acquisition")
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum + 1)
-                self.acquisitions[acqInd].customLabels += runStr
+                self.acquisitions[acqInd].customEntities += runStr
+                self.acquisitions[acqInd].setDstFile()

@@ -34,28 +34,6 @@ def write_txt(filename, lines):
         f.write(f"{lines}\n")
 
 
-def get_scaffold_dir():
-    """
-    Return SCAFFOLD data directory in dcm2bids repository
-
-    Returns
-    -------
-    scaffold_dir: string
-        SCAFFOLD path
-    """
-
-    module_path = os.path.dirname(os.path.dirname(inspect.getfile(dcm2bids)))
-    # module_path = inspect.getfile(dcm2bids)
-    scaffold_dir = opj(module_path, 'data', 'scaffold')
-    # scaffold_dir = pkg_resources.resource_filename(__name__,  os.path.join("data", "scaffold"))
-    # print(module_path)
-    # scaffold_dir = os.path.join(os.path.dirname(
-    # os.path.dirname(module_path)), "data", "scaffold")
-
-    print(scaffold_dir)
-    return scaffold_dir
-
-
 def valid_path(in_path, type="folder"):
     """Assert that file exists.
 

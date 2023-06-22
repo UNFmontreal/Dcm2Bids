@@ -17,7 +17,7 @@ class Acquisition(object):
         dataType (str): A functional group of MRI data (ex: func, anat ...)
         modalityLabel (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
-        customLabels (str): Optional labels (ex: task-rest)
+        customEntities (str): Optional entities (ex: task-rest)
         srcSidecar (Sidecar): Optional sidecar object
     """
 
@@ -26,7 +26,7 @@ class Acquisition(object):
         participant,
         dataType,
         modalityLabel,
-        customLabels="",
+        customEntities="",
         id=None,
         srcSidecar=None,
         sidecarChanges=None,
@@ -37,14 +37,14 @@ class Acquisition(object):
         self.logger = logging.getLogger(__name__)
 
         self._modalityLabel = ""
-        self._customLabels = ""
+        self._customEntities = ""
         self._id = ""
         self._intendedFor = None
 
         self.participant = participant
         self.dataType = dataType
         self.modalityLabel = modalityLabel
-        self.customLabels = customLabels
+        self.customEntities = customEntities
         self.srcSidecar = srcSidecar
 
         if sidecarChanges is None:
@@ -97,29 +97,32 @@ class Acquisition(object):
         self._id = value
 
     @property
-    def customLabels(self):
+    def customEntities(self):
         """
         Returns:
-            A string '_<customLabels>'
+            A string '_<customEntities>'
         """
-        return self._customLabels
+        return self._customEntities
 
-    @customLabels.setter
-    def customLabels(self, customLabels):
+    @customEntities.setter
+    def customEntities(self, customEntities):
         """ Prepend '_' if necessary"""
-        self._customLabels = self.prepend(customLabels)
+        if isinstance(customEntities, list):
+            self._customEntities = self.prepend('_'.join(customEntities))
+        else:
+            self._customEntities = self.prepend(customEntities)
 
     @property
     def suffix(self):
         """ The suffix to build filenames
 
         Returns:
-            A string '_<modalityLabel>' or '_<customLabels>_<modalityLabel>'
+            A string '_<modalityLabel>' or '_<customEntities>_<modalityLabel>'
         """
-        if self.customLabels.strip() == "":
+        if self.customEntities.strip() == "":
             return self.modalityLabel
         else:
-            return self.customLabels + self.modalityLabel
+            return self.customEntities + self.modalityLabel
 
     @property
     def srcRoot(self):
@@ -213,6 +216,10 @@ class Acquisition(object):
         """
         data = self.srcSidecar.origData
         data["Dcm2bidsVersion"] = __version__
+
+        # TaskName
+        if 'TaskName' in self.srcSidecar.data:
+            data["TaskName"] = self.srcSidecar.data["TaskName"]
 
         # intendedFor key
         if self.intendedFor != [None]:

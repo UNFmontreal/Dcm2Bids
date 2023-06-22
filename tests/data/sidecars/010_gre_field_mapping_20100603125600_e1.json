@@ -29,6 +29,7 @@
 	"ReconMatrixPE": 64,
 	"PixelBandwidth": 260,
 	"PhaseEncodingAxis": "j",
+	"PhaseEncodingDirection": "j-",
 	"ImageOrientationPatientDICOM": [
 		1,
 		0,

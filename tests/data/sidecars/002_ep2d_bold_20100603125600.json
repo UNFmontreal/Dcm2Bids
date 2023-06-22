@@ -7,7 +7,7 @@
 	"PatientPosition": "HFS",
 	"ProcedureStepDescription": "fMRI",
 	"MRAcquisitionType": "2D",
-	"SeriesDescription": "ep2d_bold",
+	"SeriesDescription": "ep2d_bold_task-rest",
 	"ProtocolName": "ep2d_bold",
 	"ScanningSequence": "EP",
 	"SequenceVariant": "SK",

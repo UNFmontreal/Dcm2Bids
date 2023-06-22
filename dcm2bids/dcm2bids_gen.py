@@ -44,6 +44,7 @@ class Dcm2BidsGen(object):
         config,
         output_dir=DEFAULT.outputDir,
         bids_validate=DEFAULT.bids_validate,
+        auto_extract_entities=DEFAULT.auto_extract_entities,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         forceDcm2niix=DEFAULT.forceDcm2niix,
@@ -58,6 +59,7 @@ class Dcm2BidsGen(object):
         self.participant = Participant(participant, session)
         self.clobber = clobber
         self.bids_validate = bids_validate
+        self.auto_extract_entities = auto_extract_entities
         self.forceDcm2niix = forceDcm2niix
         self.logLevel = log_level
 
@@ -73,6 +75,7 @@ class Dcm2BidsGen(object):
         self.logger.info("session: %s", self.participant.session)
         self.logger.info("config: %s", os.path.realpath(config))
         self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
+        self.logger.info("Auto extract entities: %s", self.auto_extract_entities)
         self.logger.info("Validate BIDS: %s", self.bids_validate)
 
     @property
@@ -123,6 +126,8 @@ class Dcm2BidsGen(object):
         parser = SidecarPairing(
             sidecars,
             self.config["descriptions"],
+            self.config.get("extractors", DEFAULT.extractors),
+            self.auto_extract_entities,
             self.config.get("searchMethod", DEFAULT.searchMethod),
             self.config.get("caseSensitive", DEFAULT.caseSensitive)
         )
@@ -134,7 +139,6 @@ class Dcm2BidsGen(object):
 
         intendedForList = {}
         for acq in parser.acquisitions:
-            acq.setDstFile()
             intendedForList = self.move(acq, intendedForList)
 
         if self.bids_validate:
@@ -178,7 +182,6 @@ class Dcm2BidsGen(object):
                 else:
                     intendedForList[acquisition.id] = [acquisition.dstIntendedFor + "".join(ext)]
 
-            # it's an anat nifti file and the user using a deface script
             if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
