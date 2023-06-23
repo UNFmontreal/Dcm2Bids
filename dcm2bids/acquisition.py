@@ -149,12 +149,15 @@ class Acquisition(object):
     def setDstFile(self):
         """
         Return:
-            The destination filename formatted following the v1.7.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+            The destination filename formatted following the v1.8.0
+            BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
         """
         current_name = self.participant.prefix + self.suffix
         new_name = ''
-        current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
+        current_dict = dict(
+          x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2
+          )
         suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]
 
         for current_key in DEFAULT.entityTableKeys:
@@ -168,10 +171,11 @@ class Acquisition(object):
             new_name += f"_{current_key}-{current_dict[current_key]}"
 
         if current_dict:
-            self.logger.warning("Entity \"{}\"".format(list(current_dict.keys())) +
-                                " is not a valid BIDS entity.")
+            self.logger.warning(f"Entity \"{list(current_dict.keys())}\" is"
+                                "not a valid BIDS entity.")
 
-        new_name += f"_{'_'.join(suffix_list)}"  # Allow multiple single keys (without value)
+        # Allow multiple single keys (without value)
+        new_name += f"_{'_'.join(suffix_list)}"
 
         if len(suffix_list) != 1:
             self.logger.warning("There was more than one suffix found "
@@ -217,11 +221,14 @@ class Acquisition(object):
                     intendedValue = intendedValue + [intendedForList[index]]
                 else:
                     logging.warning(f"No id found for IntendedFor value '{index}'.")
-                    logging.warning(f"No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.")
+                    logging.warning(f"No sidecar changes for field IntendedFor"
+                                    f"will be made "
+                                    f"for json file {self.dstFile}.json with this id.")
                     logging.warning("Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n")
 
-            data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
-
+            data["IntendedFor"] = [
+                item for sublist in intendedValue for item in sublist
+            ]
         # sidecarChanges
         for key, value in self.sidecarChanges.items():
             if key == "Sources":
@@ -236,7 +243,6 @@ class Acquisition(object):
                 data[key] = flat_value_list
             else:
                 data[key] = value
-
 
         return data
 

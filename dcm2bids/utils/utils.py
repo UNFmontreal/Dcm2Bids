@@ -64,7 +64,7 @@ class DEFAULT(object):
     caseSensitive = True
 
     # Entity table:
-    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+    # https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
     entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
                        "run", "mod", "echo", "flip", "inv", "mt", "part",
                        "recording"]
