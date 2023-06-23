@@ -112,13 +112,14 @@ def splitext_(path, extensions=None):
     return os.path.splitext(path)
 
 
-def run_shell_command(commandLine):
+def run_shell_command(commandLine, log=True):
     """ Wrapper of subprocess.check_output
     Returns:
         Run command with arguments and return its output
     """
-    logger = logging.getLogger(__name__)
-    logger.info("Running %s", commandLine)
+    if log:
+        logger = logging.getLogger(__name__)
+        logger.info("Running: %s", " ".join(commandLine))
     return check_output(commandLine)
 
 
@@ -131,3 +132,63 @@ def convert_dir(dir):
         str: direction - bids format
     """
     return DEFAULT.entity_dir[dir]
+
+
+class TreePrinter:
+    """
+    Generates and prints a tree representation of a given a directory.
+    """
+
+    BRANCH = "│"
+    LAST = "└──"
+    JUNCTION = "├──"
+    BRANCH_PREFIX = "│   "
+    SPACE = "    "
+
+    def __init__(self, root_dir):
+        self.root_dir = Path(root_dir)
+
+    def print_tree(self):
+        """
+        Prints the tree representation of the root directory and
+        its subdirectories and files.
+        """
+        tree = self._generate_tree(self.root_dir)
+        logger = logging.getLogger(__name__)
+        logger.info(f"Tree representation of {self.root_dir}{os.sep}")
+        logger.info(f"{self.root_dir}{os.sep}")
+        for item in tree:
+            logger.info(item)
+
+    def _generate_tree(self, directory, prefix=""):
+        """
+        Generates the tree representation of the <directory> recursively.
+
+        Parameters:
+        - directory: Path
+            The directory for which a tree representation is needed.
+        - prefix: str
+            The prefix to be added to each entry in the tree.
+
+        Returns a list of strings representing the tree.
+        """
+        tree = []
+        entries = sorted(directory.iterdir(), key=lambda path: str(path).lower())
+        entries = sorted(entries, key=lambda entry: entry.is_file())
+        entries_count = len(entries)
+
+        for index, entry in enumerate(entries):
+            connector = self.LAST if index == entries_count - 1 else self.JUNCTION
+            if entry.is_dir():
+                sub_tree = self._generate_tree(
+                    entry,
+                    prefix=prefix
+                    + (
+                        self.BRANCH_PREFIX if index != entries_count - 1 else self.SPACE
+                    ),
+                )
+                tree.append(f"{prefix}{connector} {entry.name}{os.sep}")
+                tree.extend(sub_tree)
+            else:
+                tree.append(f"{prefix}{connector} {entry.name}")
+        return tree
