@@ -1409,7 +1409,7 @@ options:
                         Output BIDS directory, Default: current directory
                         <span class="o">(</span>/home/sam<span class="o">)</span>
 --auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
-                        depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>                            
+                        depending on the suffix and datatype. <span class="o">[</span>False<span class="o">]</span>                            
 --bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
                       bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
@@ -2286,8 +2286,8 @@ task name:</p>
 <span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="hll"><span class="w">    </span><span class="p">{</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 </span><span class="hll"><span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
@@ -2325,8 +2325,8 @@ task name:</p>
 <span class="o">{</span>
   <span class="s2">&quot;descriptions&quot;</span>: <span class="o">[</span>
     <span class="o">{</span>
-      <span class="s2">&quot;dataType&quot;</span>: <span class="s2">&quot;func&quot;</span>,
-      <span class="s2">&quot;modalityLabel&quot;</span>: <span class="s2">&quot;bold&quot;</span>,
+      <span class="s2">&quot;datatype&quot;</span>: <span class="s2">&quot;func&quot;</span>,
+      <span class="s2">&quot;suffix&quot;</span>: <span class="s2">&quot;bold&quot;</span>,
       <span class="s2">&quot;customEntities&quot;</span>: <span class="s2">&quot;task-rest&quot;</span>,
       <span class="s2">&quot;criteria&quot;</span>: <span class="o">{</span>
         <span class="s2">&quot;SeriesDescription&quot;</span>: <span class="s2">&quot;*Axial EPI-FMRI (Interleaved I to S)*&quot;</span>
@@ -2414,8 +2414,8 @@ file with the appropriate info.</p>
 <span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
@@ -2425,8 +2425,8 @@ file with the appropriate info.</p>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=AP*&quot;</span><span class="w"></span>
@@ -2434,8 +2434,8 @@ file with the appropriate info.</p>
 </span><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=PA*&quot;</span><span class="w"></span>
@@ -2515,7 +2515,7 @@ options:
 -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory <span class="o">(</span>/home/sam/dcm2bids-tutorial/bids_project<span class="o">)</span>
 --auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
-                        depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>
+                        depending on the suffix and datatype. <span class="o">[</span>False<span class="o">]</span>
 --bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
                       bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
@@ -2720,7 +2720,7 @@ documentation to find information about the different commands.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T16:33:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

@@ -1613,9 +1613,9 @@ class Acquisition(object):
 
         participant (Participant): A participant object
 
-        dataType (str): A functional group of MRI data (ex: func, anat ...)
+        datatype (str): A functional group of MRI data (ex: func, anat ...)
 
-        modalityLabel (str): The modality of the acquisition
+        suffix (str): The modality of the acquisition
 
                 (ex: T1w, T2w, bold ...)
 
@@ -1631,9 +1631,9 @@ class Acquisition(object):
 
         participant,
 
-        dataType,
+        datatype,
 
-        modalityLabel,
+        suffix,
 
         customEntities=&quot;&quot;,
 
@@ -1649,7 +1649,7 @@ class Acquisition(object):
 
         self.logger = logging.getLogger(__name__)
 
-        self._modalityLabel = &quot;&quot;
+        self._suffix = &quot;&quot;
 
         self._customEntities = &quot;&quot;
 
@@ -1657,9 +1657,9 @@ class Acquisition(object):
 
         self.participant = participant
 
-        self.dataType = dataType
+        self.datatype = datatype
 
-        self.modalityLabel = modalityLabel
+        self.suffix = suffix
 
         self.customEntities = customEntities
 
@@ -1687,35 +1687,35 @@ class Acquisition(object):
 
         return (
 
-            self.dataType == other.dataType
+            self.datatype == other.datatype
 
             and self.participant.prefix == other.participant.prefix
 
-            and self.suffix == other.suffix
+            and self.build_suffix == other.build_suffix
 
         )
 
     @property
 
-    def modalityLabel(self):
+    def suffix(self):
 
         &quot;&quot;&quot;
 
         Returns:
 
-            A string &#39;_&lt;modalityLabel&gt;&#39;
+            A string &#39;_&lt;suffix&gt;&#39;
 
         &quot;&quot;&quot;
 
-        return self._modalityLabel
+        return self._suffix
 
-    @modalityLabel.setter
+    @suffix.setter
 
-    def modalityLabel(self, modalityLabel):
+    def suffix(self, suffix):
 
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-        self._modalityLabel = self.prepend(modalityLabel)
+        self._suffix = self.prepend(suffix)
 
     @property
 
@@ -1767,23 +1767,23 @@ class Acquisition(object):
 
     @property
 
-    def suffix(self):
+    def build_suffix(self):
 
         &quot;&quot;&quot; The suffix to build filenames
 
         Returns:
 
-            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;modalityLabel&gt;&#39;
+            A string &#39;_&lt;suffix&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;suffix&gt;&#39;
 
         &quot;&quot;&quot;
 
         if self.customEntities.strip() == &quot;&quot;:
 
-            return self.modalityLabel
+            return self.suffix
 
         else:
 
-            return self.customEntities + self.modalityLabel
+            return self.customEntities + self.suffix
 
     @property
 
@@ -1821,7 +1821,7 @@ class Acquisition(object):
 
             self.participant.directory,
 
-            self.dataType,
+            self.datatype,
 
             self.dstFile,
 
@@ -1835,7 +1835,7 @@ class Acquisition(object):
 
         Return:
 
-            The destination root inside the BIDS structure for descriptions with id
+            The destination root inside the BIDS structure for description
 
         &quot;&quot;&quot;
 
@@ -1843,7 +1843,7 @@ class Acquisition(object):
 
             self.participant.session,
 
-            self.dataType,
+            self.datatype,
 
             self.dstFile,
 
@@ -1861,7 +1861,7 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        current_name = self.participant.prefix + self.suffix
+        current_name = self.participant.prefix + self.build_suffix
 
         new_name = &#39;&#39;
 
@@ -2023,8 +2023,8 @@ class Acquisition(object):
 <span class="normal"> 9</span>
 <span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span>
     <span class="n">participant</span><span class="p">,</span>
-    <span class="n">dataType</span><span class="p">,</span>
-    <span class="n">modalityLabel</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="p">,</span>
     <span class="n">customEntities</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2051,13 +2051,13 @@ class Acquisition(object):
 <td>None</td>
 </tr>
 <tr>
-<td>dataType</td>
+<td>datatype</td>
 <td>str</td>
 <td>A functional group of MRI data (ex: func, anat ...)</td>
 <td>None</td>
 </tr>
 <tr>
-<td>modalityLabel</td>
+<td>suffix</td>
 <td>str</td>
 <td>The modality of the acquisition<br>(ex: T1w, T2w, bold ...)</td>
 <td>None</td>
@@ -2488,9 +2488,9 @@ class Acquisition(object):
 
         participant (Participant): A participant object
 
-        dataType (str): A functional group of MRI data (ex: func, anat ...)
+        datatype (str): A functional group of MRI data (ex: func, anat ...)
 
-        modalityLabel (str): The modality of the acquisition
+        suffix (str): The modality of the acquisition
 
                 (ex: T1w, T2w, bold ...)
 
@@ -2506,9 +2506,9 @@ class Acquisition(object):
 
         participant,
 
-        dataType,
+        datatype,
 
-        modalityLabel,
+        suffix,
 
         customEntities=&quot;&quot;,
 
@@ -2524,7 +2524,7 @@ class Acquisition(object):
 
         self.logger = logging.getLogger(__name__)
 
-        self._modalityLabel = &quot;&quot;
+        self._suffix = &quot;&quot;
 
         self._customEntities = &quot;&quot;
 
@@ -2532,9 +2532,9 @@ class Acquisition(object):
 
         self.participant = participant
 
-        self.dataType = dataType
+        self.datatype = datatype
 
-        self.modalityLabel = modalityLabel
+        self.suffix = suffix
 
         self.customEntities = customEntities
 
@@ -2562,35 +2562,35 @@ class Acquisition(object):
 
         return (
 
-            self.dataType == other.dataType
+            self.datatype == other.datatype
 
             and self.participant.prefix == other.participant.prefix
 
-            and self.suffix == other.suffix
+            and self.build_suffix == other.build_suffix
 
         )
 
     @property
 
-    def modalityLabel(self):
+    def suffix(self):
 
         &quot;&quot;&quot;
 
         Returns:
 
-            A string &#39;_&lt;modalityLabel&gt;&#39;
+            A string &#39;_&lt;suffix&gt;&#39;
 
         &quot;&quot;&quot;
 
-        return self._modalityLabel
+        return self._suffix
 
-    @modalityLabel.setter
+    @suffix.setter
 
-    def modalityLabel(self, modalityLabel):
+    def suffix(self, suffix):
 
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-        self._modalityLabel = self.prepend(modalityLabel)
+        self._suffix = self.prepend(suffix)
 
     @property
 
@@ -2642,23 +2642,23 @@ class Acquisition(object):
 
     @property
 
-    def suffix(self):
+    def build_suffix(self):
 
         &quot;&quot;&quot; The suffix to build filenames
 
         Returns:
 
-            A string &#39;_&lt;modalityLabel&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;modalityLabel&gt;&#39;
+            A string &#39;_&lt;suffix&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;suffix&gt;&#39;
 
         &quot;&quot;&quot;
 
         if self.customEntities.strip() == &quot;&quot;:
 
-            return self.modalityLabel
+            return self.suffix
 
         else:
 
-            return self.customEntities + self.modalityLabel
+            return self.customEntities + self.suffix
 
     @property
 
@@ -2696,7 +2696,7 @@ class Acquisition(object):
 
             self.participant.directory,
 
-            self.dataType,
+            self.datatype,
 
             self.dstFile,
 
@@ -2710,7 +2710,7 @@ class Acquisition(object):
 
         Return:
 
-            The destination root inside the BIDS structure for descriptions with id
+            The destination root inside the BIDS structure for description
 
         &quot;&quot;&quot;
 
@@ -2718,7 +2718,7 @@ class Acquisition(object):
 
             self.participant.session,
 
-            self.dataType,
+            self.datatype,
 
             self.dstFile,
 
@@ -2736,7 +2736,7 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        current_name = self.participant.prefix + self.suffix
+        current_name = self.participant.prefix + self.build_suffix
 
         new_name = &#39;&#39;
 
@@ -2954,6 +2954,9 @@ class Acquisition(object):
 </code></pre></div></td></tr></table></div>
 </details>
 <h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">build_suffix</span>
+</code></pre></div></td></tr></table></div>
+<p>The suffix to build filenames</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">customEntities</span>
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
@@ -2961,7 +2964,7 @@ class Acquisition(object):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstId</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
-<p>The destination root inside the BIDS structure for descriptions with id</p>
+<p>The destination root inside the BIDS structure for description</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstRoot</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
@@ -2970,17 +2973,14 @@ class Acquisition(object):
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
 <p>A string '_<id>'</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">modalityLabel</span>
-</code></pre></div></td></tr></table></div>
-<p>Returns:</p>
-<p>A string '_<modalityLabel>'</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">srcRoot</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
 <p>The sidecar source root to move</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">suffix</span>
 </code></pre></div></td></tr></table></div>
-<p>The suffix to build filenames</p>
+<p>Returns:</p>
+<p>A string '_<suffix>'</p>
 <h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
 <h4 id="dstsidecardata">dstSidecarData<a class="headerlink" href="#dstsidecardata" title="Permanent link">⚓︎</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -3216,7 +3216,7 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 
         &quot;&quot;&quot;
 
-        current_name = self.participant.prefix + self.suffix
+        current_name = self.participant.prefix + self.build_suffix
 
         new_name = &#39;&#39;
 
@@ -3279,7 +3279,7 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T16:33:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

@@ -1132,8 +1132,8 @@ same level as the <code>"descriptions"</code> entry.</p>
     &quot;defaceTpl&quot;: [&quot;pydeface&quot;, &quot;--outfile&quot;, &quot;dstFile&quot;, &quot;srcFile&quot;],
     &quot;description&quot;: [
     {
-      &quot;dataType&quot;: &quot;anat&quot;,
-      &quot;modalityLabel&quot;: &quot;T2w&quot;,
+      &quot;datatype&quot;: &quot;anat&quot;,
+      &quot;suffix&quot;: &quot;T2w&quot;,
       &quot;customEntities&quot;: [&quot;acq-highres&quot;, &quot;bodypart&quot;, &quot;run&quot;, &quot;task&quot;],
       }
     ]
@@ -1231,7 +1231,7 @@ options:
 -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory <span class="o">(</span>/home/sam/dcm2bids-tutorial/bids_project<span class="o">)</span>
 --auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
-                        depending on the suffix and dataType. <span class="o">[</span>False<span class="o">]</span>
+                        depending on the suffix and datatype. <span class="o">[</span>False<span class="o">]</span>
 --bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
                       bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
@@ -1245,7 +1245,7 @@ options:
 </div>
 </div>
 <h2 id="-auto_extract_entities">--auto_extract_entities<a class="headerlink" href="#-auto_extract_entities" title="Permanent link">⚓︎</a></h2>
-<p>This option will automatically try to find 3 entities (task, dir and echo) for specific dataType/modalityLabel.</p>
+<p>This option will automatically try to find 3 entities (task, dir and echo) for specific datatype/suffix.</p>
 <ul>
 <li>
 <p><code>task</code> in the SeriesDescription field</p>
@@ -1263,12 +1263,12 @@ options:
 <p>If found, it will try to feed the filename with this entity if they are mandatory.</p>
 <p>For example, a "pepolar" fieldmap data requires the entity <code>dir</code> (See <a href="https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#case-4-multiple-phase-encoded-directions-pepolar">BIDS specification</a>). 
 If you set this parameter, it will automatically try to find this entity and add it to the filename.</p>
-<p>So far and accordingly to the BIDS specification 5 dataType/modalityLabel automatically look for this 3 entities.</p>
+<p>So far and accordingly to the BIDS specification 5 datatype/suffix automatically look for this 3 entities.</p>
 <table>
 <thead>
 <tr>
-<th align="center">dataType</th>
-<th align="center">modalityLabel</th>
+<th align="center">datatype</th>
+<th align="center">suffix</th>
 <th align="center">Entities</th>
 </tr>
 </thead>
@@ -1305,7 +1305,7 @@ If you set this parameter, it will automatically try to find this entity and add
 </tr>
 </tbody>
 </table>
-<p>Using the <code>--auto_extract_entitie</code>, if you want another combination of dataType/modalityLabel to be able to 
+<p>Using the <code>--auto_extract_entitie</code>, if you want another combination of datatype/suffix to be able to 
 extract one or more of these 3 entities you need to add the key of the entities needed using the field customEntities like this within your description:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>&quot;customEntities&quot;: [&quot;echo&quot;, &quot;dir&quot;]
 </code></pre></div></td></tr></table></div>
@@ -1336,7 +1336,7 @@ If needed, you can install <a href="https://github.com/bids-standard/bids-valida
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T16:33:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>
