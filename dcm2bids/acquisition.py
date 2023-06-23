@@ -14,8 +14,8 @@ class Acquisition(object):
 
     Args:
         participant (Participant): A participant object
-        dataType (str): A functional group of MRI data (ex: func, anat ...)
-        modalityLabel (str): The modality of the acquisition
+        datatype (str): A functional group of MRI data (ex: func, anat ...)
+        suffix (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
         customEntities (str): Optional entities (ex: task-rest)
         srcSidecar (Sidecar): Optional sidecar object
@@ -24,8 +24,8 @@ class Acquisition(object):
     def __init__(
         self,
         participant,
-        dataType,
-        modalityLabel,
+        datatype,
+        suffix,
         customEntities="",
         id=None,
         srcSidecar=None,
@@ -34,13 +34,13 @@ class Acquisition(object):
     ):
         self.logger = logging.getLogger(__name__)
 
-        self._modalityLabel = ""
+        self._suffix = ""
         self._customEntities = ""
         self._id = ""
 
         self.participant = participant
-        self.dataType = dataType
-        self.modalityLabel = modalityLabel
+        self.datatype = datatype
+        self.suffix = suffix
         self.customEntities = customEntities
         self.srcSidecar = srcSidecar
 
@@ -58,23 +58,23 @@ class Acquisition(object):
 
     def __eq__(self, other):
         return (
-            self.dataType == other.dataType
+            self.datatype == other.datatype
             and self.participant.prefix == other.participant.prefix
-            and self.suffix == other.suffix
+            and self.build_suffix == other.build_suffix
         )
 
     @property
-    def modalityLabel(self):
+    def suffix(self):
         """
         Returns:
-            A string '_<modalityLabel>'
+            A string '_<suffix>'
         """
-        return self._modalityLabel
+        return self._suffix
 
-    @modalityLabel.setter
-    def modalityLabel(self, modalityLabel):
+    @suffix.setter
+    def suffix(self, suffix):
         """ Prepend '_' if necessary"""
-        self._modalityLabel = self.prepend(modalityLabel)
+        self._suffix = self.prepend(suffix)
 
     @property
     def id(self):
@@ -105,16 +105,16 @@ class Acquisition(object):
             self._customEntities = self.prepend(customEntities)
 
     @property
-    def suffix(self):
+    def build_suffix(self):
         """ The suffix to build filenames
 
         Returns:
-            A string '_<modalityLabel>' or '_<customEntities>_<modalityLabel>'
+            A string '_<suffix>' or '_<customEntities>_<suffix>'
         """
         if self.customEntities.strip() == "":
-            return self.modalityLabel
+            return self.suffix
         else:
-            return self.customEntities + self.modalityLabel
+            return self.customEntities + self.suffix
 
     @property
     def srcRoot(self):
@@ -135,7 +135,7 @@ class Acquisition(object):
         """
         return opj(
             self.participant.directory,
-            self.dataType,
+            self.datatype,
             self.dstFile,
         )
 
@@ -143,11 +143,11 @@ class Acquisition(object):
     def dstId(self):
         """
         Return:
-            The destination root inside the BIDS structure for descriptions with id
+            The destination root inside the BIDS structure for description
         """
         return opj(
             self.participant.session,
-            self.dataType,
+            self.datatype,
             self.dstFile,
         )
 
@@ -157,7 +157,7 @@ class Acquisition(object):
             The destination filename formatted following the v1.7.0 BIDS entity key table
             https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
         """
-        current_name = self.participant.prefix + self.suffix
+        current_name = self.participant.prefix + self.build_suffix
         new_name = ''
         current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
         suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]

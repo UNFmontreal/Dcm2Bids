@@ -182,7 +182,7 @@ class Dcm2BidsGen(object):
                 else:
                     idList[acquisition.id] = [acquisition.dstId + "".join(ext)]
 
-            if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
+            if (self.config.get("defaceTpl") and acquisition.datatype == "anat" and ".nii" in ext):
                 try:
                     os.remove(dstFile)
                 except FileNotFoundError:

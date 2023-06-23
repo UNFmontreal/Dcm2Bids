@@ -6,8 +6,8 @@
 {
   "descriptions": [
     {
-      "dataType": "anat",
-      "modalityLabel": "T2w",
+      "datatype": "anat",
+      "suffix": "T2w",
       "criteria": {
         "SeriesDescription": "*T2*",
         "EchoTime": 0.1
@@ -18,8 +18,8 @@
     },
     {
       "id": "task-rest",
-      "dataType": "func",
-      "modalityLabel": "bold",
+      "datatype": "func",
+      "suffix": "bold",
       "customEntities": "task-rest",
       "criteria": {
         "ProtocolName": "func_task-*",
@@ -27,8 +27,8 @@
       }
     },
     {
-      "dataType": "fmap",
-      "modalityLabel": "fmap",
+      "datatype": "fmap",
+      "suffix": "fmap",
       "intendedFor": "task_rest",
       "criteria": {
         "ProtocolName": "*field_mapping*"
@@ -36,8 +36,8 @@
     },
     {
       "id": "id_task_learning",
-      "dataType": "func",
-      "modalityLabel": "bold",
+      "datatype": "func",
+      "suffix": "bold",
       "customEntities": "task-learning",
       "criteria": {
         "SeriesDescription": "bold_task-learning"
@@ -47,8 +47,8 @@
       }
     },
     {
-      "dataType": "fmap",
-      "modalityLabel": "epi",
+      "datatype": "fmap",
+      "suffix": "epi",
       "criteria": {
         "SeriesDescription": "fmap_task-learning"
       },
@@ -100,7 +100,7 @@ subject to change depending on the dcm2niix version in use.
 You can enter several criteria. **All criteria must match** for a description to
 be linked to a sidecar.
 
-## dataType
+## datatype
 
 It is a mandatory field. Here is a definition from `bids v1.2.0` :
 
@@ -110,7 +110,7 @@ It is a mandatory field. Here is a definition from `bids v1.2.0` :
 > field maps), anat (structural imaging such as T1, T2, etc.), meg
 > (magnetoencephalography), beh (behavioral).
 
-## modalityLabel
+## suffix
 
 It is a mandatory field. It describes the modality of the acquisition like
 `T1w`, `T2w` or `dwi`, `bold`.

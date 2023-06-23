@@ -292,14 +292,14 @@ class SidecarPairing(object):
                 entities = set(concatenated_matches.keys()).union(set(descWithTask["customEntities"]))
 
             if self.auto_extract_entities:
-                auto_acq = '_'.join([descWithTask['dataType'], descWithTask["modalityLabel"]])
+                auto_acq = '_'.join([descWithTask['datatype'], descWithTask["suffix"]])
                 if auto_acq in DEFAULT.auto_entities:
                     # Check if these auto entities have been found before merging
                     auto_entities = set(concatenated_matches.keys()).intersection(set(DEFAULT.auto_entities[auto_acq]))
                     left_auto_entities = auto_entities.symmetric_difference(set(DEFAULT.auto_entities[auto_acq]))
                     if left_auto_entities:
-                        self.logger.warning(f"{left_auto_entities} have not been found for dataType '{descWithTask['dataType']}' "
-                                            f"and suffix '{descWithTask['modalityLabel']}'.")
+                        self.logger.warning(f"{left_auto_entities} have not been found for datatype '{descWithTask['datatype']}' "
+                                            f"and suffix '{descWithTask['suffix']}'.")
                     else:
                         entities = list(entities) + DEFAULT.auto_entities[auto_acq]
                         entities = list(set(entities))
