@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import os
 import shutil
+from pathlib import Path
+import os
 
 
 def assert_dirs_empty(parser, args, required):
@@ -18,30 +19,22 @@ def assert_dirs_empty(parser, args, required):
     required: string or list of paths to files
         Required paths to be checked.
     """
-    def check(path):
-        if os.path.isdir(path):
-            if os.listdir(path):
+    def check(path: Path):
+        if path.is_dir():
+            if any(path.iterdir()):
                 if not args.overwrite:
                     parser.error(
-                        f"Output directory {path} isn't empty, so some files "
-                        "could be overwritten or deleted.\nRerun the command"
-                        " with --force option to overwrite "
+                        f"Output directory {path}{os.sep} isn't empty, so some files "
+                        "could be overwritten or deleted.\nRerun the command "
+                        "with --force option to overwrite "
                         "existing output files.")
             else:
-                for the_file in os.listdir(path):
-                    file_path = os.path.join(path, the_file)
-                    try:
-                        if os.path.isfile(file_path):
-                            os.unlink(file_path)
-                        elif os.path.isdir(file_path):
-                            shutil.rmtree(file_path)
-                    except Exception as e:
-                        print(e)
+                shutil.rmtree(path)
 
     if isinstance(required, str):
-        required = [required]
+        required = Path(required)
 
-    for cur_dir in required:
+    for cur_dir in [required]:
         check(cur_dir)
 
 

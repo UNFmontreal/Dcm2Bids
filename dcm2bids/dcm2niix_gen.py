@@ -25,16 +25,20 @@ class Dcm2niixGen(object):
     """
 
     def __init__(
-        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
+        self,
+        dicomDirs,
+        bidsDir,
+        participant=None,
+        options=DEFAULT.dcm2niixOptions,
+        helper=False
     ):
         self.logger = logging.getLogger(__name__)
-
         self.sidecarsFiles = []
-
         self.dicomDirs = dicomDirs
         self.bidsDir = bidsDir
         self.participant = participant
         self.options = options
+        self.helper = helper
 
     @property
     def outputDir(self):
@@ -43,10 +47,12 @@ class Dcm2niixGen(object):
             A directory to save all the output files of dcm2niix
         """
         tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
+        tmpDir = self.bidsDir / DEFAULT.tmpDirName / tmpDir
+        if self.helper:
+            tmpDir = self.bidsDir
+        return tmpDir
 
-        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
-
-    def run(self, force=False):
+    def run(self, force=False, helper=False):
         """ Run dcm2niix if necessary
 
         Args:
@@ -58,7 +64,7 @@ class Dcm2niixGen(object):
         """
         try:
             oldOutput = os.listdir(self.outputDir) != []
-        except:
+        except Exception:
             oldOutput = False
 
         if oldOutput and force:
@@ -69,8 +75,6 @@ class Dcm2niixGen(object):
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            # os.makedirs(self.outputDir, exist_ok=True)
-            # python2 compatibility
             if not os.path.exists(self.outputDir):
                 os.makedirs(self.outputDir)
 
@@ -79,11 +83,9 @@ class Dcm2niixGen(object):
         elif oldOutput:
             self.logger.warning("Previous dcm2niix directory output found:")
             self.logger.warning(self.outputDir)
-            self.logger.warning("Use --forceDcm2niix to rerun dcm2niix")
+            self.logger.warning("Use --force_dcm2niix to rerun dcm2niix \n")
 
         else:
-            # os.makedirs(self.outputDir, exist_ok=True)
-            # python2 compatibility
             if not os.path.exists(self.outputDir):
                 os.makedirs(self.outputDir)
 
@@ -101,7 +103,7 @@ class Dcm2niixGen(object):
 
             try:
                 output = output.decode()
-            except:
+            except Exception:
                 pass
 
             self.logger.debug("\n%s", output)

@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 
-"""helper module"""
-
+"""
+Converts DICOM files to NIfTI files including their JSON sidecars in a
+temporary directory which can be inspected to make a dc2mbids config file.
+"""
+import logging
 import argparse
-from os.path import join as opj
-
+import sys
+import os
+from pathlib import Path
+from datetime import datetime
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.utils.args import assert_dirs_empty
 from dcm2bids.utils.utils import DEFAULT
+from dcm2bids.utils.logger import setup_logging
 
 
 def _build_arg_parser():
@@ -19,11 +25,20 @@ def _build_arg_parser():
                    help="DICOM files directory.")
 
     p.add_argument("-o", "--output_dir",
-                   required=False, default=DEFAULT.cliOutputDir,
-                   help="Output BIDS directory."
-                        " (Default: %(default)s)")
+                   required=False,
+                   default=Path(DEFAULT.cliOutputDir) / DEFAULT.tmpDirName /
+                   DEFAULT.helperDir,
+                   help="Output directory. (Default: [%(default)s]")
 
-    p.add_argument('--force',
+    p.add_argument("-n", "--nest",
+                   nargs="?", const=True, default=False, required=False,
+                   help="Nest a directory in <output_dir>. Useful if many helper "
+                        "runs are needed\nto make a config file due to slight "
+                        "variations in MRI acquisitions.\n"
+                        "Defaults to DICOM_DIR if no name is provided.\n"
+                        "(Default: [%(default)s])")
+
+    p.add_argument('--force', '--force_dcm2niix',
                    dest='overwrite', action='store_true',
                    help='Force command to overwrite existing output files.')
 
@@ -34,14 +49,36 @@ def main():
     """Let's go"""
     parser = _build_arg_parser()
     args = parser.parse_args()
+    out_dir = Path(args.output_dir)
+    log_path = (Path(DEFAULT.cliOutputDir)
+                / DEFAULT.tmpDirName
+                / "log"
+                / f"helper_{datetime.now().isoformat().replace(':', '')}.log")
+    if args.nest:
+        if isinstance(args.nest, str):
+            log_path = Path(
+              str(log_path).replace("helper_",
+                                    f"helper_{args.nest.replace(os.path.sep, '-')}_"))
+            out_dir = out_dir / args.nest
+        else:
+            log_path = Path(str(log_path).replace(
+              "helper_", f"helper_{args.dicom_dir[0].replace(os.path.sep, '-')}_")
+                            )
+            out_dir = out_dir / args.dicom_dir[0]
 
-    out_folder = opj(args.output_dir, 'tmp_dcm2bids', 'helper')
-    assert_dirs_empty(parser, args, out_folder)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    setup_logging("info", log_path)
+    logger = logging.getLogger(__name__)
 
-    app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=args.output_dir)
-    rsl = app.run()
-    print("Example in:")
-    print(opj(args.output_dir, DEFAULT.tmpDirName, DEFAULT.helperDir))
+    logger.info("Running the following command: \n" + " ".join(sys.argv) + "\n")
+
+    assert_dirs_empty(parser, args, out_dir)
+
+    app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=out_dir, helper=True)
+
+    rsl = app.run(force=args.overwrite)
+    logger.info(f"Helper files in: {out_dir}\n")
+    logger.info(f"Log file saved at {log_path}")
 
     return rsl
 
