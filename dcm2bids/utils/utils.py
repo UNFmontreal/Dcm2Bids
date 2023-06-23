@@ -69,7 +69,7 @@ class DEFAULT(object):
                        "run", "mod", "echo", "flip", "inv", "mt", "part",
                        "recording"]
 
-    keyWithPathSidecarChanges = ['IntendedFor', 'Source']
+    keyWithPathSidecarChanges = ['IntendedFor', 'Sources']
 
     # misc
     tmpDirName = "tmp_dcm2bids"
