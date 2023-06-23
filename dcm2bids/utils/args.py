@@ -25,18 +25,18 @@ def assert_dirs_empty(parser, args, required):
                 if not args.overwrite:
                     parser.error(
                         f"Output directory {path}{os.sep} isn't empty, so some files "
-                         "could be overwritten or deleted.\nRerun the command "
-                         "with --force option to overwrite "
-                         "existing output files.")
+                        "could be overwritten or deleted.\nRerun the command "
+                        "with --force option to overwrite "
+                        "existing output files.")
             else:
                 shutil.rmtree(path)
 
     if isinstance(required, str):
         required = Path(required)
 
-
     for cur_dir in [required]:
         check(cur_dir)
+
 
 def add_overwrite_arg(parser):
     parser.add_argument(

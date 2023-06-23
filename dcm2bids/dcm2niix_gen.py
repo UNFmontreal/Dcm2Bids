@@ -25,17 +25,21 @@ class Dcm2niixGen(object):
     """
 
     def __init__(
-        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions, helper = False
+        self,
+        dicomDirs,
+        bidsDir,
+        participant=None,
+        options=DEFAULT.dcm2niixOptions,
+        helper=False
     ):
         self.logger = logging.getLogger(__name__)
-
         self.sidecarsFiles = []
-
         self.dicomDirs = dicomDirs
         self.bidsDir = bidsDir
         self.participant = participant
         self.options = options
         self.helper = helper
+
     @property
     def outputDir(self):
         """
@@ -48,7 +52,7 @@ class Dcm2niixGen(object):
             tmpDir = self.bidsDir
         return tmpDir
 
-    def run(self, force = False, helper = False):
+    def run(self, force=False, helper=False):
         """ Run dcm2niix if necessary
 
         Args:
@@ -60,7 +64,7 @@ class Dcm2niixGen(object):
         """
         try:
             oldOutput = os.listdir(self.outputDir) != []
-        except:
+        except Exception:
             oldOutput = False
 
         if oldOutput and force:
@@ -99,7 +103,7 @@ class Dcm2niixGen(object):
 
             try:
                 output = output.decode()
-            except:
+            except Exception:
                 pass
 
             self.logger.debug("\n%s", output)
