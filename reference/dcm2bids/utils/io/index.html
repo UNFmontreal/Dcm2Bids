@@ -1190,29 +1190,13 @@
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
-
-import inspect
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import json
-
-import os
-
-import os.path as opj
 
 from pathlib import Path
 
 from collections import OrderedDict
-
-import dcm2bids
 
 def load_json(filename):
 
@@ -1242,7 +1226,7 @@ def save_json(filename, data):
 
 def write_txt(filename, lines):
 
-    with open(filename, &quot;a+&quot;) as f:
+    with open(filename, &quot;w&quot;) as f:
 
         f.write(f&quot;{lines}\n&quot;)
 
@@ -1490,7 +1474,7 @@ def valid_path(in_path, type=&quot;folder&quot;):
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>def write_txt(filename, lines):
 
-    with open(filename, &quot;a+&quot;) as f:
+    with open(filename, &quot;w&quot;) as f:
 
         f.write(f&quot;{lines}\n&quot;)
 </code></pre></div></td></tr></table></div>
@@ -1503,7 +1487,7 @@ def valid_path(in_path, type=&quot;folder&quot;):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-22T18:09:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-22</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T11:12:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>
