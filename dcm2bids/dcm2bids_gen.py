@@ -137,9 +137,9 @@ class Dcm2BidsGen(object):
 
         self.logger.info("moving acquisitions into BIDS folder")
 
-        intendedForList = {}
+        idList = {}
         for acq in parser.acquisitions:
-            intendedForList = self.move(acq, intendedForList)
+            idList = self.move(acq, idList)
 
         if self.bids_validate:
             try:
@@ -152,7 +152,7 @@ class Dcm2BidsGen(object):
                                  "The bids-validator may not been installed on your computer. "
                                  "Please check: https://github.com/bids-standard/bids-validator#quickstart.")
 
-    def move(self, acquisition, intendedForList):
+    def move(self, acquisition, idList):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
@@ -175,12 +175,12 @@ class Dcm2BidsGen(object):
                     self.logger.info("Use --clobber option to overwrite")
                     continue
 
-            # Populate intendedFor
+            # Populate idList
             if '.nii' in ext:
-                if acquisition.id in intendedForList:
-                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + "".join(ext))
+                if acquisition.id in idList:
+                    idList[acquisition.id].append(acquisition.dstId + "".join(ext))
                 else:
-                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + "".join(ext)]
+                    idList[acquisition.id] = [acquisition.dstId + "".join(ext)]
 
             if (self.config.get("defaceTpl") and acquisition.dataType == "anat" and ".nii" in ext):
                 try:
@@ -194,7 +194,7 @@ class Dcm2BidsGen(object):
                 run_shell_command(cmd)
 
             elif ".json" in ext:
-                data = acquisition.dstSidecarData(intendedForList)
+                data = acquisition.dstSidecarData(idList)
                 save_json(dstFile, data)
                 os.remove(srcFile)
 
@@ -202,4 +202,4 @@ class Dcm2BidsGen(object):
             else:
                 os.rename(srcFile, dstFile)
 
-        return intendedForList
+        return idList

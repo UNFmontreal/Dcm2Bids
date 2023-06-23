@@ -217,8 +217,8 @@ class SidecarPairing(object):
         Returns:
             A list of acquisition objects
         """
+        acquisitions_id = []
         acquisitions = []
-        acquisitions_intendedFor = []
 
         self.logger.info("Sidecars pairing:")
         for sidecar, valid_descriptions in self.graph.items():
@@ -233,8 +233,8 @@ class SidecarPairing(object):
                                   srcSidecar=sidecar, **desc)
                 acq.setDstFile()
 
-                if acq.intendedFor != [None]:
-                    acquisitions_intendedFor.append(acq)
+                if acq.id:
+                    acquisitions_id.append(acq)
                 else:
                     acquisitions.append(acq)
 
@@ -252,7 +252,7 @@ class SidecarPairing(object):
                                       **desc)
                     self.logger.warning("    ->  %s", acq.suffix)
 
-        self.acquisitions = acquisitions + acquisitions_intendedFor
+        self.acquisitions = acquisitions_id + acquisitions
 
         return self.acquisitions
 
@@ -290,7 +290,6 @@ class SidecarPairing(object):
 
             if "customEntities" in desc.keys():
                 entities = set(concatenated_matches.keys()).union(set(descWithTask["customEntities"]))
-                    #entities_left = set(concatenated_matches.keys()).symmetric_difference(set(descWithTask["customEntities"]))
 
             if self.auto_extract_entities:
                 auto_acq = '_'.join([descWithTask['dataType'], descWithTask["modalityLabel"]])

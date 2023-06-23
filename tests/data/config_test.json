@@ -46,7 +46,9 @@
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
             },
-            "intendedFor": ["id_dwi", "T1", "dummy"]
+            "sidecarChanges": {
+                "IntendedFor": ["id_dwi", "T1", "dummy"]
+            }
         },
         {
             "dataType": "fmap",
@@ -57,7 +59,9 @@
                 "EchoTime": 0.00738,
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             },
-            "IntendedFor": "id_dwi"
+            "sidecarChanges": {
+                "IntendedFor": "id_dwi"
+            }
         },
         {
             "dataType": "dwi",
@@ -66,7 +70,9 @@
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             },
-            "IntendedFor": ["id_dwi", "T1"]
+            "sidecarChanges": {
+                "IntendedFor": ["id_dwi", "T1"]
+            }
         },
         {
             "dataType": "dwi",

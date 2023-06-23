@@ -30,8 +30,6 @@ class Acquisition(object):
         id=None,
         srcSidecar=None,
         sidecarChanges=None,
-        intendedFor=None,
-        IntendedFor=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
@@ -39,7 +37,6 @@ class Acquisition(object):
         self._modalityLabel = ""
         self._customEntities = ""
         self._id = ""
-        self._intendedFor = None
 
         self.participant = participant
         self.dataType = dataType
@@ -51,11 +48,6 @@ class Acquisition(object):
             self.sidecarChanges = {}
         else:
             self.sidecarChanges = sidecarChanges
-
-        if intendedFor is None:
-            self.intendedFor = IntendedFor
-        else:
-            self.intendedFor = intendedFor
 
         if id is None:
             self.id = None
@@ -148,10 +140,10 @@ class Acquisition(object):
         )
 
     @property
-    def dstIntendedFor(self):
+    def dstId(self):
         """
         Return:
-            The destination root inside the BIDS structure for intendedFor
+            The destination root inside the BIDS structure for descriptions with id
         """
         return opj(
             self.participant.session,
@@ -200,18 +192,7 @@ class Acquisition(object):
 
         self.dstFile = new_name
 
-    @property
-    def intendedFor(self):
-        return self._intendedFor
-
-    @intendedFor.setter
-    def intendedFor(self, value):
-        if isinstance(value, list):
-            self._intendedFor = value
-        else:
-            self._intendedFor = [value]
-
-    def dstSidecarData(self, intendedForList):
+    def dstSidecarData(self, idList):
         """
         """
         data = self.srcSidecar.origData
@@ -221,23 +202,35 @@ class Acquisition(object):
         if 'TaskName' in self.srcSidecar.data:
             data["TaskName"] = self.srcSidecar.data["TaskName"]
 
-        # intendedFor key
-        if self.intendedFor != [None]:
-            intendedValue = []
-
-            for index in self.intendedFor:
-                if index in intendedForList:
-                    intendedValue = intendedValue + [intendedForList[index]]
-                else:
-                    logging.warning(f"No id found for IntendedFor value '{index}'.")
-                    logging.warning(f"No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.")
-                    logging.warning("Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n")
-
-            data["IntendedFor"] = [item for sublist in intendedValue for item in sublist]
-
         # sidecarChanges
         for key, value in self.sidecarChanges.items():
-            data[key] = value
+            values = []
+
+            if not isinstance(value, list):
+                value = [value]
+
+            for val in value:
+                if isinstance(val, str):
+                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+                        logging.warning(f"No id found for {key} value '{val}'.")
+                        logging.warning(f"No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.")
+                        logging.warning(f"No sidecar changes for field {key} "
+                                        f"will be made "
+                                        f"for json file {self.dstFile}.json with this id.")
+                    else:
+                        values.append(idList.get(val, val))
+
+            # handle if nested list vs str
+            flat_value_list = []
+            for item in values:
+                if isinstance(item, list):
+                    flat_value_list += item
+                else:
+                    flat_value_list.append(item)
+            if len(flat_value_list) == 1:
+                flat_value_list = flat_value_list[0]
+
+            data[key] = flat_value_list
 
         return data
 
