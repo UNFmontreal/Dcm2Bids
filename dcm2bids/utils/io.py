@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import inspect
 import json
-import os
-import os.path as opj
 from pathlib import Path
 from collections import OrderedDict
-
-import dcm2bids
 
 
 def load_json(filename):
@@ -32,6 +27,7 @@ def save_json(filename, data):
 def write_txt(filename, lines):
     with open(filename, "w") as f:
         f.write(f"{lines}\n")
+
 
 def valid_path(in_path, type="folder"):
     """Assert that file exists.

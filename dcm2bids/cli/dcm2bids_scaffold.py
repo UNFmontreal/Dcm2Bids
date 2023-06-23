@@ -15,7 +15,6 @@ import logging
 import os
 import sys
 from os.path import join as opj
-from pathlib import Path
 from dcm2bids.utils.io import write_txt
 from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
 from dcm2bids.utils.utils import DEFAULT, run_shell_command, TreePrinter
@@ -48,14 +47,18 @@ def main():
     for _ in ["code", "derivatives", "sourcedata"]:
         os.makedirs(opj(args.output_dir, _), exist_ok=True)
 
-    logger.info("Currently running the following command: \n" + " ".join(sys.argv) + "\n")
+    logger.info("Currently running the following command: \n" +
+                " ".join(sys.argv) + "\n")
     logger.info("The files used to create your BIDS directory were taken from "
                 "https://github.com/bids-standard/bids-starter-kit. \n")
 
     # CHANGES
     write_txt(opj(args.output_dir, "CHANGES"),
               bids_starter_kit.CHANGES.replace('DATE',
-                                               datetime.date.today().strftime("%Y-%m-%d")))
+                                               datetime.date.today().strftime(
+                                                 "%Y-%m-%d")
+                                               )
+              )
     # dataset_description
     write_txt(opj(args.output_dir, "dataset_description"),
               bids_starter_kit.dataset_description.replace("BIDS_VERSION",
@@ -76,7 +79,8 @@ def main():
     # README
     try:
         run_shell_command(['wget', '-q', '-O', opj(args.output_dir, "README"),
-                           'https://raw.githubusercontent.com/bids-standard/bids-starter-kit/main/templates/README.MD'], log = False)
+                           'https://raw.githubusercontent.com/bids-standard/bids-starter-kit/main/templates/README.MD'],
+                          log=False)
     except Exception:
         write_txt(opj(args.output_dir, "README"),
                   bids_starter_kit.README)
@@ -84,6 +88,7 @@ def main():
     # output tree representation of where the scaffold was built.
 
     TreePrinter(args.output_dir).print_tree()
+
 
 if __name__ == "__main__":
     main()
