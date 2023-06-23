@@ -99,7 +99,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                             Output BIDS directory, Default: current directory
                             (/home/sam)
     --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and dataType. [False]                            
+                            depending on the suffix and datatype. [False]                            
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
@@ -805,8 +805,8 @@ task name:
 {
   "descriptions": [
     {
-      "dataType": "func",
-      "modalityLabel": "bold",
+      "datatype": "func",
+      "suffix": "bold",
       "customEntities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
@@ -833,8 +833,8 @@ task name:
     {
       "descriptions": [
         {
-          "dataType": "func",
-          "modalityLabel": "bold",
+          "datatype": "func",
+          "suffix": "bold",
           "customEntities": "task-rest",
           "criteria": {
             "SeriesDescription": "*Axial EPI-FMRI (Interleaved I to S)*"
@@ -890,8 +890,8 @@ file with the appropriate info.
   "descriptions": [
     {
       "id": "id_task-rest",
-      "dataType": "func",
-      "modalityLabel": "bold",
+      "datatype": "func",
+      "suffix": "bold",
       "customEntities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
@@ -901,8 +901,8 @@ file with the appropriate info.
       }
     },
     {
-      "dataType": "fmap",
-      "modalityLabel": "epi",
+      "datatype": "fmap",
+      "suffix": "epi",
       "customEntities": "dir-AP",
       "criteria": {
         "SeriesDescription": "EPI PE=AP*"
@@ -910,8 +910,8 @@ file with the appropriate info.
       "intendedFor": "id_task-rest"
     },
     {
-      "dataType": "fmap",
-      "modalityLabel": "epi",
+      "datatype": "fmap",
+      "suffix": "epi",
       "customEntities": "dir-PA",
       "criteria": {
         "SeriesDescription": "EPI PE=PA*"
@@ -971,7 +971,7 @@ command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
     --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and dataType. [False]
+                            depending on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists

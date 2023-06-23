@@ -12,8 +12,8 @@ same level as the `"descriptions"` entry.
     "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
     "description": [
     {
-      "dataType": "anat",
-      "modalityLabel": "T2w",
+      "datatype": "anat",
+      "suffix": "T2w",
       "customEntities": ["acq-highres", "bodypart", "run", "task"],
       }
     ]
@@ -113,7 +113,7 @@ command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
     --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and dataType. [False]
+                            depending on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
@@ -128,7 +128,7 @@ command.
 
 ## --auto_extract_entities
 
-This option will automatically try to find 3 entities (task, dir and echo) for specific dataType/modalityLabel.
+This option will automatically try to find 3 entities (task, dir and echo) for specific datatype/suffix.
 
 * `task` in the SeriesDescription field
 
@@ -147,9 +147,9 @@ If found, it will try to feed the filename with this entity if they are mandator
 For example, a "pepolar" fieldmap data requires the entity `dir` (See [BIDS specification](https://bids-specification.readthedocs.io/en/stable/04-modality-specific-files/01-magnetic-resonance-imaging-data.html#case-4-multiple-phase-encoded-directions-pepolar)). 
 If you set this parameter, it will automatically try to find this entity and add it to the filename.
 
-So far and accordingly to the BIDS specification 5 dataType/modalityLabel automatically look for this 3 entities.
+So far and accordingly to the BIDS specification 5 datatype/suffix automatically look for this 3 entities.
 
-| dataType |  modalityLabel | Entities |
+| datatype |  suffix | Entities |
 |:--------:|:----------:|:--------:|
 | anat | MEGRE | echo |
 | anat | MESE | echo |
@@ -158,7 +158,7 @@ So far and accordingly to the BIDS specification 5 dataType/modalityLabel automa
 | func | sbref | task |
 | fmap | epi | dir |
 
-Using the `--auto_extract_entitie`, if you want another combination of dataType/modalityLabel to be able to 
+Using the `--auto_extract_entitie`, if you want another combination of datatype/suffix to be able to 
 extract one or more of these 3 entities you need to add the key of the entities needed using the field customEntities like this within your description:
 
 ```

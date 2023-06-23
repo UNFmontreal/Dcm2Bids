@@ -3,22 +3,22 @@
     "searchMethod": "fnmatch",
     "descriptions": [
         {
-          "dataType": "localizer",
-          "modalityLabel": "localizer",
+          "datatype": "localizer",
+          "suffix": "localizer",
           "criteria": {
               "ProtocolName": "LOCALIZER"
           }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T1w",
+            "datatype": "anat",
+            "suffix": "T1w",
             "criteria": {
                 "SeriesDescription": "*mprage*"
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "DtI"
             }

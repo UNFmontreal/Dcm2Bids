@@ -41,7 +41,7 @@ def _build_arg_parser():
     p.add_argument("--auto_extract_entities",
                    action='store_true',
                    help="If set, it will automatically try to extract entity information [task, dir, echo]"
-                        " depending on the suffix and dataType. [%(default)s]")
+                        " depending on the suffix and datatype. [%(default)s]")
 
     p.add_argument("--bids_validate",
                    action='store_true',

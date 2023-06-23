@@ -3,52 +3,52 @@
     "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
     "descriptions": [
         {
-            "dataType": "anat",
-            "modalityLabel": "T1w",
+            "datatype": "anat",
+            "suffix": "T1w",
             "criteria": {
                 "SeriesDescription": "*T1W_3D*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "T2w",
+            "datatype": "anat",
+            "suffix": "T2w",
             "criteria": {
                 "SidecarFilename": "007*",
                 "EchoTime": 0.1
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "PD",
+            "datatype": "anat",
+            "suffix": "PD",
             "criteria": {
                 "SeriesDescription": "*TSE*",
                 "EchoTime": 0.008
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "FLAIR",
+            "datatype": "anat",
+            "suffix": "FLAIR",
             "criteria": {
                 "SeriesDescription": "*FLAIR*"
             }
         },
         {
-            "dataType": "dwi",
-            "modalityLabel": "dwi",
+            "datatype": "dwi",
+            "suffix": "dwi",
             "criteria": {
                 "SeriesDescription": "*DWI*"
             }
         },
         {
-            "dataType": "anat",
-            "modalityLabel": "SWI",
+            "datatype": "anat",
+            "suffix": "SWI",
             "criteria": {
                 "SeriesDescription": "*SWI*"
             }
         },
         {
-            "dataType": "func",
-            "modalityLabel": "bold",
+            "datatype": "func",
+            "suffix": "bold",
             "customLabels": "task-rest",
             "criteria": {
                 "SeriesDescription": "rs_fMRI"
@@ -58,8 +58,8 @@
             }
         },
         {
-            "dataType": "fmap",
-            "modalityLabel": "fmap",
+            "datatype": "fmap",
+            "suffix": "fmap",
             "criteria": {
                 "SidecarFilename": "*echo-4*"
             },
