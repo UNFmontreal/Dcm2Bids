@@ -1593,17 +1593,7 @@
 <span class="normal">412</span>
 <span class="normal">413</span>
 <span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">415</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
@@ -1653,10 +1643,6 @@ class Acquisition(object):
 
         sidecarChanges=None,
 
-        intendedFor=None,
-
-        IntendedFor=None,
-
         **kwargs
 
     ):
@@ -1668,8 +1654,6 @@ class Acquisition(object):
         self._customEntities = &quot;&quot;
 
         self._id = &quot;&quot;
-
-        self._intendedFor = None
 
         self.participant = participant
 
@@ -1688,14 +1672,6 @@ class Acquisition(object):
         else:
 
             self.sidecarChanges = sidecarChanges
-
-        if intendedFor is None:
-
-            self.intendedFor = IntendedFor
-
-        else:
-
-            self.intendedFor = intendedFor
 
         if id is None:
 
@@ -1853,13 +1829,13 @@ class Acquisition(object):
 
     @property
 
-    def dstIntendedFor(self):
+    def dstId(self):
 
         &quot;&quot;&quot;
 
         Return:
 
-            The destination root inside the BIDS structure for intendedFor
+            The destination root inside the BIDS structure for descriptions with id
 
         &quot;&quot;&quot;
 
@@ -1939,25 +1915,7 @@ class Acquisition(object):
 
         self.dstFile = new_name
 
-    @property
-
-    def intendedFor(self):
-
-        return self._intendedFor
-
-    @intendedFor.setter
-
-    def intendedFor(self, value):
-
-        if isinstance(value, list):
-
-            self._intendedFor = value
-
-        else:
-
-            self._intendedFor = [value]
-
-    def dstSidecarData(self, intendedForList):
+    def dstSidecarData(self, idList):
 
         &quot;&quot;&quot;
 
@@ -1973,33 +1931,55 @@ class Acquisition(object):
 
             data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
 
-        # intendedFor key
-
-        if self.intendedFor != [None]:
-
-            intendedValue = []
-
-            for index in self.intendedFor:
-
-                if index in intendedForList:
-
-                    intendedValue = intendedValue + [intendedForList[index]]
-
-                else:
-
-                    logging.warning(f&quot;No id found for IntendedFor value &#39;{index}&#39;.&quot;)
-
-                    logging.warning(f&quot;No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.&quot;)
-
-                    logging.warning(&quot;Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n&quot;)
-
-            data[&quot;IntendedFor&quot;] = [item for sublist in intendedValue for item in sublist]
-
         # sidecarChanges
 
         for key, value in self.sidecarChanges.items():
 
-            data[key] = value
+            values = []
+
+            if not isinstance(value, list):
+
+                value = [value]
+
+            for val in value:
+
+                if isinstance(val, str):
+
+                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+
+                        logging.warning(f&quot;No id found for {key} value &#39;{val}&#39;.&quot;)
+
+                        logging.warning(f&quot;No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.&quot;)
+
+                        logging.warning(f&quot;No sidecar changes for field {key} &quot;
+
+                                        f&quot;will be made &quot;
+
+                                        f&quot;for json file {self.dstFile}.json with this id.&quot;)
+
+                    else:
+
+                        values.append(idList.get(val, val))
+
+            # handle if nested list vs str
+
+            flat_value_list = []
+
+            for item in values:
+
+                if isinstance(item, list):
+
+                    flat_value_list += item
+
+                else:
+
+                    flat_value_list.append(item)
+
+            if len(flat_value_list) == 1:
+
+                flat_value_list = flat_value_list[0]
+
+            data[key] = flat_value_list
 
         return data
 
@@ -2041,9 +2021,7 @@ class Acquisition(object):
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Acquisition</span><span class="p">(</span>
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">dataType</span><span class="p">,</span>
     <span class="n">modalityLabel</span><span class="p">,</span>
@@ -2051,8 +2029,6 @@ class Acquisition(object):
     <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">intendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">IntendedFor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2504,17 +2480,7 @@ class Acquisition(object):
 <span class="normal">400</span>
 <span class="normal">401</span>
 <span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
+<span class="normal">403</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
 
     &quot;&quot;&quot; Class representing an acquisition
 
@@ -2552,10 +2518,6 @@ class Acquisition(object):
 
         sidecarChanges=None,
 
-        intendedFor=None,
-
-        IntendedFor=None,
-
         **kwargs
 
     ):
@@ -2567,8 +2529,6 @@ class Acquisition(object):
         self._customEntities = &quot;&quot;
 
         self._id = &quot;&quot;
-
-        self._intendedFor = None
 
         self.participant = participant
 
@@ -2587,14 +2547,6 @@ class Acquisition(object):
         else:
 
             self.sidecarChanges = sidecarChanges
-
-        if intendedFor is None:
-
-            self.intendedFor = IntendedFor
-
-        else:
-
-            self.intendedFor = intendedFor
 
         if id is None:
 
@@ -2752,13 +2704,13 @@ class Acquisition(object):
 
     @property
 
-    def dstIntendedFor(self):
+    def dstId(self):
 
         &quot;&quot;&quot;
 
         Return:
 
-            The destination root inside the BIDS structure for intendedFor
+            The destination root inside the BIDS structure for descriptions with id
 
         &quot;&quot;&quot;
 
@@ -2838,25 +2790,7 @@ class Acquisition(object):
 
         self.dstFile = new_name
 
-    @property
-
-    def intendedFor(self):
-
-        return self._intendedFor
-
-    @intendedFor.setter
-
-    def intendedFor(self, value):
-
-        if isinstance(value, list):
-
-            self._intendedFor = value
-
-        else:
-
-            self._intendedFor = [value]
-
-    def dstSidecarData(self, intendedForList):
+    def dstSidecarData(self, idList):
 
         &quot;&quot;&quot;
 
@@ -2872,33 +2806,55 @@ class Acquisition(object):
 
             data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
 
-        # intendedFor key
-
-        if self.intendedFor != [None]:
-
-            intendedValue = []
-
-            for index in self.intendedFor:
-
-                if index in intendedForList:
-
-                    intendedValue = intendedValue + [intendedForList[index]]
-
-                else:
-
-                    logging.warning(f&quot;No id found for IntendedFor value &#39;{index}&#39;.&quot;)
-
-                    logging.warning(f&quot;No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.&quot;)
-
-                    logging.warning(&quot;Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n&quot;)
-
-            data[&quot;IntendedFor&quot;] = [item for sublist in intendedValue for item in sublist]
-
         # sidecarChanges
 
         for key, value in self.sidecarChanges.items():
 
-            data[key] = value
+            values = []
+
+            if not isinstance(value, list):
+
+                value = [value]
+
+            for val in value:
+
+                if isinstance(val, str):
+
+                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+
+                        logging.warning(f&quot;No id found for {key} value &#39;{val}&#39;.&quot;)
+
+                        logging.warning(f&quot;No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.&quot;)
+
+                        logging.warning(f&quot;No sidecar changes for field {key} &quot;
+
+                                        f&quot;will be made &quot;
+
+                                        f&quot;for json file {self.dstFile}.json with this id.&quot;)
+
+                    else:
+
+                        values.append(idList.get(val, val))
+
+            # handle if nested list vs str
+
+            flat_value_list = []
+
+            for item in values:
+
+                if isinstance(item, list):
+
+                    flat_value_list += item
+
+                else:
+
+                    flat_value_list.append(item)
+
+            if len(flat_value_list) == 1:
+
+                flat_value_list = flat_value_list[0]
+
+            data[key] = flat_value_list
 
         return data
 
@@ -3002,10 +2958,10 @@ class Acquisition(object):
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
 <p>A string '_<customEntities>'</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstIntendedFor</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstId</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
-<p>The destination root inside the BIDS structure for intendedFor</p>
+<p>The destination root inside the BIDS structure for descriptions with id</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstRoot</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
@@ -3014,8 +2970,6 @@ class Acquisition(object):
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
 <p>A string '_<id>'</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">intendedFor</span>
-</code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">modalityLabel</span>
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
@@ -3034,7 +2988,7 @@ class Acquisition(object):
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dstSidecarData</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">intendedForList</span>
+    <span class="n">idList</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <details class="example">
@@ -3083,7 +3037,29 @@ class Acquisition(object):
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
-<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, intendedForList):
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, idList):
 
         &quot;&quot;&quot;
 
@@ -3099,33 +3075,55 @@ class Acquisition(object):
 
             data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
 
-        # intendedFor key
-
-        if self.intendedFor != [None]:
-
-            intendedValue = []
-
-            for index in self.intendedFor:
-
-                if index in intendedForList:
-
-                    intendedValue = intendedValue + [intendedForList[index]]
-
-                else:
-
-                    logging.warning(f&quot;No id found for IntendedFor value &#39;{index}&#39;.&quot;)
-
-                    logging.warning(f&quot;No sidecar changes for field IntendedFor will be made for json file {self.dstFile}.json with this id.&quot;)
-
-                    logging.warning(&quot;Check: https://unfmontreal.github.io/Dcm2Bids/docs/how-to/create-config-file/#id-and-intendedFor.\n&quot;)
-
-            data[&quot;IntendedFor&quot;] = [item for sublist in intendedValue for item in sublist]
-
         # sidecarChanges
 
         for key, value in self.sidecarChanges.items():
 
-            data[key] = value
+            values = []
+
+            if not isinstance(value, list):
+
+                value = [value]
+
+            for val in value:
+
+                if isinstance(val, str):
+
+                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+
+                        logging.warning(f&quot;No id found for {key} value &#39;{val}&#39;.&quot;)
+
+                        logging.warning(f&quot;No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.&quot;)
+
+                        logging.warning(f&quot;No sidecar changes for field {key} &quot;
+
+                                        f&quot;will be made &quot;
+
+                                        f&quot;for json file {self.dstFile}.json with this id.&quot;)
+
+                    else:
+
+                        values.append(idList.get(val, val))
+
+            # handle if nested list vs str
+
+            flat_value_list = []
+
+            for item in values:
+
+                if isinstance(item, list):
+
+                    flat_value_list += item
+
+                else:
+
+                    flat_value_list.append(item)
+
+            if len(flat_value_list) == 1:
+
+                flat_value_list = flat_value_list[0]
+
+            data[key] = flat_value_list
 
         return data
 </code></pre></div></td></tr></table></div>
@@ -3281,7 +3279,7 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

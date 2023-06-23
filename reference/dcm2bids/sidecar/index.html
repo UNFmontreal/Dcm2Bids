@@ -1813,9 +1813,7 @@
 <span class="normal">578</span>
 <span class="normal">579</span>
 <span class="normal">580</span>
-<span class="normal">581</span>
-<span class="normal">582</span>
-<span class="normal">583</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">581</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
 
@@ -2169,9 +2167,9 @@ class SidecarPairing(object):
 
         &quot;&quot;&quot;
 
-        acquisitions = []
+        acquisitions_id = []
 
-        acquisitions_intendedFor = []
+        acquisitions = []
 
         self.logger.info(&quot;Sidecars pairing:&quot;)
 
@@ -2193,9 +2191,9 @@ class SidecarPairing(object):
 
                 acq.setDstFile()
 
-                if acq.intendedFor != [None]:
+                if acq.id:
 
-                    acquisitions_intendedFor.append(acq)
+                    acquisitions_id.append(acq)
 
                 else:
 
@@ -2223,7 +2221,7 @@ class SidecarPairing(object):
 
                     self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
 
-        self.acquisitions = acquisitions + acquisitions_intendedFor
+        self.acquisitions = acquisitions_id + acquisitions
 
         return self.acquisitions
 
@@ -2286,8 +2284,6 @@ class SidecarPairing(object):
             if &quot;customEntities&quot; in desc.keys():
 
                 entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;customEntities&quot;]))
-
-                    #entities_left = set(concatenated_matches.keys()).symmetric_difference(set(descWithTask[&quot;customEntities&quot;]))
 
             if self.auto_extract_entities:
 
@@ -3133,9 +3129,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 <span class="normal">446</span>
 <span class="normal">447</span>
 <span class="normal">448</span>
-<span class="normal">449</span>
-<span class="normal">450</span>
-<span class="normal">451</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
+<span class="normal">449</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
 
     &quot;&quot;&quot;
 
@@ -3357,9 +3351,9 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         &quot;&quot;&quot;
 
-        acquisitions = []
+        acquisitions_id = []
 
-        acquisitions_intendedFor = []
+        acquisitions = []
 
         self.logger.info(&quot;Sidecars pairing:&quot;)
 
@@ -3381,9 +3375,9 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 acq.setDstFile()
 
-                if acq.intendedFor != [None]:
+                if acq.id:
 
-                    acquisitions_intendedFor.append(acq)
+                    acquisitions_id.append(acq)
 
                 else:
 
@@ -3411,7 +3405,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                     self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
 
-        self.acquisitions = acquisitions + acquisitions_intendedFor
+        self.acquisitions = acquisitions_id + acquisitions
 
         return self.acquisitions
 
@@ -3474,8 +3468,6 @@ descriptions (list): List of dictionaries describing acquisitions</p>
             if &quot;customEntities&quot; in desc.keys():
 
                 entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;customEntities&quot;]))
-
-                    #entities_left = set(concatenated_matches.keys()).symmetric_difference(set(descWithTask[&quot;customEntities&quot;]))
 
             if self.auto_extract_entities:
 
@@ -3724,9 +3716,9 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         &quot;&quot;&quot;
 
-        acquisitions = []
+        acquisitions_id = []
 
-        acquisitions_intendedFor = []
+        acquisitions = []
 
         self.logger.info(&quot;Sidecars pairing:&quot;)
 
@@ -3748,9 +3740,9 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 acq.setDstFile()
 
-                if acq.intendedFor != [None]:
+                if acq.id:
 
-                    acquisitions_intendedFor.append(acq)
+                    acquisitions_id.append(acq)
 
                 else:
 
@@ -3778,7 +3770,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                     self.logger.warning(&quot;    -&gt;  %s&quot;, acq.suffix)
 
-        self.acquisitions = acquisitions + acquisitions_intendedFor
+        self.acquisitions = acquisitions_id + acquisitions
 
         return self.acquisitions
 </code></pre></div></td></tr></table></div>
@@ -4304,9 +4296,7 @@ the values are a list of possible descriptions</p>
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code>    def searchDcmTagEntity(self, sidecar, desc):
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code>    def searchDcmTagEntity(self, sidecar, desc):
 
         &quot;&quot;&quot;
 
@@ -4365,8 +4355,6 @@ the values are a list of possible descriptions</p>
             if &quot;customEntities&quot; in desc.keys():
 
                 entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;customEntities&quot;]))
-
-                    #entities_left = set(concatenated_matches.keys()).symmetric_difference(set(descWithTask[&quot;customEntities&quot;]))
 
             if self.auto_extract_entities:
 
@@ -4433,7 +4421,7 @@ the values are a list of possible descriptions</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

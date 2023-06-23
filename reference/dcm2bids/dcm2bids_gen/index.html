@@ -1725,11 +1725,11 @@ class Dcm2BidsGen(object):
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
-        intendedForList = {}
+        idList = {}
 
         for acq in parser.acquisitions:
 
-            intendedForList = self.move(acq, intendedForList)
+            idList = self.move(acq, idList)
 
         if self.bids_validate:
 
@@ -1751,7 +1751,7 @@ class Dcm2BidsGen(object):
 
                                  &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
 
-    def move(self, acquisition, intendedForList):
+    def move(self, acquisition, idList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -1785,17 +1785,17 @@ class Dcm2BidsGen(object):
 
                     continue
 
-            # Populate intendedFor
+            # Populate idList
 
             if &#39;.nii&#39; in ext:
 
-                if acquisition.id in intendedForList:
+                if acquisition.id in idList:
 
-                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
+                    idList[acquisition.id].append(acquisition.dstId + &quot;&quot;.join(ext))
 
                 else:
 
-                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
+                    idList[acquisition.id] = [acquisition.dstId + &quot;&quot;.join(ext)]
 
             if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
@@ -1817,7 +1817,7 @@ class Dcm2BidsGen(object):
 
             elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(intendedForList)
+                data = acquisition.dstSidecarData(idList)
 
                 save_json(dstFile, data)
 
@@ -1829,7 +1829,7 @@ class Dcm2BidsGen(object):
 
                 os.rename(srcFile, dstFile)
 
-        return intendedForList
+        return idList
 </code></pre></div></td></tr></table></div>
 </details>
 <h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
@@ -2408,11 +2408,11 @@ class Dcm2BidsGen(object):
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
-        intendedForList = {}
+        idList = {}
 
         for acq in parser.acquisitions:
 
-            intendedForList = self.move(acq, intendedForList)
+            idList = self.move(acq, idList)
 
         if self.bids_validate:
 
@@ -2434,7 +2434,7 @@ class Dcm2BidsGen(object):
 
                                  &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
 
-    def move(self, acquisition, intendedForList):
+    def move(self, acquisition, idList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -2468,17 +2468,17 @@ class Dcm2BidsGen(object):
 
                     continue
 
-            # Populate intendedFor
+            # Populate idList
 
             if &#39;.nii&#39; in ext:
 
-                if acquisition.id in intendedForList:
+                if acquisition.id in idList:
 
-                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
+                    idList[acquisition.id].append(acquisition.dstId + &quot;&quot;.join(ext))
 
                 else:
 
-                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
+                    idList[acquisition.id] = [acquisition.dstId + &quot;&quot;.join(ext)]
 
             if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
@@ -2500,7 +2500,7 @@ class Dcm2BidsGen(object):
 
             elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(intendedForList)
+                data = acquisition.dstSidecarData(idList)
 
                 save_json(dstFile, data)
 
@@ -2512,7 +2512,7 @@ class Dcm2BidsGen(object):
 
                 os.rename(srcFile, dstFile)
 
-        return intendedForList
+        return idList
 </code></pre></div></td></tr></table></div>
 </details>
 <hr />
@@ -2529,7 +2529,7 @@ class Dcm2BidsGen(object):
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">acquisition</span><span class="p">,</span>
-    <span class="n">intendedForList</span>
+    <span class="n">idList</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Move an acquisition to BIDS format</p>
@@ -2613,7 +2613,7 @@ class Dcm2BidsGen(object):
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, intendedForList):
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, idList):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -2647,17 +2647,17 @@ class Dcm2BidsGen(object):
 
                     continue
 
-            # Populate intendedFor
+            # Populate idList
 
             if &#39;.nii&#39; in ext:
 
-                if acquisition.id in intendedForList:
+                if acquisition.id in idList:
 
-                    intendedForList[acquisition.id].append(acquisition.dstIntendedFor + &quot;&quot;.join(ext))
+                    idList[acquisition.id].append(acquisition.dstId + &quot;&quot;.join(ext))
 
                 else:
 
-                    intendedForList[acquisition.id] = [acquisition.dstIntendedFor + &quot;&quot;.join(ext)]
+                    idList[acquisition.id] = [acquisition.dstId + &quot;&quot;.join(ext)]
 
             if (self.config.get(&quot;defaceTpl&quot;) and acquisition.dataType == &quot;anat&quot; and &quot;.nii&quot; in ext):
 
@@ -2679,7 +2679,7 @@ class Dcm2BidsGen(object):
 
             elif &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(intendedForList)
+                data = acquisition.dstSidecarData(idList)
 
                 save_json(dstFile, data)
 
@@ -2691,7 +2691,7 @@ class Dcm2BidsGen(object):
 
                 os.rename(srcFile, dstFile)
 
-        return intendedForList
+        return idList
 </code></pre></div></td></tr></table></div>
 </details>
 <h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">⚓︎</a></h4>
@@ -2844,11 +2844,11 @@ class Dcm2BidsGen(object):
 
         self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
 
-        intendedForList = {}
+        idList = {}
 
         for acq in parser.acquisitions:
 
-            intendedForList = self.move(acq, intendedForList)
+            idList = self.move(acq, idList)
 
         if self.bids_validate:
 
@@ -2916,7 +2916,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

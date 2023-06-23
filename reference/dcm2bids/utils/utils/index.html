@@ -1566,7 +1566,9 @@
 <span class="normal">304</span>
 <span class="normal">305</span>
 <span class="normal">306</span>
-<span class="normal">307</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -1676,6 +1678,8 @@ class DEFAULT(object):
 
                        &quot;recording&quot;]
 
+    keyWithPathSidecarChanges = [&#39;IntendedFor&#39;, &#39;Sources&#39;]
+
     # misc
 
     tmpDirName = &quot;tmp_dcm2bids&quot;
@@ -1752,7 +1756,7 @@ def run_shell_command(commandLine, log=True):
 
         logger = logging.getLogger(__name__)
 
-        logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(commandLine))
+        logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(str(item) for item in commandLine))
 
     return check_output(commandLine)
 
@@ -2040,7 +2044,7 @@ class TreePrinter:
 
         logger = logging.getLogger(__name__)
 
-        logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(commandLine))
+        logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(str(item) for item in commandLine))
 
     return check_output(commandLine)
 </code></pre></div></td></tr></table></div>
@@ -2308,7 +2312,9 @@ class TreePrinter:
 <span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
-<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
 
     &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
@@ -2406,6 +2412,8 @@ class TreePrinter:
 
                        &quot;recording&quot;]
 
+    keyWithPathSidecarChanges = [&#39;IntendedFor&#39;, &#39;Sources&#39;]
+
     # misc
 
     tmpDirName = &quot;tmp_dcm2bids&quot;
@@ -2456,6 +2464,8 @@ class TreePrinter:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">force_dcm2niix</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">helperDir</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">keyWithPathSidecarChanges</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">link_bids_validator</span>
 </code></pre></div></td></tr></table></div>
@@ -2763,7 +2773,7 @@ class TreePrinter:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T15:43:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>
