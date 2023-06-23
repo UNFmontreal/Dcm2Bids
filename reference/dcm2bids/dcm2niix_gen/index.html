@@ -1313,7 +1313,17 @@
 <span class="normal">160</span>
 <span class="normal">161</span>
 <span class="normal">162</span>
-<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Dcm2niix class&quot;&quot;&quot;
 
@@ -1351,7 +1361,17 @@ class Dcm2niixGen(object):
 
     def __init__(
 
-        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
+        self,
+
+        dicomDirs,
+
+        bidsDir,
+
+        participant=None,
+
+        options=DEFAULT.dcm2niixOptions,
+
+        helper=False
 
     ):
 
@@ -1367,6 +1387,8 @@ class Dcm2niixGen(object):
 
         self.options = options
 
+        self.helper = helper
+
     @property
 
     def outputDir(self):
@@ -1381,9 +1403,15 @@ class Dcm2niixGen(object):
 
         tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
 
-        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
+        tmpDir = self.bidsDir / DEFAULT.tmpDirName / tmpDir
 
-    def run(self, force=False):
+        if self.helper:
+
+            tmpDir = self.bidsDir
+
+        return tmpDir
+
+    def run(self, force=False, helper=False):
 
         &quot;&quot;&quot; Run dcm2niix if necessary
 
@@ -1403,7 +1431,7 @@ class Dcm2niixGen(object):
 
             oldOutput = os.listdir(self.outputDir) != []
 
-        except:
+        except Exception:
 
             oldOutput = False
 
@@ -1419,10 +1447,6 @@ class Dcm2niixGen(object):
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            # os.makedirs(self.outputDir, exist_ok=True)
-
-            # python2 compatibility
-
             if not os.path.exists(self.outputDir):
 
                 os.makedirs(self.outputDir)
@@ -1435,13 +1459,9 @@ class Dcm2niixGen(object):
 
             self.logger.warning(self.outputDir)
 
-            self.logger.warning(&quot;Use --forceDcm2niix to rerun dcm2niix&quot;)
+            self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix \n&quot;)
 
         else:
-
-            # os.makedirs(self.outputDir, exist_ok=True)
-
-            # python2 compatibility
 
             if not os.path.exists(self.outputDir):
 
@@ -1469,7 +1489,7 @@ class Dcm2niixGen(object):
 
                 output = output.decode()
 
-            except:
+            except Exception:
 
                 pass
 
@@ -1485,11 +1505,13 @@ class Dcm2niixGen(object):
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niixGen</span><span class="p">(</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niixGen</span><span class="p">(</span>
     <span class="n">dicomDirs</span><span class="p">,</span>
     <span class="n">bidsDir</span><span class="p">,</span>
     <span class="n">participant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">options</span><span class="o">=</span><span class="s2">&quot;-b y -ba y -z y -f &#39;</span><span class="si">%3s</span><span class="s2">_</span><span class="si">%f</span><span class="s2">_%p_%t&#39;&quot;</span>
+    <span class="n">options</span><span class="o">=</span><span class="s2">&quot;-b y -ba y -z y -f &#39;</span><span class="si">%3s</span><span class="s2">_</span><span class="si">%f</span><span class="s2">_%p_%t&#39;&quot;</span><span class="p">,</span>
+    <span class="n">helper</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Object to handle dcm2niix execution</p>
@@ -1684,7 +1706,17 @@ class Dcm2niixGen(object):
 <span class="normal">144</span>
 <span class="normal">145</span>
 <span class="normal">146</span>
-<span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2niixGen(object):
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2niixGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2niix execution
 
@@ -1706,7 +1738,17 @@ class Dcm2niixGen(object):
 
     def __init__(
 
-        self, dicomDirs, bidsDir, participant=None, options=DEFAULT.dcm2niixOptions
+        self,
+
+        dicomDirs,
+
+        bidsDir,
+
+        participant=None,
+
+        options=DEFAULT.dcm2niixOptions,
+
+        helper=False
 
     ):
 
@@ -1722,6 +1764,8 @@ class Dcm2niixGen(object):
 
         self.options = options
 
+        self.helper = helper
+
     @property
 
     def outputDir(self):
@@ -1736,9 +1780,15 @@ class Dcm2niixGen(object):
 
         tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
 
-        return self.bidsDir / DEFAULT.tmpDirName / tmpDir
+        tmpDir = self.bidsDir / DEFAULT.tmpDirName / tmpDir
 
-    def run(self, force=False):
+        if self.helper:
+
+            tmpDir = self.bidsDir
+
+        return tmpDir
+
+    def run(self, force=False, helper=False):
 
         &quot;&quot;&quot; Run dcm2niix if necessary
 
@@ -1758,7 +1808,7 @@ class Dcm2niixGen(object):
 
             oldOutput = os.listdir(self.outputDir) != []
 
-        except:
+        except Exception:
 
             oldOutput = False
 
@@ -1774,10 +1824,6 @@ class Dcm2niixGen(object):
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            # os.makedirs(self.outputDir, exist_ok=True)
-
-            # python2 compatibility
-
             if not os.path.exists(self.outputDir):
 
                 os.makedirs(self.outputDir)
@@ -1790,13 +1836,9 @@ class Dcm2niixGen(object):
 
             self.logger.warning(self.outputDir)
 
-            self.logger.warning(&quot;Use --forceDcm2niix to rerun dcm2niix&quot;)
+            self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix \n&quot;)
 
         else:
-
-            # os.makedirs(self.outputDir, exist_ok=True)
-
-            # python2 compatibility
 
             if not os.path.exists(self.outputDir):
 
@@ -1824,7 +1866,7 @@ class Dcm2niixGen(object):
 
                 output = output.decode()
 
-            except:
+            except Exception:
 
                 pass
 
@@ -1892,7 +1934,7 @@ class Dcm2niixGen(object):
 
                 output = output.decode()
 
-            except:
+            except Exception:
 
                 pass
 
@@ -1905,9 +1947,11 @@ class Dcm2niixGen(object):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">force</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">helper</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Run dcm2niix if necessary</p>
@@ -1996,15 +2040,7 @@ class Dcm2niixGen(object):
 <span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self, force=False):
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self, force=False, helper=False):
 
         &quot;&quot;&quot; Run dcm2niix if necessary
 
@@ -2024,7 +2060,7 @@ class Dcm2niixGen(object):
 
             oldOutput = os.listdir(self.outputDir) != []
 
-        except:
+        except Exception:
 
             oldOutput = False
 
@@ -2040,10 +2076,6 @@ class Dcm2niixGen(object):
 
             shutil.rmtree(self.outputDir, ignore_errors=True)
 
-            # os.makedirs(self.outputDir, exist_ok=True)
-
-            # python2 compatibility
-
             if not os.path.exists(self.outputDir):
 
                 os.makedirs(self.outputDir)
@@ -2056,13 +2088,9 @@ class Dcm2niixGen(object):
 
             self.logger.warning(self.outputDir)
 
-            self.logger.warning(&quot;Use --forceDcm2niix to rerun dcm2niix&quot;)
+            self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix \n&quot;)
 
         else:
-
-            # os.makedirs(self.outputDir, exist_ok=True)
-
-            # python2 compatibility
 
             if not os.path.exists(self.outputDir):
 
@@ -2081,7 +2109,7 @@ class Dcm2niixGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T11:12:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

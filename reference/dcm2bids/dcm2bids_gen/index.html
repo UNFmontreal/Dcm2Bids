@@ -1553,7 +1553,7 @@ class Dcm2BidsGen(object):
 
         clobber (boolean): Overwrite file if already in BIDS folder
 
-        forceDcm2niix (boolean): Forces a cleaning of a previous execution of
+        force_dcm2niix (boolean): Forces a cleaning of a previous execution of
 
                                  dcm2niix
 
@@ -1581,7 +1581,7 @@ class Dcm2BidsGen(object):
 
         clobber=DEFAULT.clobber,
 
-        forceDcm2niix=DEFAULT.forceDcm2niix,
+        force_dcm2niix=DEFAULT.force_dcm2niix,
 
         log_level=DEFAULT.logLevel,
 
@@ -1605,7 +1605,7 @@ class Dcm2BidsGen(object):
 
         self.auto_extract_entities = auto_extract_entities
 
-        self.forceDcm2niix = forceDcm2niix
+        self.force_dcm2niix = force_dcm2niix
 
         self.logLevel = log_level
 
@@ -1687,7 +1687,7 @@ class Dcm2BidsGen(object):
 
         check_latest(&quot;dcm2niix&quot;)
 
-        dcm2niix.run(self.forceDcm2niix)
+        dcm2niix.run(self.force_dcm2niix)
 
         sidecars = []
 
@@ -1855,7 +1855,7 @@ class Dcm2BidsGen(object):
     <span class="n">auto_extract_entities</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="n">clobber</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">forceDcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">force_dcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">_</span>
 <span class="p">)</span>
@@ -1909,7 +1909,7 @@ class Dcm2BidsGen(object):
 <td>None</td>
 </tr>
 <tr>
-<td>forceDcm2niix</td>
+<td>force_dcm2niix</td>
 <td>boolean</td>
 <td>Forces a cleaning of a previous execution of<br>dcm2niix</td>
 <td>None</td>
@@ -2236,7 +2236,7 @@ class Dcm2BidsGen(object):
 
         clobber (boolean): Overwrite file if already in BIDS folder
 
-        forceDcm2niix (boolean): Forces a cleaning of a previous execution of
+        force_dcm2niix (boolean): Forces a cleaning of a previous execution of
 
                                  dcm2niix
 
@@ -2264,7 +2264,7 @@ class Dcm2BidsGen(object):
 
         clobber=DEFAULT.clobber,
 
-        forceDcm2niix=DEFAULT.forceDcm2niix,
+        force_dcm2niix=DEFAULT.force_dcm2niix,
 
         log_level=DEFAULT.logLevel,
 
@@ -2288,7 +2288,7 @@ class Dcm2BidsGen(object):
 
         self.auto_extract_entities = auto_extract_entities
 
-        self.forceDcm2niix = forceDcm2niix
+        self.force_dcm2niix = force_dcm2niix
 
         self.logLevel = log_level
 
@@ -2370,7 +2370,7 @@ class Dcm2BidsGen(object):
 
         check_latest(&quot;dcm2niix&quot;)
 
-        dcm2niix.run(self.forceDcm2niix)
+        dcm2niix.run(self.force_dcm2niix)
 
         sidecars = []
 
@@ -2806,7 +2806,7 @@ class Dcm2BidsGen(object):
 
         check_latest(&quot;dcm2niix&quot;)
 
-        dcm2niix.run(self.forceDcm2niix)
+        dcm2niix.run(self.force_dcm2niix)
 
         sidecars = []
 
@@ -2916,7 +2916,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T11:12:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>

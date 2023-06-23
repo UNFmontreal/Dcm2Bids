@@ -1154,25 +1154,13 @@
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
-
-import os
+<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import shutil
+
+from pathlib import Path
+
+import os
 
 def assert_dirs_empty(parser, args, required):
 
@@ -1200,49 +1188,33 @@ def assert_dirs_empty(parser, args, required):
 
     &quot;&quot;&quot;
 
-    def check(path):
+    def check(path: Path):
 
-        if os.path.isdir(path):
+        if path.is_dir():
 
-            if os.listdir(path):
+            if any(path.iterdir()):
 
                 if not args.overwrite:
 
                     parser.error(
 
-                        f&quot;Output directory {path} isn&#39;t empty, so some files &quot;
+                        f&quot;Output directory {path}{os.sep} isn&#39;t empty, so some files &quot;
 
-                        &quot;could be overwritten or deleted.\nRerun the command&quot;
+                        &quot;could be overwritten or deleted.\nRerun the command &quot;
 
-                        &quot; with --force option to overwrite &quot;
+                        &quot;with --force option to overwrite &quot;
 
                         &quot;existing output files.&quot;)
 
             else:
 
-                for the_file in os.listdir(path):
-
-                    file_path = os.path.join(path, the_file)
-
-                    try:
-
-                        if os.path.isfile(file_path):
-
-                            os.unlink(file_path)
-
-                        elif os.path.isdir(file_path):
-
-                            shutil.rmtree(file_path)
-
-                    except Exception as e:
-
-                        print(e)
+                shutil.rmtree(path)
 
     if isinstance(required, str):
 
-        required = [required]
+        required = Path(required)
 
-    for cur_dir in required:
+    for cur_dir in [required]:
 
         check(cur_dir)
 
@@ -1380,23 +1352,7 @@ def add_overwrite_arg(parser):
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code>def assert_dirs_empty(parser, args, required):
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code>def assert_dirs_empty(parser, args, required):
 
     &quot;&quot;&quot;
 
@@ -1422,49 +1378,33 @@ def add_overwrite_arg(parser):
 
     &quot;&quot;&quot;
 
-    def check(path):
+    def check(path: Path):
 
-        if os.path.isdir(path):
+        if path.is_dir():
 
-            if os.listdir(path):
+            if any(path.iterdir()):
 
                 if not args.overwrite:
 
                     parser.error(
 
-                        f&quot;Output directory {path} isn&#39;t empty, so some files &quot;
+                        f&quot;Output directory {path}{os.sep} isn&#39;t empty, so some files &quot;
 
-                        &quot;could be overwritten or deleted.\nRerun the command&quot;
+                        &quot;could be overwritten or deleted.\nRerun the command &quot;
 
-                        &quot; with --force option to overwrite &quot;
+                        &quot;with --force option to overwrite &quot;
 
                         &quot;existing output files.&quot;)
 
             else:
 
-                for the_file in os.listdir(path):
-
-                    file_path = os.path.join(path, the_file)
-
-                    try:
-
-                        if os.path.isfile(file_path):
-
-                            os.unlink(file_path)
-
-                        elif os.path.isdir(file_path):
-
-                            shutil.rmtree(file_path)
-
-                    except Exception as e:
-
-                        print(e)
+                shutil.rmtree(path)
 
     if isinstance(required, str):
 
-        required = [required]
+        required = Path(required)
 
-    for cur_dir in required:
+    for cur_dir in [required]:
 
         check(cur_dir)
 </code></pre></div></td></tr></table></div>
@@ -1477,7 +1417,7 @@ def add_overwrite_arg(parser):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T11:12:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T13:53:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
       
     
   </small>
