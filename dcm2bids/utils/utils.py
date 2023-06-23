@@ -69,6 +69,8 @@ class DEFAULT(object):
                        "run", "mod", "echo", "flip", "inv", "mt", "part",
                        "recording"]
 
+    keyWithPathSidecarChanges = ['IntendedFor', 'Sources']
+
     # misc
     tmpDirName = "tmp_dcm2bids"
     helperDir = "helper"
@@ -119,7 +121,7 @@ def run_shell_command(commandLine, log=True):
     """
     if log:
         logger = logging.getLogger(__name__)
-        logger.info("Running: %s", " ".join(commandLine))
+        logger.info("Running: %s", " ".join(str(item) for item in commandLine))
     return check_output(commandLine)
 
 

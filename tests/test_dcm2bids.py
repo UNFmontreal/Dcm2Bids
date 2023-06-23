@@ -55,7 +55,7 @@ def test_dcm2bids():
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test.json"),
                       bidsDir.name)
-    app.run()   
+    app.run()
 
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
@@ -65,7 +65,7 @@ def test_dcm2bids():
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
-    assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz")]
+    assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
@@ -204,7 +204,7 @@ def test_caseSensitive_false():
     fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
-    assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz")]
+    assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
@@ -255,7 +255,9 @@ def test_dcm2bids_auto_extract():
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
                                    os.path.join("anat", "sub-01_T1w.nii")]
 
-    func_task = os.path.join(bidsDir.name, "sub-01", "func", "sub-01_task-rest_acq-highres_bold.json")
+    func_task = os.path.join(bidsDir.name, "sub-01",
+                             "func",
+                             "sub-01_task-rest_acq-highres_bold.json")
     data = load_json(func_task)
 
     assert os.path.exists(func_task)
