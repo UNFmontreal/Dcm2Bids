@@ -90,7 +90,7 @@ def test_dcm2bids():
     assert fmapMtime == fmapMtimeRerun
 
 
-def test_caseSensitive_false():
+def test_dcm2bids_caseSensitive():
     # Validate caseSensitive false
     bidsDir = TemporaryDirectory()
 
@@ -262,3 +262,46 @@ def test_dcm2bids_auto_extract():
 
     assert os.path.exists(func_task)
     assert data['TaskName'] == "rest"
+
+
+def test_dcm2bids_dup():
+    # Validate duplicateMethod: dup
+    bidsDir = TemporaryDirectory()
+    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test_dup.json"),
+                      bidsDir.name)
+    app.run()
+
+    layout = BIDSLayout(bidsDir.name,
+                        validate=False)
+
+    original_01_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00001.json")
+
+    original_02_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00002.json")
+
+    original_03_localizer = os.path.join(TEST_DATA_DIR,
+                                         "sidecars",
+                                         "001_localizer_20100603125600_i00003.json")
+
+    # Input localizer is lowercase (json)
+    json_localizer = layout.get(subject="01",
+                                   extension="json",
+                                   suffix="localizer")
+    # dup 01
+    assert compare_json(original_01_localizer,
+                        json_localizer[0].path)
+
+    # dup 02
+    assert compare_json(original_03_localizer,
+                        json_localizer[1].path)
+
+    # not dup
+    assert compare_json(original_02_localizer,
+                        json_localizer[2])
