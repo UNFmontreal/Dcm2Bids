@@ -82,14 +82,6 @@ def _build_arg_parser():
 
     return p
 
-# def set_logger(self):
-#     """ Set a basic logger"""
-#     logDir = Path(args.output_dir) / DEFAULT.tmpDirName / "log"
-#     logFile = logDir / f"{args.participant}_{dtoday.strftime('%Y_%m_%d')}.log"
-#     logDir.mkdir(parents=True, exist_ok=True)
-#     setup_logging(args.log_level, logFile)
-
-
 def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
@@ -105,6 +97,7 @@ def main():
     logger = logging.getLogger(__name__)
 
     logger.info("--- dcm2bids start ---")
+    logger.info("Running the following command: " + " ".join(sys.argv))
     logger.info("OS version: %s", platform.platform())
     logger.info("Python version: %s", sys.version.replace("\n", ""))
     logger.info(f"dcm2bids version: { __version__}")
