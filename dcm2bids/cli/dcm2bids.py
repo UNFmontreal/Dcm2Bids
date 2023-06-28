@@ -97,11 +97,10 @@ def main():
     participant = Participant(args.participant, args.session)
     log_dir = Path(args.output_dir) / DEFAULT.tmpDirName / "log"
     log_file = (log_dir /
-               f"{participant.prefix}_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
+                f"{participant.prefix}_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
     log_dir.mkdir(parents=True, exist_ok=True)
 
     setup_logging(args.log_level, log_file)
-    # set_logger()
 
     logger = logging.getLogger(__name__)
 
@@ -125,6 +124,7 @@ def main():
 
     app = Dcm2BidsGen(**vars(args)).run()
 
+    logger.info(f"Logs saved in {log_file}")
     logger.info("--- dcm2bids end ---")
 
     return app

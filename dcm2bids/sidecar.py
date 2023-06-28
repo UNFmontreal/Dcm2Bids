@@ -214,8 +214,8 @@ class SidecarPairing(object):
         """
         acquisitions_id = []
         acquisitions = []
-
-        self.logger.info("Sidecars pairing:")
+        acquisitions_intendedFor = []
+        self.logger.info("Sidecar pairing:\n".upper())
         for sidecar, valid_descriptions in self.graph.items():
             sidecarName = os.path.basename(sidecar.root)
 
@@ -235,7 +235,7 @@ class SidecarPairing(object):
 
                 self.logger.info(
                   f"{acq.dstFile.replace(f'{acq.participant.prefix}-', '')}"
-                  "<-  {sidecarName}")
+                  f"<-  {sidecarName}")
 
             elif len(valid_descriptions) == 0:
                 self.logger.info(f"No Pairing  <-  {sidecarName}")

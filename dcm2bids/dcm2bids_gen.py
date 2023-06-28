@@ -102,7 +102,7 @@ class Dcm2BidsGen(object):
         parser.build_acquisitions(self.participant)
         parser.find_runs()
 
-        self.logger.info("moving acquisitions into BIDS folder".upper())
+        self.logger.info("moving acquisitions into BIDS folder\n".upper())
 
         idList = {}
         for acq in parser.acquisitions:
