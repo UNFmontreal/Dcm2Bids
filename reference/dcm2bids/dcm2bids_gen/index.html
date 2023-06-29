@@ -1431,7 +1431,9 @@
 <span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
-<span class="normal">281</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;
 
@@ -1593,7 +1595,9 @@ class Dcm2BidsGen(object):
 
             self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
+            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive),
+
+            self.config.get(&quot;dupMethod&quot;, DEFAULT.dupMethod)
 
         )
 
@@ -2060,7 +2064,9 @@ class Dcm2BidsGen(object):
 <span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
-<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2196,7 +2202,9 @@ class Dcm2BidsGen(object):
 
             self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
+            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive),
+
+            self.config.get(&quot;dupMethod&quot;, DEFAULT.dupMethod)
 
         )
 
@@ -2586,7 +2594,9 @@ class Dcm2BidsGen(object):
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
@@ -2628,7 +2638,9 @@ class Dcm2BidsGen(object):
 
             self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive)
+            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive),
+
+            self.config.get(&quot;dupMethod&quot;, DEFAULT.dupMethod)
 
         )
 
@@ -2677,7 +2689,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T03:14:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T04:31:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
       
     
   </small>

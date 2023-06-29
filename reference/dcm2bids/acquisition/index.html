@@ -1591,7 +1591,13 @@
 <span class="normal">410</span>
 <span class="normal">411</span>
 <span class="normal">412</span>
-<span class="normal">413</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
@@ -1853,9 +1859,11 @@ class Acquisition(object):
 
         Return:
 
-            The destination filename formatted following the v1.7.0 BIDS entity key table
+            The destination filename formatted following
 
-            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+            the v1.8.0 BIDS entity key table
+
+            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
 
         &quot;&quot;&quot;
 
@@ -1885,9 +1893,13 @@ class Acquisition(object):
 
         if current_dict:
 
-            self.logger.warning(f&#39;Entity \&quot;{list(current_dict.keys())}\&quot; is not a valid BIDS entity.&#39;)
+            self.logger.warning(f&#39;Entity \&quot;{list(current_dict.keys())}\&quot;&#39;
 
-        new_name += f&quot;_{&#39;_&#39;.join(suffix_list)}&quot;  # Allow multiple single keys (without value)
+                                &#39; is not a valid BIDS entity.&#39;)
+
+        # Allow multiple single keys (without value)
+
+        new_name += f&quot;_{&#39;_&#39;.join(suffix_list)}&quot;
 
         if len(suffix_list) != 1:
 
@@ -1943,15 +1955,15 @@ class Acquisition(object):
 
                     if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
 
-                        logging.warning(f&quot;No id found for {key} value &#39;{val}&#39;.&quot;)
+                        logging.warning(f&quot;No id found for &#39;{key}&#39; value &#39;{val}&#39;.&quot;)
 
-                        logging.warning(f&quot;No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.&quot;)
-
-                        logging.warning(f&quot;No sidecar changes for field {key} &quot;
+                        logging.warning(f&quot;No sidecar changes for field &#39;{key}&#39; &quot;
 
                                         f&quot;will be made &quot;
 
-                                        f&quot;for json file {self.dstFile}.json with this id.&quot;)
+                                        f&quot;for json file &#39;{self.dstFile}.json&#39; &quot;
+
+                                        &quot;with this id.&quot;)
 
                     else:
 
@@ -2474,7 +2486,13 @@ class Acquisition(object):
 <span class="normal">398</span>
 <span class="normal">399</span>
 <span class="normal">400</span>
-<span class="normal">401</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
 
     &quot;&quot;&quot; Class representing an acquisition
 
@@ -2724,9 +2742,11 @@ class Acquisition(object):
 
         Return:
 
-            The destination filename formatted following the v1.7.0 BIDS entity key table
+            The destination filename formatted following
 
-            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+            the v1.8.0 BIDS entity key table
+
+            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
 
         &quot;&quot;&quot;
 
@@ -2756,9 +2776,13 @@ class Acquisition(object):
 
         if current_dict:
 
-            self.logger.warning(f&#39;Entity \&quot;{list(current_dict.keys())}\&quot; is not a valid BIDS entity.&#39;)
+            self.logger.warning(f&#39;Entity \&quot;{list(current_dict.keys())}\&quot;&#39;
 
-        new_name += f&quot;_{&#39;_&#39;.join(suffix_list)}&quot;  # Allow multiple single keys (without value)
+                                &#39; is not a valid BIDS entity.&#39;)
+
+        # Allow multiple single keys (without value)
+
+        new_name += f&quot;_{&#39;_&#39;.join(suffix_list)}&quot;
 
         if len(suffix_list) != 1:
 
@@ -2814,15 +2838,15 @@ class Acquisition(object):
 
                     if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
 
-                        logging.warning(f&quot;No id found for {key} value &#39;{val}&#39;.&quot;)
+                        logging.warning(f&quot;No id found for &#39;{key}&#39; value &#39;{val}&#39;.&quot;)
 
-                        logging.warning(f&quot;No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.&quot;)
-
-                        logging.warning(f&quot;No sidecar changes for field {key} &quot;
+                        logging.warning(f&quot;No sidecar changes for field &#39;{key}&#39; &quot;
 
                                         f&quot;will be made &quot;
 
-                                        f&quot;for json file {self.dstFile}.json with this id.&quot;)
+                                        f&quot;for json file &#39;{self.dstFile}.json&#39; &quot;
+
+                                        &quot;with this id.&quot;)
 
                     else:
 
@@ -3083,15 +3107,15 @@ class Acquisition(object):
 
                     if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
 
-                        logging.warning(f&quot;No id found for {key} value &#39;{val}&#39;.&quot;)
+                        logging.warning(f&quot;No id found for &#39;{key}&#39; value &#39;{val}&#39;.&quot;)
 
-                        logging.warning(f&quot;No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.&quot;)
-
-                        logging.warning(f&quot;No sidecar changes for field {key} &quot;
+                        logging.warning(f&quot;No sidecar changes for field &#39;{key}&#39; &quot;
 
                                         f&quot;will be made &quot;
 
-                                        f&quot;for json file {self.dstFile}.json with this id.&quot;)
+                                        f&quot;for json file &#39;{self.dstFile}.json&#39; &quot;
+
+                                        &quot;with this id.&quot;)
 
                     else:
 
@@ -3128,8 +3152,9 @@ class Acquisition(object):
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
-<p>The destination filename formatted following the v1.7.0 BIDS entity key table
-https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html</p>
+<p>The destination filename formatted following
+the v1.8.0 BIDS entity key table
+https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html</p>
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -3194,15 +3219,23 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 <span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code>    def setDstFile(self):
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code>    def setDstFile(self):
 
         &quot;&quot;&quot;
 
         Return:
 
-            The destination filename formatted following the v1.7.0 BIDS entity key table
+            The destination filename formatted following
 
-            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+            the v1.8.0 BIDS entity key table
+
+            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
 
         &quot;&quot;&quot;
 
@@ -3232,9 +3265,13 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 
         if current_dict:
 
-            self.logger.warning(f&#39;Entity \&quot;{list(current_dict.keys())}\&quot; is not a valid BIDS entity.&#39;)
+            self.logger.warning(f&#39;Entity \&quot;{list(current_dict.keys())}\&quot;&#39;
 
-        new_name += f&quot;_{&#39;_&#39;.join(suffix_list)}&quot;  # Allow multiple single keys (without value)
+                                &#39; is not a valid BIDS entity.&#39;)
+
+        # Allow multiple single keys (without value)
+
+        new_name += f&quot;_{&#39;_&#39;.join(suffix_list)}&quot;
 
         if len(suffix_list) != 1:
 
@@ -3267,7 +3304,7 @@ https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-tabl
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T03:14:21+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T04:31:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
       
     
   </small>
