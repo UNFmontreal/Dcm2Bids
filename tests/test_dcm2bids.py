@@ -292,3 +292,6 @@ def test_dcm2bids_complex():
     localizer_file_2 = os.path.join(bidsDir.name, "sub-01", "localizer", "sub-01_run-02_localizer.json")
     assert os.path.exists(localizer_file_1)
     assert os.path.exists(localizer_file_2)
+
+    mprage = os.path.join(bidsDir.name, "sub-01", "anat", "sub-01_T1w.json")
+    assert not os.path.exists(mprage)

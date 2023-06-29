@@ -19,6 +19,16 @@
                         ["ORIGINAL", "PRIMARY", "P", "ND"]]
                 }
             }
-        }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T1w",
+            "criteria": {
+                "SeriesDescription": "MPRAGE",
+                "ImageType": {
+                "any": ["PRIMARY"]
+                }
+            }
+        }       
     ]
 }
