@@ -1281,7 +1281,13 @@
 <span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
@@ -1338,6 +1344,12 @@ class Participant(object):
         else:
 
             self._name = &quot;sub-&quot; + name
+
+        if not self._name.replace(&#39;sub-&#39;, &#39;&#39;).isalnum():
+
+            raise NameError(f&quot;Participant &#39;{self._name.replace(&#39;sub-&#39;, &#39;&#39;)}&#39; &quot;
+
+                            &quot;should contains only alphanumeric characters.&quot;)
 
     @property
 
@@ -1602,7 +1614,13 @@ class Participant(object):
 <span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
-<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code>class Participant(object):
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span></pre></div></td><td class="code"><div><pre><span></span><code>class Participant(object):
 
     &quot;&quot;&quot; Class representing a participant
 
@@ -1651,6 +1669,12 @@ class Participant(object):
         else:
 
             self._name = &quot;sub-&quot; + name
+
+        if not self._name.replace(&#39;sub-&#39;, &#39;&#39;).isalnum():
+
+            raise NameError(f&quot;Participant &#39;{self._name.replace(&#39;sub-&#39;, &#39;&#39;)}&#39; &quot;
+
+                            &quot;should contains only alphanumeric characters.&quot;)
 
     @property
 
@@ -1814,7 +1838,7 @@ class Participant(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T02:16:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T02:36:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
       
     
   </small>
