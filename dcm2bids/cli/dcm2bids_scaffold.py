@@ -14,12 +14,18 @@ import datetime
 import logging
 import os
 import sys
+import platform
 from os.path import join as opj
 from dcm2bids.utils.io import write_txt
+from pathlib import Path
+
 from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
 from dcm2bids.utils.utils import DEFAULT, run_shell_command, TreePrinter
+from dcm2bids.utils.tools import check_latest
+
 from dcm2bids.utils.scaffold import bids_starter_kit
 from dcm2bids.utils.logger import setup_logging
+from dcm2bids.version import __version__
 
 
 def _build_arg_parser():
@@ -39,16 +45,30 @@ def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
 
-    setup_logging("info")
-    logger = logging.getLogger(__name__)
+    out_dir = Path(args.output_dir)
+    log_file = (out_dir
+                / DEFAULT.tmpDirName
+                / "log"
+                / f"scaffold_{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
 
     assert_dirs_empty(parser, args, args.output_dir)
+    log_file.parent.mkdir(parents=True, exist_ok=True)
 
     for _ in ["code", "derivatives", "sourcedata"]:
         os.makedirs(opj(args.output_dir, _), exist_ok=True)
 
-    logger.info("Currently running the following command: \n" +
-                " ".join(sys.argv) + "\n")
+    setup_logging("INFO", log_file)
+    logger = logging.getLogger(__name__)
+
+    logger.info("--- dcm2bids_scaffold start ---")
+    logger.info("Running the following command: " + " ".join(sys.argv))
+    logger.info("OS version: %s", platform.platform())
+    logger.info("Python version: %s", sys.version.replace("\n", ""))
+    logger.info(f"dcm2bids version: { __version__}")
+    logger.info("Checking for software update")
+
+    check_latest("dcm2bids")
+
     logger.info("The files used to create your BIDS directory were taken from "
                 "https://github.com/bids-standard/bids-starter-kit. \n")
 
@@ -88,6 +108,9 @@ def main():
     # output tree representation of where the scaffold was built.
 
     TreePrinter(args.output_dir).print_tree()
+
+    logger.info(f"Log file saved at {log_file}")
+    logger.info("--- dcm2bids_scaffold end ---")
 
 
 if __name__ == "__main__":

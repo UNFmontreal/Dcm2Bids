@@ -4,16 +4,19 @@
 Converts DICOM files to NIfTI files including their JSON sidecars in a
 temporary directory which can be inspected to make a dc2mbids config file.
 """
-import logging
 import argparse
+import logging
+import platform
 import sys
 import os
 from pathlib import Path
 from datetime import datetime
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
-from dcm2bids.utils.args import assert_dirs_empty
 from dcm2bids.utils.utils import DEFAULT
+from dcm2bids.utils.tools import dcm2niix_version, check_latest
 from dcm2bids.utils.logger import setup_logging
+from dcm2bids.utils.args import assert_dirs_empty
+from dcm2bids.version import __version__
 
 
 def _build_arg_parser():
@@ -42,6 +45,12 @@ def _build_arg_parser():
                    dest='overwrite', action='store_true',
                    help='Force command to overwrite existing output files.')
 
+    p.add_argument("-l", "--log_level",
+                   required=False,
+                   default=DEFAULT.cliLogLevel,
+                   choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                   help="Set logging level to the console. [%(default)s]")
+
     return p
 
 
@@ -50,35 +59,49 @@ def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
     out_dir = Path(args.output_dir)
-    log_path = (Path(DEFAULT.cliOutputDir)
+    log_file = (Path(DEFAULT.cliOutputDir)
                 / DEFAULT.tmpDirName
                 / "log"
-                / f"helper_{datetime.now().isoformat().replace(':', '')}.log")
+                / f"helper_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
+
     if args.nest:
         if isinstance(args.nest, str):
-            log_path = Path(
-              str(log_path).replace("helper_",
+            log_file = Path(
+              str(log_file).replace("helper_",
                                     f"helper_{args.nest.replace(os.path.sep, '-')}_"))
             out_dir = out_dir / args.nest
         else:
-            log_path = Path(str(log_path).replace(
+            log_file = Path(str(log_file).replace(
               "helper_", f"helper_{args.dicom_dir[0].replace(os.path.sep, '-')}_")
                             )
             out_dir = out_dir / args.dicom_dir[0]
 
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    setup_logging("info", log_path)
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+
+    setup_logging(args.log_level, log_file)
+
     logger = logging.getLogger(__name__)
 
-    logger.info("Running the following command: \n" + " ".join(sys.argv) + "\n")
+    logger.info("--- dcm2bids_helper start ---")
+    logger.info("Running the following command: " + " ".join(sys.argv))
+    logger.info("OS version: %s", platform.platform())
+    logger.info("Python version: %s", sys.version.replace("\n", ""))
+    logger.info(f"dcm2bids version: { __version__}")
+    logger.info(f"dcm2niix version: {dcm2niix_version()}")
+    logger.info("Checking for software update")
+
+    check_latest("dcm2bids")
+    check_latest("dcm2niix")
 
     assert_dirs_empty(parser, args, out_dir)
 
     app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=out_dir, helper=True)
 
     rsl = app.run(force=args.overwrite)
+
     logger.info(f"Helper files in: {out_dir}\n")
-    logger.info(f"Log file saved at {log_path}")
+    logger.info(f"Log file saved at {log_file}")
+    logger.info("--- dcm2bids_helper end ---")
 
     return rsl
 
