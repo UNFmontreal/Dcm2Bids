@@ -263,6 +263,7 @@ def test_dcm2bids_auto_extract():
     assert os.path.exists(func_task)
     assert data['TaskName'] == "rest"
 
+
 def test_dcm2bids_complex():
     bidsDir = TemporaryDirectory()
 

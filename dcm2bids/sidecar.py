@@ -188,15 +188,15 @@ class SidecarPairing(object):
         def compare_list(name, pattern):
             try:
                 subResult = [
-                        len(name)==len(pattern),
+                        len(name) == len(pattern),
                         isinstance(pattern, list),
                         ]
                 for subName, subPattern in zip(name, pattern):
                     subResult.append(compare(subName, subPattern))
-            except:
+            except Exception:
                 subResult = [False]
             return all(subResult)
-        
+
         def compare_complex(name, pattern):
             sub_result = []
             compare_type = None
@@ -204,10 +204,10 @@ class SidecarPairing(object):
                 for compare_type, patterns in pattern.items():
                     for sub_pattern in patterns:
                         if isinstance(name, list):
-                            sub_result.append(compare_list(name,sub_pattern))
+                            sub_result.append(compare_list(name, sub_pattern))
                         else:
                             sub_result.append(compare(name, sub_pattern))
-            except:
+            except Exception:
                 sub_result = [False]
             if compare_type == "any":
                 return any(sub_result)
