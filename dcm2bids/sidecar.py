@@ -211,8 +211,6 @@ class SidecarPairing(object):
                 sub_result = [False]
             if compare_type == "any":
                 return any(sub_result)
-            elif compare_type == "all":
-                return all(sub_result)
             else:
                 return False
 
