@@ -34,13 +34,13 @@ class Participant(object):
     def name(self, name):
         """ Prepend 'sub-' if necessary"""
         if name.startswith("sub-"):
-            self._name = name   
+            self._name = name
         else:
             self._name = "sub-" + name
 
-        if '_' in self._name or '-' in self._name.replace('sub-', ''):
-            raise NameError(f"Participant '{self._name}' contains forbidden character "
-                             "(multiple - or _).")
+        if not self._name.replace('sub-', '').isalnum():
+            raise NameError(f"Participant '{self._name.replace('sub-', '')}' "
+                            "should contains only alphanumeric characters.")
 
     @property
     def session(self):
