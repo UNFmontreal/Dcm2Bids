@@ -21,7 +21,7 @@ from pathlib import Path
 
 from dcm2bids.utils.args import add_overwrite_arg, assert_dirs_empty
 from dcm2bids.utils.utils import DEFAULT, run_shell_command, TreePrinter
-from dcm2bids.utils.tools import dcm2niix_version, check_latest
+from dcm2bids.utils.tools import check_latest
 
 from dcm2bids.utils.scaffold import bids_starter_kit
 from dcm2bids.utils.logger import setup_logging
@@ -46,7 +46,7 @@ def main():
     args = parser.parse_args()
 
     out_dir = Path(args.output_dir)
-    log_file = (Path(DEFAULT.cliOutputDir)
+    log_file = (out_dir
                 / DEFAULT.tmpDirName
                 / "log"
                 / f"scaffold_{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
@@ -65,15 +65,10 @@ def main():
     logger.info("OS version: %s", platform.platform())
     logger.info("Python version: %s", sys.version.replace("\n", ""))
     logger.info(f"dcm2bids version: { __version__}")
-    logger.info(f"dcm2niix version: {dcm2niix_version()}")
     logger.info("Checking for software update")
 
     check_latest("dcm2bids")
-    check_latest("dcm2niix")
 
-
-    logger.info("Currently running the following command: \n" +
-                " ".join(sys.argv) + "\n")
     logger.info("The files used to create your BIDS directory were taken from "
                 "https://github.com/bids-standard/bids-starter-kit. \n")
 
@@ -116,6 +111,7 @@ def main():
 
     logger.info(f"Log file saved at {log_file}")
     logger.info("--- dcm2bids_scaffold end ---")
+
 
 if __name__ == "__main__":
     main()

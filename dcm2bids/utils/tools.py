@@ -73,13 +73,15 @@ def check_latest(name="dcm2bids"):
         "dcm2niix": {
             "repo": "rordenlab/dcm2niix",
             "host": "https://github.com",
-            "current": dcm2niix_version(),
+            "current": dcm2niix_version,
         },
     }
 
     repo = data.get(name)["repo"]
     host = data.get(name)["host"]
     current = data.get(name)["current"]
+    if callable(current):
+        current = current()
     latest = check_github_latest(repo)
 
     if latest != "no_internet" and latest > current:
