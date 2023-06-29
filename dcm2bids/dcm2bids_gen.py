@@ -7,19 +7,13 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 import logging
 import os
 from pathlib import Path
-import platform
-import sys
-from datetime import datetime
 from glob import glob
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
-from dcm2bids.utils.logger import setup_logging
 from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.participant import Participant
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
 from dcm2bids.utils.io import load_json, save_json, valid_path
-from dcm2bids.utils.tools import check_latest, dcm2niix_version
-from dcm2bids.version import __version__
 
 
 class Dcm2BidsGen(object):
@@ -52,7 +46,6 @@ class Dcm2BidsGen(object):
         **_
     ):
         self._dicomDirs = []
-
         self.dicomDirs = dicom_dir
         self.bidsDir = valid_path(output_dir, type="folder")
         self.config = load_json(valid_path(config, type="file"))
@@ -62,21 +55,7 @@ class Dcm2BidsGen(object):
         self.auto_extract_entities = auto_extract_entities
         self.force_dcm2niix = force_dcm2niix
         self.logLevel = log_level
-
-        # logging setup
-        self.set_logger()
-
-        self.logger.info("--- dcm2bids start ---")
-        self.logger.info("OS:version: %s", platform.platform())
-        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
-        self.logger.info("dcm2bids:version: %s", __version__)
-        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
-        self.logger.info("participant: %s", self.participant.name)
-        self.logger.info("session: %s", self.participant.session)
-        self.logger.info("config: %s", os.path.realpath(config))
-        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
-        self.logger.info("Auto extract entities: %s", self.auto_extract_entities)
-        self.logger.info("Validate BIDS: %s", self.bids_validate)
+        self.logger = logging.getLogger(__name__)
 
     @property
     def dicomDirs(self):
@@ -92,15 +71,6 @@ class Dcm2BidsGen(object):
 
         self._dicomDirs = valid_dirs
 
-    def set_logger(self):
-        """ Set a basic logger"""
-        logDir = self.bidsDir / DEFAULT.tmpDirName / "log"
-        logFile = logDir / f"{self.participant.prefix}_{datetime.now().isoformat().replace(':', '')}.log"
-        logDir.mkdir(parents=True, exist_ok=True)
-
-        setup_logging(self.logLevel, logFile)
-        self.logger = logging.getLogger(__name__)
-
     def run(self):
         """Run dcm2bids"""
         dcm2niix = Dcm2niixGen(
@@ -109,9 +79,6 @@ class Dcm2BidsGen(object):
             self.participant,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
-
-        check_latest()
-        check_latest("dcm2niix")
 
         dcm2niix.run(self.force_dcm2niix)
 
@@ -136,7 +103,7 @@ class Dcm2BidsGen(object):
         parser.build_acquisitions(self.participant)
         parser.find_runs()
 
-        self.logger.info("moving acquisitions into BIDS folder")
+        self.logger.info("moving acquisitions into BIDS folder\n".upper())
 
         idList = {}
         for acq in parser.acquisitions:
@@ -144,14 +111,15 @@ class Dcm2BidsGen(object):
 
         if self.bids_validate:
             try:
-                self.logger.info(f"Validate if { self.output_dir} is BIDS valid.")
+                self.logger.info(f"Validate if {self.output_dir} is BIDS valid.")
                 self.logger.info("Use bids-validator version: ")
                 run_shell_command(['bids-validator', '-v'])
                 run_shell_command(['bids-validator', self.bidsDir])
-            except:
-                self.logger.info("The bids-validator does not seem to work properly. "
-                                 "The bids-validator may not been installed on your computer. "
-                                 "Please check: https://github.com/bids-standard/bids-validator#quickstart.")
+            except Exception:
+                self.logger.error("The bids-validator does not seem to work properly. "
+                                  "The bids-validator may not be installed on your "
+                                  "computer. Please check: "
+                                  "https://github.com/bids-standard/bids-validator.")
 
     def move(self, acquisition, idList):
         """Move an acquisition to BIDS format"""
@@ -167,7 +135,7 @@ class Dcm2BidsGen(object):
 
             # checking if destination file exists
             if dstFile.exists():
-                self.logger.info("'%s' already exists", dstFile)
+                self.logger.info(f"'{dstFile}' already exists")
 
                 if self.clobber:
                     self.logger.info("Overwriting because of --clobber option")

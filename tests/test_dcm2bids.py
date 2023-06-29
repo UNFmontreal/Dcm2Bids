@@ -264,9 +264,42 @@ def test_dcm2bids_auto_extract():
     assert data['TaskName'] == "rest"
 
 
-def test_dcm2bids_dup():
-    # Validate duplicateMethod: dup
+def test_dcm2bids_complex():
     bidsDir = TemporaryDirectory()
+
+    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test_complex.json"),
+                      bidsDir.name)
+    app.run()
+
+    layout = BIDSLayout(bidsDir.name, validate=False)
+
+    assert layout.get_subjects() == ["01"]
+    assert layout.get_sessions() == []
+    assert layout.get_runs() == [1, 2, 3]
+
+    fmap_file_1 = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_run-01_fmap.json")
+    fmap_file_2 = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_run-02_fmap.json")
+    fmap_file_3 = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_run-03_fmap.json")
+    assert os.path.exists(fmap_file_1)
+    assert os.path.exists(fmap_file_2)
+    assert os.path.exists(fmap_file_3)
+
+    localizer_file_1 = os.path.join(bidsDir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json")
+    localizer_file_2 = os.path.join(bidsDir.name, "sub-01", "localizer", "sub-01_run-02_localizer.json")
+    assert os.path.exists(localizer_file_1)
+    assert os.path.exists(localizer_file_2)
+
+    mprage = os.path.join(bidsDir.name, "sub-01", "anat", "sub-01_T1w.json")
+    assert not os.path.exists(mprage)
+
+
+def test_dcm2bids_dup():
+    bidsDir = TemporaryDirectory()
+
     tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
     shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
 
@@ -292,8 +325,8 @@ def test_dcm2bids_dup():
 
     # Input localizer is lowercase (json)
     json_localizer = layout.get(subject="01",
-                                   extension="json",
-                                   suffix="localizer")
+                                extension="json",
+                                suffix="localizer")
     # dup 01
     assert compare_json(original_01_localizer,
                         json_localizer[0].path)
