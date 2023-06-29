@@ -1193,7 +1193,81 @@
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
-<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 
@@ -1205,9 +1279,27 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 
 import argparse
 
+import logging
+
+import platform
+
+import sys
+
+import os
+
+from pathlib import Path
+
+from datetime import datetime
+
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
 
 from dcm2bids.utils.utils import DEFAULT
+
+from dcm2bids.utils.tools import dcm2niix_version, check_latest
+
+from dcm2bids.participant import Participant
+
+from dcm2bids.utils.logger import setup_logging
 
 from dcm2bids.version import __version__
 
@@ -1255,19 +1347,23 @@ def _build_arg_parser():
 
                    action=&#39;store_true&#39;,
 
-                   help=&quot;If set, it will automatically try to extract entity information [task, dir, echo]&quot;
+                   help=&quot;If set, it will automatically try to extract entity&quot;
 
-                        &quot; depending on the suffix and datatype. [%(default)s]&quot;)
+                   &quot;information [task, dir, echo] based on the suffix and dataType.&quot;
+
+                   &quot; [%(default)s]&quot;)
 
     p.add_argument(&quot;--bids_validate&quot;,
 
                    action=&#39;store_true&#39;,
 
-                   help=&quot;If set, once your conversion is done it&quot;
+                   help=&quot;If set, once your conversion is done it &quot;
 
-                        &quot; will check if your output folder is BIDS valid. [%(default)s]\n&quot;
+                        &quot;will check if your output folder is BIDS valid. [%(default)s]&quot;
 
-                        f&quot;bids-validator needs to be installed check: {DEFAULT.link_bids_validator}&quot;)
+                        &quot;\nbids-validator needs to be installed check: &quot;
+
+                        f&quot;{DEFAULT.link_bids_validator}&quot;)
 
     p.add_argument(&quot;--force_dcm2niix&quot;,
 
@@ -1291,13 +1387,15 @@ def _build_arg_parser():
 
                    choices=[&quot;DEBUG&quot;, &quot;INFO&quot;, &quot;WARNING&quot;, &quot;ERROR&quot;, &quot;CRITICAL&quot;],
 
-                   help=&quot;Set logging level. [%(default)s]&quot;)
+                   help=&quot;Set logging level to the console. [%(default)s]&quot;)
 
     p.add_argument(&quot;-v&quot;, &quot;--version&quot;,
 
                    action=&quot;version&quot;,
 
-                   version=f&quot;dcm2bids version:\t{__version__}\nBased on BIDS version:\t{DEFAULT.bids_version}&quot;,
+                   version=f&quot;dcm2bids version:\t{__version__}\n&quot;
+
+                   f&quot;Based on BIDS version:\t{DEFAULT.bids_version}&quot;,
 
                    help=&quot;Report dcm2bids version and the BIDS version.&quot;)
 
@@ -1309,9 +1407,59 @@ def main():
 
     args = parser.parse_args()
 
-    app = Dcm2BidsGen(**vars(args))
+    participant = Participant(args.participant, args.session)
 
-    return app.run()
+    log_dir = Path(args.output_dir) / DEFAULT.tmpDirName / &quot;log&quot;
+
+    log_file = (log_dir /
+
+                f&quot;{participant.prefix}_{datetime.now().strftime(&#39;%Y%m%d-%H%M%S&#39;)}.log&quot;)
+
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    setup_logging(args.log_level, log_file)
+
+    logger = logging.getLogger(__name__)
+
+    logger.info(&quot;--- dcm2bids start ---&quot;)
+
+    logger.info(&quot;Running the following command: &quot; + &quot; &quot;.join(sys.argv))
+
+    logger.info(&quot;OS version: %s&quot;, platform.platform())
+
+    logger.info(&quot;Python version: %s&quot;, sys.version.replace(&quot;\n&quot;, &quot;&quot;))
+
+    logger.info(f&quot;dcm2bids version: { __version__}&quot;)
+
+    logger.info(f&quot;dcm2niix version: {dcm2niix_version()}&quot;)
+
+    logger.info(&quot;Checking for software update&quot;)
+
+    check_latest(&quot;dcm2bids&quot;)
+
+    check_latest(&quot;dcm2niix&quot;)
+
+    logger.info(f&quot;participant: {participant.name}&quot;)
+
+    if participant.session:
+
+        logger.info(f&quot;session: {participant.session}&quot;)
+
+    logger.info(f&quot;config: {os.path.realpath(args.config)}&quot;)
+
+    logger.info(f&quot;BIDS directory: {os.path.realpath(args.output_dir)}&quot;)
+
+    logger.info(f&quot;Auto extract entities: {args.auto_extract_entities}&quot;)
+
+    logger.info(f&quot;Validate BIDS: {args.bids_validate}\n&quot;)
+
+    app = Dcm2BidsGen(**vars(args)).run()
+
+    logger.info(f&quot;Logs saved in {log_file}&quot;)
+
+    logger.info(&quot;--- dcm2bids end ---&quot;)
+
+    return app
 
 if __name__ == &quot;__main__&quot;:
 
@@ -1328,23 +1476,123 @@ if __name__ == &quot;__main__&quot;:
 </code></pre></div></td></tr></table></div>
 <details class="example">
 <summary>View Source</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>def main():
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code>def main():
 
     parser = _build_arg_parser()
 
     args = parser.parse_args()
 
-    app = Dcm2BidsGen(**vars(args))
+    participant = Participant(args.participant, args.session)
 
-    return app.run()
+    log_dir = Path(args.output_dir) / DEFAULT.tmpDirName / &quot;log&quot;
+
+    log_file = (log_dir /
+
+                f&quot;{participant.prefix}_{datetime.now().strftime(&#39;%Y%m%d-%H%M%S&#39;)}.log&quot;)
+
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    setup_logging(args.log_level, log_file)
+
+    logger = logging.getLogger(__name__)
+
+    logger.info(&quot;--- dcm2bids start ---&quot;)
+
+    logger.info(&quot;Running the following command: &quot; + &quot; &quot;.join(sys.argv))
+
+    logger.info(&quot;OS version: %s&quot;, platform.platform())
+
+    logger.info(&quot;Python version: %s&quot;, sys.version.replace(&quot;\n&quot;, &quot;&quot;))
+
+    logger.info(f&quot;dcm2bids version: { __version__}&quot;)
+
+    logger.info(f&quot;dcm2niix version: {dcm2niix_version()}&quot;)
+
+    logger.info(&quot;Checking for software update&quot;)
+
+    check_latest(&quot;dcm2bids&quot;)
+
+    check_latest(&quot;dcm2niix&quot;)
+
+    logger.info(f&quot;participant: {participant.name}&quot;)
+
+    if participant.session:
+
+        logger.info(f&quot;session: {participant.session}&quot;)
+
+    logger.info(f&quot;config: {os.path.realpath(args.config)}&quot;)
+
+    logger.info(f&quot;BIDS directory: {os.path.realpath(args.output_dir)}&quot;)
+
+    logger.info(f&quot;Auto extract entities: {args.auto_extract_entities}&quot;)
+
+    logger.info(f&quot;Validate BIDS: {args.bids_validate}\n&quot;)
+
+    app = Dcm2BidsGen(**vars(args)).run()
+
+    logger.info(f&quot;Logs saved in {log_file}&quot;)
+
+    logger.info(&quot;--- dcm2bids end ---&quot;)
+
+    return app
 </code></pre></div></td></tr></table></div>
 </details>
                 
@@ -1355,7 +1603,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T16:33:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T02:16:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
       
     
   </small>

@@ -1124,7 +1124,7 @@
                 
                 
                 <h1 id="module-dcm2bidsutilstools">Module dcm2bids.utils.tools<a class="headerlink" href="#module-dcm2bidsutilstools" title="Permanent link">⚓︎</a></h1>
-<p>This module take care of the versioning</p>
+<p>This module checks whether a software is in PATH, for version, and for updates.</p>
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
@@ -1315,65 +1315,17 @@
 <span class="normal">186</span>
 <span class="normal">187</span>
 <span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">189</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
-&quot;&quot;&quot;This module take care of the versioning&quot;&quot;&quot;
+&quot;&quot;&quot;This module checks whether a software is in PATH, for version, and for updates.&quot;&quot;&quot;
 
 import logging
 
-import shlex
+import json
 
-from packaging import version
+from urllib import error, request
 
-from subprocess import check_output, CalledProcessError, TimeoutExpired
+from subprocess import getoutput
 
 from shutil import which
 
@@ -1397,9 +1349,13 @@ def is_tool(name):
 
     return which(name) is not None
 
-def check_github_latest(githubRepo, timeout=3):
+def check_github_latest(github_repo, timeout=3):
 
-    &quot;&quot;&quot; Check the latest version of a github repository
+    &quot;&quot;&quot;
+
+    Check the latest version of a github repository. Will skip the process if
+
+    no connection can be established.
 
     Args:
 
@@ -1409,65 +1365,49 @@ def check_github_latest(githubRepo, timeout=3):
 
     Returns:
 
-        A string of the version
+        A string of the latest release tag that correspond to the version
 
     &quot;&quot;&quot;
 
-    url = f&quot;https://github.com/{githubRepo}/releases/latest&quot;
+    req = request.Request(
+
+      url=f&quot;https://api.github.com/repos/{github_repo}/releases/latest&quot;)
 
     try:
 
-        output = check_output(shlex.split(&quot;curl -L --silent &quot; + url), timeout=timeout)
+        response = request.urlopen(req, timeout=timeout)
 
-    except CalledProcessError:
+    except error.HTTPError as e:
 
-        logger.info(f&quot;Checking latest version of {githubRepo} was not possible&quot;)
+        logger.warning(f&quot;Checking latest version of {github_repo} was not possible, &quot;
 
-        logger.debug(f&quot;Error while &#39;curl --silent {url}&#39;&quot;, exc_info=True)
+                       &quot;the server couldn&#39;t fulfill the request.&quot;)
 
-        return
+        logger.debug(f&quot;Error code: {e.code}&quot;)
 
-    except TimeoutExpired:
+        return &quot;no_internet&quot;
 
-        logger.info(f&quot;Checking latest version of {githubRepo} was not possible&quot;)
+    except error.URLError as e:
 
-        logger.debug(f&quot;Command &#39;curl --silent {url}&#39; timed out after {timeout}s&quot;)
+        logger.warning(f&quot;Checking latest version of {github_repo} was not possible, &quot;
 
-        return
+                       &quot;your machine is probably not connected to the Internet.&quot;)
 
-    # The output should have this format
+        logger.debug(f&quot;Reason {e.reason}&quot;)
 
-    # &lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;
+        return &quot;no_internet&quot;
 
-    try:
+    else:
 
-        version = output.decode().split(f&quot;{githubRepo}/releases/tag/&quot;)[1].split(&#39;&quot;&#39;)[0]
+        content = json.loads(response.read())
 
-        # Versions are X.X.X
-
-        if len(version) &gt; 5:
-
-            version = version[:5]
-
-        return version
-
-    except:
-
-        logger.debug(
-
-            &quot;Checking latest version of %s was not possible&quot;, githubRepo,
-
-            exc_info=True,
-
-        )
-
-        return
+        return content[&quot;tag_name&quot;]
 
 def check_latest(name=&quot;dcm2bids&quot;):
 
     &quot;&quot;&quot; Check if a new version of a software exists and print some details
 
-    Implemented for dcm2bids, dcm2niix
+    Implemented for dcm2bids and dcm2niix
 
     Args:
 
@@ -1483,7 +1423,7 @@ def check_latest(name=&quot;dcm2bids&quot;):
 
         &quot;dcm2bids&quot;: {
 
-            &quot;repo&quot;: &quot;unfmontreal/Dcm2Bids&quot;,
+            &quot;repo&quot;: &quot;UNFmontreal/Dcm2Bids&quot;,
 
             &quot;host&quot;: &quot;https://github.com&quot;,
 
@@ -1503,29 +1443,9 @@ def check_latest(name=&quot;dcm2bids&quot;):
 
     }
 
-    if is_tool(&quot;curl&quot;):
+    repo = data.get(name)[&quot;repo&quot;]
 
-        host = data.get(name)[&quot;host&quot;]
-
-        if host == &quot;https://github.com&quot;:
-
-            repo = data.get(name)[&quot;repo&quot;]
-
-            latest = check_github_latest(repo)
-
-        else:
-
-            # Not implemented
-
-            return False
-
-    else:
-
-        logger.debug(&quot;Checking latest version of %s was not possible&quot;, name)
-
-        logger.debug(&quot;curl: %s&quot;, is_tool(&quot;curl&quot;))
-
-        return
+    host = data.get(name)[&quot;host&quot;]
 
     current = data.get(name)[&quot;current&quot;]
 
@@ -1533,25 +1453,25 @@ def check_latest(name=&quot;dcm2bids&quot;):
 
         current = current()
 
-    try:
+    latest = check_github_latest(repo)
 
-        news = version(latest) &gt; version(current)
+    if latest != &quot;no_internet&quot; and latest &gt; current:
 
-    except:
+        logger.warning(f&quot;A newer version exists for {name}: {latest}&quot;)
 
-        news = None
+        logger.warning(f&quot;You should update it -&gt; {host}/{repo}.&quot;)
 
-    if news:
+    elif latest != &quot;no_internet&quot;:
 
-        logger.warning(&quot;Your using %s version %s&quot;, name, current)
+        logger.info(f&quot;Currently using the latest version of {name}.&quot;)
 
-        logger.warning(&quot;A new version exists : %s&quot;, latest)
-
-        logger.warning(&quot;Check %s/%s&quot;, host, repo)
-
-def dcm2niix_version():
+def dcm2niix_version(name=&quot;dcm2niix&quot;):
 
     &quot;&quot;&quot;
+
+    Check and raises an error if dcm2niix is not in PATH.
+
+    Then check for the version installed.
 
     Returns:
 
@@ -1559,47 +1479,31 @@ def dcm2niix_version():
 
     &quot;&quot;&quot;
 
-    if not is_tool(&quot;dcm2niix&quot;):
+    if not is_tool(name):
 
-        logger.error(&quot;dcm2niix is not in your PATH or not installed&quot;)
+        logger.error(f&quot;{name} is not in your PATH or not installed.&quot;)
 
-        logger.error(&quot;Check https://github.com/rordenlab/dcm2niix&quot;)
+        logger.error(&quot;https://github.com/rordenlab/dcm2niix to troubleshoot.&quot;)
 
-        return
+        raise FileNotFoundError(f&quot;{name} is not in your PATH or not installed.&quot;
 
-    try:
+                                &quot; -&gt; https://github.com/rordenlab/dcm2niix&quot;
 
-        output = check_output(shlex.split(&quot;dcm2niix&quot;))
-
-    except:
-
-        logger.error(&quot;Running: dcm2niix&quot;, exc_info=True)
-
-        return
+                                &quot; to troubleshoot.&quot;)
 
     try:
 
-        lines = output.decode().split(&quot;\n&quot;)
+        output = getoutput(&quot;dcm2niix --version&quot;)
 
-    except:
+    except Exception:
 
-        logger.debug(output, exc_info=True)
+        logger.exception(&quot;Checking dcm2niix version&quot;, exc_info=False)
 
         return
 
-    for line in lines:
+    else:
 
-        try:
-
-            splits = line.split()
-
-            return splits[splits.index(&quot;version&quot;) + 1]
-
-        except:
-
-            continue
-
-    return
+        return output.split()[-1]
 </code></pre></div></td></tr></table></div>
 </details>
 <h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">⚓︎</a></h2>
@@ -1611,11 +1515,12 @@ def dcm2niix_version():
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_github_latest</span><span class="p">(</span>
-    <span class="n">githubRepo</span><span class="p">,</span>
+    <span class="n">github_repo</span><span class="p">,</span>
     <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Check the latest version of a github repository</p>
+<p>Check the latest version of a github repository. Will skip the process if</p>
+<p>no connection can be established.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1652,7 +1557,7 @@ def dcm2niix_version():
 <tbody>
 <tr>
 <td>None</td>
-<td>A string of the version</td>
+<td>A string of the latest release tag that correspond to the version</td>
 </tr>
 </tbody>
 </table>
@@ -1710,21 +1615,13 @@ def dcm2niix_version():
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code>def check_github_latest(githubRepo, timeout=3):
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code>def check_github_latest(github_repo, timeout=3):
 
-    &quot;&quot;&quot; Check the latest version of a github repository
+    &quot;&quot;&quot;
+
+    Check the latest version of a github repository. Will skip the process if
+
+    no connection can be established.
 
     Args:
 
@@ -1734,59 +1631,43 @@ def dcm2niix_version():
 
     Returns:
 
-        A string of the version
+        A string of the latest release tag that correspond to the version
 
     &quot;&quot;&quot;
 
-    url = f&quot;https://github.com/{githubRepo}/releases/latest&quot;
+    req = request.Request(
+
+      url=f&quot;https://api.github.com/repos/{github_repo}/releases/latest&quot;)
 
     try:
 
-        output = check_output(shlex.split(&quot;curl -L --silent &quot; + url), timeout=timeout)
+        response = request.urlopen(req, timeout=timeout)
 
-    except CalledProcessError:
+    except error.HTTPError as e:
 
-        logger.info(f&quot;Checking latest version of {githubRepo} was not possible&quot;)
+        logger.warning(f&quot;Checking latest version of {github_repo} was not possible, &quot;
 
-        logger.debug(f&quot;Error while &#39;curl --silent {url}&#39;&quot;, exc_info=True)
+                       &quot;the server couldn&#39;t fulfill the request.&quot;)
 
-        return
+        logger.debug(f&quot;Error code: {e.code}&quot;)
 
-    except TimeoutExpired:
+        return &quot;no_internet&quot;
 
-        logger.info(f&quot;Checking latest version of {githubRepo} was not possible&quot;)
+    except error.URLError as e:
 
-        logger.debug(f&quot;Command &#39;curl --silent {url}&#39; timed out after {timeout}s&quot;)
+        logger.warning(f&quot;Checking latest version of {github_repo} was not possible, &quot;
 
-        return
+                       &quot;your machine is probably not connected to the Internet.&quot;)
 
-    # The output should have this format
+        logger.debug(f&quot;Reason {e.reason}&quot;)
 
-    # &lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;https://github.com/{gitRepo}/releases/tag/{version}&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;
+        return &quot;no_internet&quot;
 
-    try:
+    else:
 
-        version = output.decode().split(f&quot;{githubRepo}/releases/tag/&quot;)[1].split(&#39;&quot;&#39;)[0]
+        content = json.loads(response.read())
 
-        # Versions are X.X.X
-
-        if len(version) &gt; 5:
-
-            version = version[:5]
-
-        return version
-
-    except:
-
-        logger.debug(
-
-            &quot;Checking latest version of %s was not possible&quot;, githubRepo,
-
-            exc_info=True,
-
-        )
-
-        return
+        return content[&quot;tag_name&quot;]
 </code></pre></div></td></tr></table></div>
 </details>
 <h3 id="check_latest">check_latest<a class="headerlink" href="#check_latest" title="Permanent link">⚓︎</a></h3>
@@ -1797,7 +1678,7 @@ def dcm2niix_version():
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Check if a new version of a software exists and print some details</p>
-<p>Implemented for dcm2bids, dcm2niix</p>
+<p>Implemented for dcm2bids and dcm2niix</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1894,35 +1775,11 @@ def dcm2niix_version():
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code>def check_latest(name=&quot;dcm2bids&quot;):
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code>def check_latest(name=&quot;dcm2bids&quot;):
 
     &quot;&quot;&quot; Check if a new version of a software exists and print some details
 
-    Implemented for dcm2bids, dcm2niix
+    Implemented for dcm2bids and dcm2niix
 
     Args:
 
@@ -1938,7 +1795,7 @@ def dcm2niix_version():
 
         &quot;dcm2bids&quot;: {
 
-            &quot;repo&quot;: &quot;unfmontreal/Dcm2Bids&quot;,
+            &quot;repo&quot;: &quot;UNFmontreal/Dcm2Bids&quot;,
 
             &quot;host&quot;: &quot;https://github.com&quot;,
 
@@ -1958,29 +1815,9 @@ def dcm2niix_version():
 
     }
 
-    if is_tool(&quot;curl&quot;):
+    repo = data.get(name)[&quot;repo&quot;]
 
-        host = data.get(name)[&quot;host&quot;]
-
-        if host == &quot;https://github.com&quot;:
-
-            repo = data.get(name)[&quot;repo&quot;]
-
-            latest = check_github_latest(repo)
-
-        else:
-
-            # Not implemented
-
-            return False
-
-    else:
-
-        logger.debug(&quot;Checking latest version of %s was not possible&quot;, name)
-
-        logger.debug(&quot;curl: %s&quot;, is_tool(&quot;curl&quot;))
-
-        return
+    host = data.get(name)[&quot;host&quot;]
 
     current = data.get(name)[&quot;current&quot;]
 
@@ -1988,32 +1825,43 @@ def dcm2niix_version():
 
         current = current()
 
-    try:
+    latest = check_github_latest(repo)
 
-        news = version(latest) &gt; version(current)
+    if latest != &quot;no_internet&quot; and latest &gt; current:
 
-    except:
+        logger.warning(f&quot;A newer version exists for {name}: {latest}&quot;)
 
-        news = None
+        logger.warning(f&quot;You should update it -&gt; {host}/{repo}.&quot;)
 
-    if news:
+    elif latest != &quot;no_internet&quot;:
 
-        logger.warning(&quot;Your using %s version %s&quot;, name, current)
-
-        logger.warning(&quot;A new version exists : %s&quot;, latest)
-
-        logger.warning(&quot;Check %s/%s&quot;, host, repo)
+        logger.info(f&quot;Currently using the latest version of {name}.&quot;)
 </code></pre></div></td></tr></table></div>
 </details>
 <h3 id="dcm2niix_version">dcm2niix_version<a class="headerlink" href="#dcm2niix_version" title="Permanent link">⚓︎</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dcm2niix_version</span><span class="p">(</span>
-
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dcm2niix&#39;</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Returns:</p>
-<p>A string of the version of dcm2niix install on the system</p>
+<p>Check and raises an error if dcm2niix is not in PATH.</p>
+<p>Then check for the version installed.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>A string of the version of dcm2niix install on the system</td>
+</tr>
+</tbody>
+</table>
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -2054,21 +1902,13 @@ def dcm2niix_version():
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code>def dcm2niix_version():
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code>def dcm2niix_version(name=&quot;dcm2niix&quot;):
 
     &quot;&quot;&quot;
+
+    Check and raises an error if dcm2niix is not in PATH.
+
+    Then check for the version installed.
 
     Returns:
 
@@ -2076,47 +1916,31 @@ def dcm2niix_version():
 
     &quot;&quot;&quot;
 
-    if not is_tool(&quot;dcm2niix&quot;):
+    if not is_tool(name):
 
-        logger.error(&quot;dcm2niix is not in your PATH or not installed&quot;)
+        logger.error(f&quot;{name} is not in your PATH or not installed.&quot;)
 
-        logger.error(&quot;Check https://github.com/rordenlab/dcm2niix&quot;)
+        logger.error(&quot;https://github.com/rordenlab/dcm2niix to troubleshoot.&quot;)
 
-        return
+        raise FileNotFoundError(f&quot;{name} is not in your PATH or not installed.&quot;
 
-    try:
+                                &quot; -&gt; https://github.com/rordenlab/dcm2niix&quot;
 
-        output = check_output(shlex.split(&quot;dcm2niix&quot;))
-
-    except:
-
-        logger.error(&quot;Running: dcm2niix&quot;, exc_info=True)
-
-        return
+                                &quot; to troubleshoot.&quot;)
 
     try:
 
-        lines = output.decode().split(&quot;\n&quot;)
+        output = getoutput(&quot;dcm2niix --version&quot;)
 
-    except:
+    except Exception:
 
-        logger.debug(output, exc_info=True)
+        logger.exception(&quot;Checking dcm2niix version&quot;, exc_info=False)
 
         return
 
-    for line in lines:
+    else:
 
-        try:
-
-            splits = line.split()
-
-            return splits[splits.index(&quot;version&quot;) + 1]
-
-        except:
-
-            continue
-
-    return
+        return output.split()[-1]
 </code></pre></div></td></tr></table></div>
 </details>
 <h3 id="is_tool">is_tool<a class="headerlink" href="#is_tool" title="Permanent link">⚓︎</a></h3>
@@ -2202,7 +2026,7 @@ def dcm2niix_version():
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T16:33:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T02:16:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
       
     
   </small>

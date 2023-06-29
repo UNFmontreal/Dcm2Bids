@@ -717,13 +717,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#set_logger" class="md-nav__link">
-    set_logger
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1127,13 +1120,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#set_logger" class="md-nav__link">
-    set_logger
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1445,59 +1431,7 @@
 <span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">281</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;
 
@@ -1511,17 +1445,9 @@ import os
 
 from pathlib import Path
 
-import platform
-
-import sys
-
-from datetime import datetime
-
 from glob import glob
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
-
-from dcm2bids.utils.logger import setup_logging
 
 from dcm2bids.sidecar import Sidecar, SidecarPairing
 
@@ -1530,10 +1456,6 @@ from dcm2bids.participant import Participant
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
 
 from dcm2bids.utils.io import load_json, save_json, valid_path
-
-from dcm2bids.utils.tools import check_latest, dcm2niix_version
-
-from dcm2bids.version import __version__
 
 class Dcm2BidsGen(object):
 
@@ -1609,31 +1531,7 @@ class Dcm2BidsGen(object):
 
         self.logLevel = log_level
 
-        # logging setup
-
-        self.set_logger()
-
-        self.logger.info(&quot;--- dcm2bids start ---&quot;)
-
-        self.logger.info(&quot;OS:version: %s&quot;, platform.platform())
-
-        self.logger.info(&quot;python:version: %s&quot;, sys.version.replace(&quot;\n&quot;, &quot;&quot;))
-
-        self.logger.info(&quot;dcm2bids:version: %s&quot;, __version__)
-
-        self.logger.info(&quot;dcm2niix:version: %s&quot;, dcm2niix_version())
-
-        self.logger.info(&quot;participant: %s&quot;, self.participant.name)
-
-        self.logger.info(&quot;session: %s&quot;, self.participant.session)
-
-        self.logger.info(&quot;config: %s&quot;, os.path.realpath(config))
-
-        self.logger.info(&quot;BIDS directory: %s&quot;, os.path.realpath(output_dir))
-
-        self.logger.info(&quot;Auto extract entities: %s&quot;, self.auto_extract_entities)
-
-        self.logger.info(&quot;Validate BIDS: %s&quot;, self.bids_validate)
+        self.logger = logging.getLogger(__name__)
 
     @property
 
@@ -1653,20 +1551,6 @@ class Dcm2BidsGen(object):
 
         self._dicomDirs = valid_dirs
 
-    def set_logger(self):
-
-        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
-
-        logDir = self.bidsDir / DEFAULT.tmpDirName / &quot;log&quot;
-
-        logFile = logDir / f&quot;{self.participant.prefix}_{datetime.now().isoformat().replace(&#39;:&#39;, &#39;&#39;)}.log&quot;
-
-        logDir.mkdir(parents=True, exist_ok=True)
-
-        setup_logging(self.logLevel, logFile)
-
-        self.logger = logging.getLogger(__name__)
-
     def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
@@ -1682,10 +1566,6 @@ class Dcm2BidsGen(object):
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
-
-        check_latest()
-
-        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.force_dcm2niix)
 
@@ -1723,7 +1603,7 @@ class Dcm2BidsGen(object):
 
         parser.find_runs()
 
-        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
+        self.logger.info(&quot;moving acquisitions into BIDS folder\n&quot;.upper())
 
         idList = {}
 
@@ -1735,7 +1615,7 @@ class Dcm2BidsGen(object):
 
             try:
 
-                self.logger.info(f&quot;Validate if { self.output_dir} is BIDS valid.&quot;)
+                self.logger.info(f&quot;Validate if {self.output_dir} is BIDS valid.&quot;)
 
                 self.logger.info(&quot;Use bids-validator version: &quot;)
 
@@ -1743,13 +1623,15 @@ class Dcm2BidsGen(object):
 
                 run_shell_command([&#39;bids-validator&#39;, self.bidsDir])
 
-            except:
+            except Exception:
 
-                self.logger.info(&quot;The bids-validator does not seem to work properly. &quot;
+                self.logger.error(&quot;The bids-validator does not seem to work properly. &quot;
 
-                                 &quot;The bids-validator may not been installed on your computer. &quot;
+                                  &quot;The bids-validator may not be installed on your &quot;
 
-                                 &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
+                                  &quot;computer. Please check: &quot;
+
+                                  &quot;https://github.com/bids-standard/bids-validator.&quot;)
 
     def move(self, acquisition, idList):
 
@@ -1773,7 +1655,7 @@ class Dcm2BidsGen(object):
 
             if dstFile.exists():
 
-                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
+                self.logger.info(f&quot;&#39;{dstFile}&#39; already exists&quot;)
 
                 if self.clobber:
 
@@ -2178,47 +2060,7 @@ class Dcm2BidsGen(object):
 <span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2292,31 +2134,7 @@ class Dcm2BidsGen(object):
 
         self.logLevel = log_level
 
-        # logging setup
-
-        self.set_logger()
-
-        self.logger.info(&quot;--- dcm2bids start ---&quot;)
-
-        self.logger.info(&quot;OS:version: %s&quot;, platform.platform())
-
-        self.logger.info(&quot;python:version: %s&quot;, sys.version.replace(&quot;\n&quot;, &quot;&quot;))
-
-        self.logger.info(&quot;dcm2bids:version: %s&quot;, __version__)
-
-        self.logger.info(&quot;dcm2niix:version: %s&quot;, dcm2niix_version())
-
-        self.logger.info(&quot;participant: %s&quot;, self.participant.name)
-
-        self.logger.info(&quot;session: %s&quot;, self.participant.session)
-
-        self.logger.info(&quot;config: %s&quot;, os.path.realpath(config))
-
-        self.logger.info(&quot;BIDS directory: %s&quot;, os.path.realpath(output_dir))
-
-        self.logger.info(&quot;Auto extract entities: %s&quot;, self.auto_extract_entities)
-
-        self.logger.info(&quot;Validate BIDS: %s&quot;, self.bids_validate)
+        self.logger = logging.getLogger(__name__)
 
     @property
 
@@ -2336,20 +2154,6 @@ class Dcm2BidsGen(object):
 
         self._dicomDirs = valid_dirs
 
-    def set_logger(self):
-
-        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
-
-        logDir = self.bidsDir / DEFAULT.tmpDirName / &quot;log&quot;
-
-        logFile = logDir / f&quot;{self.participant.prefix}_{datetime.now().isoformat().replace(&#39;:&#39;, &#39;&#39;)}.log&quot;
-
-        logDir.mkdir(parents=True, exist_ok=True)
-
-        setup_logging(self.logLevel, logFile)
-
-        self.logger = logging.getLogger(__name__)
-
     def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
@@ -2365,10 +2169,6 @@ class Dcm2BidsGen(object):
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
-
-        check_latest()
-
-        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.force_dcm2niix)
 
@@ -2406,7 +2206,7 @@ class Dcm2BidsGen(object):
 
         parser.find_runs()
 
-        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
+        self.logger.info(&quot;moving acquisitions into BIDS folder\n&quot;.upper())
 
         idList = {}
 
@@ -2418,7 +2218,7 @@ class Dcm2BidsGen(object):
 
             try:
 
-                self.logger.info(f&quot;Validate if { self.output_dir} is BIDS valid.&quot;)
+                self.logger.info(f&quot;Validate if {self.output_dir} is BIDS valid.&quot;)
 
                 self.logger.info(&quot;Use bids-validator version: &quot;)
 
@@ -2426,13 +2226,15 @@ class Dcm2BidsGen(object):
 
                 run_shell_command([&#39;bids-validator&#39;, self.bidsDir])
 
-            except:
+            except Exception:
 
-                self.logger.info(&quot;The bids-validator does not seem to work properly. &quot;
+                self.logger.error(&quot;The bids-validator does not seem to work properly. &quot;
 
-                                 &quot;The bids-validator may not been installed on your computer. &quot;
+                                  &quot;The bids-validator may not be installed on your &quot;
 
-                                 &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
+                                  &quot;computer. Please check: &quot;
+
+                                  &quot;https://github.com/bids-standard/bids-validator.&quot;)
 
     def move(self, acquisition, idList):
 
@@ -2456,7 +2258,7 @@ class Dcm2BidsGen(object):
 
             if dstFile.exists():
 
-                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
+                self.logger.info(f&quot;&#39;{dstFile}&#39; already exists&quot;)
 
                 if self.clobber:
 
@@ -2635,7 +2437,7 @@ class Dcm2BidsGen(object):
 
             if dstFile.exists():
 
-                self.logger.info(&quot;&#39;%s&#39; already exists&quot;, dstFile)
+                self.logger.info(f&quot;&#39;{dstFile}&#39; already exists&quot;)
 
                 if self.clobber:
 
@@ -2784,9 +2586,7 @@ class Dcm2BidsGen(object):
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
@@ -2801,10 +2601,6 @@ class Dcm2BidsGen(object):
             self.config.get(&quot;dcm2niixOptions&quot;, DEFAULT.dcm2niixOptions),
 
         )
-
-        check_latest()
-
-        check_latest(&quot;dcm2niix&quot;)
 
         dcm2niix.run(self.force_dcm2niix)
 
@@ -2842,7 +2638,7 @@ class Dcm2BidsGen(object):
 
         parser.find_runs()
 
-        self.logger.info(&quot;moving acquisitions into BIDS folder&quot;)
+        self.logger.info(&quot;moving acquisitions into BIDS folder\n&quot;.upper())
 
         idList = {}
 
@@ -2854,7 +2650,7 @@ class Dcm2BidsGen(object):
 
             try:
 
-                self.logger.info(f&quot;Validate if { self.output_dir} is BIDS valid.&quot;)
+                self.logger.info(f&quot;Validate if {self.output_dir} is BIDS valid.&quot;)
 
                 self.logger.info(&quot;Use bids-validator version: &quot;)
 
@@ -2862,50 +2658,15 @@ class Dcm2BidsGen(object):
 
                 run_shell_command([&#39;bids-validator&#39;, self.bidsDir])
 
-            except:
+            except Exception:
 
-                self.logger.info(&quot;The bids-validator does not seem to work properly. &quot;
+                self.logger.error(&quot;The bids-validator does not seem to work properly. &quot;
 
-                                 &quot;The bids-validator may not been installed on your computer. &quot;
+                                  &quot;The bids-validator may not be installed on your &quot;
 
-                                 &quot;Please check: https://github.com/bids-standard/bids-validator#quickstart.&quot;)
-</code></pre></div></td></tr></table></div>
-</details>
-<h4 id="set_logger">set_logger<a class="headerlink" href="#set_logger" title="Permanent link">⚓︎</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
-    <span class="bp">self</span>
-<span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<p>Set a basic logger</p>
-<details class="example">
-<summary>View Source</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>    def set_logger(self):
+                                  &quot;computer. Please check: &quot;
 
-        &quot;&quot;&quot; Set a basic logger&quot;&quot;&quot;
-
-        logDir = self.bidsDir / DEFAULT.tmpDirName / &quot;log&quot;
-
-        logFile = logDir / f&quot;{self.participant.prefix}_{datetime.now().isoformat().replace(&#39;:&#39;, &#39;&#39;)}.log&quot;
-
-        logDir.mkdir(parents=True, exist_ok=True)
-
-        setup_logging(self.logLevel, logFile)
-
-        self.logger = logging.getLogger(__name__)
+                                  &quot;https://github.com/bids-standard/bids-validator.&quot;)
 </code></pre></div></td></tr></table></div>
 </details>
                 
@@ -2916,7 +2677,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-23T16:33:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-23</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-06-29T02:16:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-06-29</span>
       
     
   </small>
