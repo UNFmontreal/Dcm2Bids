@@ -35,9 +35,12 @@ class Participant(object):
         """ Prepend 'sub-' if necessary"""
         if name.startswith("sub-"):
             self._name = name
-
         else:
             self._name = "sub-" + name
+
+        if not self._name.replace('sub-', '').isalnum():
+            raise NameError(f"Participant '{self._name.replace('sub-', '')}' "
+                            "should contains only alphanumeric characters.")
 
     @property
     def session(self):
