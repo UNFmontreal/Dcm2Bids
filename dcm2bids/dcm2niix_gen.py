@@ -83,7 +83,7 @@ class Dcm2niixGen(object):
         elif oldOutput:
             self.logger.warning("Previous dcm2niix directory output found:")
             self.logger.warning(self.outputDir)
-            self.logger.warning("Use --force_dcm2niix to rerun dcm2niix \n")
+            self.logger.warning("Use --force_dcm2niix to rerun dcm2niix\n")
 
         else:
             if not os.path.exists(self.outputDir):
@@ -106,5 +106,5 @@ class Dcm2niixGen(object):
             except Exception:
                 pass
 
-            self.logger.debug("\n%s", output)
-            self.logger.info("Check log file for dcm2niix output")
+            self.logger.debug(f"\n{output}")
+            self.logger.info("Check log file for dcm2niix output\n")
