@@ -1,13 +1,9 @@
-name: Build binaries
+name: Build + add binaries to release
 
 # Controls when the workflow will run
 on:
-  # Trigger the workflow on push or pull request events only for master
-  push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
-
+  release:
+    types: [published]
   # Allow this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -22,7 +18,6 @@ jobs:
     steps:
       # Check-out repository
       - uses: actions/checkout@v3
-
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -58,17 +53,37 @@ jobs:
           show-scons: false
           onefile: true
           output-file: dcm2bids_helper
-     
-      - name: whats in there
-        run: ls build
-
-      - name: Upload Artifacts
+      - name: Create archive for Linux and macOS
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macos')
+        run: |
+          tar -cvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
+          build/dcm2bids \
+          build/dcm2bids_helper \
+          build/dcm2bids_scaffold \
+          build/*.app/**/*
+      - name: Create archive for Windows
+        if: startsWith(matrix.os, 'windows')
+        run: zip dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.zip build/*.exe 
+      - name: Upload binaries
         uses: actions/upload-artifact@v3
         with:
-          name: dcm2bids_${{ runner.os }}
           path: |
-            build/*.exe
-            build/dcm2bids
-            build/dcm2bids_helper
-            build/dcm2bids_scaffold
-            build/*.app/**/*
+            dcm2bids*.zip
+            dcm2bids*.tar.gz
+
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download binaries
+        uses: actions/download-artifact@v3
+        with:
+          path: download
+      - run: ls -lR && echo $PWD
+      - name: Publish archives and packages
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            download/dcm2bids*/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
