@@ -279,7 +279,7 @@ class SidecarPairing(object):
 
                 self.logger.info(
                   f"{acq.dstFile.replace(f'{acq.participant.prefix}-', '')}"
-                  f"<-  {sidecarName}")
+                  f"  <-  {sidecarName}")
 
             elif len(valid_descriptions) == 0:
                 self.logger.info(f"No Pairing  <-  {sidecarName}")
