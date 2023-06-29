@@ -214,7 +214,6 @@ class SidecarPairing(object):
         """
         acquisitions_id = []
         acquisitions = []
-        acquisitions_intendedFor = []
         self.logger.info("Sidecar pairing:\n".upper())
         for sidecar, valid_descriptions in self.graph.items():
             sidecarName = os.path.basename(sidecar.root)

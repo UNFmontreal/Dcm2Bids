@@ -82,6 +82,7 @@ def _build_arg_parser():
 
     return p
 
+
 def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
