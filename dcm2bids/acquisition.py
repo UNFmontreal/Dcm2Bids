@@ -173,8 +173,7 @@ class Acquisition(object):
             new_name += f"_{current_key}-{current_dict[current_key]}"
 
         if current_dict:
-            self.logger.warning("Entity \"{}\"".format(list(current_dict.keys())) +
-                                " is not a valid BIDS entity.")
+            self.logger.warning(f'Entity \"{list(current_dict.keys())}\" is not a valid BIDS entity.')
 
         new_name += f"_{'_'.join(suffix_list)}"  # Allow multiple single keys (without value)
 

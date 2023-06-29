@@ -26,7 +26,6 @@ class Sidecar(object):
     def __init__(self, filename, compKeys=DEFAULT.compKeys):
         self._origData = {}
         self._data = {}
-
         self.filename = filename
         self.root, _ = splitext_(filename)
         self.data = filename
@@ -44,7 +43,7 @@ class Sidecar(object):
                 else:
                     lts.append(None)
 
-            except:
+            except Exception:
                 lts.append(None)
 
         for lt in lts:
@@ -76,7 +75,7 @@ class Sidecar(object):
         """
         try:
             data = load_json(filename)
-        except:
+        except Exception:
             data = {}
         self._origData = data.copy()
         data["SidecarFilename"] = os.path.basename(filename)
@@ -90,15 +89,17 @@ class SidecarPairing(object):
         descriptions (list): List of dictionaries describing acquisitions
     """
 
-    def __init__(self, sidecars, descriptions, extractors=DEFAULT.extractors,
+    def __init__(self,
+                 sidecars,
+                 descriptions,
+                 extractors=DEFAULT.extractors,
                  auto_extractor=DEFAULT.auto_extract_entities,
-                 searchMethod=DEFAULT.searchMethod, caseSensitive=DEFAULT.caseSensitive):
+                 searchMethod=DEFAULT.searchMethod,
+                 caseSensitive=DEFAULT.caseSensitive):
         self.logger = logging.getLogger(__name__)
-
         self._searchMethod = ""
         self.graph = OrderedDict()
         self.acquisitions = []
-
         self.extractors = extractors
         self.auto_extract_entities = auto_extractor
         self.sidecars = sidecars
@@ -121,12 +122,10 @@ class SidecarPairing(object):
 
         else:
             self._searchMethod = DEFAULT.searchMethod
-            self.logger.warning("'%s' is not a search method implemented", value)
+            self.logger.warning(f"'{value}' is not a search method implemented")
+            self.logger.warning(f"Falling back to default: {DEFAULT.searchMethod}")
             self.logger.warning(
-                "Falling back to default: %s", DEFAULT.searchMethod
-            )
-            self.logger.warning(
-                "Search methods implemented: %s", DEFAULT.searchMethodChoices
+                f"Search methods implemented: {DEFAULT.searchMethodChoices}"
             )
 
     @property
@@ -139,13 +138,9 @@ class SidecarPairing(object):
             self._caseSensitive = value
         else:
             self._caseSensitive = DEFAULT.caseSensitive
-            self.logger.warning("'%s' is not a boolean", value)
-            self.logger.warning(
-                "Falling back to default: %s", DEFAULT.caseSensitive
-            )
-            self.logger.warning(
-                "Search methods implemented: %s", DEFAULT.caseSensitive
-            )
+            self.logger.warning(f"'{value}' is not a boolean")
+            self.logger.warning(f"Falling back to default: {DEFAULT.caseSensitive}")
+            self.logger.warning(f"Search methods implemented: {DEFAULT.caseSensitive}")
 
     def build_graph(self):
         """
@@ -201,7 +196,7 @@ class SidecarPairing(object):
                     subResult = [len(name) == len(pattern), isinstance(pattern, list)]
                     for subName, subPattern in zip(name, pattern):
                         subResult.append(compare(subName, subPattern))
-                except:
+                except Exception:
                     subResult = [False]
 
                 result.append(all(subResult))
@@ -219,8 +214,7 @@ class SidecarPairing(object):
         """
         acquisitions_id = []
         acquisitions = []
-
-        self.logger.info("Sidecars pairing:")
+        self.logger.info("Sidecar pairing:\n".upper())
         for sidecar, valid_descriptions in self.graph.items():
             sidecarName = os.path.basename(sidecar.root)
 
@@ -238,19 +232,19 @@ class SidecarPairing(object):
                 else:
                     acquisitions.append(acq)
 
-                self.logger.info("%s  <-  %s", acq.dstFile.replace(acq.participant.prefix + "-", ""), sidecarName)
+                self.logger.info(
+                  f"{acq.dstFile.replace(f'{acq.participant.prefix}-', '')}"
+                  f"<-  {sidecarName}")
 
-            # sidecar with no link
             elif len(valid_descriptions) == 0:
-                self.logger.info("No Pairing  <-  %s", sidecarName)
+                self.logger.info(f"No Pairing  <-  {sidecarName}")
 
-            # sidecar with several links
             else:
-                self.logger.warning("Several Pairing  <-  %s", sidecarName)
+                self.logger.warning(f"Several Pairing  <-  {sidecarName}")
                 for desc in valid_descriptions:
                     acq = Acquisition(participant,
                                       **desc)
-                    self.logger.warning("    ->  %s", acq.suffix)
+                    self.logger.warning(f"    ->  {acq.suffix}")
 
         self.acquisitions = acquisitions_id + acquisitions
 
@@ -281,11 +275,13 @@ class SidecarPairing(object):
                         compile_regex = re.compile(regex)
                         if not isinstance(dcmInfo, list):
                             if compile_regex.search(str(dcmInfo)) is not None:
-                                concatenated_matches.update(compile_regex.search(str(dcmInfo)).groupdict())
+                                concatenated_matches.update(
+                                  compile_regex.search(str(dcmInfo)).groupdict())
                         else:
                             for curr_dcmInfo in dcmInfo:
                                 if compile_regex.search(curr_dcmInfo) is not None:
-                                    concatenated_matches.update(compile_regex.search(curr_dcmInfo).groupdict())
+                                    concatenated_matches.update(
+                                      compile_regex.search(curr_dcmInfo).groupdict())
                                     break
 
             if "customEntities" in desc.keys():
@@ -318,7 +314,9 @@ class SidecarPairing(object):
             # Remove entities without -
             for curr_entity in descWithTask["customEntities"]:
                 if '-' not in curr_entity:
-                    self.logger.info(f"Removing entity '{curr_entity}' since it does not fit the basic BIDS specification (Entity-Value)")
+                    self.logger.info(f"Removing entity '{curr_entity}' since it "
+                                     "does not fit the basic BIDS specification "
+                                     "(Entity-Value)")
                     descWithTask["customEntities"].remove(curr_entity)
 
         return descWithTask, sidecar
@@ -351,7 +349,7 @@ class SidecarPairing(object):
         dstRoots = [_.dstRoot for _ in self.acquisitions]
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info("%s has %s runs", dstRoot, len(dup))
-            self.logger.info("Adding 'run' information to the acquisition")
+            self.logger.info("Adding 'run' information to the acquisitions\n")
             for runNum, acqInd in enumerate(dup):
                 runStr = DEFAULT.runTpl.format(runNum + 1)
                 self.acquisitions[acqInd].customEntities += runStr
