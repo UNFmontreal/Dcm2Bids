@@ -60,7 +60,10 @@ class DEFAULT(object):
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
     searchMethodChoices = ["fnmatch", "re"]
     searchMethod = "fnmatch"
+    dupMethodChoices = ["dup", "run"]
+    dupMethod = "run"
     runTpl = "_run-{:02d}"
+    dupTpl = "_dup-{:02d}"
     caseSensitive = True
 
     # Entity table:

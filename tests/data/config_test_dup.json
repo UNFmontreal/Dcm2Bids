@@ -1,0 +1,13 @@
+{
+    "dupMethod": "dup",
+    "searchMethod": "fnmatch",
+    "descriptions": [
+        {
+          "datatype": "localizer",
+          "suffix": "localizer",
+          "criteria": {
+              "SeriesDescription": "locali*"
+          }
+        }
+    ]
+}

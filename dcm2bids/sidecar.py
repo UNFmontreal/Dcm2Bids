@@ -95,9 +95,11 @@ class SidecarPairing(object):
                  extractors=DEFAULT.extractors,
                  auto_extractor=DEFAULT.auto_extract_entities,
                  searchMethod=DEFAULT.searchMethod,
-                 caseSensitive=DEFAULT.caseSensitive):
+                 caseSensitive=DEFAULT.caseSensitive,
+                 dupMethod=DEFAULT.dupMethod):
         self.logger = logging.getLogger(__name__)
         self._searchMethod = ""
+        self._dupMethod = ""
         self.graph = OrderedDict()
         self.acquisitions = []
         self.extractors = extractors
@@ -106,6 +108,7 @@ class SidecarPairing(object):
         self.descriptions = descriptions
         self.searchMethod = searchMethod
         self.caseSensitive = caseSensitive
+        self.dupMethod = dupMethod
 
     @property
     def searchMethod(self):
@@ -127,6 +130,25 @@ class SidecarPairing(object):
             self.logger.warning(
                 f"Search methods implemented: {DEFAULT.searchMethodChoices}"
             )
+
+    @property
+    def dupMethod(self):
+        return self._dupMethod
+
+    @dupMethod.setter
+    def dupMethod(self, value):
+        """
+        Checks if the duplicate method is implemented
+        Warns the user if not and fall back to default
+        """
+        if value in DEFAULT.dupMethodChoices:
+            self._dupMethod = value
+        else:
+            self._dupMethod = DEFAULT.dupMethod
+            self.logger.warning(
+                "Duplicate methods implemented: %s", DEFAULT.dupMethodChoices)
+            self.logger.warning(f"{value} is not a duplicate method implemented.")
+            self.logger.warning(f"Falling back to default: {DEFAULT.dupMethod}.")
 
     @property
     def caseSensitive(self):
@@ -257,7 +279,7 @@ class SidecarPairing(object):
 
                 self.logger.info(
                   f"{acq.dstFile.replace(f'{acq.participant.prefix}-', '')}"
-                  f"<-  {sidecarName}")
+                  f"  <-  {sidecarName}")
 
             elif len(valid_descriptions) == 0:
                 self.logger.info(f"No Pairing  <-  {sidecarName}")
@@ -370,10 +392,18 @@ class SidecarPairing(object):
                     yield key, locs
 
         dstRoots = [_.dstRoot for _ in self.acquisitions]
+
+        templateDup = DEFAULT.runTpl
+        if self.dupMethod == 'dup':
+            templateDup = DEFAULT.dupTpl
+
         for dstRoot, dup in duplicates(dstRoots):
-            self.logger.info("%s has %s runs", dstRoot, len(dup))
-            self.logger.info("Adding 'run' information to the acquisitions\n")
+            self.logger.info(f"{dstRoot} has {len(dup)} runs")
+            self.logger.info(f"Adding {self.dupMethod} information to the acquisition")
+            if self.dupMethod == 'dup':
+                dup = dup[0:-1]
+
             for runNum, acqInd in enumerate(dup):
-                runStr = DEFAULT.runTpl.format(runNum + 1)
+                runStr = templateDup.format(runNum+1)
                 self.acquisitions[acqInd].customEntities += runStr
                 self.acquisitions[acqInd].setDstFile()

@@ -96,7 +96,8 @@ class Dcm2BidsGen(object):
             self.config.get("extractors", DEFAULT.extractors),
             self.auto_extract_entities,
             self.config.get("searchMethod", DEFAULT.searchMethod),
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
+            self.config.get("caseSensitive", DEFAULT.caseSensitive),
+            self.config.get("dupMethod", DEFAULT.dupMethod)
         )
         parser.build_graph()
         parser.build_acquisitions(self.participant)

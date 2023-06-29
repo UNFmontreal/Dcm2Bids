@@ -154,8 +154,9 @@ class Acquisition(object):
     def setDstFile(self):
         """
         Return:
-            The destination filename formatted following the v1.7.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+            The destination filename formatted following
+            the v1.8.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
         """
         current_name = self.participant.prefix + self.build_suffix
         new_name = ''
@@ -173,9 +174,11 @@ class Acquisition(object):
             new_name += f"_{current_key}-{current_dict[current_key]}"
 
         if current_dict:
-            self.logger.warning(f'Entity \"{list(current_dict.keys())}\" is not a valid BIDS entity.')
+            self.logger.warning(f'Entity \"{list(current_dict.keys())}\"'
+                                ' is not a valid BIDS entity.')
 
-        new_name += f"_{'_'.join(suffix_list)}"  # Allow multiple single keys (without value)
+        # Allow multiple single keys (without value)
+        new_name += f"_{'_'.join(suffix_list)}"
 
         if len(suffix_list) != 1:
             self.logger.warning("There was more than one suffix found "
@@ -211,11 +214,11 @@ class Acquisition(object):
             for val in value:
                 if isinstance(val, str):
                     if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
-                        logging.warning(f"No id found for {key} value '{val}'.")
-                        logging.warning(f"No sidecar changes for field {key} will be made for json file {self.dstFile}.json with this id.")
-                        logging.warning(f"No sidecar changes for field {key} "
+                        logging.warning(f"No id found for '{key}' value '{val}'.")
+                        logging.warning(f"No sidecar changes for field '{key}' "
                                         f"will be made "
-                                        f"for json file {self.dstFile}.json with this id.")
+                                        f"for json file '{self.dstFile}.json' "
+                                        "with this id.")
                     else:
                         values.append(idList.get(val, val))
 
