@@ -58,7 +58,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macos')
         run: |
           chmod u+x build/dcm2bids{_helper,_scaffold}
-          tar -cvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
+          tar -czvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
           build/dcm2bids \
           build/dcm2bids_helper \
           build/dcm2bids_scaffold
@@ -87,6 +87,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            download/artifact*
+            download/artifact/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
