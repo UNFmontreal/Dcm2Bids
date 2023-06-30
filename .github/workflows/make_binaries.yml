@@ -53,20 +53,20 @@ jobs:
           show-scons: false
           onefile: true
           output-file: dcm2bids_helper
+
       - name: Create archive for Linux
-        if: startsWith(matrix.os, 'ubuntu')
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macos')
         run: |
+          chmod u+x build/dcm2bids{_helper,_scaffold}
           tar -cvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
           build/dcm2bids \
           build/dcm2bids_helper \
           build/dcm2bids_scaffold
-      - name: Create archive for Linux
-        if: startsWith(matrix.os, 'macos')
-        run: |
-          tar -cvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz build/*.app/**/*
+
       - name: Create archive for Windows
         if: startsWith(matrix.os, 'windows')
-        run: zip dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.zip build/*.exe 
+        run: tar.exe acvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.zip build/*.exe
+
       - name: Upload binaries
         uses: actions/upload-artifact@v3
         with:
@@ -82,11 +82,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: download
-      - run: ls -lR && echo $PWD
+
       - name: Publish archives and packages
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            download/dcm2bids*/**
+            download/artifact*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
