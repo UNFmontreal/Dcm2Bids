@@ -53,14 +53,17 @@ jobs:
           show-scons: false
           onefile: true
           output-file: dcm2bids_helper
-      - name: Create archive for Linux and macOS
-        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macos')
+      - name: Create archive for Linux
+        if: startsWith(matrix.os, 'ubuntu')
         run: |
           tar -cvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
           build/dcm2bids \
           build/dcm2bids_helper \
-          build/dcm2bids_scaffold \
-          build/*.app/**/*
+          build/dcm2bids_scaffold
+      - name: Create archive for Linux
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          tar -cvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz build/*.app/**/*
       - name: Create archive for Windows
         if: startsWith(matrix.os, 'windows')
         run: zip dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.zip build/*.exe 
