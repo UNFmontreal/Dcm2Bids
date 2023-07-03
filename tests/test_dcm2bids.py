@@ -46,7 +46,7 @@ def test_dcm2bids_wrong_input(script_runner):
     # Wrong session
     ret_s = script_runner.run(['dcm2bids', '-d', bidsDir, 
                              '-p', "01",
-                             '-s', "ses-01_"
+                             '-s', "ses-01_",
                              '-c',  os.path.join(TEST_DATA_DIR, "config_test.json")])
     assert not ret_s.success
 
