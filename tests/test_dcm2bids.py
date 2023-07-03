@@ -31,6 +31,24 @@ def compare_json(original_file, converted_file):
 
     return original_json == converted_json
 
+def test_dcm2bids_wrong_input(script_runner):
+
+    bidsDir = TemporaryDirectory()
+    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+
+    # Wrong participant
+    ret_p = script_runner.run(['dcm2bids', '-d', bidsDir, 
+                               '-p', "01_",
+                               '-c',  os.path.join(TEST_DATA_DIR, "config_test.json")])
+    assert not ret_p.success
+
+    # Wrong session
+    ret_s = script_runner.run(['dcm2bids', '-d', bidsDir, 
+                             '-p', "01",
+                             '-s', "ses-01_"
+                             '-c',  os.path.join(TEST_DATA_DIR, "config_test.json")])
+    assert not ret_s.success
 
 def test_dcm2bids():
     # tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
