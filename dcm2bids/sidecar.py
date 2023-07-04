@@ -97,11 +97,11 @@ class SidecarPairing(object):
                  searchMethod=DEFAULT.searchMethod,
                  caseSensitive=DEFAULT.caseSensitive,
                  dupMethod=DEFAULT.dupMethod,
-                 postOp=DEFAULT.postOp):
+                 post_op=DEFAULT.post_op):
         self.logger = logging.getLogger(__name__)
         self._searchMethod = ""
         self._dupMethod = ""
-        self._postOp = ""
+        self._post_op = ""
         self.graph = OrderedDict()
         self.acquisitions = []
         self.extractors = extractors
@@ -111,7 +111,7 @@ class SidecarPairing(object):
         self.searchMethod = searchMethod
         self.caseSensitive = caseSensitive
         self.dupMethod = dupMethod
-        self.postOp = postOp
+        self.post_op = post_op
 
     @property
     def searchMethod(self):
@@ -154,31 +154,31 @@ class SidecarPairing(object):
             self.logger.warning(f"Falling back to default: {DEFAULT.dupMethod}.")
 
     @property
-    def postOp(self):
-        return self._postOp
+    def post_op(self):
+        return self._post_op
 
-    @postOp.setter
-    def postOp(self, value):
+    @post_op.setter
+    def post_op(self, value):
         """
-        Checks if postOp commands don't overlap
+        Checks if post_op commands don't overlap
         """
-        postOp = []
+        post_op = []
         try:
             pairs = []
-            for curr_postOp in value:
-                postOp.append(curr_postOp)
-                datatype = curr_postOp['datatype']
-                suffix = curr_postOp['suffix']
+            for curr_post_op in value:
+                post_op.append(curr_post_op)
+                datatype = curr_post_op['datatype']
+                suffix = curr_post_op['suffix']
 
                 if isinstance(datatype, str):
-                    postOp[-1]['datatype'] = [datatype]
+                    post_op[-1]['datatype'] = [datatype]
                     datatype = [datatype]
                 if isinstance(suffix, str):
                     # It will be compare with acq.suffix which has a `_` character
-                    postOp[-1]['suffix'] = ['_' + suffix]
+                    post_op[-1]['suffix'] = ['_' + suffix]
                     suffix = [suffix]
                 else:
-                    postOp[-1]['suffix'] = ['_' + curr_suffix for curr_suffix in suffix]
+                    post_op[-1]['suffix'] = ['_' + curr_suffix for curr_suffix in suffix]
 
                 pairs = pairs + list(itertools.product(datatype, suffix))
 
@@ -186,13 +186,13 @@ class SidecarPairing(object):
             if res:
                 raise ValueError("Some post operations apply on "
                                  "the same combination of datatype/suffix."
-                                 "Please fix postOp key in your config file."
+                                 "Please fix post_op key in your config file."
                                  f"{pairs}")
 
-            self._postOp = postOp
+            self._post_op = post_op
 
         except Exception:
-            raise ValueError("postOp is not defined correctly."
+            raise ValueError("post_op is not defined correctly."
                              "Please check the documentation.")
 
     @property

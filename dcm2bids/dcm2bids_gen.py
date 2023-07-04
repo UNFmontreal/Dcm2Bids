@@ -98,7 +98,7 @@ class Dcm2BidsGen(object):
             self.config.get("searchMethod", DEFAULT.searchMethod),
             self.config.get("caseSensitive", DEFAULT.caseSensitive),
             self.config.get("dupMethod", DEFAULT.dupMethod),
-            self.config.get("postOp",  DEFAULT.postOp)
+            self.config.get("post_op",  DEFAULT.post_op)
         )
         parser.build_graph()
         parser.build_acquisitions(self.participant)
@@ -108,7 +108,7 @@ class Dcm2BidsGen(object):
 
         idList = {}
         for acq in parser.acquisitions:
-            idList = self.move(acq, idList, parser.postOp)
+            idList = self.move(acq, idList, parser.post_op)
 
         if self.bids_validate:
             try:
@@ -122,7 +122,7 @@ class Dcm2BidsGen(object):
                                   "computer. Please check: "
                                   "https://github.com/bids-standard/bids-validator.")
 
-    def move(self, acquisition, idList, postOp):
+    def move(self, acquisition, idList, post_op):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
@@ -152,10 +152,10 @@ class Dcm2BidsGen(object):
                 else:
                     idList[acquisition.id] = [acquisition.dstId + "".join(ext)]
 
-                for curr_postOp in postOp:
-                    if acquisition.datatype in curr_postOp['datatype'] or 'any' in curr_postOp['datatype']:
-                        if acquisition.suffix in curr_postOp['suffix'] or '_any' in curr_postOp['suffix']:
-                            cmd = curr_postOp['cmd'].replace('srcFile', str(srcFile))
+                for curr_post_op in post_op:
+                    if acquisition.datatype in curr_post_op['datatype'] or 'any' in curr_post_op['datatype']:
+                        if acquisition.suffix in curr_post_op['suffix'] or '_any' in curr_post_op['suffix']:
+                            cmd = curr_post_op['cmd'].replace('srcFile', str(srcFile))
                             cmd = cmd.replace('dstFile', str(dstFile))
                             run_shell_command(cmd.split())
                             break

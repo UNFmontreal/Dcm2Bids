@@ -28,7 +28,7 @@ class DEFAULT(object):
     auto_extract_entities = False
     clobber = False
     force_dcm2niix = False
-    postOp = []
+    post_op = []
     logLevel = "WARNING"
 
     entity_dir = {"j-": "AP",

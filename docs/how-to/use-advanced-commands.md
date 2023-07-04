@@ -9,7 +9,7 @@ same level as the `"descriptions"` entry.
                    "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
     "searchMethod": "fnmatch",
     "caseSensitive": true,
-    "postOp": {"cmd": "pydeface --outfile dstFile srcFile",
+    "post_op": {"cmd": "pydeface --outfile dstFile srcFile",
                "datatype": "anat",
                "suffix": ["T1w", "MP2RAGE"]},
     "description": [
@@ -50,16 +50,16 @@ default: `"caseSensitive": "true"`
 If false, comparisons between strings/lists will be not case sensitive. It's
 only disabled when used with `"searchMethod": "fnmatch"`.
 
-## postOp
+## post_op
 
-default: `"postOp": []`
+default: `"post_op": []`
 
-postOp key allows you to run any post-processing analyses just before being moved 
+post_op key allows you to run any post-processing analyses just before being moved 
 to there respective folders. 
 
 For example, if you want to deface your T1w images you could use pydeface by adding:
 ```
-    "postOp": [{"cmd": "pydeface --outfile dstFile srcFile",
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
                "datatype": "anat",
                "suffix": ["T1w", "MP2RAGE"]}],
 ```
@@ -70,7 +70,7 @@ datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
 Although you can add multiple commands the combination datatype/suffix has to be unique.
 
 ```
-    "postOp": [{"cmd": "pydeface --outfile dstFile srcFile",
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
                "datatype": "anat",
                "suffix": ["T1w", "MP2RAGE"]},
                {"cmd": "my_new_script --input srcFile --output dstFile ",
