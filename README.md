@@ -24,6 +24,14 @@ Your friendly DICOM converter.
 
 `dcm2bids` reorganises NIfTI files using [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
+
+## Major upgrade with dcm2bids >=3.0.0
+
+Please be careful, dcm2bids>=3.0.0 is not compatible with previous config files. 
+In order to develop dcm2bids new features we had to build from scratch some of its code.
+
+Since 3.0.0 and higher, dcm2bids gives more flexible, it is more powerful and reduce the work when creating the config file.
+
 ## Scope
 
 `dcm2bids` is a community-centered project. It aims to be a friendly,
