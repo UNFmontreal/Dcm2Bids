@@ -96,10 +96,12 @@ class SidecarPairing(object):
                  auto_extractor=DEFAULT.auto_extract_entities,
                  searchMethod=DEFAULT.searchMethod,
                  caseSensitive=DEFAULT.caseSensitive,
-                 dupMethod=DEFAULT.dupMethod):
+                 dupMethod=DEFAULT.dupMethod,
+                 postOp=DEFAULT.postOp):
         self.logger = logging.getLogger(__name__)
         self._searchMethod = ""
         self._dupMethod = ""
+        self._postOp = ""
         self.graph = OrderedDict()
         self.acquisitions = []
         self.extractors = extractors
@@ -109,6 +111,7 @@ class SidecarPairing(object):
         self.searchMethod = searchMethod
         self.caseSensitive = caseSensitive
         self.dupMethod = dupMethod
+        self.postOp = postOp
 
     @property
     def searchMethod(self):
@@ -149,6 +152,48 @@ class SidecarPairing(object):
                 "Duplicate methods implemented: %s", DEFAULT.dupMethodChoices)
             self.logger.warning(f"{value} is not a duplicate method implemented.")
             self.logger.warning(f"Falling back to default: {DEFAULT.dupMethod}.")
+
+    @property
+    def postOp(self):
+        return self._postOp
+
+    @postOp.setter
+    def postOp(self, value):
+        """
+        Checks if postOp commands don't overlap
+        """
+        postOp = []
+        try:
+            pairs = []
+            for curr_postOp in value:
+                postOp.append(curr_postOp)
+                datatype = curr_postOp['datatype']
+                suffix = curr_postOp['suffix']
+
+                if isinstance(datatype, str):
+                    postOp[-1]['datatype'] = [datatype]
+                    datatype = [datatype]
+                if isinstance(suffix, str):
+                    # It will be compare with acq.suffix which has a `_` character
+                    postOp[-1]['suffix'] = ['_' + suffix]
+                    suffix = [suffix]
+                else:
+                    postOp[-1]['suffix'] = ['_' + curr_suffix for curr_suffix in suffix]
+
+                pairs = pairs + list(itertools.product(datatype, suffix))
+
+            res = list(set([ele for ele in pairs if pairs.count(ele) > 1]))
+            if res:
+                raise ValueError("Some post operations apply on "
+                                 "the same combination of datatype/suffix."
+                                 "Please fix postOp key in your config file."
+                                 f"{pairs}")
+
+            self._postOp = postOp
+
+        except Exception:
+            raise ValueError("postOp is not defined correctly."
+                             "Please check the documentation.")
 
     @property
     def caseSensitive(self):

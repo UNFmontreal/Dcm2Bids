@@ -300,9 +300,6 @@ options:
   --clobber             Overwrite output if it exists
   -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                         Set logging level
-  -a, --anonymizer      This option no longer exists from the script in this
-                        release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
-                        aster/README.md#defaceTpl
 
             Documentation at https://github.com/unfmontreal/Dcm2Bids
 ```

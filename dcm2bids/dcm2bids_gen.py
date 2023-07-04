@@ -97,7 +97,8 @@ class Dcm2BidsGen(object):
             self.auto_extract_entities,
             self.config.get("searchMethod", DEFAULT.searchMethod),
             self.config.get("caseSensitive", DEFAULT.caseSensitive),
-            self.config.get("dupMethod", DEFAULT.dupMethod)
+            self.config.get("dupMethod", DEFAULT.dupMethod),
+            self.config.get("postOp",  DEFAULT.postOp)
         )
         parser.build_graph()
         parser.build_acquisitions(self.participant)
@@ -107,7 +108,7 @@ class Dcm2BidsGen(object):
 
         idList = {}
         for acq in parser.acquisitions:
-            idList = self.move(acq, idList)
+            idList = self.move(acq, idList, parser.postOp)
 
         if self.bids_validate:
             try:
@@ -121,7 +122,7 @@ class Dcm2BidsGen(object):
                                   "computer. Please check: "
                                   "https://github.com/bids-standard/bids-validator.")
 
-    def move(self, acquisition, idList):
+    def move(self, acquisition, idList, postOp):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
@@ -151,18 +152,15 @@ class Dcm2BidsGen(object):
                 else:
                     idList[acquisition.id] = [acquisition.dstId + "".join(ext)]
 
-            if (self.config.get("defaceTpl") and acquisition.datatype == "anat" and ".nii" in ext):
-                try:
-                    os.remove(dstFile)
-                except FileNotFoundError:
-                    pass
-                defaceTpl = self.config.get("defaceTpl")
+                for curr_postOp in postOp:
+                    if acquisition.datatype in curr_postOp['datatype'] or 'any' in curr_postOp['datatype']:
+                        if acquisition.suffix in curr_postOp['suffix'] or '_any' in curr_postOp['suffix']:
+                            cmd = curr_postOp['cmd'].replace('srcFile', str(srcFile))
+                            cmd = cmd.replace('dstFile', str(dstFile))
+                            run_shell_command(cmd.split())
+                            break
 
-                cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
-                cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
-                run_shell_command(cmd)
-
-            elif ".json" in ext:
+            if ".json" in ext:
                 data = acquisition.dstSidecarData(idList)
                 save_json(dstFile, data)
                 os.remove(srcFile)
