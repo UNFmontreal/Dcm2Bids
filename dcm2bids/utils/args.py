@@ -29,7 +29,11 @@ def assert_dirs_empty(parser, args, required):
                         "with --force option to overwrite "
                         "existing output files.")
             else:
-                shutil.rmtree(path)
+                for child in path.iterdir():
+                    if child.is_file():
+                        os.remove(child)
+                    elif child.is_dir():
+                        shutil.rmtree(child)
 
     if isinstance(required, str):
         required = Path(required)
