@@ -158,7 +158,7 @@ class Dcm2BidsGen(object):
                             cmd = curr_post_op['cmd'].replace('srcFile', str(srcFile))
                             cmd = cmd.replace('dstFile', str(dstFile))
                             run_shell_command(cmd.split())
-                            break
+                            continue
 
             if ".json" in ext:
                 data = acquisition.dstSidecarData(idList)
