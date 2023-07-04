@@ -79,7 +79,8 @@ You can test it with any command but a safe way is to use the `--help` command.
     ```sh
     (dcm2bids) sam:~$ dcm2bids --help
     usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
-                    CONFIG [-o OUTPUT_DIR] [--forceDcm2niix] [--clobber]
+                    CONFIG [-o OUTPUT_DIR][--auto_extract_entities] [--bids_validate]
+                    [--forceDcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -98,8 +99,8 @@ You can test it with any command but a safe way is to use the `--help` command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory
                             (/home/sam)
-    --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and datatype. [False]                            
+    --auto_extract_entities
+                          If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and dataType. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
@@ -163,6 +164,7 @@ scaffold_directory/
 ├── participants.json
 ├── participants.tsv
 ├── README
+├── .bidsignore
 └── sourcedata/
 
 3 directories, 5 files
@@ -191,6 +193,8 @@ option.
 
                 Create basic BIDS files and directories
 
+                Based on the material provided by
+                https://github.com/bids-standard/bids-starter-kit
 
     options:
     -h, --help            show this help message and exit
@@ -227,20 +231,69 @@ scaffold beforehand, the command will create it for you.
 
     ```sh
     (dcm2bids) sam:~/dcm2bids-tutorial$ dcm2bids_scaffold
-    (dcm2bids) sam:~/dcm2bids-tutorial$ ls
-    CHANGES  dataset_description.json  participants.json  README
-    code     derivatives               participants.tsv   sourcedata
+    INFO    | --- dcm2bids_scaffold start ---
+    INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids-env/bin/dcm2bids_scaffold
+    INFO    | OS version: Linux-5.19.0-45-generic-x86_64-with-glibc2.35
+    INFO    | Python version: 3.10.4 (main, May 29 2023, 11:10:38) [GCC 11.3.0]
+    INFO    | dcm2bids version: 3.0.0
+    INFO    | Checking for software update
+    INFO    | Currently using the latest version of dcm2bids.
+    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit. 
+
+    INFO    | Tree representation of /home/sam/dcm2bids-tutorials/
+    INFO    | /home/sam/dcm2bids-tutorials/
+    INFO    | ├── code/
+    INFO    | ├── derivatives/
+    INFO    | ├── sourcedata/
+    INFO    | ├── tmp_dcm2bids/
+    INFO    | │   └── log/
+    INFO    | │       └── scaffold_20230703-163905.log
+    INFO    | ├── .bidsignore
+    INFO    | ├── CHANGES
+    INFO    | ├── dataset_description
+    INFO    | ├── participants.json
+    INFO    | ├── participants.tsv
+    INFO    | └── README
+    INFO    | Log file saved at /home/sam/dcm2bids-tutorials/tmp_dcm2bids/log/scaffold_20230703-163905.log
+    INFO    | --- dcm2bids_scaffold end ---
+    
+    (dcm2bids) sam:~/dcm2bids-tutorial$ ls -a
+    .bidsignore CHANGES      dataset_description.json  participants.json  README
+    code        derivatives  participants.tsv          sourcedata
 
     ```
     **VS**
 
     ```sh
     (dcm2bids) sam:~/dcm2bids-tutorial$ dcm2bids_scaffold -o bids_project
-    (dcm2bids) sam:~/dcm2bids-tutorial$ ls -F
-    bids_project/
-    (dcm2bids) sam:~/dcm2bids-tutorial$ ls -F bids_project/
-    CHANGES  dataset_description.json  participants.json  README
-    code/    derivatives/              participants.tsv   sourcedata/
+    INFO    | --- dcm2bids_scaffold start ---
+    INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids-env/bin/dcm2bids_scaffold -o bids_project
+    INFO    | OS version: Linux-5.19.0-45-generic-x86_64-with-glibc2.35
+    INFO    | Python version: 3.10.4 (main, May 29 2023, 11:10:38) [GCC 11.3.0]
+    INFO    | dcm2bids version: 3.0.dev
+    INFO    | Checking for software update
+    INFO    | Currently using the latest version of dcm2bids.
+    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit. 
+
+    INFO    | Tree representation of bids_project/
+    INFO    | bids_project/
+    INFO    | ├── code/
+    INFO    | ├── derivatives/
+    INFO    | ├── sourcedata/
+    INFO    | ├── tmp_dcm2bids/
+    INFO    | │   └── log/
+    INFO    | │       └── scaffold_20230703-205902.log
+    INFO    | ├── .bidsignore
+    INFO    | ├── CHANGES
+    INFO    | ├── dataset_description
+    INFO    | ├── participants.json
+    INFO    | ├── participants.tsv
+    INFO    | └── README
+    INFO    | Log file saved at bids_project/tmp_dcm2bids/log/scaffold_20230703-205902.log
+    INFO    | --- dcm2bids_scaffold end ---
+    (dcm2bids) sam:~/dcm2bids-tutorial$ ls -Fa bids_project
+    .bidsignore CHANGES      dataset_description.json  participants.json  README
+    code        derivatives  participants.tsv          sourcedata
     ```
 
 For the purpose of the tutorial, you chose to specify the output directory
@@ -437,6 +490,15 @@ As usual the first command will be to request the help info.
                             DICOM files directory
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory
+    -n [NEST], --nest [NEST]
+                            Nest a directory in <output_dir>. Useful if many helper runs are needed
+                            to make a config file due to slight variations in MRI acquisitions.
+                            Defaults to DICOM_DIR if no name is provided.
+                            (Default: [False])
+    --force, --force_dcm2niix
+                            Force command to overwrite existing output files.
+    -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                            Set logging level to the console. [INFO]
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
     ```
@@ -467,9 +529,22 @@ the command, the current directory.
 === "Output"
 
     ```sh hl_lines="4"
-    (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids_helper -d sourcedata/dcm_qa_nih/In/
-    Example in:
-    /home/sam/dcm2bids-tutorial/bids_project/tmp_dcm2bids/helper
+    INFO    | --- dcm2bids_helper start ---
+    INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids-env/bin/dcm2bids_helper -d sourcedata/dcm_qa_nih/In/
+    INFO    | OS version: Linux-5.19.0-45-generic-x86_64-with-glibc2.35
+    INFO    | Python version: 3.10.4 (main, May 29 2023, 11:10:38) [GCC 11.3.0]
+    INFO    | dcm2bids version: 3.0.0
+    INFO    | dcm2niix version: v1.0.20230411
+    INFO    | Checking for software update
+    INFO    | Currently using the latest version of dcm2bids.
+    INFO    | Currently using the latest version of dcm2niix.
+    INFO    | Running: dcm2niix -b y -ba y -z y -f %3s_%f_%p_%t -o /home/sam/miniconda3/envs/dcm2bids-env/bin/dcm2bids_helper sourcedata/dcm_qa_nih/In/
+    INFO    | Check log file for dcm2niix output
+
+    INFO    | Helper files in: /home/sam/dcm2bids-tutorial/bids_project/tmp_dcm2bids/helper
+
+    INFO    | Log file saved at /home/sam/dcm2bids-tutorial/bids_project/tmp_dcm2bids/log/helper_20230703-210946.log
+    INFO    | --- dcm2bids_helper end ---
     ```
 
 ### Finding what you need in **tmp_dcm2bids/helper**
@@ -854,11 +929,11 @@ task name:
     the [release notes of version 17-March-2021 (v1.0.20210317)][dcm2niix-release]
     of dcmniix to now more, especially the [GE file naming behavior changes (%p protocol name and %d description) section](https://github.com/rordenlab/dcm2niix/issues/476).
 
-Moving to the two fieldmaps, if you inspect their sidecar files (the same ones
+Moving to the fieldmaps, if you inspect their sidecar files (the same ones
 that were compared in the
 [dcm2bids_helper section](#finding-what-you-need-in-tmpdcm2bidshelper)), you can
-see a pattern of `"EPI PE=AP"` or `"EPI PE=PA"` in the `SeriesDescription` once
-again. Is it enough to match only the correct acquisition?
+see a pattern of `"EPI PE=AP"`, `"EPI PE=PA"`, `"EPI PE=RL"` and `"EPI PE=LR"`  in the `SeriesDescription` once
+again. 
 
 You can test it, of course!
 
@@ -867,6 +942,8 @@ You can test it, of course!
     ```sh
     grep "EPI PE=AP" tmp_dcm2bids/helper/*.json
     grep "EPI PE=PA" tmp_dcm2bids/helper/*.json
+    grep "EPI PE=RL" tmp_dcm2bids/helper/*.json
+    grep "EPI PE=LR" tmp_dcm2bids/helper/*.json
     ```
 
 === "Output"
@@ -879,8 +956,39 @@ You can test it, of course!
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ grep "EPI PE=PA" tmp_dcm2bids/helper/*.json
     tmp_dcm2bids/helper/004_In_EPI_PE=PA_20180918121230.json:	"SeriesDescription": "EPI PE=PA",
     tmp_dcm2bids/helper/004_In_EPI_PE=PA_20180918121230.json:	"ProtocolName": "EPI PE=PA",
+    (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ grep "EPI PE=RL" tmp_dcm2bids/helper/*.json
+    tmp_dcm2bids/helper/005_In_EPI_PE=RL_20180918121230.json:	"SeriesDescription": "EPI PE=RL",
+    tmp_dcm2bids/helper/005_In_EPI_PE=RL_20180918121230.json:	"ProtocolName": "EPI PE=RL",
+    (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ grep "EPI PE=LR" tmp_dcm2bids/helper/*.json
+    tmp_dcm2bids/helper/006_In_EPI_PE=LR_20180918121230.json:	"SeriesDescription": "EPI PE=LR",
+    tmp_dcm2bids/helper/006_In_EPI_PE=LR_20180918121230.json:	"ProtocolName": "EPI PE=LR",
 
     ```
+
+Now, Dcm2bids new feature `--auto_extract_entities` will help you with this specific situations.
+Following BIDS naming scheme fieldmaps need to be named with a dir entity. If you take a look each json file
+you'll find in their respective sidecar PhaseEncodedDirection a different direction
+
+=== "Command"
+
+    ```sh
+    grep "PhaseEncodedDirection\"" tmp_dcm2bids/helper/*_In_EPI_PE=*.json
+    ```
+
+=== "Output"
+
+    There are four matches per pattern but they come from the same file, so it is okay.
+    ```sh
+    (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ grep "PhaseEncodedDirection\"" tmp_dcm2bids/helper/*_In_EPI_PE=*.json
+    tmp_dcm2bids/helper/003_In_EPI_PE=AP_20180918121230.json:	"PhaseEncodingDirection": "j-",
+    tmp_dcm2bids/helper/004_In_EPI_PE=PA_20180918121230.json:	"PhaseEncodingDirection": "j",
+    tmp_dcm2bids/helper/005_In_EPI_PE=RL_20180918121230.json:	"PhaseEncodingDirection": "i",
+    tmp_dcm2bids/helper/006_In_EPI_PE=LR_20180918121230.json:	"PhaseEncodingDirection": "i-",
+    ```
+
+This entity will be different for each fieldmap so there's no need to be more specific.
+
+Please check the different use cases for this feature
 
 Once you are sure of you matching criteria, you can update your configuration
 file with the appropriate info.
@@ -889,7 +997,7 @@ file with the appropriate info.
 {
   "descriptions": [
     {
-      "id": "id_task-rest",
+      "id": "id_task-rest", |
       "datatype": "func",
       "suffix": "bold",
       "customEntities": "task-rest",
@@ -903,29 +1011,20 @@ file with the appropriate info.
     {
       "datatype": "fmap",
       "suffix": "epi",
-      "customEntities": "dir-AP",
       "criteria": {
-        "SeriesDescription": "EPI PE=AP*"
+        "SeriesDescription": "EPI PE=*"
       },
-      "intendedFor": "id_task-rest"
-    },
-    {
-      "datatype": "fmap",
-      "suffix": "epi",
-      "customEntities": "dir-PA",
-      "criteria": {
-        "SeriesDescription": "EPI PE=PA*"
-      },
-      "intendedFor": "id_task-rest"
+      "intendedFor": "id_task-rest" |
     }
   ]
 }
 ```
 
-For fieldmaps, you need to add an `"intendedFor"` field to show that these
+For fieldmaps, you need to add an `"intendedFor"` as well as `id` field to show that these
 fieldmaps should be used with your fMRI acquisition. Have a look at the
-explanation of [intendedFor](/docs/3-configuration/#intendedfor) in the
+explanation of [intendedFor](/docs/3-configuration/#id-and-intendedfor) in the
 documentation or in the [BIDS specification][bids-fmap].
+
 
 !!! tip "Use an online JSON validator"
 
@@ -952,7 +1051,8 @@ command.
 
     ```sh hl_lines="2-3"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
-    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR] [--forceDcm2niix] [--clobber]
+    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR] 
+                    [--auto_extract_entities] [--bids_validate] [--forceDcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -970,10 +1070,11 @@ command.
                             JSON configuration file (see example/config.json)
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
-    --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and datatype. [False]
-    --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
-                          bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
+    --auto_extract_entities
+                            If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and dataType. [False]
+    --bids_validate         If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
+                            bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
+
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
@@ -988,50 +1089,65 @@ As you can see, to run the `dcm2bids` command, you have to specify at least 3
 required options with their argument.
 
 ```sh
-dcm2bids -d path/to/source/data -p subject_id -c path/to/config/file.json
+dcm2bids -d path/to/source/data -p subID -c path/to/config/file.json --auto_extract_entities
 ```
 
 `dcm2bids` will create a directory which will be named after the argument
 specified for `-p`, and put the _BIDSified_ data in it.
 
-For the tutorial, pretend that the subject_id is simply `ID01`.
+For the tutorial, pretend that the subID is simply `ID01`.
 
 Note that if you don't specify the `-o` option, your current directory will be
 populated with the `sub-<label>` directories.
+
+Using the option `--auto_extract_entities` will allow dcm2bids to look for some 
+specific entities without having to put them in the config file.
 
 That being said, you can run the command:
 
 === "Command"
 
     ```sh
-    dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json
+    dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json --auto_extract_entities
     ```
 
 === "Output"
 
     ```sh hl_lines="14-16"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json
-    INFO:dcm2bids.dcm2bids:--- dcm2bids start ---
-    INFO:dcm2bids.dcm2bids:OS:version: Linux-5.13.0-39-generic-x86_64-with-glibc2.31
-    INFO:dcm2bids.dcm2bids:python:version: 3.10.4 | packaged by conda-forge | (main, Mar 24 2022, 17:39:04) [GCC 10.3.0]
-    INFO:dcm2bids.dcm2bids:dcm2bids:version: 2.1.7
-    INFO:dcm2bids.dcm2bids:dcm2niix:version: v1.0.20211006
-    INFO:dcm2bids.dcm2bids:participant: sub-ID01
-    INFO:dcm2bids.dcm2bids:session:
-    INFO:dcm2bids.dcm2bids:config: /home/sam/dcm2bids-tutorial/bids_project/code/dcm2bids_config.json
-    INFO:dcm2bids.dcm2bids:BIDS directory: /home/sam/dcm2bids-tutorial/bids_project
-    INFO:dcm2bids.utils:Running dcm2niix -b y -ba y -z y -f '%3s_%f_%p_%t' -o /home/sam/dcm2bids-tutorial/bids_project/tmp_dcm2bids/sub-ID01 sourcedata/dcm_qa_nih/In/
-    INFO:dcm2bids.dcm2niix:Check log file for dcm2niix output
-    INFO:dcm2bids.sidecar:Sidecars pairing:
-    INFO:dcm2bids.sidecar:_dir-AP_epi  <-  003_In_EPI_PE=AP_20180918121230
-    INFO:dcm2bids.sidecar:_task-rest_bold  <-  004_In_DCM2NIIX_regression_test_20180918114023
-    INFO:dcm2bids.sidecar:_dir-PA_epi  <-  004_In_EPI_PE=PA_20180918121230
-    INFO:dcm2bids.sidecar:No Pairing  <-  005_In_DCM2NIIX_regression_test_20180918114023
-    INFO:dcm2bids.sidecar:No Pairing  <-  005_In_EPI_PE=RL_20180918121230
-    INFO:dcm2bids.sidecar:No Pairing  <-  006_In_DCM2NIIX_regression_test_20180918114023
-    INFO:dcm2bids.sidecar:No Pairing  <-  006_In_EPI_PE=LR_20180918121230
-    INFO:dcm2bids.sidecar:No Pairing  <-  007_In_DCM2NIIX_regression_test_20180918114023
-    INFO:dcm2bids.dcm2bids:moving acquisitions into BIDS folder
+    INFO    | --- dcm2bids start ---
+    INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids-env/bin/dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json --auto_extract_entities
+    INFO    | OS version: Linux-5.19.0-45-generic-x86_64-with-glibc2.35
+    INFO    | Python version: 3.10.4 (main, May 29 2023, 11:10:38) [GCC 11.3.0]
+    INFO    | dcm2bids version: 3.0.0
+    INFO    | dcm2niix version: v1.0.20230411
+    INFO    | Checking for software update
+    INFO    | Currently using the latest version of dcm2bids.
+    INFO    | Currently using the latest version of dcm2niix.
+    INFO    | participant: sub-ID01
+    INFO    | config: /home/sam/dcm2bids-tutorial/bids_project/code/dcm2bids_config.json
+    INFO    | BIDS directory: /home/sam/p/unf/t
+    INFO    | Auto extract entities: True
+    INFO    | Validate BIDS: False
+
+    INFO    | Running: dcm2niix -b y -ba y -z y -f %3s_%f_%p_%t -o /home/sam/dcm2bids-tutorial/bids_project/tmp_dcm2bids/sub-ID01 sourcedata/dcm_qa_nih/In
+    INFO    | Check log file for dcm2niix output
+
+    INFO    | SIDECAR PAIRING:
+
+    INFO    | sub-ID01_dir-AP_epi  <-  003_In_EPI_PE=AP_20180918121230
+    WARNING | {'task'} have not been found for datatype 'func' and suffix 'bold'.
+    INFO    | sub-ID01_task-rest_bold  <-  004_In_DCM2NIIX_regression_test_20180918114023
+    INFO    | sub-ID01_dir-PA_epi  <-  004_In_EPI_PE=PA_20180918121230
+    INFO    | No Pairing  <-  005_In_DCM2NIIX_regression_test_20180918114023
+    INFO    | No Pairing  <-  005_In_EPI_PE=RL_20180918121230
+    INFO    | No Pairing  <-  006_In_DCM2NIIX_regression_test_20180918114023
+    INFO    | No Pairing  <-  006_In_EPI_PE=LR_20180918121230
+    INFO    | No Pairing  <-  007_In_DCM2NIIX_regression_test_20180918114023
+    INFO    | MOVING ACQUISITIONS INTO BIDS FOLDER
+
+    INFO    | Logs saved in /home/sam/dcm2bids-tutorials/tmp_dcm2bids/log/sub-ID01_20230703-185410.log
+    INFO    | --- dcm2bids end ---
     ```
 
 A bunch of information is printed to the terminal as well as to a log file
@@ -1059,8 +1175,12 @@ converted data!
     ├── fmap
     │   ├── sub-ID01_dir-AP_epi.json
     │   ├── sub-ID01_dir-AP_epi.nii.gz
+    │   ├── sub-ID01_dir-LR_epi.json
+    │   ├── sub-ID01_dir-LR_epi.nii.gz
     │   ├── sub-ID01_dir-PA_epi.json
-    │   └── sub-ID01_dir-PA_epi.nii.gz
+    │   ├── sub-ID01_dir-PA_epi.nii.gz
+    │   ├── sub-ID01_dir-RL_epi.json
+    │   └── sub-ID01_dir-RL_epi.nii.gz
     └── func
         ├── sub-ID01_task-rest_bold.json
         └── sub-ID01_task-rest_bold.nii.gz
@@ -1104,12 +1224,8 @@ Files that were not paired stay in a temporary directory
     └── sub-ID01
         ├── 005_In_DCM2NIIX_regression_test_20180918114023.json
         ├── 005_In_DCM2NIIX_regression_test_20180918114023.nii.gz
-        ├── 005_In_EPI_PE=RL_20180918121230.json
-        ├── 005_In_EPI_PE=RL_20180918121230.nii.gz
         ├── 006_In_DCM2NIIX_regression_test_20180918114023.json
         ├── 006_In_DCM2NIIX_regression_test_20180918114023.nii.gz
-        ├── 006_In_EPI_PE=LR_20180918121230.json
-        ├── 006_In_EPI_PE=LR_20180918121230.nii.gz
         ├── 007_In_DCM2NIIX_regression_test_20180918114023.json
         └── 007_In_DCM2NIIX_regression_test_20180918114023.nii.gz
 

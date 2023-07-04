@@ -9,6 +9,7 @@ same level as the `"descriptions"` entry.
                    "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
     "searchMethod": "fnmatch",
     "caseSensitive": true,
+    "dupMethod": "dup",
     "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
     "description": [
     {
@@ -40,6 +41,16 @@ default: `"searchMethod": "fnmatch"`
 fnmatch is the behaviour (See criteria) by default and the fall back if this
 option is set incorrectly. `re` is the other choice if you want more flexibility
 to match criteria.
+
+## dupMethod
+
+default: `"dupMethod": "run"`
+
+run is the default behavior and will add '_run-' to the customEntities of the acquisition
+if it finds duplicate destination roots.
+
+dup will keep the last duplicate description and put `_dup-`to the customEntities of the other acquisitions.
+This behavior is a [heudiconv](https://heudiconv.readthedocs.io/en/latest/changes.html) inspired feature.
 
 ## caseSensitive
 
@@ -94,7 +105,8 @@ command.
 
     ```sh hl_lines="2-3"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
-    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR] [--forceDcm2niix] [--clobber]
+    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR]
+                    [--auto_extract_entities] [--bids_validate] [--forceDcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -120,7 +132,6 @@ command.
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
 
