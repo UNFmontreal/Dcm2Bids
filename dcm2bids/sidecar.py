@@ -170,6 +170,13 @@ class SidecarPairing(object):
                 datatype = curr_post_op['datatype']
                 suffix = curr_post_op['suffix']
 
+                cmd_split = curr_post_op['cmd'].split()
+
+                if 'srcFile' not in cmd_split or 'dstFile' not in cmd_split:
+                    raise ValueError("post_op cmd is not defined correctly."
+                                     "srcFile and/or dstFile is missing."
+                                     "Please check the documentation.")
+
                 if isinstance(datatype, str):
                     post_op[-1]['datatype'] = [datatype]
                     datatype = [datatype]
