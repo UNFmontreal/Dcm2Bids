@@ -9,7 +9,9 @@ same level as the `"descriptions"` entry.
                    "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
     "searchMethod": "fnmatch",
     "caseSensitive": true,
-    "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]}],
     "description": [
     {
       "datatype": "anat",
@@ -48,18 +50,40 @@ default: `"caseSensitive": "true"`
 If false, comparisons between strings/lists will be not case sensitive. It's
 only disabled when used with `"searchMethod": "fnmatch"`.
 
-## defaceTpl
+## post_op
 
-default: `"defaceTpl": None`
+default: `"post_op": []`
 
-!!! danger The anonymizer option no longer exists from `v2.0.0`. It is still
-possible to deface the anatomical nifti images.
+post_op key allows you to run any post-processing analyses just before being moved 
+to there respective folders. 
 
-For example, if you use the last version of pydeface, add:
+For example, if you want to deface your T1w images you could use pydeface by adding:
+```
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]}],
+```
 
-`"defaceTpl": "pydeface --outfile {dstFile} {srcFile}"`
+It will specifically run the corresponding `cmd` to any image that follow the combinations
+datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
 
-It is a template string and dcm2bids will replace {srcFile} and {dstFile} by the
+!!! warning "Multiple post_op commands"
+
+    Although you can add multiple commands, the combination datatype/suffix on which you want to run the command has to be unique.
+    You cannot run multiple commands on a specific combination datatype/suffix.
+
+```
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]},
+               {"cmd": "my_new_script --input srcFile --output dstFile ",
+               "datatype": "fmap",
+               "suffix": ["any"]}],
+```
+
+In this example the second command "my_new_script" will be running on any image which datatype is fmap.
+
+Finally, this is a template string and dcm2bids will replace srcFile and dstFile by the
 source file (input) and the destination file (output).
 
 ## dcm2niixOptions
@@ -120,7 +144,6 @@ command.
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
 

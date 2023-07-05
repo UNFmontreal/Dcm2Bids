@@ -96,10 +96,12 @@ class SidecarPairing(object):
                  auto_extractor=DEFAULT.auto_extract_entities,
                  searchMethod=DEFAULT.searchMethod,
                  caseSensitive=DEFAULT.caseSensitive,
-                 dupMethod=DEFAULT.dupMethod):
+                 dupMethod=DEFAULT.dupMethod,
+                 post_op=DEFAULT.post_op):
         self.logger = logging.getLogger(__name__)
         self._searchMethod = ""
         self._dupMethod = ""
+        self._post_op = ""
         self.graph = OrderedDict()
         self.acquisitions = []
         self.extractors = extractors
@@ -109,6 +111,7 @@ class SidecarPairing(object):
         self.searchMethod = searchMethod
         self.caseSensitive = caseSensitive
         self.dupMethod = dupMethod
+        self.post_op = post_op
 
     @property
     def searchMethod(self):
@@ -149,6 +152,66 @@ class SidecarPairing(object):
                 "Duplicate methods implemented: %s", DEFAULT.dupMethodChoices)
             self.logger.warning(f"{value} is not a duplicate method implemented.")
             self.logger.warning(f"Falling back to default: {DEFAULT.dupMethod}.")
+
+    @property
+    def post_op(self):
+        return self._post_op
+
+    @post_op.setter
+    def post_op(self, value):
+        """
+        Checks if post_op commands don't overlap
+        """
+        post_op = []
+        if isinstance(value, dict):
+            value = [value]
+        elif not isinstance(value, list):
+            raise ValueError("post_op should be a list of dict."
+                             "Please check the documentation.")
+
+        try:
+            pairs = []
+            for curr_post_op in value:
+                post_op.append(curr_post_op)
+                datatype = curr_post_op['datatype']
+                suffix = curr_post_op['suffix']
+
+                if isinstance(curr_post_op['cmd'], str):
+                    cmd_split = curr_post_op['cmd'].split()
+                else:
+                    raise ValueError("post_op cmd should be a string."
+                                     "Please check the documentation.")
+
+                if 'srcFile' not in cmd_split or 'dstFile' not in cmd_split:
+                    raise ValueError("post_op cmd is not defined correctly."
+                                     "srcFile and/or dstFile is missing."
+                                     "Please check the documentation.")
+
+                if isinstance(datatype, str):
+                    post_op[-1]['datatype'] = [datatype]
+                    datatype = [datatype]
+
+                if isinstance(suffix, str):
+                    # It will be compare with acq.suffix which has a `_` character
+                    post_op[-1]['suffix'] = ['_' + suffix]
+                    suffix = [suffix]
+                elif isinstance(suffix, list):
+                    post_op[-1]['suffix'] = ['_' + curr_suffix for curr_suffix in suffix]
+
+                pairs = pairs + list(itertools.product(datatype, suffix))
+
+            res = list(set([ele for ele in pairs if pairs.count(ele) > 1]))
+            if res:
+                raise ValueError("Some post operations apply on "
+                                 "the same combination of datatype/suffix."
+                                 "Please fix post_op key in your config file."
+                                 f"{pairs}")
+
+            self._post_op = post_op
+
+        except Exception:
+            raise ValueError("post_op is not defined correctly."
+                             "Please check the documentation.")
 
     @property
     def caseSensitive(self):

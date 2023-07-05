@@ -106,12 +106,8 @@ You can test it with any command but a safe way is to use the `--help` command.
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this
-                            release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
-                            aster/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
-
     ```
 
 ??? bug "What you can do if you did not get this output"
@@ -978,7 +974,6 @@ command.
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
 

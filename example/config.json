@@ -1,6 +1,8 @@
 {
     "searchMethod": "fnmatch",
-    "defaceTpl": "pydeface --outfile {dstFile} {srcFile}",
+    "post_op": [{"cmd" : "pydeface --outfile dstFile srcFile",
+                "datatype": "anat",
+                "suffix": ["T1w", "MP2RAGE"]}],
     "descriptions": [
         {
             "datatype": "anat",
