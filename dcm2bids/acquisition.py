@@ -18,7 +18,7 @@ class Acquisition(object):
         suffix (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
         custom_entities (str): Optional entities (ex: task-rest)
-        srcSidecar (Sidecar): Optional sidecar object
+        src_sidecar (Sidecar): Optional sidecar object
     """
 
     def __init__(
@@ -28,7 +28,7 @@ class Acquisition(object):
         suffix,
         custom_entities="",
         id=None,
-        srcSidecar=None,
+        src_sidecar=None,
         sidecar_changes=None,
         **kwargs
     ):
@@ -42,7 +42,7 @@ class Acquisition(object):
         self.datatype = datatype
         self.suffix = suffix
         self.custom_entities = custom_entities
-        self.srcSidecar = srcSidecar
+        self.src_sidecar = src_sidecar
 
         if sidecar_changes is None:
             self.sidecar_changes = {}
@@ -122,8 +122,8 @@ class Acquisition(object):
         Return:
             The sidecar source root to move
         """
-        if self.srcSidecar:
-            return self.srcSidecar.root
+        if self.src_sidecar:
+            return self.src_sidecar.root
         else:
             return None
 
@@ -197,12 +197,12 @@ class Acquisition(object):
     def dstSidecarData(self, idList):
         """
         """
-        data = self.srcSidecar.origData
+        data = self.src_sidecar.origData
         data["Dcm2bidsVersion"] = __version__
 
         # TaskName
-        if 'TaskName' in self.srcSidecar.data:
-            data["TaskName"] = self.srcSidecar.data["TaskName"]
+        if 'TaskName' in self.src_sidecar.data:
+            data["TaskName"] = self.src_sidecar.data["TaskName"]
 
         # sidecar_changes
         for key, value in self.sidecar_changes.items():

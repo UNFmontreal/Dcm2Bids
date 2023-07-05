@@ -332,7 +332,7 @@ class SidecarPairing(object):
                 desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
 
                 acq = Acquisition(participant,
-                                  srcSidecar=sidecar, **desc)
+                                  src_sidecar=sidecar, **desc)
                 acq.setDstFile()
 
                 if acq.id:
