@@ -1154,7 +1154,15 @@
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import shutil
 
@@ -1208,7 +1216,15 @@ def assert_dirs_empty(parser, args, required):
 
             else:
 
-                shutil.rmtree(path)
+                for child in path.iterdir():
+
+                    if child.is_file():
+
+                        os.remove(child)
+
+                    elif child.is_dir():
+
+                        shutil.rmtree(child)
 
     if isinstance(required, str):
 
@@ -1352,7 +1368,15 @@ def add_overwrite_arg(parser):
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code>def assert_dirs_empty(parser, args, required):
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code>def assert_dirs_empty(parser, args, required):
 
     &quot;&quot;&quot;
 
@@ -1398,7 +1422,15 @@ def add_overwrite_arg(parser):
 
             else:
 
-                shutil.rmtree(path)
+                for child in path.iterdir():
+
+                    if child.is_file():
+
+                        os.remove(child)
+
+                    elif child.is_dir():
+
+                        shutil.rmtree(child)
 
     if isinstance(required, str):
 
@@ -1417,7 +1449,7 @@ def add_overwrite_arg(parser):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-03T20:42:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-03</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
       
     
   </small>
