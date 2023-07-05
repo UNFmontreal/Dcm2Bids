@@ -5,7 +5,14 @@ authors:
 date: 2022-04-17
 ---
 
-# Installation
+
+# Installation using binaries
+
+From dcm2bids>=3.0.0, we provide binaries for mac, windows and ubuntu (debian-based and rhel-based).
+
+They can easily been downloaded from [the release page](https://github.com/UNFmontreal/Dcm2Bids/releases).
+
+# Installation using pip or conda
 
 Before you can use dcm2bids, you will need to get it installed. This page guides
 you through a minimal, typical dcm2bids installation workflow that is sufficient
@@ -20,6 +27,8 @@ whole installation process in one go and make use of a dedicated environment for
 dcm2bids.
 
 ??? tip "You just want the installation command?"
+
+    You can use the binaries provided with each release (starting with dcm2bids>=3)
 
     If you are used to installing packages, you can get it from PyPI or conda:
 
