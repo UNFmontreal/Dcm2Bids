@@ -195,7 +195,7 @@ It means you don't have to add the field in the config file like this.
 
 ```
 {
-     "sidecarChanges": {
+     "sidecar_changes": {
         "TaskName": "learning"
     }
 }

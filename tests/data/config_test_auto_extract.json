@@ -39,7 +39,7 @@
             "criteria": {
                 "SeriesDescription": "gre_field_mapping"
             },
-            "sidecarChanges": { 
+            "sidecar_changes": { 
                 "IntendedFor": ["id_dwi", "T1", "dummy"]
             }
         },
@@ -50,7 +50,7 @@
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             },
-            "sidecarChanges": { 
+            "sidecar_changes": { 
                 "IntendedFor": ["id_dwi", "T1"] 
             }
         }

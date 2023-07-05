@@ -8,7 +8,7 @@
             "criteria": {
                 "SeriesDescription": "locali*"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "ProcedureStepDescription": "Modify by dcm2bids"
             }
         },
@@ -46,7 +46,7 @@
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "IntendedFor": ["id_dwi", "T1", "dummy"]
             }
         },
@@ -59,7 +59,7 @@
                 "EchoTime": 0.00738,
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "IntendedFor": "id_dwi"
             }
         },
@@ -70,7 +70,7 @@
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "IntendedFor": ["id_dwi", "T1"]
             }
         },

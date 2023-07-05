@@ -807,7 +807,7 @@ task name:
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     }
@@ -835,7 +835,7 @@ task name:
           "criteria": {
             "SeriesDescription": "*Axial EPI-FMRI (Interleaved I to S)*"
           },
-          "sidecarChanges": {
+          "sidecar_changes": {
             "TaskName": "rest"
           }
         }
@@ -892,7 +892,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     },

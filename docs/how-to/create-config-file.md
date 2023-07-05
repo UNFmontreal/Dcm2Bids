@@ -12,7 +12,7 @@
         "SeriesDescription": "*T2*",
         "EchoTime": 0.1
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "ProtocolName": "T2"
       }
     },
@@ -42,7 +42,7 @@
       "criteria": {
         "SeriesDescription": "bold_task-learning"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "learning"
       }
     },
@@ -53,7 +53,7 @@
         "SeriesDescription": "fmap_task-learning"
       },
       "IntendedFor": "id_task_learning",
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "learning"
       }
     }
@@ -148,7 +148,7 @@ custom_entities could also be combined with extractors.
 See [custom_entities combined with extractors](./use-advanced-commands.md#custom_entities-combined-with-extractors)
 
 
-## sidecarChanges
+## sidecar_changes
 
 Optional field to change or add information in a sidecar.
 
@@ -159,7 +159,7 @@ You will need to set an id to the corresponding description and put the same id 
 
 Fo example, **`task_rest`** means it is intended for `task-rest_bold` 
 and **`id_task_learning`** is intended for `task-learning` which will be
-renamed to only `learning` because of the `"sidecarChanges": { "TaskName": "learning" }` field.
+renamed to only `learning` because of the `"sidecar_changes": { "TaskName": "learning" }` field.
 
 ## Multiple config files
 

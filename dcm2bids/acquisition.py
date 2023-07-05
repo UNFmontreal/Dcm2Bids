@@ -29,7 +29,7 @@ class Acquisition(object):
         custom_entities="",
         id=None,
         srcSidecar=None,
-        sidecarChanges=None,
+        sidecar_changes=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
@@ -44,10 +44,10 @@ class Acquisition(object):
         self.custom_entities = custom_entities
         self.srcSidecar = srcSidecar
 
-        if sidecarChanges is None:
-            self.sidecarChanges = {}
+        if sidecar_changes is None:
+            self.sidecar_changes = {}
         else:
-            self.sidecarChanges = sidecarChanges
+            self.sidecar_changes = sidecar_changes
 
         if id is None:
             self.id = None
@@ -204,8 +204,8 @@ class Acquisition(object):
         if 'TaskName' in self.srcSidecar.data:
             data["TaskName"] = self.srcSidecar.data["TaskName"]
 
-        # sidecarChanges
-        for key, value in self.sidecarChanges.items():
+        # sidecar_changes
+        for key, value in self.sidecar_changes.items():
             values = []
 
             if not isinstance(value, list):
@@ -213,7 +213,7 @@ class Acquisition(object):
 
             for val in value:
                 if isinstance(val, str):
-                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+                    if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
                         logging.warning(f"No id found for '{key}' value '{val}'.")
                         logging.warning(f"No sidecar changes for field '{key}' "
                                         f"will be made "
