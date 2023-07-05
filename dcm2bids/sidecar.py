@@ -176,7 +176,11 @@ class SidecarPairing(object):
                 datatype = curr_post_op['datatype']
                 suffix = curr_post_op['suffix']
 
-                cmd_split = curr_post_op['cmd'].split()
+                if isinstance(curr_post_op['cmd'], str):
+                    cmd_split = curr_post_op['cmd'].split()
+                else:
+                    raise ValueError("post_op cmd should be a string."
+                                     "Please check the documentation.")
 
                 if 'srcFile' not in cmd_split or 'dstFile' not in cmd_split:
                     raise ValueError("post_op cmd is not defined correctly."
@@ -186,11 +190,12 @@ class SidecarPairing(object):
                 if isinstance(datatype, str):
                     post_op[-1]['datatype'] = [datatype]
                     datatype = [datatype]
+
                 if isinstance(suffix, str):
                     # It will be compare with acq.suffix which has a `_` character
                     post_op[-1]['suffix'] = ['_' + suffix]
                     suffix = [suffix]
-                else:
+                elif isinstance(suffix, list):
                     post_op[-1]['suffix'] = ['_' + curr_suffix for curr_suffix in suffix]
 
                 pairs = pairs + list(itertools.product(datatype, suffix))
