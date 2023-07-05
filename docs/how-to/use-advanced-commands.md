@@ -14,9 +14,12 @@ same level as the `"descriptions"` entry.
     "description": [
     {
       "datatype": "anat",
-      "suffix": "T2w",
+      "suffix": "T1w",
       "customEntities": ["acq-highres", "bodypart", "run", "task"],
+      "criteria": {
+        "SeriesDescription": {"any" : ["*MPRAGE*", "*T1w*"]}
       }
+    }
     ]
     ...
 }
@@ -87,6 +90,17 @@ Acquisitions are sorted using the sidecar data. The default behaviour is to sort
 by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You
 can change this behaviour setting this key inside the configuration file.
 
+## criteria
+
+As mentionned in the tutorial, criteria is the way to filter specific acquisitions. If you work with dicoms from multiple sites
+you will need different criterias for the same kind of acquisition. In order to reduce the length of the config file, 
+we developped a feature where for a specific criteria you can get multiple descriptions. 
+
+```
+      "criteria": {
+        "SeriesDescription": {"any" : ["*MPRAGE*", "*T1w*"]}
+      }
+```
 
 # How to use advanced commands
 
