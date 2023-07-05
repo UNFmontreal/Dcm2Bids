@@ -803,11 +803,11 @@ task name:
     {
       "datatype": "func",
       "suffix": "bold",
-      "customEntities": "task-rest",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     }
@@ -831,11 +831,11 @@ task name:
         {
           "datatype": "func",
           "suffix": "bold",
-          "customEntities": "task-rest",
+          "custom_entities": "task-rest",
           "criteria": {
             "SeriesDescription": "*Axial EPI-FMRI (Interleaved I to S)*"
           },
-          "sidecarChanges": {
+          "sidecar_changes": {
             "TaskName": "rest"
           }
         }
@@ -888,18 +888,18 @@ file with the appropriate info.
       "id": "id_task-rest",
       "datatype": "func",
       "suffix": "bold",
-      "customEntities": "task-rest",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     },
     {
       "datatype": "fmap",
       "suffix": "epi",
-      "customEntities": "dir-AP",
+      "custom_entities": "dir-AP",
       "criteria": {
         "SeriesDescription": "EPI PE=AP*"
       },
@@ -908,7 +908,7 @@ file with the appropriate info.
     {
       "datatype": "fmap",
       "suffix": "epi",
-      "customEntities": "dir-PA",
+      "custom_entities": "dir-PA",
       "criteria": {
         "SeriesDescription": "EPI PE=PA*"
       },

@@ -1,5 +1,5 @@
 {
-    "searchMethod": "fnmatch",
+    "search_method": "fnmatch",
     "post_op": [{"cmd" : "pydeface --outfile dstFile srcFile",
                 "datatype": "anat",
                 "suffix": ["T1w", "MP2RAGE"]}],
@@ -55,7 +55,7 @@
             "criteria": {
                 "SeriesDescription": "rs_fMRI"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "SeriesDescription": "rsfMRI"
             }
         },

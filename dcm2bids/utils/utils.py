@@ -17,12 +17,11 @@ class DEFAULT(object):
     link_doc_intended_for = "https://unfmontreal.github.io/Dcm2Bids/docs/tutorial/first-steps/#populating-the-config-file"
 
     # cli dcm2bids
-    cliSession = ""
-    cliOutputDir = os.getcwd()
-    cliLogLevel = "INFO"
+    cli_session = ""
+    cli_log_level = "INFO"
 
     # dcm2bids.py
-    outputDir = Path.cwd()
+    output_dir = Path.cwd()
     session = ""  # also Participant object
     bids_validate = False
     auto_extract_entities = False
@@ -58,13 +57,13 @@ class DEFAULT(object):
                      "fmap_epi": ["dir"]}
 
     compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
-    searchMethodChoices = ["fnmatch", "re"]
-    searchMethod = "fnmatch"
-    dupMethodChoices = ["dup", "run"]
-    dupMethod = "run"
+    search_methodChoices = ["fnmatch", "re"]
+    search_method = "fnmatch"
+    dup_method_choices = ["dup", "run"]
+    dup_method = "run"
     runTpl = "_run-{:02d}"
     dupTpl = "_dup-{:02d}"
-    caseSensitive = True
+    case_sensitive = True
 
     # Entity table:
     # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
@@ -72,11 +71,11 @@ class DEFAULT(object):
                        "run", "mod", "echo", "flip", "inv", "mt", "part",
                        "recording"]
 
-    keyWithPathSidecarChanges = ['IntendedFor', 'Sources']
+    keyWithPathsidecar_changes = ['IntendedFor', 'Sources']
 
     # misc
-    tmpDirName = "tmp_dcm2bids"
-    helperDir = "helper"
+    tmp_dir_name = "tmp_dcm2bids"
+    helper_dir = "helper"
 
     # BIDS version
     bids_version = "v1.8.0"

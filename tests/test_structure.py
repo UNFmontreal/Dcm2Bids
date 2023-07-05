@@ -21,7 +21,7 @@ from dcm2bids.acquisition import Acquisition
 
 def test_acquisition_get_dst_path(name, session, modality, custom, expected):
     participant = Participant(name, session)
-    acquisition = Acquisition(participant, "anat", modality, customEntities=custom)
+    acquisition = Acquisition(participant, "anat", modality, custom_entities=custom)
     acquisition.setDstFile()
     assert acquisition.dstRoot == expected
 
@@ -34,6 +34,6 @@ def test_acquisition_get_dst_path(name, session, modality, custom, expected):
 
 def test_comparison_acquisitions(name_c, session_c, modality_c, custom_c):
     participant = Participant(name_c, session_c)
-    acquisition1 = Acquisition(participant, "anat", modality_c, customEntities=custom_c)
-    acquisition2 = Acquisition(participant, "anat", modality_c, customEntities=custom_c)
+    acquisition1 = Acquisition(participant, "anat", modality_c, custom_entities=custom_c)
+    acquisition2 = Acquisition(participant, "anat", modality_c, custom_entities=custom_c)
     assert acquisition1 == acquisition2

@@ -17,8 +17,8 @@ class Acquisition(object):
         datatype (str): A functional group of MRI data (ex: func, anat ...)
         suffix (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
-        customEntities (str): Optional entities (ex: task-rest)
-        srcSidecar (Sidecar): Optional sidecar object
+        custom_entities (str): Optional entities (ex: task-rest)
+        src_sidecar (Sidecar): Optional sidecar object
     """
 
     def __init__(
@@ -26,28 +26,28 @@ class Acquisition(object):
         participant,
         datatype,
         suffix,
-        customEntities="",
+        custom_entities="",
         id=None,
-        srcSidecar=None,
-        sidecarChanges=None,
+        src_sidecar=None,
+        sidecar_changes=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
 
         self._suffix = ""
-        self._customEntities = ""
+        self._custom_entities = ""
         self._id = ""
 
         self.participant = participant
         self.datatype = datatype
         self.suffix = suffix
-        self.customEntities = customEntities
-        self.srcSidecar = srcSidecar
+        self.custom_entities = custom_entities
+        self.src_sidecar = src_sidecar
 
-        if sidecarChanges is None:
-            self.sidecarChanges = {}
+        if sidecar_changes is None:
+            self.sidecar_changes = {}
         else:
-            self.sidecarChanges = sidecarChanges
+            self.sidecar_changes = sidecar_changes
 
         if id is None:
             self.id = None
@@ -89,32 +89,32 @@ class Acquisition(object):
         self._id = value
 
     @property
-    def customEntities(self):
+    def custom_entities(self):
         """
         Returns:
-            A string '_<customEntities>'
+            A string '_<custom_entities>'
         """
-        return self._customEntities
+        return self._custom_entities
 
-    @customEntities.setter
-    def customEntities(self, customEntities):
+    @custom_entities.setter
+    def custom_entities(self, custom_entities):
         """ Prepend '_' if necessary"""
-        if isinstance(customEntities, list):
-            self._customEntities = self.prepend('_'.join(customEntities))
+        if isinstance(custom_entities, list):
+            self._custom_entities = self.prepend('_'.join(custom_entities))
         else:
-            self._customEntities = self.prepend(customEntities)
+            self._custom_entities = self.prepend(custom_entities)
 
     @property
     def build_suffix(self):
         """ The suffix to build filenames
 
         Returns:
-            A string '_<suffix>' or '_<customEntities>_<suffix>'
+            A string '_<suffix>' or '_<custom_entities>_<suffix>'
         """
-        if self.customEntities.strip() == "":
+        if self.custom_entities.strip() == "":
             return self.suffix
         else:
-            return self.customEntities + self.suffix
+            return self.custom_entities + self.suffix
 
     @property
     def srcRoot(self):
@@ -122,8 +122,8 @@ class Acquisition(object):
         Return:
             The sidecar source root to move
         """
-        if self.srcSidecar:
-            return self.srcSidecar.root
+        if self.src_sidecar:
+            return self.src_sidecar.root
         else:
             return None
 
@@ -197,15 +197,15 @@ class Acquisition(object):
     def dstSidecarData(self, idList):
         """
         """
-        data = self.srcSidecar.origData
+        data = self.src_sidecar.origData
         data["Dcm2bidsVersion"] = __version__
 
         # TaskName
-        if 'TaskName' in self.srcSidecar.data:
-            data["TaskName"] = self.srcSidecar.data["TaskName"]
+        if 'TaskName' in self.src_sidecar.data:
+            data["TaskName"] = self.src_sidecar.data["TaskName"]
 
-        # sidecarChanges
-        for key, value in self.sidecarChanges.items():
+        # sidecar_changes
+        for key, value in self.sidecar_changes.items():
             values = []
 
             if not isinstance(value, list):
@@ -213,7 +213,7 @@ class Acquisition(object):
 
             for val in value:
                 if isinstance(val, str):
-                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+                    if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
                         logging.warning(f"No id found for '{key}' value '{val}'.")
                         logging.warning(f"No sidecar changes for field '{key}' "
                                         f"will be made "

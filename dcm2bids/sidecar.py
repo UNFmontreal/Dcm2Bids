@@ -94,13 +94,13 @@ class SidecarPairing(object):
                  descriptions,
                  extractors=DEFAULT.extractors,
                  auto_extractor=DEFAULT.auto_extract_entities,
-                 searchMethod=DEFAULT.searchMethod,
-                 caseSensitive=DEFAULT.caseSensitive,
-                 dupMethod=DEFAULT.dupMethod,
+                 search_method=DEFAULT.search_method,
+                 case_sensitive=DEFAULT.case_sensitive,
+                 dup_method=DEFAULT.dup_method,
                  post_op=DEFAULT.post_op):
         self.logger = logging.getLogger(__name__)
-        self._searchMethod = ""
-        self._dupMethod = ""
+        self._search_method = ""
+        self._dup_method = ""
         self._post_op = ""
         self.graph = OrderedDict()
         self.acquisitions = []
@@ -108,50 +108,50 @@ class SidecarPairing(object):
         self.auto_extract_entities = auto_extractor
         self.sidecars = sidecars
         self.descriptions = descriptions
-        self.searchMethod = searchMethod
-        self.caseSensitive = caseSensitive
-        self.dupMethod = dupMethod
+        self.search_method = search_method
+        self.case_sensitive = case_sensitive
+        self.dup_method = dup_method
         self.post_op = post_op
 
     @property
-    def searchMethod(self):
-        return self._searchMethod
+    def search_method(self):
+        return self._search_method
 
-    @searchMethod.setter
-    def searchMethod(self, value):
+    @search_method.setter
+    def search_method(self, value):
         """
         Checks if the search method is implemented
         Warns the user if not and fall back to default
         """
-        if value in DEFAULT.searchMethodChoices:
-            self._searchMethod = value
+        if value in DEFAULT.search_methodChoices:
+            self._search_method = value
 
         else:
-            self._searchMethod = DEFAULT.searchMethod
+            self._search_method = DEFAULT.search_method
             self.logger.warning(f"'{value}' is not a search method implemented")
-            self.logger.warning(f"Falling back to default: {DEFAULT.searchMethod}")
+            self.logger.warning(f"Falling back to default: {DEFAULT.search_method}")
             self.logger.warning(
-                f"Search methods implemented: {DEFAULT.searchMethodChoices}"
+                f"Search methods implemented: {DEFAULT.search_methodChoices}"
             )
 
     @property
-    def dupMethod(self):
-        return self._dupMethod
+    def dup_method(self):
+        return self._dup_method
 
-    @dupMethod.setter
-    def dupMethod(self, value):
+    @dup_method.setter
+    def dup_method(self, value):
         """
         Checks if the duplicate method is implemented
         Warns the user if not and fall back to default
         """
-        if value in DEFAULT.dupMethodChoices:
-            self._dupMethod = value
+        if value in DEFAULT.dup_method_choices:
+            self._dup_method = value
         else:
-            self._dupMethod = DEFAULT.dupMethod
+            self._dup_method = DEFAULT.dup_method
             self.logger.warning(
-                "Duplicate methods implemented: %s", DEFAULT.dupMethodChoices)
+                "Duplicate methods implemented: %s", DEFAULT.dup_method_choices)
             self.logger.warning(f"{value} is not a duplicate method implemented.")
-            self.logger.warning(f"Falling back to default: {DEFAULT.dupMethod}.")
+            self.logger.warning(f"Falling back to default: {DEFAULT.dup_method}.")
 
     @property
     def post_op(self):
@@ -214,18 +214,18 @@ class SidecarPairing(object):
                              "Please check the documentation.")
 
     @property
-    def caseSensitive(self):
-        return self._caseSensitive
+    def case_sensitive(self):
+        return self._case_sensitive
 
-    @caseSensitive.setter
-    def caseSensitive(self, value):
+    @case_sensitive.setter
+    def case_sensitive(self, value):
         if isinstance(value, bool):
-            self._caseSensitive = value
+            self._case_sensitive = value
         else:
-            self._caseSensitive = DEFAULT.caseSensitive
+            self._case_sensitive = DEFAULT.case_sensitive
             self.logger.warning(f"'{value}' is not a boolean")
-            self.logger.warning(f"Falling back to default: {DEFAULT.caseSensitive}")
-            self.logger.warning(f"Search methods implemented: {DEFAULT.caseSensitive}")
+            self.logger.warning(f"Falling back to default: {DEFAULT.case_sensitive}")
+            self.logger.warning(f"Search methods implemented: {DEFAULT.case_sensitive}")
 
     def build_graph(self):
         """
@@ -260,11 +260,11 @@ class SidecarPairing(object):
 
         def compare(name, pattern):
             name = str(name)
-            if self.searchMethod == "re":
+            if self.search_method == "re":
                 return bool(re.match(pattern, name))
             else:
                 pattern = str(pattern)
-                if not self.caseSensitive:
+                if not self.case_sensitive:
                     name = name.lower()
                     pattern = pattern.lower()
 
@@ -332,7 +332,7 @@ class SidecarPairing(object):
                 desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
 
                 acq = Acquisition(participant,
-                                  srcSidecar=sidecar, **desc)
+                                  src_sidecar=sidecar, **desc)
                 acq.setDstFile()
 
                 if acq.id:
@@ -360,18 +360,18 @@ class SidecarPairing(object):
 
     def searchDcmTagEntity(self, sidecar, desc):
         """
-        Add DCM Tag to customEntities
+        Add DCM Tag to custom_entities
         """
         descWithTask = desc.copy()
         concatenated_matches = {}
         entities = []
 
-        if "customEntities" in desc.keys() or self.auto_extract_entities:
-            if 'customEntities' in desc.keys():
-                if isinstance(descWithTask["customEntities"], str):
-                    descWithTask["customEntities"] = [descWithTask["customEntities"]]
+        if "custom_entities" in desc.keys() or self.auto_extract_entities:
+            if 'custom_entities' in desc.keys():
+                if isinstance(descWithTask["custom_entities"], str):
+                    descWithTask["custom_entities"] = [descWithTask["custom_entities"]]
             else:
-                descWithTask["customEntities"] = []
+                descWithTask["custom_entities"] = []
 
             if self.auto_extract_entities:
                 self.extractors.update(DEFAULT.auto_extractors)
@@ -392,8 +392,8 @@ class SidecarPairing(object):
                                       compile_regex.search(curr_dcmInfo).groupdict())
                                     break
 
-            if "customEntities" in desc.keys():
-                entities = set(concatenated_matches.keys()).union(set(descWithTask["customEntities"]))
+            if "custom_entities" in desc.keys():
+                entities = set(concatenated_matches.keys()).union(set(descWithTask["custom_entities"]))
 
             if self.auto_extract_entities:
                 auto_acq = '_'.join([descWithTask['datatype'], descWithTask["suffix"]])
@@ -407,32 +407,32 @@ class SidecarPairing(object):
                     else:
                         entities = list(entities) + DEFAULT.auto_entities[auto_acq]
                         entities = list(set(entities))
-                        descWithTask["customEntities"] = entities
+                        descWithTask["custom_entities"] = entities
 
             for curr_entity in entities:
                 if curr_entity in concatenated_matches.keys():
                     if curr_entity == 'dir':
-                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask["customEntities"]))
+                        descWithTask["custom_entities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask["custom_entities"]))
                     elif curr_entity == 'task':
                         sidecar.data['TaskName'] = concatenated_matches[curr_entity]
-                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                        descWithTask["custom_entities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["custom_entities"]))
                     else:
-                        descWithTask["customEntities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["customEntities"]))
+                        descWithTask["custom_entities"] = list(map(lambda x: x.replace(curr_entity, '-'.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask["custom_entities"]))
 
             # Remove entities without -
-            for curr_entity in descWithTask["customEntities"]:
+            for curr_entity in descWithTask["custom_entities"]:
                 if '-' not in curr_entity:
                     self.logger.info(f"Removing entity '{curr_entity}' since it "
                                      "does not fit the basic BIDS specification "
                                      "(Entity-Value)")
-                    descWithTask["customEntities"].remove(curr_entity)
+                    descWithTask["custom_entities"].remove(curr_entity)
 
         return descWithTask, sidecar
 
     def find_runs(self):
         """
         Check if there is duplicate destination roots in the acquisitions
-        and add '_run-' to the customEntities of the acquisition
+        and add '_run-' to the custom_entities of the acquisition
         """
 
         def duplicates(seq):
@@ -457,16 +457,16 @@ class SidecarPairing(object):
         dstRoots = [_.dstRoot for _ in self.acquisitions]
 
         templateDup = DEFAULT.runTpl
-        if self.dupMethod == 'dup':
+        if self.dup_method == 'dup':
             templateDup = DEFAULT.dupTpl
 
         for dstRoot, dup in duplicates(dstRoots):
             self.logger.info(f"{dstRoot} has {len(dup)} runs")
-            self.logger.info(f"Adding {self.dupMethod} information to the acquisition")
-            if self.dupMethod == 'dup':
+            self.logger.info(f"Adding {self.dup_method} information to the acquisition")
+            if self.dup_method == 'dup':
                 dup = dup[0:-1]
 
             for runNum, acqInd in enumerate(dup):
                 runStr = templateDup.format(runNum+1)
-                self.acquisitions[acqInd].customEntities += runStr
+                self.acquisitions[acqInd].custom_entities += runStr
                 self.acquisitions[acqInd].setDstFile()
