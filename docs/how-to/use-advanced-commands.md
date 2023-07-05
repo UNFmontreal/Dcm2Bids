@@ -9,9 +9,9 @@ same level as the `"descriptions"` entry.
                    "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
     "searchMethod": "fnmatch",
     "caseSensitive": true,
-    "post_op": {"cmd": "pydeface --outfile dstFile srcFile",
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
                "datatype": "anat",
-               "suffix": ["T1w", "MP2RAGE"]},
+               "suffix": ["T1w", "MP2RAGE"]}],
     "description": [
     {
       "datatype": "anat",

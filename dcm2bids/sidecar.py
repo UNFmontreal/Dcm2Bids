@@ -163,6 +163,12 @@ class SidecarPairing(object):
         Checks if post_op commands don't overlap
         """
         post_op = []
+        if isinstance(value, dict):
+            value = [value]
+        elif not isinstance(value, list):
+            raise ValueError("post_op should be a list of dict."
+                             "Please check the documentation.")
+
         try:
             pairs = []
             for curr_post_op in value:
