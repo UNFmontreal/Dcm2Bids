@@ -1,0 +1,97 @@
+name: Build + add binaries to release
+
+# Controls when the workflow will run
+on:
+  release:
+    types: [published]
+  # Allow this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-11, ubuntu-20.04, windows-latest] # not using latest based on https://github.com/Nuitka/Nuitka/issues/2240#issuecomment-1564030218
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # Check-out repository
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+          cache: 'pip'
+          cache-dependency-path: |
+            **/requirements*.txt
+
+      - name: Build dcm2bids executable
+        uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: dcm2bids/cli/dcm2bids.py
+          onefile: true
+          show-scons: false
+          output-file: dcm2bids
+
+      - name: Build dcm2bids_scaffold executable
+        uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: dcm2bids/cli/dcm2bids_scaffold.py
+          onefile: true
+          show-scons: false
+          output-file: dcm2bids_scaffold
+
+      - name: Build dcm2bids_helper executable
+        uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: dcm2bids/cli/dcm2bids_helper.py
+          show-scons: false
+          onefile: true
+          output-file: dcm2bids_helper
+
+      - name: Create archive for Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          chmod u+x build/dcm2bids{,_helper,_scaffold}
+          tar -czvf dcm2bids_debian-based_${{ github.event.release.tag_name }}.tar.gz \
+          -C build dcm2bids dcm2bids_helper dcm2bids_scaffold
+
+      - name: Create archive for macOS
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          chmod u+x build/dcm2bids{,_helper,_scaffold}
+          tar -czvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
+          -C build dcm2bids dcm2bids_helper dcm2bids_scaffold
+
+      - name: Create archive for Windows
+        if: startsWith(matrix.os, 'windows')
+        run: tar.exe cavf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.zip -C build *.exe
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v3
+        with:
+          path: |
+            dcm2bids*.zip
+            dcm2bids*.tar.gz
+
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download binaries
+        uses: actions/download-artifact@v3
+        with:
+          path: download
+
+      - name: Publish archives and packages
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            download/artifact/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
