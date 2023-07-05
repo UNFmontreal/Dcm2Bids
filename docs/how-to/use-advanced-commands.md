@@ -67,7 +67,10 @@ For example, if you want to deface your T1w images you could use pydeface by add
 It will specifically run the corresponding `cmd` to any image that follow the combinations
 datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
 
-Although you can add multiple commands the combination datatype/suffix has to be unique.
+!!! warning "Multiple post_op commands"
+
+    Although you can add multiple commands, the combination datatype/suffix on which you want to run the command has to be unique.
+    You cannot run multiple commands on a specific combination datatype/suffix.
 
 ```
     "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
