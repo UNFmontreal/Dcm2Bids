@@ -1,5 +1,5 @@
 {
-    "searchMethod": "re",
+    "search_method": "re",
     "descriptions": [
         {
             "datatype": "localizer",
@@ -12,7 +12,7 @@
             "id": "func_task-rest",
             "datatype": "func",
             "suffix": "bold",
-            "customEntities": ["acq-highres"],
+            "custom_entities": ["acq-highres"],
             "criteria": {
                 "SeriesDescription": ".*bold.*"
             }
@@ -46,7 +46,7 @@
         {
             "datatype": "dwi",
             "suffix": "dwi",
-            "customEntities": "desc-fa00",
+            "custom_entities": "desc-fa00",
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             },

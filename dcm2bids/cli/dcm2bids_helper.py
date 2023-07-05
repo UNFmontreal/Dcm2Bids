@@ -29,8 +29,8 @@ def _build_arg_parser():
 
     p.add_argument("-o", "--output_dir",
                    required=False,
-                   default=Path(DEFAULT.cliOutputDir) / DEFAULT.tmpDirName /
-                   DEFAULT.helperDir,
+                   default=Path(DEFAULT.output_dir) / DEFAULT.tmp_dir_name /
+                   DEFAULT.helper_dir,
                    help="Output directory. (Default: [%(default)s]")
 
     p.add_argument("-n", "--nest",
@@ -47,7 +47,7 @@ def _build_arg_parser():
 
     p.add_argument("-l", "--log_level",
                    required=False,
-                   default=DEFAULT.cliLogLevel,
+                   default=DEFAULT.cli_log_level,
                    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                    help="Set logging level to the console. [%(default)s]")
 
@@ -59,8 +59,8 @@ def main():
     parser = _build_arg_parser()
     args = parser.parse_args()
     out_dir = Path(args.output_dir)
-    log_file = (Path(DEFAULT.cliOutputDir)
-                / DEFAULT.tmpDirName
+    log_file = (Path(DEFAULT.output_dir)
+                / DEFAULT.tmp_dir_name
                 / "log"
                 / f"helper_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
 
@@ -95,7 +95,7 @@ def main():
 
     assert_dirs_empty(parser, args, out_dir)
 
-    app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=out_dir, helper=True)
+    app = Dcm2niixGen(dicom_dirs=args.dicom_dir, bids_dir=out_dir, helper=True)
 
     rsl = app.run(force=args.overwrite)
 

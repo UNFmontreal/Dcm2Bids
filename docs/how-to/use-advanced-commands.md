@@ -7,8 +7,8 @@ same level as the `"descriptions"` entry.
 {
     "extractors": {"SeriesDescription": ["run-(?P<run>[0-9]+)", "task-(?P<task>[0-9]+)"], 
                    "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
-    "searchMethod": "fnmatch",
-    "caseSensitive": true,
+    "search_method": "fnmatch",
+    "case_sensitive": true,
     "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
                "datatype": "anat",
                "suffix": ["T1w", "MP2RAGE"]}],
@@ -16,14 +16,14 @@ same level as the `"descriptions"` entry.
     {
       "datatype": "anat",
       "suffix": "T2w",
-      "customEntities": ["acq-highres", "bodypart", "run", "task"],
+      "custom_entities": ["acq-highres", "bodypart", "run", "task"],
       }
     ]
     ...
 }
 ```
 
-## customEntities combined with extractors
+## custom_entities combined with extractors
 
 default: None
 
@@ -31,24 +31,24 @@ extractors will allow you to extract information embeded into sidecar files.
 In the example above, it will try to match 2 different regex expressions (keys: task, run) within the 
 SeriesDescription field and bodypart in BodyPartExamined field.
 
-By using the same keys in customEntities and if found, it will add this new entities directly into the final filename.
-customEntities can be a list that combined extractor keys and regular entities. 
+By using the same keys in custom_entities and if found, it will add this new entities directly into the final filename.
+custom_entities can be a list that combined extractor keys and regular entities. 
 If key is `task` it will automatically add the field "TaskName" inside the sidecase file.
 
-## searchMethod
+## search_method
 
-default: `"searchMethod": "fnmatch"`
+default: `"search_method": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this
 option is set incorrectly. `re` is the other choice if you want more flexibility
 to match criteria.
 
-## caseSensitive
+## case_sensitive
 
-default: `"caseSensitive": "true"`
+default: `"case_sensitive": "true"`
 
 If false, comparisons between strings/lists will be not case sensitive. It's
-only disabled when used with `"searchMethod": "fnmatch"`.
+only disabled when used with `"search_method": "fnmatch"`.
 
 ## post_op
 
@@ -182,10 +182,10 @@ So far and accordingly to the BIDS specification 5 datatype/suffix automatically
 | fmap | epi | dir |
 
 Using the `--auto_extract_entitie`, if you want another combination of datatype/suffix to be able to 
-extract one or more of these 3 entities you need to add the key of the entities needed using the field customEntities like this within your description:
+extract one or more of these 3 entities you need to add the key of the entities needed using the field custom_entities like this within your description:
 
 ```
-"customEntities": ["echo", "dir"]
+"custom_entities": ["echo", "dir"]
 ```
 
 :warning: If task is found, it will automatically add the field `TaskName` into the sidecar file. 

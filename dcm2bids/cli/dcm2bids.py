@@ -34,7 +34,7 @@ def _build_arg_parser():
 
     p.add_argument("-s", "--session",
                    required=False,
-                   default=DEFAULT.cliSession,
+                   default=DEFAULT.cli_session,
                    help="Session ID. [%(default)s]")
 
     p.add_argument("-c", "--config",
@@ -43,7 +43,7 @@ def _build_arg_parser():
 
     p.add_argument("-o", "--output_dir",
                    required=False,
-                   default=DEFAULT.cliOutputDir,
+                   default=DEFAULT.output_dir,
                    help="Output BIDS directory. [%(default)s]")
 
     p.add_argument("--auto_extract_entities",
@@ -70,7 +70,7 @@ def _build_arg_parser():
 
     p.add_argument("-l", "--log_level",
                    required=False,
-                   default=DEFAULT.cliLogLevel,
+                   default=DEFAULT.cli_log_level,
                    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
                    help="Set logging level to the console. [%(default)s]")
 
@@ -88,7 +88,7 @@ def main():
     args = parser.parse_args()
 
     participant = Participant(args.participant, args.session)
-    log_dir = Path(args.output_dir) / DEFAULT.tmpDirName / "log"
+    log_dir = Path(args.output_dir) / DEFAULT.tmp_dir_name / "log"
     log_file = (log_dir /
                 f"{participant.prefix}_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
     log_dir.mkdir(parents=True, exist_ok=True)

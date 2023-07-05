@@ -1,6 +1,6 @@
 {
-    "caseSensitive": false,
-    "searchMethod": "fnmatch",
+    "case_sensitive": false,
+    "search_method": "fnmatch",
     "descriptions": [
         {
           "datatype": "localizer",

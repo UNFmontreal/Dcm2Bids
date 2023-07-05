@@ -17,7 +17,7 @@ class Acquisition(object):
         datatype (str): A functional group of MRI data (ex: func, anat ...)
         suffix (str): The modality of the acquisition
                 (ex: T1w, T2w, bold ...)
-        customEntities (str): Optional entities (ex: task-rest)
+        custom_entities (str): Optional entities (ex: task-rest)
         srcSidecar (Sidecar): Optional sidecar object
     """
 
@@ -26,7 +26,7 @@ class Acquisition(object):
         participant,
         datatype,
         suffix,
-        customEntities="",
+        custom_entities="",
         id=None,
         srcSidecar=None,
         sidecarChanges=None,
@@ -35,13 +35,13 @@ class Acquisition(object):
         self.logger = logging.getLogger(__name__)
 
         self._suffix = ""
-        self._customEntities = ""
+        self._custom_entities = ""
         self._id = ""
 
         self.participant = participant
         self.datatype = datatype
         self.suffix = suffix
-        self.customEntities = customEntities
+        self.custom_entities = custom_entities
         self.srcSidecar = srcSidecar
 
         if sidecarChanges is None:
@@ -89,32 +89,32 @@ class Acquisition(object):
         self._id = value
 
     @property
-    def customEntities(self):
+    def custom_entities(self):
         """
         Returns:
-            A string '_<customEntities>'
+            A string '_<custom_entities>'
         """
-        return self._customEntities
+        return self._custom_entities
 
-    @customEntities.setter
-    def customEntities(self, customEntities):
+    @custom_entities.setter
+    def custom_entities(self, custom_entities):
         """ Prepend '_' if necessary"""
-        if isinstance(customEntities, list):
-            self._customEntities = self.prepend('_'.join(customEntities))
+        if isinstance(custom_entities, list):
+            self._custom_entities = self.prepend('_'.join(custom_entities))
         else:
-            self._customEntities = self.prepend(customEntities)
+            self._custom_entities = self.prepend(custom_entities)
 
     @property
     def build_suffix(self):
         """ The suffix to build filenames
 
         Returns:
-            A string '_<suffix>' or '_<customEntities>_<suffix>'
+            A string '_<suffix>' or '_<custom_entities>_<suffix>'
         """
-        if self.customEntities.strip() == "":
+        if self.custom_entities.strip() == "":
             return self.suffix
         else:
-            return self.customEntities + self.suffix
+            return self.custom_entities + self.suffix
 
     @property
     def srcRoot(self):

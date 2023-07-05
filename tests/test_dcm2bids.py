@@ -31,39 +31,41 @@ def compare_json(original_file, converted_file):
 
     return original_json == converted_json
 
+
 def test_dcm2bids_wrong_input(script_runner):
 
-    bidsDir = TemporaryDirectory()
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    bids_dir = TemporaryDirectory()
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     # Wrong participant
-    ret_p = script_runner.run(['dcm2bids', '-d', bidsDir, 
+    ret_p = script_runner.run(['dcm2bids', '-d', bids_dir,
                                '-p', "01_",
                                '-c',  os.path.join(TEST_DATA_DIR, "config_test.json")])
     assert not ret_p.success
 
     # Wrong session
-    ret_s = script_runner.run(['dcm2bids', '-d', bidsDir, 
-                             '-p', "01",
-                             '-s', "ses-01_",
-                             '-c',  os.path.join(TEST_DATA_DIR, "config_test.json")])
+    ret_s = script_runner.run(['dcm2bids', '-d', bids_dir,
+                               '-p', "01",
+                               '-s', "ses-01_",
+                               '-c',  os.path.join(TEST_DATA_DIR, "config_test.json")])
     assert not ret_s.success
+
 
 def test_dcm2bids():
     # tmpBase = os.path.join(TEST_DATA_DIR, "tmp")
-    # bidsDir = TemporaryDirectory(dir=tmpBase)
-    bidsDir = TemporaryDirectory()
+    # bids_dir = TemporaryDirectory(dir=tmpBase)
+    bids_dir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test.json"),
-                      bidsDir.name)
+                      bids_dir.name)
     app.run()
 
-    layout = BIDSLayout(bidsDir.name, validate=False)
+    layout = BIDSLayout(bids_dir.name, validate=False)
 
     assert layout.get_subjects() == ["01"]
     assert layout.get_sessions() == []
@@ -72,35 +74,35 @@ def test_dcm2bids():
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test.json"),
-                      bidsDir.name)
+                      bids_dir.name)
     app.run()
 
-    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
                                    os.path.join("anat", "sub-01_T1w.nii")]
 
-    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
+    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
     assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
-            bidsDir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json"
+            bids_dir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json"
         )
     )
     assert data["ProcedureStepDescription"] == "Modify by dcm2bids"
 
     # rerun
-    shutil.rmtree(tmpSubDir)
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    shutil.rmtree(tmp_sub_dir)
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(
         [TEST_DATA_DIR],
         "01",
         os.path.join(TEST_DATA_DIR, "config_test.json"),
-        bidsDir.name,
+        bids_dir.name,
     )
     app.run()
 
@@ -108,33 +110,33 @@ def test_dcm2bids():
     assert fmapMtime == fmapMtimeRerun
 
 
-def test_dcm2bids_caseSensitive():
-    # Validate caseSensitive false
-    bidsDir = TemporaryDirectory()
+def test_dcm2bids_case_sensitive():
+    # Validate case_sensitive false
+    bids_dir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR,
                                    "config_test_not_case_sensitive_option.json"),
-                      bidsDir.name)
+                      bids_dir.name)
     app.run()
 
-    layout = BIDSLayout(bidsDir.name,
+    layout = BIDSLayout(bids_dir.name,
                         validate=False)
 
-    path_dwi = os.path.join(bidsDir.name,
+    path_dwi = os.path.join(bids_dir.name,
                             "sub-01",
                             "dwi",
                             "sub-01_dwi.json")
 
-    path_t1 = os.path.join(bidsDir.name,
+    path_t1 = os.path.join(bids_dir.name,
                            "sub-01",
                            "anat",
                            "sub-01_T1w.json")
 
-    path_localizer = os.path.join(bidsDir.name,
+    path_localizer = os.path.join(bids_dir.name,
                                   "sub-01",
                                   "localizer",
                                   "sub-01_run-01_localizer.json")
@@ -179,7 +181,7 @@ def test_dcm2bids_caseSensitive():
                           extension='json',
                           suffix='dwi')
 
-    assert set(os.listdir(os.path.join(bidsDir.name,
+    assert set(os.listdir(os.path.join(bids_dir.name,
                                        'sub-01'))) == {'anat',
                                                        'dwi',
                                                        'localizer'}
@@ -197,49 +199,49 @@ def test_dcm2bids_caseSensitive():
     assert compare_json(original_03_localizer,
                         json_02_localizer[0].path)
 
-    bidsDir = TemporaryDirectory()
+    bids_dir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test.json"),
-                      bidsDir.name)
+                      bids_dir.name)
     app.run()
 
-    layout = BIDSLayout(bidsDir.name, validate=False)
+    layout = BIDSLayout(bids_dir.name, validate=False)
 
     assert layout.get_subjects() == ["01"]
     assert layout.get_sessions() == []
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2, 3]
 
-    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
                                    os.path.join("anat", "sub-01_T1w.nii")]
 
-    fmapFile = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
+    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
     assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
-            bidsDir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json"
+            bids_dir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json"
         )
     )
     assert data["ProcedureStepDescription"] == "Modify by dcm2bids"
 
     # rerun
-    shutil.rmtree(tmpSubDir)
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    shutil.rmtree(tmp_sub_dir)
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(
         [TEST_DATA_DIR],
         "01",
         os.path.join(TEST_DATA_DIR, "config_test.json"),
-        bidsDir.name,
+        bids_dir.name,
     )
     app.run()
 
@@ -248,32 +250,32 @@ def test_dcm2bids_caseSensitive():
 
 
 def test_dcm2bids_auto_extract():
-    bidsDir = TemporaryDirectory()
+    bids_dir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test_auto_extract.json"),
-                      bidsDir.name,
+                      bids_dir.name,
                       auto_extract_entities=True)
     app.run()
 
-    layout = BIDSLayout(bidsDir.name, validate=False)
+    layout = BIDSLayout(bids_dir.name, validate=False)
 
     assert layout.get_subjects() == ["01"]
     assert layout.get_sessions() == []
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2]
 
-    epi_file = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_dir-AP_epi.json")
+    epi_file = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_dir-AP_epi.json")
     data = load_json(epi_file)
 
     assert os.path.exists(epi_file)
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
                                    os.path.join("anat", "sub-01_T1w.nii")]
 
-    func_task = os.path.join(bidsDir.name, "sub-01",
+    func_task = os.path.join(bids_dir.name, "sub-01",
                              "func",
                              "sub-01_task-rest_acq-highres_bold.json")
     data = load_json(func_task)
@@ -283,50 +285,50 @@ def test_dcm2bids_auto_extract():
 
 
 def test_dcm2bids_complex():
-    bidsDir = TemporaryDirectory()
+    bids_dir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test_complex.json"),
-                      bidsDir.name)
+                      bids_dir.name)
     app.run()
 
-    layout = BIDSLayout(bidsDir.name, validate=False)
+    layout = BIDSLayout(bids_dir.name, validate=False)
 
     assert layout.get_subjects() == ["01"]
     assert layout.get_sessions() == []
     assert layout.get_runs() == [1, 2, 3]
 
-    fmap_file_1 = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_run-01_fmap.json")
-    fmap_file_2 = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_run-02_fmap.json")
-    fmap_file_3 = os.path.join(bidsDir.name, "sub-01", "fmap", "sub-01_run-03_fmap.json")
+    fmap_file_1 = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_run-01_fmap.json")
+    fmap_file_2 = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_run-02_fmap.json")
+    fmap_file_3 = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_run-03_fmap.json")
     assert os.path.exists(fmap_file_1)
     assert os.path.exists(fmap_file_2)
     assert os.path.exists(fmap_file_3)
 
-    localizer_file_1 = os.path.join(bidsDir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json")
-    localizer_file_2 = os.path.join(bidsDir.name, "sub-01", "localizer", "sub-01_run-02_localizer.json")
+    localizer_file_1 = os.path.join(bids_dir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json")
+    localizer_file_2 = os.path.join(bids_dir.name, "sub-01", "localizer", "sub-01_run-02_localizer.json")
     assert os.path.exists(localizer_file_1)
     assert os.path.exists(localizer_file_2)
 
-    mprage = os.path.join(bidsDir.name, "sub-01", "anat", "sub-01_T1w.json")
+    mprage = os.path.join(bids_dir.name, "sub-01", "anat", "sub-01_T1w.json")
     assert not os.path.exists(mprage)
 
 
 def test_dcm2bids_dup():
-    bidsDir = TemporaryDirectory()
+    bids_dir = TemporaryDirectory()
 
-    tmpSubDir = os.path.join(bidsDir.name, DEFAULT.tmpDirName, "sub-01")
-    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmpSubDir)
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
 
     app = Dcm2BidsGen(TEST_DATA_DIR, "01",
                       os.path.join(TEST_DATA_DIR, "config_test_dup.json"),
-                      bidsDir.name)
+                      bids_dir.name)
     app.run()
 
-    layout = BIDSLayout(bidsDir.name,
+    layout = BIDSLayout(bids_dir.name,
                         validate=False)
 
     original_01_localizer = os.path.join(TEST_DATA_DIR,
