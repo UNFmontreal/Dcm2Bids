@@ -189,7 +189,7 @@ name: dcm2bids
 channels:
   - conda-forge
 dependencies:
-  - python>=3.8
+  - python>=3.7
   - dcm2niix
   - dcm2bids
 ```
@@ -277,7 +277,7 @@ usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
                 [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids 3.0.0
+dcm2bids 2.1.7
 
 options:
   -h, --help            show this help message and exit
@@ -292,14 +292,13 @@ options:
   -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
                         (/home/sam/dcm2bids-proj)
-  --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                          depending on the suffix and datatype. [False]
-  --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
-                        bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
   --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
   --clobber             Overwrite output if it exists
   -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                         Set logging level
+  -a, --anonymizer      This option no longer exists from the script in this
+                        release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
+                        aster/README.md#defaceTpl
 
             Documentation at https://github.com/unfmontreal/Dcm2Bids
 ```
@@ -342,7 +341,7 @@ containers:
             channels:
                 - conda-forge
             dependencies:
-                - python>=3.8
+                - python>=3.7
                 - dcm2niix
                 - dcm2bids
 

@@ -83,7 +83,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 3.0.0
+    dcm2bids 2.1.7
 
     options:
     -h, --help            show this help message and exit
@@ -98,16 +98,16 @@ You can test it with any command but a safe way is to use the `--help` command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory
                             (/home/sam)
-    --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and datatype. [False]                            
-    --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
-                          bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
+    -a, --anonymizer      This option no longer exists from the script in this
+                            release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
+                            aster/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
+
     ```
 
 ??? bug "What you can do if you did not get this output"
@@ -669,7 +669,7 @@ good unique identifier.
 === "Command"
 
     ```sh
-    cat tmp_dcm2bids/helper/004_In_DCM2NIIX_regression_test_20180918114023.json
+    cat code/dcm2bids_config.json
     ```
 
 === "Output"
@@ -801,14 +801,14 @@ task name:
 {
   "descriptions": [
     {
-      "datatype": "func",
-      "suffix": "bold",
-      "custom_entities": "task-rest",
+      "dataType": "func",
+      "modalityLabel": "bold",
+      "customLabels": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
-      },
-      "sidecar_changes": {
+      "sidecarChanges": {
         "TaskName": "rest"
+      }
       }
     }
   ]
@@ -829,13 +829,13 @@ task name:
     {
       "descriptions": [
         {
-          "datatype": "func",
-          "suffix": "bold",
-          "custom_entities": "task-rest",
+          "dataType": "func",
+          "modalityLabel": "bold",
+          "customLabels": "task-rest",
           "criteria": {
             "SeriesDescription": "*Axial EPI-FMRI (Interleaved I to S)*"
           },
-          "sidecar_changes": {
+          "sidecarChanges": {
             "TaskName": "rest"
           }
         }
@@ -885,34 +885,33 @@ file with the appropriate info.
 {
   "descriptions": [
     {
-      "id": "id_task-rest",
-      "datatype": "func",
-      "suffix": "bold",
-      "custom_entities": "task-rest",
+      "dataType": "func",
+      "modalityLabel": "bold",
+      "customLabels": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecar_changes": {
+      "sidecarChanges": {
         "TaskName": "rest"
       }
     },
     {
-      "datatype": "fmap",
-      "suffix": "epi",
-      "custom_entities": "dir-AP",
+      "dataType": "fmap",
+      "modalityLabel": "epi",
+      "customLabels": "dir-AP",
       "criteria": {
         "SeriesDescription": "EPI PE=AP*"
       },
-      "intendedFor": "id_task-rest"
+      "intendedFor": 0
     },
     {
-      "datatype": "fmap",
-      "suffix": "epi",
-      "custom_entities": "dir-PA",
+      "dataType": "fmap",
+      "modalityLabel": "epi",
+      "customLabels": "dir-PA",
       "criteria": {
         "SeriesDescription": "EPI PE=PA*"
       },
-      "intendedFor": "id_task-rest"
+      "intendedFor": 0
     }
   ]
 }
@@ -952,7 +951,7 @@ command.
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 3.0.0
+    dcm2bids 2.1.7
 
     options:
     -h, --help            show this help message and exit
@@ -966,14 +965,11 @@ command.
                             JSON configuration file (see example/config.json)
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
-    --auto_extract_entities If set, it will automatically try to extract entity information [task, dir, echo]
-                            depending on the suffix and datatype. [False]
-    --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
-                          bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
+    -a, --anonymizer      This option no longer exists from the script in this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
 
