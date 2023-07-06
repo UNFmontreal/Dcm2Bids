@@ -1325,7 +1325,7 @@ def _build_arg_parser():
 
                    required=False,
 
-                   default=DEFAULT.cliSession,
+                   default=DEFAULT.cli_session,
 
                    help=&quot;Session ID. [%(default)s]&quot;)
 
@@ -1339,7 +1339,7 @@ def _build_arg_parser():
 
                    required=False,
 
-                   default=DEFAULT.cliOutputDir,
+                   default=DEFAULT.output_dir,
 
                    help=&quot;Output BIDS directory. [%(default)s]&quot;)
 
@@ -1383,7 +1383,7 @@ def _build_arg_parser():
 
                    required=False,
 
-                   default=DEFAULT.cliLogLevel,
+                   default=DEFAULT.cli_log_level,
 
                    choices=[&quot;DEBUG&quot;, &quot;INFO&quot;, &quot;WARNING&quot;, &quot;ERROR&quot;, &quot;CRITICAL&quot;],
 
@@ -1409,7 +1409,7 @@ def main():
 
     participant = Participant(args.participant, args.session)
 
-    log_dir = Path(args.output_dir) / DEFAULT.tmpDirName / &quot;log&quot;
+    log_dir = Path(args.output_dir) / DEFAULT.tmp_dir_name / &quot;log&quot;
 
     log_file = (log_dir /
 
@@ -1542,7 +1542,7 @@ if __name__ == &quot;__main__&quot;:
 
     participant = Participant(args.participant, args.session)
 
-    log_dir = Path(args.output_dir) / DEFAULT.tmpDirName / &quot;log&quot;
+    log_dir = Path(args.output_dir) / DEFAULT.tmp_dir_name / &quot;log&quot;
 
     log_file = (log_dir /
 
@@ -1603,7 +1603,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

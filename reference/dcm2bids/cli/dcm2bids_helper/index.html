@@ -1294,9 +1294,9 @@ def _build_arg_parser():
 
                    required=False,
 
-                   default=Path(DEFAULT.cliOutputDir) / DEFAULT.tmpDirName /
+                   default=Path(DEFAULT.output_dir) / DEFAULT.tmp_dir_name /
 
-                   DEFAULT.helperDir,
+                   DEFAULT.helper_dir,
 
                    help=&quot;Output directory. (Default: [%(default)s]&quot;)
 
@@ -1324,7 +1324,7 @@ def _build_arg_parser():
 
                    required=False,
 
-                   default=DEFAULT.cliLogLevel,
+                   default=DEFAULT.cli_log_level,
 
                    choices=[&quot;DEBUG&quot;, &quot;INFO&quot;, &quot;WARNING&quot;, &quot;ERROR&quot;, &quot;CRITICAL&quot;],
 
@@ -1342,9 +1342,9 @@ def main():
 
     out_dir = Path(args.output_dir)
 
-    log_file = (Path(DEFAULT.cliOutputDir)
+    log_file = (Path(DEFAULT.output_dir)
 
-                / DEFAULT.tmpDirName
+                / DEFAULT.tmp_dir_name
 
                 / &quot;log&quot;
 
@@ -1398,7 +1398,7 @@ def main():
 
     assert_dirs_empty(parser, args, out_dir)
 
-    app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=out_dir, helper=True)
+    app = Dcm2niixGen(dicom_dirs=args.dicom_dir, bids_dir=out_dir, helper=True)
 
     rsl = app.run(force=args.overwrite)
 
@@ -1512,9 +1512,9 @@ if __name__ == &quot;__main__&quot;:
 
     out_dir = Path(args.output_dir)
 
-    log_file = (Path(DEFAULT.cliOutputDir)
+    log_file = (Path(DEFAULT.output_dir)
 
-                / DEFAULT.tmpDirName
+                / DEFAULT.tmp_dir_name
 
                 / &quot;log&quot;
 
@@ -1568,7 +1568,7 @@ if __name__ == &quot;__main__&quot;:
 
     assert_dirs_empty(parser, args, out_dir)
 
-    app = Dcm2niixGen(dicomDirs=args.dicom_dir, bidsDir=out_dir, helper=True)
+    app = Dcm2niixGen(dicom_dirs=args.dicom_dir, bids_dir=out_dir, helper=True)
 
     rsl = app.run(force=args.overwrite)
 
@@ -1589,7 +1589,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

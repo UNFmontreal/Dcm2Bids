@@ -1572,9 +1572,7 @@
 <span class="normal">310</span>
 <span class="normal">311</span>
 <span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">313</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -1598,15 +1596,13 @@ class DEFAULT(object):
 
     # cli dcm2bids
 
-    cliSession = &quot;&quot;
+    cli_session = &quot;&quot;
 
-    cliOutputDir = os.getcwd()
-
-    cliLogLevel = &quot;INFO&quot;
+    cli_log_level = &quot;INFO&quot;
 
     # dcm2bids.py
 
-    outputDir = Path.cwd()
+    output_dir = Path.cwd()
 
     session = &quot;&quot;  # also Participant object
 
@@ -1618,7 +1614,7 @@ class DEFAULT(object):
 
     force_dcm2niix = False
 
-    defaceTpl = None
+    post_op = []
 
     logLevel = &quot;WARNING&quot;
 
@@ -1666,19 +1662,19 @@ class DEFAULT(object):
 
     compKeys = [&quot;SeriesNumber&quot;, &quot;AcquisitionTime&quot;, &quot;SidecarFilename&quot;]
 
-    searchMethodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
+    search_methodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
 
-    searchMethod = &quot;fnmatch&quot;
+    search_method = &quot;fnmatch&quot;
 
-    dupMethodChoices = [&quot;dup&quot;, &quot;run&quot;]
+    dup_method_choices = [&quot;dup&quot;, &quot;run&quot;]
 
-    dupMethod = &quot;run&quot;
+    dup_method = &quot;run&quot;
 
     runTpl = &quot;_run-{:02d}&quot;
 
     dupTpl = &quot;_dup-{:02d}&quot;
 
-    caseSensitive = True
+    case_sensitive = True
 
     # Entity table:
 
@@ -1690,13 +1686,13 @@ class DEFAULT(object):
 
                        &quot;recording&quot;]
 
-    keyWithPathSidecarChanges = [&#39;IntendedFor&#39;, &#39;Sources&#39;]
+    keyWithPathsidecar_changes = [&#39;IntendedFor&#39;, &#39;Sources&#39;]
 
     # misc
 
-    tmpDirName = &quot;tmp_dcm2bids&quot;
+    tmp_dir_name = &quot;tmp_dcm2bids&quot;
 
-    helperDir = &quot;helper&quot;
+    helper_dir = &quot;helper&quot;
 
     # BIDS version
 
@@ -2330,9 +2326,7 @@ class TreePrinter:
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
 
     &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
@@ -2344,15 +2338,13 @@ class TreePrinter:
 
     # cli dcm2bids
 
-    cliSession = &quot;&quot;
+    cli_session = &quot;&quot;
 
-    cliOutputDir = os.getcwd()
-
-    cliLogLevel = &quot;INFO&quot;
+    cli_log_level = &quot;INFO&quot;
 
     # dcm2bids.py
 
-    outputDir = Path.cwd()
+    output_dir = Path.cwd()
 
     session = &quot;&quot;  # also Participant object
 
@@ -2364,7 +2356,7 @@ class TreePrinter:
 
     force_dcm2niix = False
 
-    defaceTpl = None
+    post_op = []
 
     logLevel = &quot;WARNING&quot;
 
@@ -2412,19 +2404,19 @@ class TreePrinter:
 
     compKeys = [&quot;SeriesNumber&quot;, &quot;AcquisitionTime&quot;, &quot;SidecarFilename&quot;]
 
-    searchMethodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
+    search_methodChoices = [&quot;fnmatch&quot;, &quot;re&quot;]
 
-    searchMethod = &quot;fnmatch&quot;
+    search_method = &quot;fnmatch&quot;
 
-    dupMethodChoices = [&quot;dup&quot;, &quot;run&quot;]
+    dup_method_choices = [&quot;dup&quot;, &quot;run&quot;]
 
-    dupMethod = &quot;run&quot;
+    dup_method = &quot;run&quot;
 
     runTpl = &quot;_run-{:02d}&quot;
 
     dupTpl = &quot;_dup-{:02d}&quot;
 
-    caseSensitive = True
+    case_sensitive = True
 
     # Entity table:
 
@@ -2436,13 +2428,13 @@ class TreePrinter:
 
                        &quot;recording&quot;]
 
-    keyWithPathSidecarChanges = [&#39;IntendedFor&#39;, &#39;Sources&#39;]
+    keyWithPathsidecar_changes = [&#39;IntendedFor&#39;, &#39;Sources&#39;]
 
     # misc
 
-    tmpDirName = &quot;tmp_dcm2bids&quot;
+    tmp_dir_name = &quot;tmp_dcm2bids&quot;
 
-    helperDir = &quot;helper&quot;
+    helper_dir = &quot;helper&quot;
 
     # BIDS version
 
@@ -2461,13 +2453,11 @@ class TreePrinter:
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">bids_version</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">caseSensitive</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">case_sensitive</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">cliLogLevel</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">cli_log_level</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">cliOutputDir</span>
-</code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">cliSession</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">cli_session</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">clobber</span>
 </code></pre></div></td></tr></table></div>
@@ -2475,15 +2465,13 @@ class TreePrinter:
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dcm2niixOptions</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">defaceTpl</span>
-</code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">doc</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dupMethod</span>
-</code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dupMethodChoices</span>
-</code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dupTpl</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dup_method</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dup_method_choices</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">entityTableKeys</span>
 </code></pre></div></td></tr></table></div>
@@ -2493,9 +2481,9 @@ class TreePrinter:
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">force_dcm2niix</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">helperDir</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">helper_dir</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">keyWithPathSidecarChanges</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">keyWithPathsidecar_changes</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">link_bids_validator</span>
 </code></pre></div></td></tr></table></div>
@@ -2503,17 +2491,19 @@ class TreePrinter:
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">logLevel</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">outputDir</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">output_dir</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">post_op</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">runTpl</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">searchMethod</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">search_method</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">searchMethodChoices</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">search_methodChoices</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">session</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tmpDirName</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tmp_dir_name</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="treeprinter">TreePrinter<a class="headerlink" href="#treeprinter" title="Permanent link">⚓︎</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -2803,7 +2793,7 @@ class TreePrinter:
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

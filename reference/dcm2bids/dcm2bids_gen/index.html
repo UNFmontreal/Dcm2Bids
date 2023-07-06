@@ -1431,9 +1431,7 @@
 <span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">281</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;
 
@@ -1495,7 +1493,7 @@ class Dcm2BidsGen(object):
 
         config,
 
-        output_dir=DEFAULT.outputDir,
+        output_dir=DEFAULT.output_dir,
 
         bids_validate=DEFAULT.bids_validate,
 
@@ -1513,11 +1511,11 @@ class Dcm2BidsGen(object):
 
     ):
 
-        self._dicomDirs = []
+        self._dicom_dirs = []
 
-        self.dicomDirs = dicom_dir
+        self.dicom_dirs = dicom_dir
 
-        self.bidsDir = valid_path(output_dir, type=&quot;folder&quot;)
+        self.bids_dir = valid_path(output_dir, type=&quot;folder&quot;)
 
         self.config = load_json(valid_path(config, type=&quot;file&quot;))
 
@@ -1537,21 +1535,21 @@ class Dcm2BidsGen(object):
 
     @property
 
-    def dicomDirs(self):
+    def dicom_dirs(self):
 
         &quot;&quot;&quot;List of DICOMs directories&quot;&quot;&quot;
 
-        return self._dicomDirs
+        return self._dicom_dirs
 
-    @dicomDirs.setter
+    @dicom_dirs.setter
 
-    def dicomDirs(self, value):
+    def dicom_dirs(self, value):
 
         dicom_dirs = value if isinstance(value, list) else [value]
 
         valid_dirs = [valid_path(_dir, &quot;folder&quot;) for _dir in dicom_dirs]
 
-        self._dicomDirs = valid_dirs
+        self._dicom_dirs = valid_dirs
 
     def run(self):
 
@@ -1559,9 +1557,9 @@ class Dcm2BidsGen(object):
 
         dcm2niix = Dcm2niixGen(
 
-            self.dicomDirs,
+            self.dicom_dirs,
 
-            self.bidsDir,
+            self.bids_dir,
 
             self.participant,
 
@@ -1593,11 +1591,13 @@ class Dcm2BidsGen(object):
 
             self.auto_extract_entities,
 
-            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
+            self.config.get(&quot;search_method&quot;, DEFAULT.search_method),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive),
+            self.config.get(&quot;case_sensitive&quot;, DEFAULT.case_sensitive),
 
-            self.config.get(&quot;dupMethod&quot;, DEFAULT.dupMethod)
+            self.config.get(&quot;dup_method&quot;, DEFAULT.dup_method),
+
+            self.config.get(&quot;post_op&quot;,  DEFAULT.post_op)
 
         )
 
@@ -1613,7 +1613,7 @@ class Dcm2BidsGen(object):
 
         for acq in parser.acquisitions:
 
-            idList = self.move(acq, idList)
+            idList = self.move(acq, idList, parser.post_op)
 
         if self.bids_validate:
 
@@ -1625,7 +1625,7 @@ class Dcm2BidsGen(object):
 
                 run_shell_command([&#39;bids-validator&#39;, &#39;-v&#39;])
 
-                run_shell_command([&#39;bids-validator&#39;, self.bidsDir])
+                run_shell_command([&#39;bids-validator&#39;, self.bids_dir])
 
             except Exception:
 
@@ -1637,7 +1637,7 @@ class Dcm2BidsGen(object):
 
                                   &quot;https://github.com/bids-standard/bids-validator.&quot;)
 
-    def move(self, acquisition, idList):
+    def move(self, acquisition, idList, post_op):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -1651,7 +1651,7 @@ class Dcm2BidsGen(object):
 
                                                                 &#39;.bval&#39;, &#39;.bvec&#39;]]
 
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
+            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -1683,25 +1683,21 @@ class Dcm2BidsGen(object):
 
                     idList[acquisition.id] = [acquisition.dstId + &quot;&quot;.join(ext)]
 
-            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.datatype == &quot;anat&quot; and &quot;.nii&quot; in ext):
+                for curr_post_op in post_op:
 
-                try:
+                    if acquisition.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
 
-                    os.remove(dstFile)
+                        if acquisition.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
 
-                except FileNotFoundError:
+                            cmd = curr_post_op[&#39;cmd&#39;].replace(&#39;srcFile&#39;, str(srcFile))
 
-                    pass
+                            cmd = cmd.replace(&#39;dstFile&#39;, str(dstFile))
 
-                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
+                            run_shell_command(cmd.split())
 
-                cmd = [w.replace(&#39;srcFile&#39;, srcFile) for w in defaceTpl]
+                            continue
 
-                cmd = [w.replace(&#39;dstFile&#39;, dstFile) for w in defaceTpl]
-
-                run_shell_command(cmd)
-
-            elif &quot;.json&quot; in ext:
+            if &quot;.json&quot; in ext:
 
                 data = acquisition.dstSidecarData(idList)
 
@@ -2064,9 +2060,7 @@ class Dcm2BidsGen(object):
 <span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -2102,7 +2096,7 @@ class Dcm2BidsGen(object):
 
         config,
 
-        output_dir=DEFAULT.outputDir,
+        output_dir=DEFAULT.output_dir,
 
         bids_validate=DEFAULT.bids_validate,
 
@@ -2120,11 +2114,11 @@ class Dcm2BidsGen(object):
 
     ):
 
-        self._dicomDirs = []
+        self._dicom_dirs = []
 
-        self.dicomDirs = dicom_dir
+        self.dicom_dirs = dicom_dir
 
-        self.bidsDir = valid_path(output_dir, type=&quot;folder&quot;)
+        self.bids_dir = valid_path(output_dir, type=&quot;folder&quot;)
 
         self.config = load_json(valid_path(config, type=&quot;file&quot;))
 
@@ -2144,21 +2138,21 @@ class Dcm2BidsGen(object):
 
     @property
 
-    def dicomDirs(self):
+    def dicom_dirs(self):
 
         &quot;&quot;&quot;List of DICOMs directories&quot;&quot;&quot;
 
-        return self._dicomDirs
+        return self._dicom_dirs
 
-    @dicomDirs.setter
+    @dicom_dirs.setter
 
-    def dicomDirs(self, value):
+    def dicom_dirs(self, value):
 
         dicom_dirs = value if isinstance(value, list) else [value]
 
         valid_dirs = [valid_path(_dir, &quot;folder&quot;) for _dir in dicom_dirs]
 
-        self._dicomDirs = valid_dirs
+        self._dicom_dirs = valid_dirs
 
     def run(self):
 
@@ -2166,9 +2160,9 @@ class Dcm2BidsGen(object):
 
         dcm2niix = Dcm2niixGen(
 
-            self.dicomDirs,
+            self.dicom_dirs,
 
-            self.bidsDir,
+            self.bids_dir,
 
             self.participant,
 
@@ -2200,11 +2194,13 @@ class Dcm2BidsGen(object):
 
             self.auto_extract_entities,
 
-            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
+            self.config.get(&quot;search_method&quot;, DEFAULT.search_method),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive),
+            self.config.get(&quot;case_sensitive&quot;, DEFAULT.case_sensitive),
 
-            self.config.get(&quot;dupMethod&quot;, DEFAULT.dupMethod)
+            self.config.get(&quot;dup_method&quot;, DEFAULT.dup_method),
+
+            self.config.get(&quot;post_op&quot;,  DEFAULT.post_op)
 
         )
 
@@ -2220,7 +2216,7 @@ class Dcm2BidsGen(object):
 
         for acq in parser.acquisitions:
 
-            idList = self.move(acq, idList)
+            idList = self.move(acq, idList, parser.post_op)
 
         if self.bids_validate:
 
@@ -2232,7 +2228,7 @@ class Dcm2BidsGen(object):
 
                 run_shell_command([&#39;bids-validator&#39;, &#39;-v&#39;])
 
-                run_shell_command([&#39;bids-validator&#39;, self.bidsDir])
+                run_shell_command([&#39;bids-validator&#39;, self.bids_dir])
 
             except Exception:
 
@@ -2244,7 +2240,7 @@ class Dcm2BidsGen(object):
 
                                   &quot;https://github.com/bids-standard/bids-validator.&quot;)
 
-    def move(self, acquisition, idList):
+    def move(self, acquisition, idList, post_op):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -2258,7 +2254,7 @@ class Dcm2BidsGen(object):
 
                                                                 &#39;.bval&#39;, &#39;.bvec&#39;]]
 
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
+            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -2290,25 +2286,21 @@ class Dcm2BidsGen(object):
 
                     idList[acquisition.id] = [acquisition.dstId + &quot;&quot;.join(ext)]
 
-            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.datatype == &quot;anat&quot; and &quot;.nii&quot; in ext):
+                for curr_post_op in post_op:
 
-                try:
+                    if acquisition.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
 
-                    os.remove(dstFile)
+                        if acquisition.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
 
-                except FileNotFoundError:
+                            cmd = curr_post_op[&#39;cmd&#39;].replace(&#39;srcFile&#39;, str(srcFile))
 
-                    pass
+                            cmd = cmd.replace(&#39;dstFile&#39;, str(dstFile))
 
-                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
+                            run_shell_command(cmd.split())
 
-                cmd = [w.replace(&#39;srcFile&#39;, srcFile) for w in defaceTpl]
+                            continue
 
-                cmd = [w.replace(&#39;dstFile&#39;, dstFile) for w in defaceTpl]
-
-                run_shell_command(cmd)
-
-            elif &quot;.json&quot; in ext:
+            if &quot;.json&quot; in ext:
 
                 data = acquisition.dstSidecarData(idList)
 
@@ -2327,7 +2319,7 @@ class Dcm2BidsGen(object):
 </details>
 <hr />
 <h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dicomDirs</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dicom_dirs</span>
 </code></pre></div></td></tr></table></div>
 <p>List of DICOMs directories</p>
 <h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
@@ -2336,10 +2328,12 @@ class Dcm2BidsGen(object):
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">acquisition</span><span class="p">,</span>
-    <span class="n">idList</span>
+    <span class="n">idList</span><span class="p">,</span>
+    <span class="n">post_op</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Move an acquisition to BIDS format</p>
@@ -2419,11 +2413,7 @@ class Dcm2BidsGen(object):
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, idList):
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, idList, post_op):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
@@ -2437,7 +2427,7 @@ class Dcm2BidsGen(object):
 
                                                                 &#39;.bval&#39;, &#39;.bvec&#39;]]
 
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
+            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -2469,25 +2459,21 @@ class Dcm2BidsGen(object):
 
                     idList[acquisition.id] = [acquisition.dstId + &quot;&quot;.join(ext)]
 
-            if (self.config.get(&quot;defaceTpl&quot;) and acquisition.datatype == &quot;anat&quot; and &quot;.nii&quot; in ext):
+                for curr_post_op in post_op:
 
-                try:
+                    if acquisition.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
 
-                    os.remove(dstFile)
+                        if acquisition.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
 
-                except FileNotFoundError:
+                            cmd = curr_post_op[&#39;cmd&#39;].replace(&#39;srcFile&#39;, str(srcFile))
 
-                    pass
+                            cmd = cmd.replace(&#39;dstFile&#39;, str(dstFile))
 
-                defaceTpl = self.config.get(&quot;defaceTpl&quot;)
+                            run_shell_command(cmd.split())
 
-                cmd = [w.replace(&#39;srcFile&#39;, srcFile) for w in defaceTpl]
+                            continue
 
-                cmd = [w.replace(&#39;dstFile&#39;, dstFile) for w in defaceTpl]
-
-                run_shell_command(cmd)
-
-            elif &quot;.json&quot; in ext:
+            if &quot;.json&quot; in ext:
 
                 data = acquisition.dstSidecarData(idList)
 
@@ -2596,15 +2582,17 @@ class Dcm2BidsGen(object):
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self):
 
         &quot;&quot;&quot;Run dcm2bids&quot;&quot;&quot;
 
         dcm2niix = Dcm2niixGen(
 
-            self.dicomDirs,
+            self.dicom_dirs,
 
-            self.bidsDir,
+            self.bids_dir,
 
             self.participant,
 
@@ -2636,11 +2624,13 @@ class Dcm2BidsGen(object):
 
             self.auto_extract_entities,
 
-            self.config.get(&quot;searchMethod&quot;, DEFAULT.searchMethod),
+            self.config.get(&quot;search_method&quot;, DEFAULT.search_method),
 
-            self.config.get(&quot;caseSensitive&quot;, DEFAULT.caseSensitive),
+            self.config.get(&quot;case_sensitive&quot;, DEFAULT.case_sensitive),
 
-            self.config.get(&quot;dupMethod&quot;, DEFAULT.dupMethod)
+            self.config.get(&quot;dup_method&quot;, DEFAULT.dup_method),
+
+            self.config.get(&quot;post_op&quot;,  DEFAULT.post_op)
 
         )
 
@@ -2656,7 +2646,7 @@ class Dcm2BidsGen(object):
 
         for acq in parser.acquisitions:
 
-            idList = self.move(acq, idList)
+            idList = self.move(acq, idList, parser.post_op)
 
         if self.bids_validate:
 
@@ -2668,7 +2658,7 @@ class Dcm2BidsGen(object):
 
                 run_shell_command([&#39;bids-validator&#39;, &#39;-v&#39;])
 
-                run_shell_command([&#39;bids-validator&#39;, self.bidsDir])
+                run_shell_command([&#39;bids-validator&#39;, self.bids_dir])
 
             except Exception:
 
@@ -2689,7 +2679,7 @@ class Dcm2BidsGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

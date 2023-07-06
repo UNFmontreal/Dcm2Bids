@@ -1345,9 +1345,9 @@ class Dcm2niixGen(object):
 
     Args:
 
-        dicomDirs (list): A list of folder with dicoms to convert
+        dicom_dirs (list): A list of folder with dicoms to convert
 
-        bidsDir (str): A path to the root BIDS directory
+        bids_dir (str): A path to the root BIDS directory
 
         participant: Optional Participant object
 
@@ -1363,9 +1363,9 @@ class Dcm2niixGen(object):
 
         self,
 
-        dicomDirs,
+        dicom_dirs,
 
-        bidsDir,
+        bids_dir,
 
         participant=None,
 
@@ -1379,9 +1379,9 @@ class Dcm2niixGen(object):
 
         self.sidecarsFiles = []
 
-        self.dicomDirs = dicomDirs
+        self.dicom_dirs = dicom_dirs
 
-        self.bidsDir = bidsDir
+        self.bids_dir = bids_dir
 
         self.participant = participant
 
@@ -1391,7 +1391,7 @@ class Dcm2niixGen(object):
 
     @property
 
-    def outputDir(self):
+    def output_dir(self):
 
         &quot;&quot;&quot;
 
@@ -1401,13 +1401,13 @@ class Dcm2niixGen(object):
 
         &quot;&quot;&quot;
 
-        tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
+        tmpDir = self.participant.prefix if self.participant else DEFAULT.helper_dir
 
-        tmpDir = self.bidsDir / DEFAULT.tmpDirName / tmpDir
+        tmpDir = self.bids_dir / DEFAULT.tmp_dir_name / tmpDir
 
         if self.helper:
 
-            tmpDir = self.bidsDir
+            tmpDir = self.bids_dir
 
         return tmpDir
 
@@ -1429,7 +1429,7 @@ class Dcm2niixGen(object):
 
         try:
 
-            oldOutput = os.listdir(self.outputDir) != []
+            oldOutput = os.listdir(self.output_dir) != []
 
         except Exception:
 
@@ -1439,17 +1439,17 @@ class Dcm2niixGen(object):
 
             self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            self.logger.warning(self.outputDir)
+            self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
             self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
 
-            shutil.rmtree(self.outputDir, ignore_errors=True)
+            shutil.rmtree(self.output_dir, ignore_errors=True)
 
-            if not os.path.exists(self.outputDir):
+            if not os.path.exists(self.output_dir):
 
-                os.makedirs(self.outputDir)
+                os.makedirs(self.output_dir)
 
             self.execute()
 
@@ -1457,31 +1457,31 @@ class Dcm2niixGen(object):
 
             self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            self.logger.warning(self.outputDir)
+            self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix\n&quot;)
 
         else:
 
-            if not os.path.exists(self.outputDir):
+            if not os.path.exists(self.output_dir):
 
-                os.makedirs(self.outputDir)
+                os.makedirs(self.output_dir)
 
             self.execute()
 
-        self.sidecarFiles = glob(os.path.join(self.outputDir, &quot;*.json&quot;))
+        self.sidecarFiles = glob(os.path.join(self.output_dir, &quot;*.json&quot;))
 
     def execute(self):
 
-        &quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs
+        &quot;&quot;&quot; Execute dcm2niix for each directory in dicom_dirs
 
         &quot;&quot;&quot;
 
-        for dicomDir in self.dicomDirs:
+        for dicomDir in self.dicom_dirs:
 
             cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-                   &#39;-o&#39;, self.outputDir, dicomDir]
+                   &#39;-o&#39;, self.output_dir, dicomDir]
 
             output = run_shell_command(cmd)
 
@@ -1507,8 +1507,8 @@ class Dcm2niixGen(object):
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niixGen</span><span class="p">(</span>
-    <span class="n">dicomDirs</span><span class="p">,</span>
-    <span class="n">bidsDir</span><span class="p">,</span>
+    <span class="n">dicom_dirs</span><span class="p">,</span>
+    <span class="n">bids_dir</span><span class="p">,</span>
     <span class="n">participant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">options</span><span class="o">=</span><span class="s2">&quot;-b y -ba y -z y -f &#39;</span><span class="si">%3s</span><span class="s2">_</span><span class="si">%f</span><span class="s2">_%p_%t&#39;&quot;</span><span class="p">,</span>
     <span class="n">helper</span><span class="o">=</span><span class="kc">False</span>
@@ -1527,13 +1527,13 @@ class Dcm2niixGen(object):
 </thead>
 <tbody>
 <tr>
-<td>dicomDirs</td>
+<td>dicom_dirs</td>
 <td>list</td>
 <td>A list of folder with dicoms to convert</td>
 <td>None</td>
 </tr>
 <tr>
-<td>bidsDir</td>
+<td>bids_dir</td>
 <td>str</td>
 <td>A path to the root BIDS directory</td>
 <td>None</td>
@@ -1722,9 +1722,9 @@ class Dcm2niixGen(object):
 
     Args:
 
-        dicomDirs (list): A list of folder with dicoms to convert
+        dicom_dirs (list): A list of folder with dicoms to convert
 
-        bidsDir (str): A path to the root BIDS directory
+        bids_dir (str): A path to the root BIDS directory
 
         participant: Optional Participant object
 
@@ -1740,9 +1740,9 @@ class Dcm2niixGen(object):
 
         self,
 
-        dicomDirs,
+        dicom_dirs,
 
-        bidsDir,
+        bids_dir,
 
         participant=None,
 
@@ -1756,9 +1756,9 @@ class Dcm2niixGen(object):
 
         self.sidecarsFiles = []
 
-        self.dicomDirs = dicomDirs
+        self.dicom_dirs = dicom_dirs
 
-        self.bidsDir = bidsDir
+        self.bids_dir = bids_dir
 
         self.participant = participant
 
@@ -1768,7 +1768,7 @@ class Dcm2niixGen(object):
 
     @property
 
-    def outputDir(self):
+    def output_dir(self):
 
         &quot;&quot;&quot;
 
@@ -1778,13 +1778,13 @@ class Dcm2niixGen(object):
 
         &quot;&quot;&quot;
 
-        tmpDir = self.participant.prefix if self.participant else DEFAULT.helperDir
+        tmpDir = self.participant.prefix if self.participant else DEFAULT.helper_dir
 
-        tmpDir = self.bidsDir / DEFAULT.tmpDirName / tmpDir
+        tmpDir = self.bids_dir / DEFAULT.tmp_dir_name / tmpDir
 
         if self.helper:
 
-            tmpDir = self.bidsDir
+            tmpDir = self.bids_dir
 
         return tmpDir
 
@@ -1806,7 +1806,7 @@ class Dcm2niixGen(object):
 
         try:
 
-            oldOutput = os.listdir(self.outputDir) != []
+            oldOutput = os.listdir(self.output_dir) != []
 
         except Exception:
 
@@ -1816,17 +1816,17 @@ class Dcm2niixGen(object):
 
             self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            self.logger.warning(self.outputDir)
+            self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
             self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
 
-            shutil.rmtree(self.outputDir, ignore_errors=True)
+            shutil.rmtree(self.output_dir, ignore_errors=True)
 
-            if not os.path.exists(self.outputDir):
+            if not os.path.exists(self.output_dir):
 
-                os.makedirs(self.outputDir)
+                os.makedirs(self.output_dir)
 
             self.execute()
 
@@ -1834,31 +1834,31 @@ class Dcm2niixGen(object):
 
             self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            self.logger.warning(self.outputDir)
+            self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix\n&quot;)
 
         else:
 
-            if not os.path.exists(self.outputDir):
+            if not os.path.exists(self.output_dir):
 
-                os.makedirs(self.outputDir)
+                os.makedirs(self.output_dir)
 
             self.execute()
 
-        self.sidecarFiles = glob(os.path.join(self.outputDir, &quot;*.json&quot;))
+        self.sidecarFiles = glob(os.path.join(self.output_dir, &quot;*.json&quot;))
 
     def execute(self):
 
-        &quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs
+        &quot;&quot;&quot; Execute dcm2niix for each directory in dicom_dirs
 
         &quot;&quot;&quot;
 
-        for dicomDir in self.dicomDirs:
+        for dicomDir in self.dicom_dirs:
 
             cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-                   &#39;-o&#39;, self.outputDir, dicomDir]
+                   &#39;-o&#39;, self.output_dir, dicomDir]
 
             output = run_shell_command(cmd)
 
@@ -1877,7 +1877,7 @@ class Dcm2niixGen(object):
 </details>
 <hr />
 <h4 id="instance-variables">Instance variables<a class="headerlink" href="#instance-variables" title="Permanent link">⚓︎</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">outputDir</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">output_dir</span>
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
 <p>A directory to save all the output files of dcm2niix</p>
@@ -1889,7 +1889,7 @@ class Dcm2niixGen(object):
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Execute dcm2niix for each directory in dicomDirs</p>
+<p>Execute dcm2niix for each directory in dicom_dirs</p>
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -1918,15 +1918,15 @@ class Dcm2niixGen(object):
 <span class="normal">24</span>
 <span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>    def execute(self):
 
-        &quot;&quot;&quot; Execute dcm2niix for each directory in dicomDirs
+        &quot;&quot;&quot; Execute dcm2niix for each directory in dicom_dirs
 
         &quot;&quot;&quot;
 
-        for dicomDir in self.dicomDirs:
+        for dicomDir in self.dicom_dirs:
 
             cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-                   &#39;-o&#39;, self.outputDir, dicomDir]
+                   &#39;-o&#39;, self.output_dir, dicomDir]
 
             output = run_shell_command(cmd)
 
@@ -2058,7 +2058,7 @@ class Dcm2niixGen(object):
 
         try:
 
-            oldOutput = os.listdir(self.outputDir) != []
+            oldOutput = os.listdir(self.output_dir) != []
 
         except Exception:
 
@@ -2068,17 +2068,17 @@ class Dcm2niixGen(object):
 
             self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            self.logger.warning(self.outputDir)
+            self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
             self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
 
-            shutil.rmtree(self.outputDir, ignore_errors=True)
+            shutil.rmtree(self.output_dir, ignore_errors=True)
 
-            if not os.path.exists(self.outputDir):
+            if not os.path.exists(self.output_dir):
 
-                os.makedirs(self.outputDir)
+                os.makedirs(self.output_dir)
 
             self.execute()
 
@@ -2086,19 +2086,19 @@ class Dcm2niixGen(object):
 
             self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
 
-            self.logger.warning(self.outputDir)
+            self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix\n&quot;)
 
         else:
 
-            if not os.path.exists(self.outputDir):
+            if not os.path.exists(self.output_dir):
 
-                os.makedirs(self.outputDir)
+                os.makedirs(self.output_dir)
 
             self.execute()
 
-        self.sidecarFiles = glob(os.path.join(self.outputDir, &quot;*.json&quot;))
+        self.sidecarFiles = glob(os.path.join(self.output_dir, &quot;*.json&quot;))
 </code></pre></div></td></tr></table></div>
 </details>
                 
@@ -2109,7 +2109,7 @@ class Dcm2niixGen(object):
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

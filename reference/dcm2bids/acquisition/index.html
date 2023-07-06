@@ -1623,9 +1623,9 @@ class Acquisition(object):
 
                 (ex: T1w, T2w, bold ...)
 
-        customEntities (str): Optional entities (ex: task-rest)
+        custom_entities (str): Optional entities (ex: task-rest)
 
-        srcSidecar (Sidecar): Optional sidecar object
+        src_sidecar (Sidecar): Optional sidecar object
 
     &quot;&quot;&quot;
 
@@ -1639,13 +1639,13 @@ class Acquisition(object):
 
         suffix,
 
-        customEntities=&quot;&quot;,
+        custom_entities=&quot;&quot;,
 
         id=None,
 
-        srcSidecar=None,
+        src_sidecar=None,
 
-        sidecarChanges=None,
+        sidecar_changes=None,
 
         **kwargs
 
@@ -1655,7 +1655,7 @@ class Acquisition(object):
 
         self._suffix = &quot;&quot;
 
-        self._customEntities = &quot;&quot;
+        self._custom_entities = &quot;&quot;
 
         self._id = &quot;&quot;
 
@@ -1665,17 +1665,17 @@ class Acquisition(object):
 
         self.suffix = suffix
 
-        self.customEntities = customEntities
+        self.custom_entities = custom_entities
 
-        self.srcSidecar = srcSidecar
+        self.src_sidecar = src_sidecar
 
-        if sidecarChanges is None:
+        if sidecar_changes is None:
 
-            self.sidecarChanges = {}
+            self.sidecar_changes = {}
 
         else:
 
-            self.sidecarChanges = sidecarChanges
+            self.sidecar_changes = sidecar_changes
 
         if id is None:
 
@@ -1743,31 +1743,31 @@ class Acquisition(object):
 
     @property
 
-    def customEntities(self):
+    def custom_entities(self):
 
         &quot;&quot;&quot;
 
         Returns:
 
-            A string &#39;_&lt;customEntities&gt;&#39;
+            A string &#39;_&lt;custom_entities&gt;&#39;
 
         &quot;&quot;&quot;
 
-        return self._customEntities
+        return self._custom_entities
 
-    @customEntities.setter
+    @custom_entities.setter
 
-    def customEntities(self, customEntities):
+    def custom_entities(self, custom_entities):
 
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-        if isinstance(customEntities, list):
+        if isinstance(custom_entities, list):
 
-            self._customEntities = self.prepend(&#39;_&#39;.join(customEntities))
+            self._custom_entities = self.prepend(&#39;_&#39;.join(custom_entities))
 
         else:
 
-            self._customEntities = self.prepend(customEntities)
+            self._custom_entities = self.prepend(custom_entities)
 
     @property
 
@@ -1777,17 +1777,17 @@ class Acquisition(object):
 
         Returns:
 
-            A string &#39;_&lt;suffix&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;suffix&gt;&#39;
+            A string &#39;_&lt;suffix&gt;&#39; or &#39;_&lt;custom_entities&gt;_&lt;suffix&gt;&#39;
 
         &quot;&quot;&quot;
 
-        if self.customEntities.strip() == &quot;&quot;:
+        if self.custom_entities.strip() == &quot;&quot;:
 
             return self.suffix
 
         else:
 
-            return self.customEntities + self.suffix
+            return self.custom_entities + self.suffix
 
     @property
 
@@ -1801,9 +1801,9 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        if self.srcSidecar:
+        if self.src_sidecar:
 
-            return self.srcSidecar.root
+            return self.src_sidecar.root
 
         else:
 
@@ -1929,19 +1929,19 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        data = self.srcSidecar.origData
+        data = self.src_sidecar.origData
 
         data[&quot;Dcm2bidsVersion&quot;] = __version__
 
         # TaskName
 
-        if &#39;TaskName&#39; in self.srcSidecar.data:
+        if &#39;TaskName&#39; in self.src_sidecar.data:
 
-            data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
+            data[&quot;TaskName&quot;] = self.src_sidecar.data[&quot;TaskName&quot;]
 
-        # sidecarChanges
+        # sidecar_changes
 
-        for key, value in self.sidecarChanges.items():
+        for key, value in self.sidecar_changes.items():
 
             values = []
 
@@ -1953,7 +1953,7 @@ class Acquisition(object):
 
                 if isinstance(val, str):
 
-                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+                    if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
                         logging.warning(f&quot;No id found for &#39;{key}&#39; value &#39;{val}&#39;.&quot;)
 
@@ -2033,10 +2033,10 @@ class Acquisition(object):
     <span class="n">participant</span><span class="p">,</span>
     <span class="n">datatype</span><span class="p">,</span>
     <span class="n">suffix</span><span class="p">,</span>
-    <span class="n">customEntities</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">custom_entities</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">srcSidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">sidecarChanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">src_sidecar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sidecar_changes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2071,13 +2071,13 @@ class Acquisition(object):
 <td>None</td>
 </tr>
 <tr>
-<td>customEntities</td>
+<td>custom_entities</td>
 <td>str</td>
 <td>Optional entities (ex: task-rest)</td>
 <td>None</td>
 </tr>
 <tr>
-<td>srcSidecar</td>
+<td>src_sidecar</td>
 <td>Sidecar</td>
 <td>Optional sidecar object</td>
 <td>None</td>
@@ -2506,9 +2506,9 @@ class Acquisition(object):
 
                 (ex: T1w, T2w, bold ...)
 
-        customEntities (str): Optional entities (ex: task-rest)
+        custom_entities (str): Optional entities (ex: task-rest)
 
-        srcSidecar (Sidecar): Optional sidecar object
+        src_sidecar (Sidecar): Optional sidecar object
 
     &quot;&quot;&quot;
 
@@ -2522,13 +2522,13 @@ class Acquisition(object):
 
         suffix,
 
-        customEntities=&quot;&quot;,
+        custom_entities=&quot;&quot;,
 
         id=None,
 
-        srcSidecar=None,
+        src_sidecar=None,
 
-        sidecarChanges=None,
+        sidecar_changes=None,
 
         **kwargs
 
@@ -2538,7 +2538,7 @@ class Acquisition(object):
 
         self._suffix = &quot;&quot;
 
-        self._customEntities = &quot;&quot;
+        self._custom_entities = &quot;&quot;
 
         self._id = &quot;&quot;
 
@@ -2548,17 +2548,17 @@ class Acquisition(object):
 
         self.suffix = suffix
 
-        self.customEntities = customEntities
+        self.custom_entities = custom_entities
 
-        self.srcSidecar = srcSidecar
+        self.src_sidecar = src_sidecar
 
-        if sidecarChanges is None:
+        if sidecar_changes is None:
 
-            self.sidecarChanges = {}
+            self.sidecar_changes = {}
 
         else:
 
-            self.sidecarChanges = sidecarChanges
+            self.sidecar_changes = sidecar_changes
 
         if id is None:
 
@@ -2626,31 +2626,31 @@ class Acquisition(object):
 
     @property
 
-    def customEntities(self):
+    def custom_entities(self):
 
         &quot;&quot;&quot;
 
         Returns:
 
-            A string &#39;_&lt;customEntities&gt;&#39;
+            A string &#39;_&lt;custom_entities&gt;&#39;
 
         &quot;&quot;&quot;
 
-        return self._customEntities
+        return self._custom_entities
 
-    @customEntities.setter
+    @custom_entities.setter
 
-    def customEntities(self, customEntities):
+    def custom_entities(self, custom_entities):
 
         &quot;&quot;&quot; Prepend &#39;_&#39; if necessary&quot;&quot;&quot;
 
-        if isinstance(customEntities, list):
+        if isinstance(custom_entities, list):
 
-            self._customEntities = self.prepend(&#39;_&#39;.join(customEntities))
+            self._custom_entities = self.prepend(&#39;_&#39;.join(custom_entities))
 
         else:
 
-            self._customEntities = self.prepend(customEntities)
+            self._custom_entities = self.prepend(custom_entities)
 
     @property
 
@@ -2660,17 +2660,17 @@ class Acquisition(object):
 
         Returns:
 
-            A string &#39;_&lt;suffix&gt;&#39; or &#39;_&lt;customEntities&gt;_&lt;suffix&gt;&#39;
+            A string &#39;_&lt;suffix&gt;&#39; or &#39;_&lt;custom_entities&gt;_&lt;suffix&gt;&#39;
 
         &quot;&quot;&quot;
 
-        if self.customEntities.strip() == &quot;&quot;:
+        if self.custom_entities.strip() == &quot;&quot;:
 
             return self.suffix
 
         else:
 
-            return self.customEntities + self.suffix
+            return self.custom_entities + self.suffix
 
     @property
 
@@ -2684,9 +2684,9 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        if self.srcSidecar:
+        if self.src_sidecar:
 
-            return self.srcSidecar.root
+            return self.src_sidecar.root
 
         else:
 
@@ -2812,19 +2812,19 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        data = self.srcSidecar.origData
+        data = self.src_sidecar.origData
 
         data[&quot;Dcm2bidsVersion&quot;] = __version__
 
         # TaskName
 
-        if &#39;TaskName&#39; in self.srcSidecar.data:
+        if &#39;TaskName&#39; in self.src_sidecar.data:
 
-            data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
+            data[&quot;TaskName&quot;] = self.src_sidecar.data[&quot;TaskName&quot;]
 
-        # sidecarChanges
+        # sidecar_changes
 
-        for key, value in self.sidecarChanges.items():
+        for key, value in self.sidecar_changes.items():
 
             values = []
 
@@ -2836,7 +2836,7 @@ class Acquisition(object):
 
                 if isinstance(val, str):
 
-                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+                    if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
                         logging.warning(f&quot;No id found for &#39;{key}&#39; value &#39;{val}&#39;.&quot;)
 
@@ -2973,10 +2973,10 @@ class Acquisition(object):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">build_suffix</span>
 </code></pre></div></td></tr></table></div>
 <p>The suffix to build filenames</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">customEntities</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">custom_entities</span>
 </code></pre></div></td></tr></table></div>
 <p>Returns:</p>
-<p>A string '_<customEntities>'</p>
+<p>A string '_<custom_entities>'</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dstId</span>
 </code></pre></div></td></tr></table></div>
 <p>Return:</p>
@@ -3081,19 +3081,19 @@ class Acquisition(object):
 
         &quot;&quot;&quot;
 
-        data = self.srcSidecar.origData
+        data = self.src_sidecar.origData
 
         data[&quot;Dcm2bidsVersion&quot;] = __version__
 
         # TaskName
 
-        if &#39;TaskName&#39; in self.srcSidecar.data:
+        if &#39;TaskName&#39; in self.src_sidecar.data:
 
-            data[&quot;TaskName&quot;] = self.srcSidecar.data[&quot;TaskName&quot;]
+            data[&quot;TaskName&quot;] = self.src_sidecar.data[&quot;TaskName&quot;]
 
-        # sidecarChanges
+        # sidecar_changes
 
-        for key, value in self.sidecarChanges.items():
+        for key, value in self.sidecar_changes.items():
 
             values = []
 
@@ -3105,7 +3105,7 @@ class Acquisition(object):
 
                 if isinstance(val, str):
 
-                    if val not in idList and key in DEFAULT.keyWithPathSidecarChanges:
+                    if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
                         logging.warning(f&quot;No id found for &#39;{key}&#39; value &#39;{val}&#39;.&quot;)
 
@@ -3304,7 +3304,7 @@ https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-tabl
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

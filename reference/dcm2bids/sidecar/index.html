@@ -1913,7 +1913,111 @@
 <span class="normal">678</span>
 <span class="normal">679</span>
 <span class="normal">680</span>
-<span class="normal">681</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">681</span>
+<span class="normal">682</span>
+<span class="normal">683</span>
+<span class="normal">684</span>
+<span class="normal">685</span>
+<span class="normal">686</span>
+<span class="normal">687</span>
+<span class="normal">688</span>
+<span class="normal">689</span>
+<span class="normal">690</span>
+<span class="normal">691</span>
+<span class="normal">692</span>
+<span class="normal">693</span>
+<span class="normal">694</span>
+<span class="normal">695</span>
+<span class="normal">696</span>
+<span class="normal">697</span>
+<span class="normal">698</span>
+<span class="normal">699</span>
+<span class="normal">700</span>
+<span class="normal">701</span>
+<span class="normal">702</span>
+<span class="normal">703</span>
+<span class="normal">704</span>
+<span class="normal">705</span>
+<span class="normal">706</span>
+<span class="normal">707</span>
+<span class="normal">708</span>
+<span class="normal">709</span>
+<span class="normal">710</span>
+<span class="normal">711</span>
+<span class="normal">712</span>
+<span class="normal">713</span>
+<span class="normal">714</span>
+<span class="normal">715</span>
+<span class="normal">716</span>
+<span class="normal">717</span>
+<span class="normal">718</span>
+<span class="normal">719</span>
+<span class="normal">720</span>
+<span class="normal">721</span>
+<span class="normal">722</span>
+<span class="normal">723</span>
+<span class="normal">724</span>
+<span class="normal">725</span>
+<span class="normal">726</span>
+<span class="normal">727</span>
+<span class="normal">728</span>
+<span class="normal">729</span>
+<span class="normal">730</span>
+<span class="normal">731</span>
+<span class="normal">732</span>
+<span class="normal">733</span>
+<span class="normal">734</span>
+<span class="normal">735</span>
+<span class="normal">736</span>
+<span class="normal">737</span>
+<span class="normal">738</span>
+<span class="normal">739</span>
+<span class="normal">740</span>
+<span class="normal">741</span>
+<span class="normal">742</span>
+<span class="normal">743</span>
+<span class="normal">744</span>
+<span class="normal">745</span>
+<span class="normal">746</span>
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span>
+<span class="normal">759</span>
+<span class="normal">760</span>
+<span class="normal">761</span>
+<span class="normal">762</span>
+<span class="normal">763</span>
+<span class="normal">764</span>
+<span class="normal">765</span>
+<span class="normal">766</span>
+<span class="normal">767</span>
+<span class="normal">768</span>
+<span class="normal">769</span>
+<span class="normal">770</span>
+<span class="normal">771</span>
+<span class="normal">772</span>
+<span class="normal">773</span>
+<span class="normal">774</span>
+<span class="normal">775</span>
+<span class="normal">776</span>
+<span class="normal">777</span>
+<span class="normal">778</span>
+<span class="normal">779</span>
+<span class="normal">780</span>
+<span class="normal">781</span>
+<span class="normal">782</span>
+<span class="normal">783</span>
+<span class="normal">784</span>
+<span class="normal">785</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
 
@@ -2067,17 +2171,21 @@ class SidecarPairing(object):
 
                  auto_extractor=DEFAULT.auto_extract_entities,
 
-                 searchMethod=DEFAULT.searchMethod,
+                 search_method=DEFAULT.search_method,
 
-                 caseSensitive=DEFAULT.caseSensitive,
+                 case_sensitive=DEFAULT.case_sensitive,
 
-                 dupMethod=DEFAULT.dupMethod):
+                 dup_method=DEFAULT.dup_method,
+
+                 post_op=DEFAULT.post_op):
 
         self.logger = logging.getLogger(__name__)
 
-        self._searchMethod = &quot;&quot;
+        self._search_method = &quot;&quot;
 
-        self._dupMethod = &quot;&quot;
+        self._dup_method = &quot;&quot;
+
+        self._post_op = &quot;&quot;
 
         self.graph = OrderedDict()
 
@@ -2091,21 +2199,23 @@ class SidecarPairing(object):
 
         self.descriptions = descriptions
 
-        self.searchMethod = searchMethod
+        self.search_method = search_method
 
-        self.caseSensitive = caseSensitive
+        self.case_sensitive = case_sensitive
 
-        self.dupMethod = dupMethod
+        self.dup_method = dup_method
+
+        self.post_op = post_op
 
     @property
 
-    def searchMethod(self):
+    def search_method(self):
 
-        return self._searchMethod
+        return self._search_method
 
-    @searchMethod.setter
+    @search_method.setter
 
-    def searchMethod(self, value):
+    def search_method(self, value):
 
         &quot;&quot;&quot;
 
@@ -2115,33 +2225,33 @@ class SidecarPairing(object):
 
         &quot;&quot;&quot;
 
-        if value in DEFAULT.searchMethodChoices:
+        if value in DEFAULT.search_methodChoices:
 
-            self._searchMethod = value
+            self._search_method = value
 
         else:
 
-            self._searchMethod = DEFAULT.searchMethod
+            self._search_method = DEFAULT.search_method
 
             self.logger.warning(f&quot;&#39;{value}&#39; is not a search method implemented&quot;)
 
-            self.logger.warning(f&quot;Falling back to default: {DEFAULT.searchMethod}&quot;)
+            self.logger.warning(f&quot;Falling back to default: {DEFAULT.search_method}&quot;)
 
             self.logger.warning(
 
-                f&quot;Search methods implemented: {DEFAULT.searchMethodChoices}&quot;
+                f&quot;Search methods implemented: {DEFAULT.search_methodChoices}&quot;
 
             )
 
     @property
 
-    def dupMethod(self):
+    def dup_method(self):
 
-        return self._dupMethod
+        return self._dup_method
 
-    @dupMethod.setter
+    @dup_method.setter
 
-    def dupMethod(self, value):
+    def dup_method(self, value):
 
         &quot;&quot;&quot;
 
@@ -2151,45 +2261,143 @@ class SidecarPairing(object):
 
         &quot;&quot;&quot;
 
-        if value in DEFAULT.dupMethodChoices:
+        if value in DEFAULT.dup_method_choices:
 
-            self._dupMethod = value
+            self._dup_method = value
 
         else:
 
-            self._dupMethod = DEFAULT.dupMethod
+            self._dup_method = DEFAULT.dup_method
 
             self.logger.warning(
 
-                &quot;Duplicate methods implemented: %s&quot;, DEFAULT.dupMethodChoices)
+                &quot;Duplicate methods implemented: %s&quot;, DEFAULT.dup_method_choices)
 
             self.logger.warning(f&quot;{value} is not a duplicate method implemented.&quot;)
 
-            self.logger.warning(f&quot;Falling back to default: {DEFAULT.dupMethod}.&quot;)
+            self.logger.warning(f&quot;Falling back to default: {DEFAULT.dup_method}.&quot;)
 
     @property
 
-    def caseSensitive(self):
+    def post_op(self):
 
-        return self._caseSensitive
+        return self._post_op
 
-    @caseSensitive.setter
+    @post_op.setter
 
-    def caseSensitive(self, value):
+    def post_op(self, value):
+
+        &quot;&quot;&quot;
+
+        Checks if post_op commands don&#39;t overlap
+
+        &quot;&quot;&quot;
+
+        post_op = []
+
+        if isinstance(value, dict):
+
+            value = [value]
+
+        elif not isinstance(value, list):
+
+            raise ValueError(&quot;post_op should be a list of dict.&quot;
+
+                             &quot;Please check the documentation.&quot;)
+
+        try:
+
+            pairs = []
+
+            for curr_post_op in value:
+
+                post_op.append(curr_post_op)
+
+                datatype = curr_post_op[&#39;datatype&#39;]
+
+                suffix = curr_post_op[&#39;suffix&#39;]
+
+                if isinstance(curr_post_op[&#39;cmd&#39;], str):
+
+                    cmd_split = curr_post_op[&#39;cmd&#39;].split()
+
+                else:
+
+                    raise ValueError(&quot;post_op cmd should be a string.&quot;
+
+                                     &quot;Please check the documentation.&quot;)
+
+                if &#39;srcFile&#39; not in cmd_split or &#39;dstFile&#39; not in cmd_split:
+
+                    raise ValueError(&quot;post_op cmd is not defined correctly.&quot;
+
+                                     &quot;srcFile and/or dstFile is missing.&quot;
+
+                                     &quot;Please check the documentation.&quot;)
+
+                if isinstance(datatype, str):
+
+                    post_op[-1][&#39;datatype&#39;] = [datatype]
+
+                    datatype = [datatype]
+
+                if isinstance(suffix, str):
+
+                    # It will be compare with acq.suffix which has a `_` character
+
+                    post_op[-1][&#39;suffix&#39;] = [&#39;_&#39; + suffix]
+
+                    suffix = [suffix]
+
+                elif isinstance(suffix, list):
+
+                    post_op[-1][&#39;suffix&#39;] = [&#39;_&#39; + curr_suffix for curr_suffix in suffix]
+
+                pairs = pairs + list(itertools.product(datatype, suffix))
+
+            res = list(set([ele for ele in pairs if pairs.count(ele) &gt; 1]))
+
+            if res:
+
+                raise ValueError(&quot;Some post operations apply on &quot;
+
+                                 &quot;the same combination of datatype/suffix.&quot;
+
+                                 &quot;Please fix post_op key in your config file.&quot;
+
+                                 f&quot;{pairs}&quot;)
+
+            self._post_op = post_op
+
+        except Exception:
+
+            raise ValueError(&quot;post_op is not defined correctly.&quot;
+
+                             &quot;Please check the documentation.&quot;)
+
+    @property
+
+    def case_sensitive(self):
+
+        return self._case_sensitive
+
+    @case_sensitive.setter
+
+    def case_sensitive(self, value):
 
         if isinstance(value, bool):
 
-            self._caseSensitive = value
+            self._case_sensitive = value
 
         else:
 
-            self._caseSensitive = DEFAULT.caseSensitive
+            self._case_sensitive = DEFAULT.case_sensitive
 
             self.logger.warning(f&quot;&#39;{value}&#39; is not a boolean&quot;)
 
-            self.logger.warning(f&quot;Falling back to default: {DEFAULT.caseSensitive}&quot;)
+            self.logger.warning(f&quot;Falling back to default: {DEFAULT.case_sensitive}&quot;)
 
-            self.logger.warning(f&quot;Search methods implemented: {DEFAULT.caseSensitive}&quot;)
+            self.logger.warning(f&quot;Search methods implemented: {DEFAULT.case_sensitive}&quot;)
 
     def build_graph(self):
 
@@ -2245,7 +2453,7 @@ class SidecarPairing(object):
 
             name = str(name)
 
-            if self.searchMethod == &quot;re&quot;:
+            if self.search_method == &quot;re&quot;:
 
                 return bool(re.match(pattern, name))
 
@@ -2253,7 +2461,7 @@ class SidecarPairing(object):
 
                 pattern = str(pattern)
 
-                if not self.caseSensitive:
+                if not self.case_sensitive:
 
                     name = name.lower()
 
@@ -2369,7 +2577,7 @@ class SidecarPairing(object):
 
                 acq = Acquisition(participant,
 
-                                  srcSidecar=sidecar, **desc)
+                                  src_sidecar=sidecar, **desc)
 
                 acq.setDstFile()
 
@@ -2411,7 +2619,7 @@ class SidecarPairing(object):
 
         &quot;&quot;&quot;
 
-        Add DCM Tag to customEntities
+        Add DCM Tag to custom_entities
 
         &quot;&quot;&quot;
 
@@ -2421,17 +2629,17 @@ class SidecarPairing(object):
 
         entities = []
 
-        if &quot;customEntities&quot; in desc.keys() or self.auto_extract_entities:
+        if &quot;custom_entities&quot; in desc.keys() or self.auto_extract_entities:
 
-            if &#39;customEntities&#39; in desc.keys():
+            if &#39;custom_entities&#39; in desc.keys():
 
-                if isinstance(descWithTask[&quot;customEntities&quot;], str):
+                if isinstance(descWithTask[&quot;custom_entities&quot;], str):
 
-                    descWithTask[&quot;customEntities&quot;] = [descWithTask[&quot;customEntities&quot;]]
+                    descWithTask[&quot;custom_entities&quot;] = [descWithTask[&quot;custom_entities&quot;]]
 
             else:
 
-                descWithTask[&quot;customEntities&quot;] = []
+                descWithTask[&quot;custom_entities&quot;] = []
 
             if self.auto_extract_entities:
 
@@ -2467,9 +2675,9 @@ class SidecarPairing(object):
 
                                     break
 
-            if &quot;customEntities&quot; in desc.keys():
+            if &quot;custom_entities&quot; in desc.keys():
 
-                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;customEntities&quot;]))
+                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;custom_entities&quot;]))
 
             if self.auto_extract_entities:
 
@@ -2495,7 +2703,7 @@ class SidecarPairing(object):
 
                         entities = list(set(entities))
 
-                        descWithTask[&quot;customEntities&quot;] = entities
+                        descWithTask[&quot;custom_entities&quot;] = entities
 
             for curr_entity in entities:
 
@@ -2503,21 +2711,21 @@ class SidecarPairing(object):
 
                     if curr_entity == &#39;dir&#39;:
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask[&quot;custom_entities&quot;]))
 
                     elif curr_entity == &#39;task&#39;:
 
                         sidecar.data[&#39;TaskName&#39;] = concatenated_matches[curr_entity]
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;custom_entities&quot;]))
 
                     else:
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;custom_entities&quot;]))
 
             # Remove entities without -
 
-            for curr_entity in descWithTask[&quot;customEntities&quot;]:
+            for curr_entity in descWithTask[&quot;custom_entities&quot;]:
 
                 if &#39;-&#39; not in curr_entity:
 
@@ -2527,7 +2735,7 @@ class SidecarPairing(object):
 
                                      &quot;(Entity-Value)&quot;)
 
-                    descWithTask[&quot;customEntities&quot;].remove(curr_entity)
+                    descWithTask[&quot;custom_entities&quot;].remove(curr_entity)
 
         return descWithTask, sidecar
 
@@ -2537,7 +2745,7 @@ class SidecarPairing(object):
 
         Check if there is duplicate destination roots in the acquisitions
 
-        and add &#39;_run-&#39; to the customEntities of the acquisition
+        and add &#39;_run-&#39; to the custom_entities of the acquisition
 
         &quot;&quot;&quot;
 
@@ -2573,7 +2781,7 @@ class SidecarPairing(object):
 
         templateDup = DEFAULT.runTpl
 
-        if self.dupMethod == &#39;dup&#39;:
+        if self.dup_method == &#39;dup&#39;:
 
             templateDup = DEFAULT.dupTpl
 
@@ -2581,9 +2789,9 @@ class SidecarPairing(object):
 
             self.logger.info(f&quot;{dstRoot} has {len(dup)} runs&quot;)
 
-            self.logger.info(f&quot;Adding {self.dupMethod} information to the acquisition&quot;)
+            self.logger.info(f&quot;Adding {self.dup_method} information to the acquisition&quot;)
 
-            if self.dupMethod == &#39;dup&#39;:
+            if self.dup_method == &#39;dup&#39;:
 
                 dup = dup[0:-1]
 
@@ -2591,7 +2799,7 @@ class SidecarPairing(object):
 
                 runStr = templateDup.format(runNum+1)
 
-                self.acquisitions[acqInd].customEntities += runStr
+                self.acquisitions[acqInd].custom_entities += runStr
 
                 self.acquisitions[acqInd].setDstFile()
 </code></pre></div></td></tr></table></div>
@@ -2860,22 +3068,24 @@ class SidecarPairing(object):
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">origData</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="sidecarpairing">SidecarPairing<a class="headerlink" href="#sidecarpairing" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SidecarPairing</span><span class="p">(</span>
     <span class="n">sidecars</span><span class="p">,</span>
     <span class="n">descriptions</span><span class="p">,</span>
     <span class="n">extractors</span><span class="o">=</span><span class="p">{},</span>
     <span class="n">auto_extractor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">searchMethod</span><span class="o">=</span><span class="s1">&#39;fnmatch&#39;</span><span class="p">,</span>
-    <span class="n">caseSensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">dupMethod</span><span class="o">=</span><span class="s1">&#39;run&#39;</span>
+    <span class="n">search_method</span><span class="o">=</span><span class="s1">&#39;fnmatch&#39;</span><span class="p">,</span>
+    <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">dup_method</span><span class="o">=</span><span class="s1">&#39;run&#39;</span><span class="p">,</span>
+    <span class="n">post_op</span><span class="o">=</span><span class="p">[]</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Args:</p>
@@ -3431,7 +3641,111 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 <span class="normal">546</span>
 <span class="normal">547</span>
 <span class="normal">548</span>
-<span class="normal">549</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span>
+<span class="normal">651</span>
+<span class="normal">652</span>
+<span class="normal">653</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
 
     &quot;&quot;&quot;
 
@@ -3453,17 +3767,21 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                  auto_extractor=DEFAULT.auto_extract_entities,
 
-                 searchMethod=DEFAULT.searchMethod,
+                 search_method=DEFAULT.search_method,
 
-                 caseSensitive=DEFAULT.caseSensitive,
+                 case_sensitive=DEFAULT.case_sensitive,
 
-                 dupMethod=DEFAULT.dupMethod):
+                 dup_method=DEFAULT.dup_method,
+
+                 post_op=DEFAULT.post_op):
 
         self.logger = logging.getLogger(__name__)
 
-        self._searchMethod = &quot;&quot;
+        self._search_method = &quot;&quot;
 
-        self._dupMethod = &quot;&quot;
+        self._dup_method = &quot;&quot;
+
+        self._post_op = &quot;&quot;
 
         self.graph = OrderedDict()
 
@@ -3477,21 +3795,23 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         self.descriptions = descriptions
 
-        self.searchMethod = searchMethod
+        self.search_method = search_method
 
-        self.caseSensitive = caseSensitive
+        self.case_sensitive = case_sensitive
 
-        self.dupMethod = dupMethod
+        self.dup_method = dup_method
+
+        self.post_op = post_op
 
     @property
 
-    def searchMethod(self):
+    def search_method(self):
 
-        return self._searchMethod
+        return self._search_method
 
-    @searchMethod.setter
+    @search_method.setter
 
-    def searchMethod(self, value):
+    def search_method(self, value):
 
         &quot;&quot;&quot;
 
@@ -3501,33 +3821,33 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         &quot;&quot;&quot;
 
-        if value in DEFAULT.searchMethodChoices:
+        if value in DEFAULT.search_methodChoices:
 
-            self._searchMethod = value
+            self._search_method = value
 
         else:
 
-            self._searchMethod = DEFAULT.searchMethod
+            self._search_method = DEFAULT.search_method
 
             self.logger.warning(f&quot;&#39;{value}&#39; is not a search method implemented&quot;)
 
-            self.logger.warning(f&quot;Falling back to default: {DEFAULT.searchMethod}&quot;)
+            self.logger.warning(f&quot;Falling back to default: {DEFAULT.search_method}&quot;)
 
             self.logger.warning(
 
-                f&quot;Search methods implemented: {DEFAULT.searchMethodChoices}&quot;
+                f&quot;Search methods implemented: {DEFAULT.search_methodChoices}&quot;
 
             )
 
     @property
 
-    def dupMethod(self):
+    def dup_method(self):
 
-        return self._dupMethod
+        return self._dup_method
 
-    @dupMethod.setter
+    @dup_method.setter
 
-    def dupMethod(self, value):
+    def dup_method(self, value):
 
         &quot;&quot;&quot;
 
@@ -3537,45 +3857,143 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         &quot;&quot;&quot;
 
-        if value in DEFAULT.dupMethodChoices:
+        if value in DEFAULT.dup_method_choices:
 
-            self._dupMethod = value
+            self._dup_method = value
 
         else:
 
-            self._dupMethod = DEFAULT.dupMethod
+            self._dup_method = DEFAULT.dup_method
 
             self.logger.warning(
 
-                &quot;Duplicate methods implemented: %s&quot;, DEFAULT.dupMethodChoices)
+                &quot;Duplicate methods implemented: %s&quot;, DEFAULT.dup_method_choices)
 
             self.logger.warning(f&quot;{value} is not a duplicate method implemented.&quot;)
 
-            self.logger.warning(f&quot;Falling back to default: {DEFAULT.dupMethod}.&quot;)
+            self.logger.warning(f&quot;Falling back to default: {DEFAULT.dup_method}.&quot;)
 
     @property
 
-    def caseSensitive(self):
+    def post_op(self):
 
-        return self._caseSensitive
+        return self._post_op
 
-    @caseSensitive.setter
+    @post_op.setter
 
-    def caseSensitive(self, value):
+    def post_op(self, value):
+
+        &quot;&quot;&quot;
+
+        Checks if post_op commands don&#39;t overlap
+
+        &quot;&quot;&quot;
+
+        post_op = []
+
+        if isinstance(value, dict):
+
+            value = [value]
+
+        elif not isinstance(value, list):
+
+            raise ValueError(&quot;post_op should be a list of dict.&quot;
+
+                             &quot;Please check the documentation.&quot;)
+
+        try:
+
+            pairs = []
+
+            for curr_post_op in value:
+
+                post_op.append(curr_post_op)
+
+                datatype = curr_post_op[&#39;datatype&#39;]
+
+                suffix = curr_post_op[&#39;suffix&#39;]
+
+                if isinstance(curr_post_op[&#39;cmd&#39;], str):
+
+                    cmd_split = curr_post_op[&#39;cmd&#39;].split()
+
+                else:
+
+                    raise ValueError(&quot;post_op cmd should be a string.&quot;
+
+                                     &quot;Please check the documentation.&quot;)
+
+                if &#39;srcFile&#39; not in cmd_split or &#39;dstFile&#39; not in cmd_split:
+
+                    raise ValueError(&quot;post_op cmd is not defined correctly.&quot;
+
+                                     &quot;srcFile and/or dstFile is missing.&quot;
+
+                                     &quot;Please check the documentation.&quot;)
+
+                if isinstance(datatype, str):
+
+                    post_op[-1][&#39;datatype&#39;] = [datatype]
+
+                    datatype = [datatype]
+
+                if isinstance(suffix, str):
+
+                    # It will be compare with acq.suffix which has a `_` character
+
+                    post_op[-1][&#39;suffix&#39;] = [&#39;_&#39; + suffix]
+
+                    suffix = [suffix]
+
+                elif isinstance(suffix, list):
+
+                    post_op[-1][&#39;suffix&#39;] = [&#39;_&#39; + curr_suffix for curr_suffix in suffix]
+
+                pairs = pairs + list(itertools.product(datatype, suffix))
+
+            res = list(set([ele for ele in pairs if pairs.count(ele) &gt; 1]))
+
+            if res:
+
+                raise ValueError(&quot;Some post operations apply on &quot;
+
+                                 &quot;the same combination of datatype/suffix.&quot;
+
+                                 &quot;Please fix post_op key in your config file.&quot;
+
+                                 f&quot;{pairs}&quot;)
+
+            self._post_op = post_op
+
+        except Exception:
+
+            raise ValueError(&quot;post_op is not defined correctly.&quot;
+
+                             &quot;Please check the documentation.&quot;)
+
+    @property
+
+    def case_sensitive(self):
+
+        return self._case_sensitive
+
+    @case_sensitive.setter
+
+    def case_sensitive(self, value):
 
         if isinstance(value, bool):
 
-            self._caseSensitive = value
+            self._case_sensitive = value
 
         else:
 
-            self._caseSensitive = DEFAULT.caseSensitive
+            self._case_sensitive = DEFAULT.case_sensitive
 
             self.logger.warning(f&quot;&#39;{value}&#39; is not a boolean&quot;)
 
-            self.logger.warning(f&quot;Falling back to default: {DEFAULT.caseSensitive}&quot;)
+            self.logger.warning(f&quot;Falling back to default: {DEFAULT.case_sensitive}&quot;)
 
-            self.logger.warning(f&quot;Search methods implemented: {DEFAULT.caseSensitive}&quot;)
+            self.logger.warning(f&quot;Search methods implemented: {DEFAULT.case_sensitive}&quot;)
 
     def build_graph(self):
 
@@ -3631,7 +4049,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
             name = str(name)
 
-            if self.searchMethod == &quot;re&quot;:
+            if self.search_method == &quot;re&quot;:
 
                 return bool(re.match(pattern, name))
 
@@ -3639,7 +4057,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 pattern = str(pattern)
 
-                if not self.caseSensitive:
+                if not self.case_sensitive:
 
                     name = name.lower()
 
@@ -3755,7 +4173,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 acq = Acquisition(participant,
 
-                                  srcSidecar=sidecar, **desc)
+                                  src_sidecar=sidecar, **desc)
 
                 acq.setDstFile()
 
@@ -3797,7 +4215,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         &quot;&quot;&quot;
 
-        Add DCM Tag to customEntities
+        Add DCM Tag to custom_entities
 
         &quot;&quot;&quot;
 
@@ -3807,17 +4225,17 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         entities = []
 
-        if &quot;customEntities&quot; in desc.keys() or self.auto_extract_entities:
+        if &quot;custom_entities&quot; in desc.keys() or self.auto_extract_entities:
 
-            if &#39;customEntities&#39; in desc.keys():
+            if &#39;custom_entities&#39; in desc.keys():
 
-                if isinstance(descWithTask[&quot;customEntities&quot;], str):
+                if isinstance(descWithTask[&quot;custom_entities&quot;], str):
 
-                    descWithTask[&quot;customEntities&quot;] = [descWithTask[&quot;customEntities&quot;]]
+                    descWithTask[&quot;custom_entities&quot;] = [descWithTask[&quot;custom_entities&quot;]]
 
             else:
 
-                descWithTask[&quot;customEntities&quot;] = []
+                descWithTask[&quot;custom_entities&quot;] = []
 
             if self.auto_extract_entities:
 
@@ -3853,9 +4271,9 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                     break
 
-            if &quot;customEntities&quot; in desc.keys():
+            if &quot;custom_entities&quot; in desc.keys():
 
-                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;customEntities&quot;]))
+                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;custom_entities&quot;]))
 
             if self.auto_extract_entities:
 
@@ -3881,7 +4299,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                         entities = list(set(entities))
 
-                        descWithTask[&quot;customEntities&quot;] = entities
+                        descWithTask[&quot;custom_entities&quot;] = entities
 
             for curr_entity in entities:
 
@@ -3889,21 +4307,21 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                     if curr_entity == &#39;dir&#39;:
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask[&quot;custom_entities&quot;]))
 
                     elif curr_entity == &#39;task&#39;:
 
                         sidecar.data[&#39;TaskName&#39;] = concatenated_matches[curr_entity]
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;custom_entities&quot;]))
 
                     else:
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;custom_entities&quot;]))
 
             # Remove entities without -
 
-            for curr_entity in descWithTask[&quot;customEntities&quot;]:
+            for curr_entity in descWithTask[&quot;custom_entities&quot;]:
 
                 if &#39;-&#39; not in curr_entity:
 
@@ -3913,7 +4331,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                      &quot;(Entity-Value)&quot;)
 
-                    descWithTask[&quot;customEntities&quot;].remove(curr_entity)
+                    descWithTask[&quot;custom_entities&quot;].remove(curr_entity)
 
         return descWithTask, sidecar
 
@@ -3923,7 +4341,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         Check if there is duplicate destination roots in the acquisitions
 
-        and add &#39;_run-&#39; to the customEntities of the acquisition
+        and add &#39;_run-&#39; to the custom_entities of the acquisition
 
         &quot;&quot;&quot;
 
@@ -3959,7 +4377,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         templateDup = DEFAULT.runTpl
 
-        if self.dupMethod == &#39;dup&#39;:
+        if self.dup_method == &#39;dup&#39;:
 
             templateDup = DEFAULT.dupTpl
 
@@ -3967,9 +4385,9 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
             self.logger.info(f&quot;{dstRoot} has {len(dup)} runs&quot;)
 
-            self.logger.info(f&quot;Adding {self.dupMethod} information to the acquisition&quot;)
+            self.logger.info(f&quot;Adding {self.dup_method} information to the acquisition&quot;)
 
-            if self.dupMethod == &#39;dup&#39;:
+            if self.dup_method == &#39;dup&#39;:
 
                 dup = dup[0:-1]
 
@@ -3977,18 +4395,20 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 runStr = templateDup.format(runNum+1)
 
-                self.acquisitions[acqInd].customEntities += runStr
+                self.acquisitions[acqInd].custom_entities += runStr
 
                 self.acquisitions[acqInd].setDstFile()
 </code></pre></div></td></tr></table></div>
 </details>
 <hr />
 <h4 id="instance-variables_1">Instance variables<a class="headerlink" href="#instance-variables_1" title="Permanent link">⚓︎</a></h4>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">caseSensitive</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">case_sensitive</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dupMethod</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">dup_method</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">searchMethod</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">post_op</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">search_method</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h4>
 <h4 id="build_acquisitions">build_acquisitions<a class="headerlink" href="#build_acquisitions" title="Permanent link">⚓︎</a></h4>
@@ -4140,7 +4560,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 acq = Acquisition(participant,
 
-                                  srcSidecar=sidecar, **desc)
+                                  src_sidecar=sidecar, **desc)
 
                 acq.setDstFile()
 
@@ -4282,7 +4702,7 @@ the values are a list of possible descriptions</p>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Check if there is duplicate destination roots in the acquisitions</p>
-<p>and add '_run-' to the customEntities of the acquisition</p>
+<p>and add '_run-' to the custom_entities of the acquisition</p>
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -4353,7 +4773,7 @@ the values are a list of possible descriptions</p>
 
         Check if there is duplicate destination roots in the acquisitions
 
-        and add &#39;_run-&#39; to the customEntities of the acquisition
+        and add &#39;_run-&#39; to the custom_entities of the acquisition
 
         &quot;&quot;&quot;
 
@@ -4389,7 +4809,7 @@ the values are a list of possible descriptions</p>
 
         templateDup = DEFAULT.runTpl
 
-        if self.dupMethod == &#39;dup&#39;:
+        if self.dup_method == &#39;dup&#39;:
 
             templateDup = DEFAULT.dupTpl
 
@@ -4397,9 +4817,9 @@ the values are a list of possible descriptions</p>
 
             self.logger.info(f&quot;{dstRoot} has {len(dup)} runs&quot;)
 
-            self.logger.info(f&quot;Adding {self.dupMethod} information to the acquisition&quot;)
+            self.logger.info(f&quot;Adding {self.dup_method} information to the acquisition&quot;)
 
-            if self.dupMethod == &#39;dup&#39;:
+            if self.dup_method == &#39;dup&#39;:
 
                 dup = dup[0:-1]
 
@@ -4407,7 +4827,7 @@ the values are a list of possible descriptions</p>
 
                 runStr = templateDup.format(runNum+1)
 
-                self.acquisitions[acqInd].customEntities += runStr
+                self.acquisitions[acqInd].custom_entities += runStr
 
                 self.acquisitions[acqInd].setDstFile()
 </code></pre></div></td></tr></table></div>
@@ -4593,7 +5013,7 @@ the values are a list of possible descriptions</p>
 
             name = str(name)
 
-            if self.searchMethod == &quot;re&quot;:
+            if self.search_method == &quot;re&quot;:
 
                 return bool(re.match(pattern, name))
 
@@ -4601,7 +5021,7 @@ the values are a list of possible descriptions</p>
 
                 pattern = str(pattern)
 
-                if not self.caseSensitive:
+                if not self.case_sensitive:
 
                     name = name.lower()
 
@@ -4695,7 +5115,7 @@ the values are a list of possible descriptions</p>
     <span class="n">desc</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Add DCM Tag to customEntities</p>
+<p>Add DCM Tag to custom_entities</p>
 <details class="example">
 <summary>View Source</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
@@ -4824,7 +5244,7 @@ the values are a list of possible descriptions</p>
 
         &quot;&quot;&quot;
 
-        Add DCM Tag to customEntities
+        Add DCM Tag to custom_entities
 
         &quot;&quot;&quot;
 
@@ -4834,17 +5254,17 @@ the values are a list of possible descriptions</p>
 
         entities = []
 
-        if &quot;customEntities&quot; in desc.keys() or self.auto_extract_entities:
+        if &quot;custom_entities&quot; in desc.keys() or self.auto_extract_entities:
 
-            if &#39;customEntities&#39; in desc.keys():
+            if &#39;custom_entities&#39; in desc.keys():
 
-                if isinstance(descWithTask[&quot;customEntities&quot;], str):
+                if isinstance(descWithTask[&quot;custom_entities&quot;], str):
 
-                    descWithTask[&quot;customEntities&quot;] = [descWithTask[&quot;customEntities&quot;]]
+                    descWithTask[&quot;custom_entities&quot;] = [descWithTask[&quot;custom_entities&quot;]]
 
             else:
 
-                descWithTask[&quot;customEntities&quot;] = []
+                descWithTask[&quot;custom_entities&quot;] = []
 
             if self.auto_extract_entities:
 
@@ -4880,9 +5300,9 @@ the values are a list of possible descriptions</p>
 
                                     break
 
-            if &quot;customEntities&quot; in desc.keys():
+            if &quot;custom_entities&quot; in desc.keys():
 
-                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;customEntities&quot;]))
+                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;custom_entities&quot;]))
 
             if self.auto_extract_entities:
 
@@ -4908,7 +5328,7 @@ the values are a list of possible descriptions</p>
 
                         entities = list(set(entities))
 
-                        descWithTask[&quot;customEntities&quot;] = entities
+                        descWithTask[&quot;custom_entities&quot;] = entities
 
             for curr_entity in entities:
 
@@ -4916,21 +5336,21 @@ the values are a list of possible descriptions</p>
 
                     if curr_entity == &#39;dir&#39;:
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, convert_dir(concatenated_matches[curr_entity])])), descWithTask[&quot;custom_entities&quot;]))
 
                     elif curr_entity == &#39;task&#39;:
 
                         sidecar.data[&#39;TaskName&#39;] = concatenated_matches[curr_entity]
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;custom_entities&quot;]))
 
                     else:
 
-                        descWithTask[&quot;customEntities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;customEntities&quot;]))
+                        descWithTask[&quot;custom_entities&quot;] = list(map(lambda x: x.replace(curr_entity, &#39;-&#39;.join([curr_entity, concatenated_matches[curr_entity]])), descWithTask[&quot;custom_entities&quot;]))
 
             # Remove entities without -
 
-            for curr_entity in descWithTask[&quot;customEntities&quot;]:
+            for curr_entity in descWithTask[&quot;custom_entities&quot;]:
 
                 if &#39;-&#39; not in curr_entity:
 
@@ -4940,7 +5360,7 @@ the values are a list of possible descriptions</p>
 
                                      &quot;(Entity-Value)&quot;)
 
-                    descWithTask[&quot;customEntities&quot;].remove(curr_entity)
+                    descWithTask[&quot;custom_entities&quot;].remove(curr_entity)
 
         return descWithTask, sidecar
 </code></pre></div></td></tr></table></div>
@@ -4953,7 +5373,7 @@ the values are a list of possible descriptions</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:09+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>

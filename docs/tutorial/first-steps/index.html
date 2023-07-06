@@ -1383,17 +1383,13 @@ You can test it with any command but a safe way is to use the <code>--help</code
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~$ dcm2bids --help
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~$ dcm2bids --help
 usage: dcm2bids <span class="o">[</span>-h<span class="o">]</span> -d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span> -p PARTICIPANT <span class="o">[</span>-s SESSION<span class="o">]</span> -c
                 CONFIG <span class="o">[</span>-o OUTPUT_DIR<span class="o">]</span> <span class="o">[</span>--forceDcm2niix<span class="o">]</span> <span class="o">[</span>--clobber<span class="o">]</span>
                 <span class="o">[</span>-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
 
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids <span class="m">3</span>.0.0
+dcm2bids <span class="m">2</span>.1.7
 
 options:
 -h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
@@ -1408,10 +1404,6 @@ options:
 -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
                         <span class="o">(</span>/home/sam<span class="o">)</span>
---auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
-                        depending on the suffix and datatype. <span class="o">[</span>False<span class="o">]</span>                            
---bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
-                      bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
 --clobber             Overwrite output <span class="k">if</span> it exists
 -l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>, --log_level <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
@@ -2081,7 +2073,7 @@ example, with the resting-state fMRI data
 file and look for the <code>"SeriesDescription"</code> field for example. It is often a
 good unique identifier.</p>
 <div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">Command</label><div class="tabbed-content">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cat tmp_dcm2bids/helper/004_In_DCM2NIIX_regression_test_20180918114023.json
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cat code/dcm2bids_config.json
 </code></pre></div></td></tr></table></div>
 </div>
 <input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">Output</label><div class="tabbed-content">
@@ -2286,14 +2278,14 @@ task name:</p>
 <span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="hll"><span class="w">    </span><span class="p">{</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+</span><span class="hll"><span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-</span><span class="hll"><span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
-</span><span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="nt">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
 </span><span class="hll"><span class="w">      </span><span class="nt">&quot;sidecarChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-</span><span class="w">        </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rest&quot;</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="nt">&quot;TaskName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rest&quot;</span><span class="w"></span>
+</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
@@ -2325,9 +2317,9 @@ task name:</p>
 <span class="o">{</span>
   <span class="s2">&quot;descriptions&quot;</span>: <span class="o">[</span>
     <span class="o">{</span>
-      <span class="s2">&quot;datatype&quot;</span>: <span class="s2">&quot;func&quot;</span>,
-      <span class="s2">&quot;suffix&quot;</span>: <span class="s2">&quot;bold&quot;</span>,
-      <span class="s2">&quot;customEntities&quot;</span>: <span class="s2">&quot;task-rest&quot;</span>,
+      <span class="s2">&quot;dataType&quot;</span>: <span class="s2">&quot;func&quot;</span>,
+      <span class="s2">&quot;modalityLabel&quot;</span>: <span class="s2">&quot;bold&quot;</span>,
+      <span class="s2">&quot;customLabels&quot;</span>: <span class="s2">&quot;task-rest&quot;</span>,
       <span class="s2">&quot;criteria&quot;</span>: <span class="o">{</span>
         <span class="s2">&quot;SeriesDescription&quot;</span>: <span class="s2">&quot;*Axial EPI-FMRI (Interleaved I to S)*&quot;</span>
       <span class="o">}</span>,
@@ -2409,14 +2401,12 @@ file with the appropriate info.</p>
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bold&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-rest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axial EPI-FMRI (Interleaved I to S)*&quot;</span><span class="w"></span>
 <span class="w">      </span><span class="p">},</span><span class="w"></span>
@@ -2425,23 +2415,23 @@ file with the appropriate info.</p>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-AP&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=AP*&quot;</span><span class="w"></span>
-<span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
-</span><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="hll"><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</span><span class="w">    </span><span class="p">},</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;customEntities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;modalityLabel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;epi&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;customLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dir-PA&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EPI PE=PA*&quot;</span><span class="w"></span>
-<span class="hll"><span class="w">      </span><span class="p">},</span><span class="w"></span>
-</span><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id_task-rest&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="hll"><span class="w">      </span><span class="nt">&quot;intendedFor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div></td></tr></table></div>
@@ -2491,16 +2481,12 @@ command.</p>
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span> sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
 <span class="hll">usage: dcm2bids <span class="o">[</span>-h<span class="o">]</span> -d DICOM_DIR <span class="o">[</span>DICOM_DIR ...<span class="o">]</span> -p PARTICIPANT <span class="o">[</span>-s SESSION<span class="o">]</span> -c CONFIG <span class="o">[</span>-o OUTPUT_DIR<span class="o">]</span> <span class="o">[</span>--forceDcm2niix<span class="o">]</span> <span class="o">[</span>--clobber<span class="o">]</span>
 </span><span class="hll">                <span class="o">[</span>-l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span> <span class="o">[</span>-a<span class="o">]</span>
 </span>
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids <span class="m">3</span>.0.0
+dcm2bids <span class="m">2</span>.1.7
 
 options:
 -h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
@@ -2514,10 +2500,6 @@ options:
                         JSON configuration file <span class="o">(</span>see example/config.json<span class="o">)</span>
 -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory <span class="o">(</span>/home/sam/dcm2bids-tutorial/bids_project<span class="o">)</span>
---auto_extract_entities If set, it will automatically try to extract entity information <span class="o">[</span>task, dir, echo<span class="o">]</span>
-                        depending on the suffix and datatype. <span class="o">[</span>False<span class="o">]</span>
---bids_validate       If set, once your conversion is <span class="k">done</span> it will check <span class="k">if</span> your output folder is BIDS valid. <span class="o">[</span>False<span class="o">]</span>
-                      bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 --forceDcm2niix       Overwrite previous temporary dcm2niix output <span class="k">if</span> it exists
 --clobber             Overwrite output <span class="k">if</span> it exists
 -l <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>, --log_level <span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
@@ -2720,7 +2702,7 @@ documentation to find information about the different commands.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-05T02:01:55+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-05</span>
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-06T15:04:08+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-06</span>
       
     
   </small>
