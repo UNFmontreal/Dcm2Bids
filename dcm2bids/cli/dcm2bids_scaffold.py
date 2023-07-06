@@ -34,7 +34,7 @@ def _build_arg_parser():
 
     p.add_argument("-o", "--output_dir",
                    required=False,
-                   default=DEFAULT.cliOutputDir,
+                   default=DEFAULT.output_dir,
                    help="Output BIDS directory. Default: [%(default)s]")
 
     add_overwrite_arg(p)
@@ -47,7 +47,7 @@ def main():
 
     out_dir = Path(args.output_dir)
     log_file = (out_dir
-                / DEFAULT.tmpDirName
+                / DEFAULT.tmp_dir_name
                 / "log"
                 / f"scaffold_{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
 

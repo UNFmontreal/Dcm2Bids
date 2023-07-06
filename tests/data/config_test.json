@@ -1,5 +1,5 @@
 {
-    "searchMethod": "fnmatch",
+    "search_method": "fnmatch",
     "extractors": {"SeriesDescription": ["task-(?P<task>[a-zA-Z0-9]+)"]},
     "descriptions": [
         {
@@ -8,7 +8,7 @@
             "criteria": {
                 "SeriesDescription": "locali*"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "ProcedureStepDescription": "Modify by dcm2bids"
             }
         },
@@ -16,7 +16,7 @@
             "id": "func_task-rest",
             "datatype": "func",
             "suffix": "bold",
-            "customEntities": ["task", "acq-highres"],
+            "custom_entities": ["task", "acq-highres"],
             "criteria": {
                 "SeriesDescription": "*bold*",
                 "ImageType": ["ORIG?NAL", "PRIMARY", "M", "ND", "MOSAIC"]
@@ -41,43 +41,43 @@
         {
             "datatype": "fmap",
             "suffix": "fmap",
-            "customEntities": "echo-492",
+            "custom_entities": "echo-492",
             "criteria": {
                 "EchoNumber": 1,
                 "EchoTime": 0.00492
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "IntendedFor": ["id_dwi", "T1", "dummy"]
             }
         },
         {
             "datatype": "fmap",
             "suffix": "fmap",
-            "customEntities": "echo-738",
+            "custom_entities": "echo-738",
             "criteria": {
                 "EchoNumber": 2,
                 "EchoTime": 0.00738,
                 "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "IntendedFor": "id_dwi"
             }
         },
         {
             "datatype": "dwi",
             "suffix": "dwi",
-            "customEntities": "desc-fa00",
+            "custom_entities": "desc-fa00",
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             },
-            "sidecarChanges": {
+            "sidecar_changes": {
                 "IntendedFor": ["id_dwi", "T1"]
             }
         },
         {
             "datatype": "dwi",
             "suffix": "dwi",
-            "customEntities": "desc-fa01",
+            "custom_entities": "desc-fa01",
             "criteria": {
                 "SeriesDescription": "DTI_FA"
             }
@@ -85,7 +85,7 @@
         {
             "datatype": "dwi",
             "suffix": "dwi",
-            "customEntities": "desc-fa00",
+            "custom_entities": "desc-fa00",
             "criteria": {
                 "SeriesDescription": ["DTI_FA"],
                 "ImageType": ["DTI_FA", "M"]

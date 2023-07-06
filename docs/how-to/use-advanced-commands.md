@@ -7,25 +7,25 @@ same level as the `"descriptions"` entry.
 {
     "extractors": {"SeriesDescription": ["run-(?P<run>[0-9]+)", "task-(?P<task>[0-9]+)"], 
                    "BodyPartExamined": ["(?P<bodypart>[a-zA-Z]+)"]},
-    "searchMethod": "fnmatch",
-    "caseSensitive": true,
-    "dupMethod": "dup",
-    "defaceTpl": ["pydeface", "--outfile", "dstFile", "srcFile"],
+    "search_method": "fnmatch",
+    "case_sensitive": true,
+    "dup_method": "dup",
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]}],
     "description": [
     {
       "datatype": "anat",
-      "suffix": "T1w",
-      "customEntities": ["acq-highres", "bodypart", "run", "task"],
-      "criteria": {
-        "SeriesDescription": {"any" : ["*MPRAGE*", "*T1w*"]}
-      }
+      "suffix": "T2w",
+      "custom_entities": ["acq-highres", "bodypart", "run", "task"],
+      "criteria" : ...
     }
     ]
     ...
 }
 ```
 
-## customEntities combined with extractors
+## custom_entities combined with extractors
 
 default: None
 
@@ -33,21 +33,21 @@ extractors will allow you to extract information embeded into sidecar files.
 In the example above, it will try to match 2 different regex expressions (keys: task, run) within the 
 SeriesDescription field and bodypart in BodyPartExamined field.
 
-By using the same keys in customEntities and if found, it will add this new entities directly into the final filename.
-customEntities can be a list that combined extractor keys and regular entities. 
+By using the same keys in custom_entities and if found, it will add this new entities directly into the final filename.
+custom_entities can be a list that combined extractor keys and regular entities. 
 If key is `task` it will automatically add the field "TaskName" inside the sidecase file.
 
-## searchMethod
+## search_method
 
-default: `"searchMethod": "fnmatch"`
+default: `"search_method": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this
 option is set incorrectly. `re` is the other choice if you want more flexibility
 to match criteria.
 
-## dupMethod
+## dup_method
 
-default: `"dupMethod": "run"`
+default: `"dup_method": "run"`
 
 run is the default behavior and will add '_run-' to the customEntities of the acquisition
 if it finds duplicate destination roots.
@@ -55,25 +55,48 @@ if it finds duplicate destination roots.
 dup will keep the last duplicate description and put `_dup-`to the customEntities of the other acquisitions.
 This behavior is a [heudiconv](https://heudiconv.readthedocs.io/en/latest/changes.html) inspired feature.
 
-## caseSensitive
 
-default: `"caseSensitive": "true"`
+## case_sensitive
+
+default: `"case_sensitive": "true"`
 
 If false, comparisons between strings/lists will be not case sensitive. It's
-only disabled when used with `"searchMethod": "fnmatch"`.
+only disabled when used with `"search_method": "fnmatch"`.
 
-## defaceTpl
+## post_op
 
-default: `"defaceTpl": None`
+default: `"post_op": []`
 
-!!! danger The anonymizer option no longer exists from `v2.0.0`. It is still
-possible to deface the anatomical nifti images.
+post_op key allows you to run any post-processing analyses just before being moved 
+to there respective folders. 
 
-For example, if you use the last version of pydeface, add:
+For example, if you want to deface your T1w images you could use pydeface by adding:
+```
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]}],
+```
 
-`"defaceTpl": "pydeface --outfile {dstFile} {srcFile}"`
+It will specifically run the corresponding `cmd` to any image that follow the combinations
+datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
 
-It is a template string and dcm2bids will replace {srcFile} and {dstFile} by the
+!!! warning "Multiple post_op commands"
+
+    Although you can add multiple commands, the combination datatype/suffix on which you want to run the command has to be unique.
+    You cannot run multiple commands on a specific combination datatype/suffix.
+
+```
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]},
+               {"cmd": "my_new_script --input srcFile --output dstFile ",
+               "datatype": "fmap",
+               "suffix": ["any"]}],
+```
+
+In this example the second command "my_new_script" will be running on any image which datatype is fmap.
+
+Finally, this is a template string and dcm2bids will replace srcFile and dstFile by the
 source file (input) and the destination file (output).
 
 ## dcm2niixOptions
@@ -184,10 +207,10 @@ So far and accordingly to the BIDS specification 5 datatype/suffix automatically
 | fmap | epi | dir |
 
 Using the `--auto_extract_entitie`, if you want another combination of datatype/suffix to be able to 
-extract one or more of these 3 entities you need to add the key of the entities needed using the field customEntities like this within your description:
+extract one or more of these 3 entities you need to add the key of the entities needed using the field custom_entities like this within your description:
 
 ```
-"customEntities": ["echo", "dir"]
+"custom_entities": ["echo", "dir"]
 ```
 
 :warning: If task is found, it will automatically add the field `TaskName` into the sidecar file. 
@@ -197,7 +220,7 @@ It means you don't have to add the field in the config file like this.
 
 ```
 {
-     "sidecarChanges": {
+     "sidecar_changes": {
         "TaskName": "learning"
     }
 }

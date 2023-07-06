@@ -36,7 +36,7 @@ class Dcm2BidsGen(object):
         dicom_dir,
         participant,
         config,
-        output_dir=DEFAULT.outputDir,
+        output_dir=DEFAULT.output_dir,
         bids_validate=DEFAULT.bids_validate,
         auto_extract_entities=DEFAULT.auto_extract_entities,
         session=DEFAULT.session,
@@ -45,9 +45,9 @@ class Dcm2BidsGen(object):
         log_level=DEFAULT.logLevel,
         **_
     ):
-        self._dicomDirs = []
-        self.dicomDirs = dicom_dir
-        self.bidsDir = valid_path(output_dir, type="folder")
+        self._dicom_dirs = []
+        self.dicom_dirs = dicom_dir
+        self.bids_dir = valid_path(output_dir, type="folder")
         self.config = load_json(valid_path(config, type="file"))
         self.participant = Participant(participant, session)
         self.clobber = clobber
@@ -58,24 +58,24 @@ class Dcm2BidsGen(object):
         self.logger = logging.getLogger(__name__)
 
     @property
-    def dicomDirs(self):
+    def dicom_dirs(self):
         """List of DICOMs directories"""
-        return self._dicomDirs
+        return self._dicom_dirs
 
-    @dicomDirs.setter
-    def dicomDirs(self, value):
+    @dicom_dirs.setter
+    def dicom_dirs(self, value):
 
         dicom_dirs = value if isinstance(value, list) else [value]
 
         valid_dirs = [valid_path(_dir, "folder") for _dir in dicom_dirs]
 
-        self._dicomDirs = valid_dirs
+        self._dicom_dirs = valid_dirs
 
     def run(self):
         """Run dcm2bids"""
         dcm2niix = Dcm2niixGen(
-            self.dicomDirs,
-            self.bidsDir,
+            self.dicom_dirs,
+            self.bids_dir,
             self.participant,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
@@ -95,9 +95,10 @@ class Dcm2BidsGen(object):
             self.config["descriptions"],
             self.config.get("extractors", DEFAULT.extractors),
             self.auto_extract_entities,
-            self.config.get("searchMethod", DEFAULT.searchMethod),
-            self.config.get("caseSensitive", DEFAULT.caseSensitive),
-            self.config.get("dupMethod", DEFAULT.dupMethod)
+            self.config.get("search_method", DEFAULT.search_method),
+            self.config.get("case_sensitive", DEFAULT.case_sensitive),
+            self.config.get("dup_method", DEFAULT.dup_method),
+            self.config.get("post_op",  DEFAULT.post_op)
         )
         parser.build_graph()
         parser.build_acquisitions(self.participant)
@@ -107,21 +108,21 @@ class Dcm2BidsGen(object):
 
         idList = {}
         for acq in parser.acquisitions:
-            idList = self.move(acq, idList)
+            idList = self.move(acq, idList, parser.post_op)
 
         if self.bids_validate:
             try:
                 self.logger.info(f"Validate if {self.output_dir} is BIDS valid.")
                 self.logger.info("Use bids-validator version: ")
                 run_shell_command(['bids-validator', '-v'])
-                run_shell_command(['bids-validator', self.bidsDir])
+                run_shell_command(['bids-validator', self.bids_dir])
             except Exception:
                 self.logger.error("The bids-validator does not seem to work properly. "
                                   "The bids-validator may not be installed on your "
                                   "computer. Please check: "
                                   "https://github.com/bids-standard/bids-validator.")
 
-    def move(self, acquisition, idList):
+    def move(self, acquisition, idList, post_op):
         """Move an acquisition to BIDS format"""
         for srcFile in glob(acquisition.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
@@ -129,7 +130,7 @@ class Dcm2BidsGen(object):
                                                                 '.json',
                                                                 '.bval', '.bvec']]
 
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
+            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix("".join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -151,18 +152,15 @@ class Dcm2BidsGen(object):
                 else:
                     idList[acquisition.id] = [acquisition.dstId + "".join(ext)]
 
-            if (self.config.get("defaceTpl") and acquisition.datatype == "anat" and ".nii" in ext):
-                try:
-                    os.remove(dstFile)
-                except FileNotFoundError:
-                    pass
-                defaceTpl = self.config.get("defaceTpl")
+                for curr_post_op in post_op:
+                    if acquisition.datatype in curr_post_op['datatype'] or 'any' in curr_post_op['datatype']:
+                        if acquisition.suffix in curr_post_op['suffix'] or '_any' in curr_post_op['suffix']:
+                            cmd = curr_post_op['cmd'].replace('srcFile', str(srcFile))
+                            cmd = cmd.replace('dstFile', str(dstFile))
+                            run_shell_command(cmd.split())
+                            continue
 
-                cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
-                cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
-                run_shell_command(cmd)
-
-            elif ".json" in ext:
+            if ".json" in ext:
                 data = acquisition.dstSidecarData(idList)
                 save_json(dstFile, data)
                 os.remove(srcFile)

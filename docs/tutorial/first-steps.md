@@ -107,12 +107,8 @@ You can test it with any command but a safe way is to use the `--help` command.
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this
-                            release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
-                            aster/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
-
     ```
 
 ??? bug "What you can do if you did not get this output"
@@ -882,11 +878,11 @@ task name:
     {
       "datatype": "func",
       "suffix": "bold",
-      "customEntities": "task-rest",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     }
@@ -910,11 +906,11 @@ task name:
         {
           "datatype": "func",
           "suffix": "bold",
-          "customEntities": "task-rest",
+          "custom_entities": "task-rest",
           "criteria": {
             "SeriesDescription": "*Axial EPI-FMRI (Interleaved I to S)*"
           },
-          "sidecarChanges": {
+          "sidecar_changes": {
             "TaskName": "rest"
           }
         }
@@ -1000,11 +996,11 @@ file with the appropriate info.
       "id": "id_task-rest", |
       "datatype": "func",
       "suffix": "bold",
-      "customEntities": "task-rest",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     },
@@ -1014,7 +1010,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "EPI PE=*"
       },
-      "intendedFor": "id_task-rest" |
+      "intendedFor": "id_task-rest"
     }
   ]
 }
@@ -1079,7 +1075,6 @@ command.
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
 
                 Documentation at https://github.com/unfmontreal/Dcm2Bids
 

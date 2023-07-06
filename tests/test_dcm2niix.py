@@ -22,8 +22,8 @@ def test_dcm2niix_run():
     app = Dcm2niixGen([dicomDir], tmpDir.name)
     app.run()
 
-    helperDir = os.path.join(tmpDir.name, DEFAULT.tmpDirName, DEFAULT.helperDir, "*")
-    ls = sorted(glob(helperDir))
+    helper_dir = os.path.join(tmpDir.name, DEFAULT.tmp_dir_name, DEFAULT.helper_dir, "*")
+    ls = sorted(glob(helper_dir))
     firstMtime = [os.stat(_).st_mtime for _ in ls]
     assert "localizer_20100603125600" in ls[0]
 

@@ -1,6 +1,6 @@
 {
-    "dupMethod": "dup",
-    "searchMethod": "fnmatch",
+    "dup_method": "dup",
+    "search_method": "fnmatch",
     "descriptions": [
         {
           "datatype": "localizer",
