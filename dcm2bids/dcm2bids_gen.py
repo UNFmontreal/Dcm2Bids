@@ -38,7 +38,7 @@ class Dcm2BidsGen(object):
         config,
         output_dir=DEFAULT.output_dir,
         bids_validate=DEFAULT.bids_validate,
-        auto_extract_entities=DEFAULT.auto_extract_entities,
+        auto_extract_entities={},
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         force_dcm2niix=DEFAULT.force_dcm2niix,

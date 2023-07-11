@@ -13,6 +13,8 @@ from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
 from dcm2bids.utils.utils import DEFAULT, convert_dir, splitext_
 
+compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
+
 
 class Sidecar(object):
     """ A sidecar object
@@ -294,9 +296,56 @@ class SidecarPairing(object):
                             sub_result.append(compare(name, sub_pattern))
             except Exception:
                 sub_result = [False]
+
             if compare_type == "any":
                 return any(sub_result)
             else:
+                return False
+
+        def compare_float(name, pattern):
+            try:
+                comparison = list(pattern.keys())[0]
+                name_float = float(name)
+
+                sub_pattern = pattern[list(pattern.keys())[0]]
+
+                if comparison in ["btwe", "btw"]:
+                    if not isinstance(sub_pattern, list):
+                        raise ValueError("You should be using a list"
+                                         " for float comparison "
+                                         f" with key {comparison}. "
+                                         f"Error val: {sub_pattern}")
+
+                    if len(sub_pattern) != 2:
+                        raise ValueError(f"List for key {comparison}"
+                                         " should have two values. "
+                                         f"Error val: {sub_pattern}")
+
+                    elif comparison == "btwe":
+                        return name_float >= float(sub_pattern[0]) and name_float <= float(sub_pattern[1])
+                    elif comparison == "btw":
+                        return name_float > float(sub_pattern[0]) and name_float < float(sub_pattern[1])
+
+                if isinstance(sub_pattern, list):
+                    if len(sub_pattern) != 1:
+                        raise ValueError(f"List for key {comparison}"
+                                         " should have only one value. "
+                                         "Error val: {sub_pattern}")
+
+                    sub_pattern = float(sub_pattern[0])
+                else:
+                    sub_pattern = float(sub_pattern)
+
+                if comparison == 'gt':
+                    return sub_pattern < name_float
+                elif comparison == 'lt':
+                    return sub_pattern > name_float
+                elif comparison == 'ge':
+                    return sub_pattern <= name_float
+                elif comparison == 'le':
+                    return sub_pattern >= name_float
+
+            except Exception:
                 return False
 
         result = []
@@ -305,7 +354,17 @@ class SidecarPairing(object):
             name = data.get(tag, '')
 
             if isinstance(pattern, dict):
-                result.append(compare_complex(name, pattern))
+                if len(pattern.keys()) == 1:
+                    if "any" in pattern.keys():
+                        result.append(compare_complex(name, pattern))
+                    elif list(pattern.keys())[0] in compare_float_keys:
+                        result.append(compare_float(name, pattern))
+                    else:
+                        self.logger.warning(f"HERE {list(pattern.keys())[0]}")
+                else:
+                    raise ValueError("Dictionnary used as criteria should be "
+                                     "using only one key.")
+
             elif isinstance(name, list):
                 result.append(compare_list(name, pattern))
             else:

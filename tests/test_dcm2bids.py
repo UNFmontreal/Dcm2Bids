@@ -77,12 +77,20 @@ def test_dcm2bids():
                       bids_dir.name)
     app.run()
 
-    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    fmapFile = os.path.join(bids_dir.name,
+                            "sub-01",
+                            "fmap",
+                            "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
-    assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
-                                   os.path.join("anat", "sub-01_T1w.nii")]
+    assert data["IntendedFor"] == [os.path.join("dwi",
+                                                "sub-01_dwi.nii.gz"),
+                                   os.path.join("anat",
+                                                "sub-01_T1w.nii")]
 
-    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
+    fmapFile = os.path.join(bids_dir.name,
+                            "sub-01",
+                            "fmap",
+                            "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
     assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
@@ -216,12 +224,18 @@ def test_dcm2bids_case_sensitive():
     assert layout.get_tasks() == ["rest"]
     assert layout.get_runs() == [1, 2, 3]
 
-    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-492_fmap.json")
+    fmapFile = os.path.join(bids_dir.name,
+                            "sub-01",
+                            "fmap",
+                            "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
     assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
                                    os.path.join("anat", "sub-01_T1w.nii")]
 
-    fmapFile = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_echo-738_fmap.json")
+    fmapFile = os.path.join(bids_dir.name,
+                            "sub-01",
+                            "fmap",
+                            "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
     assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
@@ -301,15 +315,30 @@ def test_dcm2bids_complex():
     assert layout.get_sessions() == []
     assert layout.get_runs() == [1, 2, 3]
 
-    fmap_file_1 = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_run-01_fmap.json")
-    fmap_file_2 = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_run-02_fmap.json")
-    fmap_file_3 = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_run-03_fmap.json")
+    fmap_file_1 = os.path.join(bids_dir.name,
+                               "sub-01",
+                               "fmap",
+                               "sub-01_run-01_fmap.json")
+    fmap_file_2 = os.path.join(bids_dir.name,
+                               "sub-01",
+                               "fmap",
+                               "sub-01_run-02_fmap.json")
+    fmap_file_3 = os.path.join(bids_dir.name,
+                               "sub-01",
+                               "fmap",
+                               "sub-01_run-03_fmap.json")
     assert os.path.exists(fmap_file_1)
     assert os.path.exists(fmap_file_2)
     assert os.path.exists(fmap_file_3)
 
-    localizer_file_1 = os.path.join(bids_dir.name, "sub-01", "localizer", "sub-01_run-01_localizer.json")
-    localizer_file_2 = os.path.join(bids_dir.name, "sub-01", "localizer", "sub-01_run-02_localizer.json")
+    localizer_file_1 = os.path.join(bids_dir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_run-01_localizer.json")
+    localizer_file_2 = os.path.join(bids_dir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_run-02_localizer.json")
     assert os.path.exists(localizer_file_1)
     assert os.path.exists(localizer_file_2)
 
@@ -358,3 +387,59 @@ def test_dcm2bids_dup():
     # not dup
     assert compare_json(original_02_localizer,
                         json_localizer[2])
+
+
+def test_dcm2bids_float():
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test_float.json"),
+                      bids_dir.name)
+    app.run()
+    layout = BIDSLayout(bids_dir.name,
+                        validate=False)
+
+    assert layout.get_runs() == [1, 2, 3]
+
+    original_fmap = os.path.join(TEST_DATA_DIR,
+                                 "sidecars",
+                                 "010_gre_field_mapping_20100603125600_e1.json")
+
+    # Input localizer is lowercase (json)
+    json_fmap = layout.get(subject="01",
+                           extension="json",
+                           suffix="fmap")
+
+    assert compare_json(original_fmap,
+                        json_fmap[0].path)
+
+    localizer_file_1 = os.path.join(bids_dir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_run-01_localizer.json")
+    localizer_file_2 = os.path.join(bids_dir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_run-02_localizer.json")
+    localizer_file_3 = os.path.join(bids_dir.name,
+                                    "sub-01",
+                                    "localizer",
+                                    "sub-01_run-03_localizer.json")
+    fmap_file = os.path.join(bids_dir.name,
+                             "sub-01",
+                             "fmap",
+                             "sub-01_echo-1_fmap.json")
+    t1w_file = os.path.join(bids_dir.name,
+                            "sub-01",
+                            "anat",
+                            "sub-01_T1w.json")
+
+    assert os.path.exists(localizer_file_1)
+    assert os.path.exists(localizer_file_2)
+    assert os.path.exists(localizer_file_3)
+
+    assert os.path.exists(fmap_file)
+    assert os.path.exists(t1w_file)
