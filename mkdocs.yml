@@ -116,6 +116,7 @@ extra:
     provider: mike
     default: latest
     alias_type: symlink
+    redirect_template: null
     canonical_version: latest
     version_selector: true
 plugins:
