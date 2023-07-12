@@ -1,0 +1,42 @@
+{
+    "descriptions": [
+        {
+            "datatype": "localizer",
+            "suffix": "localizer",
+            "criteria": {
+                "RepetitionTime": {
+                "le": ["0.0086"]
+                },
+                "SAR": {
+                    "gt": ["0.020"]
+                },
+                "ImagingFrequency": {
+                    "ge": ["123.105"]
+                }
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "fmap",
+            "custom_entities": "echo-1",
+            "criteria": {
+                "EchoTime": {
+                "lt": ["0.005"]
+                },
+                "PixelBandwidth": {
+                    "btw": ["259", "261"]
+                }
+            }
+        },
+        {
+            "datatype": "anat",
+            "suffix": "T1w",
+            "criteria": {
+                "EchoTime": {
+                "btwe": ["0.00291", "0.00292"]
+                },
+                "InversionTime": 0.9
+            }
+        }    
+    ]
+}
