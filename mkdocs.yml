@@ -37,8 +37,6 @@ markdown_extensions:
 - admonition
 - attr_list
 - md_in_html
-# - pymdownx.extra:
-#     a
 - pymdownx.caret
 - pymdownx.emoji
 - pymdownx.mark
@@ -117,18 +115,13 @@ extra:
   version:
     provider: mike
     default: latest
-    # These fields are all optional; the defaults are as below...
     alias_type: symlink
-    redirect_template: null
-    deploy_prefix: ''
     canonical_version: latest
     version_selector: true
-    css_dir: css
-    javascript_dir: js
 plugins:
   - search
-  # - git-revision-date-localized:
-  #     type: timeago
-  #     enable_creation_date: true
-  #     fallback_to_build_date: true
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
+      fallback_to_build_date: true
   # - git-authors
