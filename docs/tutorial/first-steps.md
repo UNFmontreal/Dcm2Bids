@@ -405,7 +405,7 @@ You have to input the filters yourself, which is way easier to define when you
 have access to an example of the sidecar files.
 
 You can generate all the sidecar files for an individual participant using the
-[dcm2bids_helper](./use-main-commands.md#tools) command.
+[dcm2bids_helper](/use-main-commands.md#tools) command.
 
 ### `dcm2bids_helper` command
 

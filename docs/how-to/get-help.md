@@ -33,7 +33,7 @@ unfamiliar with GitHub and issues.
 
 ### 2. **Community support channels**
 
-There is a couple of places you can look for
+There are a couple of places you can look for
 
 #### **[NeuroStars][neurostars]**
 
