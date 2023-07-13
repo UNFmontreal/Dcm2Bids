@@ -1,5 +1,37 @@
 # CHANGELOG
 
+## **2.1.9 - 2022-06-17**
+
+Some issues with pypi. Sorry for this.
+
+### **What's Changed**
+
+* Fix if dot in dcm files names by[ @arnaudbore](https://github.com/arnaudbore) in[ #169](https://github.com/UNFmontreal/Dcm2Bids/pull/169)
+* Support output_dir override[ #170](https://github.com/UNFmontreal/Dcm2Bids/issues/170) by[ @GMerakis](https://github.com/GMerakis) in[ #171](https://github.com/UNFmontreal/Dcm2Bids/pull/171)
+* BF - forgot bval bvec by[ @arnaudbore](https://github.com/arnaudbore) in[ #172](https://github.com/UNFmontreal/Dcm2Bids/pull/172)
+
+### **New Contributors**
+
+* [@GMerakis](https://github.com/GMerakis) made their first contribution in[ #171](https://github.com/UNFmontreal/Dcm2Bids/pull/171)
+
+**Full Changelog**:[ 2.1.7...2.1.9](https://github.com/UNFmontreal/Dcm2Bids/compare/2.1.7...2.1.9)
+
+## **2.1.8 - 2022-06-17**
+
+This will be our last PR before moving to a new API.
+
+### **What's Changed**
+
+* Fix if dot in dcm files names by[ @arnaudbore](https://github.com/arnaudbore) in[ #169](https://github.com/UNFmontreal/Dcm2Bids/pull/169)
+* Support output_dir override[ #170](https://github.com/UNFmontreal/Dcm2Bids/issues/170) by[ @GMerakis](https://github.com/GMerakis) in[ #171](https://github.com/UNFmontreal/Dcm2Bids/pull/171)
+* BF - forgot bval bvec by[ @arnaudbore](https://github.com/arnaudbore) in[ #172](https://github.com/UNFmontreal/Dcm2Bids/pull/172)
+
+### **New Contributors**
+
+* [@GMerakis](https://github.com/GMerakis) made their first contribution in[ #171](https://github.com/UNFmontreal/Dcm2Bids/pull/171)
+
+**Full Changelog**:[ 2.1.7...2.1.8](https://github.com/UNFmontreal/Dcm2Bids/compare/2.1.7...2.1.8)
+
 ## 2.1.7 - 2022-05-30
 
 Last version before refactoring.

@@ -1,0 +1,128 @@
+# Project info
+site_name: dcm2bids documentation
+site_url: https://UNFmontreal.github.io/Dcm2Bids/
+site_description: >-
+  This is the documentation for dcm2bids, a community-centered project that
+  aims to be an easy-to-use tool to automate the process of 1- converting
+  DICOM files to NIfTI files with dcm2niix and 2- reorganising NIfTI files
+  into the Brain Imaging Data Structure (BIDS).
+# site_author:
+
+# Repo info
+repo_name: UNFmontreal/dcm2bids
+repo_url: https://github.com/UNFmontreal/Dcm2Bids
+edit_uri: blob/master/
+
+# custom navbar order
+nav:
+  - Home: index.md
+  - Get started:
+      - index: get-started/index.md
+      - Installation: get-started/install.md
+  - Tutorials:
+      - index: tutorial/index.md
+      - First steps: tutorial/first-steps.md
+  - How-to guides:
+      - index: how-to/index.md
+      - Get help and support: how-to/get-help.md
+      - Use main commands: how-to/use-main-commands.md
+      - Create a config file: how-to/create-config-file.md
+      - Use advanced commands: how-to/use-advanced-commands.md
+      - Contribute to dcm2bids: how-to/contributing.md
+  - Code of conduct: code_of_conduct.md
+  - Changelog: changelog.md
+  - API Reference: dcm2bids
+
+markdown_extensions:
+- admonition
+- attr_list
+- md_in_html
+- pymdownx.caret
+- pymdownx.emoji
+- pymdownx.mark
+- pymdownx.tilde
+- pymdownx.critic
+- pymdownx.keys
+- pymdownx.details
+- pymdownx.tabbed:
+    alternate_style: true
+- pymdownx.snippets
+    # check_paths: true
+- pymdownx.inlinehilite
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.superfences:
+    custom_fences:
+      - name: mermaid
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_code_format
+- footnotes
+
+
+
+# Configuration
+theme:
+  language: en
+  name: material
+  custom_dir: docs_helper/templates
+  features:
+  - announce.dismiss
+  - content.action.edit
+  - content.action.view
+  - content.code.annotate
+  - content.code.copy
+  - content.tooltips
+  - navigation.footer
+  - navigation.indexes
+  - navigation.sections
+  - navigation.tabs
+  - navigation.tabs.sticky
+  - navigation.top
+  - search.highlight
+  - search.suggest
+  - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      primary: custom
+      scheme: default
+      toggle:
+        icon: material/brightness-6
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-5
+        name: Switch to light mode
+
+extra_css:
+  - assets/extra.css
+
+# extra_javascript:
+#   - assets/..
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/UNFmontreal/Dcm2Bids
+      name: dcm2bids on GitHub
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/unfmontreal/dcm2bids
+      name: dcm2bids on docker
+  version:
+    provider: mike
+    default: latest
+    alias_type: symlink
+    redirect_template: null
+    canonical_version: latest
+    version_selector: true
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
+      fallback_to_build_date: true
+  # - git-authors
