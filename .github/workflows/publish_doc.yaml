@@ -56,8 +56,11 @@ jobs:
 
       - name: Build docs for specific release
         if: github.event_name == 'release'
-        run: mike deploy --push ${{ github.ref_name }} latest
+        run: |
+          mike deploy -p ${{ github.ref_name }} latest
 
       - name: Deploy dev version
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: mike deploy --push dev
+        run: |
+          VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
+          mike deploy $VERSION dev -p
