@@ -52,7 +52,7 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Build API reference
-        run: pdocs as_markdown -o docs/dcm2bids dcm2bids
+        run: pdocs as_markdown -o docs/ dcm2bids --overwrite
 
       - name: Build docs for specific release
         if: github.event_name == 'release'
@@ -63,4 +63,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
-          mike deploy $VERSION dev -p
+          mike deploy -p $VERSION dev
