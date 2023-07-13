@@ -5,6 +5,7 @@
         {
             "datatype": "localizer",
             "suffix": "localizer",
+            "custom_entities": "dummy01",
             "criteria": {
                 "SeriesDescription": "locali*"
             },
