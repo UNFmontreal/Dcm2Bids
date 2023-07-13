@@ -604,6 +604,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#classes" class="md-nav__link">
     Classes
   </a>
@@ -761,6 +768,8 @@ from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
 
 from dcm2bids.utils.utils import DEFAULT, convert_dir, splitext_
+
+compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
 
 class Sidecar(object):
 
@@ -1246,6 +1255,80 @@ class SidecarPairing(object):
 
                 return False
 
+        def compare_float(name, pattern):
+
+            try:
+
+                comparison = list(pattern.keys())[0]
+
+                name_float = float(name)
+
+                sub_pattern = pattern[list(pattern.keys())[0]]
+
+                if comparison in ["btwe", "btw"]:
+
+                    if not isinstance(sub_pattern, list):
+
+                        raise ValueError("You should be using a list "
+
+                                         "for float comparison "
+
+                                         f"with key {comparison}. "
+
+                                         f"Error val: {sub_pattern}")
+
+                    if len(sub_pattern) != 2:
+
+                        raise ValueError(f"List for key {comparison} "
+
+                                         "should have two values. "
+
+                                         f"Error val: {sub_pattern}")
+
+                    elif comparison == "btwe":
+
+                        return name_float &gt;= float(sub_pattern[0]) and name_float &lt;= float(sub_pattern[1])
+
+                    elif comparison == "btw":
+
+                        return name_float &gt; float(sub_pattern[0]) and name_float &lt; float(sub_pattern[1])
+
+                if isinstance(sub_pattern, list):
+
+                    if len(sub_pattern) != 1:
+
+                        raise ValueError(f"List for key {comparison} "
+
+                                         "should have only one value. "
+
+                                         "Error val: {sub_pattern}")
+
+                    sub_pattern = float(sub_pattern[0])
+
+                else:
+
+                    sub_pattern = float(sub_pattern)
+
+                if comparison == 'gt':
+
+                    return sub_pattern &lt; name_float
+
+                elif comparison == 'lt':
+
+                    return sub_pattern &gt; name_float
+
+                elif comparison == 'ge':
+
+                    return sub_pattern &lt;= name_float
+
+                elif comparison == 'le':
+
+                    return sub_pattern &gt;= name_float
+
+            except Exception:
+
+                return False
+
         result = []
 
         for tag, pattern in criteria.items():
@@ -1254,7 +1337,27 @@ class SidecarPairing(object):
 
             if isinstance(pattern, dict):
 
-                result.append(compare_complex(name, pattern))
+                if len(pattern.keys()) == 1:
+
+                    if "any" in pattern.keys():
+
+                        result.append(compare_complex(name, pattern))
+
+                    elif list(pattern.keys())[0] in compare_float_keys:
+
+                        result.append(compare_float(name, pattern))
+
+                    else:
+
+                        self.logger.warning(f"This key {list(pattern.keys())[0]} "
+
+                                            "is not allowed.")
+
+                else:
+
+                    raise ValueError("Dictionnary used as criteria should be "
+
+                                     "using only one key.")
 
             elif isinstance(name, list):
 
@@ -1527,6 +1630,9 @@ class SidecarPairing(object):
                 self.acquisitions[acqInd].setDstFile()
 </code></pre>
 </details>
+<h2 id="variables">Variables</h2>
+<div class="highlight"><pre><span></span><code><span class="n">compare_float_keys</span>
+</code></pre></div>
 <h2 id="classes">Classes</h2>
 <h3 id="sidecar">Sidecar</h3>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sidecar</span><span class="p">(</span>
@@ -2070,6 +2176,80 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 return False
 
+        def compare_float(name, pattern):
+
+            try:
+
+                comparison = list(pattern.keys())[0]
+
+                name_float = float(name)
+
+                sub_pattern = pattern[list(pattern.keys())[0]]
+
+                if comparison in ["btwe", "btw"]:
+
+                    if not isinstance(sub_pattern, list):
+
+                        raise ValueError("You should be using a list "
+
+                                         "for float comparison "
+
+                                         f"with key {comparison}. "
+
+                                         f"Error val: {sub_pattern}")
+
+                    if len(sub_pattern) != 2:
+
+                        raise ValueError(f"List for key {comparison} "
+
+                                         "should have two values. "
+
+                                         f"Error val: {sub_pattern}")
+
+                    elif comparison == "btwe":
+
+                        return name_float &gt;= float(sub_pattern[0]) and name_float &lt;= float(sub_pattern[1])
+
+                    elif comparison == "btw":
+
+                        return name_float &gt; float(sub_pattern[0]) and name_float &lt; float(sub_pattern[1])
+
+                if isinstance(sub_pattern, list):
+
+                    if len(sub_pattern) != 1:
+
+                        raise ValueError(f"List for key {comparison} "
+
+                                         "should have only one value. "
+
+                                         "Error val: {sub_pattern}")
+
+                    sub_pattern = float(sub_pattern[0])
+
+                else:
+
+                    sub_pattern = float(sub_pattern)
+
+                if comparison == 'gt':
+
+                    return sub_pattern &lt; name_float
+
+                elif comparison == 'lt':
+
+                    return sub_pattern &gt; name_float
+
+                elif comparison == 'ge':
+
+                    return sub_pattern &lt;= name_float
+
+                elif comparison == 'le':
+
+                    return sub_pattern &gt;= name_float
+
+            except Exception:
+
+                return False
+
         result = []
 
         for tag, pattern in criteria.items():
@@ -2078,7 +2258,27 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
             if isinstance(pattern, dict):
 
-                result.append(compare_complex(name, pattern))
+                if len(pattern.keys()) == 1:
+
+                    if "any" in pattern.keys():
+
+                        result.append(compare_complex(name, pattern))
+
+                    elif list(pattern.keys())[0] in compare_float_keys:
+
+                        result.append(compare_float(name, pattern))
+
+                    else:
+
+                        self.logger.warning(f"This key {list(pattern.keys())[0]} "
+
+                                            "is not allowed.")
+
+                else:
+
+                    raise ValueError("Dictionnary used as criteria should be "
+
+                                     "using only one key.")
 
             elif isinstance(name, list):
 
@@ -2751,6 +2951,80 @@ the values are a list of possible descriptions</p>
 
                 return False
 
+        def compare_float(name, pattern):
+
+            try:
+
+                comparison = list(pattern.keys())[0]
+
+                name_float = float(name)
+
+                sub_pattern = pattern[list(pattern.keys())[0]]
+
+                if comparison in ["btwe", "btw"]:
+
+                    if not isinstance(sub_pattern, list):
+
+                        raise ValueError("You should be using a list "
+
+                                         "for float comparison "
+
+                                         f"with key {comparison}. "
+
+                                         f"Error val: {sub_pattern}")
+
+                    if len(sub_pattern) != 2:
+
+                        raise ValueError(f"List for key {comparison} "
+
+                                         "should have two values. "
+
+                                         f"Error val: {sub_pattern}")
+
+                    elif comparison == "btwe":
+
+                        return name_float &gt;= float(sub_pattern[0]) and name_float &lt;= float(sub_pattern[1])
+
+                    elif comparison == "btw":
+
+                        return name_float &gt; float(sub_pattern[0]) and name_float &lt; float(sub_pattern[1])
+
+                if isinstance(sub_pattern, list):
+
+                    if len(sub_pattern) != 1:
+
+                        raise ValueError(f"List for key {comparison} "
+
+                                         "should have only one value. "
+
+                                         "Error val: {sub_pattern}")
+
+                    sub_pattern = float(sub_pattern[0])
+
+                else:
+
+                    sub_pattern = float(sub_pattern)
+
+                if comparison == 'gt':
+
+                    return sub_pattern &lt; name_float
+
+                elif comparison == 'lt':
+
+                    return sub_pattern &gt; name_float
+
+                elif comparison == 'ge':
+
+                    return sub_pattern &lt;= name_float
+
+                elif comparison == 'le':
+
+                    return sub_pattern &gt;= name_float
+
+            except Exception:
+
+                return False
+
         result = []
 
         for tag, pattern in criteria.items():
@@ -2759,7 +3033,27 @@ the values are a list of possible descriptions</p>
 
             if isinstance(pattern, dict):
 
-                result.append(compare_complex(name, pattern))
+                if len(pattern.keys()) == 1:
+
+                    if "any" in pattern.keys():
+
+                        result.append(compare_complex(name, pattern))
+
+                    elif list(pattern.keys())[0] in compare_float_keys:
+
+                        result.append(compare_float(name, pattern))
+
+                    else:
+
+                        self.logger.warning(f"This key {list(pattern.keys())[0]} "
+
+                                            "is not allowed.")
+
+                else:
+
+                    raise ValueError("Dictionnary used as criteria should be "
+
+                                     "using only one key.")
 
             elif isinstance(name, list):
 
@@ -2913,11 +3207,11 @@ the values are a list of possible descriptions</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-13T12:45:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-13T21:59:27+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-13</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-13T12:45:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-13</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-13T21:59:27+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-13</span>
       
     
   </small>
