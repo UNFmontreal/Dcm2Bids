@@ -1,4 +1,7 @@
 {
+    "search_method": "random_method",
+    "dup_method": "random_dup",
+    "case_sensitive": "random_case_sensitive",
     "descriptions": [
         {
             "datatype": "localizer",

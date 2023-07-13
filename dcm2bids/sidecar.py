@@ -311,14 +311,14 @@ class SidecarPairing(object):
 
                 if comparison in ["btwe", "btw"]:
                     if not isinstance(sub_pattern, list):
-                        raise ValueError("You should be using a list"
-                                         " for float comparison "
-                                         f" with key {comparison}. "
+                        raise ValueError("You should be using a list "
+                                         "for float comparison "
+                                         f"with key {comparison}. "
                                          f"Error val: {sub_pattern}")
 
                     if len(sub_pattern) != 2:
-                        raise ValueError(f"List for key {comparison}"
-                                         " should have two values. "
+                        raise ValueError(f"List for key {comparison} "
+                                         "should have two values. "
                                          f"Error val: {sub_pattern}")
 
                     elif comparison == "btwe":
@@ -328,8 +328,8 @@ class SidecarPairing(object):
 
                 if isinstance(sub_pattern, list):
                     if len(sub_pattern) != 1:
-                        raise ValueError(f"List for key {comparison}"
-                                         " should have only one value. "
+                        raise ValueError(f"List for key {comparison} "
+                                         "should have only one value. "
                                          "Error val: {sub_pattern}")
 
                     sub_pattern = float(sub_pattern[0])
@@ -360,7 +360,8 @@ class SidecarPairing(object):
                     elif list(pattern.keys())[0] in compare_float_keys:
                         result.append(compare_float(name, pattern))
                     else:
-                        self.logger.warning(f"HERE {list(pattern.keys())[0]}")
+                        self.logger.warning(f"This key {list(pattern.keys())[0]} "
+                                            "is not allowed.")
                 else:
                     raise ValueError("Dictionnary used as criteria should be "
                                      "using only one key.")
