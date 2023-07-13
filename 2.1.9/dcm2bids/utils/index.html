@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://UNFmontreal.github.io/Dcm2Bids/2.1.9/dcm2bids/dcm2bids/">
+        <link rel="canonical" href="https://UNFmontreal.github.io/Dcm2Bids/2.1.9/dcm2bids/utils/">
       
       
       
@@ -19,7 +19,7 @@
     
     
       
-        <title>Module dcm2bids.dcm2bids - dcm2bids documentation</title>
+        <title>Module dcm2bids.utils - dcm2bids documentation</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-dcm2bidsdcm2bids" class="md-skip">
+        <a href="#module-dcm2bidsutils" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Module dcm2bids.dcm2bids
+              Module dcm2bids.utils
             
           </span>
         </div>
@@ -598,8 +598,64 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#main" class="md-nav__link">
-    main
+  <a href="#assert_dirs_empty" class="md-nav__link">
+    assert_dirs_empty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_json" class="md-nav__link">
+    load_json
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_participants" class="md-nav__link">
+    read_participants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_shell_command" class="md-nav__link">
+    run_shell_command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_json" class="md-nav__link">
+    save_json
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splitext_" class="md-nav__link">
+    splitext_
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid_path" class="md-nav__link">
+    valid_path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_participants" class="md-nav__link">
+    write_participants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_txt" class="md-nav__link">
+    write_txt
   </a>
   
 </li>
@@ -618,51 +674,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dcm2bids" class="md-nav__link">
-    Dcm2bids
+  <a href="#default" class="md-nav__link">
+    DEFAULT
   </a>
   
-    <nav class="md-nav" aria-label="Dcm2bids">
+    <nav class="md-nav" aria-label="DEFAULT">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instance-variables" class="md-nav__link">
-    Instance variables
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move" class="md-nav__link">
-    move
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run" class="md-nav__link">
-    run
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set_logger" class="md-nav__link">
-    set_logger
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
   </a>
   
 </li>
@@ -692,7 +713,7 @@
                   
 
   
-    <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/dcm2bids/dcm2bids.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/UNFmontreal/Dcm2Bids/blob/master/dcm2bids/utils.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -701,26 +722,21 @@
     
       
     
-    <a href="https://github.com/UNFmontreal/Dcm2Bids/raw/master/dcm2bids/dcm2bids.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/UNFmontreal/Dcm2Bids/raw/master/dcm2bids/utils.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
     </a>
   
 
 
-<h1 id="module-dcm2bidsdcm2bids">Module dcm2bids.dcm2bids</h1>
-<p>Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure</p>
+<h1 id="module-dcm2bidsutils">Module dcm2bids.utils</h1>
 <details class="example">
 <summary>View Source</summary>
 <pre><code># -*- coding: utf-8 -*-
 
-"""
+import csv
 
-Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-
-"""
-
-import argparse
+import json
 
 import logging
 
@@ -728,423 +744,306 @@ import os
 
 from pathlib import Path
 
-import platform
+import re
 
-import sys
+from collections import OrderedDict
 
-from datetime import datetime
+import shlex
 
-from glob import glob
+import shutil
 
-from dcm2bids.dcm2niix import Dcm2niix
+from subprocess import check_output
 
-from dcm2bids.logger import setup_logging
+class DEFAULT(object):
 
-from dcm2bids.sidecar import Sidecar, SidecarPairing
+    """ Default values of the package"""
 
-from dcm2bids.structure import Participant
+    # cli dcm2bids
 
-from dcm2bids.utils import (DEFAULT, load_json, save_json,
+    cliLogLevel = "INFO"
 
-                            splitext_, run_shell_command, valid_path)
+    EPILOG="Documentation at https://github.com/unfmontreal/Dcm2Bids"
 
-from dcm2bids.version import __version__, check_latest, dcm2niix_version
+    # dcm2bids.py
 
-class Dcm2bids(object):
+    outputDir = Path.cwd()
 
-    """ Object to handle dcm2bids execution steps
+    session = ""  # also Participant object
+
+    clobber = False
+
+    forceDcm2niix = False
+
+    defaceTpl = None
+
+    logLevel = "WARNING"
+
+    # dcm2niix.py
+
+    dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+
+    dcm2niixVersion = "v1.0.20181125"
+
+    # sidecar.py
+
+    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
+
+    searchMethod = "fnmatch"
+
+    searchMethodChoices = ["fnmatch", "re"]
+
+    runTpl = "_run-{:02d}"
+
+    caseSensitive = True
+
+    # Entity table:
+
+    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+
+    entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
+
+                       "run", "mod", "echo", "flip", "inv", "mt", "part",
+
+                       "recording"]
+
+    # misc
+
+    tmpDirName = "tmp_dcm2bids"
+
+    helperDir = "helper"
+
+def load_json(filename):
+
+    """ Load a JSON file
 
     Args:
 
-        dicom_dir (str or list): A list of folder with dicoms to convert
+        filename (str): Path of a JSON file
 
-        participant (str): Label of your participant
+    Return:
 
-        config (path): Path to a dcm2bids configuration file
-
-        output_dir (path): Path to the BIDS base folder
-
-        session (str): Optional label of a session
-
-        clobber (boolean): Overwrite file if already in BIDS folder
-
-        forceDcm2niix (boolean): Forces a cleaning of a previous execution of
-
-                                 dcm2niix
-
-        log_level (str): logging level
+        Dictionnary of the JSON file
 
     """
 
-    def __init__(
+    with open(filename, "r") as f:
 
-        self,
+        data = json.load(f, object_pairs_hook=OrderedDict)
 
-        dicom_dir,
+    return data
 
-        participant,
+def save_json(filename, data):
 
-        config,
+    with filename.open("w") as f:
 
-        output_dir=DEFAULT.outputDir,
+        json.dump(data, f, indent=4)
 
-        session=DEFAULT.session,
+def write_txt(filename, lines):
 
-        clobber=DEFAULT.clobber,
+    with open(filename, "a") as f:
 
-        forceDcm2niix=DEFAULT.forceDcm2niix,
+        for row in lines:
 
-        log_level=DEFAULT.logLevel,
+            f.write("%s\n" % row)
 
-        **_
+def write_participants(filename, participants):
 
-    ):
+    with open(filename, "w") as f:
 
-        self._dicomDirs = []
+        writer = csv.DictWriter(f, delimiter="\t", fieldnames=participants[0].keys())
 
-        self.dicomDirs = dicom_dir
+        writer.writeheader()
 
-        self.bidsDir = valid_path(output_dir, type="folder")
+        writer.writerows(participants)
 
-        self.config = load_json(valid_path(config, type="file"))
+def read_participants(filename):
 
-        self.participant = Participant(participant, session)
+    if not os.path.exists(filename):
 
-        self.clobber = clobber
+        return []
 
-        self.forceDcm2niix = forceDcm2niix
+    with open(filename, "r") as f:
 
-        self.logLevel = log_level
+        reader = csv.DictReader(f, delimiter="\t")
 
-        # logging setup
+        return [row for row in reader]
 
-        self.set_logger()
+def splitext_(path, extensions=None):
 
-        self.logger.info("--- dcm2bids start ---")
+    """ Split the extension from a pathname
 
-        self.logger.info("OS:version: %s", platform.platform())
+    Handle case with extensions with '.' in it
 
-        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
+    Args:
 
-        self.logger.info("dcm2bids:version: %s", __version__)
+        path (str): A path to split
 
-        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
+        extensions (list): List of special extensions
 
-        self.logger.info("participant: %s", self.participant.name)
+    Returns:
 
-        self.logger.info("session: %s", self.participant.session)
+        (root, ext): ext may be empty
 
-        self.logger.info("config: %s", os.path.realpath(config))
+    """
 
-        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
+    if extensions is None:
 
-    @property
+        extensions = [".nii.gz"]
 
-    def dicomDirs(self):
+    for ext in extensions:
 
-        """List of DICOMs directories"""
+        if path.endswith(ext):
 
-        return self._dicomDirs
+            return path[: -len(ext)], path[-len(ext) :]
 
-    @dicomDirs.setter
+    return os.path.splitext(path)
 
-    def dicomDirs(self, value):
+def run_shell_command(commandLine):
 
-        dicom_dirs = value if isinstance(value, list) else [value]
+    """ Wrapper of subprocess.check_output
 
-        valid_dirs = [valid_path(_dir, "folder") for _dir in dicom_dirs]
+    Returns:
 
-        self._dicomDirs = valid_dirs
+        Run command with arguments and return its output
 
-    def set_logger(self):
+    """
 
-        """ Set a basic logger"""
+    logger = logging.getLogger(__name__)
 
-        logDir = self.bidsDir / DEFAULT.tmpDirName / "log"
+    logger.info("Running %s", commandLine)
 
-        logFile = logDir / f"{self.participant.prefix}_{datetime.now().isoformat().replace(':', '')}.log"
+    return check_output(commandLine)
 
-        logDir.mkdir(parents=True, exist_ok=True)
+def valid_path(in_path, type="folder"):
 
-        setup_logging(self.logLevel, logFile)
+    """Assert that file exists.
 
-        self.logger = logging.getLogger(__name__)
+    Parameters
 
-    def run(self):
+    ----------
 
-        """Run dcm2bids"""
+    required_file: Path
 
-        dcm2niix = Dcm2niix(
+        Path to be checked.
 
-            self.dicomDirs,
+    """
 
-            self.bidsDir,
+    if isinstance(in_path, str):
 
-            self.participant,
+        in_path = Path(in_path)
 
-            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
+    if type == 'folder':
 
-        )
+        if in_path.is_dir() or in_path.parent.is_dir():
 
-        check_latest()
+            return in_path
 
-        check_latest("dcm2niix")
+        else:
 
-        dcm2niix.run(self.forceDcm2niix)
+            raise NotADirectoryError(in_path)
 
-        sidecars = []
+    elif type == "file":
 
-        for filename in dcm2niix.sidecarFiles:
+        if in_path.is_file():
 
-            sidecars.append(
+            return in_path
 
-                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
+        else:
 
-            )
+            raise FileNotFoundError(in_path)
 
-        sidecars = sorted(sidecars)
+    raise TypeError(type)
 
-        parser = SidecarPairing(
+def assert_dirs_empty(parser, args, required):
 
-            sidecars,
+    """
 
-            self.config["descriptions"],
+    Assert that all directories exist are empty.
 
-            self.config.get("searchMethod", DEFAULT.searchMethod),
+    If dirs exist and not empty, and --force is used, delete dirs.
 
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
+    Parameters
 
-        )
+    ----------
 
-        parser.build_graph()
+    parser: argparse.ArgumentParser object
 
-        parser.build_acquisitions(self.participant)
+        Parser.
 
-        parser.find_runs()
+    args: argparse namespace
 
-        self.logger.info("moving acquisitions into BIDS folder")
+        Argument list.
 
-        intendedForList = [[] for i in range(len(parser.descriptions))]
+    required: string or list of paths to files
 
-        for acq in parser.acquisitions:
+        Required paths to be checked.
 
-            acq.setDstFile()
+    create_dir: bool
 
-            intendedForList = self.move(acq, intendedForList)
+        If true, create the directory if it does not exist.
 
-    def move(self, acquisition, intendedForList):
+    """
 
-        """Move an acquisition to BIDS format"""
+    def check(path):
 
-        for srcFile in glob(acquisition.srcRoot + ".*"):
+        if not path.is_dir():
 
-            ext = Path(srcFile).suffixes
+            return
 
-            ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii','.gz',
+        if not any(path.iterdir()):
 
-                                                                '.json',
+            return
 
-                                                                '.bval','.bvec']]
+        if not args.overwrite:
 
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
+            parser.error(
 
-            dstFile.parent.mkdir(parents = True, exist_ok = True)
+                f"Output directory {path} isn't empty, so some files "
 
-            # checking if destination file exists
+                "could be overwritten or deleted.\nRerun the command with "
 
-            if dstFile.exists():
+                "--force option to overwrite existing output files.")
 
-                self.logger.info("'%s' already exists", dstFile)
+        else:
 
-                if self.clobber:
+            for the_file in path.iterdir():
 
-                    self.logger.info("Overwriting because of --clobber option")
-
-                else:
-
-                    self.logger.info("Use --clobber option to overwrite")
-
-                    continue
-
-            # it's an anat nifti file and the user using a deface script
-
-            if (
-
-                self.config.get("defaceTpl")
-
-                and acquisition.dataType == "func"
-
-                and ".nii" in ext
-
-                ):
+                file_path = path / the_file
 
                 try:
 
-                    os.remove(dstFile)
+                    if file_path.is_file():
 
-                except FileNotFoundError:
+                        file_path.unlink()
 
-                    pass
+                    elif file_path.is_dir():
 
-                defaceTpl = self.config.get("defaceTpl")
+                        shutil.rmtree(file_path)
 
-                cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
+                except Exception as e:
 
-                cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
+                    print(e)
 
-                run_shell_command(cmd)
+    if isinstance(required, str) or isinstance(required, Path):
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
+        required = [Path(required)]
 
-            elif ".json" in ext:
+    for cur_dir in required:
 
-                data = acquisition.dstSidecarData(self.config["descriptions"],
-
-                                                  intendedForList)
-
-                save_json(dstFile, data)
-
-                os.remove(srcFile)
-
-            # just move
-
-            else:
-
-                os.rename(srcFile, dstFile)
-
-            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
-
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
-
-        return intendedForList
-
-def _build_arg_parser():
-
-    p = argparse.ArgumentParser(description=__doc__, epilog=DEFAULT.EPILOG,
-
-                                formatter_class=argparse.RawTextHelpFormatter)
-
-    p.add_argument("-d", "--dicom_dir",
-
-                   type=Path, required=True, nargs="+",
-
-                   help="DICOM directory(ies).")
-
-    p.add_argument("-p", "--participant",
-
-                   required=True,
-
-                   help="Participant ID.")
-
-    p.add_argument("-s", "--session",
-
-                   required=False,
-
-                   default="",
-
-                   help="Session ID.")
-
-    p.add_argument("-c", "--config",
-
-                   type=Path,
-
-                   required=True,
-
-                   help="JSON configuration file (see example/config.json).")
-
-    p.add_argument("-o", "--output_dir",
-
-                   required=False,
-
-                   type=Path,
-
-                   default=Path.cwd(),
-
-                   help="Output BIDS directory. (Default: %(default)s)")
-
-    p.add_argument("--forceDcm2niix",
-
-                   action="store_true",
-
-                   help="Overwrite previous temporary dcm2niix "
-
-                        "output if it exists.")
-
-    p.add_argument("--clobber",
-
-                   action="store_true",
-
-                   help="Overwrite output if it exists.")
-
-    p.add_argument("-l", "--log_level",
-
-                   required=False,
-
-                   default=DEFAULT.cliLogLevel,
-
-                   choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-
-                   help="Set logging level. [%(default)s]")
-
-    return p
-
-def main():
-
-    """Let's go"""
-
-    parser = _build_arg_parser()
-
-    args = parser.parse_args()
-
-    app = Dcm2bids(**vars(args))
-
-    return app.run()
-
-if __name__ == "__main__":
-
-    sys.exit(main())
+        check(cur_dir)
 </code></pre>
 </details>
 <h2 id="functions">Functions</h2>
-<h3 id="main">main</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
-
+<h3 id="assert_dirs_empty">assert_dirs_empty</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assert_dirs_empty</span><span class="p">(</span>
+    <span class="n">parser</span><span class="p">,</span>
+    <span class="n">args</span><span class="p">,</span>
+    <span class="n">required</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>Let's go</p>
-<details class="example">
-<summary>View Source</summary>
-<pre><code>def main():
-
-    """Let's go"""
-
-    parser = _build_arg_parser()
-
-    args = parser.parse_args()
-
-    app = Dcm2bids(**vars(args))
-
-    return app.run()
-</code></pre>
-</details>
-<h2 id="classes">Classes</h2>
-<h3 id="dcm2bids">Dcm2bids</h3>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2bids</span><span class="p">(</span>
-    <span class="n">dicom_dir</span><span class="p">,</span>
-    <span class="n">participant</span><span class="p">,</span>
-    <span class="n">config</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;/home/sam/Projects/Dcm2Bids&#39;</span><span class="p">),</span>
-    <span class="n">session</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">clobber</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">forceDcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">_</span>
-<span class="p">)</span>
-</code></pre></div>
-<p>Object to handle dcm2bids execution steps</p>
-<h4 id="attributes">Attributes</h4>
+<p>Assert that all directories exist are empty.</p>
+<p>If dirs exist and not empty, and --force is used, delete dirs.</p>
+<p><strong>Parameters:</strong></p>
 <table>
 <thead>
 <tr>
@@ -1156,527 +1055,529 @@ if __name__ == "__main__":
 </thead>
 <tbody>
 <tr>
-<td>dicom_dir</td>
-<td>str or list</td>
-<td>A list of folder with dicoms to convert</td>
+<td>parser</td>
+<td>argparse.ArgumentParser object</td>
+<td>Parser.</td>
 <td>None</td>
 </tr>
 <tr>
-<td>participant</td>
-<td>str</td>
-<td>Label of your participant</td>
+<td>args</td>
+<td>argparse namespace</td>
+<td>Argument list.</td>
 <td>None</td>
 </tr>
 <tr>
-<td>config</td>
-<td>path</td>
-<td>Path to a dcm2bids configuration file</td>
+<td>required</td>
+<td>string or list of paths to files</td>
+<td>Required paths to be checked.</td>
 <td>None</td>
 </tr>
 <tr>
-<td>output_dir</td>
-<td>path</td>
-<td>Path to the BIDS base folder</td>
-<td>None</td>
-</tr>
-<tr>
-<td>session</td>
-<td>str</td>
-<td>Optional label of a session</td>
-<td>None</td>
-</tr>
-<tr>
-<td>clobber</td>
-<td>boolean</td>
-<td>Overwrite file if already in BIDS folder</td>
-<td>None</td>
-</tr>
-<tr>
-<td>forceDcm2niix</td>
-<td>boolean</td>
-<td>Forces a cleaning of a previous execution of<br>dcm2niix</td>
-<td>None</td>
-</tr>
-<tr>
-<td>log_level</td>
-<td>str</td>
-<td>logging level</td>
+<td>create_dir</td>
+<td>bool</td>
+<td>If true, create the directory if it does not exist.</td>
 <td>None</td>
 </tr>
 </tbody>
 </table>
 <details class="example">
 <summary>View Source</summary>
-<pre><code>class Dcm2bids(object):
-
-    """ Object to handle dcm2bids execution steps
-
-    Args:
-
-        dicom_dir (str or list): A list of folder with dicoms to convert
-
-        participant (str): Label of your participant
-
-        config (path): Path to a dcm2bids configuration file
-
-        output_dir (path): Path to the BIDS base folder
-
-        session (str): Optional label of a session
-
-        clobber (boolean): Overwrite file if already in BIDS folder
-
-        forceDcm2niix (boolean): Forces a cleaning of a previous execution of
-
-                                 dcm2niix
-
-        log_level (str): logging level
+<pre><code>def assert_dirs_empty(parser, args, required):
 
     """
 
-    def __init__(
+    Assert that all directories exist are empty.
 
-        self,
+    If dirs exist and not empty, and --force is used, delete dirs.
 
-        dicom_dir,
+    Parameters
 
-        participant,
+    ----------
 
-        config,
+    parser: argparse.ArgumentParser object
 
-        output_dir=DEFAULT.outputDir,
+        Parser.
 
-        session=DEFAULT.session,
+    args: argparse namespace
 
-        clobber=DEFAULT.clobber,
+        Argument list.
 
-        forceDcm2niix=DEFAULT.forceDcm2niix,
+    required: string or list of paths to files
 
-        log_level=DEFAULT.logLevel,
+        Required paths to be checked.
 
-        **_
+    create_dir: bool
 
-    ):
+        If true, create the directory if it does not exist.
 
-        self._dicomDirs = []
+    """
 
-        self.dicomDirs = dicom_dir
+    def check(path):
 
-        self.bidsDir = valid_path(output_dir, type="folder")
+        if not path.is_dir():
 
-        self.config = load_json(valid_path(config, type="file"))
+            return
 
-        self.participant = Participant(participant, session)
+        if not any(path.iterdir()):
 
-        self.clobber = clobber
+            return
 
-        self.forceDcm2niix = forceDcm2niix
+        if not args.overwrite:
 
-        self.logLevel = log_level
+            parser.error(
 
-        # logging setup
+                f"Output directory {path} isn't empty, so some files "
 
-        self.set_logger()
+                "could be overwritten or deleted.\nRerun the command with "
 
-        self.logger.info("--- dcm2bids start ---")
+                "--force option to overwrite existing output files.")
 
-        self.logger.info("OS:version: %s", platform.platform())
+        else:
 
-        self.logger.info("python:version: %s", sys.version.replace("\n", ""))
+            for the_file in path.iterdir():
 
-        self.logger.info("dcm2bids:version: %s", __version__)
-
-        self.logger.info("dcm2niix:version: %s", dcm2niix_version())
-
-        self.logger.info("participant: %s", self.participant.name)
-
-        self.logger.info("session: %s", self.participant.session)
-
-        self.logger.info("config: %s", os.path.realpath(config))
-
-        self.logger.info("BIDS directory: %s", os.path.realpath(output_dir))
-
-    @property
-
-    def dicomDirs(self):
-
-        """List of DICOMs directories"""
-
-        return self._dicomDirs
-
-    @dicomDirs.setter
-
-    def dicomDirs(self, value):
-
-        dicom_dirs = value if isinstance(value, list) else [value]
-
-        valid_dirs = [valid_path(_dir, "folder") for _dir in dicom_dirs]
-
-        self._dicomDirs = valid_dirs
-
-    def set_logger(self):
-
-        """ Set a basic logger"""
-
-        logDir = self.bidsDir / DEFAULT.tmpDirName / "log"
-
-        logFile = logDir / f"{self.participant.prefix}_{datetime.now().isoformat().replace(':', '')}.log"
-
-        logDir.mkdir(parents=True, exist_ok=True)
-
-        setup_logging(self.logLevel, logFile)
-
-        self.logger = logging.getLogger(__name__)
-
-    def run(self):
-
-        """Run dcm2bids"""
-
-        dcm2niix = Dcm2niix(
-
-            self.dicomDirs,
-
-            self.bidsDir,
-
-            self.participant,
-
-            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
-
-        )
-
-        check_latest()
-
-        check_latest("dcm2niix")
-
-        dcm2niix.run(self.forceDcm2niix)
-
-        sidecars = []
-
-        for filename in dcm2niix.sidecarFiles:
-
-            sidecars.append(
-
-                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
-
-            )
-
-        sidecars = sorted(sidecars)
-
-        parser = SidecarPairing(
-
-            sidecars,
-
-            self.config["descriptions"],
-
-            self.config.get("searchMethod", DEFAULT.searchMethod),
-
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
-
-        )
-
-        parser.build_graph()
-
-        parser.build_acquisitions(self.participant)
-
-        parser.find_runs()
-
-        self.logger.info("moving acquisitions into BIDS folder")
-
-        intendedForList = [[] for i in range(len(parser.descriptions))]
-
-        for acq in parser.acquisitions:
-
-            acq.setDstFile()
-
-            intendedForList = self.move(acq, intendedForList)
-
-    def move(self, acquisition, intendedForList):
-
-        """Move an acquisition to BIDS format"""
-
-        for srcFile in glob(acquisition.srcRoot + ".*"):
-
-            ext = Path(srcFile).suffixes
-
-            ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii','.gz',
-
-                                                                '.json',
-
-                                                                '.bval','.bvec']]
-
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
-
-            dstFile.parent.mkdir(parents = True, exist_ok = True)
-
-            # checking if destination file exists
-
-            if dstFile.exists():
-
-                self.logger.info("'%s' already exists", dstFile)
-
-                if self.clobber:
-
-                    self.logger.info("Overwriting because of --clobber option")
-
-                else:
-
-                    self.logger.info("Use --clobber option to overwrite")
-
-                    continue
-
-            # it's an anat nifti file and the user using a deface script
-
-            if (
-
-                self.config.get("defaceTpl")
-
-                and acquisition.dataType == "func"
-
-                and ".nii" in ext
-
-                ):
+                file_path = path / the_file
 
                 try:
 
-                    os.remove(dstFile)
+                    if file_path.is_file():
 
-                except FileNotFoundError:
+                        file_path.unlink()
 
-                    pass
+                    elif file_path.is_dir():
 
-                defaceTpl = self.config.get("defaceTpl")
+                        shutil.rmtree(file_path)
 
-                cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
+                except Exception as e:
 
-                cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
+                    print(e)
 
-                run_shell_command(cmd)
+    if isinstance(required, str) or isinstance(required, Path):
 
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
+        required = [Path(required)]
 
-            elif ".json" in ext:
+    for cur_dir in required:
 
-                data = acquisition.dstSidecarData(self.config["descriptions"],
+        check(cur_dir)
+</code></pre>
+</details>
+<h3 id="load_json">load_json</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span>
+    <span class="n">filename</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Load a JSON file</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>str</td>
+<td>Path of a JSON file</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def load_json(filename):
 
-                                                  intendedForList)
+    """ Load a JSON file
 
-                save_json(dstFile, data)
+    Args:
 
-                os.remove(srcFile)
+        filename (str): Path of a JSON file
 
-            # just move
+    Return:
 
-            else:
+        Dictionnary of the JSON file
 
-                os.rename(srcFile, dstFile)
+    """
 
-            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
+    with open(filename, "r") as f:
 
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
+        data = json.load(f, object_pairs_hook=OrderedDict)
 
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
+    return data
+</code></pre>
+</details>
+<h3 id="read_participants">read_participants</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_participants</span><span class="p">(</span>
+    <span class="n">filename</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def read_participants(filename):
 
-        return intendedForList
+    if not os.path.exists(filename):
+
+        return []
+
+    with open(filename, "r") as f:
+
+        reader = csv.DictReader(f, delimiter="\t")
+
+        return [row for row in reader]
+</code></pre>
+</details>
+<h3 id="run_shell_command">run_shell_command</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run_shell_command</span><span class="p">(</span>
+    <span class="n">commandLine</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Wrapper of subprocess.check_output</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>Run command with arguments and return its output</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def run_shell_command(commandLine):
+
+    """ Wrapper of subprocess.check_output
+
+    Returns:
+
+        Run command with arguments and return its output
+
+    """
+
+    logger = logging.getLogger(__name__)
+
+    logger.info("Running %s", commandLine)
+
+    return check_output(commandLine)
+</code></pre>
+</details>
+<h3 id="save_json">save_json</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save_json</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def save_json(filename, data):
+
+    with filename.open("w") as f:
+
+        json.dump(data, f, indent=4)
+</code></pre>
+</details>
+<h3 id="splitext_">splitext_</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">splitext_</span><span class="p">(</span>
+    <span class="n">path</span><span class="p">,</span>
+    <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Split the extension from a pathname</p>
+<p>Handle case with extensions with '.' in it</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>str</td>
+<td>A path to split</td>
+<td>None</td>
+</tr>
+<tr>
+<td>extensions</td>
+<td>list</td>
+<td>List of special extensions</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>(root, ext): ext may be empty</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def splitext_(path, extensions=None):
+
+    """ Split the extension from a pathname
+
+    Handle case with extensions with '.' in it
+
+    Args:
+
+        path (str): A path to split
+
+        extensions (list): List of special extensions
+
+    Returns:
+
+        (root, ext): ext may be empty
+
+    """
+
+    if extensions is None:
+
+        extensions = [".nii.gz"]
+
+    for ext in extensions:
+
+        if path.endswith(ext):
+
+            return path[: -len(ext)], path[-len(ext) :]
+
+    return os.path.splitext(path)
+</code></pre>
+</details>
+<h3 id="valid_path">valid_path</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">valid_path</span><span class="p">(</span>
+    <span class="n">in_path</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;folder&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Assert that file exists.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>required_file</td>
+<td>Path</td>
+<td>Path to be checked.</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def valid_path(in_path, type="folder"):
+
+    """Assert that file exists.
+
+    Parameters
+
+    ----------
+
+    required_file: Path
+
+        Path to be checked.
+
+    """
+
+    if isinstance(in_path, str):
+
+        in_path = Path(in_path)
+
+    if type == 'folder':
+
+        if in_path.is_dir() or in_path.parent.is_dir():
+
+            return in_path
+
+        else:
+
+            raise NotADirectoryError(in_path)
+
+    elif type == "file":
+
+        if in_path.is_file():
+
+            return in_path
+
+        else:
+
+            raise FileNotFoundError(in_path)
+
+    raise TypeError(type)
+</code></pre>
+</details>
+<h3 id="write_participants">write_participants</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_participants</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span>
+    <span class="n">participants</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def write_participants(filename, participants):
+
+    with open(filename, "w") as f:
+
+        writer = csv.DictWriter(f, delimiter="\t", fieldnames=participants[0].keys())
+
+        writer.writeheader()
+
+        writer.writerows(participants)
+</code></pre>
+</details>
+<h3 id="write_txt">write_txt</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_txt</span><span class="p">(</span>
+    <span class="n">filename</span><span class="p">,</span>
+    <span class="n">lines</span>
+<span class="p">)</span>
+</code></pre></div>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>def write_txt(filename, lines):
+
+    with open(filename, "a") as f:
+
+        for row in lines:
+
+            f.write("%s\n" % row)
+</code></pre>
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="default">DEFAULT</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DEFAULT</span><span class="p">(</span>
+    <span class="o">/</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Default values of the package</p>
+<details class="example">
+<summary>View Source</summary>
+<pre><code>class DEFAULT(object):
+
+    """ Default values of the package"""
+
+    # cli dcm2bids
+
+    cliLogLevel = "INFO"
+
+    EPILOG="Documentation at https://github.com/unfmontreal/Dcm2Bids"
+
+    # dcm2bids.py
+
+    outputDir = Path.cwd()
+
+    session = ""  # also Participant object
+
+    clobber = False
+
+    forceDcm2niix = False
+
+    defaceTpl = None
+
+    logLevel = "WARNING"
+
+    # dcm2niix.py
+
+    dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+
+    dcm2niixVersion = "v1.0.20181125"
+
+    # sidecar.py
+
+    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
+
+    searchMethod = "fnmatch"
+
+    searchMethodChoices = ["fnmatch", "re"]
+
+    runTpl = "_run-{:02d}"
+
+    caseSensitive = True
+
+    # Entity table:
+
+    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
+
+    entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
+
+                       "run", "mod", "echo", "flip", "inv", "mt", "part",
+
+                       "recording"]
+
+    # misc
+
+    tmpDirName = "tmp_dcm2bids"
+
+    helperDir = "helper"
 </code></pre>
 </details>
 <hr />
-<h4 id="instance-variables">Instance variables</h4>
-<div class="highlight"><pre><span></span><code><span class="n">dicomDirs</span>
+<h4 id="class-variables">Class variables</h4>
+<div class="highlight"><pre><span></span><code><span class="n">EPILOG</span>
 </code></pre></div>
-<p>List of DICOMs directories</p>
-<h4 id="methods">Methods</h4>
-<h4 id="move">move</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">acquisition</span><span class="p">,</span>
-    <span class="n">intendedForList</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">caseSensitive</span>
 </code></pre></div>
-<p>Move an acquisition to BIDS format</p>
-<details class="example">
-<summary>View Source</summary>
-<pre><code>    def move(self, acquisition, intendedForList):
-
-        """Move an acquisition to BIDS format"""
-
-        for srcFile in glob(acquisition.srcRoot + ".*"):
-
-            ext = Path(srcFile).suffixes
-
-            ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii','.gz',
-
-                                                                '.json',
-
-                                                                '.bval','.bvec']]
-
-            dstFile = (self.bidsDir / acquisition.dstRoot).with_suffix("".join(ext))
-
-            dstFile.parent.mkdir(parents = True, exist_ok = True)
-
-            # checking if destination file exists
-
-            if dstFile.exists():
-
-                self.logger.info("'%s' already exists", dstFile)
-
-                if self.clobber:
-
-                    self.logger.info("Overwriting because of --clobber option")
-
-                else:
-
-                    self.logger.info("Use --clobber option to overwrite")
-
-                    continue
-
-            # it's an anat nifti file and the user using a deface script
-
-            if (
-
-                self.config.get("defaceTpl")
-
-                and acquisition.dataType == "func"
-
-                and ".nii" in ext
-
-                ):
-
-                try:
-
-                    os.remove(dstFile)
-
-                except FileNotFoundError:
-
-                    pass
-
-                defaceTpl = self.config.get("defaceTpl")
-
-                cmd = [w.replace('srcFile', srcFile) for w in defaceTpl]
-
-                cmd = [w.replace('dstFile', dstFile) for w in defaceTpl]
-
-                run_shell_command(cmd)
-
-                intendedForList[acquisition.indexSidecar].append(acquisition.dstIntendedFor + "".join(ext))
-
-            elif ".json" in ext:
-
-                data = acquisition.dstSidecarData(self.config["descriptions"],
-
-                                                  intendedForList)
-
-                save_json(dstFile, data)
-
-                os.remove(srcFile)
-
-            # just move
-
-            else:
-
-                os.rename(srcFile, dstFile)
-
-            intendedFile = acquisition.dstIntendedFor + ".nii.gz"
-
-            if intendedFile not in intendedForList[acquisition.indexSidecar]:
-
-                intendedForList[acquisition.indexSidecar].append(intendedFile)
-
-        return intendedForList
-</code></pre>
-</details>
-<h4 id="run">run</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
-    <span class="bp">self</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">cliLogLevel</span>
 </code></pre></div>
-<p>Run dcm2bids</p>
-<details class="example">
-<summary>View Source</summary>
-<pre><code>    def run(self):
-
-        """Run dcm2bids"""
-
-        dcm2niix = Dcm2niix(
-
-            self.dicomDirs,
-
-            self.bidsDir,
-
-            self.participant,
-
-            self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
-
-        )
-
-        check_latest()
-
-        check_latest("dcm2niix")
-
-        dcm2niix.run(self.forceDcm2niix)
-
-        sidecars = []
-
-        for filename in dcm2niix.sidecarFiles:
-
-            sidecars.append(
-
-                Sidecar(filename, self.config.get("compKeys", DEFAULT.compKeys))
-
-            )
-
-        sidecars = sorted(sidecars)
-
-        parser = SidecarPairing(
-
-            sidecars,
-
-            self.config["descriptions"],
-
-            self.config.get("searchMethod", DEFAULT.searchMethod),
-
-            self.config.get("caseSensitive", DEFAULT.caseSensitive)
-
-        )
-
-        parser.build_graph()
-
-        parser.build_acquisitions(self.participant)
-
-        parser.find_runs()
-
-        self.logger.info("moving acquisitions into BIDS folder")
-
-        intendedForList = [[] for i in range(len(parser.descriptions))]
-
-        for acq in parser.acquisitions:
-
-            acq.setDstFile()
-
-            intendedForList = self.move(acq, intendedForList)
-</code></pre>
-</details>
-<h4 id="set_logger">set_logger</h4>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_logger</span><span class="p">(</span>
-    <span class="bp">self</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">clobber</span>
 </code></pre></div>
-<p>Set a basic logger</p>
-<details class="example">
-<summary>View Source</summary>
-<pre><code>    def set_logger(self):
-
-        """ Set a basic logger"""
-
-        logDir = self.bidsDir / DEFAULT.tmpDirName / "log"
-
-        logFile = logDir / f"{self.participant.prefix}_{datetime.now().isoformat().replace(':', '')}.log"
-
-        logDir.mkdir(parents=True, exist_ok=True)
-
-        setup_logging(self.logLevel, logFile)
-
-        self.logger = logging.getLogger(__name__)
-</code></pre>
-</details>
+<div class="highlight"><pre><span></span><code><span class="n">compKeys</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">dcm2niixOptions</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">dcm2niixVersion</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">defaceTpl</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">entityTableKeys</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">forceDcm2niix</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">helperDir</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">logLevel</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">outputDir</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">runTpl</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">searchMethod</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">searchMethodChoices</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">session</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">tmpDirName</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
