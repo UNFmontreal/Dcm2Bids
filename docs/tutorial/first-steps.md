@@ -881,11 +881,11 @@ task name:
   "descriptions": [
     {
       "dataType": "func",
-      "modalityLabel": "bold",
-      "customLabels": "task-rest",
+      "suffix": "bold",
+      "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
       }
@@ -909,12 +909,12 @@ task name:
       "descriptions": [
         {
           "dataType": "func",
-          "modalityLabel": "bold",
-          "customLabels": "task-rest",
+          "suffix": "bold",
+          "custom_entities": "task-rest",
           "criteria": {
             "SeriesDescription": "*Axial EPI-FMRI (Interleaved I to S)*"
           },
-          "sidecarChanges": {
+          "sidecar_changes": {
             "TaskName": "rest"
           }
         }
@@ -1004,7 +1004,7 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "rest"
       }
     },

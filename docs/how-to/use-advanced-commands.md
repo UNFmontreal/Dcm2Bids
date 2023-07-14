@@ -1,4 +1,4 @@
-# How to use advanced commands and configuration
+# How to use advanced configuration
 
 These optional configurations could be insert in the configuration file at the
 same level as the `"descriptions"` entry.
@@ -24,9 +24,22 @@ same level as the `"descriptions"` entry.
 }
 ```
 
-## searchMethod
+## custom_entities combined with extractors
 
-default: `"searchMethod": "fnmatch"`
+default: None
+
+extractors will allow you to extract information embeded into sidecar files. 
+In the example above, it will try to match 2 different regex expressions (keys: task, run) within the 
+SeriesDescription field and bodypart in BodyPartExamined field.
+
+By using the same keys in custom_entities and if found, it will add this new entities directly into the final filename.
+custom_entities can be a list that combined extractor keys and regular entities. 
+If key is `task` it will automatically add the field "TaskName" inside the sidecase file.
+
+
+## search_method
+
+default: `"search_method": "fnmatch"`
 
 fnmatch is the behaviour (See criteria) by default and the fall back if this
 option is set incorrectly. `re` is the other choice if you want more flexibility
@@ -48,20 +61,42 @@ This behavior is a [heudiconv](https://heudiconv.readthedocs.io/en/latest/change
 default: `"caseSensitive": "true"`
 
 If false, comparisons between strings/lists will be not case sensitive. It's
-only disabled when used with `"searchMethod": "fnmatch"`.
+only disabled when used with `"search_method": "fnmatch"`.
 
-## defaceTpl
+## post_op
 
-default: `"defaceTpl": None`
+default: `"post_op": []`
 
-!!! danger The anonymizer option no longer exists from `v2.0.0`. It is still
-possible to deface the anatomical nifti images.
+post_op key allows you to run any post-processing analyses just before being moved 
+to there respective folders. 
 
-For example, if you use the last version of pydeface, add:
+For example, if you want to deface your T1w images you could use pydeface by adding:
+```
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]}],
+```
 
-`"defaceTpl": "pydeface --outfile {dstFile} {srcFile}"`
+It will specifically run the corresponding `cmd` to any image that follow the combinations
+datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
 
-It is a template string and dcm2bids will replace {srcFile} and {dstFile} by the
+!!! warning "Multiple post_op commands"
+
+    Although you can add multiple commands, the combination datatype/suffix on which you want to run the command has to be unique.
+    You cannot run multiple commands on a specific combination datatype/suffix.
+
+```
+    "post_op": [{"cmd": "pydeface --outfile dstFile srcFile",
+               "datatype": "anat",
+               "suffix": ["T1w", "MP2RAGE"]},
+               {"cmd": "my_new_script --input srcFile --output dstFile ",
+               "datatype": "fmap",
+               "suffix": ["any"]}],
+```
+
+In this example the second command "my_new_script" will be running on any image which datatype is fmap.
+
+Finally, this is a template string and dcm2bids will replace srcFile and dstFile by the
 source file (input) and the destination file (output).
 
 ## dcm2niixOptions

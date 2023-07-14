@@ -7,19 +7,20 @@
   "descriptions": [
     {
       "dataType": "anat",
-      "modalityLabel": "T2w",
+      "suffix": "T2w",
       "criteria": {
         "SeriesDescription": "*T2*",
         "EchoTime": 0.1
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "ProtocolName": "T2"
       }
     },
     {
+      "id": "task-rest",
       "dataType": "func",
-      "modalityLabel": "bold",
-      "customLabels": "task-rest",
+      "suffix": "bold",
+      "custom_entities": "task-rest",
       "criteria": {
         "ProtocolName": "func_task-*",
         "ImageType": ["ORIG*", "PRIMARY", "M", "MB", "ND", "MOSAIC"]
@@ -27,32 +28,35 @@
     },
     {
       "dataType": "fmap",
-      "modalityLabel": "fmap",
-      "intendedFor": 1,
+      "suffix": "fmap",
       "criteria": {
         "ProtocolName": "*field_mapping*"
+      },
+      "sidecar_changes": {
+        "IntendedFor": "task_rest"
       }
     },
     {
+      "id": "id_task_learning",
       "dataType": "func",
-      "modalityLabel": "bold",
-      "customLabels": "task-learning",
+      "suffix": "bold",
+      "custom_entities": "task-learning",
       "criteria": {
         "SeriesDescription": "bold_task-learning"
       },
-      "sidecarChanges": {
+      "sidecar_changes": {
         "TaskName": "learning"
       }
     },
     {
       "dataType": "fmap",
-      "modalityLabel": "epi",
+      "suffix": "epi",
       "criteria": {
         "SeriesDescription": "fmap_task-learning"
       },
-      "IntendedFor": 2,
-      "sidecarChanges": {
-        "TaskName": "learning"
+      "sidecar_changes": {
+        "TaskName": "learning",
+        "IntendedFor": "id_task_learning"
       }
     }
   ]
@@ -108,12 +112,12 @@ It is a mandatory field. Here is a definition from `bids v1.2.0` :
 > field maps), anat (structural imaging such as T1, T2, etc.), meg
 > (magnetoencephalography), beh (behavioral).
 
-## modalityLabel
+## suffix
 
 It is a mandatory field. It describes the modality of the acquisition like
 `T1w`, `T2w` or `dwi`, `bold`.
 
-## customLabels
+## custom_entities
 
 It is an optional field. For some acquisitions, you need to add information in
 the file name. For resting state fMRI, it is usually `task-rest`.
@@ -124,19 +128,53 @@ specifications][bids-spec].
 For a longer example of a Dcm2Bids config json, see
 [here](https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json).
 
-## sidecarChanges
+Note that the different bids labels must come in a very specific order to be bids valid filenames. 
+If the custom_entities fields that are entered that are in the wrong order,
+then dcm2bids will reorder them for you.
 
-Optional field to change or add information in a sidecar.
+For example if you entered:
 
-## intendedFor
+```json
+"custom_entities": "run-01_task-rest"
+```
 
-Optional field to add an `IntendedFor` entry in the sidecar of a fieldmap. Just
-put the index or a list of indices of the description(s) that's intended for.
+when running dcm2bids, you will get the following warning:
 
-Python index begins at `0` so in the example, **`1`** means it is intended for
-`task-rest_bold` and **`2`** is intended for `task-learning` which will be
-renamed to only `learning` because of the
-`"sidecarChanges": { "TaskName": "learning" }` field.
+```bash
+WARNING:dcm2bids.structure:✅ Filename was reordered according to BIDS entity table order:
+                from:   sub-ID01_run-01_task-rest_bold
+                to:     sub-ID01_task-rest_run-01_bold
+```
+
+custom_entities could also be combined with extractors. 
+See [custom_entities combined with extractors](./use-advanced-commands.md#custom_entities-combined-with-extractors)
+
+
+## sidecar_changes, id and IntendedFor
+
+Optional field to change or add information in a sidecar. 
+
+:warning: IntendedFor is now seen as a sidecar_changes.
+
+Example:
+
+```json
+{
+  "sidecar_changes": {
+    "IntendedFor": "task_rest"
+  }
+}
+```
+
+If you want to add an `IntendedFor` entry or any extra sidecar linked to a specific file, 
+you will need to set an id to the corresponding description and put the same id with `IntendedFor`.
+
+Fo example, **`task_rest`** means it is intended for `task-rest_bold` 
+and **`id_task_learning`** is intended for `task-learning_bold`. 
+
+You could also use this feature to feed sidecar such as `Source`` for example 
+or anything that suits your needs.
+
 
 ## Multiple config files
 
