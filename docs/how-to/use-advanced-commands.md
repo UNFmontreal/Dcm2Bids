@@ -115,14 +115,51 @@ can change this behaviour setting this key inside the configuration file.
 
 ## criteria
 
+### Handle multi site filtering
+
 As mentionned in the tutorial, criteria is the way to filter specific acquisitions. If you work with dicoms from multiple sites
 you will need different criterias for the same kind of acquisition. In order to reduce the length of the config file, 
 we developped a feature where for a specific criteria you can get multiple descriptions. 
 
 ```
-      "criteria": {
+    "criteria": {
         "SeriesDescription": {"any" : ["*MPRAGE*", "*T1w*"]}
-      }
+    }
+```
+
+### Enhanced float/int comparison
+
+Criteria can help you filter acquisitions by comparing float/int sidecar.
+
+```
+    "criteria": {
+        "RepetitionTime": {
+            "le": "0.0086"
+        }
+    }
+```
+
+In this example, dcm2bids will check if RepetitionTime is lower or equal to 0.0086.
+
+Here are the key coded to help you compare float/int sidecar.
+
+| key |  operator |
+|:--------:|:----------:|
+| lt | lower than | 
+| le | lower than or equal to |
+| gt | greater than |
+| ge | greater than or equal to |
+| btw | between |
+| btwe | between or equal to |
+
+If you want to use btw or btwe you will need to give an ordered list like this.
+
+```
+    "criteria": {
+        "EchoTime": {
+            "btwe": ["0.0029", "0.003"]
+        }
+    }
 ```
 
 # How to use advanced commands
@@ -229,7 +266,7 @@ It means you don't have to add the field in the config file like this.
 </strike>
    
 :radioactive: You can find more detailed information by looking at the file `dcm2bids/utils/utils.py` and 
-more specifically auto_extractors and auto_entities variables.
+more specifically *auto_extractors* and *auto_entities* variables.
 
 
 ## --bids_validate
