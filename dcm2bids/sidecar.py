@@ -382,7 +382,7 @@ class SidecarPairing(object):
         """
         acquisitions_id = []
         acquisitions = []
-        self.logger.info("Sidecar pairing:\n".upper())
+        self.logger.info("Sidecar pairing".upper())
         for sidecar, valid_descriptions in self.graph.items():
             sidecarName = os.path.basename(sidecar.root)
 
