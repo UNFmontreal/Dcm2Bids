@@ -61,7 +61,7 @@ class Participant(object):
 
         else:
             self._session = "ses-" + session
-        
+
         if not self._session.replace('ses-', '').isalnum() and self._session:
             raise NameError(f"Session '{self._session.replace('ses-', '')}' "
                             "should contains only alphanumeric characters.")
