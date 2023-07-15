@@ -104,7 +104,6 @@ class Dcm2BidsGen(object):
         parser.build_acquisitions(self.participant)
         parser.find_runs()
 
-
         output_dir = os.path.join(self.bids_dir, self.participant.directory)
         if parser.acquisitions:
             self.logger.info("Moving acquisitions into BIDS "
