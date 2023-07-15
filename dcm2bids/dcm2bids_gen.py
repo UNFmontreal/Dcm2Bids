@@ -104,16 +104,18 @@ class Dcm2BidsGen(object):
         parser.build_acquisitions(self.participant)
         parser.find_runs()
 
+
+        output_dir = os.path.join(self.bids_dir, self.participant.directory)
         if parser.acquisitions:
-            self.logger.info("moving acquisitions into BIDS folder\n".upper())
+            self.logger.info("Moving acquisitions into BIDS "
+                             f"folder \"{output_dir}\".\n")
         else:
-            self.logger.info("No acquisition was found. "
-                             "BIDS folder won't be created. "
-                             "Check your config file.\n".upper())
+            self.logger.warning("No pairing was found. "
+                                f"BIDS folder \"{output_dir}\" won't be created. "
+                                "Check your config file.\n".upper())
 
         idList = {}
         for acq in parser.acquisitions:
-            print('toto')
             idList = self.move(acq, idList, parser.post_op)
 
         if self.bids_validate:
