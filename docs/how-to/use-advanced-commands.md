@@ -27,7 +27,7 @@ same level as the `"description"` entry.
       ]
     }
   ],
-  "description": [
+  "descriptions": [
     {
       "datatype": "anat",
       "suffix": "T2w",
