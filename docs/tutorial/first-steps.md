@@ -48,7 +48,8 @@ Note that you use `dcm2bids` as the name of the environment but you should use
 the name you gave your environment when you created it.
 
 If you used Anaconda Navigator to install dcm2bids and create you environment,
-make sure to open your environment from Navigator as indicated in [Create your environment with the Anaconda Navigator GUI](../get-started/install.md#install-dcm2bids).
+make sure to open your environment from Navigator as indicated in
+[Create your environment with the Anaconda Navigator GUI](../get-started/install.md#install-dcm2bids).
 
 === "Command"
 
@@ -100,7 +101,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                             Output BIDS directory, Default: current directory
                             (/home/sam)
     --auto_extract_entities
-                          If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and dataType. [False]
+                          If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
@@ -123,7 +124,7 @@ You can test it with any command but a safe way is to use the `--help` command.
 
 ### Create a new directory for this tutorial
 
-For the tutorial, you recommend that you create a new directory (folder) instead
+For the tutorial, we recommend that you create a new directory (folder) instead
 of jumping straight into a real project directory with real data. In this
 tutorial, we decided to named our project directory `dcm2bids-tutorial`.
 
@@ -238,7 +239,7 @@ scaffold beforehand, the command will create it for you.
     INFO    | dcm2bids version: 3.0.0
     INFO    | Checking for software update
     INFO    | Currently using the latest version of dcm2bids.
-    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit. 
+    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit.
 
     INFO    | Tree representation of /home/sam/dcm2bids-tutorials/
     INFO    | /home/sam/dcm2bids-tutorials/
@@ -256,7 +257,7 @@ scaffold beforehand, the command will create it for you.
     INFO    | └── README
     INFO    | Log file saved at /home/sam/dcm2bids-tutorials/tmp_dcm2bids/log/scaffold_20230703-163905.log
     INFO    | --- dcm2bids_scaffold end ---
-    
+
     (dcm2bids) sam:~/dcm2bids-tutorial$ ls -a
     .bidsignore CHANGES      dataset_description.json  participants.json  README
     code        derivatives  participants.tsv          sourcedata
@@ -273,7 +274,7 @@ scaffold beforehand, the command will create it for you.
     INFO    | dcm2bids version: 3.0.dev
     INFO    | Checking for software update
     INFO    | Currently using the latest version of dcm2bids.
-    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit. 
+    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit.
 
     INFO    | Tree representation of bids_project/
     INFO    | bids_project/
@@ -515,7 +516,7 @@ the command, the current directory.
     one session of one participant only by targeting their directory, otherwise you may be overwhelmed
     by the number of files for nothing.
 
-    In this tutorial, there are two folders with data, one with data coming from a
+    In this tutorial, there are two directories with data, one with data coming from a
     Siemens scanner (`20180918Si`), and one with data coming from GE (20180918GE).
     The tutorial will use the data acquired on both scanners and Siemens scanner
     located in `sourcedata/dcm_qa_nih/In/` and pretend it is one participant only.
@@ -880,7 +881,7 @@ task name:
 {
   "descriptions": [
     {
-      "dataType": "func",
+      "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-rest",
       "criteria": {
@@ -908,7 +909,7 @@ task name:
     {
       "descriptions": [
         {
-          "dataType": "func",
+          "datatype": "func",
           "suffix": "bold",
           "custom_entities": "task-rest",
           "criteria": {
@@ -929,11 +930,11 @@ task name:
     the [release notes of version 17-March-2021 (v1.0.20210317)][dcm2niix-release]
     of dcmniix to now more, especially the [GE file naming behavior changes (%p protocol name and %d description) section](https://github.com/rordenlab/dcm2niix/issues/476).
 
-Moving to the fieldmaps, if you inspect their sidecar files (the same ones
-that were compared in the
+Moving to the fieldmaps, if you inspect their sidecar files (the same ones that
+were compared in the
 [dcm2bids_helper section](#finding-what-you-need-in-tmpdcm2bidshelper)), you can
-see a pattern of `"EPI PE=AP"`, `"EPI PE=PA"`, `"EPI PE=RL"` and `"EPI PE=LR"`  in the `SeriesDescription` once
-again. 
+see a pattern of `"EPI PE=AP"`, `"EPI PE=PA"`, `"EPI PE=RL"` and `"EPI PE=LR"`
+in the `SeriesDescription` once again.
 
 You can test it, of course!
 
@@ -965,9 +966,10 @@ You can test it, of course!
 
     ```
 
-Now, Dcm2bids new feature `--auto_extract_entities` will help you with this specific situations.
-Following BIDS naming scheme fieldmaps need to be named with a dir entity. If you take a look each json file
-you'll find in their respective sidecar PhaseEncodedDirection a different direction
+Now, Dcm2bids new feature `--auto_extract_entities` will help you with this
+specific situations. Following BIDS naming scheme fieldmaps need to be named
+with a dir entity. If you take a look each json file you'll find in their
+respective sidecar PhaseEncodedDirection a different direction
 
 === "Command"
 
@@ -986,18 +988,19 @@ you'll find in their respective sidecar PhaseEncodedDirection a different direct
     tmp_dcm2bids/helper/006_In_EPI_PE=LR_20180918121230.json:	"PhaseEncodingDirection": "i-",
     ```
 
-This entity will be different for each fieldmap so there's no need to be more specific.
+This entity will be different for each fieldmap so there's no need to be more
+specific.
 
 Please check the different use cases for this feature
 
 Once you are sure of you matching criteria, you can update your configuration
 file with the appropriate info.
 
-```json hl_lines="21 30"
+```json hl_lines="4 21-23"
 {
   "descriptions": [
     {
-      "id": "id_task-rest", |
+      "id": "id_task-rest",
       "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-rest",
@@ -1014,17 +1017,18 @@ file with the appropriate info.
       "criteria": {
         "SeriesDescription": "EPI PE=*"
       },
-      "intendedFor": ["id_task-rest"]
+      "sidecar_changes": {
+        "intendedFor": ["id_task-rest"]
+      }
     }
   ]
 }
 ```
 
-For fieldmaps, you need to add an `"intendedFor"` as well as `id` field to show that these
-fieldmaps should be used with your fMRI acquisition. Have a look at the
-explanation of [intendedFor](/docs/3-configuration/#id-and-intendedfor) in the
-documentation or in the [BIDS specification][bids-fmap].
-
+For fieldmaps, you need to add an `"intendedFor"` as well as `id` field to show
+that these fieldmaps should be used with your fMRI acquisition. Have a look at
+the explanation of [intendedFor](/docs/3-configuration/#id-and-intendedfor) in
+the documentation or in the [BIDS specification][bids-fmap].
 
 !!! tip "Use an online JSON validator"
 
@@ -1051,7 +1055,7 @@ command.
 
     ```sh hl_lines="2-3"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
-    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR] 
+    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR]
                     [--auto_extract_entities] [--bids_validate] [--forceDcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
@@ -1071,7 +1075,7 @@ command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
     --auto_extract_entities
-                            If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and dataType. [False]
+                            If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
     --bids_validate         If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                             bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 
@@ -1100,7 +1104,7 @@ For the tutorial, pretend that the subID is simply `ID01`.
 Note that if you don't specify the `-o` option, your current directory will be
 populated with the `sub-<label>` directories.
 
-Using the option `--auto_extract_entities` will allow dcm2bids to look for some 
+Using the option `--auto_extract_entities` will allow dcm2bids to look for some
 specific entities without having to put them in the config file.
 
 That being said, you can run the command:
@@ -1116,7 +1120,7 @@ That being said, you can run the command:
     ```sh hl_lines="14-16"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json
     INFO    | --- dcm2bids start ---
-    INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids-env/bin/dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json --auto_extract_entities
+    INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids/bin/dcm2bids -d sourcedata/dcm_qa_nih/In/ -p ID01 -c code/dcm2bids_config.json --auto_extract_entities
     INFO    | OS version: Linux-5.19.0-45-generic-x86_64-with-glibc2.35
     INFO    | Python version: 3.10.4 (main, May 29 2023, 11:10:38) [GCC 11.3.0]
     INFO    | dcm2bids version: 3.0.0
@@ -1158,8 +1162,8 @@ participants are affected.
 You can see that dcm2bids was able to pair and match the files you specified at
 lines 14-16 in the previous output tab.
 
-You can now have a look in the newly created folder `sub-ID01` and discover your
-converted data!
+You can now have a look in the newly created directory `sub-ID01` and discover
+your converted data!
 
 === "Command"
 
