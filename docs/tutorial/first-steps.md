@@ -100,7 +100,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                             Output BIDS directory, Default: current directory
                             (/home/sam)
     --auto_extract_entities
-                          If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and dataType. [False]
+                          If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
     --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
@@ -880,7 +880,7 @@ task name:
 {
   "descriptions": [
     {
-      "dataType": "func",
+      "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-rest",
       "criteria": {
@@ -908,7 +908,7 @@ task name:
     {
       "descriptions": [
         {
-          "dataType": "func",
+          "datatype": "func",
           "suffix": "bold",
           "custom_entities": "task-rest",
           "criteria": {
@@ -1071,7 +1071,7 @@ command.
     -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                             Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
     --auto_extract_entities
-                            If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and dataType. [False]
+                            If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
     --bids_validate         If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                             bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
 

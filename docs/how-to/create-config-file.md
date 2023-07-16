@@ -6,7 +6,7 @@
 {
   "descriptions": [
     {
-      "dataType": "anat",
+      "datatype": "anat",
       "suffix": "T2w",
       "criteria": {
         "SeriesDescription": "*T2*",
@@ -18,7 +18,7 @@
     },
     {
       "id": "task-rest",
-      "dataType": "func",
+      "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-rest",
       "criteria": {
@@ -27,7 +27,7 @@
       }
     },
     {
-      "dataType": "fmap",
+      "datatype": "fmap",
       "suffix": "fmap",
       "criteria": {
         "ProtocolName": "*field_mapping*"
@@ -38,7 +38,7 @@
     },
     {
       "id": "id_task_learning",
-      "dataType": "func",
+      "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-learning",
       "criteria": {
@@ -49,7 +49,7 @@
       }
     },
     {
-      "dataType": "fmap",
+      "datatype": "fmap",
       "suffix": "epi",
       "criteria": {
         "SeriesDescription": "fmap_task-learning"
@@ -102,7 +102,7 @@ subject to change depending on the dcm2niix version in use.
 You can enter several criteria. **All criteria must match** for a description to
 be linked to a sidecar.
 
-## dataType
+## datatype
 
 It is a mandatory field. Here is a definition from `bids v1.2.0` :
 
@@ -128,7 +128,7 @@ specifications][bids-spec].
 For a longer example of a Dcm2Bids config json, see
 [here](https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json).
 
-Note that the different bids labels must come in a very specific order to be bids valid filenames. 
+Note that the different bids labels must come in a very specific order to be bids valid filenames.
 If the custom_entities fields that are entered that are in the wrong order,
 then dcm2bids will reorder them for you.
 
