@@ -128,9 +128,9 @@ specifications][bids-spec].
 For a longer example of a Dcm2Bids config json, see
 [here](https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json).
 
-Note that the different bids labels must come in a very specific order to be bids valid filenames.
-If the custom_entities fields that are entered that are in the wrong order,
-then dcm2bids will reorder them for you.
+Note that the different bids labels must come in a very specific order to be
+bids valid filenames. If the custom_entities fields that are entered that are in
+the wrong order, then dcm2bids will reorder them for you.
 
 For example if you entered:
 
@@ -146,15 +146,14 @@ WARNING:dcm2bids.structure:✅ Filename was reordered according to BIDS entity t
                 to:     sub-ID01_task-rest_run-01_bold
 ```
 
-custom_entities could also be combined with extractors. 
-See [custom_entities combined with extractors](./use-advanced-commands.md#custom_entities-combined-with-extractors)
-
+custom_entities could also be combined with extractors. See
+[custom_entities combined with extractors](./use-advanced-commands.md#custom_entities-combined-with-extractors)
 
 ## sidecar_changes, id and IntendedFor
 
-Optional field to change or add information in a sidecar. 
+Optional field to change or add information in a sidecar.
 
-:warning: IntendedFor is now seen as a sidecar_changes.
+:warning: `IntendedFor` is now considered a sidecar_changes.
 
 Example:
 
@@ -166,15 +165,15 @@ Example:
 }
 ```
 
-If you want to add an `IntendedFor` entry or any extra sidecar linked to a specific file, 
-you will need to set an id to the corresponding description and put the same id with `IntendedFor`.
+If you want to add an `IntendedFor` entry or any extra sidecar linked to a
+specific file, you will need to set an id to the corresponding description and
+put the same id with `IntendedFor`.
 
-Fo example, **`task_rest`** means it is intended for `task-rest_bold` 
-and **`id_task_learning`** is intended for `task-learning_bold`. 
+Fo example, **`task_rest`** means it is intended for `task-rest_bold` and
+**`id_task_learning`** is intended for `task-learning_bold`.
 
-You could also use this feature to feed sidecar such as `Source`` for example 
-or anything that suits your needs.
-
+You could also use this feature to feed sidecar such as `Source`` for example or
+anything that suits your needs.
 
 ## Multiple config files
 

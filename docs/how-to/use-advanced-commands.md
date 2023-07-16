@@ -79,7 +79,7 @@ feature.
 
 ## case_sensitive
 
-default: `"caseSensitive": "true"`
+default: `"case_sensitive": "true"`
 
 If false, comparisons between strings/lists will be not case sensitive. It's
 only disabled when used with `"search_method": "fnmatch"`.

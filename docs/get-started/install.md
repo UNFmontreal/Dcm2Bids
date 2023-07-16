@@ -11,11 +11,15 @@ There are several ways to install dcm2bids.
 
 ## Installing binary executables
 
-From dcm2bids>=3.0.0, we provide binaries for macOS, Windows and Linux (debian-based and rhel-based).
+From dcm2bids>=3.0.0, we provide binaries for macOS, Windows and Linux
+(debian-based and rhel-based).
 
-They can easily been downloaded from [the release page](https://github.com/UNFmontreal/Dcm2Bids/releases/latest).
+They can easily been downloaded from
+[the release page](https://github.com/UNFmontreal/Dcm2Bids/releases/latest).
 
-Once downloaded, you should be able to extract the `dcm2bids`, `dcm2bids_scaffold`, and `dcm2bids_helper` files and use them with the full path.
+Once downloaded, you should be able to extract the `dcm2bids`,
+`dcm2bids_scaffold`, and `dcm2bids_helper` files and use them with the full
+path.
 
 === "Example on Ubuntu 22.04"
 
@@ -202,8 +206,9 @@ installed and correctly setup on your computer as it is the easiest way to
 install dcm2bids and its dependencies on any OS. We assume that if you want to
 install it in a different way, you have enough skills to do it on your own.
 
-If you installed Anaconda and want to use the graphical user interface (GUI), you can follow the steps as
-demonstrated below and only read the steps until the end of the installation guide.
+If you installed Anaconda and want to use the graphical user interface (GUI),
+you can follow the steps as demonstrated below and only read the steps until the
+end of the installation guide.
 
 ??? info "Create your environment with the **Anaconda Navigator** GUI"
 
@@ -235,8 +240,6 @@ conda install -c conda-forge dcm2niix
 But this would install the software in the main environment instead of a
 dedicated one, assuming none were active. This could have atrocious dependencies
 issues in the long-term if you want to install other software.
-
-
 
 #### Create environment.yml
 

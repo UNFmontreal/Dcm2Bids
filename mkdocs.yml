@@ -29,9 +29,11 @@ nav:
       - Create a config file: how-to/create-config-file.md
       - Use advanced commands: how-to/use-advanced-commands.md
       - Contribute to dcm2bids: how-to/contributing.md
-  - Code of conduct: code_of_conduct.md
-  - Changelog: changelog.md
+  - Changelog:
+    - changelog/index.md
+    - How to upgrade: upgrade.md
   - API Reference: dcm2bids
+  - Code of conduct: code_of_conduct.md
 
 markdown_extensions:
 - admonition
@@ -59,8 +61,8 @@ markdown_extensions:
         class: mermaid
         format: !!python/name:pymdownx.superfences.fence_code_format
 - footnotes
-
-
+- toc:
+    permalink: "⚓︎"
 
 # Configuration
 theme:
@@ -76,7 +78,7 @@ theme:
   - content.tooltips
   - navigation.footer
   - navigation.indexes
-  # - navigation.sections
+  - navigation.sections
   - navigation.top
   - navigation.tracking
   - search.highlight

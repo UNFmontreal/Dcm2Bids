@@ -37,5 +37,5 @@ function:
 [installation]: ./install.md
 [tutorial]: ../tutorial/first-steps.md
 [how-to]: ../how-to
-[reference]: /reference/dcm2bids
+[reference]: ../dcm2bids
 [get-help]: ../how-to/get-help.md
