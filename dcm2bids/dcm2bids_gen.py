@@ -162,8 +162,8 @@ class Dcm2BidsGen(object):
                 for curr_post_op in post_op:
                     if acquisition.datatype in curr_post_op['datatype'] or 'any' in curr_post_op['datatype']:
                         if acquisition.suffix in curr_post_op['suffix'] or '_any' in curr_post_op['suffix']:
-                            cmd = curr_post_op['cmd'].replace('srcFile', str(srcFile))
-                            cmd = cmd.replace('dstFile', str(dstFile))
+                            cmd = curr_post_op['cmd'].replace('src_file', str(srcFile))
+                            cmd = cmd.replace('dst_file', str(dstFile))
                             run_shell_command(cmd.split())
                             continue
 
