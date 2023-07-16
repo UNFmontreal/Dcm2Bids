@@ -44,6 +44,8 @@ markdown_extensions:
 - pymdownx.critic
 - pymdownx.keys
 - pymdownx.details
+- pymdownx.highlight:
+    linenums: true
 - pymdownx.tabbed:
     alternate_style: true
 - pymdownx.snippets
