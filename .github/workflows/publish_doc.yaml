@@ -7,7 +7,7 @@ on:
     branches:
       - master
     tags:
-      - '**'
+      - '[0-9]+.[0-9]+.[0-9]+'
   # Allow this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -57,10 +57,10 @@ jobs:
       - name: Build docs for specific release
         if: github.event_name == 'release'
         run: |
-          mike deploy -p ${{ github.ref_name }} latest
+          mike deploy -p ${{ github.ref_name }} latest -u
 
       - name: Deploy dev version
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
-          mike deploy -p $VERSION dev
+          mike deploy -p $VERSION dev -u
