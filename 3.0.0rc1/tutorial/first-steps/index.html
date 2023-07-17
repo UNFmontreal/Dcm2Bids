@@ -1426,6 +1426,10 @@ well as Siemens MRI scanners so it gives a bit a diversity of data provenance.</
 <p>To download the data, you can use your terminal or the GitHub interface. You can
 do it any way you want as long as the directory with the dicoms is in
 <strong>sourcedata</strong> directory with the name <strong>dcm_qa_nih</strong>.</p>
+<p>In general, dicoms are considered sourcedata and should be placed in the
+<strong>sourcedata</strong> directory. There is no explicit BIDS organization for <strong>sourcedata</strong>,
+but having all of a subject's dicoms in a folder with the subject's name is
+an intuitive organization (with sub-folders for sessions, as necessary).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Terminal</label><label for="__tabbed_8_2">GitHub</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1646,10 +1650,11 @@ moving the files inside a new <code>tmp_dcm2bids/helper</code> directory from wh
 the command, the current directory.</p>
 <div class="admonition tip">
 <p class="admonition-title">Use one participant only</p>
-<p>For this tutorial, it is easy since you there are only few data. However, in
-project with many participants, it is recommended to use data from one
-one session of one participant only by targeting their directory, otherwise you may be overwhelmed
-by the number of files for nothing.</p>
+<p>For this tutorial, it is easy since there are only few data. However, in
+general, each folder of dicoms should be specific to a participant and session.
+This will not only be more computationally efficient, but also avoid any
+confusion with overlapping file names between sessions if protocols are
+repeated.</p>
 <p>In this tutorial, there are two directories with data, one with data coming from a
 Siemens scanner (<code>20180918Si</code>), and one with data coming from GE (20180918GE).
 The tutorial will use the data acquired on both scanners and Siemens scanner
@@ -2264,6 +2269,13 @@ as different versions of dcm2niix can lead to different file names (Refer to
 the <a href="https://github.com/rordenlab/dcm2niix/releases/tag/v1.0.20210317">release notes of version 17-March-2021 (v1.0.20210317)</a>
 of dcmniix to now more, especially the <a href="https://github.com/rordenlab/dcm2niix/issues/476">GE file naming behavior changes (%p protocol name and %d description) section</a>.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Use SeriesNumber with caution</p>
+<p>It is not uncommon for runs to be repeated due to motion or the participant
+leaving the scanner to take a break (leading to an extra Scout acquisition).
+This will throw off the scan order for all subsequent acquisitions,
+potentially invalidating several matching criteria.</p>
+</div>
 <p>Moving to the fieldmaps, if you inspect their sidecar files (the same ones that
 were compared in the
 <a href="#finding-what-you-need-in-tmpdcm2bidshelper">dcm2bids_helper section</a>), you can
@@ -2708,7 +2720,7 @@ documentation to find information about the different commands.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-16T18:35:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-16</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-17T18:30:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-17</span>
       
         <br>
         Created:
