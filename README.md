@@ -24,6 +24,16 @@ Your friendly DICOM converter.
 
 `dcm2bids` reorganises NIfTI files using [dcm2niix][dcm2niix-github] into the [Brain Imaging Data Structure][bids] (BIDS).
 
+
+## Major upgrade with dcm2bids >=3.0.0
+
+⚠️ Breaking changes alert ⚠️
+
+**dcm2bids>=3.0.0 is not compatible with config files made for v2.1.9 and below**.
+In order to develop dcm2bids new features we had to rewrite some of its code.  
+Since v3.0.0, dcm2bids has become **more powerful** and **more flexible** while reducing the burden of creating config files. Porting your config file should be relatively easy by following the [How-to upgrade][dcm2bids-upgrade] page.
+If you have any issues with it don't hesitate to report it on [Neurostars][neurostars-dcm2bids].
+
 ## Scope
 
 `dcm2bids` is a community-centered project. It aims to be a friendly,
@@ -55,12 +65,13 @@ Before posting your question, you may want to first browse through questions tha
 [bids-examples]: https://github.com/bids-standard/bids-examples
 [bids-spec]: https://bids-specification.readthedocs.io/en/stable/
 [dcm2bids-doc]: https://unfmontreal.github.io/Dcm2Bids
-[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/docs/get-started/install/
-[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/docs/tutorial/first-steps/#tutorial-first-steps
-[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/docs/advanced/
+[dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/latest/get-started/install/
+[dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/latest/tutorial/first-steps/#tutorial-first-steps
+[dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/latest/advanced/
+[dcm2bids-upgrade]: https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
 [neurostars]: https://neurostars.org/
 [neurostars-dcm2bids]: https://neurostars.org/tag/dcm2bids
-[dcm2bids-contributing]:  https://unfmontreal.github.io/Dcm2Bids/CONTRIBUTING
+[dcm2bids-contributing]:  https://unfmontreal.github.io/Dcm2Bids/latest/how-to/contributing/

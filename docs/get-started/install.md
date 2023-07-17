@@ -7,6 +7,76 @@ date: 2022-04-17
 
 # Installation
 
+There are several ways to install dcm2bids.
+
+## Installing binary executables
+
+From dcm2bids>=3.0.0, we provide binaries for macOS, Windows and Linux
+(debian-based and rhel-based).
+
+They can easily been downloaded from
+[the release page](https://github.com/UNFmontreal/Dcm2Bids/releases/latest).
+
+Once downloaded, you should be able to extract the `dcm2bids`,
+`dcm2bids_scaffold`, and `dcm2bids_helper` files and use them with the full
+path.
+
+=== "Example on Ubuntu 22.04"
+
+    ```bash
+    sam:~/software$ curl -fLO https://github.com/unfmontreal/dcm2bids/releases/latest/download/dcm2bids_debian-based_3.0.rc1.tar.gz
+    sam:~/software$ tar -xvf dcm2bids_debian-based*.tar.gz
+    sam:~/software$ cd ../data
+    sam:~/data$ ~/software/dcm2bids_scaffold -o new-bids-project
+    ```
+
+=== "Ouput"
+
+    ```bash
+    sam:~/software$ curl -fLO https://github.com/unfmontreal/dcm2bids/releases/latest/download/dcm2bids_debian-based_3.0.0rc1.tar.gz
+    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                  Dload  Upload   Total   Spent    Left  Speed
+    0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    100 40.6M  100 40.6M    0     0  23.2M      0  0:00:01  0:00:01 --:--:-- 36.4M
+
+    sam:~/software$ tar -xvf dcm2bids_debian-based*.tar.gz
+    dcm2bids
+    dcm2bids_helper
+    dcm2bids_scaffold
+
+    sam:~/software$ cd ../data
+
+    sam:~/data$ ~/software/dcm2bids_scaffold -o new-bids-project
+    INFO    | --- dcm2bids_scaffold start ---
+    INFO    | Running the following command: /home/sam/software/dcm2bids_scaffold -o new-bids-project
+    INFO    | OS version: Linux-5.15.0-76-generic-x86_64-with-glibc2.31
+    INFO    | Python version: 3.10.12 | packaged by conda-forge | (main, Jun 23 2023, 22:40:32) [GCC 12.3.0]
+    INFO    | dcm2bids version: 3.0.rc1
+    INFO    | Checking for software update
+    INFO    | Currently using the latest version of dcm2bids.
+    INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit.
+
+    INFO    | Tree representation of new-bids-project/
+    INFO    | new-bids-project/
+    INFO    | ├── code/
+    INFO    | ├── derivatives/
+    INFO    | ├── sourcedata/
+    INFO    | ├── tmp_dcm2bids/
+    INFO    | │   └── log/
+    INFO    | │       └── scaffold_20230716-122220.log
+    INFO    | ├── .bidsignore
+    INFO    | ├── CHANGES
+    INFO    | ├── dataset_description
+    INFO    | ├── participants.json
+    INFO    | ├── participants.tsv
+    INFO    | └── README
+    INFO    | Log file saved at new-bids-project/tmp_dcm2bids/log/scaffold_20230716-122220.log
+    INFO    | --- dcm2bids_scaffold end ---
+    ```
+
+## Installing using pip or conda
+
 Before you can use dcm2bids, you will need to get it installed. This page guides
 you through a minimal, typical dcm2bids installation workflow that is sufficient
 to complete all dcm2bids tasks.
@@ -20,6 +90,8 @@ whole installation process in one go and make use of a dedicated environment for
 dcm2bids.
 
 ??? tip "You just want the installation command?"
+
+    You can use the binaries provided with each release (starting with dcm2bids>=3)
 
     If you are used to installing packages, you can get it from PyPI or conda:
 
@@ -134,8 +206,9 @@ installed and correctly setup on your computer as it is the easiest way to
 install dcm2bids and its dependencies on any OS. We assume that if you want to
 install it in a different way, you have enough skills to do it on your own.
 
-If you installed Anaconda and want to use the graphical user interface (GUI), you can follow the steps as
-demonstrated below and only read the steps until the end of the installation guide.
+If you installed Anaconda and want to use the graphical user interface (GUI),
+you can follow the steps as demonstrated below and only read the steps until the
+end of the installation guide.
 
 ??? info "Create your environment with the **Anaconda Navigator** GUI"
 
@@ -167,8 +240,6 @@ conda install -c conda-forge dcm2niix
 But this would install the software in the main environment instead of a
 dedicated one, assuming none were active. This could have atrocious dependencies
 issues in the long-term if you want to install other software.
-
-
 
 #### Create environment.yml
 

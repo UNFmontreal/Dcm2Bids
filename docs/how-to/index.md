@@ -18,4 +18,4 @@ title: How-to guides
 
 ## Development and Community
 
-- [Contribute to dcm2bids](/CONTRIBUTING.md)
+- [Contribute to dcm2bids](./contributing.md)
