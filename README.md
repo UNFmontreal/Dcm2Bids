@@ -68,7 +68,7 @@ Before posting your question, you may want to first browse through questions tha
 [dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/latest/get-started/install/
 [dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/latest/tutorial/first-steps/#tutorial-first-steps
 [dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/latest/advanced/
-[dcm2bids-upgrade]: https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/
+[dcm2bids-upgrade]: https://unfmontreal.github.io/Dcm2Bids/dev/upgrade/
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install
 [dcm2niix-github]: https://github.com/rordenlab/dcm2niix
