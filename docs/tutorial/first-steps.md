@@ -336,6 +336,11 @@ To download the data, you can use your terminal or the GitHub interface. You can
 do it any way you want as long as the directory with the dicoms is in
 **sourcedata** directory with the name **dcm_qa_nih**.
 
+In general, dicoms are considered sourcedata and should be placed in the
+**sourcedata** directory. There is no explicit BIDS organization for **sourcedata**,
+but having all of a subject's dicoms in a folder with the subject's name is
+an intuitive organization (with sub-folders for sessions, as necessary).
+
 === "Terminal"
 
     === "Commands"
@@ -511,10 +516,11 @@ the command, the current directory.
 
 !!! tip "Use one participant only"
 
-    For this tutorial, it is easy since you there are only few data. However, in
-    project with many participants, it is recommended to use data from one
-    one session of one participant only by targeting their directory, otherwise you may be overwhelmed
-    by the number of files for nothing.
+    For this tutorial, it is easy since there are only few data. However, in
+    general, each folder of dicoms should be specific to a participant and session.
+    This will not only be more computationally efficient, but also avoid any
+    confusion with overlapping file names between sessions if protocols are
+    repeated.
 
     In this tutorial, there are two directories with data, one with data coming from a
     Siemens scanner (`20180918Si`), and one with data coming from GE (20180918GE).
@@ -929,6 +935,13 @@ task name:
     as different versions of dcm2niix can lead to different file names (Refer to
     the [release notes of version 17-March-2021 (v1.0.20210317)][dcm2niix-release]
     of dcmniix to now more, especially the [GE file naming behavior changes (%p protocol name and %d description) section](https://github.com/rordenlab/dcm2niix/issues/476).
+
+!!! warning "Use SeriesNumber with caution"
+
+    It is not uncommon for runs to be repeated due to motion or the participant
+    leaving the scanner to take a break (leading to an extra Scout acquisition).
+    This will throw off the scan order for all subsequent acquisitions,
+    potentially invalidating several matching criteria.
 
 Moving to the fieldmaps, if you inspect their sidecar files (the same ones that
 were compared in the
