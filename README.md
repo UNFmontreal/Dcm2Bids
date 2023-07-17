@@ -31,7 +31,8 @@ Your friendly DICOM converter.
 
 **dcm2bids>=3.0.0 is not compatible with config files made for v2.1.9 and below**.
 In order to develop dcm2bids new features we had to rewrite some of its code.  
-Since v3.0.0, dcm2bids has become **more powerful** and **more flexible** while reducing the burden of creating config files. Porting you config file should be relatively easy by following the [How-to upgrade][dcm2bids-upgrade] page.
+Since v3.0.0, dcm2bids has become **more powerful** and **more flexible** while reducing the burden of creating config files. Porting your config file should be relatively easy by following the [How-to upgrade][dcm2bids-upgrade] page.
+If you have any issues with it don't hesitate to report it on [Neurostars][neurostars-dcm2bids].
 
 ## Scope
 

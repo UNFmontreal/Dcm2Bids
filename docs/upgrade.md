@@ -25,44 +25,56 @@ Upgrade to the latest version using your favorite method.
 This major release includes many new features that unfortunaly requires breaking
 changes to configuration files.
 
-### _"key"_ changes
-
-#### Changes to existing keys
+### Changes to existing description and config file keys
 
 Some _"keys"_ had to be renamed in order to better align with the BIDS
 specification and reduce the risk of typos.
 
+#### Description keys
+
 |      key before      |        key now        |
 | :------------------: | :-------------------: |
-|    **`dataType`**    |    **`datatype`**     |
-| **`modalityLabel`**  |     **`suffix`**      |
+| **`dataType`**       | **`datatype`**        |
+| **`modalityLabel`**  | **`suffix`**          |
 | **`customEntities`** | **`custom_entities`** |
 | **`sidecarChanges`** | **`sidecar_changes`** |
-|  **`searchMethod`**  |  **`search_method`**  |
-|   **`defaceTpl`**    |     **`post_op`**     |
+| **`intendedFor`**    | **REMOVED**           |
+
+#### Configuration file keys
+
+|      key before      |        key now        |
+| :------------------: | :-------------------: |
 | **`caseSensitive`**  | **`case_sensitive`**  |
+| **`defaceTpl`**      | **`post_op`**         |
+| **`searchMethod`**   | **`search_method`**   |
+| **DOES NOT EXIST**   | **`id`**              |
+| **DOES NOT EXIST**   | **`extractor`**       |
 
-#### `sidecar_changes`
 
-#### `intendedFor` and `id`
+### `sidecar_changes` : `intendedFor` and `id`
 
 `intendedFor` has two major changes:
 
 1. Since intendedFor has always been a sidecar change under the hood, it now
-   must be nested in `sidecar_changes` and will be treated as such.
+   must be nested in `sidecar_changes` and will be treated as such. intendedFor is not a description key anymore.
 2. Instead of relying on the index of an image listed in the config file as used
-   to be done in <= 2.1.9, `intendedFor` now works with the newly created `id`
+   to be done in dcm2bids version <= 2.1.9, `intendedFor` now works with the newly created `id`
    key. The `id` key needs to be added to the image the index was referring to
    in <= 2.1.9. the value for `id` must be an arbitrary string but must
-   corresponds to the value for `intendedFor`.
+   corresponds to the value for `IntendedFor`.
 
-Refer to the [id documentation section][config-file-id] for more info.
+Refer to the [id and IntendedFor documentation section](../how-to/create-config-file/#sidecar_changes-id-and-intendedfor) for more info.
 
-#### `post_op` now replaces `defaceTpl`
 
-### new features
+### `custom_entities` and `extractors`
 
-`dup_method`
+Please check the [custom_entities combined with extractors section](../how-to/use-advanced-commands/#custom_entities-combined-with-extractors) for more information.
 
-[config-file-id]:
-  ../how-to/create-config-file/#sidecar_changes-id-and-intendedfor
+
+### `post_op` now replaces `defaceTpl`
+
+Since a couple of versions, defaceTpl has been removed. Instead of just putting it back, 
+we also generalized the whole concept of post operation. After being converted into nifti 
+and before moving it to the BIDS structure people can now apply whatever script they want to run on their data.
+
+Please check the [post op section](../how-to/use-advanced-commands/#post_op) to get more info.
