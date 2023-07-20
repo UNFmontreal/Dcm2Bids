@@ -212,7 +212,7 @@ class Acquisition(object):
                 value = [value]
 
             for val in value:
-                if isinstance(val, str):
+                if isinstance(val, str) or isinstance(val, bool):
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
                         logging.warning(f"No id found for '{key}' value '{val}'.")
                         logging.warning(f"No sidecar changes for field '{key}' "
@@ -229,10 +229,11 @@ class Acquisition(object):
                     flat_value_list += item
                 else:
                     flat_value_list.append(item)
+            
             if len(flat_value_list) == 1:
-                flat_value_list = flat_value_list[0]
-
-            data[key] = flat_value_list
+                data[key] = flat_value_list[0]
+            else:
+                data[key] = flat_value_list
 
         return data
 

@@ -443,3 +443,63 @@ def test_dcm2bids_float():
 
     assert os.path.exists(fmap_file)
     assert os.path.exists(t1w_file)
+
+
+def test_dcm2bids_sidecar():
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test_sidecar.json"),
+                      bids_dir.name)
+    app.run()
+
+    layout = BIDSLayout(bids_dir.name, validate=False)
+
+    # existing field
+    data = load_json(os.path.join(bids_dir.name,
+                                  "sub-01",
+                                  "localizer",
+                                  "sub-01_run-01_localizer.json"))
+    assert data["ProcedureStepDescription"] == "Modified by dcm2bids"
+
+    # new field
+    data = load_json(os.path.join(bids_dir.name,
+                                  "sub-01",
+                                  "anat",
+                                  "sub-01_T1w.json"))
+    assert data["new_field"] == "new value"
+
+    # boolean value
+    data = load_json(os.path.join(bids_dir.name,
+                                  "sub-01",
+                                  "fmap",
+                                  "sub-01_echo-492_fmap.json"))
+    assert data["MTState"] == True
+    
+    # boolean value if input as a string
+    data = load_json(os.path.join(bids_dir.name,
+                                  "sub-01",
+                                  "fmap",
+                                  "sub-01_echo-738_fmap.json"))
+    assert data["MTState"] == "false"
+
+    # list with > 1 items
+    data = load_json(os.path.join(bids_dir.name,
+                                  "sub-01",
+                                  "dwi",
+                                  "sub-01_desc-fa01_dwi.json"))
+    assert data["IntendedFor"] == [os.path.join("dwi", "sub-01_dwi.nii.gz"),
+                                   os.path.join("anat", "sub-01_T1w.nii")]
+    assert data["Sources"] == [os.path.join("anat", "sub-01_T1w.nii"),
+                               os.path.join("dwi", "sub-01_dwi.nii.gz")]
+
+    # list with 1 item
+    data = load_json(os.path.join(bids_dir.name,
+                                  "sub-01",
+                                  "dwi",
+                                  "sub-01_desc-trace_dwi.json"))
+    assert data["IntendedFor"] == os.path.join("dwi", "sub-01_dwi.nii.gz")
+    assert data["Sources"] == os.path.join("anat", "sub-01_T1w.nii")
