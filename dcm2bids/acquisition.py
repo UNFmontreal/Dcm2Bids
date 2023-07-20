@@ -221,6 +221,11 @@ class Acquisition(object):
                                         "with this id.")
                     else:
                         values.append(idList.get(val, val))
+                        if values[-1] != val:
+                            if isinstance(values[-1], list):
+                                values[-1] = "bids::" + values[-1][0]
+                            else:
+                                 values[-1] = "bids::" + values[-1]
 
             # handle if nested list vs str
             flat_value_list = []
