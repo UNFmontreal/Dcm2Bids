@@ -155,9 +155,11 @@ class Dcm2BidsGen(object):
             # Populate idList
             if '.nii' in ext:
                 if acquisition.id in idList:
-                    idList[acquisition.id].append(acquisition.dstId + "".join(ext))
+                    idList[acquisition.id].append(os.path.join(acquisition.participant.name,
+                                                               acquisition.dstId + "".join(ext)))
                 else:
-                    idList[acquisition.id] = [acquisition.dstId + "".join(ext)]
+                    idList[acquisition.id] = [os.path.join(acquisition.participant.name,
+                                                           acquisition.dstId + "".join(ext))]
 
                 for curr_post_op in post_op:
                     if acquisition.datatype in curr_post_op['datatype'] or 'any' in curr_post_op['datatype']:

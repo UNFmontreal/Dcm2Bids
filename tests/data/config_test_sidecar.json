@@ -1,0 +1,92 @@
+{
+    "descriptions": [
+      {
+        "datatype": "localizer",
+        "suffix": "localizer",
+        "criteria": {
+          "SeriesDescription": "locali*"
+        },
+        "sidecar_changes": {
+          "ProcedureStepDescription": "Modified by dcm2bids"
+        }
+      },
+      {
+        "id": "T1",
+        "datatype": "anat",
+        "suffix": "T1w",
+        "criteria": {
+          "SidecarFilename": "*MPRAGE*"
+        },
+        "sidecar_changes": {
+          "new_field": "new value"
+        }
+      },
+      {
+        "id": "id_dwi",
+        "datatype": "dwi",
+        "suffix": "dwi",
+        "criteria": {
+          "SeriesDescription": "DTI"
+        }
+      },
+      {
+        "datatype": "fmap",
+        "suffix": "fmap",
+        "custom_entities": "echo-492",
+        "criteria": {
+          "EchoNumber": 1,
+          "EchoTime": 0.00492
+        },
+        "sidecar_changes": {
+          "MTState": true
+        }
+      },
+      {
+        "datatype": "fmap",
+        "suffix": "fmap",
+        "custom_entities": "echo-738",
+        "criteria": {
+          "EchoNumber": 2,
+          "EchoTime": 0.00738,
+          "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND"]
+        },
+        "sidecar_changes": {
+          "MTState": "false"
+        }
+      },
+      {
+        "datatype": "dwi",
+        "suffix": "dwi",
+        "custom_entities": "desc-fa01",
+        "criteria": {
+          "SeriesDescription": "DTI_FA"
+        },
+        "sidecar_changes": {
+          "IntendedFor": [
+            "id_dwi",
+            "T1"
+          ],
+          "Sources": [
+            "T1",
+            "id_dwi"
+          ]
+        }
+      },
+      {
+        "datatype": "dwi",
+        "suffix": "dwi",
+        "custom_entities": "desc-trace",
+        "criteria": {
+          "SeriesDescription": "DTI_TRACEW"
+        },
+        "sidecar_changes": {
+          "IntendedFor": [
+            "id_dwi"
+          ],
+          "Sources": [
+            "T1"
+          ]
+        }
+      }
+    ]
+  }

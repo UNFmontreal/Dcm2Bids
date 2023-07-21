@@ -1,4 +1,6 @@
-# How to use advanced configuration
+# Advanced configuration and commands
+
+## How to use advanced configuration
 
 These optional configurations can be inserted in the configuration file at the
 same level as the `"description"` entry.
@@ -43,7 +45,7 @@ same level as the `"description"` entry.
 }
 ```
 
-## custom_entities combined with extractors
+### `custom_entities` combined with extractors
 
 default: None
 
@@ -57,7 +59,7 @@ entities directly into the final filename. custom_entities can be a list that
 combined extractor keys and regular entities. If key is `task` it will
 automatically add the field "TaskName" inside the sidecase file.
 
-## search_method
+### `search_method`
 
 default: `"search_method": "fnmatch"`
 
@@ -65,7 +67,7 @@ fnmatch is the behaviour (See criteria) by default and the fall back if this
 option is set incorrectly. `re` is the other choice if you want more flexibility
 to match criteria.
 
-## dup_method
+### `dup_method`
 
 default: `"dup_method": "run"`
 
@@ -77,14 +79,14 @@ customEntities of the other acquisitions. This behavior is a
 [heudiconv](https://heudiconv.readthedocs.io/en/latest/changes.html) inspired
 feature.
 
-## case_sensitive
+### `case_sensitive`
 
 default: `"case_sensitive": "true"`
 
 If false, comparisons between strings/lists will be not case sensitive. It's
 only disabled when used with `"search_method": "fnmatch"`.
 
-## post_op
+### `post_op`
 
 default: `"post_op": []`
 
@@ -130,13 +132,13 @@ which datatype is fmap.
 Finally, this is a template string and dcm2bids will replace `src_file` and
 `dst_file` by the source file (input) and the destination file (output).
 
-## dcm2niixOptions
+### `dcm2niixOptions`
 
 default: `"dcm2niixOptions": "-b y -ba y -z y -f '%3s_%f_%p_%t'"`
 
 Arguments for dcm2niix
 
-## compKeys
+### `compKeys`
 
 default: `"compKeys": ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]`
 
@@ -144,9 +146,9 @@ Acquisitions are sorted using the sidecar data. The default behaviour is to sort
 by `SeriesNumber` then by `AcquisitionTime` then by the `SidecarFilename`. You
 can change this behaviour setting this key inside the configuration file.
 
-## criteria
+### `criteria`
 
-### Handle multi site filtering
+#### Handle multi site filtering
 
 As mentionned in the [first-steps tutorial](../tutorial/first-steps.md),
 criteria is the way to filter specific acquisitions. If you work with dicoms
@@ -160,7 +162,7 @@ feature where for a specific criteria you can get multiple descriptions.
 }
 ```
 
-### Enhanced float/int comparison
+#### Enhanced float/int comparison
 
 Criteria can help you filter acquisitions by comparing float/int sidecar.
 
@@ -196,9 +198,9 @@ If you want to use btw or btwe you will need to give an ordered list like this.
 }
 ```
 
-# How to use advanced commands
+## How to use advanced commands
 
-## dcm2bids advanced options
+### dcm2bids advanced options
 
 By now, you should be used to getting the `--help` information before running a
 command.
@@ -236,7 +238,7 @@ command.
                             depending on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
+    --force_dcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
@@ -245,7 +247,7 @@ command.
 
     ```
 
-## --auto_extract_entities
+### `--auto_extract_entities`
 
 This option will automatically try to find 3 entities (task, dir and echo) for
 specific datatype/suffix.
@@ -310,7 +312,7 @@ like this.
 :radioactive: You can find more detailed information by looking at the file [`dcm2bids/utils/utils.py`](../dcm2bids/utils/utils/) and
 more specifically *`auto_extractors`* and *`auto_entities`* variables.
 
-## --bids_validate
+### `--bids_validate`
 
 By default, dcm2bids will not validate your final BIDS structure. If needed, you
 can install
