@@ -1189,7 +1189,19 @@
 <span class="normal">416</span>
 <span class="normal">417</span>
 <span class="normal">418</span>
-<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Participant class&quot;&quot;&quot;
 
@@ -1543,7 +1555,7 @@ class Acquisition(object):
 
             for val in value:
 
-                if isinstance(val, str):
+                if isinstance(val, str) or isinstance(val, bool):
 
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
@@ -1561,6 +1573,16 @@ class Acquisition(object):
 
                         values.append(idList.get(val, val))
 
+                        if values[-1] != val:
+
+                            if isinstance(values[-1], list):
+
+                                values[-1] = &quot;bids::&quot; + values[-1][0]
+
+                            else:
+
+                                 values[-1] = &quot;bids::&quot; + values[-1]
+
             # handle if nested list vs str
 
             flat_value_list = []
@@ -1577,9 +1599,11 @@ class Acquisition(object):
 
             if len(flat_value_list) == 1:
 
-                flat_value_list = flat_value_list[0]
+                data[key] = flat_value_list[0]
 
-            data[key] = flat_value_list
+            else:
+
+                data[key] = flat_value_list
 
         return data
 
@@ -2084,7 +2108,19 @@ class Acquisition(object):
 <span class="normal">404</span>
 <span class="normal">405</span>
 <span class="normal">406</span>
-<span class="normal">407</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code>class Acquisition(object):
 
     &quot;&quot;&quot; Class representing an acquisition
 
@@ -2426,7 +2462,7 @@ class Acquisition(object):
 
             for val in value:
 
-                if isinstance(val, str):
+                if isinstance(val, str) or isinstance(val, bool):
 
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
@@ -2444,6 +2480,16 @@ class Acquisition(object):
 
                         values.append(idList.get(val, val))
 
+                        if values[-1] != val:
+
+                            if isinstance(values[-1], list):
+
+                                values[-1] = &quot;bids::&quot; + values[-1][0]
+
+                            else:
+
+                                 values[-1] = &quot;bids::&quot; + values[-1]
+
             # handle if nested list vs str
 
             flat_value_list = []
@@ -2460,9 +2506,11 @@ class Acquisition(object):
 
             if len(flat_value_list) == 1:
 
-                flat_value_list = flat_value_list[0]
+                data[key] = flat_value_list[0]
 
-            data[key] = flat_value_list
+            else:
+
+                data[key] = flat_value_list
 
         return data
 
@@ -2661,7 +2709,19 @@ class Acquisition(object):
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
-<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, idList):
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def dstSidecarData(self, idList):
 
         &quot;&quot;&quot;
 
@@ -2689,7 +2749,7 @@ class Acquisition(object):
 
             for val in value:
 
-                if isinstance(val, str):
+                if isinstance(val, str) or isinstance(val, bool):
 
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
@@ -2707,6 +2767,16 @@ class Acquisition(object):
 
                         values.append(idList.get(val, val))
 
+                        if values[-1] != val:
+
+                            if isinstance(values[-1], list):
+
+                                values[-1] = &quot;bids::&quot; + values[-1][0]
+
+                            else:
+
+                                 values[-1] = &quot;bids::&quot; + values[-1]
+
             # handle if nested list vs str
 
             flat_value_list = []
@@ -2723,9 +2793,11 @@ class Acquisition(object):
 
             if len(flat_value_list) == 1:
 
-                flat_value_list = flat_value_list[0]
+                data[key] = flat_value_list[0]
 
-            data[key] = flat_value_list
+            else:
+
+                data[key] = flat_value_list
 
         return data
 </code></pre></div></td></tr></table></div>
@@ -2888,11 +2960,11 @@ https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-tabl
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-17T20:45:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-21T15:59:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-21</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-17T20:45:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-17</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-21T15:59:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-21</span>
       
     
   </small>
