@@ -238,7 +238,7 @@ command.
                             depending on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --forceDcm2niix       Overwrite previous temporary dcm2niix output if it exists
+    --force_dcm2niix       Overwrite previous temporary dcm2niix output if it exists
     --clobber             Overwrite output if it exists
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level
