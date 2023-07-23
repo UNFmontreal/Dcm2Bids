@@ -12,7 +12,7 @@ def load_json(filename):
         filename (str): Path of a JSON file
 
     Return:
-        Dictionnary of the JSON file
+        Dictionary of the JSON file
     """
     with open(filename, "r") as f:
         data = json.load(f, object_pairs_hook=OrderedDict)

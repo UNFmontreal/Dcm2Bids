@@ -187,7 +187,7 @@ a preview from an editor like Atom using `CTRL+SHIFT+M`.
 
 Pull Request Checklist (For Fastest Review):
 
-- [x] Check that all tests are passing ("All tests passsed")
+- [x] Check that all tests are passing ("All tests passed")
 - [x] Make sure you have docstrings for any new functions
 - [x] Make sure that docstrings are updated for edited functions
 - [x] Make sure you note any issues that will be closed by your PR

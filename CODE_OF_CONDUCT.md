@@ -8,7 +8,7 @@ seeking help on [Neurostars](https://neurostars.org/) or on
 [GitHub](https://github.com/UNFmontreal/Dcm2Bids/issues).
 
 We also encourage everybody regardless of age, gender identity, level of
-experience, native langage, race or religion to be involved in the project. We
+experience, native language, race or religion to be involved in the project. We
 pledge to make participation in the dcm2bids project an harassment-free
 experience for everyone.
 

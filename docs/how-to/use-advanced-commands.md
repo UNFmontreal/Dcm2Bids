@@ -49,7 +49,7 @@ same level as the `"description"` entry.
 
 default: None
 
-extractors will allow you to extract information embeded into sidecar files. In
+extractors will allow you to extract information embedded into sidecar files. In
 the example above, it will try to match 2 different regex expressions (keys:
 task, run) within the SeriesDescription field and bodypart in BodyPartExamined
 field.
@@ -150,10 +150,10 @@ can change this behaviour setting this key inside the configuration file.
 
 #### Handle multi site filtering
 
-As mentionned in the [first-steps tutorial](../tutorial/first-steps.md),
+As mentioned in the [first-steps tutorial](../tutorial/first-steps.md),
 criteria is the way to filter specific acquisitions. If you work with dicoms
-from multiple sites you will need different criterias for the same kind of
-acquisition. In order to reduce the length of the config file, we developped a
+from multiple sites you will need different criteria for the same kind of
+acquisition. In order to reduce the length of the config file, we developed a
 feature where for a specific criteria you can get multiple descriptions.
 
 ```json
