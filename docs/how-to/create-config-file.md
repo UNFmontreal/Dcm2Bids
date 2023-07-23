@@ -169,7 +169,7 @@ If you want to add an `IntendedFor` entry or any extra sidecar linked to a
 specific file, you will need to set an id to the corresponding description and
 put the same id with `IntendedFor`.
 
-Fo example, **`task_rest`** means it is intended for `task-rest_bold` and
+For example, **`task_rest`** means it is intended for `task-rest_bold` and
 **`id_task_learning`** is intended for `task-learning_bold`.
 
 You could also use this feature to feed sidecar such as `Source`` for example or
