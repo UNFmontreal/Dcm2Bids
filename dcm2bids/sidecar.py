@@ -73,7 +73,7 @@ class Sidecar(object):
             filename (path): path of a JSON file
 
         Return:
-            A dictionnary of the JSON content plus the SidecarFilename
+            A dictionary of the JSON content plus the SidecarFilename
         """
         try:
             data = load_json(filename)
@@ -253,8 +253,8 @@ class SidecarPairing(object):
     def isLink(self, data, criteria):
         """
         Args:
-            data (dict): Dictionnary data of a sidecar
-            criteria (dict): Dictionnary criteria
+            data (dict): Dictionary data of a sidecar
+            criteria (dict): Dictionary criteria
 
         Returns:
             boolean
@@ -363,7 +363,7 @@ class SidecarPairing(object):
                         self.logger.warning(f"This key {list(pattern.keys())[0]} "
                                             "is not allowed.")
                 else:
-                    raise ValueError("Dictionnary used as criteria should be "
+                    raise ValueError("Dictionary used as criteria should be "
                                      "using only one key.")
 
             elif isinstance(name, list):

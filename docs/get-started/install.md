@@ -30,7 +30,7 @@ path.
     sam:~/data$ ~/software/dcm2bids_scaffold -o new-bids-project
     ```
 
-=== "Ouput"
+=== "Output"
 
     ```bash
     sam:~/software$ curl -fLO https://github.com/unfmontreal/dcm2bids/releases/latest/download/dcm2bids_debian-based_3.0.0rc1.tar.gz
@@ -157,7 +157,7 @@ we recommend to install it at the same time in the dedicated environment.
 As you can see, dcm2niix is available through [conda][conda] so that is the
 approach chosen in this guide. We will benefit from the simplicity of installing
 all software from the same located at. Steps to install dcm2niix are included in
-the next secton.
+the next section.
 
 ## Recommendations
 
@@ -293,7 +293,7 @@ this command:
 conda env create --file environment.yml
 ```
 
-If the executation was successful, you should see a message similar to:
+If the execution was successful, you should see a message similar to:
 
 ```bash hl_lines="14"
 sam:~/dcm2bids-proj$ nano environment.yml

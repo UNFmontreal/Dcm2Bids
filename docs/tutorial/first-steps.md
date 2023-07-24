@@ -28,7 +28,7 @@ these:
     ```
 
 Note that in the Output tab, the content before the command prompt (`$`) will be
-dependend or your operating system and terminal configuration. What you want to
+dependent or your operating system and terminal configuration. What you want to
 compare is what follows it and the output below the command that was ran. The
 output you see was taken directly out of your terminal when you tested the
 tutorial.
@@ -590,7 +590,7 @@ which file based on their identical names, only with a
 
 As you can see, it is not necessarily easy to tell which scan files (`nii.gz`)
 refer to which acquisitions from their names only. That is why you have to go
-through their sidecar files to find unique identifiers for one acquisiton you
+through their sidecar files to find unique identifiers for one acquisition you
 want to _BIDSify_.
 
 Go ahead and use any code editor, file viewer or your terminal to inspect the
@@ -712,13 +712,13 @@ acquisitions, namely:
 2. `003_In_EPI_PE=AP_20180918121230`
 3. `004_In_EPI_PE=PA_20180918121230`
 
-The first is an resting-state fMRI acquisiton whereas the second and third are
+The first is an resting-state fMRI acquisition whereas the second and third are
 fieldmap EPI.
 
 ### Setting up the configuration file
 
 Once you found the data you want to _BIDSify_, you can start setting up your
-configuration file. The file name is arbritrary but for the readibility purpose,
+configuration file. The file name is arbitrary but for the readability purpose,
 you can name it `dcm2bids_config.json` like in the tutorial. You can create in
 the `code/` directory. Use any code editor to create the file and add the
 following content:

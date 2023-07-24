@@ -25,7 +25,7 @@ more information.
     If your directory or file names have space in them, we recommend that you
     change all the spaces for another character (`_` or `-`) but if you can't
     change the names, you have to wrap each argument with quotes as in the
-    exemple below: 
+    example below: 
 
     `dcm2bids -d "DICOM DIR" -p PARTICIPANT_ID -c "path/with spaces to/CONFIG FILE.json"`
 

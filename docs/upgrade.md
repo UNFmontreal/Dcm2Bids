@@ -22,7 +22,7 @@ Upgrade to the latest version using your favorite method.
 
 ## Upgrading from 2.x to 3.x
 
-This major release includes many new features that unfortunaly requires breaking
+This major release includes many new features that unfortunately requires breaking
 changes to configuration files.
 
 ### Changes to existing description and config file keys
