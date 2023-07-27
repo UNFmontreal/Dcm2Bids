@@ -42,6 +42,7 @@ class Dcm2BidsGen(object):
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         force_dcm2niix=DEFAULT.force_dcm2niix,
+        skip_dcm2niix=DEFAULT.skip_dcm2niix,
         log_level=DEFAULT.logLevel,
         **_
     ):
@@ -54,6 +55,7 @@ class Dcm2BidsGen(object):
         self.bids_validate = bids_validate
         self.auto_extract_entities = auto_extract_entities
         self.force_dcm2niix = force_dcm2niix
+        self.skip_dcm2niix = skip_dcm2niix
         self.logLevel = log_level
         self.logger = logging.getLogger(__name__)
 
@@ -77,6 +79,7 @@ class Dcm2BidsGen(object):
             self.dicom_dirs,
             self.bids_dir,
             self.participant,
+            self.skip_dcm2niix,
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
 

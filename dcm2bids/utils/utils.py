@@ -41,6 +41,7 @@ class DEFAULT(object):
 
     # dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    skip_dcm2niix = False
 
     # sidecar.py
     auto_extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)"],

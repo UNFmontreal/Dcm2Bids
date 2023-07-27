@@ -64,6 +64,11 @@ def _build_arg_parser():
                    help="Overwrite previous temporary dcm2niix "
                         "output if it exists.")
 
+    p.add_argument("--skip_dcm2niix",
+                   action="store_true",
+                   help="Skip dcm2niix conversion. "
+                        "Option -d should contains NIFTI and json files.")
+
     p.add_argument("--clobber",
                    action="store_true",
                    help="Overwrite output if it exists.")

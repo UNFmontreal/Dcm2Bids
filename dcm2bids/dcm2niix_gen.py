@@ -18,6 +18,7 @@ class Dcm2niixGen(object):
         dicom_dirs (list): A list of folder with dicoms to convert
         bids_dir (str): A path to the root BIDS directory
         participant: Optional Participant object
+        skip_dcm2niix: Optional if input only NIFTI and JSON files
         options (str): Optional arguments for dcm2niix
 
     Properties:
@@ -29,6 +30,7 @@ class Dcm2niixGen(object):
         dicom_dirs,
         bids_dir,
         participant=None,
+        skip_dcm2niix=DEFAULT.skip_dcm2niix,
         options=DEFAULT.dcm2niixOptions,
         helper=False
     ):
@@ -37,6 +39,7 @@ class Dcm2niixGen(object):
         self.dicom_dirs = dicom_dirs
         self.bids_dir = bids_dir
         self.participant = participant
+        self.skip_dcm2niix = skip_dcm2niix
         self.options = options
         self.helper = helper
 
@@ -96,15 +99,26 @@ class Dcm2niixGen(object):
     def execute(self):
         """ Execute dcm2niix for each directory in dicom_dirs
         """
-        for dicomDir in self.dicom_dirs:
-            cmd = ['dcm2niix', *shlex.split(self.options),
-                   '-o', self.output_dir, dicomDir]
+        if not self.skip_dcm2niix:
+            for dicomDir in self.dicom_dirs:
+                cmd = ['dcm2niix', *shlex.split(self.options),
+                       '-o', self.output_dir, dicomDir]
+                output = run_shell_command(cmd)
+
+                try:
+                    output = output.decode()
+                except Exception:
+                    pass
+
+                self.logger.debug(f"\n{output}")
+                self.logger.info("Check log file for dcm2niix output\n")
+        else:
+            cmd = ['cp', '-r', dicomDir, self.output_dir]
             output = run_shell_command(cmd)
 
             try:
                 output = output.decode()
             except Exception:
                 pass
-
-            self.logger.debug(f"\n{output}")
-            self.logger.info("Check log file for dcm2niix output\n")
+         
+            self.logger.info("Not running dcm2niix\n")
