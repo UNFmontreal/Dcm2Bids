@@ -113,12 +113,9 @@ class Dcm2niixGen(object):
                 self.logger.debug(f"\n{output}")
                 self.logger.info("Check log file for dcm2niix output\n")
         else:
-            cmd = ['cp', '-r', dicomDir, self.output_dir]
-            output = run_shell_command(cmd)
+            for dicomDir in self.dicom_dirs:
+                shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
+                cmd = ['cp', '-r', dicomDir, self.output_dir]
+                self.logger.info("Running: %s", " ".join(str(item) for item in cmd))
 
-            try:
-                output = output.decode()
-            except Exception:
-                pass
-         
             self.logger.info("Not running dcm2niix\n")
