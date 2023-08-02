@@ -26,8 +26,8 @@ class Dcm2BidsGen(object):
         output_dir (path): Path to the BIDS base folder
         session (str): Optional label of a session
         clobber (boolean): Overwrite file if already in BIDS folder
-        force_dcm2niix (boolean): Forces a cleaning of a previous execution of
-                                 dcm2niix
+        force_dcm2bids (boolean): Forces a cleaning of a previous execution of
+                                 dcm2bids
         log_level (str): logging level
     """
 
@@ -41,7 +41,7 @@ class Dcm2BidsGen(object):
         auto_extract_entities=False,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
-        force_dcm2niix=DEFAULT.force_dcm2niix,
+        force_dcm2bids=DEFAULT.force_dcm2bids,
         skip_dcm2niix=DEFAULT.skip_dcm2niix,
         log_level=DEFAULT.logLevel,
         **_
@@ -54,7 +54,7 @@ class Dcm2BidsGen(object):
         self.clobber = clobber
         self.bids_validate = bids_validate
         self.auto_extract_entities = auto_extract_entities
-        self.force_dcm2niix = force_dcm2niix
+        self.force_dcm2bids = force_dcm2bids
         self.skip_dcm2niix = skip_dcm2niix
         self.logLevel = log_level
         self.logger = logging.getLogger(__name__)
@@ -83,7 +83,7 @@ class Dcm2BidsGen(object):
             self.config.get("dcm2niixOptions", DEFAULT.dcm2niixOptions),
         )
 
-        dcm2niix.run(self.force_dcm2niix)
+        dcm2niix.run(self.force_dcm2bids)
 
         sidecars = []
         for filename in dcm2niix.sidecarFiles:

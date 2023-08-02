@@ -26,7 +26,7 @@ class DEFAULT(object):
     bids_validate = False
     auto_extract_entities = False
     clobber = False
-    force_dcm2niix = False
+    force_dcm2bids = False
     post_op = []
     logLevel = "WARNING"
 

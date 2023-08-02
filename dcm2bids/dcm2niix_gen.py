@@ -55,7 +55,7 @@ class Dcm2niixGen(object):
             tmpDir = self.bids_dir
         return tmpDir
 
-    def run(self, force=False, helper=False):
+    def run(self, force=False):
         """ Run dcm2niix if necessary
 
         Args:
@@ -71,10 +71,10 @@ class Dcm2niixGen(object):
             oldOutput = False
 
         if oldOutput and force:
-            self.logger.warning("Previous dcm2niix directory output found:")
+            self.logger.warning("Previous dcm2bids temporary directory output found:")
             self.logger.warning(self.output_dir)
             self.logger.warning("'force' argument is set to True")
-            self.logger.warning("Cleaning the previous directory and running dcm2niix")
+            self.logger.warning("Cleaning the previous directory and running dcm2bids")
 
             shutil.rmtree(self.output_dir, ignore_errors=True)
 
@@ -84,9 +84,9 @@ class Dcm2niixGen(object):
             self.execute()
 
         elif oldOutput:
-            self.logger.warning("Previous dcm2niix directory output found:")
+            self.logger.warning("Previous dcm2bids temporary directory output found:")
             self.logger.warning(self.output_dir)
-            self.logger.warning("Use --force_dcm2niix to rerun dcm2niix\n")
+            self.logger.warning("Use --force_dcm2bids to rerun dcm2bids\n")
 
         else:
             if not os.path.exists(self.output_dir):

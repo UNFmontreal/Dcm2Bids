@@ -81,7 +81,7 @@ You can test it with any command but a safe way is to use the `--help` command.
     (dcm2bids) sam:~$ dcm2bids --help
     usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
                     CONFIG [-o OUTPUT_DIR][--auto_extract_entities] [--bids_validate]
-                    [--force_dcm2niix] [--skip_dcm2niix] [--clobber]
+                    [--force_dcm2bids] [--skip_dcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -104,7 +104,7 @@ You can test it with any command but a safe way is to use the `--help` command.
                           If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --force_dcm2niix       Overwrite previous temporary dcm2niix output if it exists.
+    --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists.
     --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
     --clobber             Overwrite output if it exists.
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
@@ -502,7 +502,7 @@ As usual the first command will be to request the help info.
                             to make a config file due to slight variations in MRI acquisitions.
                             Defaults to DICOM_DIR if no name is provided.
                             (Default: [False])
-    --force, --force_dcm2niix
+    --force, --force_dcm2bids
                             Force command to overwrite existing output files.
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
                             Set logging level to the console. [INFO]
@@ -1070,7 +1070,7 @@ command.
     ```sh hl_lines="2-3"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
     usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR]
-                    [--auto_extract_entities] [--bids_validate] [--force_dcm2niix] [--skip_dcm2niix] [--clobber]
+                    [--auto_extract_entities] [--bids_validate] [--force_dcm2bids] [--skip_dcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -1092,7 +1092,7 @@ command.
                             If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
     --bids_validate         If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                             bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --force_dcm2niix       Overwrite previous temporary dcm2niix output if it exists.
+    --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists.
     --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
     --clobber             Overwrite output if it exists.
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}

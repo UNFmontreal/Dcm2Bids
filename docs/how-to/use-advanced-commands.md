@@ -216,7 +216,7 @@ command.
     ```sh hl_lines="2-3"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
     usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR]
-                    [--auto_extract_entities] [--bids_validate] [--force_dcm2niix] [--skip_dcm2niix] [--clobber]
+                    [--auto_extract_entities] [--bids_validate] [--force_dcm2bids] [--skip_dcm2niix] [--clobber]
                     [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
     Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -238,7 +238,7 @@ command.
                             depending on the suffix and datatype. [False]
     --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
                           bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --force_dcm2niix       Overwrite previous temporary dcm2niix output if it exists.
+    --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists.
     --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
     --clobber             Overwrite output if it exists.
     -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}

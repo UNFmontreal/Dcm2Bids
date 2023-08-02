@@ -344,7 +344,7 @@ dcm2bids command such as `dcm2bids --help`:
 ```bash hl_lines="1"
 (dcm2bids) sam:~/dcm2bids-proj$ dcm2bids --help
 usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
-                CONFIG [-o OUTPUT_DIR] [--force_dcm2niix] [--skip_dcm2niix]
+                CONFIG [-o OUTPUT_DIR] [--force_dcm2bids] [--skip_dcm2niix]
                 [--clobber] [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
 
 Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
@@ -363,7 +363,7 @@ options:
   -o OUTPUT_DIR, --output_dir OUTPUT_DIR
                         Output BIDS directory, Default: current directory
                         (/home/sam/dcm2bids-proj)
-  --force_dcm2niix       Overwrite previous temporary dcm2niix output if it exists
+  --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists
   --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
   --clobber             Overwrite output if it exists
   -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
