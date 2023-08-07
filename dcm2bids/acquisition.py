@@ -211,8 +211,8 @@ class Acquisition(object):
             if not isinstance(value, list):
                 value = [value]
 
-            for val in value:
-                if isinstance(val, str) or isinstance(val, bool):
+             for val in value:
+                if isinstance(val, (bool, str, int, float)):
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
                         logging.warning(f"No id found for '{key}' value '{val}'.")
                         logging.warning(f"No sidecar changes for field '{key}' "
@@ -221,7 +221,7 @@ class Acquisition(object):
                                         "with this id.")
                     else:
                         values.append(idList.get(val, val))
-                        if values[-1] != val:
+                        if values[-1] != val and isinstance(values[-1], str):
                             if isinstance(values[-1], list):
                                 values[-1] = "bids::" + values[-1][0]
                             else:
