@@ -211,7 +211,7 @@ class Acquisition(object):
             if not isinstance(value, list):
                 value = [value]
 
-             for val in value:
+            for val in value:
                 if isinstance(val, (bool, str, int, float)):
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
                         logging.warning(f"No id found for '{key}' value '{val}'.")
