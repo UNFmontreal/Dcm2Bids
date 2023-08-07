@@ -221,7 +221,7 @@ class Acquisition(object):
                                         "with this id.")
                     else:
                         values.append(idList.get(val, val))
-                        if values[-1] != val and isinstance(values[-1], str):
+                        if values[-1] != val:
                             if isinstance(values[-1], list):
                                 values[-1] = "bids::" + values[-1][0]
                             else:
