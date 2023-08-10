@@ -1122,7 +1122,9 @@
 <span class="normal">310</span>
 <span class="normal">311</span>
 <span class="normal">312</span>
-<span class="normal">313</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -1162,7 +1164,7 @@ class DEFAULT(object):
 
     clobber = False
 
-    force_dcm2niix = False
+    force_dcm2bids = False
 
     post_op = []
 
@@ -1187,6 +1189,8 @@ class DEFAULT(object):
     # dcm2niix.py
 
     dcm2niixOptions = &quot;-b y -ba y -z y -f &#39;%3s_%f_%p_%t&#39;&quot;
+
+    skip_dcm2niix = False
 
     # sidecar.py
 
@@ -1876,7 +1880,9 @@ class TreePrinter:
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code>class DEFAULT(object):
 
     &quot;&quot;&quot; Default values of the package&quot;&quot;&quot;
 
@@ -1904,7 +1910,7 @@ class TreePrinter:
 
     clobber = False
 
-    force_dcm2niix = False
+    force_dcm2bids = False
 
     post_op = []
 
@@ -1929,6 +1935,8 @@ class TreePrinter:
     # dcm2niix.py
 
     dcm2niixOptions = &quot;-b y -ba y -z y -f &#39;%3s_%f_%p_%t&#39;&quot;
+
+    skip_dcm2niix = False
 
     # sidecar.py
 
@@ -2029,7 +2037,7 @@ class TreePrinter:
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">extractors</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">force_dcm2niix</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">force_dcm2bids</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">helper_dir</span>
 </code></pre></div></td></tr></table></div>
@@ -2052,6 +2060,8 @@ class TreePrinter:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">search_methodChoices</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">session</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">skip_dcm2niix</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tmp_dir_name</span>
 </code></pre></div></td></tr></table></div>
@@ -2341,11 +2351,11 @@ class TreePrinter:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-27T03:43:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:11:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-27T03:43:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-27</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:11:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
     
   </small>

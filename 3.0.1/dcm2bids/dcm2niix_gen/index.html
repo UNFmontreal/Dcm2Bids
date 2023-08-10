@@ -929,7 +929,27 @@
 <span class="normal">170</span>
 <span class="normal">171</span>
 <span class="normal">172</span>
-<span class="normal">173</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;Dcm2niix class&quot;&quot;&quot;
 
@@ -957,6 +977,8 @@ class Dcm2niixGen(object):
 
         participant: Optional Participant object
 
+        skip_dcm2niix: Optional if input only NIFTI and JSON files
+
         options (str): Optional arguments for dcm2niix
 
     Properties:
@@ -975,6 +997,8 @@ class Dcm2niixGen(object):
 
         participant=None,
 
+        skip_dcm2niix=DEFAULT.skip_dcm2niix,
+
         options=DEFAULT.dcm2niixOptions,
 
         helper=False
@@ -990,6 +1014,8 @@ class Dcm2niixGen(object):
         self.bids_dir = bids_dir
 
         self.participant = participant
+
+        self.skip_dcm2niix = skip_dcm2niix
 
         self.options = options
 
@@ -1017,7 +1043,7 @@ class Dcm2niixGen(object):
 
         return tmpDir
 
-    def run(self, force=False, helper=False):
+    def run(self, force=False):
 
         &quot;&quot;&quot; Run dcm2niix if necessary
 
@@ -1043,13 +1069,13 @@ class Dcm2niixGen(object):
 
         if oldOutput and force:
 
-            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
+            self.logger.warning(&quot;Previous dcm2bids temporary directory output found:&quot;)
 
             self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
-            self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
+            self.logger.warning(&quot;Cleaning the previous directory and running dcm2bids&quot;)
 
             shutil.rmtree(self.output_dir, ignore_errors=True)
 
@@ -1061,11 +1087,11 @@ class Dcm2niixGen(object):
 
         elif oldOutput:
 
-            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
+            self.logger.warning(&quot;Previous dcm2bids temporary directory output found:&quot;)
 
             self.logger.warning(self.output_dir)
 
-            self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix\n&quot;)
+            self.logger.warning(&quot;Use --force_dcm2bids to rerun dcm2bids\n&quot;)
 
         else:
 
@@ -1083,25 +1109,39 @@ class Dcm2niixGen(object):
 
         &quot;&quot;&quot;
 
-        for dicomDir in self.dicom_dirs:
+        if not self.skip_dcm2niix:
 
-            cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
+            for dicomDir in self.dicom_dirs:
 
-                   &#39;-o&#39;, self.output_dir, dicomDir]
+                cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-            output = run_shell_command(cmd)
+                       &#39;-o&#39;, self.output_dir, dicomDir]
 
-            try:
+                output = run_shell_command(cmd)
 
-                output = output.decode()
+                try:
 
-            except Exception:
+                    output = output.decode()
 
-                pass
+                except Exception:
 
-            self.logger.debug(f&quot;\n{output}&quot;)
+                    pass
 
-            self.logger.info(&quot;Check log file for dcm2niix output\n&quot;)
+                self.logger.debug(f&quot;\n{output}&quot;)
+
+                self.logger.info(&quot;Check log file for dcm2niix output\n&quot;)
+
+        else:
+
+            for dicomDir in self.dicom_dirs:
+
+                shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
+
+                cmd = [&#39;cp&#39;, &#39;-r&#39;, dicomDir, self.output_dir]
+
+                self.logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(str(item) for item in cmd))
+
+            self.logger.info(&quot;Not running dcm2niix\n&quot;)
 </code></pre></div></td></tr></table></div>
 </details>
 <h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">⚓︎</a></h2>
@@ -1112,10 +1152,12 @@ class Dcm2niixGen(object):
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niixGen</span><span class="p">(</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Dcm2niixGen</span><span class="p">(</span>
     <span class="n">dicom_dirs</span><span class="p">,</span>
     <span class="n">bids_dir</span><span class="p">,</span>
     <span class="n">participant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">skip_dcm2niix</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">options</span><span class="o">=</span><span class="s2">&quot;-b y -ba y -z y -f &#39;</span><span class="si">%3s</span><span class="s2">_</span><span class="si">%f</span><span class="s2">_%p_%t&#39;&quot;</span><span class="p">,</span>
     <span class="n">helper</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
@@ -1148,6 +1190,12 @@ class Dcm2niixGen(object):
 <td>participant</td>
 <td>None</td>
 <td>Optional Participant object</td>
+<td>None</td>
+</tr>
+<tr>
+<td>skip_dcm2niix</td>
+<td>None</td>
+<td>Optional if input only NIFTI and JSON files</td>
 <td>None</td>
 </tr>
 <tr>
@@ -1316,7 +1364,27 @@ class Dcm2niixGen(object):
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
-<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2niixGen(object):
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2niixGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2niix execution
 
@@ -1327,6 +1395,8 @@ class Dcm2niixGen(object):
         bids_dir (str): A path to the root BIDS directory
 
         participant: Optional Participant object
+
+        skip_dcm2niix: Optional if input only NIFTI and JSON files
 
         options (str): Optional arguments for dcm2niix
 
@@ -1346,6 +1416,8 @@ class Dcm2niixGen(object):
 
         participant=None,
 
+        skip_dcm2niix=DEFAULT.skip_dcm2niix,
+
         options=DEFAULT.dcm2niixOptions,
 
         helper=False
@@ -1361,6 +1433,8 @@ class Dcm2niixGen(object):
         self.bids_dir = bids_dir
 
         self.participant = participant
+
+        self.skip_dcm2niix = skip_dcm2niix
 
         self.options = options
 
@@ -1388,7 +1462,7 @@ class Dcm2niixGen(object):
 
         return tmpDir
 
-    def run(self, force=False, helper=False):
+    def run(self, force=False):
 
         &quot;&quot;&quot; Run dcm2niix if necessary
 
@@ -1414,13 +1488,13 @@ class Dcm2niixGen(object):
 
         if oldOutput and force:
 
-            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
+            self.logger.warning(&quot;Previous dcm2bids temporary directory output found:&quot;)
 
             self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
-            self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
+            self.logger.warning(&quot;Cleaning the previous directory and running dcm2bids&quot;)
 
             shutil.rmtree(self.output_dir, ignore_errors=True)
 
@@ -1432,11 +1506,11 @@ class Dcm2niixGen(object):
 
         elif oldOutput:
 
-            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
+            self.logger.warning(&quot;Previous dcm2bids temporary directory output found:&quot;)
 
             self.logger.warning(self.output_dir)
 
-            self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix\n&quot;)
+            self.logger.warning(&quot;Use --force_dcm2bids to rerun dcm2bids\n&quot;)
 
         else:
 
@@ -1454,25 +1528,39 @@ class Dcm2niixGen(object):
 
         &quot;&quot;&quot;
 
-        for dicomDir in self.dicom_dirs:
+        if not self.skip_dcm2niix:
 
-            cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
+            for dicomDir in self.dicom_dirs:
 
-                   &#39;-o&#39;, self.output_dir, dicomDir]
+                cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-            output = run_shell_command(cmd)
+                       &#39;-o&#39;, self.output_dir, dicomDir]
 
-            try:
+                output = run_shell_command(cmd)
 
-                output = output.decode()
+                try:
 
-            except Exception:
+                    output = output.decode()
 
-                pass
+                except Exception:
 
-            self.logger.debug(f&quot;\n{output}&quot;)
+                    pass
 
-            self.logger.info(&quot;Check log file for dcm2niix output\n&quot;)
+                self.logger.debug(f&quot;\n{output}&quot;)
+
+                self.logger.info(&quot;Check log file for dcm2niix output\n&quot;)
+
+        else:
+
+            for dicomDir in self.dicom_dirs:
+
+                shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
+
+                cmd = [&#39;cp&#39;, &#39;-r&#39;, dicomDir, self.output_dir]
+
+                self.logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(str(item) for item in cmd))
+
+            self.logger.info(&quot;Not running dcm2niix\n&quot;)
 </code></pre></div></td></tr></table></div>
 </details>
 <hr />
@@ -1514,42 +1602,68 @@ class Dcm2niixGen(object):
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>    def execute(self):
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code>    def execute(self):
 
         &quot;&quot;&quot; Execute dcm2niix for each directory in dicom_dirs
 
         &quot;&quot;&quot;
 
-        for dicomDir in self.dicom_dirs:
+        if not self.skip_dcm2niix:
 
-            cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
+            for dicomDir in self.dicom_dirs:
 
-                   &#39;-o&#39;, self.output_dir, dicomDir]
+                cmd = [&#39;dcm2niix&#39;, *shlex.split(self.options),
 
-            output = run_shell_command(cmd)
+                       &#39;-o&#39;, self.output_dir, dicomDir]
 
-            try:
+                output = run_shell_command(cmd)
 
-                output = output.decode()
+                try:
 
-            except Exception:
+                    output = output.decode()
 
-                pass
+                except Exception:
 
-            self.logger.debug(f&quot;\n{output}&quot;)
+                    pass
 
-            self.logger.info(&quot;Check log file for dcm2niix output\n&quot;)
+                self.logger.debug(f&quot;\n{output}&quot;)
+
+                self.logger.info(&quot;Check log file for dcm2niix output\n&quot;)
+
+        else:
+
+            for dicomDir in self.dicom_dirs:
+
+                shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
+
+                cmd = [&#39;cp&#39;, &#39;-r&#39;, dicomDir, self.output_dir]
+
+                self.logger.info(&quot;Running: %s&quot;, &quot; &quot;.join(str(item) for item in cmd))
+
+            self.logger.info(&quot;Not running dcm2niix\n&quot;)
 </code></pre></div></td></tr></table></div>
 </details>
 <h4 id="run">run<a class="headerlink" href="#run" title="Permanent link">⚓︎</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">helper</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">force</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Run dcm2niix if necessary</p>
@@ -1632,7 +1746,7 @@ class Dcm2niixGen(object):
 <span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
-<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self, force=False, helper=False):
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code>    def run(self, force=False):
 
         &quot;&quot;&quot; Run dcm2niix if necessary
 
@@ -1658,13 +1772,13 @@ class Dcm2niixGen(object):
 
         if oldOutput and force:
 
-            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
+            self.logger.warning(&quot;Previous dcm2bids temporary directory output found:&quot;)
 
             self.logger.warning(self.output_dir)
 
             self.logger.warning(&quot;&#39;force&#39; argument is set to True&quot;)
 
-            self.logger.warning(&quot;Cleaning the previous directory and running dcm2niix&quot;)
+            self.logger.warning(&quot;Cleaning the previous directory and running dcm2bids&quot;)
 
             shutil.rmtree(self.output_dir, ignore_errors=True)
 
@@ -1676,11 +1790,11 @@ class Dcm2niixGen(object):
 
         elif oldOutput:
 
-            self.logger.warning(&quot;Previous dcm2niix directory output found:&quot;)
+            self.logger.warning(&quot;Previous dcm2bids temporary directory output found:&quot;)
 
             self.logger.warning(self.output_dir)
 
-            self.logger.warning(&quot;Use --force_dcm2niix to rerun dcm2niix\n&quot;)
+            self.logger.warning(&quot;Use --force_dcm2bids to rerun dcm2bids\n&quot;)
 
         else:
 
@@ -1699,11 +1813,11 @@ class Dcm2niixGen(object):
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-27T03:42:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-27</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:11:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-27T03:42:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-27</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:11:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
     
   </small>

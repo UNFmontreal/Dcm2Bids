@@ -667,6 +667,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#-skip_dcm2niix" class="md-nav__link">
+    --skip_dcm2niix
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -938,6 +945,13 @@
           <li class="md-nav__item">
   <a href="#-bids_validate" class="md-nav__link">
     --bids_validate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-skip_dcm2niix" class="md-nav__link">
+    --skip_dcm2niix
   </a>
   
 </li>
@@ -1253,9 +1267,10 @@ command.</p>
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial/bids_project$<span class="w"> </span>dcm2bids<span class="w"> </span>--help
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial/bids_project$<span class="w"> </span>dcm2bids<span class="w"> </span>--help
 <span class="hll">usage:<span class="w"> </span>dcm2bids<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span>PARTICIPANT<span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>SESSION<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span>CONFIG<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span>
-</span><span class="hll"><span class="w">                </span><span class="o">[</span>--auto_extract_entities<span class="o">]</span><span class="w"> </span><span class="o">[</span>--bids_validate<span class="o">]</span><span class="w"> </span><span class="o">[</span>--forceDcm2niix<span class="o">]</span><span class="w"> </span><span class="o">[</span>--clobber<span class="o">]</span>
+</span><span class="hll"><span class="w">                </span><span class="o">[</span>--auto_extract_entities<span class="o">]</span><span class="w"> </span><span class="o">[</span>--bids_validate<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force_dcm2bids<span class="o">]</span><span class="w"> </span><span class="o">[</span>--skip_dcm2niix<span class="o">]</span><span class="w"> </span><span class="o">[</span>--clobber<span class="o">]</span>
 </span><span class="w">                </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span><span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
 
 Reorganising<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>dcm2niix<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span>Brain<span class="w"> </span>Imaging<span class="w"> </span>Data<span class="w"> </span>Structure
@@ -1277,8 +1292,9 @@ options:
 <span class="w">                        </span>depending<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>suffix<span class="w"> </span>and<span class="w"> </span>datatype.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
 --bids_validate<span class="w">       </span>If<span class="w"> </span>set,<span class="w"> </span>once<span class="w"> </span>your<span class="w"> </span>conversion<span class="w"> </span>is<span class="w"> </span><span class="k">done</span><span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span><span class="k">if</span><span class="w"> </span>your<span class="w"> </span>output<span class="w"> </span>folder<span class="w"> </span>is<span class="w"> </span>BIDS<span class="w"> </span>valid.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
 <span class="w">                      </span>bids-validator<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>installed<span class="w"> </span>check:<span class="w"> </span>https://github.com/bids-standard/bids-validator#quickstart
---force_dcm2niix<span class="w">       </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2niix<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists
---clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists
+--force_dcm2bids<span class="w">       </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2bids<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+--skip_dcm2niix<span class="w">       </span>Skip<span class="w"> </span>dcm2niix<span class="w"> </span>conversion.<span class="w"> </span>Option<span class="w"> </span>-d<span class="w"> </span>should<span class="w"> </span>contains<span class="w"> </span>NIFTI<span class="w"> </span>and<span class="w"> </span>json<span class="w"> </span>files.
+--clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
 -l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
 <span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level
 
@@ -1379,13 +1395,16 @@ more specifically <em><code>auto_extractors</code></em> and <em><code>auto_entit
 can install
 <a href="https://github.com/bids-standard/bids-validator#quickstart">bids-validator</a> and
 activate this option.</p>
+<h3 id="-skip_dcm2niix"><code>--skip_dcm2niix</code><a class="headerlink" href="#-skip_dcm2niix" title="Permanent link">⚓︎</a></h3>
+<p>If you don't have access to original dicom files you can still use dcm2bids to reorganise your data into a BIDS structure.
+Using the option --skip_dcm2niix you will skip the conversion step.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-24T15:44:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-24</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-02T13:39:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-02</span>
       
         <br>
         Created:
