@@ -212,7 +212,7 @@ class Acquisition(object):
                 value = [value]
 
             for val in value:
-                if isinstance(val, str) or isinstance(val, bool):
+                if isinstance(val, (bool, str, int, float)):
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
                         logging.warning(f"No id found for '{key}' value '{val}'.")
                         logging.warning(f"No sidecar changes for field '{key}' "
