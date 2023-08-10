@@ -1555,7 +1555,7 @@ class Acquisition(object):
 
             for val in value:
 
-                if isinstance(val, str) or isinstance(val, bool):
+                if isinstance(val, (bool, str, int, float)):
 
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
@@ -2462,7 +2462,7 @@ class Acquisition(object):
 
             for val in value:
 
-                if isinstance(val, str) or isinstance(val, bool):
+                if isinstance(val, (bool, str, int, float)):
 
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
@@ -2749,7 +2749,7 @@ class Acquisition(object):
 
             for val in value:
 
-                if isinstance(val, str) or isinstance(val, bool):
+                if isinstance(val, (bool, str, int, float)):
 
                     if val not in idList and key in DEFAULT.keyWithPathsidecar_changes:
 
@@ -2960,11 +2960,11 @@ https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-tabl
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:11:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:13:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:11:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-10T14:13:24+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-10</span>
       
     
   </small>
