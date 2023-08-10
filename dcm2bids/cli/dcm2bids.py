@@ -59,10 +59,15 @@ def _build_arg_parser():
                         "\nbids-validator needs to be installed check: "
                         f"{DEFAULT.link_bids_validator}")
 
-    p.add_argument("--force_dcm2niix",
+    p.add_argument("--force_dcm2bids",
                    action="store_true",
-                   help="Overwrite previous temporary dcm2niix "
-                        "output if it exists.")
+                   help="Overwrite previous temporary dcm2bids "
+                         "output if it exists.")
+
+    p.add_argument("--skip_dcm2niix",
+                   action="store_true",
+                   help="Skip dcm2niix conversion. "
+                        "Option -d should contains NIFTI and json files.")
 
     p.add_argument("--clobber",
                    action="store_true",

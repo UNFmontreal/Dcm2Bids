@@ -41,7 +41,7 @@ def _build_arg_parser():
                         "Defaults to DICOM_DIR if no name is provided.\n"
                         "(Default: [%(default)s])")
 
-    p.add_argument('--force', '--force_dcm2niix',
+    p.add_argument('--force', '--force_dcm2bids',
                    dest='overwrite', action='store_true',
                    help='Force command to overwrite existing output files.')
 

@@ -17,7 +17,7 @@
       }
     },
     {
-      "id": "task-rest",
+      "id": "task_rest",
       "datatype": "func",
       "suffix": "bold",
       "custom_entities": "task-rest",

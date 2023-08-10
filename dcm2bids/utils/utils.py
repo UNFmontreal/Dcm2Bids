@@ -26,7 +26,7 @@ class DEFAULT(object):
     bids_validate = False
     auto_extract_entities = False
     clobber = False
-    force_dcm2niix = False
+    force_dcm2bids = False
     post_op = []
     logLevel = "WARNING"
 
@@ -41,6 +41,7 @@ class DEFAULT(object):
 
     # dcm2niix.py
     dcm2niixOptions = "-b y -ba y -z y -f '%3s_%f_%p_%t'"
+    skip_dcm2niix = False
 
     # sidecar.py
     auto_extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)"],

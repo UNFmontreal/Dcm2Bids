@@ -12,7 +12,7 @@ RUN apt-get -y install wget build-essential cmake git pigz \
 RUN pip3 install dcm2bids
 
 # Install dcm2niix from github
-ENV DCM2NIIX_VERSION="v1.0.20201102"
+ENV DCM2NIIX_VERSION="v1.0.20230411"
 
 WORKDIR /usr/local/src
 RUN git clone https://github.com/rordenlab/dcm2niix.git
