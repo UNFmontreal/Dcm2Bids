@@ -756,7 +756,7 @@ good unique identifier.
 === "Command"
 
     ```sh
-    cat code/dcm2bids_config.json
+    cat tmp_dcm2bids/helper/004_In_DCM2NIIX_regression_test_20180918114023.json
     ```
 
 === "Output"
