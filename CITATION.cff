@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Boré"
+    given-names: "Arnaud"
+    orcid: "https://orcid.org/0000-0002-4822-1211"
+  - family-names: "Guay"
+    given-names: "Samuel"
+    orcid: "https://orcid.org/0000-0001-6990-839X"
+  - family-names: "Bedetti"
+    given-names: "Christophe"
+    orcid: "https://orcid.org/0000-0002-1443-8922"
+  - family-names: "Meisler"
+    given-names: "Steven"
+  - family-names: "GuenTher"
+    given-names: "Nick"
+title: "Dcm2Bids"
+version: 1.0.0
+doi: 10.5281/zenodo.1234
+date-released: 2023-08-31
+url: "https://github.com/UNFmontreal/Dcm2Bids"
