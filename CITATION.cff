@@ -15,7 +15,7 @@ authors:
   - family-names: "GuenTher"
     given-names: "Nick"
 title: "Dcm2Bids"
-version: 1.0.0
-doi: 10.5281/zenodo.1234
+version: "3.0.2"
+doi: 10.5281/zenodo.8306314
 date-released: 2023-08-31
 url: "https://github.com/UNFmontreal/Dcm2Bids"
