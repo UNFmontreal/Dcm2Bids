@@ -184,9 +184,9 @@ class SidecarPairing(object):
                     raise ValueError("post_op cmd should be a string."
                                      "Please check the documentation.")
 
-                if 'srcFile' not in cmd_split or 'dstFile' not in cmd_split:
+                if 'src_file' not in cmd_split or 'dst_file' not in cmd_split:
                     raise ValueError("post_op cmd is not defined correctly."
-                                     "srcFile and/or dstFile is missing."
+                                     "src_file and/or dst_file is missing."
                                      "Please check the documentation.")
 
                 if isinstance(datatype, str):
