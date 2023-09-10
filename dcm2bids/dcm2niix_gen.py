@@ -6,8 +6,11 @@ import logging
 import os
 import shlex
 import shutil
+import tarfile
+import zipfile
 from glob import glob
 
+from dcm2bids.utils.io import valid_path
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
 
 
@@ -42,6 +45,7 @@ class Dcm2niixGen(object):
         self.skip_dcm2niix = skip_dcm2niix
         self.options = options
         self.helper = helper
+        self.rm_tmp_dir = False
 
     @property
     def output_dir(self):
@@ -101,8 +105,32 @@ class Dcm2niixGen(object):
         """
         if not self.skip_dcm2niix:
             for dicomDir in self.dicom_dirs:
+                if os.path.isfile(dicomDir):
+                    tmp_dcm_name = os.path.join(self.output_dir.parent,
+                                                self.output_dir.name + '_tmp')
+                    self.rm_tmp_dir = valid_path(tmp_dcm_name, type="folder")
+
+                    if tarfile.is_tarfile(dicomDir):
+                        self.logger.info(f"Extracting archive {dicomDir} to temporary "
+                                         f"dicom directory {self.rm_tmp_dir}.")
+                        with tarfile.open(dicomDir) as archive:
+                            archive.extractall(self.rm_tmp_dir)
+
+                    elif zipfile.is_zipfile(dicomDir):
+                        self.logger.info(f"Extracting archive {dicomDir} to temporary "
+                                         f"dicom directory {self.rm_tmp_dir}.")
+                        with zipfile.ZipFile(dicomDir, 'r') as zip_ref:
+                            zip_ref.extractall(self.rm_tmp_dir)
+
+                    else:
+                        self.logger.error(f"\n{dicomDir} is not a supported file" +
+                                          " extension." +
+                                          DEFAULT.arch_extensions + " are supported.")
+                    dicomDir = self.rm_tmp_dir
+
                 cmd = ['dcm2niix', *shlex.split(self.options),
                        '-o', self.output_dir, dicomDir]
+
                 output = run_shell_command(cmd)
 
                 try:
@@ -110,8 +138,13 @@ class Dcm2niixGen(object):
                 except Exception:
                     pass
 
+                if self.rm_tmp_dir:
+                    shutil.rmtree(self.rm_tmp_dir)
+                    self.logger.info("Temporary dicom directory removed.")
+
                 self.logger.debug(f"\n{output}")
                 self.logger.info("Check log file for dcm2niix output\n")
+
         else:
             for dicomDir in self.dicom_dirs:
                 shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
