@@ -178,6 +178,9 @@ class SidecarPairing(object):
                 datatype = curr_post_op['datatype']
                 suffix = curr_post_op['suffix']
 
+                if 'custom_entities' in curr_post_op:
+                    post_op[-1]['custom_entities'] = curr_post_op['custom_entities']
+
                 if isinstance(curr_post_op['cmd'], str):
                     cmd_split = curr_post_op['cmd'].split()
                 else:
