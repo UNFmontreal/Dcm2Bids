@@ -162,7 +162,9 @@ class Acquisition(object):
 
         if self.custom_entities.strip() == "":
             suffix = new_entities + self.suffix
-        else:
+        elif isinstance(new_entities, list):
+            suffix = '_'.join(new_entities) + self.custom_entities + self.suffix
+        elif isinstance(new_entities, str):
             suffix = new_entities + self.custom_entities + self.suffix
 
         current_name = '_'.join([self.participant.prefix, suffix])

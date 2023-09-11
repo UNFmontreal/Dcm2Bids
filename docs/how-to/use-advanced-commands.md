@@ -104,13 +104,19 @@ adding:
     "suffix": [
       "T1w",
       "MP2RAGE"
-    ]
+    ],
+    "custom_entities": "rec-defaced"
   }
 ],
 ```
 
 It will specifically run the corresponding `cmd` to any image that follow the
 combinations datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
+
+!!! warning "How to use custom_entities"
+
+    If you want to keep both versions of the same file (for example defaced and not defaced) you need to provide extra custom_entities
+    otherwise it will keep only your script output.
 
 !!! warning "Multiple post_op commands"
 
@@ -120,7 +126,8 @@ combinations datatype/suffix: `(anat, T1w) or (anat, MP2RAGE)`.
 ```json
 "post_op": [{"cmd": "pydeface --outfile dst_file src_file",
             "datatype": "anat",
-            "suffix": ["T1w", "MP2RAGE"]},
+            "suffix": ["T1w", "MP2RAGE"],
+            "custom_entities": "rec-defaced"},
             {"cmd": "my_new_script --input src_file --output dst_file ",
             "datatype": "fmap",
             "suffix": ["any"]}],
