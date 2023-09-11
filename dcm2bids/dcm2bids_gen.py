@@ -8,6 +8,7 @@ import logging
 import os
 from pathlib import Path
 from glob import glob
+import shutil
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.sidecar import Sidecar, SidecarPairing
@@ -176,11 +177,8 @@ class Dcm2BidsGen(object):
                                 acq.setExtraDstFile(curr_post_op["custom_entities"])
 
                                 # Copy json file with this new set of custom entities.
-                                cmd_json = ['cp', str(srcFile).replace("".join(ext),
-                                                                       ".json"),
-                                            str(acq.extraDstFile) + ".json"]
-                                run_shell_command(cmd_json)
-
+                                shutil.copy(str(srcFile).replace("".join(ext), ".json"),
+                                            str(acq.extraDstFile) + ".json")
                                 cmd = cmd.replace('dst_file',
                                                   str(acq.extraDstFile) + ''.join(ext))
                             else:
