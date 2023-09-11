@@ -134,7 +134,7 @@ class Dcm2BidsGen(object):
 
     def move(self, acq, idList, post_op):
         """Move an acquisition to BIDS format"""
-        for srcFile in glob(acq.srcRoot + ".*"):
+        for srcFile in sorted(glob(acq.srcRoot + ".*"), reverse=True):
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
