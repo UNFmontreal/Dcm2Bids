@@ -132,15 +132,15 @@ class Dcm2BidsGen(object):
                                   "computer. Please check: "
                                   "https://github.com/bids-standard/bids-validator.")
 
-    def move(self, acquisition, idList, post_op):
+    def move(self, acq, idList, post_op):
         """Move an acquisition to BIDS format"""
-        for srcFile in glob(acquisition.srcRoot + ".*"):
+        for srcFile in glob(acq.srcRoot + ".*"):
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
                                                                 '.bval', '.bvec']]
 
-            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix("".join(ext))
+            dstFile = (self.bids_dir / acq.dstRoot).with_suffix("".join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -157,28 +157,45 @@ class Dcm2BidsGen(object):
 
             # Populate idList
             if '.nii' in ext:
-                if acquisition.id in idList:
-                    idList[acquisition.id].append(os.path.join(acquisition.participant.name,
-                                                               acquisition.dstId + "".join(ext)))
+                if acq.id in idList:
+                    idList[acq.id].append(os.path.join(acq.participant.name,
+                                                       acq.dstId + "".join(ext)))
                 else:
-                    idList[acquisition.id] = [os.path.join(acquisition.participant.name,
-                                                           acquisition.dstId + "".join(ext))]
+                    idList[acq.id] = [os.path.join(acq.participant.name,
+                                                   acq.dstId + "".join(ext))]
 
                 for curr_post_op in post_op:
-                    if acquisition.datatype in curr_post_op['datatype'] or 'any' in curr_post_op['datatype']:
-                        if acquisition.suffix in curr_post_op['suffix'] or '_any' in curr_post_op['suffix']:
+                    if acq.datatype in curr_post_op['datatype'] or 'any' in curr_post_op['datatype']:
+                        if acq.suffix in curr_post_op['suffix'] or '_any' in curr_post_op['suffix']:
                             cmd = curr_post_op['cmd'].replace('src_file', str(srcFile))
-                            cmd = cmd.replace('dst_file', str(dstFile))
+
+                            # If custom entities it means that the user
+                            # wants to have both versions
+                            # before and after post_op
+                            if 'custom_entities' in curr_post_op:
+                                acq.setExtraDstFile(curr_post_op["custom_entities"])
+
+                                # Copy json file with this new set of custom entities.
+                                cmd_json = ['cp', str(srcFile).replace("".join(ext),
+                                                                       ".json"),
+                                            str(acq.extraDstFile) + ".json"]
+                                run_shell_command(cmd_json)
+
+                                cmd = cmd.replace('dst_file',
+                                                  str(acq.extraDstFile) + ''.join(ext))
+                            else:
+                                cmd = cmd.replace('dst_file', str(dstFile))
+
                             run_shell_command(cmd.split())
                             continue
 
             if ".json" in ext:
-                data = acquisition.dstSidecarData(idList)
+                data = acq.dstSidecarData(idList)
                 save_json(dstFile, data)
                 os.remove(srcFile)
 
             # just move
-            else:
+            elif not os.path.exists(dstFile):
                 os.rename(srcFile, dstFile)
 
         return idList

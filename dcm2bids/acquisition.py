@@ -55,6 +55,7 @@ class Acquisition(object):
             self.id = id
 
         self.dstFile = ''
+        self.extraDstFile = ''
 
     def __eq__(self, other):
         return (
@@ -151,6 +152,58 @@ class Acquisition(object):
             self.dstFile,
         )
 
+    def setExtraDstFile(self, new_entities):
+        """
+        Return:
+            The destination filename formatted following
+            the v1.8.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
+        """
+
+        if self.custom_entities.strip() == "":
+            suffix = new_entities + self.suffix
+        else:
+            suffix = new_entities + self.custom_entities + self.suffix
+
+        current_name = '_'.join([self.participant.prefix, suffix])
+
+        new_name = ''
+        current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
+        suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]
+
+        for current_key in DEFAULT.entityTableKeys:
+            if current_key in current_dict and new_name != '':
+                new_name += f"_{current_key}-{current_dict[current_key]}"
+            elif current_key in current_dict:
+                new_name = f"{current_key}-{current_dict[current_key]}"
+            current_dict.pop(current_key, None)
+
+        for current_key in current_dict:
+            new_name += f"_{current_key}-{current_dict[current_key]}"
+
+        if current_dict:
+            self.logger.warning(f'Entity \"{list(current_dict.keys())}\"'
+                                ' is not a valid BIDS entity.')
+
+        # Allow multiple single keys (without value)
+        new_name += f"_{'_'.join(suffix_list)}"
+
+        if len(suffix_list) != 1:
+            self.logger.warning("There was more than one suffix found "
+                                f"({suffix_list}). This is not BIDS "
+                                "compliant. Make sure you know what "
+                                "you are doing.")
+
+        if current_name != new_name:
+            self.logger.warning(
+                f"""✅ Filename was reordered according to BIDS entity table order:
+                from:   {current_name}
+                to:     {new_name}""")
+
+        self.extraDstFile = opj(self.participant.directory,
+                                self.datatype,
+                                new_name)
+
     def setDstFile(self):
         """
         Return:
@@ -225,7 +278,7 @@ class Acquisition(object):
                             if isinstance(values[-1], list):
                                 values[-1] = "bids::" + values[-1][0]
                             else:
-                                 values[-1] = "bids::" + values[-1]
+                                values[-1] = "bids::" + values[-1]
 
             # handle if nested list vs str
             flat_value_list = []
@@ -234,7 +287,7 @@ class Acquisition(object):
                     flat_value_list += item
                 else:
                     flat_value_list.append(item)
-            
+
             if len(flat_value_list) == 1:
                 data[key] = flat_value_list[0]
             else:
