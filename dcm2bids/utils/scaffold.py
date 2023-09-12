@@ -31,9 +31,7 @@ class bids_starter_kit(object):
     "age": {
         "LongName": "",
         "Description": "age of the participant",
-        "Levels": [],
-        "Units": "years",
-        "TermURL": ""
+        "Units": "years"
     },
     "sex": {
         "LongName": "",
@@ -41,22 +39,16 @@ class bids_starter_kit(object):
         "Levels": {
             "M": "male",
             "F": "female"
-        },
-        "Units": "",
-        "TermURL": ""
+        }
     },
     "group": {
         "LongName": "",
-        "Description": "Group of the participant",
+        "Description": "experimental group the participant belonged to",
         "Levels": {
-            "control": "Control",
-            "patient": "Patient"
-        },
-        "Units": "",
-        "TermURL": ""
-    },
-
-
+            "control": "control",
+            "patient": "patient"
+        }
+    }
 }
 """
 

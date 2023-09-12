@@ -80,7 +80,7 @@ def main():
                                                )
               )
     # dataset_description
-    write_txt(opj(args.output_dir, "dataset_description"),
+    write_txt(opj(args.output_dir, "dataset_description.json"),
               bids_starter_kit.dataset_description.replace("BIDS_VERSION",
                                                            DEFAULT.bids_version))
 
