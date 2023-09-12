@@ -135,7 +135,7 @@ class Dcm2BidsGen(object):
 
     def move(self, acq, idList, post_op):
         """Move an acquisition to BIDS format"""
-        for srcFile in sorted(glob(acq.srcRoot + ".*"), reverse=True):
+        for srcFile in sorted(glob(f"{acq.srcRoot}.*"), reverse=True):
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
@@ -177,8 +177,10 @@ class Dcm2BidsGen(object):
                                 acq.setExtraDstFile(curr_post_op["custom_entities"])
 
                                 # Copy json file with this new set of custom entities.
-                                shutil.copy(str(srcFile).replace("".join(ext), ".json"),
-                                            str(acq.extraDstFile) + ".json")
+                                shutil.copy(
+                                    str(srcFile).replace("".join(ext), ".json"),
+                                    f"{str(acq.extraDstFile)}.json",
+                                )
                                 cmd = cmd.replace('dst_file',
                                                   str(acq.extraDstFile) + ''.join(ext))
                             else:
