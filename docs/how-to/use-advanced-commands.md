@@ -26,7 +26,8 @@ same level as the `"description"` entry.
       "suffix": [
         "T1w",
         "MP2RAGE"
-      ]
+      ],
+    "custom_entities": "rec-defaced"
     }
   ],
   "descriptions": [
