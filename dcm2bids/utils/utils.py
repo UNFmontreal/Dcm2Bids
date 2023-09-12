@@ -20,6 +20,9 @@ class DEFAULT(object):
     cli_session = ""
     cli_log_level = "INFO"
 
+    # Archives
+    arch_extensions = "tar, tar.bz2, tar.gz or zip"
+
     # dcm2bids.py
     output_dir = Path.cwd()
     session = ""  # also Participant object

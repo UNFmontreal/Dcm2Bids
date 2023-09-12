@@ -26,7 +26,8 @@ def _build_arg_parser():
 
     p.add_argument("-d", "--dicom_dir",
                    required=True, nargs="+",
-                   help="DICOM directory(ies).")
+                   help="DICOM directory(ies) or archive(s) (" +
+                        DEFAULT.arch_extensions + ").")
 
     p.add_argument("-p", "--participant",
                    required=True,
@@ -62,7 +63,7 @@ def _build_arg_parser():
     p.add_argument("--force_dcm2bids",
                    action="store_true",
                    help="Overwrite previous temporary dcm2bids "
-                         "output if it exists.")
+                        "output if it exists.")
 
     p.add_argument("--skip_dcm2niix",
                    action="store_true",

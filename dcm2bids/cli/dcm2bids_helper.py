@@ -25,7 +25,8 @@ def _build_arg_parser():
 
     p.add_argument("-d", "--dicom_dir",
                    required=True, nargs="+",
-                   help="DICOM files directory.")
+                   help="DICOM directory(ies) or archive(s) (" +
+                        DEFAULT.arch_extensions + ").")
 
     p.add_argument("-o", "--output_dir",
                    required=False,
