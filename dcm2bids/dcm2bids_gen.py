@@ -175,14 +175,14 @@ class Dcm2BidsGen(object):
                             # before and after post_op
                             if 'custom_entities' in curr_post_op:
                                 acq.setExtraDstFile(curr_post_op["custom_entities"])
-
+                                extraDstFile = self.bids_dir / acq.extraDstFile
                                 # Copy json file with this new set of custom entities.
                                 shutil.copy(
                                     str(srcFile).replace("".join(ext), ".json"),
-                                    f"{str(acq.extraDstFile)}.json",
+                                    f"{str(extraDstFile)}.json",
                                 )
                                 cmd = cmd.replace('dst_file',
-                                                  str(acq.extraDstFile) + ''.join(ext))
+                                                  str(extraDstFile) + ''.join(ext))
                             else:
                                 cmd = cmd.replace('dst_file', str(dstFile))
 
