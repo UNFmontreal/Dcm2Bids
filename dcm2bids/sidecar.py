@@ -188,8 +188,8 @@ class SidecarPairing(object):
                                      "Please check the documentation.")
 
                 if 'src_file' not in cmd_split or 'dst_file' not in cmd_split:
-                    raise ValueError("post_op cmd is not defined correctly."
-                                     "src_file and/or dst_file is missing."
+                    raise ValueError("post_op cmd is not defined correctly. "
+                                     "<src_file> and/or <dst_file> is missing. "
                                      "Please check the documentation.")
 
                 if isinstance(datatype, str):
@@ -208,14 +208,14 @@ class SidecarPairing(object):
             res = list(set([ele for ele in pairs if pairs.count(ele) > 1]))
             if res:
                 raise ValueError("Some post operations apply on "
-                                 "the same combination of datatype/suffix."
+                                 "the same combination of datatype/suffix. "
                                  "Please fix post_op key in your config file."
                                  f"{pairs}")
 
             self._post_op = post_op
 
         except Exception:
-            raise ValueError("post_op is not defined correctly."
+            raise ValueError("post_op is not defined correctly. "
                              "Please check the documentation.")
 
     @property
