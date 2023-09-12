@@ -1061,7 +1061,37 @@
 <span class="normal">302</span>
 <span class="normal">303</span>
 <span class="normal">304</span>
-<span class="normal">305</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;
 
@@ -1076,6 +1106,8 @@ import os
 from pathlib import Path
 
 from glob import glob
+
+import shutil
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 
@@ -1287,11 +1319,11 @@ class Dcm2BidsGen(object):
 
                                   &quot;https://github.com/bids-standard/bids-validator.&quot;)
 
-    def move(self, acquisition, idList, post_op):
+    def move(self, acq, idList, post_op):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
-        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
+        for srcFile in sorted(glob(f&quot;{acq.srcRoot}.*&quot;), reverse=True):
 
             ext = Path(srcFile).suffixes
 
@@ -1301,7 +1333,7 @@ class Dcm2BidsGen(object):
 
                                                                 &#39;.bval&#39;, &#39;.bvec&#39;]]
 
-            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
+            dstFile = (self.bids_dir / acq.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -1325,27 +1357,55 @@ class Dcm2BidsGen(object):
 
             if &#39;.nii&#39; in ext:
 
-                if acquisition.id in idList:
+                if acq.id in idList:
 
-                    idList[acquisition.id].append(os.path.join(acquisition.participant.name,
+                    idList[acq.id].append(os.path.join(acq.participant.name,
 
-                                                               acquisition.dstId + &quot;&quot;.join(ext)))
+                                                       acq.dstId + &quot;&quot;.join(ext)))
 
                 else:
 
-                    idList[acquisition.id] = [os.path.join(acquisition.participant.name,
+                    idList[acq.id] = [os.path.join(acq.participant.name,
 
-                                                           acquisition.dstId + &quot;&quot;.join(ext))]
+                                                   acq.dstId + &quot;&quot;.join(ext))]
 
                 for curr_post_op in post_op:
 
-                    if acquisition.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
+                    if acq.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
 
-                        if acquisition.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
+                        if acq.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
 
                             cmd = curr_post_op[&#39;cmd&#39;].replace(&#39;src_file&#39;, str(srcFile))
 
-                            cmd = cmd.replace(&#39;dst_file&#39;, str(dstFile))
+                            # If custom entities it means that the user
+
+                            # wants to have both versions
+
+                            # before and after post_op
+
+                            if &#39;custom_entities&#39; in curr_post_op:
+
+                                acq.setExtraDstFile(curr_post_op[&quot;custom_entities&quot;])
+
+                                extraDstFile = self.bids_dir / acq.extraDstFile
+
+                                # Copy json file with this new set of custom entities.
+
+                                shutil.copy(
+
+                                    str(srcFile).replace(&quot;&quot;.join(ext), &quot;.json&quot;),
+
+                                    f&quot;{str(extraDstFile)}.json&quot;,
+
+                                )
+
+                                cmd = cmd.replace(&#39;dst_file&#39;,
+
+                                                  str(extraDstFile) + &#39;&#39;.join(ext))
+
+                            else:
+
+                                cmd = cmd.replace(&#39;dst_file&#39;, str(dstFile))
 
                             run_shell_command(cmd.split())
 
@@ -1353,7 +1413,7 @@ class Dcm2BidsGen(object):
 
             if &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(idList)
+                data = acq.dstSidecarData(idList)
 
                 save_json(dstFile, data)
 
@@ -1361,7 +1421,7 @@ class Dcm2BidsGen(object):
 
             # just move
 
-            else:
+            elif not os.path.exists(dstFile):
 
                 os.rename(srcFile, dstFile)
 
@@ -1740,7 +1800,35 @@ class Dcm2BidsGen(object):
 <span class="normal">276</span>
 <span class="normal">277</span>
 <span class="normal">278</span>
-<span class="normal">279</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span></pre></div></td><td class="code"><div><pre><span></span><code>class Dcm2BidsGen(object):
 
     &quot;&quot;&quot; Object to handle dcm2bids execution steps
 
@@ -1940,11 +2028,11 @@ class Dcm2BidsGen(object):
 
                                   &quot;https://github.com/bids-standard/bids-validator.&quot;)
 
-    def move(self, acquisition, idList, post_op):
+    def move(self, acq, idList, post_op):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
-        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
+        for srcFile in sorted(glob(f&quot;{acq.srcRoot}.*&quot;), reverse=True):
 
             ext = Path(srcFile).suffixes
 
@@ -1954,7 +2042,7 @@ class Dcm2BidsGen(object):
 
                                                                 &#39;.bval&#39;, &#39;.bvec&#39;]]
 
-            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
+            dstFile = (self.bids_dir / acq.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -1978,27 +2066,55 @@ class Dcm2BidsGen(object):
 
             if &#39;.nii&#39; in ext:
 
-                if acquisition.id in idList:
+                if acq.id in idList:
 
-                    idList[acquisition.id].append(os.path.join(acquisition.participant.name,
+                    idList[acq.id].append(os.path.join(acq.participant.name,
 
-                                                               acquisition.dstId + &quot;&quot;.join(ext)))
+                                                       acq.dstId + &quot;&quot;.join(ext)))
 
                 else:
 
-                    idList[acquisition.id] = [os.path.join(acquisition.participant.name,
+                    idList[acq.id] = [os.path.join(acq.participant.name,
 
-                                                           acquisition.dstId + &quot;&quot;.join(ext))]
+                                                   acq.dstId + &quot;&quot;.join(ext))]
 
                 for curr_post_op in post_op:
 
-                    if acquisition.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
+                    if acq.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
 
-                        if acquisition.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
+                        if acq.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
 
                             cmd = curr_post_op[&#39;cmd&#39;].replace(&#39;src_file&#39;, str(srcFile))
 
-                            cmd = cmd.replace(&#39;dst_file&#39;, str(dstFile))
+                            # If custom entities it means that the user
+
+                            # wants to have both versions
+
+                            # before and after post_op
+
+                            if &#39;custom_entities&#39; in curr_post_op:
+
+                                acq.setExtraDstFile(curr_post_op[&quot;custom_entities&quot;])
+
+                                extraDstFile = self.bids_dir / acq.extraDstFile
+
+                                # Copy json file with this new set of custom entities.
+
+                                shutil.copy(
+
+                                    str(srcFile).replace(&quot;&quot;.join(ext), &quot;.json&quot;),
+
+                                    f&quot;{str(extraDstFile)}.json&quot;,
+
+                                )
+
+                                cmd = cmd.replace(&#39;dst_file&#39;,
+
+                                                  str(extraDstFile) + &#39;&#39;.join(ext))
+
+                            else:
+
+                                cmd = cmd.replace(&#39;dst_file&#39;, str(dstFile))
 
                             run_shell_command(cmd.split())
 
@@ -2006,7 +2122,7 @@ class Dcm2BidsGen(object):
 
             if &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(idList)
+                data = acq.dstSidecarData(idList)
 
                 save_json(dstFile, data)
 
@@ -2014,7 +2130,7 @@ class Dcm2BidsGen(object):
 
             # just move
 
-            else:
+            elif not os.path.exists(dstFile):
 
                 os.rename(srcFile, dstFile)
 
@@ -2035,7 +2151,7 @@ class Dcm2BidsGen(object):
 <span class="normal">5</span>
 <span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">move</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">acquisition</span><span class="p">,</span>
+    <span class="n">acq</span><span class="p">,</span>
     <span class="n">idList</span><span class="p">,</span>
     <span class="n">post_op</span>
 <span class="p">)</span>
@@ -2043,89 +2159,117 @@ class Dcm2BidsGen(object):
 <p>Move an acquisition to BIDS format</p>
 <details class="example">
 <summary>View Source</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acquisition, idList, post_op):
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code>    def move(self, acq, idList, post_op):
 
         &quot;&quot;&quot;Move an acquisition to BIDS format&quot;&quot;&quot;
 
-        for srcFile in glob(acquisition.srcRoot + &quot;.*&quot;):
+        for srcFile in sorted(glob(f&quot;{acq.srcRoot}.*&quot;), reverse=True):
 
             ext = Path(srcFile).suffixes
 
@@ -2135,7 +2279,7 @@ class Dcm2BidsGen(object):
 
                                                                 &#39;.bval&#39;, &#39;.bvec&#39;]]
 
-            dstFile = (self.bids_dir / acquisition.dstRoot).with_suffix(&quot;&quot;.join(ext))
+            dstFile = (self.bids_dir / acq.dstRoot).with_suffix(&quot;&quot;.join(ext))
 
             dstFile.parent.mkdir(parents=True, exist_ok=True)
 
@@ -2159,27 +2303,55 @@ class Dcm2BidsGen(object):
 
             if &#39;.nii&#39; in ext:
 
-                if acquisition.id in idList:
+                if acq.id in idList:
 
-                    idList[acquisition.id].append(os.path.join(acquisition.participant.name,
+                    idList[acq.id].append(os.path.join(acq.participant.name,
 
-                                                               acquisition.dstId + &quot;&quot;.join(ext)))
+                                                       acq.dstId + &quot;&quot;.join(ext)))
 
                 else:
 
-                    idList[acquisition.id] = [os.path.join(acquisition.participant.name,
+                    idList[acq.id] = [os.path.join(acq.participant.name,
 
-                                                           acquisition.dstId + &quot;&quot;.join(ext))]
+                                                   acq.dstId + &quot;&quot;.join(ext))]
 
                 for curr_post_op in post_op:
 
-                    if acquisition.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
+                    if acq.datatype in curr_post_op[&#39;datatype&#39;] or &#39;any&#39; in curr_post_op[&#39;datatype&#39;]:
 
-                        if acquisition.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
+                        if acq.suffix in curr_post_op[&#39;suffix&#39;] or &#39;_any&#39; in curr_post_op[&#39;suffix&#39;]:
 
                             cmd = curr_post_op[&#39;cmd&#39;].replace(&#39;src_file&#39;, str(srcFile))
 
-                            cmd = cmd.replace(&#39;dst_file&#39;, str(dstFile))
+                            # If custom entities it means that the user
+
+                            # wants to have both versions
+
+                            # before and after post_op
+
+                            if &#39;custom_entities&#39; in curr_post_op:
+
+                                acq.setExtraDstFile(curr_post_op[&quot;custom_entities&quot;])
+
+                                extraDstFile = self.bids_dir / acq.extraDstFile
+
+                                # Copy json file with this new set of custom entities.
+
+                                shutil.copy(
+
+                                    str(srcFile).replace(&quot;&quot;.join(ext), &quot;.json&quot;),
+
+                                    f&quot;{str(extraDstFile)}.json&quot;,
+
+                                )
+
+                                cmd = cmd.replace(&#39;dst_file&#39;,
+
+                                                  str(extraDstFile) + &#39;&#39;.join(ext))
+
+                            else:
+
+                                cmd = cmd.replace(&#39;dst_file&#39;, str(dstFile))
 
                             run_shell_command(cmd.split())
 
@@ -2187,7 +2359,7 @@ class Dcm2BidsGen(object):
 
             if &quot;.json&quot; in ext:
 
-                data = acquisition.dstSidecarData(idList)
+                data = acq.dstSidecarData(idList)
 
                 save_json(dstFile, data)
 
@@ -2195,7 +2367,7 @@ class Dcm2BidsGen(object):
 
             # just move
 
-            else:
+            elif not os.path.exists(dstFile):
 
                 os.rename(srcFile, dstFile)
 
@@ -2421,11 +2593,11 @@ class Dcm2BidsGen(object):
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T19:25:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T20:24:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T19:25:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T20:24:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
     
   </small>

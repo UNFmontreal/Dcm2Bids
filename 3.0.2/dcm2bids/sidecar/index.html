@@ -1685,7 +1685,11 @@
 <span class="normal">878</span>
 <span class="normal">879</span>
 <span class="normal">880</span>
-<span class="normal">881</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">881</span>
+<span class="normal">882</span>
+<span class="normal">883</span>
+<span class="normal">884</span>
+<span class="normal">885</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
 
@@ -1987,6 +1991,10 @@ class SidecarPairing(object):
 
                 suffix = curr_post_op[&#39;suffix&#39;]
 
+                if &#39;custom_entities&#39; in curr_post_op:
+
+                    post_op[-1][&#39;custom_entities&#39;] = curr_post_op[&#39;custom_entities&#39;]
+
                 if isinstance(curr_post_op[&#39;cmd&#39;], str):
 
                     cmd_split = curr_post_op[&#39;cmd&#39;].split()
@@ -1997,11 +2005,11 @@ class SidecarPairing(object):
 
                                      &quot;Please check the documentation.&quot;)
 
-                if &#39;srcFile&#39; not in cmd_split or &#39;dstFile&#39; not in cmd_split:
+                if &#39;src_file&#39; not in cmd_split or &#39;dst_file&#39; not in cmd_split:
 
-                    raise ValueError(&quot;post_op cmd is not defined correctly.&quot;
+                    raise ValueError(&quot;post_op cmd is not defined correctly. &quot;
 
-                                     &quot;srcFile and/or dstFile is missing.&quot;
+                                     &quot;&lt;src_file&gt; and/or &lt;dst_file&gt; is missing. &quot;
 
                                      &quot;Please check the documentation.&quot;)
 
@@ -2031,7 +2039,7 @@ class SidecarPairing(object):
 
                 raise ValueError(&quot;Some post operations apply on &quot;
 
-                                 &quot;the same combination of datatype/suffix.&quot;
+                                 &quot;the same combination of datatype/suffix. &quot;
 
                                  &quot;Please fix post_op key in your config file.&quot;
 
@@ -2041,7 +2049,7 @@ class SidecarPairing(object):
 
         except Exception:
 
-            raise ValueError(&quot;post_op is not defined correctly.&quot;
+            raise ValueError(&quot;post_op is not defined correctly. &quot;
 
                              &quot;Please check the documentation.&quot;)
 
@@ -3606,7 +3614,11 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 <span class="normal">744</span>
 <span class="normal">745</span>
 <span class="normal">746</span>
-<span class="normal">747</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
 
     &quot;&quot;&quot;
 
@@ -3774,6 +3786,10 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 suffix = curr_post_op[&#39;suffix&#39;]
 
+                if &#39;custom_entities&#39; in curr_post_op:
+
+                    post_op[-1][&#39;custom_entities&#39;] = curr_post_op[&#39;custom_entities&#39;]
+
                 if isinstance(curr_post_op[&#39;cmd&#39;], str):
 
                     cmd_split = curr_post_op[&#39;cmd&#39;].split()
@@ -3784,11 +3800,11 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                      &quot;Please check the documentation.&quot;)
 
-                if &#39;srcFile&#39; not in cmd_split or &#39;dstFile&#39; not in cmd_split:
+                if &#39;src_file&#39; not in cmd_split or &#39;dst_file&#39; not in cmd_split:
 
-                    raise ValueError(&quot;post_op cmd is not defined correctly.&quot;
+                    raise ValueError(&quot;post_op cmd is not defined correctly. &quot;
 
-                                     &quot;srcFile and/or dstFile is missing.&quot;
+                                     &quot;&lt;src_file&gt; and/or &lt;dst_file&gt; is missing. &quot;
 
                                      &quot;Please check the documentation.&quot;)
 
@@ -3818,7 +3834,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                 raise ValueError(&quot;Some post operations apply on &quot;
 
-                                 &quot;the same combination of datatype/suffix.&quot;
+                                 &quot;the same combination of datatype/suffix. &quot;
 
                                  &quot;Please fix post_op key in your config file.&quot;
 
@@ -3828,7 +3844,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
         except Exception:
 
-            raise ValueError(&quot;post_op is not defined correctly.&quot;
+            raise ValueError(&quot;post_op is not defined correctly. &quot;
 
                              &quot;Please check the documentation.&quot;)
 
@@ -5514,11 +5530,11 @@ the values are a list of possible descriptions</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T19:25:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T20:24:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T19:25:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T20:24:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
     
   </small>

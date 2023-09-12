@@ -1032,7 +1032,8 @@ same level as the <code>"description"</code> entry.</p>
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;extractors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;SeriesDescription&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">      </span><span class="s2">&quot;run-(?P&lt;run&gt;[0-9]+)&quot;</span><span class="p">,</span>
@@ -1052,7 +1053,8 @@ same level as the <code>"description"</code> entry.</p>
 <span class="w">      </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;MP2RAGE&quot;</span>
-<span class="w">      </span><span class="p">]</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;custom_entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rec-defaced&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
 <span class="w">  </span><span class="nt">&quot;descriptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -1112,19 +1114,26 @@ adding:</p>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;post_op&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;post_op&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">  </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pydeface --outfile dst_file src_file&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anat&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">      </span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="s2">&quot;MP2RAGE&quot;</span>
-<span class="w">    </span><span class="p">]</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;custom_entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rec-defaced&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">],</span>
 </code></pre></div></td></tr></table></div>
 <p>It will specifically run the corresponding <code>cmd</code> to any image that follow the
 combinations datatype/suffix: <code>(anat, T1w) or (anat, MP2RAGE)</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">How to use custom_entities</p>
+<p>If you want to keep both versions of the same file (for example defaced and not defaced) you need to provide extra custom_entities
+otherwise it will keep only your script output.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Multiple post_op commands</p>
 <p>Although you can add multiple commands, the combination datatype/suffix on which you want to run the command has to be unique.
@@ -1135,9 +1144,11 @@ You cannot run multiple commands on a specific combination datatype/suffix.</p>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;post_op&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pydeface --outfile dst_file src_file&quot;</span><span class="p">,</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&quot;post_op&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pydeface --outfile dst_file src_file&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anat&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MP2RAGE&quot;</span><span class="p">]},</span>
+<span class="w">            </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;T1w&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MP2RAGE&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;custom_entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rec-defaced&quot;</span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span><span class="nt">&quot;cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_new_script --input src_file --output dst_file &quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;datatype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fmap&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;suffix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;any&quot;</span><span class="p">]}],</span>
@@ -1404,7 +1415,7 @@ Using the option --skip_dcm2niix you will skip the conversion step.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-02T13:39:49+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-02</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T15:48:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
         <br>
         Created:
