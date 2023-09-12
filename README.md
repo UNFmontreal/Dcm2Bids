@@ -75,3 +75,19 @@ Before posting your question, you may want to first browse through questions tha
 [neurostars]: https://neurostars.org/
 [neurostars-dcm2bids]: https://neurostars.org/tag/dcm2bids
 [dcm2bids-contributing]:  https://unfmontreal.github.io/Dcm2Bids/latest/how-to/contributing/
+
+## Please cite dcm2bids
+
+If you use dcm2bids in your research or as part of your developments, please always cite the reference below.
+
+``````
+@software{Bore_Dcm2Bids_2023,
+author = {Boré, Arnaud and Guay, Samuel and Bedetti, Christophe and Meisler, Steven and GuenTher, Nick},
+doi = {10.5281/zenodo.8306314},
+month = aug,
+title = {{Dcm2Bids}},
+url = {https://github.com/UNFmontreal/Dcm2Bids},
+version = {3.0.2},
+year = {2023}
+}
+``````
