@@ -920,7 +920,9 @@
 <span class="normal">202</span>
 <span class="normal">203</span>
 <span class="normal">204</span>
-<span class="normal">205</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span></pre></div></td><td class="code"><div><pre><span></span><code>#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 
@@ -966,7 +968,9 @@ def _build_arg_parser():
 
                    required=True, nargs=&quot;+&quot;,
 
-                   help=&quot;DICOM directory(ies).&quot;)
+                   help=&quot;DICOM directory(ies) or archive(s) (&quot; +
+
+                        DEFAULT.arch_extensions + &quot;).&quot;)
 
     p.add_argument(&quot;-p&quot;, &quot;--participant&quot;,
 
@@ -1024,7 +1028,7 @@ def _build_arg_parser():
 
                    help=&quot;Overwrite previous temporary dcm2bids &quot;
 
-                         &quot;output if it exists.&quot;)
+                        &quot;output if it exists.&quot;)
 
     p.add_argument(&quot;--skip_dcm2niix&quot;,
 
@@ -1262,11 +1266,11 @@ if __name__ == &quot;__main__&quot;:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T15:52:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T19:25:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T15:52:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-12T19:25:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-12</span>
       
     
   </small>
