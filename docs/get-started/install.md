@@ -343,36 +343,7 @@ dcm2bids command such as `dcm2bids --help`:
 
 ```bash hl_lines="1"
 (dcm2bids) sam:~/dcm2bids-proj$ dcm2bids --help
-usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
-                CONFIG [-o OUTPUT_DIR] [--force_dcm2bids] [--skip_dcm2niix]
-                [--clobber] [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
-
-Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-dcm2bids 2.1.7
-
-options:
-  -h, --help            show this help message and exit
-  -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
-                        DICOM directory(ies)
-  -p PARTICIPANT, --participant PARTICIPANT
-                        Participant ID
-  -s SESSION, --session SESSION
-                        Session ID
-  -c CONFIG, --config CONFIG
-                        JSON configuration file (see example/config.json)
-  -o OUTPUT_DIR, --output_dir OUTPUT_DIR
-                        Output BIDS directory, Default: current directory
-                        (/home/sam/dcm2bids-proj)
-  --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists
-  --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
-  --clobber             Overwrite output if it exists
-  -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
-                        Set logging level
-  -a, --anonymizer      This option no longer exists from the script in this
-                        release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
-                        aster/README.md#defaceTpl
-
-            Documentation at https://github.com/unfmontreal/Dcm2Bids
+--8<-- "docs_helper/help.txt"
 ```
 
 Voilà, you are ready to use dcm2bids or at least

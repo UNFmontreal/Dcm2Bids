@@ -79,42 +79,7 @@ You can test it with any command but a safe way is to use the `--help` command.
 
     ```sh
     (dcm2bids) sam:~$ dcm2bids --help
-    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c
-                    CONFIG [-o OUTPUT_DIR][--auto_extract_entities] [--bids_validate]
-                    [--force_dcm2bids] [--skip_dcm2niix] [--clobber]
-                    [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
-
-    Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 2.1.7
-
-    options:
-    -h, --help            show this help message and exit
-    -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
-                            DICOM directory(ies)
-    -p PARTICIPANT, --participant PARTICIPANT
-                            Participant ID
-    -s SESSION, --session SESSION
-                            Session ID
-    -c CONFIG, --config CONFIG
-                            JSON configuration file (see example/config.json)
-    -o OUTPUT_DIR, --output_dir OUTPUT_DIR
-                            Output BIDS directory, Default: current directory
-                            (/home/sam)
-    --auto_extract_entities
-                          If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
-    --bids_validate       If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
-                          bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists.
-    --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
-    --clobber             Overwrite output if it exists.
-    -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
-                            Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this
-                            release. See:https://github.com/unfmontreal/Dcm2Bids/blob/m
-                            aster/README.md#defaceTpl
-
-                Documentation at https://github.com/unfmontreal/Dcm2Bids
-
+    --8<-- "docs_helper/help.txt"
     ```
 
 ??? bug "What you can do if you did not get this output"
@@ -189,25 +154,12 @@ option.
 
 === "Output"
 
-    ```sh hl_lines="9-10"
+    ```sh hl_lines="11-12"
     (dcm2bids) sam:~/dcm2bids-tutorial$ dcm2bids_scaffold --help
-    usage: dcm2bids_scaffold [-h] [-o OUTPUT_DIR]
-
-                Create basic BIDS files and directories
-
-                Based on the material provided by
-                https://github.com/bids-standard/bids-starter-kit
-
-    options:
-    -h, --help            show this help message and exit
-    -o OUTPUT_DIR, --output_dir OUTPUT_DIR
-                            Output BIDS directory, Default: current directory
-
-                Documentation at https://github.com/unfmontreal/Dcm2Bids
-
+    --8<-- "docs_helper/help_scaffold.txt"
     ```
 
-As you can see at lines 9-10, `dcm2bids_scaffold` has an `--output_dir` (or `-o`
+As you can see at lines 11-12, `dcm2bids_scaffold` has an `--output_dir` (or `-o`
 for short) option with a default option, which means you can either specify
 where you want the scaffolding to happen to be or it will create the scaffold in
 the current directory as a default.
@@ -487,27 +439,9 @@ As usual the first command will be to request the help info.
 
 === "Output"
 
-    ```sh hl_lines="6 8"
+    ```sh hl_lines="11 13 15"
     (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids_helper --help
-    usage: dcm2bids_helper [-h] -d DICOM_DIR [DICOM_DIR ...] [-o OUTPUT_DIR]
-
-    options:
-    -h, --help            show this help message and exit
-    -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
-                            DICOM files directory
-    -o OUTPUT_DIR, --output_dir OUTPUT_DIR
-                            Output BIDS directory, Default: current directory
-    -n [NEST], --nest [NEST]
-                            Nest a directory in <output_dir>. Useful if many helper runs are needed
-                            to make a config file due to slight variations in MRI acquisitions.
-                            Defaults to DICOM_DIR if no name is provided.
-                            (Default: [False])
-    --force, --force_dcm2bids
-                            Force command to overwrite existing output files.
-    -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
-                            Set logging level to the console. [INFO]
-
-                Documentation at https://github.com/unfmontreal/Dcm2Bids
+    --8<-- "docs_helper/helper.txt"
     ```
 
 To run the commands, you have to specify the `-d` option, namely the input
@@ -1068,39 +1002,8 @@ command.
 === "Output"
 
     ```sh hl_lines="2-3"
-    (dcm2bids) sam:~/dcm2bids-tutorial/bids_project$ dcm2bids --help
-    usage: dcm2bids [-h] -d DICOM_DIR [DICOM_DIR ...] -p PARTICIPANT [-s SESSION] -c CONFIG [-o OUTPUT_DIR]
-                    [--auto_extract_entities] [--bids_validate] [--force_dcm2bids] [--skip_dcm2niix] [--clobber]
-                    [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-a]
-
-    Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
-    dcm2bids 2.1.7
-
-    options:
-    -h, --help            show this help message and exit
-    -d DICOM_DIR [DICOM_DIR ...], --dicom_dir DICOM_DIR [DICOM_DIR ...]
-                            DICOM directory(ies)
-    -p PARTICIPANT, --participant PARTICIPANT
-                            Participant ID
-    -s SESSION, --session SESSION
-                            Session ID
-    -c CONFIG, --config CONFIG
-                            JSON configuration file (see example/config.json)
-    -o OUTPUT_DIR, --output_dir OUTPUT_DIR
-                            Output BIDS directory, Default: current directory (/home/sam/dcm2bids-tutorial/bids_project)
-    --auto_extract_entities
-                            If set, it will automatically try to extract entityinformation [task, dir, echo] based on the suffix and datatype. [False]
-    --bids_validate         If set, once your conversion is done it will check if your output folder is BIDS valid. [False]
-                            bids-validator needs to be installed check: https://github.com/bids-standard/bids-validator#quickstart
-    --force_dcm2bids       Overwrite previous temporary dcm2bids output if it exists.
-    --skip_dcm2niix       Skip dcm2niix conversion. Option -d should contains NIFTI and json files.
-    --clobber             Overwrite output if it exists.
-    -l {DEBUG,INFO,WARNING,ERROR,CRITICAL}, --log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}
-                            Set logging level
-    -a, --anonymizer      This option no longer exists from the script in this release. See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
-
-                Documentation at https://github.com/unfmontreal/Dcm2Bids
-
+    (dcm2bids) sam:~$ dcm2bids --help
+    --8<-- "docs_helper/help.txt"
     ```
 
 As you can see, to run the `dcm2bids` command, you have to specify at least 3

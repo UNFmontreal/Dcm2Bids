@@ -136,3 +136,6 @@ tests/data/*
 
 # dcm2bids documentation
 /site
+docs_helper/help.txt
+docs_helper/help_scaffold.txt
+docs_helper/helper.txt
