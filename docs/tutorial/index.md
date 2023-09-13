@@ -9,6 +9,8 @@ commands.
 
 [First steps with dcm2bids](first-steps.md){ .md-button .md-button--primary }
 
+[Convert multiple participants in parallel](parallel.md){ .md-button .md-button--primary }
+
 ---
 
 !!! tldr "Interested in co-developing a tutorial?"
