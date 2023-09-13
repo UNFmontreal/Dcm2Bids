@@ -1103,46 +1103,38 @@ You can test it with any command but a safe way is to use the <code>--help</code
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~$<span class="w"> </span>dcm2bids<span class="w"> </span>--help
-usage:<span class="w"> </span>dcm2bids<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span>PARTICIPANT<span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>SESSION<span class="o">]</span><span class="w"> </span>-c
-<span class="w">                </span>CONFIG<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">][</span>--auto_extract_entities<span class="o">]</span><span class="w"> </span><span class="o">[</span>--bids_validate<span class="o">]</span>
-<span class="w">                </span><span class="o">[</span>--force_dcm2bids<span class="o">]</span><span class="w"> </span><span class="o">[</span>--skip_dcm2niix<span class="o">]</span><span class="w"> </span><span class="o">[</span>--clobber<span class="o">]</span>
-<span class="w">                </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span><span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~$<span class="w"> </span>dcm2bids<span class="w"> </span>--help
+usage:<span class="w"> </span>dcm2bids<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span>PARTICIPANT<span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>SESSION<span class="o">]</span>
+<span class="w">                </span>-c<span class="w"> </span>CONFIG<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span><span class="w"> </span><span class="o">[</span>--auto_extract_entities<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>--bids_validate<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force_dcm2bids<span class="o">]</span><span class="w"> </span><span class="o">[</span>--skip_dcm2niix<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>--clobber<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span><span class="w"> </span><span class="o">[</span>-v<span class="o">]</span>
 
 Reorganising<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>dcm2niix<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span>Brain<span class="w"> </span>Imaging<span class="w"> </span>Data<span class="w"> </span>Structure
-dcm2bids<span class="w"> </span><span class="m">2</span>.1.7
 
 options:
--h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
--d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
-<span class="w">                        </span>DICOM<span class="w"> </span>directory<span class="o">(</span>ies<span class="o">)</span>
--p<span class="w"> </span>PARTICIPANT,<span class="w"> </span>--participant<span class="w"> </span>PARTICIPANT
-<span class="w">                        </span>Participant<span class="w"> </span>ID
--s<span class="w"> </span>SESSION,<span class="w"> </span>--session<span class="w"> </span>SESSION
-<span class="w">                        </span>Session<span class="w"> </span>ID
--c<span class="w"> </span>CONFIG,<span class="w"> </span>--config<span class="w"> </span>CONFIG
-<span class="w">                        </span>JSON<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>see<span class="w"> </span>example/config.json<span class="o">)</span>
--o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
-<span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory,<span class="w"> </span>Default:<span class="w"> </span>current<span class="w"> </span>directory
-<span class="w">                        </span><span class="o">(</span>/home/sam<span class="o">)</span>
---auto_extract_entities
-<span class="w">                      </span>If<span class="w"> </span>set,<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>automatically<span class="w"> </span>try<span class="w"> </span>to<span class="w"> </span>extract<span class="w"> </span>entityinformation<span class="w"> </span><span class="o">[</span>task,<span class="w"> </span>dir,<span class="w"> </span>echo<span class="o">]</span><span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>suffix<span class="w"> </span>and<span class="w"> </span>datatype.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
---bids_validate<span class="w">       </span>If<span class="w"> </span>set,<span class="w"> </span>once<span class="w"> </span>your<span class="w"> </span>conversion<span class="w"> </span>is<span class="w"> </span><span class="k">done</span><span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span><span class="k">if</span><span class="w"> </span>your<span class="w"> </span>output<span class="w"> </span>folder<span class="w"> </span>is<span class="w"> </span>BIDS<span class="w"> </span>valid.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
-<span class="w">                      </span>bids-validator<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>installed<span class="w"> </span>check:<span class="w"> </span>https://github.com/bids-standard/bids-validator#quickstart
---force_dcm2bids<span class="w">       </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2bids<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
---skip_dcm2niix<span class="w">       </span>Skip<span class="w"> </span>dcm2niix<span class="w"> </span>conversion.<span class="w"> </span>Option<span class="w"> </span>-d<span class="w"> </span>should<span class="w"> </span>contains<span class="w"> </span>NIFTI<span class="w"> </span>and<span class="w"> </span>json<span class="w"> </span>files.
---clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
--l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
-<span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level
--a,<span class="w"> </span>--anonymizer<span class="w">      </span>This<span class="w"> </span>option<span class="w"> </span>no<span class="w"> </span>longer<span class="w"> </span>exists<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>script<span class="w"> </span><span class="k">in</span><span class="w"> </span>this
-<span class="w">                        </span>release.<span class="w"> </span>See:https://github.com/unfmontreal/Dcm2Bids/blob/m
-<span class="w">                        </span>aster/README.md#defaceTpl
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
+<span class="w">                        </span>DICOM<span class="w"> </span>directory<span class="o">(</span>ies<span class="o">)</span><span class="w"> </span>or<span class="w"> </span>archive<span class="o">(</span>s<span class="o">)</span><span class="w"> </span><span class="o">(</span>tar,<span class="w"> </span>tar.bz2,<span class="w"> </span>tar.gz<span class="w"> </span>or<span class="w"> </span>zip<span class="o">)</span>.
+<span class="w">  </span>-p<span class="w"> </span>PARTICIPANT,<span class="w"> </span>--participant<span class="w"> </span>PARTICIPANT
+<span class="w">                        </span>Participant<span class="w"> </span>ID.
+<span class="w">  </span>-s<span class="w"> </span>SESSION,<span class="w"> </span>--session<span class="w"> </span>SESSION
+<span class="w">                        </span>Session<span class="w"> </span>ID.<span class="w"> </span><span class="o">[]</span>
+<span class="w">  </span>-c<span class="w"> </span>CONFIG,<span class="w"> </span>--config<span class="w"> </span>CONFIG
+<span class="w">                        </span>JSON<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>see<span class="w"> </span>example/config.json<span class="o">)</span>.
+<span class="w">  </span>-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
+<span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory.<span class="w"> </span><span class="o">[</span>/home/runner/work/Dcm2Bids/Dcm2Bids<span class="o">]</span>
+<span class="w">  </span>--auto_extract_entities
+<span class="w">                        </span>If<span class="w"> </span>set,<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>automatically<span class="w"> </span>try<span class="w"> </span>to<span class="w"> </span>extract<span class="w"> </span>entityinformation<span class="w"> </span><span class="o">[</span>task,<span class="w"> </span>dir,<span class="w"> </span>echo<span class="o">]</span><span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>suffix<span class="w"> </span>and<span class="w"> </span>datatype.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
+<span class="w">  </span>--bids_validate<span class="w">       </span>If<span class="w"> </span>set,<span class="w"> </span>once<span class="w"> </span>your<span class="w"> </span>conversion<span class="w"> </span>is<span class="w"> </span><span class="k">done</span><span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span><span class="k">if</span><span class="w"> </span>your<span class="w"> </span>output<span class="w"> </span>folder<span class="w"> </span>is<span class="w"> </span>BIDS<span class="w"> </span>valid.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
+<span class="w">                        </span>bids-validator<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>installed<span class="w"> </span>check:<span class="w"> </span>https://github.com/bids-standard/bids-validator#quickstart
+<span class="w">  </span>--force_dcm2bids<span class="w">      </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2bids<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+<span class="w">  </span>--skip_dcm2niix<span class="w">       </span>Skip<span class="w"> </span>dcm2niix<span class="w"> </span>conversion.<span class="w"> </span>Option<span class="w"> </span>-d<span class="w"> </span>should<span class="w"> </span>contains<span class="w"> </span>NIFTI<span class="w"> </span>and<span class="w"> </span>json<span class="w"> </span>files.
+<span class="w">  </span>--clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+<span class="w">  </span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
+<span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>console.<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span>
+<span class="w">  </span>-v,<span class="w"> </span>--version<span class="w">         </span>Report<span class="w"> </span>dcm2bids<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>version.
 
-<span class="w">            </span>Documentation<span class="w"> </span>at<span class="w"> </span>https://github.com/unfmontreal/Dcm2Bids
+Documentation<span class="w"> </span>at<span class="w"> </span>https://unfmontreal.github.io/Dcm2Bids/
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -1236,25 +1228,27 @@ option.</p>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial$<span class="w"> </span>dcm2bids_scaffold<span class="w"> </span>--help
-usage:<span class="w"> </span>dcm2bids_scaffold<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial$<span class="w"> </span>dcm2bids_scaffold<span class="w"> </span>--help
+usage:<span class="w"> </span>dcm2bids_scaffold<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force<span class="o">]</span>
 
-<span class="w">            </span>Create<span class="w"> </span>basic<span class="w"> </span>BIDS<span class="w"> </span>files<span class="w"> </span>and<span class="w"> </span>directories
+<span class="w">    </span>Create<span class="w"> </span>basic<span class="w"> </span>BIDS<span class="w"> </span>files<span class="w"> </span>and<span class="w"> </span>directories.
 
-<span class="w">            </span>Based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>material<span class="w"> </span>provided<span class="w"> </span>by
-<span class="w">            </span>https://github.com/bids-standard/bids-starter-kit
+<span class="w">    </span>Based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>material<span class="w"> </span>provided<span class="w"> </span>by
+<span class="w">    </span>https://github.com/bids-standard/bids-starter-kit
 
-<span class="hll">options:
-</span><span class="hll">-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
-</span>-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
-<span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory,<span class="w"> </span>Default:<span class="w"> </span>current<span class="w"> </span>directory
+options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="hll"><span class="w">  </span>-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
+</span><span class="hll"><span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory.<span class="w"> </span>Default:<span class="w"> </span><span class="o">[</span>/home/runner/work/Dcm2Bids/Dcm2Bids<span class="o">]</span>
+</span><span class="w">  </span>--force<span class="w">               </span>Force<span class="w"> </span>overwriting<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>files.
 
-<span class="w">            </span>Documentation<span class="w"> </span>at<span class="w"> </span>https://github.com/unfmontreal/Dcm2Bids
+Documentation<span class="w"> </span>at<span class="w"> </span>https://unfmontreal.github.io/Dcm2Bids/
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>As you can see at lines 9-10, <code>dcm2bids_scaffold</code> has an <code>--output_dir</code> (or <code>-o</code>
+<p>As you can see at lines 11-12, <code>dcm2bids_scaffold</code> has an <code>--output_dir</code> (or <code>-o</code>
 for short) option with a default option, which means you can either specify
 where you want the scaffolding to happen to be or it will create the scaffold in
 the current directory as a default.</p>
@@ -1622,26 +1616,36 @@ config file.</p>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial/bids_project$<span class="w"> </span>dcm2bids_helper<span class="w"> </span>--help
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial/bids_project$<span class="w"> </span>dcm2bids_helper<span class="w"> </span>--help
 usage:<span class="w"> </span>dcm2bids_helper<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span>
+<span class="w">                       </span><span class="o">[</span>-n<span class="w"> </span><span class="o">[</span>NEST<span class="o">]]</span><span class="w"> </span><span class="o">[</span>--force<span class="o">]</span>
+<span class="w">                       </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span>
+
+Converts<span class="w"> </span>DICOM<span class="w"> </span>files<span class="w"> </span>to<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>including<span class="w"> </span>their<span class="w"> </span>JSON<span class="w"> </span>sidecars<span class="w"> </span><span class="k">in</span><span class="w"> </span>a
+temporary<span class="w"> </span>directory<span class="w"> </span>which<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>inspected<span class="w"> </span>to<span class="w"> </span>make<span class="w"> </span>a<span class="w"> </span>dc2mbids<span class="w"> </span>config<span class="w"> </span>file.
 
 options:
--h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
-<span class="hll">-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
-</span><span class="w">                        </span>DICOM<span class="w"> </span>files<span class="w"> </span>directory
-<span class="hll">-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
-</span><span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory,<span class="w"> </span>Default:<span class="w"> </span>current<span class="w"> </span>directory
--n<span class="w"> </span><span class="o">[</span>NEST<span class="o">]</span>,<span class="w"> </span>--nest<span class="w"> </span><span class="o">[</span>NEST<span class="o">]</span>
-<span class="w">                        </span>Nest<span class="w"> </span>a<span class="w"> </span>directory<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;output_dir&gt;.<span class="w"> </span>Useful<span class="w"> </span><span class="k">if</span><span class="w"> </span>many<span class="w"> </span>helper<span class="w"> </span>runs<span class="w"> </span>are<span class="w"> </span>needed
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="hll"><span class="w">  </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
+</span><span class="w">                        </span>DICOM<span class="w"> </span>directory<span class="o">(</span>ies<span class="o">)</span><span class="w"> </span>or<span class="w"> </span>archive<span class="o">(</span>s<span class="o">)</span><span class="w"> </span><span class="o">(</span>tar,<span class="w"> </span>tar.bz2,<span class="w"> </span>tar.gz<span class="w"> </span>or<span class="w"> </span>zip<span class="o">)</span>.
+<span class="hll"><span class="w">  </span>-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
+</span><span class="w">                        </span>Output<span class="w"> </span>directory.<span class="w"> </span><span class="o">(</span>Default:<span class="w"> </span><span class="o">[</span>/home/runner/work/Dcm2Bids/Dcm2Bids/tmp_dcm2bids/helper<span class="o">]</span>
+<span class="hll"><span class="w">  </span>-n<span class="w"> </span><span class="o">[</span>NEST<span class="o">]</span>,<span class="w"> </span>--nest<span class="w"> </span><span class="o">[</span>NEST<span class="o">]</span>
+</span><span class="w">                        </span>Nest<span class="w"> </span>a<span class="w"> </span>directory<span class="w"> </span><span class="k">in</span><span class="w"> </span>&lt;output_dir&gt;.<span class="w"> </span>Useful<span class="w"> </span><span class="k">if</span><span class="w"> </span>many<span class="w"> </span>helper<span class="w"> </span>runs<span class="w"> </span>are<span class="w"> </span>needed
 <span class="w">                        </span>to<span class="w"> </span>make<span class="w"> </span>a<span class="w"> </span>config<span class="w"> </span>file<span class="w"> </span>due<span class="w"> </span>to<span class="w"> </span>slight<span class="w"> </span>variations<span class="w"> </span><span class="k">in</span><span class="w"> </span>MRI<span class="w"> </span>acquisitions.
 <span class="w">                        </span>Defaults<span class="w"> </span>to<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="k">if</span><span class="w"> </span>no<span class="w"> </span>name<span class="w"> </span>is<span class="w"> </span>provided.
 <span class="w">                        </span><span class="o">(</span>Default:<span class="w"> </span><span class="o">[</span>False<span class="o">])</span>
---force,<span class="w"> </span>--force_dcm2bids
+<span class="w">  </span>--force,<span class="w"> </span>--force_dcm2bids
 <span class="w">                        </span>Force<span class="w"> </span><span class="nb">command</span><span class="w"> </span>to<span class="w"> </span>overwrite<span class="w"> </span>existing<span class="w"> </span>output<span class="w"> </span>files.
--l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
+<span class="w">  </span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
 <span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>console.<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span>
 
-<span class="w">            </span>Documentation<span class="w"> </span>at<span class="w"> </span>https://github.com/unfmontreal/Dcm2Bids
+Documentation<span class="w"> </span>at<span class="w"> </span>https://unfmontreal.github.io/Dcm2Bids/
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2461,38 +2465,38 @@ command.</p>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~/dcm2bids-tutorial/bids_project$<span class="w"> </span>dcm2bids<span class="w"> </span>--help
-<span class="hll">usage:<span class="w"> </span>dcm2bids<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span>PARTICIPANT<span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>SESSION<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span>CONFIG<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span>
-</span><span class="hll"><span class="w">                </span><span class="o">[</span>--auto_extract_entities<span class="o">]</span><span class="w"> </span><span class="o">[</span>--bids_validate<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force_dcm2bids<span class="o">]</span><span class="w"> </span><span class="o">[</span>--skip_dcm2niix<span class="o">]</span><span class="w"> </span><span class="o">[</span>--clobber<span class="o">]</span>
-</span><span class="w">                </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span><span class="w"> </span><span class="o">[</span>-a<span class="o">]</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">(</span>dcm2bids<span class="o">)</span><span class="w"> </span>sam:~$<span class="w"> </span>dcm2bids<span class="w"> </span>--help
+<span class="hll">usage:<span class="w"> </span>dcm2bids<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span>PARTICIPANT<span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>SESSION<span class="o">]</span>
+</span><span class="hll"><span class="w">                </span>-c<span class="w"> </span>CONFIG<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span><span class="w"> </span><span class="o">[</span>--auto_extract_entities<span class="o">]</span>
+</span><span class="w">                </span><span class="o">[</span>--bids_validate<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force_dcm2bids<span class="o">]</span><span class="w"> </span><span class="o">[</span>--skip_dcm2niix<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>--clobber<span class="o">]</span><span class="w"> </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span><span class="w"> </span><span class="o">[</span>-v<span class="o">]</span>
 
 Reorganising<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>dcm2niix<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span>Brain<span class="w"> </span>Imaging<span class="w"> </span>Data<span class="w"> </span>Structure
-dcm2bids<span class="w"> </span><span class="m">2</span>.1.7
 
 options:
--h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
--d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
-<span class="w">                        </span>DICOM<span class="w"> </span>directory<span class="o">(</span>ies<span class="o">)</span>
--p<span class="w"> </span>PARTICIPANT,<span class="w"> </span>--participant<span class="w"> </span>PARTICIPANT
-<span class="w">                        </span>Participant<span class="w"> </span>ID
--s<span class="w"> </span>SESSION,<span class="w"> </span>--session<span class="w"> </span>SESSION
-<span class="w">                        </span>Session<span class="w"> </span>ID
--c<span class="w"> </span>CONFIG,<span class="w"> </span>--config<span class="w"> </span>CONFIG
-<span class="w">                        </span>JSON<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>see<span class="w"> </span>example/config.json<span class="o">)</span>
--o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
-<span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory,<span class="w"> </span>Default:<span class="w"> </span>current<span class="w"> </span>directory<span class="w"> </span><span class="o">(</span>/home/sam/dcm2bids-tutorial/bids_project<span class="o">)</span>
---auto_extract_entities
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
+<span class="w">                        </span>DICOM<span class="w"> </span>directory<span class="o">(</span>ies<span class="o">)</span><span class="w"> </span>or<span class="w"> </span>archive<span class="o">(</span>s<span class="o">)</span><span class="w"> </span><span class="o">(</span>tar,<span class="w"> </span>tar.bz2,<span class="w"> </span>tar.gz<span class="w"> </span>or<span class="w"> </span>zip<span class="o">)</span>.
+<span class="w">  </span>-p<span class="w"> </span>PARTICIPANT,<span class="w"> </span>--participant<span class="w"> </span>PARTICIPANT
+<span class="w">                        </span>Participant<span class="w"> </span>ID.
+<span class="w">  </span>-s<span class="w"> </span>SESSION,<span class="w"> </span>--session<span class="w"> </span>SESSION
+<span class="w">                        </span>Session<span class="w"> </span>ID.<span class="w"> </span><span class="o">[]</span>
+<span class="w">  </span>-c<span class="w"> </span>CONFIG,<span class="w"> </span>--config<span class="w"> </span>CONFIG
+<span class="w">                        </span>JSON<span class="w"> </span>configuration<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>see<span class="w"> </span>example/config.json<span class="o">)</span>.
+<span class="w">  </span>-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
+<span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory.<span class="w"> </span><span class="o">[</span>/home/runner/work/Dcm2Bids/Dcm2Bids<span class="o">]</span>
+<span class="w">  </span>--auto_extract_entities
 <span class="w">                        </span>If<span class="w"> </span>set,<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>automatically<span class="w"> </span>try<span class="w"> </span>to<span class="w"> </span>extract<span class="w"> </span>entityinformation<span class="w"> </span><span class="o">[</span>task,<span class="w"> </span>dir,<span class="w"> </span>echo<span class="o">]</span><span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>suffix<span class="w"> </span>and<span class="w"> </span>datatype.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
---bids_validate<span class="w">         </span>If<span class="w"> </span>set,<span class="w"> </span>once<span class="w"> </span>your<span class="w"> </span>conversion<span class="w"> </span>is<span class="w"> </span><span class="k">done</span><span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span><span class="k">if</span><span class="w"> </span>your<span class="w"> </span>output<span class="w"> </span>folder<span class="w"> </span>is<span class="w"> </span>BIDS<span class="w"> </span>valid.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
+<span class="w">  </span>--bids_validate<span class="w">       </span>If<span class="w"> </span>set,<span class="w"> </span>once<span class="w"> </span>your<span class="w"> </span>conversion<span class="w"> </span>is<span class="w"> </span><span class="k">done</span><span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span><span class="k">if</span><span class="w"> </span>your<span class="w"> </span>output<span class="w"> </span>folder<span class="w"> </span>is<span class="w"> </span>BIDS<span class="w"> </span>valid.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
 <span class="w">                        </span>bids-validator<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>installed<span class="w"> </span>check:<span class="w"> </span>https://github.com/bids-standard/bids-validator#quickstart
---force_dcm2bids<span class="w">       </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2bids<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
---skip_dcm2niix<span class="w">       </span>Skip<span class="w"> </span>dcm2niix<span class="w"> </span>conversion.<span class="w"> </span>Option<span class="w"> </span>-d<span class="w"> </span>should<span class="w"> </span>contains<span class="w"> </span>NIFTI<span class="w"> </span>and<span class="w"> </span>json<span class="w"> </span>files.
---clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
--l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
-<span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level
--a,<span class="w"> </span>--anonymizer<span class="w">      </span>This<span class="w"> </span>option<span class="w"> </span>no<span class="w"> </span>longer<span class="w"> </span>exists<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>script<span class="w"> </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>release.<span class="w"> </span>See:https://github.com/unfmontreal/Dcm2Bids/blob/master/README.md#defaceTpl
+<span class="w">  </span>--force_dcm2bids<span class="w">      </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2bids<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+<span class="w">  </span>--skip_dcm2niix<span class="w">       </span>Skip<span class="w"> </span>dcm2niix<span class="w"> </span>conversion.<span class="w"> </span>Option<span class="w"> </span>-d<span class="w"> </span>should<span class="w"> </span>contains<span class="w"> </span>NIFTI<span class="w"> </span>and<span class="w"> </span>json<span class="w"> </span>files.
+<span class="w">  </span>--clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+<span class="w">  </span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
+<span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>console.<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span>
+<span class="w">  </span>-v,<span class="w"> </span>--version<span class="w">         </span>Report<span class="w"> </span>dcm2bids<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>version.
 
-<span class="w">            </span>Documentation<span class="w"> </span>at<span class="w"> </span>https://github.com/unfmontreal/Dcm2Bids
+Documentation<span class="w"> </span>at<span class="w"> </span>https://unfmontreal.github.io/Dcm2Bids/
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -2722,7 +2726,7 @@ documentation to find information about the different commands.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-08-31T17:08:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-08-31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-09-13T19:46:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-09-13</span>
       
         <br>
         Created:
