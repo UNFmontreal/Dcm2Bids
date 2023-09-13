@@ -57,7 +57,7 @@ First thing first, let's make sure our software are usable.
 
     ```sh
     (dcm2bids) sam:~$ dcm2bids -v
-    dcm2bids version:       3.0.3
+    dcm2bids version:       3.1.0
     Based on BIDS version:  v1.8.0
     (dcm2bids) sam:~$ parallel --version
     GNU parallel 20230722
@@ -99,7 +99,7 @@ with.
     INFO    | Running the following command: /home/sam/miniconda3/envs/dcm2bids/bin/dcm2bids_scaffold -o tuto-parallel
     INFO    | OS version: Linux-5.15.0-83-generic-x86_64-with-glibc2.31
     INFO    | Python version: 3.10.4 | packaged by conda-forge | (main, Mar 24 2022, 17:39:04) [GCC 10.3.0]
-    INFO    | dcm2bids version: 3.0.3
+    INFO    | dcm2bids version: 3.1.0
     INFO    | Checking for software update
     INFO    | Currently using the latest version of dcm2bids.
     INFO    | The files used to create your BIDS directory were taken from https://github.com/bids-standard/bids-starter-kit.
@@ -128,7 +128,7 @@ This step is optional but it makes things easier when all the data are within
 the same directory. The `sourcedata` directory is meant to contain your DICOM
 files. It doesn't mean you have to duplicate your files there but it is nice to
 [symlink](https://en.wikipedia.org/wiki/Symbolic_link) them there. That being
-said, feel free to let your DICOM directories whereever they are, and use that
+said, feel free to let your DICOM directories wherever they are, and use that
 as an input to your dcm2bids command.
 
 === "Command"
@@ -195,8 +195,8 @@ created for my data to `code/config_dcm2bids_t1w.json`. This config file aims to
 }
 ```
 
-Make sure that your config file runs succesfully on one participant at least
-before moving onto parallizing.
+Make sure that your config file runs successfully on one participant at least
+before moving onto parallelizing.
 
 In my case,
 `dcm2bids --auto_extract_entities -c code/config_dcm2bids_t1w.json -d sourcedata/punk_proj/PUNK041.tar.bz2 -p 041`
