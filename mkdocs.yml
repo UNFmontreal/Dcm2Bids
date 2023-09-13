@@ -22,6 +22,7 @@ nav:
   - Tutorials:
       - index: tutorial/index.md
       - First steps: tutorial/first-steps.md
+      - Multiple participants in parallel: tutorial/parallel.md
   - How-to guides:
       - index: how-to/index.md
       - Get help and support: how-to/get-help.md
