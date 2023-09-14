@@ -82,17 +82,17 @@ If you use dcm2bids in your research or as part of your developments, please alw
 
 ### APA
 
-> Boré, A., Guay, S., Bedetti, C., Meisler, S., & GuenTher, N. (2023). Dcm2Bids (Version 3.0.2) [Computer software]. https://doi.org/10.5281/zenodo.8306314
+> Boré, A., Guay, S., Bedetti, C., Meisler, S., & GuenTher, N. (2023). Dcm2Bids (Version 3.1.0) [Computer software]. https://doi.org/10.5281/zenodo.8342572
 
 ### BibTeX
 
 ```
 @software{Bore_Dcm2Bids_2023,
 author = {Boré, Arnaud and Guay, Samuel and Bedetti, Christophe and Meisler, Steven and GuenTher, Nick},
-doi = {10.5281/zenodo.8306314},
+doi = {10.5281/zenodo.8342572},
 month = aug,
 title = {{Dcm2Bids}},
 url = {https://github.com/UNFmontreal/Dcm2Bids},
-version = {3.0.2},
+version = {3.1.0},
 year = {2023}
 ```
