@@ -36,7 +36,7 @@ specification and reduce the risk of typos.
 | :------------------: | :-------------------: |
 | **`dataType`**       | **`datatype`**        |
 | **`modalityLabel`**  | **`suffix`**          |
-| **`customEntities`** | **`custom_entities`** |
+| **`customLabels`**   | **`custom_entities`** |
 | **`sidecarChanges`** | **`sidecar_changes`** |
 | **`intendedFor`**    | **REMOVED**           |
 
