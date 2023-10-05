@@ -142,6 +142,14 @@ def convert_dir(dir):
     return DEFAULT.entity_dir[dir]
 
 
+def combine_dict_extractors(d1, d2):
+    
+    return {
+            k: [d[k] for d in (d1, d2) if k in d]
+            for k in set(d1.keys()) | set(d2.keys())
+        }
+
+
 class TreePrinter:
     """
     Generates and prints a tree representation of a given a directory.
