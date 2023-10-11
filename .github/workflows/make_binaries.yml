@@ -34,6 +34,7 @@ jobs:
           script-name: dcm2bids/cli/dcm2bids.py
           onefile: true
           show-scons: false
+          no-deployment-flag: true
           output-file: dcm2bids
 
       - name: Build dcm2bids_scaffold executable
