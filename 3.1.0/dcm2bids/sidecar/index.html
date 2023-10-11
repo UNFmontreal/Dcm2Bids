@@ -1705,7 +1705,15 @@
 <span class="normal">882</span>
 <span class="normal">883</span>
 <span class="normal">884</span>
-<span class="normal">885</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">885</span>
+<span class="normal">886</span>
+<span class="normal">887</span>
+<span class="normal">888</span>
+<span class="normal">889</span>
+<span class="normal">890</span>
+<span class="normal">891</span>
+<span class="normal">892</span>
+<span class="normal">893</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 &quot;&quot;&quot;sidecars classes&quot;&quot;&quot;
 
@@ -1725,7 +1733,7 @@ from dcm2bids.acquisition import Acquisition
 
 from dcm2bids.utils.io import load_json
 
-from dcm2bids.utils.utils import DEFAULT, convert_dir, splitext_
+from dcm2bids.utils.utils import DEFAULT, convert_dir, combine_dict_extractors, splitext_
 
 compare_float_keys = [&quot;lt&quot;, &quot;gt&quot;, &quot;le&quot;, &quot;ge&quot;, &quot;btw&quot;, &quot;btwe&quot;]
 
@@ -2431,7 +2439,7 @@ class SidecarPairing(object):
 
             if self.auto_extract_entities:
 
-                self.extractors.update(DEFAULT.auto_extractors)
+                self.extractors = combine_dict_extractors(self.extractors, DEFAULT.auto_extractors)
 
             for dcmTag in self.extractors:
 
@@ -2463,9 +2471,19 @@ class SidecarPairing(object):
 
                                     break
 
+            # Keep entities asked in custom_entities
+
+            # If dir found in custom_entities and concatenated_matches.keys we keep it
+
             if &quot;custom_entities&quot; in desc.keys():
 
-                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;custom_entities&quot;]))
+                entities = set(concatenated_matches.keys()).intersection(set(descWithTask[&quot;custom_entities&quot;]))
+
+                # custom_entities not a key for extractor or auto_extract_entities
+
+                complete_entities = [ent for ent in descWithTask[&quot;custom_entities&quot;] if &#39;-&#39; in ent]
+
+                entities = entities.union(set(complete_entities))
 
             if self.auto_extract_entities:
 
@@ -2485,13 +2503,11 @@ class SidecarPairing(object):
 
                                             f&quot;and suffix &#39;{descWithTask[&#39;suffix&#39;]}&#39;.&quot;)
 
-                    else:
+                    entities = list(entities) + list(auto_entities)
 
-                        entities = list(entities) + DEFAULT.auto_entities[auto_acq]
+                    entities = list(set(entities))
 
-                        entities = list(set(entities))
-
-                        descWithTask[&quot;custom_entities&quot;] = entities
+                    descWithTask[&quot;custom_entities&quot;] = entities
 
             for curr_entity in entities:
 
@@ -3634,7 +3650,15 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 <span class="normal">748</span>
 <span class="normal">749</span>
 <span class="normal">750</span>
-<span class="normal">751</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span>
+<span class="normal">759</span></pre></div></td><td class="code"><div><pre><span></span><code>class SidecarPairing(object):
 
     &quot;&quot;&quot;
 
@@ -4226,7 +4250,7 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
             if self.auto_extract_entities:
 
-                self.extractors.update(DEFAULT.auto_extractors)
+                self.extractors = combine_dict_extractors(self.extractors, DEFAULT.auto_extractors)
 
             for dcmTag in self.extractors:
 
@@ -4258,9 +4282,19 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                     break
 
+            # Keep entities asked in custom_entities
+
+            # If dir found in custom_entities and concatenated_matches.keys we keep it
+
             if &quot;custom_entities&quot; in desc.keys():
 
-                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;custom_entities&quot;]))
+                entities = set(concatenated_matches.keys()).intersection(set(descWithTask[&quot;custom_entities&quot;]))
+
+                # custom_entities not a key for extractor or auto_extract_entities
+
+                complete_entities = [ent for ent in descWithTask[&quot;custom_entities&quot;] if &#39;-&#39; in ent]
+
+                entities = entities.union(set(complete_entities))
 
             if self.auto_extract_entities:
 
@@ -4280,13 +4314,11 @@ descriptions (list): List of dictionaries describing acquisitions</p>
 
                                             f&quot;and suffix &#39;{descWithTask[&#39;suffix&#39;]}&#39;.&quot;)
 
-                    else:
+                    entities = list(entities) + list(auto_entities)
 
-                        entities = list(entities) + DEFAULT.auto_entities[auto_acq]
+                    entities = list(set(entities))
 
-                        entities = list(set(entities))
-
-                        descWithTask[&quot;custom_entities&quot;] = entities
+                    descWithTask[&quot;custom_entities&quot;] = entities
 
             for curr_entity in entities:
 
@@ -5415,7 +5447,15 @@ the values are a list of possible descriptions</p>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
-<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code>    def searchDcmTagEntity(self, sidecar, desc):
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code>    def searchDcmTagEntity(self, sidecar, desc):
 
         &quot;&quot;&quot;
 
@@ -5443,7 +5483,7 @@ the values are a list of possible descriptions</p>
 
             if self.auto_extract_entities:
 
-                self.extractors.update(DEFAULT.auto_extractors)
+                self.extractors = combine_dict_extractors(self.extractors, DEFAULT.auto_extractors)
 
             for dcmTag in self.extractors:
 
@@ -5475,9 +5515,19 @@ the values are a list of possible descriptions</p>
 
                                     break
 
+            # Keep entities asked in custom_entities
+
+            # If dir found in custom_entities and concatenated_matches.keys we keep it
+
             if &quot;custom_entities&quot; in desc.keys():
 
-                entities = set(concatenated_matches.keys()).union(set(descWithTask[&quot;custom_entities&quot;]))
+                entities = set(concatenated_matches.keys()).intersection(set(descWithTask[&quot;custom_entities&quot;]))
+
+                # custom_entities not a key for extractor or auto_extract_entities
+
+                complete_entities = [ent for ent in descWithTask[&quot;custom_entities&quot;] if &#39;-&#39; in ent]
+
+                entities = entities.union(set(complete_entities))
 
             if self.auto_extract_entities:
 
@@ -5497,13 +5547,11 @@ the values are a list of possible descriptions</p>
 
                                             f&quot;and suffix &#39;{descWithTask[&#39;suffix&#39;]}&#39;.&quot;)
 
-                    else:
+                    entities = list(entities) + list(auto_entities)
 
-                        entities = list(entities) + DEFAULT.auto_entities[auto_acq]
+                    entities = list(set(entities))
 
-                        entities = list(set(entities))
-
-                        descWithTask[&quot;custom_entities&quot;] = entities
+                    descWithTask[&quot;custom_entities&quot;] = entities
 
             for curr_entity in entities:
 
@@ -5546,11 +5594,11 @@ the values are a list of possible descriptions</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T00:48:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T03:32:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T00:48:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T03:32:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
       
     
   </small>

@@ -686,6 +686,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#combine_dict_extractors" class="md-nav__link">
+    combine_dict_extractors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#convert_dir" class="md-nav__link">
     convert_dir
   </a>
@@ -1144,7 +1151,33 @@
 <span class="normal">316</span>
 <span class="normal">317</span>
 <span class="normal">318</span>
-<span class="normal">319</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span></pre></div></td><td class="code"><div><pre><span></span><code># -*- coding: utf-8 -*-
 
 import csv
 
@@ -1362,6 +1395,32 @@ def convert_dir(dir):
 
     return DEFAULT.entity_dir[dir]
 
+def combine_dict_extractors(d1, d2):
+
+    &quot;&quot;&quot; combine dict
+
+    Args:
+
+        d1 (dic): dictionary
+
+        d2 (dic): dictionary
+
+    Returns:
+
+        dict: dictionary with combined information
+
+              if d1 d2 use the same keys, return dict will return a list of items.
+
+    &quot;&quot;&quot;
+
+    return {
+
+            k: [d[k][0] for d in (d1, d2) if k in d]
+
+            for k in set(d1.keys()) | set(d2.keys())
+
+        }
+
 class TreePrinter:
 
     &quot;&quot;&quot;
@@ -1466,6 +1525,109 @@ class TreePrinter:
 </code></pre></div></td></tr></table></div>
 </details>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="combine_dict_extractors">combine_dict_extractors<a class="headerlink" href="#combine_dict_extractors" title="Permanent link">⚓︎</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">combine_dict_extractors</span><span class="p">(</span>
+    <span class="n">d1</span><span class="p">,</span>
+    <span class="n">d2</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>combine dict </p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d1</td>
+<td>dic</td>
+<td>dictionary</td>
+<td>None</td>
+</tr>
+<tr>
+<td>d2</td>
+<td>dic</td>
+<td>dictionary</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dict</td>
+<td>dictionary with combined information<br>if d1 d2 use the same keys, return dict will return a list of items.</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>def combine_dict_extractors(d1, d2):
+
+    &quot;&quot;&quot; combine dict
+
+    Args:
+
+        d1 (dic): dictionary
+
+        d2 (dic): dictionary
+
+    Returns:
+
+        dict: dictionary with combined information
+
+              if d1 d2 use the same keys, return dict will return a list of items.
+
+    &quot;&quot;&quot;
+
+    return {
+
+            k: [d[k][0] for d in (d1, d2) if k in d]
+
+            for k in set(d1.keys()) | set(d2.keys())
+
+        }
+</code></pre></div></td></tr></table></div>
+</details>
 <h3 id="convert_dir">convert_dir<a class="headerlink" href="#convert_dir" title="Permanent link">⚓︎</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -2385,11 +2547,11 @@ class TreePrinter:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T00:48:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T03:32:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T00:48:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-10-11T03:32:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-10-11</span>
       
     
   </small>
