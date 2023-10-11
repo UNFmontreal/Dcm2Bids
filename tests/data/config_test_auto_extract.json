@@ -1,5 +1,6 @@
 {
     "search_method": "re",
+    "extractors": {"SeriesDescription": ["random-(?P<random>[a-zA-Z0-9]+)"]},
     "descriptions": [
         {
             "datatype": "localizer",
@@ -12,7 +13,7 @@
             "id": "func_task-rest",
             "datatype": "func",
             "suffix": "bold",
-            "custom_entities": ["acq-highres"],
+            "custom_entities": ["acq-highres", "random"],
             "criteria": {
                 "SeriesDescription": ".*bold.*"
             }

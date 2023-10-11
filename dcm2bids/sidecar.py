@@ -11,7 +11,7 @@ from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
-from dcm2bids.utils.utils import DEFAULT, convert_dir, splitext_
+from dcm2bids.utils.utils import DEFAULT, convert_dir, combine_dict_extractors, splitext_
 
 compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
 
@@ -428,7 +428,6 @@ class SidecarPairing(object):
         descWithTask = desc.copy()
         concatenated_matches = {}
         entities = []
-
         if "custom_entities" in desc.keys() or self.auto_extract_entities:
             if 'custom_entities' in desc.keys():
                 if isinstance(descWithTask["custom_entities"], str):
@@ -437,7 +436,8 @@ class SidecarPairing(object):
                 descWithTask["custom_entities"] = []
 
             if self.auto_extract_entities:
-                self.extractors.update(DEFAULT.auto_extractors)
+                self.extractors = combine_dict_extractors(self.extractors, DEFAULT.auto_extractors)
+
 
             for dcmTag in self.extractors:
                 if dcmTag in sidecar.data.keys():
@@ -455,8 +455,14 @@ class SidecarPairing(object):
                                       compile_regex.search(curr_dcmInfo).groupdict())
                                     break
 
+            # Keep entities asked in custom_entities
+            # If dir found in custom_entities and concatenated_matches.keys we keep it
             if "custom_entities" in desc.keys():
-                entities = set(concatenated_matches.keys()).union(set(descWithTask["custom_entities"]))
+                entities = set(concatenated_matches.keys()).intersection(set(descWithTask["custom_entities"]))
+
+                # custom_entities not a key for extractor or auto_extract_entities
+                complete_entities = [ent for ent in descWithTask["custom_entities"] if '-' in ent]
+                entities = entities.union(set(complete_entities))
 
             if self.auto_extract_entities:
                 auto_acq = '_'.join([descWithTask['datatype'], descWithTask["suffix"]])
@@ -467,10 +473,11 @@ class SidecarPairing(object):
                     if left_auto_entities:
                         self.logger.warning(f"{left_auto_entities} have not been found for datatype '{descWithTask['datatype']}' "
                                             f"and suffix '{descWithTask['suffix']}'.")
-                    else:
-                        entities = list(entities) + DEFAULT.auto_entities[auto_acq]
-                        entities = list(set(entities))
-                        descWithTask["custom_entities"] = entities
+                    
+                    entities = list(entities) + list(auto_entities)
+                    entities = list(set(entities))
+                    descWithTask["custom_entities"] = entities
+
 
             for curr_entity in entities:
                 if curr_entity in concatenated_matches.keys():
