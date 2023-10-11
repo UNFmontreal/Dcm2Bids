@@ -438,6 +438,7 @@ class SidecarPairing(object):
             if self.auto_extract_entities:
                 self.extractors = combine_dict_extractors(self.extractors, DEFAULT.auto_extractors)
 
+
             for dcmTag in self.extractors:
                 if dcmTag in sidecar.data.keys():
                     dcmInfo = sidecar.data.get(dcmTag)

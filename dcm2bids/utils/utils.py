@@ -143,9 +143,17 @@ def convert_dir(dir):
 
 
 def combine_dict_extractors(d1, d2):
+    """ combine dict 
+    Args:
+        d1 (dic): dictionnary
+        d2 (dic): dictionnary
     
+    Returns:
+        dict: directionnary with combined information
+              if d1 d2 use the same keys, return dict will return a list of items.
+    """    
     return {
-            k: [d[k] for d in (d1, d2) if k in d]
+            k: [d[k][0] for d in (d1, d2) if k in d]
             for k in set(d1.keys()) | set(d2.keys())
         }
 
