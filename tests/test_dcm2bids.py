@@ -95,7 +95,9 @@ def test_dcm2bids():
                             "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
-    assert data["IntendedFor"] == "bids::" + os.path.join("sub-01", "dwi", "sub-01_dwi.nii.gz")
+    assert data["IntendedFor"] == "bids::" + os.path.join("sub-01",
+                                                          "dwi",
+                                                          "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
@@ -231,8 +233,12 @@ def test_dcm2bids_case_sensitive():
                             "fmap",
                             "sub-01_echo-492_fmap.json")
     data = load_json(fmapFile)
-    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01", "dwi", "sub-01_dwi.nii.gz"),
-                                   "bids::" + os.path.join("sub-01", "anat", "sub-01_T1w.nii")]
+    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01",
+                                                           "dwi",
+                                                           "sub-01_dwi.nii.gz"),
+                                   "bids::" + os.path.join("sub-01",
+                                                           "anat",
+                                                           "sub-01_T1w.nii")]
 
     fmapFile = os.path.join(bids_dir.name,
                             "sub-01",
@@ -240,7 +246,9 @@ def test_dcm2bids_case_sensitive():
                             "sub-01_echo-738_fmap.json")
     data = load_json(fmapFile)
     fmapMtime = os.stat(fmapFile).st_mtime
-    assert data["IntendedFor"] == "bids::" + os.path.join("sub-01", "dwi", "sub-01_dwi.nii.gz")
+    assert data["IntendedFor"] == "bids::" + os.path.join("sub-01",
+                                                          "dwi",
+                                                          "sub-01_dwi.nii.gz")
 
     data = load_json(
         os.path.join(
@@ -288,8 +296,12 @@ def test_dcm2bids_auto_extract():
     data = load_json(epi_file)
 
     assert os.path.exists(epi_file)
-    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01", "dwi", "sub-01_dwi.nii.gz"),
-                                   "bids::" + os.path.join("sub-01", "anat", "sub-01_T1w.nii")]
+    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01",
+                                                           "dwi",
+                                                           "sub-01_dwi.nii.gz"),
+                                   "bids::" + os.path.join("sub-01",
+                                                           "anat",
+                                                           "sub-01_T1w.nii")]
 
     func_task = os.path.join(bids_dir.name, "sub-01",
                              "func",
@@ -459,8 +471,6 @@ def test_dcm2bids_sidecar():
                       session="dev")
     app.run()
 
-    layout = BIDSLayout(bids_dir.name, validate=False)
-
     # existing field
     data = load_json(os.path.join(bids_dir.name,
                                   "sub-01",
@@ -483,8 +493,8 @@ def test_dcm2bids_sidecar():
                                   "ses-dev",
                                   "fmap",
                                   "sub-01_ses-dev_echo-492_fmap.json"))
-    assert data["MTState"] == True
-    
+    assert data["MTState"]
+
     # boolean value if input as a string
     data = load_json(os.path.join(bids_dir.name,
                                   "sub-01",
@@ -499,10 +509,22 @@ def test_dcm2bids_sidecar():
                                   "ses-dev",
                                   "dwi",
                                   "sub-01_ses-dev_desc-fa01_dwi.json"))
-    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01", "ses-dev", "dwi", "sub-01_ses-dev_dwi.nii.gz"),
-                                   "bids::" + os.path.join("sub-01", "ses-dev", "anat", "sub-01_ses-dev_T1w.nii")]
-    assert data["Sources"] == ["bids::" + os.path.join("sub-01", "ses-dev", "anat", "sub-01_ses-dev_T1w.nii"),
-                               "bids::" + os.path.join("sub-01", "ses-dev", "dwi", "sub-01_ses-dev_dwi.nii.gz")]
+    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01",
+                                                           "ses-dev",
+                                                           "dwi",
+                                                           "sub-01_ses-dev_dwi.nii.gz"),
+                                   "bids::" + os.path.join("sub-01",
+                                                           "ses-dev",
+                                                           "anat",
+                                                           "sub-01_ses-dev_T1w.nii")]
+    assert data["Sources"] == ["bids::" + os.path.join("sub-01",
+                                                       "ses-dev",
+                                                       "anat",
+                                                       "sub-01_ses-dev_T1w.nii"),
+                               "bids::" + os.path.join("sub-01",
+                                                       "ses-dev",
+                                                       "dwi",
+                                                       "sub-01_ses-dev_dwi.nii.gz")]
 
     # list with 1 item
     data = load_json(os.path.join(bids_dir.name,
@@ -510,5 +532,42 @@ def test_dcm2bids_sidecar():
                                   "ses-dev",
                                   "dwi",
                                   "sub-01_ses-dev_desc-trace_dwi.json"))
-    assert data["IntendedFor"] == "bids::" + os.path.join("sub-01", "ses-dev", "dwi", "sub-01_ses-dev_dwi.nii.gz")
-    assert data["Sources"] == "bids::" + os.path.join("sub-01", "ses-dev", "anat", "sub-01_ses-dev_T1w.nii")
+    assert data["IntendedFor"] == "bids::" + os.path.join("sub-01",
+                                                          "ses-dev",
+                                                          "dwi",
+                                                          "sub-01_ses-dev_dwi.nii.gz")
+    assert data["Sources"] == "bids::" + os.path.join("sub-01",
+                                                      "ses-dev",
+                                                      "anat",
+                                                      "sub-01_ses-dev_T1w.nii")
+
+
+def test_dcm2bids_multiple_intendedFor():
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test_multiple_intendedfor.json"),
+                      bids_dir.name,
+                      auto_extract_entities=True)
+    app.run()
+
+    epi_file = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_fmap.json")
+    data = load_json(epi_file)
+
+    assert os.path.exists(epi_file)
+    assert data["IntendedFor"] == ["bids::" + os.path.join("sub-01",
+                                                           "localizer",
+                                                           "sub-01_run-01_localizer.nii"),
+                                   "bids::" + os.path.join("sub-01",
+                                                           "localizer",
+                                                           "sub-01_run-02_localizer.nii"),
+                                   "bids::" + os.path.join("sub-01",
+                                                           "localizer",
+                                                           "sub-01_run-03_localizer.nii"),
+                                   "bids::" + os.path.join("sub-01",
+                                                           "anat",
+                                                           "sub-01_T1w.nii")]
