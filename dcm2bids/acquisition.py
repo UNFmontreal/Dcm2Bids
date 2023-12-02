@@ -278,7 +278,7 @@ class Acquisition(object):
                         values.append(idList.get(val, val))
                         if values[-1] != val:
                             if isinstance(values[-1], list):
-                                values[-1] = "bids::" + values[-1][0]
+                                values[-1] = ["bids::" + img_dest for img_dest in values[-1]]
                             else:
                                 values[-1] = "bids::" + values[-1]
 
