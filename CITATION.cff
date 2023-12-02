@@ -12,7 +12,7 @@ authors:
     orcid: "https://orcid.org/0000-0002-1443-8922"
   - family-names: "Meisler"
     given-names: "Steven"
-  - family-names: "GuenTher"
+  - family-names: "Guenther"
     given-names: "Nick"
 title: "Dcm2Bids"
 version: "3.1.1"
