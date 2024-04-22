@@ -92,7 +92,7 @@ only disabled when used with `"search_method": "fnmatch"`.
 default: `"post_op": []`
 
 post_op key allows you to run any post-processing analyses just before moving
-the images to there respective directories.
+the images to their respective directories.
 
 For example, if you want to deface your T1w images you could use pydeface by
 adding:
