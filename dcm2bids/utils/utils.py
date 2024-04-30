@@ -59,8 +59,8 @@ class DEFAULT(object):
                      "func_bold": ["task"],
                      "func_sbref": ["task"],
                      "fmap_epi": ["dir"]}
-
-    compKeys = ["SeriesNumber", "AcquisitionTime", "SidecarFilename"]
+    
+    compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]
     search_method = "fnmatch"
     dup_method_choices = ["dup", "run"]
