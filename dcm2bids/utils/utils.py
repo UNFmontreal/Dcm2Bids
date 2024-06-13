@@ -53,12 +53,27 @@ class DEFAULT(object):
 
     extractors = {}
 
-    auto_entities = {"anat_MEGRE": ["echo"],
+    auto_entities = {"anat_IRT1": ["inv"],
+                     "anat_MEGRE": ["echo"],
                      "anat_MESE": ["echo"],
+                     "anat_MP2RAGE": ["inv"],
+                     "anat_MPM": ["flip", "mt"],
+                     "anat_MTS": ["flip", "mt"],
+                     "anat_MTR": ["mt"],
+                     "anat_VFA": ["flip"],
                      "func_cbv": ["task"],
                      "func_bold": ["task"],
                      "func_sbref": ["task"],
-                     "fmap_epi": ["dir"]}
+                     "func_event": ["task"],
+                     "func_stim": ["task"],
+                     "func_phase": ["task"],
+                     "fmap_epi": ["dir"],
+                     "fmap_m0scan": ["dir"],
+                     "fmap_TB1DAM": ["flip"],
+                     "fmap_TB1EPI": ["echo", "flip"],
+                     "fmap_TB1SRGE": ["echo", "inv"],
+                     "perf_physio": ["task"],
+                     "perf_stim": ["task"]}
     
     compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]
@@ -70,10 +85,12 @@ class DEFAULT(object):
     case_sensitive = True
 
     # Entity table:
-    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
-    entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
-                       "run", "mod", "echo", "flip", "inv", "mt", "part",
-                       "recording"]
+    # https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
+    entityTableKeys = ["sub", "ses", "sample", "task", "tracksys",
+                       "acq", "ce", "trc", "stain", "rec", "dir",
+                       "run", "mod", "echo", "flip", "inv", "mt",
+                       "part", "proc", "hemi", "space", "split", "recording",
+                       "chunk", "seg", "res", "den", "label", "desc"]
 
     keyWithPathsidecar_changes = ['IntendedFor', 'Sources']
 
