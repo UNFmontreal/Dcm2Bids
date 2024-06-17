@@ -5,7 +5,7 @@ import csv
 import logging
 import os
 from pathlib import Path
-from subprocess import check_output
+from subprocess import check_output, Popen, PIPE
 
 
 class DEFAULT(object):
@@ -99,7 +99,7 @@ class DEFAULT(object):
     helper_dir = "helper"
 
     # BIDS version
-    bids_version = "v1.8.0"
+    bids_version = "v1.9.0"
 
 
 def write_participants(filename, participants):
@@ -145,8 +145,11 @@ def run_shell_command(commandLine, log=True):
     if log:
         logger = logging.getLogger(__name__)
         logger.info("Running: %s", " ".join(str(item) for item in commandLine))
-    return check_output(commandLine)
 
+    pipes = Popen(commandLine, stdout=PIPE, stderr=PIPE)
+    std_out, std_err = pipes.communicate()
+ 
+    return std_out
 
 def convert_dir(dir):
     """ Convert Direction

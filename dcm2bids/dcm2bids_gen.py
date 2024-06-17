@@ -123,10 +123,11 @@ class Dcm2BidsGen(object):
 
         if self.bids_validate:
             try:
-                self.logger.info(f"Validate if {self.output_dir} is BIDS valid.")
-                self.logger.info("Use bids-validator version: ")
-                run_shell_command(['bids-validator', '-v'])
-                run_shell_command(['bids-validator', self.bids_dir])
+                self.logger.info(f"Validate if {self.bids_dir} is BIDS valid.")
+                bids_version = run_shell_command(['bids-validator', '-v'])
+                self.logger.info(f"Use bids-validator version: {bids_version.decode()}")
+                bids_report = run_shell_command(['bids-validator', self.bids_dir])
+                self.logger.info(bids_report.decode())
             except Exception:
                 self.logger.error("The bids-validator does not seem to work properly. "
                                   "The bids-validator may not be installed on your "
@@ -186,7 +187,8 @@ class Dcm2BidsGen(object):
                             else:
                                 cmd = cmd.replace('dst_file', str(dstFile))
 
-                            run_shell_command(cmd.split())
+                            std_out = run_shell_command(cmd.split())
+                            self.logger.debug(std_out.decode())
                             continue
 
             if ".json" in ext:
