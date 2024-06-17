@@ -5,7 +5,7 @@ import csv
 import logging
 import os
 from pathlib import Path
-from subprocess import check_output, Popen, PIPE
+from subprocess import Popen, PIPE
 
 
 class DEFAULT(object):
@@ -74,7 +74,7 @@ class DEFAULT(object):
                      "fmap_TB1SRGE": ["echo", "inv"],
                      "perf_physio": ["task"],
                      "perf_stim": ["task"]}
-    
+
     compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]
     search_method = "fnmatch"
@@ -148,8 +148,9 @@ def run_shell_command(commandLine, log=True):
 
     pipes = Popen(commandLine, stdout=PIPE, stderr=PIPE)
     std_out, std_err = pipes.communicate()
- 
+
     return std_out
+
 
 def convert_dir(dir):
     """ Convert Direction
@@ -163,15 +164,15 @@ def convert_dir(dir):
 
 
 def combine_dict_extractors(d1, d2):
-    """ combine dict 
+    """ combine dict
     Args:
         d1 (dic): dictionary
         d2 (dic): dictionary
-    
+
     Returns:
         dict: dictionary with combined information
               if d1 d2 use the same keys, return dict will return a list of items.
-    """    
+    """
     return {
             k: [d[k][0] for d in (d1, d2) if k in d]
             for k in set(d1.keys()) | set(d2.keys())

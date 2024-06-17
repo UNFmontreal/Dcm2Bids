@@ -462,7 +462,7 @@ class SidecarPairing(object):
             # If dir found in custom_entities and concatenated_matches.keys we keep it
             if "custom_entities" in desc.keys():
                 entities = set(concatenated_matches.keys()).intersection(set(descWithTask["custom_entities"]))
-                
+
                 # custom_entities not a key for extractor or auto_extract_entities
                 complete_entities = [ent for ent in descWithTask["custom_entities"] if '-' in ent]
                 entities = entities.union(set(complete_entities))
@@ -478,7 +478,7 @@ class SidecarPairing(object):
                     if left_auto_entities:
                         self.logger.warning(f"{left_auto_entities} have not been found for datatype '{descWithTask['datatype']}' "
                                             f"and suffix '{descWithTask['suffix']}'.")
-                    
+
                     entities = list(entities) + list(auto_entities)
                     entities = list(set(entities))
                     descWithTask["custom_entities"] = entities

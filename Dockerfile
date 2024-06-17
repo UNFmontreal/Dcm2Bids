@@ -30,7 +30,7 @@ ENV FSLTCLSH="${FSLDIR}/bin/fsltclsh"
 ENV FSLWISH="${FSLDIR}/bin/fslwish"
 ENV FSLGECUDAQ="cuda.q"
 
-# Install dc fro FSL bet and wget for fetching data
+# Update and install some utils
 RUN apt-get -y update && apt-get -y install dc wget npm unzip
 
 # Fetch data
