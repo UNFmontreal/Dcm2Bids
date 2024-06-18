@@ -143,11 +143,12 @@ class Dcm2niixGen(object):
                     self.logger.info("Temporary dicom directory removed.")
 
                 if "Warning" in output or "Error" in output:
-                    self.logger.info(f"\n{output}")
+                    self.logger.info("Log from dcm2niix execution")
+                    self.logger.info(f"\033[93m{output}\033[0m")
                 else:
                     self.logger.debug(f"\n{output}")
-
-                self.logger.info("Check log file for dcm2niix output\n")
+                    self.logger.info("Check log file for dcm2niix output\n")
+                
 
         else:
             for dicomDir in self.dicom_dirs:

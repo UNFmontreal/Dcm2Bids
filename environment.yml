@@ -6,4 +6,3 @@ channels:
 dependencies:
   - fsl-bet2
   - fsl-flirt
-  - pydeface
