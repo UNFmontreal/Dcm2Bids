@@ -156,8 +156,8 @@ class Acquisition(object):
         """
         Return:
             The destination filename formatted following
-            the v1.8.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
+            the v1.9.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
         """
 
         if self.custom_entities.strip() == "":
@@ -210,8 +210,8 @@ class Acquisition(object):
         """
         Return:
             The destination filename formatted following
-            the v1.8.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
+            the v1.9.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
         """
         current_name = self.participant.prefix + self.build_suffix
         new_name = ''

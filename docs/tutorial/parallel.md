@@ -58,7 +58,7 @@ First thing first, let's make sure our software are usable.
     ```sh
     (dcm2bids) sam:~$ dcm2bids -v
     dcm2bids version:       3.1.0
-    Based on BIDS version:  v1.8.0
+    Based on BIDS version:  v1.9.0
     (dcm2bids) sam:~$ parallel --version
     GNU parallel 20230722
     Copyright (C) 2007-2023 Ole Tange, http://ole.tange.dk and Free Software
