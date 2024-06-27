@@ -59,7 +59,7 @@ class DEFAULT(object):
                      "func_bold": ["task"],
                      "func_sbref": ["task"],
                      "fmap_epi": ["dir"]}
-    
+
     compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]
     search_method = "fnmatch"
@@ -67,6 +67,8 @@ class DEFAULT(object):
     dup_method = "run"
     runTpl = "_run-{:02d}"
     dupTpl = "_dup-{:02d}"
+    bids_uri_choices = ["URI", "relative"]
+    bids_uri = "URI"
     case_sensitive = True
 
     # Entity table:
@@ -143,15 +145,15 @@ def convert_dir(dir):
 
 
 def combine_dict_extractors(d1, d2):
-    """ combine dict 
+    """ combine dict
     Args:
         d1 (dic): dictionary
         d2 (dic): dictionary
-    
+
     Returns:
         dict: dictionary with combined information
               if d1 d2 use the same keys, return dict will return a list of items.
-    """    
+    """
     return {
             k: [d[k][0] for d in (d1, d2) if k in d]
             for k in set(d1.keys()) | set(d2.keys())

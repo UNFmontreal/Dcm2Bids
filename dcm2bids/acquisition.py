@@ -4,6 +4,7 @@
 
 import logging
 from os.path import join as opj
+from os import sep
 
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.version import __version__
@@ -30,6 +31,7 @@ class Acquisition(object):
         id=None,
         src_sidecar=None,
         sidecar_changes=None,
+        bids_uri=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
@@ -43,6 +45,7 @@ class Acquisition(object):
         self.suffix = suffix
         self.custom_entities = custom_entities
         self.src_sidecar = src_sidecar
+        self.bids_uri = bids_uri
 
         if sidecar_changes is None:
             self.sidecar_changes = {}
@@ -277,10 +280,16 @@ class Acquisition(object):
                     else:
                         values.append(idList.get(val, val))
                         if values[-1] != val:
-                            if isinstance(values[-1], list):
-                                values[-1] = ["bids::" + img_dest for img_dest in values[-1]]
+                            if self.bids_uri == DEFAULT.bids_uri:
+                                if isinstance(values[-1], list):
+                                    values[-1] = ["bids::" + img_dest for img_dest in values[-1]]
+                                else:
+                                    values[-1] = "bids::" + values[-1]
                             else:
-                                values[-1] = "bids::" + values[-1]
+                                if isinstance(values[-1], list):
+                                    values[-1] = [img_dest.replace(self.participant.name + sep, "") for img_dest in values[-1]]
+                                else:
+                                    values[-1] = values[-1].replace(self.participant.name + sep, "")
 
             # handle if nested list vs str
             flat_value_list = []
