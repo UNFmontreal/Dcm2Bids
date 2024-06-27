@@ -2,7 +2,6 @@ name: fsl
 channels:
   - https://fsl.fmrib.ox.ac.uk/fsldownloads/fslconda/public/
   - conda-forge
-  - HCC
 dependencies:
   - fsl-bet2
   - fsl-flirt

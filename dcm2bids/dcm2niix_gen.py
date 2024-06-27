@@ -144,7 +144,10 @@ class Dcm2niixGen(object):
 
                 if "Warning" in output or "Error" in output:
                     self.logger.info("Log from dcm2niix execution")
-                    self.logger.info(f"\033[93m{output}\033[0m")
+                    if "Warning" in output:
+                        self.logger.warning(f"{output}")
+                    else:
+                        self.logger.error(f"{output}")
                 else:
                     self.logger.debug(f"\n{output}")
                     self.logger.info("Check log file for dcm2niix output\n")

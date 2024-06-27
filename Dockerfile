@@ -19,7 +19,7 @@ FROM debian:stable AS runtime
 COPY --from=build /venv /venv
 
 # Point to conda executables
-ENV PATH /venv/bin:$PATH
+ENV PATH="/venv/bin:$PATH"
 
 # Set FSL variables
 ENV FSLDIR="/venv" 
@@ -54,4 +54,4 @@ RUN pip install -e .
 
 RUN pip install pydeface
 
-ENTRYPOINT [""]
+ENTRYPOINT ["dcm2bids"]

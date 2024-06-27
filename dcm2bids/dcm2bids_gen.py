@@ -123,19 +123,17 @@ class Dcm2BidsGen(object):
 
         if self.bids_validate:
             try:
-                self.logger.info(f"BIDS VALIDATION")
+                self.logger.info("BIDS VALIDATION")
                 bids_version = run_shell_command(['bids-validator', '-v'], False)
                 self.logger.info(f"Use bids-validator version: {bids_version.decode()[:-1]}")
                 bids_report = run_shell_command(['bids-validator', self.bids_dir])
                 self.logger.info("Report from bids-validator")
                 self.logger.info(bids_report.decode())
             except Exception:
-                self.logger.error("\033[91m"
-                                  "The bids-validator does not seem to work properly. "
+                self.logger.error("The bids-validator does not seem to work properly. "
                                   "The bids-validator may not be installed on your "
                                   "computer. Please check: "
-                                  "https://github.com/bids-standard/bids-validator."
-                                  "\033[0m")
+                                  "https://github.com/bids-standard/bids-validator.")
 
     def move(self, acq, idList, post_op):
         """Move an acquisition to BIDS format"""
@@ -198,11 +196,10 @@ class Dcm2BidsGen(object):
                                 continue
                             except Exception:
                                 self.logger.error(
-                                  "\033[91m"
                                   f"The command post_op: \"{cmd}\" "
                                   "does not seem to work properly. "
                                   "Check if it is installed on your "
-                                  "computer.\033[0m\n")
+                                  "computer.\n")
 
             if ".json" in ext:
                 data = acq.dstSidecarData(idList)
