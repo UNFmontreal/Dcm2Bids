@@ -102,7 +102,8 @@ class Dcm2BidsGen(object):
             self.config.get("search_method", DEFAULT.search_method),
             self.config.get("case_sensitive", DEFAULT.case_sensitive),
             self.config.get("dup_method", DEFAULT.dup_method),
-            self.config.get("post_op",  DEFAULT.post_op)
+            self.config.get("post_op",  DEFAULT.post_op),
+            self.config.get("bids_uri",  DEFAULT.bids_uri)
         )
         parser.build_graph()
         parser.build_acquisitions(self.participant)
