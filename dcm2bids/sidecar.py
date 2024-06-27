@@ -416,7 +416,7 @@ class SidecarPairing(object):
                 self.logger.warning(f"Several Pairing  <-  {sidecarName}")
                 for desc in valid_descriptions:
                     acq = Acquisition(participant,
-                                      reorder_entities=self.reorder_entities,
+                                      do_not_reorder_entities=self.do_not_reorder_entities,
                                       **desc)
                     self.logger.warning(f"    ->  {acq.suffix}")
 
