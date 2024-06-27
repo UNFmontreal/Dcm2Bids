@@ -53,6 +53,12 @@ def _build_arg_parser():
                    "information [task, dir, echo] based on the suffix and datatype."
                    " [%(default)s]")
 
+    p.add_argument("--do_not_reorder_entities",
+                   action='store_true',
+                   help="If set, it will not reorder entities accordingly to the BIDS "
+                        "and uses the order defined in custom_entities."
+                        " [%(default)s]")
+
     p.add_argument("--bids_validate",
                    action='store_true',
                    help="If set, once your conversion is done it "
@@ -120,6 +126,7 @@ def main():
     logger.info(f"config: {os.path.realpath(args.config)}")
     logger.info(f"BIDS directory: {os.path.realpath(args.output_dir)}")
     logger.info(f"Auto extract entities: {args.auto_extract_entities}")
+    logger.info(f"Reorder entities: {not args.do_not_reorder_entities}")
     logger.info(f"Validate BIDS: {args.bids_validate}\n")
 
     app = Dcm2BidsGen(**vars(args)).run()

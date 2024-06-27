@@ -96,6 +96,7 @@ class SidecarPairing(object):
                  descriptions,
                  extractors=DEFAULT.extractors,
                  auto_extractor=DEFAULT.auto_extract_entities,
+                 do_not_reorder_entities=DEFAULT.do_not_reorder_entities,
                  search_method=DEFAULT.search_method,
                  case_sensitive=DEFAULT.case_sensitive,
                  dup_method=DEFAULT.dup_method,
@@ -108,6 +109,7 @@ class SidecarPairing(object):
         self.acquisitions = []
         self.extractors = extractors
         self.auto_extract_entities = auto_extractor
+        self.do_not_reorder_entities = do_not_reorder_entities
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.search_method = search_method
@@ -393,8 +395,8 @@ class SidecarPairing(object):
             if len(valid_descriptions) == 1:
                 desc = valid_descriptions[0]
                 desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
-
                 acq = Acquisition(participant,
+                                  do_not_reorder_entities=self.do_not_reorder_entities,
                                   src_sidecar=sidecar, **desc)
                 acq.setDstFile()
 
@@ -414,6 +416,7 @@ class SidecarPairing(object):
                 self.logger.warning(f"Several Pairing  <-  {sidecarName}")
                 for desc in valid_descriptions:
                     acq = Acquisition(participant,
+                                      reorder_entities=self.reorder_entities,
                                       **desc)
                     self.logger.warning(f"    ->  {acq.suffix}")
 

@@ -28,6 +28,7 @@ class DEFAULT(object):
     session = ""  # also Participant object
     bids_validate = False
     auto_extract_entities = False
+    do_not_reorder_entities = False
     clobber = False
     force_dcm2bids = False
     post_op = []
