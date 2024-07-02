@@ -476,7 +476,8 @@ class SidecarPairing(object):
                     left_auto_entities = left_auto_entities.difference(keys_custom_entities)
 
                     if left_auto_entities:
-                        self.logger.warning(f"{left_auto_entities} have not been found for datatype '{descWithTask['datatype']}' "
+                        self.logger.warning(f"Entities {left_auto_entities} have not been found"
+                                            f" for datatype '{descWithTask['datatype']}' "
                                             f"and suffix '{descWithTask['suffix']}'.")
 
                     entities = list(entities) + list(auto_entities)
