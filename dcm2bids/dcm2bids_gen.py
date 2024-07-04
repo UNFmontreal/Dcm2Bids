@@ -123,10 +123,12 @@ class Dcm2BidsGen(object):
 
         if self.bids_validate:
             try:
-                self.logger.info(f"Validate if {self.output_dir} is BIDS valid.")
-                self.logger.info("Use bids-validator version: ")
-                run_shell_command(['bids-validator', '-v'])
-                run_shell_command(['bids-validator', self.bids_dir])
+                self.logger.info("BIDS VALIDATION")
+                bids_version = run_shell_command(['bids-validator', '-v'], False)
+                self.logger.info(f"Use bids-validator version: {bids_version.decode()[:-1]}")
+                bids_report = run_shell_command(['bids-validator', self.bids_dir])
+                self.logger.info("Report from bids-validator")
+                self.logger.info(bids_report.decode())
             except Exception:
                 self.logger.error("The bids-validator does not seem to work properly. "
                                   "The bids-validator may not be installed on your "
@@ -186,8 +188,18 @@ class Dcm2BidsGen(object):
                             else:
                                 cmd = cmd.replace('dst_file', str(dstFile))
 
-                            run_shell_command(cmd.split())
-                            continue
+                            try:
+                                std_out = run_shell_command(cmd.split())
+                                self.logger.debug(f"Log from: {cmd}")
+                                self.logger.debug(std_out.decode())
+                                self.logger.info("")
+                                continue
+                            except Exception:
+                                self.logger.error(
+                                  f"The command post_op: \"{cmd}\" "
+                                  "does not seem to work properly. "
+                                  "Check if it is installed on your "
+                                  "computer.\n")
 
             if ".json" in ext:
                 data = acq.dstSidecarData(idList)
