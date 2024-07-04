@@ -55,8 +55,9 @@ def _build_arg_parser():
 
     p.add_argument("--do_not_reorder_entities",
                    action='store_true',
-                   help="If set, it will not reorder entities accordingly to the BIDS "
-                        "and uses the order defined in custom_entities."
+                   help="If set, it will not reorder entities according to the relative "
+                        "ordering indicated in the BIDS specification and use the "
+                        "order defined in custom_entities by the user."
                         " [%(default)s]")
 
     p.add_argument("--bids_validate",
