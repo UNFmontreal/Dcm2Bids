@@ -39,7 +39,8 @@ class Dcm2BidsGen(object):
         config,
         output_dir=DEFAULT.output_dir,
         bids_validate=DEFAULT.bids_validate,
-        auto_extract_entities=False,
+        auto_extract_entities=DEFAULT.auto_extract_entities,
+        do_not_reorder_entities = DEFAULT.do_not_reorder_entities,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         force_dcm2bids=DEFAULT.force_dcm2bids,
@@ -55,10 +56,16 @@ class Dcm2BidsGen(object):
         self.clobber = clobber
         self.bids_validate = bids_validate
         self.auto_extract_entities = auto_extract_entities
+        self.do_not_reorder_entities = do_not_reorder_entities
         self.force_dcm2bids = force_dcm2bids
         self.skip_dcm2niix = skip_dcm2niix
         self.logLevel = log_level
         self.logger = logging.getLogger(__name__)
+
+        if self.auto_extract_entities and self.do_not_reorder_entities:
+            raise ValueError("Auto extract entities is set to True and "
+                              "do not reorder entities is set to True. "
+                              "Please choose only one option.")
 
     @property
     def dicom_dirs(self):
@@ -99,6 +106,7 @@ class Dcm2BidsGen(object):
             self.config["descriptions"],
             self.config.get("extractors", {}),
             self.auto_extract_entities,
+            self.do_not_reorder_entities,
             self.config.get("search_method", DEFAULT.search_method),
             self.config.get("case_sensitive", DEFAULT.case_sensitive),
             self.config.get("dup_method", DEFAULT.dup_method),

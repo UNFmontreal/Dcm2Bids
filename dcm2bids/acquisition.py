@@ -30,6 +30,7 @@ class Acquisition(object):
         id=None,
         src_sidecar=None,
         sidecar_changes=None,
+        do_not_reorder_entities=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
@@ -43,6 +44,7 @@ class Acquisition(object):
         self.suffix = suffix
         self.custom_entities = custom_entities
         self.src_sidecar = src_sidecar
+        self.do_not_reorder_entities = do_not_reorder_entities
 
         if sidecar_changes is None:
             self.sidecar_changes = {}
@@ -196,11 +198,14 @@ class Acquisition(object):
                                 "compliant. Make sure you know what "
                                 "you are doing.")
 
-        if current_name != new_name:
-            self.logger.warning(
-                f"""✅ Filename was reordered according to BIDS entity table order:
-                from:   {current_name}
-                to:     {new_name}""")
+        if not self.do_not_reorder_entities:
+            if current_name != new_name:
+                self.logger.warning(
+                    f"""✅ Filename was reordered according to BIDS entity table order:
+                    from:   {current_name}
+                    to:     {new_name}""")
+        else:
+            new_name = current_name
 
         self.extraDstFile = opj(self.participant.directory,
                                 self.datatype,
@@ -241,13 +246,15 @@ class Acquisition(object):
                                 "compliant. Make sure you know what "
                                 "you are doing.")
 
-        if current_name != new_name:
-            self.logger.warning(
-                f"""✅ Filename was reordered according to BIDS entity table order:
-                from:   {current_name}
-                to:     {new_name}""")
+        self.dstFile = current_name
+        if not self.do_not_reorder_entities:
+            if current_name != new_name:
+                self.logger.warning(
+                    f"""✅ Filename was reordered according to BIDS entity table order:
+                    from:   {current_name}
+                    to:     {new_name}""")
+                self.dstFile = new_name
 
-        self.dstFile = new_name
 
     def dstSidecarData(self, idList):
         """

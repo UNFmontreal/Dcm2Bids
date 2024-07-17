@@ -571,3 +571,24 @@ def test_dcm2bids_multiple_intendedFor():
                                    "bids::" + os.path.join("sub-01",
                                                            "anat",
                                                            "sub-01_T1w.nii")]
+
+
+def test_dcm2bids_no_reorder_entities():
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test_no_reorder.json"),
+                      bids_dir.name,
+                      do_not_reorder_entities=True,
+                      auto_extract_entities=False)
+                      
+    app.run()
+
+    # existing field
+    func_json = os.path.join(bids_dir.name, "sub-01",
+                             "func",
+                             "sub-01_acq-highres_task-rest_bold.json")
+    assert os.path.exists(func_json)
