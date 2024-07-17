@@ -571,3 +571,51 @@ def test_dcm2bids_multiple_intendedFor():
                                    "bids::" + os.path.join("sub-01",
                                                            "anat",
                                                            "sub-01_T1w.nii")]
+
+
+def test_dcm2bids_no_reorder_entities():
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR, "config_test_no_reorder.json"),
+                      bids_dir.name,
+                      do_not_reorder_entities=True,
+                      auto_extract_entities=False)
+                      
+    app.run()
+
+    # existing field
+    func_json = os.path.join(bids_dir.name, "sub-01",
+                             "func",
+                             "sub-01_acq-highres_task-rest_bold.json")
+    assert os.path.exists(func_json)
+
+
+def test_dcm2bids_multiple_intendedFor():
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test_multiple_intendedfor_uri_relative.json"),
+                      bids_dir.name,
+                      auto_extract_entities=True)
+    app.run()
+
+    epi_file = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_fmap.json")
+    data = load_json(epi_file)
+
+    assert os.path.exists(epi_file)
+    assert data["IntendedFor"] == [os.path.join("localizer",
+                                                "sub-01_run-01_localizer.nii"),
+                                   os.path.join("localizer",
+                                                "sub-01_run-02_localizer.nii"),
+                                   os.path.join("localizer",
+                                                "sub-01_run-03_localizer.nii"),
+                                   os.path.join("anat",
+                                                "sub-01_T1w.nii")]

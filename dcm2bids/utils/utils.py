@@ -5,7 +5,7 @@ import csv
 import logging
 import os
 from pathlib import Path
-from subprocess import check_output
+from subprocess import Popen, PIPE
 
 
 class DEFAULT(object):
@@ -28,6 +28,7 @@ class DEFAULT(object):
     session = ""  # also Participant object
     bids_validate = False
     auto_extract_entities = False
+    do_not_reorder_entities = False
     clobber = False
     force_dcm2bids = False
     post_op = []
@@ -53,12 +54,27 @@ class DEFAULT(object):
 
     extractors = {}
 
-    auto_entities = {"anat_MEGRE": ["echo"],
+    auto_entities = {"anat_IRT1": ["inv"],
+                     "anat_MEGRE": ["echo"],
                      "anat_MESE": ["echo"],
+                     "anat_MP2RAGE": ["inv"],
+                     "anat_MPM": ["flip", "mt"],
+                     "anat_MTS": ["flip", "mt"],
+                     "anat_MTR": ["mt"],
+                     "anat_VFA": ["flip"],
                      "func_cbv": ["task"],
                      "func_bold": ["task"],
                      "func_sbref": ["task"],
-                     "fmap_epi": ["dir"]}
+                     "func_event": ["task"],
+                     "func_stim": ["task"],
+                     "func_phase": ["task"],
+                     "fmap_epi": ["dir"],
+                     "fmap_m0scan": ["dir"],
+                     "fmap_TB1DAM": ["flip"],
+                     "fmap_TB1EPI": ["echo", "flip"],
+                     "fmap_TB1SRGE": ["echo", "inv"],
+                     "perf_physio": ["task"],
+                     "perf_stim": ["task"]}
 
     compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]
@@ -72,10 +88,12 @@ class DEFAULT(object):
     case_sensitive = True
 
     # Entity table:
-    # https://bids-specification.readthedocs.io/en/v1.7.0/99-appendices/04-entity-table.html
-    entityTableKeys = ["sub", "ses", "task", "acq", "ce", "rec", "dir",
-                       "run", "mod", "echo", "flip", "inv", "mt", "part",
-                       "recording"]
+    # https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
+    entityTableKeys = ["sub", "ses", "sample", "task", "tracksys",
+                       "acq", "ce", "trc", "stain", "rec", "dir",
+                       "run", "mod", "echo", "flip", "inv", "mt",
+                       "part", "proc", "hemi", "space", "split", "recording",
+                       "chunk", "seg", "res", "den", "label", "desc"]
 
     keyWithPathsidecar_changes = ['IntendedFor', 'Sources']
 
@@ -84,7 +102,7 @@ class DEFAULT(object):
     helper_dir = "helper"
 
     # BIDS version
-    bids_version = "v1.8.0"
+    bids_version = "v1.9.0"
 
 
 def write_participants(filename, participants):
@@ -130,7 +148,11 @@ def run_shell_command(commandLine, log=True):
     if log:
         logger = logging.getLogger(__name__)
         logger.info("Running: %s", " ".join(str(item) for item in commandLine))
-    return check_output(commandLine)
+
+    pipes = Popen(commandLine, stdout=PIPE, stderr=PIPE)
+    std_out, std_err = pipes.communicate()
+
+    return std_out
 
 
 def convert_dir(dir):

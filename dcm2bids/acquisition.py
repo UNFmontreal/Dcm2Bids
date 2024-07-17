@@ -32,6 +32,7 @@ class Acquisition(object):
         src_sidecar=None,
         sidecar_changes=None,
         bids_uri=None,
+        do_not_reorder_entities=None,
         **kwargs
     ):
         self.logger = logging.getLogger(__name__)
@@ -46,6 +47,7 @@ class Acquisition(object):
         self.custom_entities = custom_entities
         self.src_sidecar = src_sidecar
         self.bids_uri = bids_uri
+        self.do_not_reorder_entities = do_not_reorder_entities
 
         if sidecar_changes is None:
             self.sidecar_changes = {}
@@ -159,8 +161,8 @@ class Acquisition(object):
         """
         Return:
             The destination filename formatted following
-            the v1.8.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
+            the v1.9.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
         """
 
         if self.custom_entities.strip() == "":
@@ -199,11 +201,14 @@ class Acquisition(object):
                                 "compliant. Make sure you know what "
                                 "you are doing.")
 
-        if current_name != new_name:
-            self.logger.warning(
-                f"""✅ Filename was reordered according to BIDS entity table order:
-                from:   {current_name}
-                to:     {new_name}""")
+        if not self.do_not_reorder_entities:
+            if current_name != new_name:
+                self.logger.warning(
+                    f"""✅ Filename was reordered according to BIDS entity table order:
+                    from:   {current_name}
+                    to:     {new_name}""")
+        else:
+            new_name = current_name
 
         self.extraDstFile = opj(self.participant.directory,
                                 self.datatype,
@@ -213,8 +218,8 @@ class Acquisition(object):
         """
         Return:
             The destination filename formatted following
-            the v1.8.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.8.0/99-appendices/04-entity-table.html
+            the v1.9.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
         """
         current_name = self.participant.prefix + self.build_suffix
         new_name = ''
@@ -244,13 +249,15 @@ class Acquisition(object):
                                 "compliant. Make sure you know what "
                                 "you are doing.")
 
-        if current_name != new_name:
-            self.logger.warning(
-                f"""✅ Filename was reordered according to BIDS entity table order:
-                from:   {current_name}
-                to:     {new_name}""")
+        self.dstFile = current_name
+        if not self.do_not_reorder_entities:
+            if current_name != new_name:
+                self.logger.warning(
+                    f"""✅ Filename was reordered according to BIDS entity table order:
+                    from:   {current_name}
+                    to:     {new_name}""")
+                self.dstFile = new_name
 
-        self.dstFile = new_name
 
     def dstSidecarData(self, idList):
         """
