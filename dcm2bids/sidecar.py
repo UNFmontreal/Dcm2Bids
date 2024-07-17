@@ -11,7 +11,8 @@ from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
-from dcm2bids.utils.utils import DEFAULT, convert_dir, combine_dict_extractors, splitext_
+from dcm2bids.utils.utils import (DEFAULT, convert_dir, combine_dict_extractors,
+                                  splitext_)
 
 compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
 
@@ -100,11 +101,13 @@ class SidecarPairing(object):
                  search_method=DEFAULT.search_method,
                  case_sensitive=DEFAULT.case_sensitive,
                  dup_method=DEFAULT.dup_method,
-                 post_op=DEFAULT.post_op):
+                 post_op=DEFAULT.post_op,
+                 bids_uri=DEFAULT.bids_uri):
         self.logger = logging.getLogger(__name__)
         self._search_method = ""
         self._dup_method = ""
         self._post_op = ""
+        self._bids_uri = ""
         self.graph = OrderedDict()
         self.acquisitions = []
         self.extractors = extractors
@@ -116,6 +119,7 @@ class SidecarPairing(object):
         self.case_sensitive = case_sensitive
         self.dup_method = dup_method
         self.post_op = post_op
+        self.bids_uri = bids_uri
 
     @property
     def search_method(self):
@@ -219,6 +223,25 @@ class SidecarPairing(object):
         except Exception:
             raise ValueError("post_op is not defined correctly. "
                              "Please check the documentation.")
+
+    @property
+    def bids_uri(self):
+        return self._bids_uri
+
+    @bids_uri.setter
+    def bids_uri(self, value):
+        """
+        Checks if the method bids_uri is using is implemented
+        Warns the user if not and fall back to default
+        """
+        if value in DEFAULT.bids_uri_choices:
+            self._bids_uri = value
+        else:
+            self.bids_uri = DEFAULT.bids_uri
+            self.logger.warning(
+                "BIDS URI methods implemented: %s", DEFAULT.bids_uri_choices)
+            self.logger.warning(f"{value} is not a bids URI method implemented.")
+            self.logger.warning(f"Falling back to default: {DEFAULT.bids_uri}.")
 
     @property
     def case_sensitive(self):
@@ -396,8 +419,10 @@ class SidecarPairing(object):
                 desc = valid_descriptions[0]
                 desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
                 acq = Acquisition(participant,
+                                  src_sidecar=sidecar,
+                                  bids_uri=self.bids_uri,
                                   do_not_reorder_entities=self.do_not_reorder_entities,
-                                  src_sidecar=sidecar, **desc)
+                                  **desc)
                 acq.setDstFile()
 
                 if acq.id:
@@ -416,6 +441,7 @@ class SidecarPairing(object):
                 self.logger.warning(f"Several Pairing  <-  {sidecarName}")
                 for desc in valid_descriptions:
                     acq = Acquisition(participant,
+                                      bids_uri=self.bids_uri,
                                       do_not_reorder_entities=self.do_not_reorder_entities,
                                       **desc)
                     self.logger.warning(f"    ->  {acq.suffix}")

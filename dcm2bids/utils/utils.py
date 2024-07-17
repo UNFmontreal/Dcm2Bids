@@ -83,6 +83,8 @@ class DEFAULT(object):
     dup_method = "run"
     runTpl = "_run-{:02d}"
     dupTpl = "_dup-{:02d}"
+    bids_uri_choices = ["URI", "relative"]
+    bids_uri = "URI"
     case_sensitive = True
 
     # Entity table:
