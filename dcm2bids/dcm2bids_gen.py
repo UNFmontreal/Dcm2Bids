@@ -62,6 +62,11 @@ class Dcm2BidsGen(object):
         self.logLevel = log_level
         self.logger = logging.getLogger(__name__)
 
+        if self.auto_extract_entities and self.do_not_reorder_entities:
+            raise ValueError("Auto extract entities is set to True and "
+                              "do not reorder entities is set to True. "
+                              "Please choose only one option.")
+
     @property
     def dicom_dirs(self):
         """List of DICOMs directories"""

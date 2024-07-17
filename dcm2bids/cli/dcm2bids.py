@@ -47,17 +47,19 @@ def _build_arg_parser():
                    default=DEFAULT.output_dir,
                    help="Output BIDS directory. [%(default)s]")
 
-    p.add_argument("--auto_extract_entities",
+    g = p.add_mutually_exclusive_group()
+    g.add_argument("--auto_extract_entities",
                    action='store_true',
                    help="If set, it will automatically try to extract entity"
                    "information [task, dir, echo] based on the suffix and datatype."
                    " [%(default)s]")
 
-    p.add_argument("--do_not_reorder_entities",
+    g.add_argument("--do_not_reorder_entities",
                    action='store_true',
                    help="If set, it will not reorder entities according to the relative "
                         "ordering indicated in the BIDS specification and use the "
-                        "order defined in custom_entities by the user."
+                        "order defined in custom_entities by the user.\n"
+                        "Cannot be used with --auto_extract_entities. "
                         " [%(default)s]")
 
     p.add_argument("--bids_validate",

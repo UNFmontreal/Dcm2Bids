@@ -460,7 +460,9 @@ class SidecarPairing(object):
 
             # Keep entities asked in custom_entities
             # If dir found in custom_entities and concatenated_matches.keys we keep it
-            if "custom_entities" in desc.keys():
+            if "custom_entities" in desc.keys() and not self.auto_extract_entities:
+                entities = desc["custom_entities"]
+            elif "custom_entities" in desc.keys():
                 entities = set(concatenated_matches.keys()).intersection(set(descWithTask["custom_entities"]))
 
                 # custom_entities not a key for extractor or auto_extract_entities

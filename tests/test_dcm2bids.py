@@ -583,7 +583,7 @@ def test_dcm2bids_no_reorder_entities():
                       os.path.join(TEST_DATA_DIR, "config_test_no_reorder.json"),
                       bids_dir.name,
                       do_not_reorder_entities=True,
-                      auto_extract_entities=True)
+                      auto_extract_entities=False)
                       
     app.run()
 
