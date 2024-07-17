@@ -1,0 +1,34 @@
+{
+    "search_method": "fnmatch",
+    "extractors": {"SeriesDescription": ["task-(?P<task>[a-zA-Z0-9]+)"]},
+    "bids_uri": "relative",
+    "descriptions": [
+        {
+            "id": "localizer",
+            "datatype": "localizer",
+            "suffix": "localizer",
+            "criteria": {
+                "SeriesDescription": "locali*"
+            }
+        },
+        {
+            "id": "T1",
+            "datatype": "anat",
+            "suffix": "T1w",
+            "criteria": {
+                "SidecarFilename": "*MPRAGE*"
+            }
+        },
+        {
+            "datatype": "fmap",
+            "suffix": "fmap",
+            "criteria": {
+                "EchoNumber": 1,
+                "EchoTime": 0.00492
+            },
+            "sidecar_changes": {
+                "IntendedFor": ["localizer", "T1"]
+            }
+        }
+    ]
+}
