@@ -15,7 +15,6 @@ from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.utils.tools import dcm2niix_version, check_latest
 from dcm2bids.utils.logger import setup_logging
-from dcm2bids.utils.args import assert_dirs_empty
 from dcm2bids.version import __version__
 
 
@@ -59,12 +58,22 @@ def main():
     """Let's go"""
     parser = _build_arg_parser()
     args = parser.parse_args()
-    out_dir = Path(args.output_dir)
-    log_file = (Path(DEFAULT.output_dir)
-                / DEFAULT.tmp_dir_name
-                / "log"
-                / f"helper_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
 
+    out_dir = Path(args.output_dir)
+    if args.output_dir != parser.get_default('output_dir'):
+        out_dir = (Path(args.output_dir)
+                   / DEFAULT.tmp_dir_name
+                   / DEFAULT.helper_dir)
+
+        log_file = (Path(args.output_dir)
+                    / DEFAULT.tmp_dir_name
+                    / "log"
+                    / f"helper_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
+    else:
+        log_file = (Path(DEFAULT.output_dir)
+                    / DEFAULT.tmp_dir_name
+                    / "log"
+                    / f"helper_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log")
     if args.nest:
         if isinstance(args.nest, str):
             log_file = Path(
@@ -93,8 +102,6 @@ def main():
 
     check_latest("dcm2bids")
     check_latest("dcm2niix")
-
-    assert_dirs_empty(parser, args, out_dir)
 
     app = Dcm2niixGen(dicom_dirs=args.dicom_dir, bids_dir=out_dir, helper=True)
 
