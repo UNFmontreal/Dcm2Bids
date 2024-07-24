@@ -29,10 +29,11 @@ nav:
       - Use main commands: how-to/use-main-commands.md
       - Create a config file: how-to/create-config-file.md
       - Use advanced commands: how-to/use-advanced-commands.md
+      - Use container images: how-to/container.md
+      - Upgrade dcm2bids: upgrade.md
       - Contribute to dcm2bids: how-to/contributing.md
   - Changelog:
     - changelog/index.md
-    - How to upgrade: upgrade.md
   - API Reference: dcm2bids
   - Code of conduct: code_of_conduct.md
 
@@ -76,6 +77,7 @@ theme:
   - content.action.view
   - content.code.annotate
   - content.code.copy
+  # - content.tabs.link
   - content.tooltips
   - navigation.footer
   - navigation.indexes

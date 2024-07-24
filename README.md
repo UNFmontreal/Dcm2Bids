@@ -48,7 +48,8 @@ Please take a look at the [documentation][dcm2bids-doc] to:
 
 * [Learn about bids][bids-spec] with some dataset [examples][bids-examples]
 * [Install dcm2bids][dcm2bids-install]
-* [Follow the tutorial][dcm2bids-tutorial]
+* [Use docker and Apptainer/Singularity][dcm2bids-container]
+* [Follow the tutorials][dcm2bids-tutorial]
 * [Seek for more advanced usage][dcm2bids-advanced]
 
 ## Issues and Questions
@@ -68,6 +69,7 @@ Before posting your question, you may want to first browse through questions tha
 [dcm2bids-install]: https://unfmontreal.github.io/Dcm2Bids/latest/get-started/install/
 [dcm2bids-tutorial]: https://unfmontreal.github.io/Dcm2Bids/latest/tutorial/first-steps/#tutorial-first-steps
 [dcm2bids-advanced]: https://unfmontreal.github.io/Dcm2Bids/latest/advanced/
+[dcm2bids-container]: https://unfmontreal.github.io/Dcm2Bids/latest/how-to/container/
 [dcm2bids-upgrade]: https://unfmontreal.github.io/Dcm2Bids/dev/upgrade/
 [dcm2bids-issues]: https://github.com/UNFmontreal/Dcm2Bids/issues
 [dcm2niix-install]: https://github.com/rordenlab/dcm2niix#install

@@ -9,6 +9,19 @@ date: 2022-04-17
 
 There are several ways to install dcm2bids.
 
+## Containers
+
+We provide a container image that includes both dcm2niix and dcm2bids as well as pydeface and the BIDS validator.
+You can install it using [Docker][docker] or [Apptainer/Singularity][apptainer].
+
+=== "Docker"
+
+    `docker pull unfmontreal/dcm2bids:latest`
+
+=== "Apptainer/Singularity"
+
+    `singularity pull dcm2bids_latest.sif docker://unfmontreal/dcm2bids:latest`
+
 ## Installing binary executables
 
 From dcm2bids>=3.0.0, we provide binaries for macOS, Windows and Linux
@@ -353,18 +366,6 @@ Voilà, you are ready to use dcm2bids or at least
 
 [Go to the How-to section](../../how-to/){ .md-button }
 
-## Containers
-
-We also provide a container image that includes both dcm2niix and dcm2bids which
-you can install using [Docker][docker] or [Apptainer/Singularity][apptainer].
-
-=== "Docker"
-
-    `docker pull unfmontreal/dcm2bids:latest`
-
-=== "Apptainer/Singularity"
-
-    `singularity pull dcm2bids_latest.sif docker://unfmontreal/dcm2bids:latest `
 
 ## Summary of the steps
 

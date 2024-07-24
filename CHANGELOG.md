@@ -95,7 +95,7 @@ Congrats 🥳
 
 We could not be more proud of the 3.0.1 dcm2bids release 😊 . We put everything we've learned from our past experiences and listen to all our users' ideas into this version.
 
-Advanced searching criterias such as extractors combined with custom entities, the ability to compare floats or the auto_extract_entities option directly accessible from dcm2bids command will make the conversion to BIDS smoother than ever and significantly reduce the complexity and the length of your configuration file especially for multi-site acquisitions.
+Advanced searching criteria such as extractors combined with custom entities, the ability to compare floats or the auto_extract_entities option directly accessible from dcm2bids command will make the conversion to BIDS smoother than ever and significantly reduce the complexity and the length of your configuration file especially for multi-site acquisitions.
 
 We highly encourage you to dive into the [documentation](https://unfmontreal.github.io/Dcm2Bids/3.0.1) since we added quite a lot of new features.
 
