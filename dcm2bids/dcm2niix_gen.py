@@ -151,8 +151,6 @@ class Dcm2niixGen(object):
                 else:
                     self.logger.debug(f"\n{output}")
                     self.logger.info("Check log file for dcm2niix output\n")
-                
-
         else:
             for dicomDir in self.dicom_dirs:
                 shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
