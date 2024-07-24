@@ -300,6 +300,10 @@ more specifically *`auto_extractors`* and *`auto_entities`* variables.
 !!! danger "You cannot use `--auto_extract_entities` in conjunction with `--do_not_reorder_entities`"
     Refer to the [Manuel ordering](../create-config-file/#custom_entities) section for more information.
 
+### `--do_not_reorder_entities`
+
+This option will keep the order of the entities as they are entered in the config file by the user in the `custom_entities` field. However, please note that this flag cannot be used in conjunction with the `--auto_extract_entities` flag.
+
 ### `--bids_validate`
 
 By default, dcm2bids will not validate your final BIDS structure. If needed, you
