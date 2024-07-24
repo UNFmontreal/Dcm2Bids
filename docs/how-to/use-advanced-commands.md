@@ -290,6 +290,9 @@ like this.
 :radioactive: You can find more detailed information by looking at the file [`dcm2bids/utils/utils.py`](../dcm2bids/utils/utils/) and
 more specifically *`auto_extractors`* and *`auto_entities`* variables.
 
+!!! danger "You cannot use `--auto_extract_entities` in conjunction with `--do_not_reorder_entities`"
+    Refer to the [Manuel ordering](../create-config-file/#custom_entities) section for more information.
+
 ### `--bids_validate`
 
 By default, dcm2bids will not validate your final BIDS structure. If needed, you

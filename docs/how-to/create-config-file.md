@@ -128,9 +128,8 @@ specifications][bids-spec].
 For a longer example of a Dcm2Bids config json, see
 [here](https://github.com/unfmontreal/Dcm2Bids/blob/master/example/config.json).
 
-Note that the different bids labels must come in a very specific order to be
-bids valid filenames. If the custom_entities fields that are entered that are in
-the wrong order, then dcm2bids will reorder them for you.
+
+Note that the different BIDS entities have a specific order to be considered valid filenames, as specified in the [Entity table of the BIDS Specification](https://bids-specification.readthedocs.io/en/stable/appendices/entity-table.html). If the custom_entities fields are entered in a different order, dcm2bids will automatically reorder them for you.
 
 For example if you entered:
 
@@ -148,6 +147,12 @@ WARNING:dcm2bids.structure:✅ Filename was reordered according to BIDS entity t
 
 custom_entities could also be combined with extractors. See
 [custom_entities combined with extractors](./use-advanced-commands.md#custom_entities-combined-with-extractors)
+
+### Manuel ordering
+
+!!! tip "`--do_not_reorder_entities`"
+
+    If you prefer to have manual control over the order of `custom_entities`, you can use the `--do_not_reorder_entities` flag. This flag allows you to keep the order defined by you, the user, in the `custom_entities` field. However, please note that this flag cannot be used in conjunction with the `--auto_extract_entities` flag.
 
 ## sidecar_changes, id and IntendedFor
 
