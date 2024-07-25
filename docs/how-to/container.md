@@ -49,7 +49,7 @@ The default command, or the point of entry, for the container is `dcm2bids`. So 
 
 ## Step 3: Run `dcm2bids_scaffold`
 
-To run `dcm2bids_scaffold`, `with singularity`, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). You need to bind the respective volumes.
+To run `dcm2bids_scaffold` with Apptainer/Singularity, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). You need to bind the respective volumes.
 
 === "Docker"
 
