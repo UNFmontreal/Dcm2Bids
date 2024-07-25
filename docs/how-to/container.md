@@ -1,6 +1,6 @@
 # dcm2bids with Docker and Apptainer / Singularity
 
-We provide a container image that includes both dcm2niix and dcm2bids as well as pydeface and the BIDS validator. You can find it on [Docker Hub/r/unfmontreal/dcm2bids](https://hub.docker.com/r/unfmontreal/dcm2bids).
+We provide a container image that includes both dcm2niix and dcm2bids as well as pydeface and the BIDS validator. You can find it on [Docker Hub](https://hub.docker.com/r/unfmontreal/dcm2bids).
 
 You can install it using [Docker](https://www.docker.com/get-started) or [Apptainer/Singularity](https://www.apptainer.org).
 
