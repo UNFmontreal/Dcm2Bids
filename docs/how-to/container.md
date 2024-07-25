@@ -71,7 +71,7 @@ To run `dcm2bids_scaffold`, `with singularity`, you need to *execute* a command 
 
 ## Step 4: Run `dcm2bids_helper`
 
-To run `dcm2bids_helper`, `with singularity`, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). To bind the respective volumes, you have two options:
+To run `dcm2bids_helper` with Apptainer/Singularity, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). To bind the respective volumes, you have two options:
 
 1. Put the input data in the same parent directory as the output directory.
 2. Specify the input data directory as a separate volume.
