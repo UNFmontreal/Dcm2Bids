@@ -49,12 +49,15 @@ The default command, or the point of entry, for the container is `dcm2bids`. So 
 
 ## Step 3: Run `dcm2bids_scaffold`
 
-To run `dcm2bids_scaffold`, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). You need to bind the respective volumes.
+To run `dcm2bids_scaffold`, `with singularity`, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). You need to bind the respective volumes.
 
 === "Docker"
 
     ```
-    docker run
+    docker run --rm -it \
+    --entrypoint /venv/bin/dcm2bids_scaffold \
+    -v /path/to/output-dir:/output \
+    unfmontreal/dcm2bids:latest -o /output/new_bids_dataset
     ```
 
 === "Apptainer/Singularity"
@@ -68,7 +71,7 @@ To run `dcm2bids_scaffold`, you need to *execute* a command instead of *running*
 
 ## Step 4: Run `dcm2bids_helper`
 
-To run `dcm2bids_helper`, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). To bind the respective volumes, you have two options:
+To run `dcm2bids_helper`, `with singularity`, you need to *execute* a command instead of *running* the pre-specified command (`dcm2bids`). To bind the respective volumes, you have two options:
 
 1. Put the input data in the same parent directory as the output directory.
 2. Specify the input data directory as a separate volume.
@@ -78,7 +81,10 @@ If you bind the newly scaffolded directory on its own, you can simply use the `-
 === "Docker"
 
     ```
-    docker run
+    docker run --rm -it --entrypoint /venv/bin/dcm2bids_helper \
+    -v /path/to/input-data:/input \
+    -v /path/to/output-dir/new_bids_dataset:/output \
+    unfmontreal/dcm2bids:latest -o /output -d /input
     ```
 
 === "Apptainer/Singularity"
@@ -96,12 +102,16 @@ You can use `run` as in Step 2 or use `exec dcm2bids` to run `dcm2bids` with the
 
 You can put input data in the same parent directory as the output directory, or you can specify the input data directory as a separate volume. You must also specify the path to the configuration file. If you use the scaffolded dataset, the config file is usually in the `code/` directory.
 
-You can also deface your data and validate your BIDS data using the `--bids_validate` flag.
+You can also [deface your data](use-advanced-commands.md#post_op) and [validate your BIDS data](use-advanced-commands.md#-bids_validate) using the `--bids_validate` flag.
 
 === "Docker"
 
     ```
-    docker run --rm -v
+    docker run --rm -it \
+    -B /path/to/input-data:/input \
+    -B /path/to/output-dir/new_bids_dataset:/output \
+    unfmontreal/dcm2bids:latest --auto_extract_entities --bids_validate \
+    -o /output -d /input -c /output/code/config.json -p 001
     ```
 
 === "Apptainer/Singularity"
