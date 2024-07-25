@@ -152,7 +152,7 @@ custom_entities could also be combined with extractors. See
 
 !!! tip "`--do_not_reorder_entities`"
 
-    If you prefer to have manual control over the order of `custom_entities`, you can use the `--do_not_reorder_entities` flag. This flag allows you to keep the order defined by you, the user, in the `custom_entities` field. However, please note that this flag cannot be used in conjunction with the `--auto_extract_entities` flag.
+    If you prefer to have manual control over the order of `custom_entities`, you can use the `--do_not_reorder_entities` flag. This flag allows you to keep the order defined by you, the user, in the `custom_entities` field. However, please note that this flag cannot be used in conjunction with the `--auto_extract_entities` flag. Also please keep in mind that a custom non-BIDS compliant entity order may preclude downstream usage of BIDS apps such as fMRIPrep.
 
 ## sidecar_changes, id and IntendedFor
 
