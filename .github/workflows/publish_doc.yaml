@@ -83,4 +83,4 @@ jobs:
           VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
           echo "Version: ${VERSION}-dev"
           mike delete dev
-          mike deploy -p dev dev -u
+          mike deploy -p dev
