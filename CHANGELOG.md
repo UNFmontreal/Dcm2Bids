@@ -8,7 +8,7 @@ Dear dcm2bids Community,
 We are excited to announce the release of dcm2bids version 3.2.0 🎉 🥳
 It comes with a couple of new features such as:
 
-- Our [new container]((https://unfmontreal.github.io/Dcm2Bids/3.2.0/how-to/container/)) allows you to enjoy the full dcm2bids experience with defacing and bids validation more easily.
+- Our [new container](https://unfmontreal.github.io/Dcm2Bids/3.2.0/how-to/container/) allows you to enjoy the full dcm2bids experience with defacing and bids validation more easily.
 - dcm2bids is now compatible with BIDS 1.9.0
 - Updated documentation
 
@@ -31,6 +31,12 @@ We would like to thank [@smeisler](https://github.com/smeisler) and the users fr
 - [BF] Fix check folder by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/313
 - Document new features + docker by @SamGuay in https://github.com/UNFmontreal/Dcm2Bids/pull/311
 - Update master to 3.2.0 by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/314
+
+## New Contributors
+* @jcohenadad made their first contribution in https://github.com/UNFmontreal/Dcm2Bids/pull/285
+* @joey-scanga made their first contribution in https://github.com/UNFmontreal/Dcm2Bids/pull/292
+
+**Full Changelog**: https://github.com/UNFmontreal/Dcm2Bids/compare/3.1.1...3.2.0
 
 ## [3.1.1](https://github.com/UNFmontreal/Dcm2Bids/releases/tag/3.1.1) - 2023-10-12
 
