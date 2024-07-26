@@ -142,9 +142,15 @@ class Dcm2niixGen(object):
                     shutil.rmtree(self.rm_tmp_dir)
                     self.logger.info("Temporary dicom directory removed.")
 
-                self.logger.debug(f"\n{output}")
-                self.logger.info("Check log file for dcm2niix output\n")
-
+                if "Warning" in output or "Error" in output:
+                    self.logger.info("Log from dcm2niix execution")
+                    if "Warning" in output:
+                        self.logger.warning(f"{output}")
+                    else:
+                        self.logger.error(f"{output}")
+                else:
+                    self.logger.debug(f"\n{output}")
+                    self.logger.info("Check log file for dcm2niix output\n")
         else:
             for dicomDir in self.dicom_dirs:
                 shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)

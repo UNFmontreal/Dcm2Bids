@@ -1,2 +1,0 @@
-BootStrap: docker
-From: unfmontreal/dcm2bids:latest

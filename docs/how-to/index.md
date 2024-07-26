@@ -16,6 +16,8 @@ title: How-to guides
 
 - [Use advanced commands](./use-advanced-commands.md)
 
+- [Use dcm2bids with Docker or Apptainer/Singularity](./container.md)
+
 ## Development and Community
 
 - [Contribute to dcm2bids](./contributing.md)

@@ -1,0 +1,16 @@
+{
+    "search_method": "fnmatch",
+    "extractors": {"SeriesDescription": ["task-(?P<task>[a-zA-Z0-9]+)"]},
+    "descriptions": [
+        {
+            "id": "func_task-rest",
+            "datatype": "func",
+            "suffix": "bold",
+            "custom_entities": ["acq-highres", "task"],
+            "criteria": {
+                "SeriesDescription": "*bold*",
+                "ImageType": ["ORIG?NAL", "PRIMARY", "M", "ND", "MOSAIC"]
+            }
+        }
+    ]
+}

@@ -11,7 +11,8 @@ from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
-from dcm2bids.utils.utils import DEFAULT, convert_dir, combine_dict_extractors, splitext_
+from dcm2bids.utils.utils import (DEFAULT, convert_dir, combine_dict_extractors,
+                                  splitext_)
 
 compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
 
@@ -96,24 +97,29 @@ class SidecarPairing(object):
                  descriptions,
                  extractors=DEFAULT.extractors,
                  auto_extractor=DEFAULT.auto_extract_entities,
+                 do_not_reorder_entities=DEFAULT.do_not_reorder_entities,
                  search_method=DEFAULT.search_method,
                  case_sensitive=DEFAULT.case_sensitive,
                  dup_method=DEFAULT.dup_method,
-                 post_op=DEFAULT.post_op):
+                 post_op=DEFAULT.post_op,
+                 bids_uri=DEFAULT.bids_uri):
         self.logger = logging.getLogger(__name__)
         self._search_method = ""
         self._dup_method = ""
         self._post_op = ""
+        self._bids_uri = ""
         self.graph = OrderedDict()
         self.acquisitions = []
         self.extractors = extractors
         self.auto_extract_entities = auto_extractor
+        self.do_not_reorder_entities = do_not_reorder_entities
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.search_method = search_method
         self.case_sensitive = case_sensitive
         self.dup_method = dup_method
         self.post_op = post_op
+        self.bids_uri = bids_uri
 
     @property
     def search_method(self):
@@ -217,6 +223,25 @@ class SidecarPairing(object):
         except Exception:
             raise ValueError("post_op is not defined correctly. "
                              "Please check the documentation.")
+
+    @property
+    def bids_uri(self):
+        return self._bids_uri
+
+    @bids_uri.setter
+    def bids_uri(self, value):
+        """
+        Checks if the method bids_uri is using is implemented
+        Warns the user if not and fall back to default
+        """
+        if value in DEFAULT.bids_uri_choices:
+            self._bids_uri = value
+        else:
+            self.bids_uri = DEFAULT.bids_uri
+            self.logger.warning(
+                "BIDS URI methods implemented: %s", DEFAULT.bids_uri_choices)
+            self.logger.warning(f"{value} is not a bids URI method implemented.")
+            self.logger.warning(f"Falling back to default: {DEFAULT.bids_uri}.")
 
     @property
     def case_sensitive(self):
@@ -393,9 +418,11 @@ class SidecarPairing(object):
             if len(valid_descriptions) == 1:
                 desc = valid_descriptions[0]
                 desc, sidecar = self.searchDcmTagEntity(sidecar, desc)
-
                 acq = Acquisition(participant,
-                                  src_sidecar=sidecar, **desc)
+                                  src_sidecar=sidecar,
+                                  bids_uri=self.bids_uri,
+                                  do_not_reorder_entities=self.do_not_reorder_entities,
+                                  **desc)
                 acq.setDstFile()
 
                 if acq.id:
@@ -414,6 +441,8 @@ class SidecarPairing(object):
                 self.logger.warning(f"Several Pairing  <-  {sidecarName}")
                 for desc in valid_descriptions:
                     acq = Acquisition(participant,
+                                      bids_uri=self.bids_uri,
+                                      do_not_reorder_entities=self.do_not_reorder_entities,
                                       **desc)
                     self.logger.warning(f"    ->  {acq.suffix}")
 
@@ -427,6 +456,7 @@ class SidecarPairing(object):
         """
         descWithTask = desc.copy()
         concatenated_matches = {}
+        keys_custom_entities = []
         entities = []
         if "custom_entities" in desc.keys() or self.auto_extract_entities:
             if 'custom_entities' in desc.keys():
@@ -435,10 +465,12 @@ class SidecarPairing(object):
             else:
                 descWithTask["custom_entities"] = []
 
+            keys_custom_entities = [curr_entity.split('-')[0] for curr_entity in descWithTask["custom_entities"]]
+
             if self.auto_extract_entities:
                 self.extractors = combine_dict_extractors(self.extractors, DEFAULT.auto_extractors)
 
-
+            # Loop to check if we find self.extractor
             for dcmTag in self.extractors:
                 if dcmTag in sidecar.data.keys():
                     dcmInfo = sidecar.data.get(dcmTag)
@@ -447,37 +479,41 @@ class SidecarPairing(object):
                         if not isinstance(dcmInfo, list):
                             if compile_regex.search(str(dcmInfo)) is not None:
                                 concatenated_matches.update(
-                                  compile_regex.search(str(dcmInfo)).groupdict())
+                                    compile_regex.search(str(dcmInfo)).groupdict())
                         else:
                             for curr_dcmInfo in dcmInfo:
                                 if compile_regex.search(curr_dcmInfo) is not None:
                                     concatenated_matches.update(
-                                      compile_regex.search(curr_dcmInfo).groupdict())
+                                        compile_regex.search(curr_dcmInfo).groupdict())
                                     break
 
             # Keep entities asked in custom_entities
             # If dir found in custom_entities and concatenated_matches.keys we keep it
-            if "custom_entities" in desc.keys():
+            if "custom_entities" in desc.keys() and not self.auto_extract_entities:
+                entities = desc["custom_entities"]
+            elif "custom_entities" in desc.keys():
                 entities = set(concatenated_matches.keys()).intersection(set(descWithTask["custom_entities"]))
 
                 # custom_entities not a key for extractor or auto_extract_entities
                 complete_entities = [ent for ent in descWithTask["custom_entities"] if '-' in ent]
                 entities = entities.union(set(complete_entities))
-
             if self.auto_extract_entities:
                 auto_acq = '_'.join([descWithTask['datatype'], descWithTask["suffix"]])
                 if auto_acq in DEFAULT.auto_entities:
                     # Check if these auto entities have been found before merging
                     auto_entities = set(concatenated_matches.keys()).intersection(set(DEFAULT.auto_entities[auto_acq]))
+
                     left_auto_entities = auto_entities.symmetric_difference(set(DEFAULT.auto_entities[auto_acq]))
+                    left_auto_entities = left_auto_entities.difference(keys_custom_entities)
+
                     if left_auto_entities:
-                        self.logger.warning(f"{left_auto_entities} have not been found for datatype '{descWithTask['datatype']}' "
+                        self.logger.warning(f"Entities {left_auto_entities} have not been found "
+                                            f"for datatype '{descWithTask['datatype']}' "
                                             f"and suffix '{descWithTask['suffix']}'.")
-                    
+
                     entities = list(entities) + list(auto_entities)
                     entities = list(set(entities))
                     descWithTask["custom_entities"] = entities
-
 
             for curr_entity in entities:
                 if curr_entity in concatenated_matches.keys():

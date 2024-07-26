@@ -28,12 +28,12 @@ def assert_dirs_empty(parser, args, required):
                         "could be overwritten or deleted.\nRerun the command "
                         "with --force option to overwrite "
                         "existing output files.")
-            else:
-                for child in path.iterdir():
-                    if child.is_file():
-                        os.remove(child)
-                    elif child.is_dir():
-                        shutil.rmtree(child)
+                else:
+                    for child in path.iterdir():
+                        if child.is_file():
+                            os.remove(child)
+                        elif child.is_dir():
+                            shutil.rmtree(child)
 
     if isinstance(required, str):
         required = Path(required)

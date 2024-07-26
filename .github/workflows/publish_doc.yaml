@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - master
+      - dev
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
   release:
@@ -22,7 +23,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -50,6 +51,7 @@ jobs:
           dcm2bids -h > docs_helper/help.txt
           dcm2bids_helper -h > docs_helper/helper.txt
           dcm2bids_scaffold -h > docs_helper/help_scaffold.txt
+          echo "export VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')" > docs_helper/version.txt
 
       - name: Set git credentials
         run: |
@@ -76,8 +78,9 @@ jobs:
           mike deploy -p ${{ github.ref_name }}
 
       - name: Deploy dev version
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/dev' }}
         run: |
           VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
-          echo "Version: $VERSION"
-          mike deploy -p $VERSION dev -u
+          echo "Version: ${VERSION}-dev"
+          mike delete dev
+          mike deploy -p dev
