@@ -8,7 +8,7 @@ Dear dcm2bids Community,
 We are excited to announce the release of dcm2bids version 3.2.0 🎉 🥳
 It comes with a couple of new features such as:
 
-- With our [new container]((https://unfmontreal.github.io/Dcm2Bids/3.2.0/how-to/container/)) you can enjoy the full dcm2bids experience with defacing and bids validation more easily.
+- Our [new container]((https://unfmontreal.github.io/Dcm2Bids/3.2.0/how-to/container/)) allows you to enjoy the full dcm2bids experience with defacing and bids validation more easily.
 - dcm2bids is now compatible with BIDS 1.9.0
 - Updated documentation
 
