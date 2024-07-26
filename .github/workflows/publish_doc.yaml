@@ -82,4 +82,4 @@ jobs:
         run: |
           VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
           echo "Version: $VERSION"
-          mike deploy -p $VERSION dev -u
+          mike deploy -p dev dev -u
