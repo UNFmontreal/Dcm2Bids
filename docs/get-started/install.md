@@ -16,11 +16,17 @@ You can install it using [Docker][docker] or [Apptainer/Singularity][apptainer].
 
 === "Docker"
 
-    `docker pull unfmontreal/dcm2bids:${VERSION}`
+    ```
+    --8<-- "docs_helper/version.txt"
+    docker pull unfmontreal/dcm2bids:${VERSION}
+    ```
 
 === "Apptainer/Singularity"
 
-    `apptainer pull dcm2bids_${VERSION}.sif docker://unfmontreal/dcm2bids:${VERSION}`
+    ```
+    --8<-- "docs_helper/version.txt"
+    apptainer pull dcm2bids.sif docker://unfmontreal/dcm2bids:${VERSION}
+    ```
 
 ## Installing binary executables
 

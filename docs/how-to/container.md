@@ -19,15 +19,19 @@ Before you begin, make sure you have at least one of the following installed:
 
 To start, you can either pull the dcm2bids image from the Docker Hub repository or [build it from the Dockerfile in the repository](https://github.com/UNFmontreal/Dcm2Bids/blob/dev/Dockerfile).:
 
+ 
+
 === "Docker"
 
     ```
+    --8<-- "docs_helper/version.txt"
     docker pull unfmontreal/dcm2bids:${VERSION}
     ```
 
 === "Apptainer/Singularity"
 
     ```
+    --8<-- "docs_helper/version.txt"
     apptainer pull dcm2bids_${VERSION}.sif docker://unfmontreal/dcm2bids:${VERSION}
     ```
 
@@ -38,7 +42,7 @@ The default command, or the point of entry, for the container is `dcm2bids`. So 
 === "Docker"
 
     ```
-    docker run --rm -it unfmontreal/dcm2bids:latest --help
+    docker run --rm -it unfmontreal/dcm2bids:${VERSION} --help
     ```
 
 === "Apptainer/Singularity"
