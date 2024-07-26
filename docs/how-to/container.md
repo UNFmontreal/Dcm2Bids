@@ -28,7 +28,7 @@ To start, you can either pull the dcm2bids image from the Docker Hub repository 
 === "Apptainer/Singularity"
 
     ```
-    apptainer pull dcm2bids.sif docker://unfmontreal/dcm2bids:latest
+    apptainer pull dcm2bids_${VERSION}.sif docker://unfmontreal/dcm2bids:${VERSION}
     ```
 
 ## Step 2: Test dcm2bids
@@ -44,7 +44,7 @@ The default command, or the point of entry, for the container is `dcm2bids`. So 
 === "Apptainer/Singularity"
 
     ```
-    apptainer run dcm2bids.sif --help
+    apptainer run -e --containall dcm2bids.sif --help
     ```
 
 ## Step 3: Run `dcm2bids_scaffold`
@@ -56,16 +56,17 @@ To run `dcm2bids_scaffold` with Apptainer/Singularity, you need to *execute* a c
     ```
     docker run --rm -it \
     --entrypoint /venv/bin/dcm2bids_scaffold \
-    -v /path/to/output-dir:/output \
-    unfmontreal/dcm2bids:latest -o /output/new_bids_dataset
+    -v /path/to/bids:/bids \
+    unfmontreal/dcm2bids:${VERSION} -o /bids/new_scaffold
     ```
 
 === "Apptainer/Singularity"
 
     ```
-    singularity exec \
-    -B /path/to/output-dir:/output \
-    dcm2bids.sif dcm2bids_scaffold -o /output/new_bids_dataset
+    apptainer exec \
+    -e --containall \
+    -B /path/to/bids:/bids \
+    dcm2bids.sif dcm2bids_scaffold -o /bids/new_scaffold
     ```
 
 
@@ -76,24 +77,24 @@ To run `dcm2bids_helper` with Apptainer/Singularity, you need to *execute* a com
 1. Put the input data in the same parent directory as the output directory.
 2. Specify the input data directory as a separate volume.
 
-If you bind the newly scaffolded directory on its own, you can simply use the `-o /output` instead of having to specify the full path to the scaffolded directory. Same goes for the input data directory, if the input data directory is one subject, you can bind it directly to `/input`. If it is the parent directory of multiple subjects, you can bind it to `/input` and specify the specific subject directory (e.g, `-d /input/subject-01`).
+If you bind the newly scaffolded directory on its own, you can simply use the `-o /bids` instead of having to specify the full path to the scaffolded directory. Same goes for the input data directory, if the input data directory is one subject, you can bind it directly to `/dicoms`. If it is the parent directory of multiple subjects, you can bind it to `/dicoms` and specify the specific subject directory (e.g, `-d /dicoms/subject-01`).
 
 === "Docker"
 
     ```
     docker run --rm -it --entrypoint /venv/bin/dcm2bids_helper \
-    -v /path/to/input-data:/input \
-    -v /path/to/output-dir/new_bids_dataset:/output \
-    unfmontreal/dcm2bids:latest -o /output -d /input
+    -v /path/to/dicoms:/dicoms:ro \
+    -v /path/to/bids/new_scaffold:/bids \
+    unfmontreal/dcm2bids:${VERSION} -o /bids -d /dicoms
     ```
 
 === "Apptainer/Singularity"
 
     ```
-    singularity exec \
-    -B /path/to/input-data:/input \
-    -B /path/to/output-dir/new_bids_dataset:/output \
-    dcm2bids.sif dcm2bids_helper -o /output -d /input
+    apptainer exec \
+    -B /path/to/dicoms:/dicoms:ro \
+    -B /path/to/bids/new_scaffold:/bids \
+    dcm2bids.sif dcm2bids_helper -o /bids -d /dicoms
     ```
 
 ## Step 5: Run `dcm2bids`
@@ -108,18 +109,20 @@ You can also [deface your data](use-advanced-commands.md#post_op) and [validate 
 
     ```
     docker run --rm -it \
-    -B /path/to/input-data:/input \
-    -B /path/to/output-dir/new_bids_dataset:/output \
-    unfmontreal/dcm2bids:latest --auto_extract_entities --bids_validate \
-    -o /output -d /input -c /output/code/config.json -p 001
+    -v /path/to/dicoms:/dicoms:ro \
+    -v /path/to/config.json:/config.json:ro \
+    -v /path/to/bids/new_scaffold:/bids \
+    unfmontreal/dcm2bids:${VERSION} --auto_extract_entities --bids_validate \
+    -o /bids -d /dicoms -c /config.json -p 001
     ```
 
 === "Apptainer/Singularity"
 
     ```
-    singularity run \
-    -B /path/to/input-data:/input \
-    -B /path/to/output-dir/new_bids_dataset:/output \
+    apptainer run \
+    -B /path/to/dicoms:/dicoms:ro \
+    -B /path/to/config.json:/config.json:ro \
+    -B /path/to/bids/new_scaffold:/bids \
     dcm2bids.sif --auto_extract_entities --bids_validate \
-    -o /output -d /input -c /output/code/config.json -p 001
+    -o /bids -d /dicoms -c /config.json -p 001
     ```
