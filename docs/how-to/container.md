@@ -22,7 +22,7 @@ To start, you can either pull the dcm2bids image from the Docker Hub repository 
 === "Docker"
 
     ```
-    docker pull unfmontreal/dcm2bids:latest
+    docker pull unfmontreal/dcm2bids:${VERSION}
     ```
 
 === "Apptainer/Singularity"

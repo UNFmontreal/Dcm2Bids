@@ -16,7 +16,7 @@ You can install it using [Docker][docker] or [Apptainer/Singularity][apptainer].
 
 === "Docker"
 
-    `docker pull unfmontreal/dcm2bids:latest`
+    `docker pull unfmontreal/dcm2bids:${VERSION}`
 
 === "Apptainer/Singularity"
 
