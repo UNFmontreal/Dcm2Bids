@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-11, ubuntu-20.04, windows-latest] # not using latest based on https://github.com/Nuitka/Nuitka/issues/2240#issuecomment-1564030218
+        os: [macos-13, ubuntu-20.04, windows-latest] # not using latest based on https://github.com/Nuitka/Nuitka/issues/2240#issuecomment-1564030218
 
     runs-on: ${{ matrix.os }}
 
