@@ -1,5 +1,37 @@
 # CHANGELOG
 
+
+## [3.2.0](https://github.com/UNFmontreal/Dcm2Bids/releases/tag/3.2.0) - 2024-07-26
+
+Dear dcm2bids Community,
+
+We are excited to announce the release of dcm2bids version 3.2.0 🎉 🥳
+It comes with a couple of new features such as:
+
+- Our [new container]((https://unfmontreal.github.io/Dcm2Bids/3.2.0/how-to/container/)) allows you to enjoy the full dcm2bids experience with defacing and bids validation more easily.
+- dcm2bids is now compatible with BIDS 1.9.0
+- Updated documentation
+
+Thank you
+Arnaud and Sam
+
+We would like to thank [@smeisler](https://github.com/smeisler) and the users from [neurostars](https://neurostars.org/tag/dcm2bids) for their feedbacks.
+
+## What's Changed
+- Fixed Nick's name by @jcohenadad in https://github.com/UNFmontreal/Dcm2Bids/pull/285
+- Fetch all descriptions: id list by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/283
+- [BF] Replace macos-latest with macos-13 by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/299
+- Changed 'there' to 'their' by @joey-scanga in https://github.com/UNFmontreal/Dcm2Bids/pull/292
+- Update to BIDS 1.9 by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/301
+- [ENH] Allow disable automatic reorder entities by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/303
+- Update dev to match master' state by @SamGuay in https://github.com/UNFmontreal/Dcm2Bids/pull/306
+- [ENH] Allow user to use relative path for bids uri by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/304
+- Update GHA to use setup-python@v5 instead of v1 by @SamGuay in https://github.com/UNFmontreal/Dcm2Bids/pull/309
+- [BF] Fix output log and output folder with dcm2bids_helper by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/312
+- [BF] Fix check folder by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/313
+- Document new features + docker by @SamGuay in https://github.com/UNFmontreal/Dcm2Bids/pull/311
+- Update master to 3.2.0 by @arnaudbore in https://github.com/UNFmontreal/Dcm2Bids/pull/314
+
 ## [3.1.1](https://github.com/UNFmontreal/Dcm2Bids/releases/tag/3.1.1) - 2023-10-12
 
 [](https://github.com/UNFmontreal/Dcm2Bids/releases/edit/3.1.1)
