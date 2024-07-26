@@ -20,7 +20,7 @@ You can install it using [Docker][docker] or [Apptainer/Singularity][apptainer].
 
 === "Apptainer/Singularity"
 
-    `singularity pull dcm2bids_latest.sif docker://unfmontreal/dcm2bids:latest`
+    `apptainer pull dcm2bids_${VERSION}.sif docker://unfmontreal/dcm2bids:${VERSION}`
 
 ## Installing binary executables
 
