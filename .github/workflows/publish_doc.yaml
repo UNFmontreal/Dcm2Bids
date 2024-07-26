@@ -81,5 +81,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/dev' }}
         run: |
           VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
-          echo "Version: $VERSION"
+          echo "Version: ${VERSION}-dev"
+          mike delete dev
           mike deploy -p dev dev -u
