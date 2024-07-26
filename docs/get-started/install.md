@@ -9,6 +9,25 @@ date: 2022-04-17
 
 There are several ways to install dcm2bids.
 
+## Containers
+
+We provide a container image that includes both dcm2niix and dcm2bids as well as pydeface and the BIDS validator.
+You can install it using [Docker][docker] or [Apptainer/Singularity][apptainer].
+
+=== "Docker"
+
+    ```
+    --8<-- "docs_helper/version.txt"
+    docker pull unfmontreal/dcm2bids:${VERSION}
+    ```
+
+=== "Apptainer/Singularity"
+
+    ```
+    --8<-- "docs_helper/version.txt"
+    apptainer pull dcm2bids.sif docker://unfmontreal/dcm2bids:${VERSION}
+    ```
+
 ## Installing binary executables
 
 From dcm2bids>=3.0.0, we provide binaries for macOS, Windows and Linux
@@ -104,7 +123,7 @@ dcm2bids.
 ### Python
 
 As dcm2bids is a Python package, the first prerequisite is that Python must be
-installed on the machine you will use dcm2bids. You will need **Python 3.7 or
+installed on the machine you will use dcm2bids. You will need **Python 3.8 or
 above** to run dcm2bids properly.
 
 If you are unsure what version(s) of Python is available on your machine, you
@@ -129,7 +148,7 @@ line.
     >>> exit()
     ```
 
-If your system-wide version of Python is lower 3.7, it is okay. We will make
+If your system-wide version of Python is lower 3.8, it is okay. We will make
 sure to use a higher version in the isolated environment that will be created
 for dcm2bids. The important part is to verify that Python is installed.
 
@@ -163,7 +182,7 @@ the next section.
 
 We recommend to install all the dependencies at once when installing dcm2bids on
 a machine or server. As mentioned above the minimal installation requires only
-dcm2bids, dcm2niix and Python >= 3.7. For ease of use and to make sure we have a
+dcm2bids, dcm2niix and Python >= 3.8. For ease of use and to make sure we have a
 reproducible environment, we recommend to use a dedicated environment through
 [conda][conda] or, for those who have it installed, [Anaconda][anaconda]. Note
 that you **don't need** to use specifically them to use dcm2bids, but it will
@@ -260,7 +279,7 @@ name: dcm2bids
 channels:
   - conda-forge
 dependencies:
-  - python>=3.7
+  - python>=3.8
   - dcm2niix
   - dcm2bids
 ```
@@ -277,7 +296,7 @@ In short, here's what the fields mean:
   environment. If you are creating an environment for your analysis project,
   this is where you would list other dependencies such as `nilearn`, `pandas`,
   and especially as `pip` since you don't want to use the pip outside of your
-  environment Note that we specify `python>=3.7` to make sure the requirement is
+  environment Note that we specify `python>=3.8` to make sure the requirement is
   satisfied for dcm2bids as the newer version of dcm2bids may face issue with
   Python 3.6 and below.
 
@@ -353,18 +372,6 @@ Voilà, you are ready to use dcm2bids or at least
 
 [Go to the How-to section](../../how-to/){ .md-button }
 
-## Containers
-
-We also provide a container image that includes both dcm2niix and dcm2bids which
-you can install using [Docker][docker] or [Apptainer/Singularity][apptainer].
-
-=== "Docker"
-
-    `docker pull unfmontreal/dcm2bids:latest`
-
-=== "Apptainer/Singularity"
-
-    `singularity pull dcm2bids_latest.sif docker://unfmontreal/dcm2bids:latest `
 
 ## Summary of the steps
 
@@ -384,7 +391,7 @@ containers:
             channels:
                 - conda-forge
             dependencies:
-                - python>=3.7
+                - python>=3.8
                 - dcm2niix
                 - dcm2bids
 

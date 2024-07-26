@@ -58,7 +58,7 @@ field.
 By using the same keys in custom_entities and if found, it will add this new
 entities directly into the final filename. custom_entities can be a list that
 combined extractor keys and regular entities. If key is `task` it will
-automatically add the field "TaskName" inside the sidecase file.
+automatically add the field "TaskName" inside the sidecar file.
 
 ### `search_method`
 
@@ -72,11 +72,11 @@ to match criteria.
 
 default: `"dup_method": "run"`
 
-run is the default behavior and will add '\_run-' to the customEntities of the
+run is the default behavior and will add `_run-` to the custom_entities of the
 acquisition if it finds duplicate destination roots.
 
 dup will keep the last duplicate description and put `_dup-`to the
-customEntities of the other acquisitions. This behavior is a
+custom_entities of the other acquisitions. This behavior is a
 [heudiconv](https://heudiconv.readthedocs.io/en/latest/changes.html) inspired
 feature.
 
@@ -86,6 +86,13 @@ default: `"case_sensitive": "true"`
 
 If false, comparisons between strings/lists will be not case sensitive. It's
 only disabled when used with `"search_method": "fnmatch"`.
+
+### `bids_uri`
+
+default: `"bids_uri": "URI"`
+option: `"bids_uri": "relative"`
+
+Using `"bids_uri": "relative"` triggers the old behavior of dcm2bids (v2.1.9) that provides the path relative to within the subject directory without the BIDS URI (e.g., `bids::sub-01/`). This option has been brought back for compatibility reasons, especially for [fMRIprep users (pre v24.0.0)](https://fmriprep.org/en/latest/changes.html#june-17-2024).
 
 ### `post_op`
 
@@ -289,6 +296,13 @@ like this.
    
 :radioactive: You can find more detailed information by looking at the file [`dcm2bids/utils/utils.py`](../dcm2bids/utils/utils/) and
 more specifically *`auto_extractors`* and *`auto_entities`* variables.
+
+!!! danger "You cannot use `--auto_extract_entities` in conjunction with `--do_not_reorder_entities`"
+    Refer to the [Manuel ordering](../create-config-file/#custom_entities) section for more information.
+
+### `--do_not_reorder_entities`
+
+This option will keep the order of the entities as they are entered in the config file by the user in the `custom_entities` field. However, please note that this flag cannot be used in conjunction with the `--auto_extract_entities` flag.
 
 ### `--bids_validate`
 
