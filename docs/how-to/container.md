@@ -92,6 +92,7 @@ If you bind the newly scaffolded directory on its own, you can simply use the `-
 
     ```
     apptainer exec \
+    -e --containall \
     -B /path/to/dicoms:/dicoms:ro \
     -B /path/to/bids/new_scaffold:/bids \
     dcm2bids.sif dcm2bids_helper -o /bids -d /dicoms
@@ -120,6 +121,7 @@ You can also [deface your data](use-advanced-commands.md#post_op) and [validate 
 
     ```
     apptainer run \
+    -e --containall \
     -B /path/to/dicoms:/dicoms:ro \
     -B /path/to/config.json:/config.json:ro \
     -B /path/to/bids/new_scaffold:/bids \
