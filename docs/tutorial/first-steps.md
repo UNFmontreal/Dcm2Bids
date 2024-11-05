@@ -827,9 +827,9 @@ task name:
       "custom_entities": "task-rest",
       "criteria": {
         "SeriesDescription": "Axial EPI-FMRI (Interleaved I to S)*"
+      },
       "sidecar_changes": {
         "TaskName": "rest"
-      }
       }
     }
   ]
