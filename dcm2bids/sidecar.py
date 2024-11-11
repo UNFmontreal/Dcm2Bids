@@ -396,8 +396,10 @@ class SidecarPairing(object):
 
             elif isinstance(name, list):
                 result.append(compare_list(name, pattern))
-            else:
+            elif name:
                 result.append(compare(name, pattern))
+            else:
+                result.append(False)
 
         return all(result)
 
