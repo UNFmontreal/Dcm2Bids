@@ -121,7 +121,8 @@ def main():
     logger.info("Checking for software update")
 
     check_latest("dcm2bids")
-    check_latest("dcm2niix")
+    if not args.skip_dcm2niix:
+        check_latest("dcm2niix")
 
     logger.info(f"participant: {participant.name}")
     if participant.session:
