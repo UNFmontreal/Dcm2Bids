@@ -396,7 +396,7 @@ class SidecarPairing(object):
 
             elif isinstance(name, list):
                 result.append(compare_list(name, pattern))
-            else:
+            elif name:
                 result.append(compare(name, pattern))
 
         return all(result)
