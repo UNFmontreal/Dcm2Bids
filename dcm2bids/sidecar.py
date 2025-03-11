@@ -358,7 +358,7 @@ class SidecarPairing(object):
                     if len(sub_pattern) != 1:
                         raise ValueError(f"List for key {comparison} "
                                          "should have only one value. "
-                                         "Error val: {sub_pattern}")
+                                         f"Error val: {sub_pattern}")
 
                     sub_pattern = float(sub_pattern[0])
                 else:
