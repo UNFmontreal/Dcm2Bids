@@ -26,8 +26,10 @@ def _build_arg_parser():
 
     p.add_argument("-d", "--dicom_dir",
                    required=True, nargs="+",
-                   help="DICOM directory(ies) or archive(s) (" +
-                        DEFAULT.arch_extensions + ").")
+                   help="Path to one or more directories or archives"
+                        f" ({DEFAULT.arch_extensions}) containing the DICOM files for a"
+                        " single participant and session to be converted to BIDS."
+                    )
 
     p.add_argument("-p", "--participant",
                    required=True,
