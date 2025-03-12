@@ -55,7 +55,8 @@ def _build_arg_parser():
     p.add_argument("-o", "--output_dir",
                    required=False,
                    default=DEFAULT.output_dir,
-                   help="Output BIDS directory. [%(default)s]")
+                   help="Output BIDS directory. Defaults to the current working directory."
+                )
 
     g = p.add_mutually_exclusive_group()
     g.add_argument("--auto_extract_entities",
