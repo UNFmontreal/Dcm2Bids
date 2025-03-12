@@ -63,7 +63,7 @@ def _build_arg_parser():
                    action='store_true',
                    help="If set, it will automatically try to extract entity"
                    "information [task, dir, echo] based on the suffix and datatype."
-                   " [%(default)s]")
+                   " Default is [%(default)s]")
 
     g.add_argument("--do_not_reorder_entities",
                    action='store_true',
@@ -71,7 +71,7 @@ def _build_arg_parser():
                         "ordering indicated in the BIDS specification and use the "
                         "order defined in custom_entities by the user.\n"
                         "Cannot be used with --auto_extract_entities. "
-                        " [%(default)s]")
+                        " Default is [%(default)s]")
 
     p.add_argument("--bids_validate",
                    action='store_true',
@@ -98,7 +98,9 @@ def _build_arg_parser():
                    required=False,
                    default=DEFAULT.cli_log_level,
                    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                   help="Set logging level to the console. [%(default)s]")
+                   help="Set logging level to the console." 
+                        " The default level is [%(default)s]"
+                )
 
     p.add_argument("-v", "--version",
                    action="version",
