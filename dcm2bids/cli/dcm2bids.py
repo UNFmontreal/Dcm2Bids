@@ -40,7 +40,10 @@ def _build_arg_parser():
     p.add_argument("-s", "--session",
                    required=False,
                    default=DEFAULT.cli_session,
-                   help="Session ID. [%(default)s]")
+                   help="Session ID to be used in the BIDS dataset filenames"
+                        " (e.g. ses-<SESSION>). If not provided, no session"
+                        " entity will be added to the BIDS filenames."
+                   )
 
     p.add_argument("-c", "--config",
                    required=True,
