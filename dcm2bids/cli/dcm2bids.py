@@ -47,7 +47,10 @@ def _build_arg_parser():
 
     p.add_argument("-c", "--config",
                    required=True,
-                   help="JSON configuration file (see example/config.json).")
+                   help="JSON configuration that specifies additional parameters for"
+                        " BIDS conversion. See the documentation for more information:"
+                        f" \nhttps://unfmontreal.github.io/Dcm2Bids/{__version__}/how-to/create-config-file/"  # noqa: E501
+                )
 
     p.add_argument("-o", "--output_dir",
                    required=False,
