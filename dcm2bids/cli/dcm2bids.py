@@ -33,7 +33,9 @@ def _build_arg_parser():
 
     p.add_argument("-p", "--participant",
                    required=True,
-                   help="Participant ID.")
+                   help="Participant ID to be used in the BIDS dataset filenames"
+                        " (e.g. sub-<PARTICIPANT>)."
+    )
 
     p.add_argument("-s", "--session",
                    required=False,
