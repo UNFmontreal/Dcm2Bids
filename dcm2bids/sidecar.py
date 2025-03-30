@@ -358,7 +358,7 @@ class SidecarPairing(object):
                     if len(sub_pattern) != 1:
                         raise ValueError(f"List for key {comparison} "
                                          "should have only one value. "
-                                         "Error val: {sub_pattern}")
+                                         f"Error val: {sub_pattern}")
 
                     sub_pattern = float(sub_pattern[0])
                 else:
@@ -384,9 +384,11 @@ class SidecarPairing(object):
             if isinstance(pattern, dict):
                 if len(pattern.keys()) == 1:
                     if "any" in pattern.keys():
-                        result.append(compare_complex(name, pattern))
+                        is_match = compare_complex(name, pattern)
+                        result.append(is_match)
                     elif list(pattern.keys())[0] in compare_float_keys:
-                        result.append(compare_float(name, pattern))
+                        is_match = compare_float(name, pattern)
+                        result.append(is_match)
                     else:
                         self.logger.warning(f"This key {list(pattern.keys())[0]} "
                                             "is not allowed.")
@@ -395,9 +397,13 @@ class SidecarPairing(object):
                                      "using only one key.")
 
             elif isinstance(name, list):
-                result.append(compare_list(name, pattern))
+                is_match = compare_list(name, pattern)
+                result.append(is_match)
             else:
-                result.append(compare(name, pattern))
+                is_match = compare(name, pattern)
+                result.append(is_match)
+            if not is_match:
+                self.logger.debug(f"Criteria not met for {tag}: {name} != {pattern}")
 
         return all(result)
 
