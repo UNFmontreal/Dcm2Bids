@@ -299,9 +299,18 @@ an intuitive organization (with sub-folders for sessions, as necessary).
     === "Commands"
 
         1. Download the zipped file from <https://github.com/neurolabusc/dcm_qa_nih/archive/refs/heads/master.zip>.
-        ```sh
-        wget -O dcm_qa_nih-master.zip https://github.com/neurolabusc/dcm_qa_nih/archive/refs/heads/master.zip
-        ```
+        === "Linux"
+            ```sh
+            wget -O dcm_qa_nih-master.zip https://github.com/neurolabusc/dcm_qa_nih/archive/refs/heads/master.zip
+            ```
+        === "Mac"
+            ```sh
+            curl -L -o dcm_qa_nih-master.zip https://github.com/neurolabusc/dcm_qa_nih/archive/refs/heads/master.zip
+            ```
+        === "Windows"
+            ```sh
+            curl -L -o dcm_qa_nih-master.zip https://github.com/neurolabusc/dcm_qa_nih/archive/refs/heads/master.zip
+            ```
 
         2. Extract/unzip the zipped file into **sourcedata/**.
         ```sh
