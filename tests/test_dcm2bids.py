@@ -478,7 +478,6 @@ def test_dcm2bids_sidecar():
                                   "localizer",
                                   "sub-01_ses-dev_run-01_localizer.json"))
     assert data["ProcedureStepDescription"] == "Modified by dcm2bids"
-    assert 'AcquisitionNumber' not in data.keys()
 
     # new field
     data = load_json(os.path.join(bids_dir.name,
@@ -487,6 +486,7 @@ def test_dcm2bids_sidecar():
                                   "anat",
                                   "sub-01_ses-dev_T1w.json"))
     assert data["new_field"] == "new value"
+    assert 'AcquisitionNumber' not in list(data.keys())
 
     # boolean value
     data = load_json(os.path.join(bids_dir.name,

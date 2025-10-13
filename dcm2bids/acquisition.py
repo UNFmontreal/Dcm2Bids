@@ -310,9 +310,8 @@ class Acquisition(object):
 
             if len(flat_value_list) == 1:
                 data[key] = flat_value_list[0]
-            else:
+            elif flat_value_list:
                 data[key] = flat_value_list
-
         return data
 
     @staticmethod
