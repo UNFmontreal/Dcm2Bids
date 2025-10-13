@@ -284,6 +284,8 @@ class Acquisition(object):
                                         f"will be made "
                                         f"for json file '{self.dstFile}.json' "
                                         "with this id.")
+                    elif isinstance(val, str) and not val:
+                        data.pop(key, None)
                     else:
                         values.append(idList.get(val, val))
                         if values[-1] != val:

@@ -18,7 +18,8 @@
           "SidecarFilename": "*MPRAGE*"
         },
         "sidecar_changes": {
-          "new_field": "new value"
+          "new_field": "new value",
+          "AcquisitionNumber": ""
         }
       },
       {
