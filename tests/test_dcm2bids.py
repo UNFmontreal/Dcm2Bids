@@ -486,6 +486,7 @@ def test_dcm2bids_sidecar():
                                   "anat",
                                   "sub-01_ses-dev_T1w.json"))
     assert data["new_field"] == "new value"
+    assert 'AcquisitionNumber' not in list(data.keys())
 
     # boolean value
     data = load_json(os.path.join(bids_dir.name,
