@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 from subprocess import Popen, PIPE
 
+from dcm2bids.version import __version__
 
 class DEFAULT(object):
     """ Default values of the package"""
@@ -14,7 +15,7 @@ class DEFAULT(object):
     doc = "Documentation at https://unfmontreal.github.io/Dcm2Bids/"
 
     link_bids_validator = "https://github.com/bids-standard/bids-validator#quickstart"
-    link_doc_intended_for = "https://unfmontreal.github.io/Dcm2Bids/docs/tutorial/first-steps/#populating-the-config-file"
+    link_doc_intended_for = f"https://unfmontreal.github.io/Dcm2Bids/{__version__}/tutorial/first-steps/#populating-the-config-file"  # noqa: E501
 
     # cli dcm2bids
     cli_session = ""
