@@ -1,4 +1,4 @@
-pybids>=0.9.5
+pybids>=0.21.0
 pytest>=5.3.1
 pytest-black>=0.3.7
 pytest-cov>=2.8.1
