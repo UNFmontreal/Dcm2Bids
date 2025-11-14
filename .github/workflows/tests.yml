@@ -10,7 +10,7 @@ jobs:
       matrix:
         # https://help.github.com/articles/virtual-environments-for-github-actions
         platform:
-          - ubuntu-latest  # ubuntu-22.04
+          - ubuntu-22.04  # ubuntu-22.04
           - macos-13  # macOS-13 -
           - windows-latest  # windows-2022
         python-version: ["3.10", "3.11", "3.12", "3.13"]

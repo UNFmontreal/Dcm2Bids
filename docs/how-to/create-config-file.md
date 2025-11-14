@@ -56,7 +56,8 @@
       },
       "sidecar_changes": {
         "TaskName": "learning",
-        "IntendedFor": "id_task_learning"
+        "IntendedFor": "id_task_learning",
+        ""
       }
     }
   ]
@@ -156,7 +157,7 @@ custom_entities could also be combined with extractors. See
 
 ## sidecar_changes, id and IntendedFor
 
-Optional field to change or add information in a sidecar.
+Optional field to change, delete or add information in a sidecar.
 
 :warning: `IntendedFor` is now considered a sidecar_changes.
 
@@ -165,10 +166,13 @@ Example:
 ```json
 {
   "sidecar_changes": {
+    "AcquisitionDuration": "",
     "IntendedFor": "task_rest"
   }
 }
 ```
+
+If you want to delete a key in a sidecar you can set it to an empty string.
 
 If you want to add an `IntendedFor` entry or any extra sidecar linked to a
 specific file, you will need to set an id to the corresponding description and
