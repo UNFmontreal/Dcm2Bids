@@ -297,7 +297,6 @@ class SidecarPairing(object):
                 if not self.case_sensitive:
                     name = name.lower()
                     pattern = pattern.lower()
-
                 return fnmatch(name, pattern)
 
         def compare_list(name, pattern):
@@ -397,7 +396,13 @@ class SidecarPairing(object):
             elif isinstance(name, list):
                 result.append(compare_list(name, pattern))
             else:
-                result.append(compare(name, pattern))
+                # If criteria is empty and key not found in json
+                if not name and not pattern:
+                    result.append(True)
+                elif name and pattern:
+                    result.append(compare(name, pattern))
+                else:
+                    result.append(False)
 
         return all(result)
 

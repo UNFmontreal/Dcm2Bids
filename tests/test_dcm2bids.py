@@ -585,7 +585,6 @@ def test_dcm2bids_no_reorder_entities():
                       bids_dir.name,
                       do_not_reorder_entities=True,
                       auto_extract_entities=False)
-                      
     app.run()
 
     # existing field
@@ -595,7 +594,7 @@ def test_dcm2bids_no_reorder_entities():
     assert os.path.exists(func_json)
 
 
-def test_dcm2bids_multiple_intendedFor():
+def test_dcm2bids_multiple_intendedFor_uri():
     bids_dir = TemporaryDirectory()
 
     tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
@@ -620,3 +619,21 @@ def test_dcm2bids_multiple_intendedFor():
                                                 "sub-01_run-03_localizer.nii"),
                                    os.path.join("anat",
                                                 "sub-01_T1w.nii")]
+
+
+def test_dcm2bids_key_absent():
+    # Validate case_sensitive false
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test_key_absent.json"),
+                      bids_dir.name)
+    app.run()
+    epi_file = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_epi.json")
+    data = load_json(epi_file)
+    assert os.path.exists(epi_file)
+    assert data["SeriesNumber"] == 11
