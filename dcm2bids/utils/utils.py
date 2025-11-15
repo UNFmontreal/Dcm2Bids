@@ -62,6 +62,7 @@ class DEFAULT(object):
                      "anat_MTS": ["flip", "mt"],
                      "anat_MTR": ["mt"],
                      "anat_VFA": ["flip"],
+                     "dwi_dwi": ["dir"],
                      "func_cbv": ["task"],
                      "func_bold": ["task"],
                      "func_sbref": ["task"],
@@ -90,7 +91,7 @@ class DEFAULT(object):
     # Entity table:
     # https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
     entityTableKeys = ["sub", "ses", "sample", "task", "tracksys",
-                       "acq", "ce", "trc", "stain", "rec", "dir",
+                       "acq", "nuc", "voi", "ce", "trc", "stain", "rec", "dir",
                        "run", "mod", "echo", "flip", "inv", "mt",
                        "part", "proc", "hemi", "space", "split", "recording",
                        "chunk", "seg", "res", "den", "label", "desc"]
