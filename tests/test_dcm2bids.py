@@ -633,7 +633,7 @@ def test_dcm2bids_key_absent():
                                    "config_test_key_absent.json"),
                       bids_dir.name)
     app.run()
-    epi_file = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_fmap.json")
+    epi_file = os.path.join(bids_dir.name, "sub-01", "fmap", "sub-01_epi.json")
     data = load_json(epi_file)
     assert os.path.exists(epi_file)
     assert data["SeriesNumber"] == 11
