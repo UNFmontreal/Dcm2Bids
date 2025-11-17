@@ -5,7 +5,7 @@ import csv
 import logging
 import os
 from pathlib import Path
-from subprocess import Popen, PIPE
+from subprocess import PIPE, CalledProcessError, Popen
 
 from dcm2bids.version import __version__
 
@@ -152,6 +152,11 @@ def run_shell_command(commandLine, log=True):
 
     pipes = Popen(commandLine, stdout=PIPE, stderr=PIPE)
     std_out, std_err = pipes.communicate()
+
+    if pipes.returncode != 0:
+        if log:
+            logger.error("Command failed with error: %s", std_err.decode())
+        raise CalledProcessError(pipes.returncode, commandLine, output=std_out, stderr=std_err)
 
     return std_out
 
