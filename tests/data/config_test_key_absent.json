@@ -1,0 +1,14 @@
+{
+    "search_method": "fnmatch",
+    "extractors": {"SeriesDescription": ["task-(?P<task>[a-zA-Z0-9]+)"]},
+    "descriptions": [
+        {
+            "datatype": "fmap",
+            "suffix": "epi",
+            "criteria": {
+                "SeriesDescription": "gre_field_mapping",
+                "EchoTest": ""
+            }
+        }
+    ]
+}

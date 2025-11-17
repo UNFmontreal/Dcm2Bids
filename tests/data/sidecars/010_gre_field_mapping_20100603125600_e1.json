@@ -19,6 +19,7 @@
 	"SliceThickness": 4,
 	"SpacingBetweenSlices": 4,
 	"SAR": 0.164761,
+	"EchoTest": 1,
 	"EchoNumber": 1,
 	"EchoTime": 0.00492,
 	"RepetitionTime": 0.488,
