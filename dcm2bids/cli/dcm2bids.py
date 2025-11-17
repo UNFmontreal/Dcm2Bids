@@ -26,33 +26,44 @@ def _build_arg_parser():
 
     p.add_argument("-d", "--dicom_dir",
                    required=True, nargs="+",
-                   help="DICOM directory(ies) or archive(s) (" +
-                        DEFAULT.arch_extensions + ").")
+                   help="Path to one or more directories or archives"
+                        f" ({DEFAULT.arch_extensions}) containing the DICOM files for a"
+                        " single participant and session to be converted to BIDS."
+                    )
 
     p.add_argument("-p", "--participant",
                    required=True,
-                   help="Participant ID.")
+                   help="Participant ID to be used in the BIDS dataset filenames"
+                        " (e.g. sub-<PARTICIPANT>)."
+    )
 
     p.add_argument("-s", "--session",
                    required=False,
                    default=DEFAULT.cli_session,
-                   help="Session ID. [%(default)s]")
+                   help="Session ID to be used in the BIDS dataset filenames"
+                        " (e.g. ses-<SESSION>). If not provided, no session"
+                        " entity will be added to the BIDS filenames."
+                   )
 
     p.add_argument("-c", "--config",
                    required=True,
-                   help="JSON configuration file (see example/config.json).")
+                   help="JSON configuration that specifies additional parameters for"
+                        " BIDS conversion. See the documentation for more information:"
+                        f" \nhttps://unfmontreal.github.io/Dcm2Bids/{__version__}/how-to/create-config-file/"  # noqa: E501
+                )
 
     p.add_argument("-o", "--output_dir",
                    required=False,
                    default=DEFAULT.output_dir,
-                   help="Output BIDS directory. [%(default)s]")
+                   help="Output BIDS directory. Defaults to the current working directory."
+                )
 
     g = p.add_mutually_exclusive_group()
     g.add_argument("--auto_extract_entities",
                    action='store_true',
                    help="If set, it will automatically try to extract entity"
                    "information [task, dir, echo] based on the suffix and datatype."
-                   " [%(default)s]")
+                   " Default is [%(default)s]")
 
     g.add_argument("--do_not_reorder_entities",
                    action='store_true',
@@ -60,7 +71,7 @@ def _build_arg_parser():
                         "ordering indicated in the BIDS specification and use the "
                         "order defined in custom_entities by the user.\n"
                         "Cannot be used with --auto_extract_entities. "
-                        " [%(default)s]")
+                        " Default is [%(default)s]")
 
     p.add_argument("--bids_validate",
                    action='store_true',
@@ -87,7 +98,9 @@ def _build_arg_parser():
                    required=False,
                    default=DEFAULT.cli_log_level,
                    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                   help="Set logging level to the console. [%(default)s]")
+                   help="Set logging level to the console." 
+                        " The default level is [%(default)s]"
+                )
 
     p.add_argument("-v", "--version",
                    action="version",
