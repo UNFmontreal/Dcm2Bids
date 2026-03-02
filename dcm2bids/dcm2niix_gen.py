@@ -12,6 +12,7 @@ from glob import glob
 
 from dcm2bids.utils.io import valid_path
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
+import json
 
 
 class Dcm2niixGen(object):
@@ -99,6 +100,18 @@ class Dcm2niixGen(object):
             self.execute()
 
         self.sidecarFiles = glob(os.path.join(self.output_dir, "*.json"))
+
+        parent_folder = str(self.dicom_dirs[0]).split("/")[-1]
+
+        # Add stuff to the first sidecar file if there is only one and it is empty
+        for sidecar in self.sidecarFiles:
+            with open(sidecar, 'r') as f:
+                # Parsing the JSON file into a Python dictionary
+                data = json.load(f)
+                data["DicomFolderName"] = parent_folder
+            # Save the changed data back to the JSON file
+            with open(sidecar, 'w') as f:
+                json.dump(data, f, indent=4)
 
     def execute(self):
         """ Execute dcm2niix for each directory in dicom_dirs
