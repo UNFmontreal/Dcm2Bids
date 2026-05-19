@@ -49,6 +49,10 @@ def check_github_latest(github_repo, timeout=3):
                        "your machine is probably not connected to the Internet.")
         logger.debug(f"Reason {e.reason}")
         return "no_internet"
+    except TimeoutError as e:
+        logger.warning(f"Timeout")
+        logger.debug(f"Socket timeout: {e}")
+        return "no_internet"
     else:
         content = json.loads(response.read())
         return content["tag_name"]
