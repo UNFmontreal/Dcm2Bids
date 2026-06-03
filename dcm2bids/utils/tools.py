@@ -46,7 +46,7 @@ def check_github_latest(github_repo, timeout=3):
         return "no_internet"
     except error.URLError as e:
         logger.warning(f"Checking latest version of {github_repo} was not possible, "
-                       "your machine is probably not connected to the Internet.")
+                       "check if there any issue with GitHub or your network/proxy.")
         logger.debug(f"Reason {e.reason}")
         return "no_internet"
     except TimeoutError as e:
