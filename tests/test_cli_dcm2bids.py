@@ -95,6 +95,7 @@ def test_main_propagates_run_exceptions(tmp_path, monkeypatch):
         monkeypatch.setattr(sys, "argv", [
             "dcm2bids", "-d", str(dicom_dir),
             "-p", "01",
+            "-s", "A",
             "-c", str(config_file),
             "-o", str(output_dir),
         ])
