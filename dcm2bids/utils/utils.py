@@ -207,7 +207,7 @@ class TreePrinter:
         logger.info(f"Tree representation of {self.root_dir}{os.sep}")
         logger.info(f"{self.root_dir}{os.sep}")
         for item in tree:
-            logger.info(item)
+            logger.info(item.encode("utf-8", errors="ignore").decode("utf-8"))
 
     def _generate_tree(self, directory, prefix=""):
         """
