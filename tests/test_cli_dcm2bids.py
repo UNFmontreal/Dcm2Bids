@@ -20,6 +20,7 @@ def test_main_runs_success(tmp_path, monkeypatch):
     output_dir.mkdir()
 
     # patch external dependencies to keep the test focused and fast
+    mock_logger = MagicMock()
     mock_gen = MagicMock()
     mock_gen.run.return_value = "APP_RETURN"
 
@@ -27,17 +28,19 @@ def test_main_runs_success(tmp_path, monkeypatch):
          patch("dcm2bids.cli.dcm2bids.dcm2niix_version", return_value="1.0"), \
          patch("dcm2bids.cli.dcm2bids.check_latest", return_value=None), \
          patch("dcm2bids.cli.dcm2bids.setup_logging", return_value=None), \
-         patch("dcm2bids.cli.dcm2bids.Participant") as MockParticipant:
+         patch("dcm2bids.cli.dcm2bids.Participant") as MockParticipant, \
+         patch("dcm2bids.cli.dcm2bids.logging.getLogger", return_value=mock_logger):
 
         MockGen.return_value = mock_gen
         # Participant should provide prefix, name and session attributes
         MockParticipant.return_value.prefix = "sub-01"
         MockParticipant.return_value.name = "01"
-        MockParticipant.return_value.session = None
+        MockParticipant.return_value.session = "ses-dev"
 
         monkeypatch.setattr(sys, "argv", [
             "dcm2bids", "-d", str(dicom_dir),
             "-p", "01",
+            "-s", "dev",
             "-c", str(config_file),
             "-o", str(output_dir),
         ])
@@ -46,6 +49,7 @@ def test_main_runs_success(tmp_path, monkeypatch):
 
     assert result == "APP_RETURN"
     MockGen.assert_called_once()
+    mock_logger.info.assert_any_call("session: ses-dev")
 
 
 def test_parser_mutually_exclusive_flags_raise():
@@ -95,7 +99,6 @@ def test_main_propagates_run_exceptions(tmp_path, monkeypatch):
         monkeypatch.setattr(sys, "argv", [
             "dcm2bids", "-d", str(dicom_dir),
             "-p", "01",
-            "-s", "A",
             "-c", str(config_file),
             "-o", str(output_dir),
         ])
@@ -145,3 +148,5 @@ def test_cli_flags_forwarded_to_Dcm2BidsGen(tmp_path, monkeypatch):
         assert call_args.get("clobber") is True
         assert call_args.get("force_dcm2bids") is True
         assert call_args.get("auto_extract_entities") is True
+
+
