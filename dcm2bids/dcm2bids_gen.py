@@ -113,6 +113,7 @@ class Dcm2BidsGen(object):
             self.config.get("post_op",  DEFAULT.post_op),
             self.config.get("bids_uri",  DEFAULT.bids_uri)
         )
+        parser.validate_config()
         parser.build_graph()
         parser.build_acquisitions(self.participant)
         parser.find_runs()
