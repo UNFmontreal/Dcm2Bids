@@ -4,6 +4,7 @@
 import csv
 import logging
 import os
+import re
 from pathlib import Path
 from subprocess import Popen, PIPE
 
@@ -139,6 +140,33 @@ def splitext_(path, extensions=None):
         if path.endswith(ext):
             return path[: -len(ext)], path[-len(ext) :]
     return os.path.splitext(path)
+
+
+def normalize_acquisition_time(value):
+    if not isinstance(value, str):
+        return value
+
+    stripped_value = value.strip()
+    match = re.match(
+        r"^(?P<hour>\d{1,2}):(?P<minute>\d{1,2}):(?P<second>\d{1,2})(?:\.(?P<fraction>\d+))?$",
+        stripped_value,
+    )
+    if match is None:
+        match = re.match(
+            r"^(?P<hour>\d{2})(?P<minute>\d{2})(?P<second>\d{2})(?:\.(?P<fraction>\d+))?$",
+            stripped_value,
+        )
+    if match is None:
+        return value
+
+    fraction = (match.group("fraction") or "")
+    fraction = int((fraction + "000000")[:6])
+    return (
+        int(match.group("hour")),
+        int(match.group("minute")),
+        int(match.group("second")),
+        fraction,
+    )
 
 
 def run_shell_command(commandLine, log=True):
