@@ -56,7 +56,8 @@
       },
       "sidecar_changes": {
         "TaskName": "learning",
-        "IntendedFor": "id_task_learning"
+        "IntendedFor": "id_task_learning",
+        ""
       }
     }
   ]
@@ -98,6 +99,20 @@ the value of `SeriesDescription` of a sidecar. `AXIAL_T2_SPACE` will be a match,
 `dcm2bids` has a `SidecarFilename` key, as in the first description, if you
 prefer to also match with the filename of the sidecar. Note that filename are
 subject to change depending on the dcm2niix version in use.
+
+In some cases, a user may want to select a criterion based on a key that must not exist
+in the list of sidecars[^1]. To validate that this key is absent, the user should provide
+an empty pattern.
+
+Example:
+
+```json
+{
+  "criteria": {
+    "EchoNumber": ""
+  }
+}
+```
 
 You can enter several criteria. **All criteria must match** for a description to
 be linked to a sidecar.
@@ -156,19 +171,22 @@ custom_entities could also be combined with extractors. See
 
 ## sidecar_changes, id and IntendedFor
 
-Optional field to change or add information in a sidecar.
+Optional field to change, delete or add information in a sidecar.
 
-:warning: `IntendedFor` is now considered a sidecar_changes.
+:warning: `IntendedFor` is now considered a sidecar_changes and does support list.
 
 Example:
 
 ```json
 {
   "sidecar_changes": {
+    "AcquisitionDuration": "",
     "IntendedFor": "task_rest"
   }
 }
 ```
+
+If you want to delete a key in a sidecar you can set it to an empty string.
 
 If you want to add an `IntendedFor` entry or any extra sidecar linked to a
 specific file, you will need to set an id to the corresponding description and

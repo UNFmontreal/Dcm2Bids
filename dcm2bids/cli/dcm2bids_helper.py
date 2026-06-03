@@ -2,7 +2,7 @@
 
 """
 Converts DICOM files to NIfTI files including their JSON sidecars in a
-temporary directory which can be inspected to make a dc2mbids config file.
+temporary directory which can be inspected to make a dcm2bids config file.
 """
 import argparse
 import logging
