@@ -395,12 +395,6 @@ class SidecarPairing(object):
 
             elif isinstance(name, list):
                 result.append(compare_list(name, pattern))
-<<<<<<< HEAD
-            elif name:
-                result.append(compare(name, pattern))
-            else:
-                result.append(False)
-=======
             else:
                 # If criteria is empty and key not found in json
                 if not name and not pattern:
@@ -409,7 +403,6 @@ class SidecarPairing(object):
                     result.append(compare(name, pattern))
                 else:
                     result.append(False)
->>>>>>> master
 
         return all(result)
 
