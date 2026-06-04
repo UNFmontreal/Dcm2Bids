@@ -5,6 +5,7 @@ import csv
 import logging
 import os
 import re
+import datetime
 from pathlib import Path
 from subprocess import Popen, PIPE
 
@@ -143,30 +144,27 @@ def splitext_(path, extensions=None):
 
 
 def normalize_acquisition_time(value):
+    """
+    Normalize acquisition time strings into a tuple
+    (hour, minute, second, microsecond).
+
+    Accepts both colon-separated times (H:M:S[.fraction]) and compact
+    HHMMSS[.fraction]. Returns the original value if it cannot be parsed.
+    """
     if not isinstance(value, str):
         return value
 
-    stripped_value = value.strip()
-    match = re.match(
-        r"^(?P<hour>\d{1,2}):(?P<minute>\d{1,2}):(?P<second>\d{1,2})(?:\.(?P<fraction>\d+))?$",
-        stripped_value,
-    )
-    if match is None:
-        match = re.match(
-            r"^(?P<hour>\d{2})(?P<minute>\d{2})(?P<second>\d{2})(?:\.(?P<fraction>\d+))?$",
-            stripped_value,
-        )
-    if match is None:
-        return value
+    s = value.strip()
 
-    fraction = (match.group("fraction") or "")
-    fraction = int((fraction + "000000")[:6])
-    return (
-        int(match.group("hour")),
-        int(match.group("minute")),
-        int(match.group("second")),
-        fraction,
-    )
+    # Try a small set of strict formats using only datetime.strptime
+    for fmt in ("%H:%M:%S.%f", "%H:%M:%S", "%H%M%S.%f", "%H%M%S"):
+        try:
+            dt = datetime.datetime.strptime(s, fmt)
+            return (dt.hour, dt.minute, dt.second, dt.microsecond)
+        except ValueError:
+            continue
+
+    return value
 
 
 def run_shell_command(commandLine, log=True):
