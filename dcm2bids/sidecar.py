@@ -581,3 +581,23 @@ class SidecarPairing(object):
                 runStr = templateDup.format(runNum+1)
                 self.acquisitions[acqInd].custom_entities += runStr
                 self.acquisitions[acqInd].setDstFile()
+
+    def validate_config(self):
+        """
+        Validate the config file
+        """
+        for desc in self.descriptions:
+            # If any deprecated 'old' keys are present, instruct user to upgrade
+            if set(desc).intersection(DEFAULT.old_keys):
+                self.logger.error("You are using the old description keys working with dcm2bids 2.x.\n"
+                                  "Please check this link to update your config file: "
+                                  "https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x")
+                raise ValueError("Execution stopped due to invalid config file.")
+            
+            # Check if required keys are in the description
+            required = {"datatype", "suffix", "criteria"}
+            if not required.issubset(set(desc.keys())):
+                self.logger.error("Each description dictionary should at least have the following keys: "
+                                  "'datatype', 'suffix' and 'criteria'. "
+                                  "Please check your config file.")
+                raise ValueError("Execution stopped due to invalid config file.")

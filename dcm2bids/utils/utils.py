@@ -105,6 +105,8 @@ class DEFAULT(object):
     # BIDS version
     bids_version = "v1.9.0"
 
+    old_keys = ["dataType", "modalityLabel", "customLabels", "sidecarChanges", "intendedFor"]
+
 
 def write_participants(filename, participants):
     with open(filename, "w") as f:
