@@ -591,7 +591,7 @@ class SidecarPairing(object):
             if set(desc).intersection(DEFAULT.old_keys):
                 self.logger.error("You are using the old description keys working with dcm2bids 2.x.\n"
                                   "Please check this link to update your config file: "
-                                  "https://unfmontreal.github.io/Dcm2Bids/3.2.0/upgrade/#upgrading-from-2x-to-3x")
+                                  "https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x")
                 raise ValueError("Execution stopped due to invalid config file.")
             
             # Check if required keys are in the description
