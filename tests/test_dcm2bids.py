@@ -360,6 +360,32 @@ def test_dcm2bids_complex():
     assert not os.path.exists(mprage)
 
 
+def test_dcm2bids_files_with_brackets_and_dots(tmp_path):
+    # Use TEST_DATA_DIR sidecars: copy into the temporary dcm2bids tmp folder
+    bids_dir = TemporaryDirectory()
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    # pick a sidecar to rename to include dots and brackets
+    original = os.path.join(tmp_sub_dir, "001_localizer_20100603125600_i00001.json")
+    new_root = os.path.join(tmp_sub_dir, "sub-01.name.with.dots[br]")
+    new_json = new_root + ".json"
+    new_nii = new_root + ".nii.gz"
+
+    os.rename(original, new_json)
+    # create corresponding nii.gz file
+    with open(new_nii, "w") as f:
+        f.write("")
+
+    # run generator (it will read the tmp dir we populated)
+    gen = Dcm2BidsGen(TEST_DATA_DIR, "01", os.path.join(TEST_DATA_DIR, "config_test.json"), bids_dir.name)
+    gen.run()
+
+    expected_dst = os.path.join(bids_dir.name, gen.participant.directory, "localizer", "sub-01_run-01_localizer.nii")
+    assert os.path.exists(expected_dst)
+    bids_dir.cleanup()
+
+
 def test_dcm2bids_dup():
     bids_dir = TemporaryDirectory()
 
