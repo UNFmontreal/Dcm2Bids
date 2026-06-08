@@ -11,7 +11,8 @@ from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
-from dcm2bids.utils.utils import (DEFAULT, convert_dir, combine_dict_extractors,
+from dcm2bids.utils.utils import (DEFAULT, combine_dict_extractors,
+                                  convert_dir, normalize_acquisition_time,
                                   splitext_)
 
 compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
@@ -39,10 +40,17 @@ class Sidecar(object):
         for key in self.compKeys:
             try:
                 if all(key in d for d in (self.data, other.data)):
-                    if self.data.get(key) == other.data.get(key):
+                    self_value = self.data.get(key)
+                    other_value = other.data.get(key)
+
+                    if key == "AcquisitionTime":
+                        self_value = normalize_acquisition_time(self_value)
+                        other_value = normalize_acquisition_time(other_value)
+
+                    if self_value == other_value:
                         lts.append(None)
                     else:
-                        lts.append(self.data.get(key) < other.data.get(key))
+                        lts.append(self_value < other_value)
                 else:
                     lts.append(None)
 

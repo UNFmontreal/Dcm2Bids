@@ -4,6 +4,8 @@
 import csv
 import logging
 import os
+import re
+import datetime
 from pathlib import Path
 from subprocess import Popen, PIPE
 
@@ -141,6 +143,30 @@ def splitext_(path, extensions=None):
         if path.endswith(ext):
             return path[: -len(ext)], path[-len(ext) :]
     return os.path.splitext(path)
+
+
+def normalize_acquisition_time(value):
+    """
+    Normalize acquisition time strings into a tuple
+    (hour, minute, second, microsecond).
+
+    Accepts both colon-separated times (H:M:S[.fraction]) and compact
+    HHMMSS[.fraction]. Returns the original value if it cannot be parsed.
+    """
+    if not isinstance(value, str):
+        return value
+
+    s = value.strip()
+
+    # Try a small set of strict formats using only datetime.strptime
+    for fmt in ("%H:%M:%S.%f", "%H:%M:%S", "%H%M%S.%f", "%H%M%S"):
+        try:
+            dt = datetime.datetime.strptime(s, fmt)
+            return (dt.hour, dt.minute, dt.second, dt.microsecond)
+        except ValueError:
+            continue
+
+    return value
 
 
 def run_shell_command(commandLine, log=True):
