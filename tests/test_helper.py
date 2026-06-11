@@ -49,6 +49,7 @@ def test_helper_default_output_dir(monkeypatch):
     }
     mock_gen.run.assert_called_once_with(force=True)
     mock_logger.info.assert_any_call(f"Helper files in: {expected_default_out_dir}\n")
+     i_tmpDir.cleanup()
 
 
 def test_helper_custom_output_dir_and_nested(monkeypatch):
@@ -91,3 +92,5 @@ def test_helper_custom_output_dir_and_nested(monkeypatch):
     }
     mock_gen.run.assert_called_once_with(force=True)
     mock_logger.info.assert_any_call(f"Helper files in: {expected_nested_out_dir}\n")
+    i_tmpDir.cleanup()
+    o_tmpDir.cleanup()

@@ -18,7 +18,6 @@ RUN conda install -c conda-forge deno
 RUN deno install -ERWN -g -n bids-validator-deno jsr:@bids/validator@2.4.1
 
 # Install dcm2bids
-RUN conda install pip
 WORKDIR /
 ADD . /dcm2bids
 WORKDIR /dcm2bids
@@ -59,4 +58,4 @@ RUN wget https://github.com/rordenlab/dcm2niix/releases/download/v1.0.20260416/d
 RUN unzip dcm2niix_lnx.zip
 RUN mv dcm2niix /usr/bin/
 
-#ENTRYPOINT ["dcm2bids"]
+ENTRYPOINT ["dcm2bids"]
