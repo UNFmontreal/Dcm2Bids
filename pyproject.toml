@@ -1,5 +1,54 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+
+[project]
+name = "dcm2bids"
+dynamic = ["version"] # keep in sync with dcm2bids/version.py, or use dynamic below
+description = "Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure"
+readme = "README.md"
+license = { text = "GPL-3.0" }
+requires-python = ">=3.8"
+dependencies = [
+    "packaging>=23.1",
+]
+authors = [
+    { name = "Arnaud Boré" },
+    { name = "Samuel Guay" },
+    { name = "Christophe Bedetti" },
+    { name = "Steven Meisler" },
+    { name = "Nick GuenTher" },
+]
+maintainers = [
+    { name = "Arnaud Boré", email = "arnaud.bore@gmail.com" },
+    { name = "Samuel Guay", email = "samuel.guay@gmail.com" },
+]
+keywords = ["neuroimaging", "bids", "dicom", "mri"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/UNFmontreal/Dcm2Bids"
+Documentation = "https://unfmontreal.github.io/Dcm2Bids"
+"Bug Tracker" = "https://github.com/UNFmontreal/Dcm2Bids/issues"
+
+[project.scripts]
+dcm2bids = "dcm2bids.dcm2bids_gen:main"
+dcm2bids_helper = "dcm2bids.dcm2bids_helper:main"
+dcm2bids_scaffold = "dcm2bids.scaffold:main"
+
+[tool.setuptools.packages.find]
+exclude = ["tests*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "dcm2bids.version.__version__"}
 
 [tool.codespell]
 skip = '.git,*.pdf,*.svg'
-#
 ignore-words-list = 'nd'
