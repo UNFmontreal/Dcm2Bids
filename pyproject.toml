@@ -39,9 +39,9 @@ Documentation = "https://unfmontreal.github.io/Dcm2Bids"
 "Bug Tracker" = "https://github.com/UNFmontreal/Dcm2Bids/issues"
 
 [project.scripts]
-dcm2bids = "dcm2bids.dcm2bids_gen:main"
-dcm2bids_helper = "dcm2bids.dcm2bids_helper:main"
-dcm2bids_scaffold = "dcm2bids.scaffold:main"
+dcm2bids = "dcm2bids.cli.dcm2bids:main"
+dcm2bids_helper = "dcm2bids.cli.dcm2bids_helper:main"
+dcm2bids_scaffold = "dcm2bids.cli.dcm2bids_scaffold:main"
 
 [tool.setuptools.packages.find]
 exclude = ["tests*"]
