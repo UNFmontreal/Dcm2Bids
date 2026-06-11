@@ -13,7 +13,7 @@
             "id": "func_task-rest",
             "datatype": "func",
             "suffix": "bold",
-            "custom_entities": ["acq-highres", "random"],
+            "custom_entities": ["acq-highres", "random", "ran.dom"],
             "criteria": {
                 "SeriesDescription": ".*bold.*"
             }
