@@ -168,6 +168,60 @@ def normalize_acquisition_time(value):
 
     return value
 
+def normalize_version(value):
+    """
+    Normalize a version string into a tuple of integer parts, when possible.
+
+    - Strips a leading 'v' (e.g. 'v1.11.0' -> '1.11.0')
+    - Splits on '.'
+    - Converts each part to int if possible
+    - Returns the original value if it cannot be parsed in a simple numeric form
+    """
+    if not isinstance(value, str):
+        return value
+
+    s = value.strip()
+    if not s:
+        return value
+
+    # BIDS tag style: v1.2.3
+    s = s.lstrip("v")
+
+    parts = s.split(".")
+    normalized = []
+    for p in parts:
+        p = p.strip()
+        if not p:
+            # Empty segment; treat as zero
+            normalized.append(0)
+            continue
+        try:
+            normalized.append(int(p))
+        except ValueError:
+            # If any part is not numeric, bail return the original string
+            return value
+
+    return tuple(normalized)
+
+def _version_newer(latest, current):
+    """
+    Compare two versions, preferring normalized numeric comparison
+    and falling back to string comparison.
+    
+    Returns True if `latest` is considered newer than `current`.
+    """
+    norm_latest = normalize_version(latest)
+    norm_current = normalize_version(current)
+
+    if isinstance(norm_latest, tuple) and isinstance(norm_current, tuple):
+        # Padding to compare same length
+        max_len = max(len(norm_latest), len(norm_current))
+        norm_latest += (0,) * (max_len - len(norm_latest))
+        norm_current += (0,) * (max_len - len(norm_current))
+        return norm_latest > norm_current
+
+    # Fallback: string comparison as before
+    return str(latest) > str(current)
 
 def run_shell_command(commandLine, log=True):
     """ Wrapper of subprocess.check_output
