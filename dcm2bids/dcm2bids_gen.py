@@ -7,7 +7,7 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 import logging
 import os
 from pathlib import Path
-from glob import glob
+from glob import glob, escape
 import shutil
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
@@ -147,7 +147,7 @@ class Dcm2BidsGen(object):
 
     def move(self, acq, idList, post_op):
         """Move an acquisition to BIDS format"""
-        for srcFile in sorted(glob(f"{acq.srcRoot}.*"), reverse=True):
+        for srcFile in sorted(glob(f"{escape(acq.srcRoot)}.*"), reverse=True):
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',
