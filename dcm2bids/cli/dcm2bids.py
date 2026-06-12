@@ -14,7 +14,8 @@ from pathlib import Path
 from datetime import datetime
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
 from dcm2bids.utils.utils import DEFAULT
-from dcm2bids.utils.tools import dcm2niix_version, check_latest
+from dcm2bids.utils.tools import dcm2niix_version, check_latest, has_internet, _version_newer
+from dcm2bids.utils.schema import _get_schema, BIDS_SCHEMA_DEFAULT_VERSION
 from dcm2bids.participant import Participant
 from dcm2bids.utils.logger import setup_logging
 from dcm2bids.version import __version__
@@ -61,7 +62,7 @@ def _build_arg_parser():
     g = p.add_mutually_exclusive_group()
     g.add_argument("--auto_extract_entities",
                    action='store_true',
-                   help="If set, it will automatically try to extract entity"
+                   help="If set, it will automatically try to extract entity "
                    "information [task, dir, echo] based on the suffix and datatype."
                    " Default is [%(default)s]")
 
@@ -72,6 +73,19 @@ def _build_arg_parser():
                         "order defined in custom_entities by the user.\n"
                         "Cannot be used with --auto_extract_entities. "
                         " Default is [%(default)s]")
+
+    p.add_argument("-b", "--bids_version",
+                   default=DEFAULT.bids_version,
+                   help=(
+            "Set the BIDS specification version to follow (e.g. 'v1.11.1', 'stable', 'latest' or 'bundled')."
+            "\nThis controls which BIDS schema and rules dcm2bids uses for automatic entity extraction and ordering."
+            "\nIf not provided, dcm2bids uses the 'bundled' BIDS spec [%(default)s] for reproducible, "
+            "offline-friendly behavior."
+            "\nFor long-running or shared pipelines, consider pinning a specific tag (e.g. 'v1.11.1') or using 'bundled'."
+            "\nWhen internet is available, it will check once whether the remote 'stable' is newer and, if so, "
+            "suggest updating to that specific version tag."
+            ),
+        )
 
     p.add_argument("--bids_validate",
                    action='store_true',
@@ -98,15 +112,20 @@ def _build_arg_parser():
                    required=False,
                    default=DEFAULT.cli_log_level,
                    choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                   help="Set logging level to the console." 
+                   help="Set logging level to the console."
                         " The default level is [%(default)s]"
                 )
 
     p.add_argument("-v", "--version",
                    action="version",
-                   version=f"dcm2bids version:\t{__version__}\n"
-                   f"Based on BIDS version:\t{DEFAULT.bids_version}",
-                   help="Report dcm2bids version and the BIDS version.")
+                   # This uses DEFAULT.bids_version, which reflects the bundled schema version.
+                   version=(
+                        f"dcm2bids version:\t{__version__}\n"
+                        f"Bundled BIDS version:\t{DEFAULT.bids_version} "
+                        "unless overridden by --bids_version."
+                    ),
+                   help="Report dcm2bids version and the bundled BIDS specification version it follows by default."
+                   )
 
     return p
 
@@ -129,13 +148,115 @@ def main():
     logger.info("Running the following command: " + " ".join(sys.argv))
     logger.info("OS version: %s", platform.platform())
     logger.info("Python version: %s", sys.version.replace("\n", ""))
-    logger.info(f"dcm2bids version: { __version__}")
+    logger.info(f"dcm2bids version: {__version__}")
     logger.info(f"dcm2niix version: {dcm2niix_version()}")
     logger.info("Checking for software update")
 
-    check_latest("dcm2bids")
+    check_latest("dcm2bids", log_dir=log_dir)
     if not args.skip_dcm2niix:
-        check_latest("dcm2niix")
+        check_latest("dcm2niix", log_dir=log_dir)
+
+
+    # Detect presence of the flag explicitly, user == explicit choice == use it.
+    supplied_bids_version = ("--bids_version" in sys.argv) or ("-b" in sys.argv)
+
+    if not supplied_bids_version:
+        bundled_version = BIDS_SCHEMA_DEFAULT_VERSION
+        # TODO: improve this log / add an info one more brief?
+        logger.info(
+            "No --bids_version provided; using 'bundled' BIDS spec (version=%s) "
+            "for reproducible behavior.",
+            bundled_version,
+        )
+        # Effective schema label for this run:
+        args.bids_version = "bundled"
+
+        # Optionally *suggest* upgrading if remote stable is newer.
+        if has_internet():
+            logger.info("Checking for BIDS update")
+            logger.debug(
+                "Checking remote 'stable' BIDS spec to see if a newer version "
+                "is available."
+            )
+            stable_schema = _get_schema(schema_version="stable", log_dir=log_dir)
+            stable_version = None
+            if stable_schema is not None:
+                stable_version = stable_schema.get("bids_version", "stable")
+
+            if isinstance(stable_version, str):
+                logger.debug(
+                    "Bundled BIDS version: %s; remote 'stable' version: %s",
+                    bundled_version,
+                    stable_version,
+                )
+                if _version_newer(stable_version, bundled_version):
+                    logger.warning(
+                        "A newer 'stable' BIDS specification (%s) is available than the "
+                        "bundled version (%s). The bundled schema is still used "
+                        "for this run. Consider updating using "
+                        "--bids_version %s.",
+                        stable_version,
+                        bundled_version,
+                        stable_version,
+                    )
+                else:
+                    logger.info("Using latest stable BIDS specification.")
+
+            else:
+                logger.info(
+                    "Could not determine version for 'stable'; "
+                    "continuing with bundled BIDS specification (%s).",
+                    bundled_version,
+                )
+    else:
+        logger.info(
+            "Specific BIDS version requested via --bids_version=%s",
+            args.bids_version,
+        )
+        requested_label = args.bids_version
+
+        # Warn user explicitly about using 'latest' and to a lesser extent 'stable'.
+        if requested_label == "latest":
+            logger.warning(
+                "You requested BIDS version 'latest'. This typically tracks the "
+                "current development version of the BIDS specification and may be "
+                "unstable or change without notice. For reproducible pipelines, "
+                "consider using a fixed version tag (e.g. 'v1.11.1') or 'bundled'."
+            )
+
+        elif requested_label == "stable":
+            logger.info(
+                "You requested BIDS version 'stable'. This label may point to "
+                "different BIDS releases over time. For reproducible pipelines, "
+                "consider using a fixed version tag (e.g. 'v1.11.1') or 'bundled'."
+            )
+
+    logger.info("Ensuring BIDS version '%s' is available.", args.bids_version)
+
+    schema = _get_schema(schema_version=args.bids_version, log_dir=log_dir)
+    if schema is None:
+        # Be explicit so users know how to recover, aborting so user actually reads the log ;)
+        logger.error(
+            "Failed to load BIDS schema for '%s'. If you are running offline and "
+            "this label has never been used before on this machine, there may be "
+            "no cached file available.",
+            args.bids_version,
+        )
+        logger.error(
+            "To proceed offline, either:\n"
+            "  * Run once with internet so the schema for '%s' can be cached, or\n"
+            "  * Use the bundled schema with '--bids_version bundled', or\n"
+            "  * Pin to a specific BIDS version tag that is already cached.",
+            args.bids_version,
+        )
+        logger.error(
+            "BIDS version '%s' could not be found; verify the version provided.",
+            args.bids_version,
+        )
+        logger.error(
+            "dcm2bids cannot continue without a valid BIDS version. Aborting."
+        )
+        sys.exit(1)
 
     logger.info(f"participant: {participant.name}")
     if participant.session:

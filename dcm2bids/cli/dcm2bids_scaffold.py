@@ -64,10 +64,12 @@ def main():
     logger.info("Running the following command: " + " ".join(sys.argv))
     logger.info("OS version: %s", platform.platform())
     logger.info("Python version: %s", sys.version.replace("\n", ""))
-    logger.info(f"dcm2bids version: { __version__}")
+    logger.info(f"dcm2bids version: {__version__}")
     logger.info("Checking for software update")
 
-    check_latest("dcm2bids")
+    log_dir = log_file.parent
+    check_latest("dcm2bids", log_dir=log_dir)
+    # check_latest("bids_version", log_dir=log_dir)
 
     logger.info("The files used to create your BIDS directory were taken from "
                 "https://github.com/bids-standard/bids-starter-kit. \n")
