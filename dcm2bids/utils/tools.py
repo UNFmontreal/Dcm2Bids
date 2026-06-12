@@ -18,7 +18,8 @@ logger = logging.getLogger(__name__)
 # How long a cached "latest version" is considered valid (seconds)
 LATEST_VERSION_CACHE_TTL = 24 * 60 * 60  # 24 hours
 
-def _version_cache_path(log_dir: str | Path) -> Path:
+
+def _version_cache_path(log_dir):
     """
     Return the path to the JSON file used to cache version check results
     inside the given log directory.
@@ -26,7 +27,8 @@ def _version_cache_path(log_dir: str | Path) -> Path:
     log_dir = Path(log_dir)
     return log_dir / "version_check.json"
 
-def _load_version_cache(log_dir: str | Path) -> dict:
+
+def _load_version_cache(log_dir):
     """
     Load the JSON cache of previous version checks from the given log directory.
     """
@@ -43,7 +45,7 @@ def _load_version_cache(log_dir: str | Path) -> dict:
         return {}
 
 
-def _save_version_cache(cache: dict, log_dir: str | Path) -> None:
+def _save_version_cache(cache, log_dir) -> None:
     """
     Save the JSON cache of previous version checks to the given log directory.
     """
@@ -52,6 +54,7 @@ def _save_version_cache(cache: dict, log_dir: str | Path) -> None:
         save_json(filename=path, data=cache)
     except Exception:
         logger.debug("Failed to write version cache; ignoring.", exc_info=True)
+
 
 def _normalize_version(value):
     """
@@ -88,11 +91,12 @@ def _normalize_version(value):
 
     return tuple(normalized)
 
+
 def _version_newer(latest, current):
     """
     Compare two versions, preferring normalized numeric comparison
     and falling back to string comparison.
-    
+
     Returns True if `latest` is considered newer than `current`.
     """
     norm_latest = _normalize_version(latest)
@@ -119,6 +123,7 @@ def is_tool(name):
     """
     return which(name) is not None
 
+
 def has_internet(timeout=3):
     """
     Check if the machine appears to have internet access by trying to reach api.github.com.
@@ -140,6 +145,7 @@ def has_internet(timeout=3):
             "Check if there is an issue with your network/proxy/DNS. "
             "Skipping version check."
         )
+        logger.debug("URLError: %s", e)
     except TimeoutError as e:
         logger.warning(
             "Timeout error, no access to internet or to GitHub API: %s. "
@@ -147,6 +153,7 @@ def has_internet(timeout=3):
             e,
         )
     return False
+
 
 def check_github_latest(github_repo, timeout=3):
     """
@@ -188,6 +195,7 @@ def check_github_latest(github_repo, timeout=3):
 
     content = json.loads(response.read())
     return content.get("tag_name", "unavailable")
+
 
 def check_latest(name="dcm2bids", log_dir=None):
     """Check if a new version of a software exists and log some details.
@@ -303,6 +311,7 @@ def check_latest(name="dcm2bids", log_dir=None):
         logger.warning("Consider updating it -> %s/%s.", host, repo)
     else:
         logger.info("Currently using the latest version of %s.", name)
+
 
 def dcm2niix_version(name="dcm2niix"):
     """
