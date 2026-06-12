@@ -576,56 +576,62 @@ def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_defaul
     assert DEFAULT.auto_entities == auto_entities
 
 
-# # https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
-def test_bids_v1_9_0_entity_table_keys_match_hardcoded_list(tmp_path):
+# # https://bids-specification.readthedocs.io/en/v1.11.1/99-appendices/04-entity-table.html
+def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
     """
-    For BIDS v1.9.0, the derived entity_table_keys should match the
-    hardcoded list from the v1.9.0 entity table in the spec.
+    For BIDS v1.11.1, the derived entity_table_keys should match the
+    hardcoded list from the v1.11.1 entity table in the spec.
     """
     expected_entity_keys = [
-        "sub",
-        "ses",
-        "sample",
-        "task",
-        "tracksys",
-        "acq",
-        "ce",
-        "trc",
-        "stain",
-        "rec",
-        "dir",
-        "run",
-        "mod",
-        "echo",
-        "flip",
-        "inv",
-        "mt",
-        "part",
-        "proc",
-        "hemi",
-        "space",
-        "split",
-        "recording",
-        "chunk",
-        "seg",
-        "res",
-        "den",
-        "label",
-        "desc",
+        'sub',
+        'tpl',
+        'ses',
+        'cohort',
+        'sample',
+        'task',
+        'tracksys',
+        'acq',
+        'nuc',
+        'voi',
+        'ce',
+        'trc',
+        'stain',
+        'rec',
+        'dir',
+        'run',
+        'mod',
+        'echo',
+        'flip',
+        'inv',
+        'mt',
+        'part',
+        'proc',
+        'hemi',
+        'space',
+        'split',
+        'recording',
+        'chunk',
+        'atlas',
+        'seg',
+        'scale',
+        'res',
+        'den',
+        'label',
+        'desc'
     ]
 
-    # Load the v1.9.0 schema directly from the web or cache.
-    schema = _get_schema(schema_version="v1.9.0", log_dir=tmp_path)
+    # Load the v1.11.1 schema directly from the web or cache.
+    schema = _get_schema(schema_version="v1.11.1", log_dir=tmp_path)
     assert schema is not None
-    assert schema.get("bids_version") in ("1.9.0", "v1.9.0")
+    assert schema.get("bids_version") in ("1.11.1", "v1.11.1")
 
     entity_keys = _get_entity_table_keys(schema)
     assert entity_keys == expected_entity_keys
 
 
-def test_bids_v1_9_0_auto_entities_match_hardcoded_mapping(tmp_path):
+def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
     """
-    For BIDS v1.9.0, the derived auto_entities should match the
+    For BIDS v1.11.1, the derived auto_entities should match the
     hardcoded mapping we used previously.
     """
     expected_auto_entities = {
@@ -637,28 +643,27 @@ def test_bids_v1_9_0_auto_entities_match_hardcoded_mapping(tmp_path):
         "anat_MTS": ["flip", "mt"],
         "anat_MTR": ["mt"],
         "anat_VFA": ["flip"],
+        "anat_physio": ["task"],
+        "anat_physioevents": ["task"],
+        "anat_stim": ["task"],
         "func_cbv": ["task"],
         "func_bold": ["task"],
         "func_sbref": ["task"],
-        "func_events": ["task"],
         "func_stim": ["task"],
         "func_phase": ["task"],
         "func_physio": ["task"],
-        "dwi_physio": ["task"],
-        "dwi_stim": ["task"],
-        "fmap_epi": ["dir"],
-        "fmap_m0scan": ["dir"],
+        "func_physioevents": ["task"],
+        "func_noRF": ["task"],
+        # "fmap_epi": ["dir"], # not anymore!
         "fmap_TB1DAM": ["flip"],
         "fmap_TB1EPI": ["echo", "flip"],
         "fmap_TB1SRGE": ["flip", "inv"],
-        "perf_physio": ["task"],
-        "perf_stim": ["task"],
     }
 
-    schema = _get_schema(schema_version="v1.9.0", log_dir=tmp_path)
+    schema = _get_schema(schema_version="v1.11.1", log_dir=tmp_path)
     assert schema is not None
-    assert schema.get("bids_version") in ("1.9.0", "v1.9.0")
+    assert schema.get("bids_version") in ("1.11.1", "v1.11.1")
 
     auto_entities = _get_auto_entities_from_schema(schema)
-    # Exact equality: ensures we haven't regressed compared to the old tables
+    # Exact equality: ensures we haven't regressed compared to the manually-input tables
     assert auto_entities == expected_auto_entities

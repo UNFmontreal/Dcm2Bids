@@ -21,29 +21,6 @@ jobs:
       uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Pre-download BIDS schema JSONs
-      # This makes sure the GitHub runner (including macOS) can reach the schema URL.
-      # If it can’t, this step fails and you see a clear error.
-      run: |
-        python - << 'EOF'
-        from pathlib import Path
-        from dcm2bids.utils.schema import _get_schema, BIDS_SCHEMA_DEFAULT_VERSION
-
-        log_dir = Path("log")
-        log_dir.mkdir(exist_ok=True)
-
-        # 1) ensure default (bundled/online) schema is available/cached
-        schema = _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
-        if not schema:
-            raise SystemExit(f"Failed to get default schema {BIDS_SCHEMA_DEFAULT_VERSION}")
-
-        # 2) ensure v1.9.0 is downloaded/cached for regression tests
-        schema_190 = _get_schema(schema_version="v1.9.0", log_dir=log_dir)
-        if not schema_190:
-            raise SystemExit("Failed to get BIDS schema v1.9.0")
-
-        print("Successfully fetched BIDS schemas:", schema.get("bids_version"), schema_190.get("bids_version"))
-        EOF
         
     - name: Install dependencies
       run: |
