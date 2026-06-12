@@ -258,7 +258,6 @@ class Acquisition(object):
                     to:     {new_name}""")
                 self.dstFile = new_name
 
-
     def dstSidecarData(self, idList):
         """
         """
