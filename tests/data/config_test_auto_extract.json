@@ -17,7 +17,7 @@
             "criteria": {
                 "SeriesDescription": ".*bold.*"
             }
-        },
+        }, 
         {
             "id": "T1",
             "datatype": "anat",
@@ -37,6 +37,7 @@
         {
             "datatype": "fmap",
             "suffix": "epi",
+            "custom_entities": "dir",
             "criteria": {
                 "SeriesDescription": "gre_field_mapping"
             },
