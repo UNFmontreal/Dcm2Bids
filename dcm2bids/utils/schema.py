@@ -148,7 +148,6 @@ def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
     """
     schema = None
     # TODO: reduce complexity of this very long and complex function.
-    # Explicit request for bundled schema
     if schema_version == "bundled":
         return _load_bundled_schema()
     is_alias = str(schema_version) in {"stable", "latest"}
@@ -228,7 +227,6 @@ def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
                             exc_info=True,
                         )
 
-    # 2) Download if internet is available
     if tools.has_internet():
         schema = _download_schema(schema_version)
         if schema is not None and log_dir is not None:
@@ -262,7 +260,6 @@ def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
         if schema is not None:
             return schema
 
-        # For aliases: if refresh failed but we had a cached file, fall back to it
         if is_alias and cached_schema_path is not None:
             try:
                 logger.info(

@@ -162,7 +162,6 @@ def main():
 
     if not supplied_bids_version:
         bundled_version = BIDS_SCHEMA_DEFAULT_VERSION
-        # TODO: improve this log / add an info one more brief?
         logger.info(
             "No --bids_version provided; using 'bundled' BIDS spec (version=%s) "
             "for reproducible behavior.",

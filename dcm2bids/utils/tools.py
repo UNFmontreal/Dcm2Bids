@@ -250,7 +250,6 @@ def check_latest(name="dcm2bids", log_dir=None):
         if isinstance(cached_entry, dict):
             ts = cached_entry.get("timestamp", 0)
             age = now - ts
-            # TODO: convert time to be human-readable
             logger.debug(
                 "Version check: found cached entry for %s (age=%.1fs, ttl=%ds)",
                 cache_key,
