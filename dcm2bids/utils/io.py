@@ -52,3 +52,44 @@ def valid_path(in_path, type="folder"):
             raise FileNotFoundError(in_path)
 
     raise TypeError(type)
+
+
+def update_participants_tsv(bids_dir, participant_name, logger):
+    """Add a participant name to the participants.tsv file.
+
+    Creates the participants.tsv file if it doesn't exist, and adds the
+    participant name if not already present.
+
+    Args:
+        bids_dir (str or Path): Path to the BIDS directory
+        participant_name (str): Name of the participant (e.g., 'sub-01')
+        logger: Logger object for logging messages
+    """
+    if isinstance(bids_dir, str):
+        bids_dir = Path(bids_dir)
+
+    participants_file = bids_dir / "participants.tsv"
+    existing_participants = set()
+
+    # Read existing participants if file exists
+    if participants_file.exists():
+        with open(participants_file, "r") as f:
+            lines = f.readlines()
+            # Skip header line (participant_id)
+            if len(lines) > 1:
+                existing_participants = {line.strip() for line in lines[1:]}
+    else:
+        logger.info("Creating new participants.tsv file")
+
+    # Add participant if not already present
+    if participant_name not in existing_participants:
+        existing_participants.add(participant_name)
+        logger.info(f"Adding participant '{participant_name}' to participants.tsv")
+
+        # Write participants.tsv with sorted participant IDs
+        with open(participants_file, "w") as f:
+            f.write("participant_id\n")
+            for participant in sorted(existing_participants):
+                f.write(f"{participant}\n")
+    else:
+        logger.info(f"Participant '{participant_name}' already in participants.tsv")
