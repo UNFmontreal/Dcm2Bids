@@ -75,14 +75,13 @@ def _build_arg_parser():
                         " Default is [%(default)s]")
 
     p.add_argument("-b", "--bids_version",
-                   default=DEFAULT.bids_version,
+                   default=None,
                    help=(
             "Set the BIDS specification version to follow (e.g. 'v1.11.1', 'stable', 'latest' or 'bundled')."
             "\nThis controls which BIDS schema and rules dcm2bids uses for automatic entity extraction and ordering."
-            "\nIf not provided, dcm2bids uses the 'bundled' BIDS spec [%(default)s] for reproducible, "
-            "offline-friendly behavior."
-            "\nFor long-running or shared pipelines, consider pinning a specific tag (e.g. 'v1.11.1') or using 'bundled'."
-            "\nWhen internet is available, it will check once whether the remote 'stable' is newer and, if so, "
+            "\nIf not provided, dcm2bids uses the 'bundled' BIDS spec for reproducible, offline-friendly behavior."
+            "\nFor long-running or shared pipelines, consider pinning a specific tag (e.g. 'v1.11.1')."
+            "\nWhen internet is available, it will check once whether the remote 'stable' is newer and, if so, \n"
             "suggest updating to that specific version tag."
             ),
         )
@@ -157,10 +156,11 @@ def main():
         check_latest("dcm2niix", log_dir=log_dir)
 
 
-    # Detect presence of the flag explicitly, user == explicit choice == use it.
-    supplied_bids_version = ("--bids_version" in sys.argv) or ("-b" in sys.argv)
 
-    if not supplied_bids_version:
+
+    # Detect presence via argparse: None means not explicitly provided.
+    # This is to make sure when user asks explicitly for a version that it uses it even if default
+    if args.bids_version is None:
         bundled_version = BIDS_SCHEMA_DEFAULT_VERSION
         logger.info(
             "No --bids_version provided; using 'bundled' BIDS spec (version=%s) "
