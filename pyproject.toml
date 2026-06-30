@@ -1,5 +1,5 @@
 
 [tool.codespell]
-skip = '.git,*.pdf,*.svg,./dcm2bids/utils/schema_data'
+skip = '.git,*.pdf,*.svg,./dcm2bids/utils/schema_data/*.json'
 #
 ignore-words-list = 'nd'
