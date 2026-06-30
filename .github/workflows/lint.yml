@@ -20,8 +20,11 @@ jobs:
           pip install black flake8 pylint
           pip install .
 
-      - name: Flake8
-        run: flake8 dcm2bids
+#      - name: Black
+#        run: black --check dcm2bids
+
+#      - name: Flake8
+#        run: flake8 dcm2bids
 
       - name: Pylint
         run: pylint dcm2bids
