@@ -77,9 +77,9 @@ def _build_arg_parser():
     p.add_argument("-b", "--bids_version",
                    default=None,
                    help=(
-            "Set the BIDS specification version to follow (e.g. 'v1.11.1', 'stable', 'latest' or 'bundled')."
+            "Set the BIDS specification version to follow (e.g. 'v1.11.1', 'stable', 'latest' or 'default')."
             "\nThis controls which BIDS schema and rules dcm2bids uses for automatic entity extraction and ordering."
-            "\nIf not provided, dcm2bids uses the 'bundled' BIDS spec for reproducible, offline-friendly behavior."
+            "\nIf not provided, dcm2bids uses the 'default' BIDS spec for reproducible, offline-friendly behavior."
             "\nFor long-running or shared pipelines, consider pinning a specific tag (e.g. 'v1.11.1')."
             "\nWhen internet is available, it will check once whether the remote 'stable' is newer and, if so, \n"
             "suggest updating to that specific version tag."
@@ -117,13 +117,13 @@ def _build_arg_parser():
 
     p.add_argument("-v", "--version",
                    action="version",
-                   # This uses DEFAULT.bids_version, which reflects the bundled schema version.
+                   # This uses DEFAULT.bids_version, which reflects the default schema version.
                    version=(
                         f"dcm2bids version:\t{__version__}\n"
-                        f"Bundled BIDS version:\t{DEFAULT.bids_version} "
+                        f"default BIDS version:\t{DEFAULT.bids_version} "
                         "unless overridden by --bids_version."
                     ),
-                   help="Report dcm2bids version and the bundled BIDS specification version it follows by default."
+                   help="Report dcm2bids version and the default BIDS specification version it follows by default."
                    )
 
     return p
@@ -161,14 +161,14 @@ def main():
     # Detect presence via argparse: None means not explicitly provided.
     # This is to make sure when user asks explicitly for a version that it uses it even if default
     if args.bids_version is None:
-        bundled_version = BIDS_SCHEMA_DEFAULT_VERSION
+        default_version = BIDS_SCHEMA_DEFAULT_VERSION
         logger.info(
-            "No --bids_version provided; using 'bundled' BIDS spec (version=%s) "
+            "No --bids_version provided; using 'default' BIDS spec (version=%s) "
             "for reproducible behavior.",
-            bundled_version,
+            default_version,
         )
         # Effective schema label for this run:
-        args.bids_version = "bundled"
+        args.bids_version = "default"
 
         # Optionally *suggest* upgrading if remote stable is newer.
         if has_internet():
@@ -184,18 +184,18 @@ def main():
 
             if isinstance(stable_version, str):
                 logger.debug(
-                    "Bundled BIDS version: %s; remote 'stable' version: %s",
-                    bundled_version,
+                    "default BIDS version: %s; remote 'stable' version: %s",
+                    default_version,
                     stable_version,
                 )
-                if _version_newer(stable_version, bundled_version):
+                if _version_newer(stable_version, default_version):
                     logger.warning(
                         "A newer 'stable' BIDS specification (%s) is available than the "
-                        "bundled version (%s). The bundled schema is still used "
+                        "default version (%s). The default schema is still used "
                         "for this run. Consider updating using "
                         "--bids_version %s.",
                         stable_version,
-                        bundled_version,
+                        default_version,
                         stable_version,
                     )
                 else:
@@ -204,8 +204,8 @@ def main():
             else:
                 logger.info(
                     "Could not determine version for 'stable'; "
-                    "continuing with bundled BIDS specification (%s).",
-                    bundled_version,
+                    "continuing with default BIDS specification (%s).",
+                    default_version,
                 )
     else:
         logger.info(
@@ -220,14 +220,14 @@ def main():
                 "You requested BIDS version 'latest'. This typically tracks the "
                 "current development version of the BIDS specification and may be "
                 "unstable or change without notice. For reproducible pipelines, "
-                "consider using a fixed version tag (e.g. 'v1.11.1') or 'bundled'."
+                "consider using a fixed version tag (e.g. 'v1.11.1') or 'default'."
             )
 
         elif requested_label == "stable":
             logger.info(
                 "You requested BIDS version 'stable'. This label may point to "
                 "different BIDS releases over time. For reproducible pipelines, "
-                "consider using a fixed version tag (e.g. 'v1.11.1') or 'bundled'."
+                "consider using a fixed version tag (e.g. 'v1.11.1') or 'default'."
             )
 
     logger.info("Ensuring BIDS version '%s' is available.", args.bids_version)
@@ -244,7 +244,7 @@ def main():
         logger.error(
             "To proceed offline, either:\n"
             "  * Run once with internet so the schema for '%s' can be cached, or\n"
-            "  * Use the bundled schema with '--bids_version bundled', or\n"
+            "  * Use the default schema with '--bids_version default', or\n"
             "  * Pin to a specific BIDS version tag that is already cached.",
             args.bids_version,
         )

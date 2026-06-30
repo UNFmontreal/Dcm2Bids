@@ -2,7 +2,7 @@
 # https://learn.scientific-python.org/development/patterns/data-files/#using-the-init
 
 """
-Bundled _stable_ BIDS schema resources available upon dcm2bids release.
+default _stable_ BIDS schema resources available upon dcm2bids release.
 
 This module exposes:
 

@@ -60,7 +60,7 @@ class DEFAULT(object):
                        'PhaseEncodingDirection': ["(?P<dir>(j|i)-?)"],
                        'EchoNumber': ["(?P<echo>[0-9])"]}
 
-    # Compute schema-derived defaults once from the bundled schema.
+    # Compute schema-derived defaults once from the default schema.
     _SCHEMA_DERIVED = load_schema_derived_defaults()
     # Default schema-derived entity table keys derived from it.
     # If schema loading fails, dcm2bids will raise at import time

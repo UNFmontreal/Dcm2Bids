@@ -103,9 +103,9 @@ def _save_schema_cache(schema_cache, full_cache, log_dir):
     tools._save_version_cache(full_cache, log_dir)
 
 
-def _load_bundled_schema():
+def _load_default_schema():
     """
-    Load the schema that is bundled with dcm2bids.
+    Load the schema that is default with dcm2bids.
 
     The JSON is packaged under `dcm2bids.utils.schema_data` as
     `bids_schema_<BIDS_SCHEMA_DEFAULT_VERSION>.json`, e.g.:
@@ -118,24 +118,24 @@ def _load_bundled_schema():
         with path.open("r", encoding="utf-8") as f:
             schema = json.load(f)
         logger.info(
-            "Loaded bundled BIDS schema (version=%s) from %s.",
+            "Loaded default BIDS schema (version=%s) from %s.",
             BIDS_SCHEMA_DEFAULT_VERSION,
             path,
         )
         return schema
     except FileNotFoundError:
         logger.warning(
-            "Bundled BIDS schema file not found for version=%s (expected at %s).",
+            "default BIDS schema file not found for version=%s (expected at %s).",
             BIDS_SCHEMA_DEFAULT_VERSION,
             filename,
         )
-        logger.debug("Bundled schema load FileNotFoundError:", exc_info=True)
+        logger.debug("default schema load FileNotFoundError:", exc_info=True)
     except Exception:
         logger.warning(
-            "Failed to load bundled BIDS schema (version=%s).",
+            "Failed to load default BIDS schema (version=%s).",
             BIDS_SCHEMA_DEFAULT_VERSION,
         )
-        logger.debug("Bundled schema load exception:", exc_info=True)
+        logger.debug("default schema load exception:", exc_info=True)
     return None
 
 
@@ -148,8 +148,8 @@ def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
     """
     schema = None
     # TODO: reduce complexity of this very long and complex function.
-    if schema_version == "bundled":
-        return _load_bundled_schema()
+    if schema_version == "default":
+        return _load_default_schema()
     is_alias = str(schema_version) in {"stable", "latest"}
 
     # If no log_dir, we can still download but won't persist cache metadata or files.
@@ -280,7 +280,7 @@ def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
         logger.info(
             "No internet connection; cannot download BIDS schema (version=%s) "
             "from %s. If this is your first run with this label, you must either "
-            "run once with internet or use the 'bundled' schema or a pinned, "
+            "run once with internet or use the 'default' schema or a pinned, "
             "previously-cached version.",
             schema_version,
             BIDS_SCHEMA_BASEURL,
@@ -303,14 +303,14 @@ def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
                     exc_info=True,
                 )
 
-    # 3) Fallback to bundled only if requested version == default
+    # 3) Fallback to default only if requested version == default
     if schema_version in (BIDS_SCHEMA_DEFAULT_VERSION,
                           f"v{BIDS_SCHEMA_DEFAULT_VERSION}"):
         logger.info(
-            "Falling back to bundled BIDS schema for default version %s.",
+            "Falling back to default BIDS schema for default version %s.",
             BIDS_SCHEMA_DEFAULT_VERSION,
         )
-        schema = _load_bundled_schema()
+        schema = _load_default_schema()
 
     if schema is None:
         logger.debug("BIDS schema: no schema loaded (version=%s)", schema_version)

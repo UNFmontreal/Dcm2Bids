@@ -101,37 +101,37 @@ def test_version_newer(latest, current, expected):
     assert _version_newer(latest, current) is expected
 
 
-def test_get_schema_bundled_calls_loader(monkeypatch):
+def test_get_schema_default_calls_loader(monkeypatch):
     """
-    When schema_version='bundled', _get_schema should delegate directly to
-    _load_bundled_schema and return exactly what it yields.
+    When schema_version='default', _get_schema should delegate directly to
+    _load_default_schema and return exactly what it yields.
     """
     called = {"count": 0}
     fake_schema = {"bids_version": "vX.Y.Z", "dummy": True}
 
-    def fake_load_bundled():
+    def fake_load_default():
         called["count"] += 1
         return fake_schema
 
-    monkeypatch.setattr(schema_mod, "_load_bundled_schema", fake_load_bundled)
+    monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default)
 
-    result = _get_schema(schema_version="bundled", log_dir=None)
+    result = _get_schema(schema_version="default", log_dir=None)
 
     assert called["count"] == 1
     assert result is fake_schema
 
 
-def test_get_schema_bundled_returns_none_if_loader_fails(monkeypatch):
+def test_get_schema_default_returns_none_if_loader_fails(monkeypatch):
     """
-    If _load_bundled_schema returns None, _get_schema('bundled') should
+    If _load_default_schema returns None, _get_schema('default') should
     also return None and not raise. The caller decides if this is fatal.
     """
-    def fake_load_bundled():
+    def fake_load_default():
         return None
 
-    monkeypatch.setattr(schema_mod, "_load_bundled_schema", fake_load_bundled)
+    monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default)
 
-    result = _get_schema(schema_version="bundled", log_dir=None)
+    result = _get_schema(schema_version="default", log_dir=None)
     assert result is None
 
 
@@ -289,13 +289,13 @@ def test_get_schema_default_offline_with_cache(monkeypatch, tmp_path):
     assert result == cached_schema
 
 
-def test_get_schema_default_offline_without_cache_falls_back_to_bundled(
+def test_get_schema_default_offline_without_cache_falls_back_to_default(
     monkeypatch, tmp_path
 ):
     """
     When offline, no cache exists, and the requested version equals the default:
-      * _load_bundled_schema is used as a fallback
-      * the bundled schema is returned
+      * _load_default_schema is used as a fallback
+      * the default schema is returned
     """
     log_dir = tmp_path / "log"
     log_dir.mkdir()
@@ -307,23 +307,23 @@ def test_get_schema_default_offline_without_cache_falls_back_to_bundled(
         assert ld == log_dir
         return {}, {}
 
-    bundled_called = {"called": False}
-    bundled_schema = {
+    default_called = {"called": False}
+    default_schema = {
         "bids_version": BIDS_SCHEMA_DEFAULT_VERSION,
-        "from": "bundled-fallback",
+        "from": "default-fallback",
     }
 
-    def fake_load_bundled_schema():
-        bundled_called["called"] = True
-        return bundled_schema
+    def fake_load_default_schema():
+        default_called["called"] = True
+        return default_schema
 
     monkeypatch.setattr(schema_mod.tools, "has_internet", fake_has_internet)
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
-    monkeypatch.setattr(schema_mod, "_load_bundled_schema", fake_load_bundled_schema)
+    monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default_schema)
 
     result = _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
-    assert bundled_called["called"] is True
-    assert result == bundled_schema
+    assert default_called["called"] is True
+    assert result == default_schema
 
 
 def test_get_schema_alias_fresh_cache_uses_cache(monkeypatch, tmp_path):
@@ -572,7 +572,7 @@ def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_defaul
     assert len(auto_entities) > 0
 
     # DEFAULT.auto_entities is built from load_schema_derived_defaults()
-    # at import time; they should match for the bundled schema version.
+    # at import time; they should match for the default schema version.
     assert DEFAULT.auto_entities == auto_entities
 
 
