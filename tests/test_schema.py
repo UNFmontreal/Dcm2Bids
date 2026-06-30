@@ -580,22 +580,14 @@ def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_defaul
 def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
     """
     For BIDS v1.11.1, the derived entity_table_keys should match the
-    hardcoded list from the v1.11.1 entity table in the spec.
+    hardcoded list from the v1.11.1 entity table in the spec for MRI (raw, not derivatives).
     """
     expected_entity_keys = [
         'sub',
-        'tpl',
         'ses',
-        'cohort',
-        'sample',
         'task',
-        'tracksys',
         'acq',
-        'nuc',
-        'voi',
         'ce',
-        'trc',
-        'stain',
         'rec',
         'dir',
         'run',
@@ -605,19 +597,8 @@ def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
         'inv',
         'mt',
         'part',
-        'proc',
-        'hemi',
-        'space',
-        'split',
         'recording',
-        'chunk',
-        'atlas',
-        'seg',
-        'scale',
-        'res',
-        'den',
-        'label',
-        'desc'
+        'chunk'
     ]
 
     # Load the v1.11.1 schema directly from the web or cache.
@@ -648,6 +629,7 @@ def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
         "anat_stim": ["task"],
         "func_cbv": ["task"],
         "func_bold": ["task"],
+        "func_events": ["task"],
         "func_sbref": ["task"],
         "func_stim": ["task"],
         "func_phase": ["task"],

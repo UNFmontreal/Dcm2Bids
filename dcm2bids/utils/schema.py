@@ -328,7 +328,7 @@ def _get_entities_ordered(schema):
     return [entities[key] for key in entities_order]
 
 
-def _get_entity_table_keys(entities_list):
+def _get_entity_table_keys(schema):
     """
     Return the list of entity short names,
     ordered according to `rules.entities`.
@@ -336,7 +336,40 @@ def _get_entity_table_keys(entities_list):
     This is the schema-driven version of former DEFAULT.entityTableKeys.
     """
 
-    ordered_entities = _get_entities_ordered(entities_list)
+    ordered_entities = _get_entities_ordered(schema)
+    return [ent["name"] for ent in ordered_entities]
+
+
+def _get_raw_mri_entity_table_keys(schema):
+    """
+    Return ordered entity short names that are actually used
+    in the raw MRI datatype rules.
+
+    This is like `_get_entity_table_keys`, but restricted to entities that
+    are referenced in `rules.files['raw']` for MRI datatypes.
+    """
+    rules = schema["rules"]
+    raw_rules = rules["files"].get("raw", {})
+    mri_datatypes = _get_mri_datatypes(schema)
+
+    # Collect schema-level entity *keys* that appear in raw MRI rules
+    used_schema_entities = set()
+    for datatype, groups in raw_rules.items():
+        if datatype not in mri_datatypes:
+            continue
+        for spec in groups.values():
+            for ent_key in (spec.get("entities") or {}):
+                used_schema_entities.add(ent_key)
+
+    # Walk rules.entities in order, but keep only those used in raw MRI
+    entities = schema["objects"]["entities"]
+    ordered_schema_keys = rules["entities"]
+
+    ordered_entities = [
+        entities[key]
+        for key in ordered_schema_keys
+        if key in used_schema_entities
+    ]
     return [ent["name"] for ent in ordered_entities]
 
 
@@ -376,8 +409,7 @@ def _get_auto_entities_from_schema(schema):
 
     This is the schema-driven version of DEFAULT.auto_entities.
     """
-    rules_files = schema["rules"]["files"]
-    raw_rules = rules_files.get("raw", {})
+    raw_rules = schema["rules"]["files"]['raw']
 
     schema_to_bids = _get_schema_to_bids_entity_map(schema)
     mri_datatypes = _get_mri_datatypes(schema)
@@ -452,10 +484,18 @@ def load_schema_derived_defaults(
             "schema_version override."
         )
 
-    entity_table_keys = _get_entity_table_keys(schema)
+    # All entities in schema order
+    entity_table_keys_all = _get_entity_table_keys(schema)
     auto_entities = _get_auto_entities_from_schema(schema)
+    # Entities for raw MRI datatypes only
+    raw_mri_entity_table_keys = _get_raw_mri_entity_table_keys(schema)
 
+    # Make raw MRI entities the default
+    # makes it backward compatible with manual tables in default
     return {
-        "entity_table_keys": entity_table_keys,
+        # default set
+        "entity_table_keys": raw_mri_entity_table_keys,
         "auto_entities": auto_entities,
+        # keep the full list available
+        "all_entity_table_keys": entity_table_keys_all,
     }

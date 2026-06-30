@@ -161,8 +161,7 @@ class Acquisition(object):
         """
         Return:
             The destination filename formatted following
-            the v1.9.0 BIDS entity key table
-            https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
+            the BIDS entity key order according to the schema
         """
 
         if self.custom_entities.strip() == "":
