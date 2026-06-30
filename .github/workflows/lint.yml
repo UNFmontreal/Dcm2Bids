@@ -1,0 +1,30 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install lint dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black flake8 pylint
+          pip install .
+
+      - name: Black
+        run: black --check dcm2bids
+
+      - name: Flake8
+        run: flake8 dcm2bids
+
+      - name: Pylint
+        run: pylint dcm2bids
