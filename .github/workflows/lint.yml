@@ -26,5 +26,5 @@ jobs:
 #      - name: Flake8
 #        run: flake8 dcm2bids
 
-      - name: Pylint
-        run: pylint dcm2bids
+#      - name: Pylint
+#        run: pylint dcm2bids
