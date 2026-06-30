@@ -41,7 +41,7 @@ from dcm2bids.utils.utils import DEFAULT
         ("1..2", (1, 0, 2)),
         (".1", (0, 1)),
         ("1.", (1, 0)),
-        # Unparseable versions: fall back to string comparison
+        # Unparsable versions: fall back to string comparison
         ("dev", "dev"),
         ("1.11.1-rc1", "1.11.1-rc1"),
         ("v1.11.1-rc1", "v1.11.1-rc1"),
