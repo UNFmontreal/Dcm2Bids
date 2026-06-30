@@ -923,10 +923,15 @@ You can test it, of course!
 
     ```
 
-Now, Dcm2bids new feature `--auto_extract_entities` will help you with this
-specific situations. Following BIDS naming scheme fieldmaps need to be named
-with a dir entity. If you take a look each json file you'll find in their
-respective sidecar PhaseEncodedDirection a different direction
+Now, dcm2bids' `--auto_extract_entities` feature will help you with this
+specific situation. Following the BIDS schema, fieldmap EPI files can
+optionally use the standard `dir` entity in their filename (for example,
+`sub-ID01_dir-AP_epi`). dcm2bids can derive this `dir` value automatically
+from the phase-encoding information in the sidecar, so you do **not** need
+to specify `dir-AP`, `dir-PA`, etc. yourself in the config file.
+
+If you look at each JSON file, you will find in their respective sidecar a
+`"PhaseEncodingDirection"` field that differs between the fieldmaps:
 
 === "Command"
 
@@ -945,10 +950,12 @@ respective sidecar PhaseEncodedDirection a different direction
     tmp_dcm2bids/helper/006_In_EPI_PE=LR_20180918121230.json:	"PhaseEncodingDirection": "i-",
     ```
 
-This entity will be different for each fieldmap so there's no need to be more
-specific.
+Because this field is different for each fieldmap, dcm2bids can safely use it
+to generate distinct `dir` labels automatically when `--auto_extract_entities`
+is enabled.
 
-Please check the different use cases for this feature
+Please check the different use cases for this feature in the main
+configuration documentation.
 
 Once you are sure of you matching criteria, you can update your configuration
 file with the appropriate info.
@@ -971,6 +978,7 @@ file with the appropriate info.
     {
       "datatype": "fmap",
       "suffix": "epi",
+      "custom_entities": "dir",
       "criteria": {
         "SeriesDescription": "EPI PE=*"
       },
@@ -1031,7 +1039,10 @@ Note that if you don't specify the `-o` option, your current directory will be
 populated with the `sub-<label>` directories.
 
 Using the option `--auto_extract_entities` will allow dcm2bids to look for some
-specific entities without having to put them in the config file.
+required BIDS entities per datatype (such as `inv` for MP2RAGE) and add them to the
+output filenames without you having to define them in the config file. For
+other entities, you should still use `custom_entities` in the
+configuration.
 
 That being said, you can run the command:
 
