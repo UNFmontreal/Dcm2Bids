@@ -24,7 +24,6 @@ class DEFAULT(object):
     cli_session = ""
     cli_log_level = "INFO"
 
-    # BIDS version # TODO: Make this pull from the cached data
     bids_version = BIDS_SCHEMA_DEFAULT_VERSION
 
     # Archives

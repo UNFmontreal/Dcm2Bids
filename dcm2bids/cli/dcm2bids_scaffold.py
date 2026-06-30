@@ -69,7 +69,7 @@ def main():
 
     log_dir = log_file.parent
     check_latest("dcm2bids", log_dir=log_dir)
-    # check_latest("bids_version", log_dir=log_dir)
+
 
     logger.info("The files used to create your BIDS directory were taken from "
                 "https://github.com/bids-standard/bids-starter-kit. \n")

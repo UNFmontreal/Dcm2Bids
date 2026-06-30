@@ -139,7 +139,7 @@ def _load_default_schema():
     return None
 
 
-def _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
+def get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
     """
     Fetch the BIDS schema JSON for a given version label, with caching and fallback.
 
@@ -489,7 +489,7 @@ def load_schema_derived_defaults(
       - 'entity_table_keys': Entity short names
       - 'auto_entities': schema-driven auto-entities (MRI datatypes)
     """
-    schema = _get_schema(schema_version=schema_version, log_dir=log_dir)
+    schema = get_schema(schema_version=schema_version, log_dir=log_dir)
     if schema is None:
         raise RuntimeError(
             f"Failed to load BIDS schema for version '{schema_version}'. "

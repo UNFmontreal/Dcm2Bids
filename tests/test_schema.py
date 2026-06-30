@@ -7,7 +7,7 @@ import pytest
 from dcm2bids.utils.tools import _normalize_version, _version_newer
 from dcm2bids.utils import schema as schema_mod
 from dcm2bids.utils.schema import (
-    _get_schema,
+    get_schema,
     BIDS_SCHEMA_DEFAULT_VERSION,
     load_schema_derived_defaults,
     _get_raw_mri_entity_table_keys,
@@ -103,7 +103,7 @@ def test_version_newer(latest, current, expected):
 
 def test_get_schema_default_calls_loader(monkeypatch):
     """
-    When schema_version='default', _get_schema should delegate directly to
+    When schema_version='default', get_schema should delegate directly to
     _load_default_schema and return exactly what it yields.
     """
     called = {"count": 0}
@@ -115,7 +115,7 @@ def test_get_schema_default_calls_loader(monkeypatch):
 
     monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default)
 
-    result = _get_schema(schema_version="default", log_dir=None)
+    result = get_schema(schema_version="default", log_dir=None)
 
     assert called["count"] == 1
     assert result is fake_schema
@@ -123,7 +123,7 @@ def test_get_schema_default_calls_loader(monkeypatch):
 
 def test_get_schema_default_returns_none_if_loader_fails(monkeypatch):
     """
-    If _load_default_schema returns None, _get_schema('default') should
+    If _load_default_schema returns None, get_schema('default') should
     also return None and not raise. The caller decides if this is fatal.
     """
     def fake_load_default():
@@ -131,7 +131,7 @@ def test_get_schema_default_returns_none_if_loader_fails(monkeypatch):
 
     monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default)
 
-    result = _get_schema(schema_version="default", log_dir=None)
+    result = get_schema(schema_version="default", log_dir=None)
     assert result is None
 
 
@@ -183,7 +183,7 @@ def test_get_schema_default_online_uncached_downloads_and_caches(monkeypatch, tm
     monkeypatch.setattr(schema_mod, "_save_schema_cache", fake_save_schema_cache)
 
     # Use the real save_json/load_json to verify file round-trip
-    result = _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
 
     assert downloaded["called"] is True
     assert result == fake_schema
@@ -243,7 +243,7 @@ def test_get_schema_default_online_cached_uses_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
     monkeypatch.setattr(schema_mod, "_save_schema_cache", fake_save_schema_cache)
 
-    result = _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
     assert result == cached_schema
 
     # cache should have been updated with timestamp (and keep bids_version)
@@ -285,7 +285,7 @@ def test_get_schema_default_offline_with_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(schema_mod.tools, "has_internet", fake_has_internet)
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
 
-    result = _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
     assert result == cached_schema
 
 
@@ -321,7 +321,7 @@ def test_get_schema_default_offline_without_cache_falls_back_to_default(
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
     monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default_schema)
 
-    result = _get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
     assert default_called["called"] is True
     assert result == default_schema
 
@@ -329,7 +329,7 @@ def test_get_schema_default_offline_without_cache_falls_back_to_default(
 def test_get_schema_alias_fresh_cache_uses_cache(monkeypatch, tmp_path):
     """
     For alias labels like 'stable':
-      * If cache entry exists and is fresh, _get_schema should return cached
+      * If cache entry exists and is fresh, get_schema should return cached
         schema and not attempt a download.
     """
     log_dir = tmp_path / "log"
@@ -367,14 +367,14 @@ def test_get_schema_alias_fresh_cache_uses_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
     monkeypatch.setattr(schema_mod, "_download_schema", fake_download_schema)
 
-    result = _get_schema(schema_version=schema_version, log_dir=log_dir)
+    result = get_schema(schema_version=schema_version, log_dir=log_dir)
     assert result == cached_schema
 
 
 def test_get_schema_alias_stale_cache_downloads_and_updates(monkeypatch, tmp_path):
     """
     For alias labels like 'stable':
-      * If cache entry exists but is stale, _get_schema should attempt to
+      * If cache entry exists but is stale, get_schema should attempt to
         re-download from the internet.
       * On successful download, it should return the new schema and update
         the cache metadata.
@@ -434,7 +434,7 @@ def test_get_schema_alias_stale_cache_downloads_and_updates(monkeypatch, tmp_pat
     monkeypatch.setattr(schema_mod, "_save_schema_cache", fake_save_schema_cache)
     monkeypatch.setattr(schema_mod, "_schema_file_path", fake_schema_file_path)
 
-    result = _get_schema(schema_version=schema_version, log_dir=log_dir)
+    result = get_schema(schema_version=schema_version, log_dir=log_dir)
     assert download_called["called"] is True
     assert result == new_schema
 
@@ -487,7 +487,7 @@ def test_get_schema_alias_stale_cache_download_fails_falls_back_to_cache(
     monkeypatch.setattr(schema_mod, "_download_schema", fake_download_schema)
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
 
-    result = _get_schema(schema_version=schema_version, log_dir=log_dir)
+    result = get_schema(schema_version=schema_version, log_dir=log_dir)
     assert result == cached_schema
 
 
@@ -525,7 +525,7 @@ def test_get_schema_alias_offline_with_and_without_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(schema_mod.tools, "has_internet", fake_has_internet)
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache_with)
 
-    result_with = _get_schema(schema_version=schema_version, log_dir=log_dir)
+    result_with = get_schema(schema_version=schema_version, log_dir=log_dir)
     assert result_with == cached_schema
 
     # Case 2: without cache
@@ -535,7 +535,7 @@ def test_get_schema_alias_offline_with_and_without_cache(monkeypatch, tmp_path):
 
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache_without)
 
-    result_without = _get_schema(schema_version=schema_version, log_dir=log_dir)
+    result_without = get_schema(schema_version=schema_version, log_dir=log_dir)
     assert result_without is None
 
 
@@ -602,7 +602,7 @@ def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
     ]
 
     # Load the v1.11.1 schema directly from the web or cache.
-    schema = _get_schema(schema_version="v1.11.1", log_dir=tmp_path)
+    schema = get_schema(schema_version="v1.11.1", log_dir=tmp_path)
     assert schema is not None
     assert schema.get("bids_version") in ("1.11.1", "v1.11.1")
 
@@ -641,7 +641,7 @@ def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
         "fmap_TB1SRGE": ["flip", "inv"],
     }
 
-    schema = _get_schema(schema_version="v1.11.1", log_dir=tmp_path)
+    schema = get_schema(schema_version="v1.11.1", log_dir=tmp_path)
     assert schema is not None
     assert schema.get("bids_version") in ("1.11.1", "v1.11.1")
 

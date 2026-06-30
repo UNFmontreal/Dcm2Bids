@@ -17,7 +17,7 @@
             "criteria": {
                 "SeriesDescription": ".*bold.*"
             }
-        }, 
+        },
         {
             "id": "T1",
             "datatype": "anat",

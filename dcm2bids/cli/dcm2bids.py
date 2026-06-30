@@ -15,7 +15,7 @@ from datetime import datetime
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.utils.tools import dcm2niix_version, check_latest, has_internet, _version_newer
-from dcm2bids.utils.schema import _get_schema, BIDS_SCHEMA_DEFAULT_VERSION
+from dcm2bids.utils.schema import get_schema, BIDS_SCHEMA_DEFAULT_VERSION
 from dcm2bids.participant import Participant
 from dcm2bids.utils.logger import setup_logging
 from dcm2bids.version import __version__
@@ -177,7 +177,7 @@ def main():
                 "Checking remote 'stable' BIDS spec to see if a newer version "
                 "is available."
             )
-            stable_schema = _get_schema(schema_version="stable", log_dir=log_dir)
+            stable_schema = get_schema(schema_version="stable", log_dir=log_dir)
             stable_version = None
             if stable_schema is not None:
                 stable_version = stable_schema.get("bids_version", "stable")
@@ -232,7 +232,7 @@ def main():
 
     logger.info("Ensuring BIDS version '%s' is available.", args.bids_version)
 
-    schema = _get_schema(schema_version=args.bids_version, log_dir=log_dir)
+    schema = get_schema(schema_version=args.bids_version, log_dir=log_dir)
     if schema is None:
         # Be explicit so users know how to recover, aborting so user actually reads the log ;)
         logger.error(
