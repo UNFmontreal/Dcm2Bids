@@ -14,8 +14,8 @@ from pathlib import Path
 from datetime import datetime
 from dcm2bids.dcm2bids_gen import Dcm2BidsGen
 from dcm2bids.utils.utils import DEFAULT
-from dcm2bids.utils.tools import dcm2niix_version, check_latest, has_internet, _version_newer
-from dcm2bids.utils.schema import get_schema, BIDS_SCHEMA_DEFAULT_VERSION
+from dcm2bids.utils.tools import dcm2niix_version, check_latest
+from dcm2bids.utils.schema import load_schema
 from dcm2bids.participant import Participant
 from dcm2bids.utils.logger import setup_logging
 from dcm2bids.version import __version__
@@ -158,104 +158,8 @@ def main():
 
 
 
-    # Detect presence via argparse: None means not explicitly provided.
-    # This is to make sure when user asks explicitly for a version that it uses it even if default
-    if args.bids_version is None:
-        default_version = BIDS_SCHEMA_DEFAULT_VERSION
-        logger.info(
-            "No --bids_version provided; using 'default' BIDS spec (version=%s) "
-            "for reproducible behavior.",
-            default_version,
-        )
-        # Effective schema label for this run:
-        args.bids_version = "default"
 
-        # Optionally *suggest* upgrading if remote stable is newer.
-        if has_internet():
-            logger.info("Checking for BIDS update")
-            logger.debug(
-                "Checking remote 'stable' BIDS spec to see if a newer version "
-                "is available."
-            )
-            stable_schema = get_schema(schema_version="stable", log_dir=log_dir)
-            stable_version = None
-            if stable_schema is not None:
-                stable_version = stable_schema.get("bids_version", "stable")
-
-            if isinstance(stable_version, str):
-                logger.debug(
-                    "default BIDS version: %s; remote 'stable' version: %s",
-                    default_version,
-                    stable_version,
-                )
-                if _version_newer(stable_version, default_version):
-                    logger.warning(
-                        "A newer 'stable' BIDS specification (%s) is available than the "
-                        "default version (%s). The default schema is still used "
-                        "for this run. Consider updating using "
-                        "--bids_version %s.",
-                        stable_version,
-                        default_version,
-                        stable_version,
-                    )
-                else:
-                    logger.info("Using latest stable BIDS specification.")
-
-            else:
-                logger.info(
-                    "Could not determine version for 'stable'; "
-                    "continuing with default BIDS specification (%s).",
-                    default_version,
-                )
-    else:
-        logger.info(
-            "Specific BIDS version requested via --bids_version=%s",
-            args.bids_version,
-        )
-        requested_label = args.bids_version
-
-        # Warn user explicitly about using 'latest' and to a lesser extent 'stable'.
-        if requested_label == "latest":
-            logger.warning(
-                "You requested BIDS version 'latest'. This typically tracks the "
-                "current development version of the BIDS specification and may be "
-                "unstable or change without notice. For reproducible pipelines, "
-                "consider using a fixed version tag (e.g. 'v1.11.1') or 'default'."
-            )
-
-        elif requested_label == "stable":
-            logger.info(
-                "You requested BIDS version 'stable'. This label may point to "
-                "different BIDS releases over time. For reproducible pipelines, "
-                "consider using a fixed version tag (e.g. 'v1.11.1') or 'default'."
-            )
-
-    logger.info("Ensuring BIDS version '%s' is available.", args.bids_version)
-
-    schema = get_schema(schema_version=args.bids_version, log_dir=log_dir)
-    if schema is None:
-        # Be explicit so users know how to recover, aborting so user actually reads the log ;)
-        logger.error(
-            "Failed to load BIDS schema for '%s'. If you are running offline and "
-            "this label has never been used before on this machine, there may be "
-            "no cached file available.",
-            args.bids_version,
-        )
-        logger.error(
-            "To proceed offline, either:\n"
-            "  * Run once with internet so the schema for '%s' can be cached, or\n"
-            "  * Use the default schema with '--bids_version default', or\n"
-            "  * Pin to a specific BIDS version tag that is already cached.",
-            args.bids_version,
-        )
-        logger.error(
-            "BIDS version '%s' could not be found; verify the version provided.",
-            args.bids_version,
-        )
-        logger.error(
-            "dcm2bids cannot continue without a valid BIDS version. Aborting."
-        )
-        sys.exit(1)
+    load_schema(args.bids_version, log_dir=log_dir)
 
     logger.info(f"participant: {participant.name}")
     if participant.session:

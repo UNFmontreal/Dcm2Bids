@@ -1,4 +1,5 @@
 import logging
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -512,3 +513,136 @@ def load_schema_derived_defaults(
         # keep the full list available
         "all_entity_table_keys": entity_table_keys_all,
     }
+
+def _resolve_bids_version_label(args_bids_version, log_dir):
+    """
+    Decide which schema label to use and log messages.
+    Returns the actual label in used (e.g. 'default', 'stable', 'v1.11.1', etc)
+    """
+    if args_bids_version is None:
+        default_version = BIDS_SCHEMA_DEFAULT_VERSION
+        logger.info(
+            "No --bids_version provided; using 'default' BIDS spec (version=%s) "
+            "for reproducible behavior.",
+            default_version,
+        )
+
+        if tools.has_internet():
+            _check_latest_stable(default_version, log_dir)
+
+        return "default"
+
+    logger.info(
+        "Specific BIDS version requested via --bids_version=%s",
+        args_bids_version,
+    )
+
+    if args_bids_version == "latest":
+        logger.warning(
+            "You requested BIDS version 'latest'. This typically tracks the "
+            "current development version of the BIDS specification and may be "
+            "unstable or change without notice. For reproducible pipelines, "
+            "consider using a fixed version tag (e.g. 'v1.11.1') or 'default'."
+        )
+    elif args_bids_version == "stable":
+        logger.info(
+            "You requested BIDS version 'stable'. This label may point to "
+            "different BIDS releases over time. For reproducible pipelines, "
+            "consider using a fixed version tag (e.g. 'v1.11.1') or 'default'."
+        )
+
+    return args_bids_version
+
+
+def _check_latest_stable(version, log_dir):
+    """
+    If possible, check remote 'stable' and suggest upgrading if newer.
+    """
+    logger.info("Checking for BIDS update")
+    logger.debug(
+        "Checking remote 'stable' BIDS spec to see if a newer version "
+        "is available."
+    )
+    stable_schema = get_schema(schema_version="stable", log_dir=log_dir)
+    stable_version = None
+    if stable_schema is not None:
+        stable_version = stable_schema.get("bids_version", "stable")
+
+    if isinstance(stable_version, str):
+        logger.debug(
+            "default BIDS version: %s; remote 'stable' version: %s",
+            version,
+            stable_version,
+        )
+        if tools._version_newer(stable_version, version):
+            logger.warning(
+                "A newer 'stable' BIDS specification (%s) is available than the "
+                "default version (%s). The default schema is still used "
+                "for this run. Consider updating using "
+                "--bids_version %s.",
+                stable_version,
+                version,
+                stable_version,
+            )
+        else:
+            logger.info("Using latest stable BIDS specification.")
+    else:
+        logger.info(
+            "Could not determine version for 'stable'; "
+            "continuing with default BIDS specification (%s).",
+            version,
+        )
+
+
+def _abort_if_schema_missing(schema_version, schema):
+    """
+    Centralized error logging + exit when schema cannot be loaded.
+    """
+    if schema is not None:
+        return
+    # Be explicit so users know how to recover, aborting so user actually reads the log ;)
+    logger.error(
+        "Failed to load BIDS schema for '%s'. If you are running offline and "
+        "this label has never been used before on this machine, there may be "
+        "no cached file available.",
+        schema_version,
+    )
+    logger.error(
+        "To proceed offline, either:\n"
+        "  * Run once with internet so the schema for '%s' can be cached, or\n"
+        "  * Use the default schema with '--bids_version default', or\n"
+        "  * Pin to a specific BIDS version tag that is already cached.",
+        schema_version,
+    )
+    logger.error(
+        "BIDS version '%s' could not be found; verify the version provided.",
+        schema_version,
+    )
+    logger.error(
+        "dcm2bids cannot continue without a valid BIDS version. Aborting."
+    )
+    sys.exit(1)
+
+
+
+def load_schema(args_bids_version, log_dir):
+    """
+    Helper to resolve and load the requested BIDS schema version for the current run.
+    This function decides which BIDS version label to use, checks for updates, and
+    aborts if the schema cannot be loaded.
+
+    Args:
+        args_bids_version: BIDS version label requested by the user.
+
+    Returns:
+        dict: Loaded BIDS schema JSON corresponding to the actual version label.
+
+    Raises:
+        SystemExit: If no valid BIDS schema can be loaded for the requested label.
+    """
+    actual_label = _resolve_bids_version_label(args_bids_version, log_dir)
+
+    logger.info("Ensuring BIDS version '%s' is available.", actual_label)
+
+    schema = get_schema(schema_version=actual_label, log_dir=log_dir)
+    _abort_if_schema_missing(actual_label, schema)

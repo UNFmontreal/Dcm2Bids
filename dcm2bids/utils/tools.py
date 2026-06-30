@@ -141,14 +141,14 @@ def has_internet(timeout=3):
 
     except error.URLError as e:
         logger.warning(
-            "No access to internet or GitHub API. "
+            "No access to internet, GitHub or Read the Docs API. "
             "Check if there is an issue with your network/proxy/DNS. "
             "Skipping version check."
         )
         logger.debug("URLError: %s", e)
     except TimeoutError as e:
         logger.warning(
-            "Timeout error, no access to internet or to GitHub API: %s. "
+            "Timeout error, no access to internet or to GitHub or Read the Docs API: %s. "
             "Check if there is an issue with your network/proxy.",
             e,
         )
