@@ -10,7 +10,7 @@ from dcm2bids.utils.schema import (
     _get_schema,
     BIDS_SCHEMA_DEFAULT_VERSION,
     load_schema_derived_defaults,
-    _get_entity_table_keys,
+    _get_raw_mri_entity_table_keys,
     _get_auto_entities_from_schema,
 )
 from dcm2bids.utils.utils import DEFAULT
@@ -606,9 +606,8 @@ def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
     assert schema is not None
     assert schema.get("bids_version") in ("1.11.1", "v1.11.1")
 
-    entity_keys = _get_entity_table_keys(schema)
+    entity_keys = _get_raw_mri_entity_table_keys(schema)
     assert entity_keys == expected_entity_keys
-
 
 def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
     """
@@ -629,8 +628,8 @@ def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
         "anat_stim": ["task"],
         "func_cbv": ["task"],
         "func_bold": ["task"],
-        "func_events": ["task"],
         "func_sbref": ["task"],
+        # "func_events": ["task"], # only 3 above needed
         "func_stim": ["task"],
         "func_phase": ["task"],
         "func_physio": ["task"],

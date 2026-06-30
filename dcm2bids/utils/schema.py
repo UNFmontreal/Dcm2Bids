@@ -347,6 +347,10 @@ def _get_raw_mri_entity_table_keys(schema):
 
     This is like `_get_entity_table_keys`, but restricted to entities that
     are referenced in `rules.files['raw']` for MRI datatypes.
+
+    Note: A small quirk for (datatype == 'task') *only* when
+    they target MRI datatypes, so that entities like 'rec' that appear
+    in task timeseries__* rules for MRI are included.
     """
     rules = schema["rules"]
     raw_rules = rules["files"].get("raw", {})
@@ -354,12 +358,21 @@ def _get_raw_mri_entity_table_keys(schema):
 
     # Collect schema-level entity *keys* that appear in raw MRI rules
     used_schema_entities = set()
+
     for datatype, groups in raw_rules.items():
-        if datatype not in mri_datatypes:
-            continue
-        for spec in groups.values():
-            for ent_key in (spec.get("entities") or {}):
-                used_schema_entities.add(ent_key)
+        if datatype in mri_datatypes:
+            for spec in groups.values():
+                for ent_key in (spec.get("entities") or {}):
+                    used_schema_entities.add(ent_key)
+
+        # Task rules that target MRI datatypes (timeseries__*)
+        if datatype == "task":
+            for spec in groups.values():
+                target_dts = spec.get("datatypes", [])
+                if all(dt not in mri_datatypes for dt in target_dts):
+                    continue
+                for ent_key in (spec.get("entities") or {}):
+                    used_schema_entities.add(ent_key)
 
     # Walk rules.entities in order, but keep only those used in raw MRI
     entities = schema["objects"]["entities"]
@@ -386,16 +399,12 @@ def _get_mri_datatypes(schema):
     """
     Return the list of MRI-related datatypes defined in the schema.
 
-    This follows `rules.modalities['mri']['datatypes']` and ensures 'task'
-    is present because several modalities requires tasks.
+    This follows `rules.modalities['mri']['datatypes']`
     """
     rules = schema["rules"]
     mri = rules["modalities"].get("mri", {})
     datatypes = list(mri.get("datatypes", []))
 
-    # Quirk: Add task into the list if it's not explicitly listed.
-    if "task" not in datatypes:
-        datatypes.append("task")
 
     return datatypes
 
@@ -412,14 +421,18 @@ def _get_auto_entities_from_schema(schema):
     raw_rules = schema["rules"]["files"]['raw']
 
     schema_to_bids = _get_schema_to_bids_entity_map(schema)
-    mri_datatypes = _get_mri_datatypes(schema)
+    mri_datatypes = _get_mri_datatypes(schema) 
+
+    # Quirk: Add task into the list if it's not explicitly listed.
+    mri_datatypes_with_task = mri_datatypes + ["task"]
+
 
     auto_required_entities = {}
 
     # Loop over datatype groups
     for datatype, groups in raw_rules.items():
         # Skip non-mri datatype
-        if datatype not in mri_datatypes:
+        if datatype not in mri_datatypes_with_task:
             continue
 
         for group_name, spec in groups.items():
@@ -456,7 +469,7 @@ def _get_auto_entities_from_schema(schema):
                 # task-* rules are trickier (timeseries__*) applicable to multiple
                 # datatypes, so keys per *target* datatype, (eg anat_physio)
                 for target_dt in target_datatypes:
-                    if target_dt not in mri_datatypes:
+                    if target_dt not in mri_datatypes_with_task:
                         continue
                     for suffix in suffixes:
                         key = f"{target_dt}_{suffix}"
