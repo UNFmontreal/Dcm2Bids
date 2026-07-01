@@ -50,7 +50,7 @@ def check_github_latest(github_repo, timeout=3):
         logger.debug(f"Reason {e.reason}")
         return "no_internet"
     except TimeoutError as e:
-        logger.warning(f"Timeout")
+        logger.warning("Timeout")
         logger.debug(f"Socket timeout: {e}")
         return "no_internet"
     else:

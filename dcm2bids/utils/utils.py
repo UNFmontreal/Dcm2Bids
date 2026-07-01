@@ -4,12 +4,12 @@
 import csv
 import logging
 import os
-import re
 import datetime
 from pathlib import Path
 from subprocess import Popen, PIPE
 
 from dcm2bids.version import __version__
+
 
 class DEFAULT(object):
     """ Default values of the package"""
@@ -107,7 +107,8 @@ class DEFAULT(object):
     # BIDS version
     bids_version = "v1.9.0"
 
-    old_keys = ["dataType", "modalityLabel", "customLabels", "sidecarChanges", "intendedFor"]
+    old_keys = ["dataType", "modalityLabel", "customLabels",
+                "sidecarChanges", "intendedFor"]
 
 
 def write_participants(filename, participants):
