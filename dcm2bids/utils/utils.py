@@ -12,6 +12,7 @@ from dcm2bids.version import __version__
 from dcm2bids.utils.schema import BIDS_SCHEMA_DEFAULT_VERSION, load_schema_derived_defaults
 
 
+
 class DEFAULT(object):
     """ Default values of the package"""
 
@@ -85,7 +86,8 @@ class DEFAULT(object):
     tmp_dir_name = "tmp_dcm2bids"
     helper_dir = "helper"
 
-    old_keys = ["dataType", "modalityLabel", "customLabels", "sidecarChanges", "intendedFor"]
+    old_keys = ["dataType", "modalityLabel", "customLabels",
+                "sidecarChanges", "intendedFor"]
 
 
 def write_participants(filename, participants):

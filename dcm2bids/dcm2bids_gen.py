@@ -134,9 +134,9 @@ class Dcm2BidsGen(object):
         if self.bids_validate:
             try:
                 self.logger.info("BIDS VALIDATION")
-                bids_version = run_shell_command(['bids-validator', '-v'], False)
+                bids_version = run_shell_command(['bids-validator-deno', '-V'], False)
                 self.logger.info(f"Use bids-validator version: {bids_version.decode()[:-1]}")
-                bids_report = run_shell_command(['bids-validator', self.bids_dir])
+                bids_report = run_shell_command(['bids-validator-deno', self.bids_dir])
                 self.logger.info("Report from bids-validator")
                 self.logger.info(bids_report.decode())
             except Exception:
