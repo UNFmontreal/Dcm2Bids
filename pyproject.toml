@@ -19,7 +19,7 @@ authors = [
 ]
 maintainers = [
     { name = "Arnaud Boré", email = "arnaud.bore@gmail.com" },
-    { name = "Samuel Guay", email = "samuel.guay@gmail.com" },
+    { name = "Samuel Guay", email = "samuel.guay@umontreal.ca" },
 ]
 keywords = ["neuroimaging", "bids", "dicom", "mri"]
 classifiers = [
