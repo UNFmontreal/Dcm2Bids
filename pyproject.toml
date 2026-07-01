@@ -51,3 +51,38 @@ version = {attr = "dcm2bids.version.__version__"}
 [tool.codespell]
 skip = '.git,*.pdf,*.svg'
 ignore-words-list = 'nd'
+
+
+[dependency-groups]
+
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"}
+]
+
+lint = [
+    "pylint",
+    "flake8",
+    "ruff"
+]
+
+test = [
+    # from requirements-test.txt
+    "pybids>=0.21.0 ; python_version >= '3.10'",
+    "pytest",
+    "pytest-cov",
+    "pytest-console-scripts",
+    "pybids; python_version >= '3.10'",
+]
+
+doc = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocs-autorefs",
+    "mkdocs-git-revision-date-localized-plugin",
+    "mike",
+    "pymdown-extensions",
+    "pdocs",
+    "ghp-import",
+    "watchdog",
+]
