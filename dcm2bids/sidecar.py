@@ -606,7 +606,7 @@ class SidecarPairing(object):
                                   "Please check this link to update your config file: "
                                   "https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x")
                 raise ValueError("Execution stopped due to invalid config file.")
-            
+
             # Check if required keys are in the description
             required = {"datatype", "suffix", "criteria"}
             if not required.issubset(set(desc.keys())):
