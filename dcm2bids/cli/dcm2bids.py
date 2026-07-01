@@ -155,10 +155,6 @@ def main():
     if not args.skip_dcm2niix:
         check_latest("dcm2niix", log_dir=log_dir)
 
-
-
-
-
     load_schema(args.bids_version, log_dir=log_dir)
 
     logger.info(f"participant: {participant.name}")
