@@ -24,7 +24,7 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v3
         with:
-          version: "3.11"
+          python-version: "3.11"
 
       - name: Cache uv
         uses: actions/cache@v6.1.0
