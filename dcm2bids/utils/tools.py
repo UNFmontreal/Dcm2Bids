@@ -28,7 +28,7 @@ def _version_cache_path(log_dir):
     return log_dir / "version_check.json"
 
 
-def load_version_cache(log_dir):
+def _load_version_cache(log_dir):
     """
     Load the JSON cache of previous version checks from the given log directory.
     """
@@ -45,7 +45,7 @@ def load_version_cache(log_dir):
         return {}
 
 
-def save_version_cache(cache, log_dir) -> None:
+def _save_version_cache(cache, log_dir) -> None:
     """
     Save the JSON cache of previous version checks to the given log directory.
     """
@@ -56,7 +56,7 @@ def save_version_cache(cache, log_dir) -> None:
         logger.debug("Failed to write version cache; ignoring.", exc_info=True)
 
 
-def normalize_version(value):
+def _normalize_version(value):
     """
     Normalize a version string into a tuple of integer parts, when possible.
 
@@ -92,15 +92,15 @@ def normalize_version(value):
     return tuple(normalized)
 
 
-def version_newer(latest, current):
+def _version_newer(latest, current):
     """
     Compare two versions, preferring normalized numeric comparison
     and falling back to string comparison.
 
     Returns True if `latest` is considered newer than `current`.
     """
-    norm_latest = normalize_version(latest)
-    norm_current = normalize_version(current)
+    norm_latest = _normalize_version(latest)
+    norm_current = _normalize_version(current)
 
     if isinstance(norm_latest, tuple) and isinstance(norm_current, tuple):
         # Padding to compare same length
@@ -242,7 +242,7 @@ def check_latest(name="dcm2bids", log_dir=None):
 
     if log_dir is not None:
         # Try cache first
-        cache = load_version_cache(log_dir)
+        cache = _load_version_cache(log_dir)
         cache_key = repo  # one entry per GitHub repo
         now = time.time()
         cached_entry = cache.get(cache_key)
@@ -283,7 +283,7 @@ def check_latest(name="dcm2bids", log_dir=None):
             )
             latest = check_github_latest(repo)
             cache[cache_key] = {"latest": latest, "timestamp": now}
-            save_version_cache(cache, log_dir)
+            _save_version_cache(cache, log_dir)
             logger.debug(
                 "Version check: updated cache for %s with latest=%s", cache_key, latest
             )
@@ -305,7 +305,7 @@ def check_latest(name="dcm2bids", log_dir=None):
         logger.info("Could not determine latest version of %s (unavailable).", name)
         return
 
-    if version_newer(latest, current):
+    if _version_newer(latest, current):
         logger.warning("A newer version exists for %s: %s", name, latest)
         logger.warning("Consider updating it -> %s/%s.", host, repo)
     else:

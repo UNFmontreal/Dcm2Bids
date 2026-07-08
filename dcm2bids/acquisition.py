@@ -8,7 +8,6 @@ from os import sep
 
 from dcm2bids.utils.utils import DEFAULT
 from dcm2bids.version import __version__
-from dcm2bids.utils.schema import load_schema_derived_defaults
 
 
 class Acquisition(object):
@@ -33,7 +32,6 @@ class Acquisition(object):
         src_sidecar=None,
         sidecar_changes=None,
         bids_uri=None,
-        entity_table_keys=None,
         do_not_reorder_entities=None,
         **kwargs
     ):
@@ -49,10 +47,6 @@ class Acquisition(object):
         self.custom_entities = custom_entities
         self.src_sidecar = src_sidecar
         self.bids_uri = bids_uri
-        if entity_table_keys is None:
-            schema_defaults = load_schema_derived_defaults()
-            entity_table_keys = schema_defaults["entity_table_keys"]
-        self.entity_table_keys = entity_table_keys
         self.do_not_reorder_entities = do_not_reorder_entities
 
         if sidecar_changes is None:
@@ -183,7 +177,7 @@ class Acquisition(object):
         current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
         suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]
 
-        for current_key in self.entity_table_keys:
+        for current_key in DEFAULT.entityTableKeys:
             if current_key in current_dict and new_name != '':
                 new_name += f"_{current_key}-{current_dict[current_key]}"
             elif current_key in current_dict:
@@ -223,14 +217,15 @@ class Acquisition(object):
         """
         Return:
             The destination filename formatted following
-            the BIDS entity key table requested
+            the v1.9.0 BIDS entity key table
+            https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
         """
         current_name = self.participant.prefix + self.build_suffix
         new_name = ''
         current_dict = dict(x.split("-") for x in current_name.split("_") if len(x.split('-')) == 2)
         suffix_list = [x for x in current_name.split("_") if len(x.split('-')) == 1]
 
-        for current_key in self.entity_table_keys:
+        for current_key in DEFAULT.entityTableKeys:
             if current_key in current_dict and new_name != '':
                 new_name += f"_{current_key}-{current_dict[current_key]}"
             elif current_key in current_dict:

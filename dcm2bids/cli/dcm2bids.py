@@ -117,7 +117,7 @@ def _build_arg_parser():
 
     p.add_argument("-v", "--version",
                    action="version",
-                   # This uses DEFAULT.bids_version, which reflects the bundled schema version.
+                   # This uses DEFAULT.bids_version, which reflects the default schema version.
                    version=(
                         f"dcm2bids version:\t{__version__}\n"
                         f"default BIDS version:\t{DEFAULT.bids_version} "
@@ -155,7 +155,7 @@ def main():
     if not args.skip_dcm2niix:
         check_latest("dcm2niix", log_dir=log_dir)
 
-    schema = load_schema(args.bids_version, log_dir=log_dir)
+    load_schema(args.bids_version, log_dir=log_dir)
 
     logger.info(f"participant: {participant.name}")
     if participant.session:
@@ -166,11 +166,7 @@ def main():
     logger.info(f"Reorder entities: {not args.do_not_reorder_entities}")
     logger.info(f"Validate BIDS: {args.bids_validate}\n")
 
-    app = Dcm2BidsGen(
-        **vars(args),
-        entity_table_keys=schema["entity_table_keys"],
-        auto_entities=schema["auto_entities"]
-    ).run()
+    app = Dcm2BidsGen(**vars(args)).run()
 
     logger.info(f"Logs saved in {log_file}")
     logger.info("--- dcm2bids end ---")
