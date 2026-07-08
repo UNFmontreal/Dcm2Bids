@@ -13,10 +13,10 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v3
         with:
-          python-version: "3.11"
+          version: "3.11"
 
       - name: Cache uv
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/uv
           key: uv-${{ runner.os }}-3.11-${{ hashFiles('uv.lock') }}

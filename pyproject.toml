@@ -85,4 +85,5 @@ doc = [
     "pdocs",
     "ghp-import",
     "watchdog",
+    "numpy>=1.26,<2 ; python_version >= '3.11'",
 ]
