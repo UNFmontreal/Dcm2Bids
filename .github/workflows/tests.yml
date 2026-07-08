@@ -25,12 +25,7 @@ jobs:
         uses: astral-sh/setup-uv@v8.3.2
         with:
           python-version: ${{ matrix.python-version }}
-
-      - name: Cache uv
-        uses: actions/cache@v6.1.0
-        with:
-          path: ~/.cache/uv
-          key: uv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('uv.lock') }}
+          enable-cache: true
 
       - name: Sync dependencies (test group)
         run: uv sync --group test
