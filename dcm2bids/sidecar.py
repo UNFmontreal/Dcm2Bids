@@ -117,7 +117,9 @@ class SidecarPairing(object):
                  case_sensitive=DEFAULT.case_sensitive,
                  dup_method=DEFAULT.dup_method,
                  post_op=DEFAULT.post_op,
-                 bids_uri=DEFAULT.bids_uri):
+                 bids_uri=DEFAULT.bids_uri,
+                 auto_entities=None,
+                 entity_table_keys=None):
         self.logger = logging.getLogger(__name__)
         self._search_method = ""
         self._dup_method = ""
@@ -128,6 +130,8 @@ class SidecarPairing(object):
         self.extractors = extractors
         self.auto_extract_entities = auto_extractor
         self.do_not_reorder_entities = do_not_reorder_entities
+        self.auto_entities = auto_entities
+        self.entity_table_keys = entity_table_keys
         self.sidecars = sidecars
         self.descriptions = descriptions
         self.search_method = search_method
@@ -442,6 +446,7 @@ class SidecarPairing(object):
                                   src_sidecar=sidecar,
                                   bids_uri=self.bids_uri,
                                   do_not_reorder_entities=self.do_not_reorder_entities,
+                                  entity_table_keys=self.entity_table_keys,
                                   **desc)
                 acq.setDstFile()
 
@@ -463,6 +468,7 @@ class SidecarPairing(object):
                     acq = Acquisition(participant,
                                       bids_uri=self.bids_uri,
                                       do_not_reorder_entities=self.do_not_reorder_entities,
+                                      entity_table_keys=self.entity_table_keys,
                                       **desc)
                     self.logger.warning(f"    ->  {acq.suffix}")
 
@@ -519,11 +525,11 @@ class SidecarPairing(object):
                 entities = entities.union(set(complete_entities))
             if self.auto_extract_entities:
                 auto_acq = '_'.join([descWithTask['datatype'], descWithTask["suffix"]])
-                if auto_acq in DEFAULT.auto_entities:
+                if auto_acq in self.auto_entities:
                     # Check if these auto entities have been found before merging
-                    auto_entities = set(concatenated_matches.keys()).intersection(set(DEFAULT.auto_entities[auto_acq]))
+                    auto_entities = set(concatenated_matches.keys()).intersection(self.auto_entities[auto_acq])
 
-                    left_auto_entities = auto_entities.symmetric_difference(set(DEFAULT.auto_entities[auto_acq]))
+                    left_auto_entities = auto_entities.symmetric_difference(self.auto_entities[auto_acq])
                     left_auto_entities = left_auto_entities.difference(keys_custom_entities)
 
                     if left_auto_entities:

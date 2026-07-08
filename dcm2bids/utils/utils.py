@@ -8,8 +8,7 @@ import datetime
 from pathlib import Path
 from subprocess import Popen, PIPE
 
-from dcm2bids.version import __version__
-from dcm2bids.utils.schema import BIDS_SCHEMA_DEFAULT_VERSION, load_schema_derived_defaults
+from dcm2bids.version import __version__, __BIDSversion__
 
 
 
@@ -25,7 +24,7 @@ class DEFAULT(object):
     cli_session = ""
     cli_log_level = "INFO"
 
-    bids_version = BIDS_SCHEMA_DEFAULT_VERSION
+    bids_version = __BIDSversion__
 
     # Archives
     arch_extensions = "tar, tar.bz2, tar.gz or zip"
@@ -60,14 +59,8 @@ class DEFAULT(object):
                        'PhaseEncodingDirection': ["(?P<dir>(j|i)-?)"],
                        'EchoNumber': ["(?P<echo>[0-9])"]}
 
-    # Compute schema-derived defaults once from the default schema.
-    _SCHEMA_DERIVED = load_schema_derived_defaults()
-    # Default schema-derived entity table keys derived from it.
-    # If schema loading fails, dcm2bids will raise at import time
-    entityTableKeys = _SCHEMA_DERIVED["entity_table_keys"]
-
-    # Default schema-derived auto entities.
-    auto_entities = _SCHEMA_DERIVED["auto_entities"]
+    # Schema-derived defaults (entityTableKeys, auto_entities) are now
+    # computed per-run from schema.py. No longer considered "global DEFAULT" attributes.
 
     compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]

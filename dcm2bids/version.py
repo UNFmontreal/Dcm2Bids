@@ -13,6 +13,8 @@ if _version_extra:
 
 __version__ = '.'.join(map(str, _ver))
 
+__BIDSversion__ = "v1.11.1"
+
 CLASSIFIERS = [
     "Intended Audience :: Healthcare Industry",
     "Intended Audience :: Science/Research",

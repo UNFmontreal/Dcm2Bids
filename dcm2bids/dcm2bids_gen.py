@@ -15,6 +15,7 @@ from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.participant import Participant
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
 from dcm2bids.utils.io import load_json, save_json, valid_path
+from dcm2bids.utils.schema import load_schema_derived_defaults
 
 
 class Dcm2BidsGen(object):
@@ -41,6 +42,8 @@ class Dcm2BidsGen(object):
         bids_validate=DEFAULT.bids_validate,
         auto_extract_entities=DEFAULT.auto_extract_entities,
         do_not_reorder_entities=DEFAULT.do_not_reorder_entities,
+        entity_table_keys=None,
+        auto_entities=None,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         force_dcm2bids=DEFAULT.force_dcm2bids,
@@ -57,6 +60,16 @@ class Dcm2BidsGen(object):
         self.bids_validate = bids_validate
         self.auto_extract_entities = auto_extract_entities
         self.do_not_reorder_entities = do_not_reorder_entities
+        # Ensure auto/entity_table_keys None:
+        #  - tests fall back to the bundled default schema
+        if entity_table_keys is None and auto_entities is None:
+            schema_defaults = load_schema_derived_defaults()
+            if entity_table_keys is None:
+                entity_table_keys = schema_defaults["entity_table_keys"]
+            if auto_entities is None:
+                auto_entities = schema_defaults["auto_entities"]
+        self.entity_table_keys = entity_table_keys
+        self.auto_entities = auto_entities
         self.force_dcm2bids = force_dcm2bids
         self.skip_dcm2niix = skip_dcm2niix
         self.logLevel = log_level
@@ -111,7 +124,9 @@ class Dcm2BidsGen(object):
             self.config.get("case_sensitive", DEFAULT.case_sensitive),
             self.config.get("dup_method", DEFAULT.dup_method),
             self.config.get("post_op",  DEFAULT.post_op),
-            self.config.get("bids_uri",  DEFAULT.bids_uri)
+            self.config.get("bids_uri",  DEFAULT.bids_uri),
+            auto_entities=self.auto_entities,
+            entity_table_keys=self.entity_table_keys
         )
         parser.validate_config()
         parser.build_graph()

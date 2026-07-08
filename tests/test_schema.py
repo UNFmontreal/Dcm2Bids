@@ -1,10 +1,9 @@
 import json
-from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from dcm2bids.utils.tools import _normalize_version, _version_newer
+from dcm2bids.utils.tools import normalize_version, version_newer
 from dcm2bids.utils import schema as schema_mod
 from dcm2bids.utils.schema import (
     get_schema,
@@ -13,7 +12,6 @@ from dcm2bids.utils.schema import (
     _get_raw_mri_entity_table_keys,
     _get_auto_entities_from_schema,
 )
-from dcm2bids.utils.utils import DEFAULT
 
 
 @pytest.mark.parametrize(
@@ -51,7 +49,7 @@ from dcm2bids.utils.utils import DEFAULT
     ],
 )
 def test_normalize_version(raw, expected):
-    assert _normalize_version(raw) == expected
+    assert normalize_version(raw) == expected
 
 
 @pytest.mark.parametrize(
@@ -80,9 +78,9 @@ def test_normalize_version(raw, expected):
 
         # For these, we just assert that behavior is consistent, not that it
         # encodes SemVer semantics.
-        ("v1.2.0", "v1.2.0-dev", False),  
+        ("v1.2.0", "v1.2.0-dev", False),
         ("v1.2.0-dev", "v1.2.0", True),
-        ("1.11.1-dev", "1.11.1", True),   # "1.11.1-dev" > "1.11.1" lexicographically
+        ("1.11.1-dev", "1.11.1", True),  # "1.11.1-dev" > "1.11.1" lexicographically
         ("1.11.1", "1.11.1-dev", False),
         ("1.11.1-rc1", "1.11.1", True),
         ("1.11.1", "1.11.1-rc1", False),
@@ -92,13 +90,13 @@ def test_normalize_version(raw, expected):
 )
 def test_version_newer(latest, current, expected):
     """
-    _version_newer should:
+    version_newer should:
       * Treat tags we actually use (dcm2bids, dcm2niix, BIDS) sensibly.
       * Use numeric comparison when both normalize cleanly.
       * Pad shorter tuples with zeros.
       * Fall back to string comparison for non‑numeric tags (dev, rc, stable, latest).
     """
-    assert _version_newer(latest, current) is expected
+    assert version_newer(latest, current) is expected
 
 
 def test_get_schema_default_calls_loader(monkeypatch):
@@ -539,11 +537,11 @@ def test_get_schema_alias_offline_with_and_without_cache(monkeypatch, tmp_path):
     assert result_without is None
 
 
-def test_load_schema_derived_defaults_entity_table_keys_non_empty():
+def test_load_schema_derived_defaults_entity_table_keys_non_empty(tmp_path):
     """
     load_schema_derived_defaults should return a non-empty list of
-    entity_table_keys, and it should at least contain core entities
-    like 'sub', 'ses', and 'run' that are required by the BIDS spec.
+    entity_table_keys, and for the default BIDS schema those keys should
+    match what load_schema() derives for a 'default' run.
     """
     derived = load_schema_derived_defaults()
     entity_keys = derived["entity_table_keys"]
@@ -555,15 +553,16 @@ def test_load_schema_derived_defaults_entity_table_keys_non_empty():
     for required in ("sub", "ses", "run"):
         assert required in entity_keys
 
-    # DEFAULT should be using exactly these keys.
-    assert DEFAULT.entityTableKeys == entity_keys
+    # For the default run, load_schema should produce the same keys.
+    schema_defaults = schema_mod.load_schema("default", log_dir=tmp_path)
+    assert schema_defaults["entity_table_keys"] == entity_keys
 
 
-def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_default():
+def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_default(tmp_path):
     """
     load_schema_derived_defaults should return a non-empty mapping of
-    auto_entities and it should be consistent with DEFAULT.auto_entities,
-    which is initialized from the same helper at import time.
+    auto_entities and, for the default BIDS schema, it should be consistent
+    with the per-run defaults derived by load_schema().
     """
     derived = load_schema_derived_defaults()
     auto_entities = derived["auto_entities"]
@@ -571,9 +570,10 @@ def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_defaul
     assert isinstance(auto_entities, dict)
     assert len(auto_entities) > 0
 
-    # DEFAULT.auto_entities is built from load_schema_derived_defaults()
-    # at import time; they should match for the default schema version.
-    assert DEFAULT.auto_entities == auto_entities
+    # load_schema() builds per-run defaults from the same helper; for the
+    # default schema version they should match.
+    schema_defaults = schema_mod.load_schema("default", log_dir=tmp_path)
+    assert schema_defaults["auto_entities"] == auto_entities
 
 
 # # https://bids-specification.readthedocs.io/en/v1.11.1/99-appendices/04-entity-table.html
@@ -608,6 +608,7 @@ def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
 
     entity_keys = _get_raw_mri_entity_table_keys(schema)
     assert entity_keys == expected_entity_keys
+
 
 def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
     """
