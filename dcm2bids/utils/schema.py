@@ -128,6 +128,155 @@ def _load_default_schema():
     return None
 
 
+def _is_alias_label(schema_version):
+    """
+    Return True if the given schema_version is an alias
+    """
+    return str(schema_version) in {"stable", "latest"}
+
+
+def _schema_cached_entry_info(schema_version, schema_cache):
+    """
+    Return (cached_entry, cached_schema_path, cache_fresh, is_alias) for a
+    given schema_version from schema_cache.
+    """
+    is_alias = _is_alias_label(schema_version)
+    cached_entry = schema_cache.get(schema_version)
+    cached_schema_path = None
+    cache_fresh = False
+
+    if not isinstance(cached_entry, dict):
+        return None, None, False, is_alias
+
+    schema_path_str = cached_entry.get("path")
+    ts_str = cached_entry.get("timestamp")
+    now = time.time()
+
+    if is_alias and ts_str:
+        try:
+            ts_dt = datetime.fromisoformat(ts_str)
+            age = now - ts_dt.timestamp()
+            cache_fresh = age < SCHEMA_ALIAS_CACHE_TTL
+            logger.debug(
+                "Schema cache: alias '%s' cached at %s "
+                "(age=%.1fs, fresh=%s, ttl=%ds)",
+                schema_version,
+                ts_str,
+                age,
+                cache_fresh,
+                SCHEMA_ALIAS_CACHE_TTL,
+            )
+        except ValueError:
+            logger.debug(
+                "Failed to parse schema cache timestamp '%s' for %s",
+                ts_str,
+                schema_version,
+                exc_info=True,
+            )
+
+    if schema_path_str:
+        schema_path = Path(schema_path_str)
+        if schema_path.exists():
+            cached_schema_path = schema_path
+
+    return cached_entry, cached_schema_path, cache_fresh, is_alias
+
+
+def _get_schema_from_cache(schema_version, log_dir, schema_cache, full_cache):
+    """
+    Try to load schema from cache. Returns (schema, cached_schema_path, is_alias).
+    """
+    cached_entry, cached_schema_path, cache_fresh, is_alias = _schema_cached_entry_info(
+        schema_version, schema_cache
+    )
+
+    if cached_schema_path is None:
+        return None, None, is_alias
+
+    # For fixed versions, always try cache. For aliases, only if fresh.
+    if is_alias and not cache_fresh:
+        return None, cached_schema_path, is_alias
+
+    try:
+        schema = load_json(cached_schema_path)
+        if is_alias:
+            logger.debug(
+                "Verifying cached alias BIDS schema for version '%s' from %s.",
+                schema_version,
+                cached_schema_path,
+            )
+        else:
+            logger.info(
+                "Using cached BIDS schema for version '%s' from %s.",
+                schema_version,
+                cached_schema_path,
+            )
+    except (OSError, json.JSONDecodeError):
+        logger.debug(
+            "Failed to load cached schema JSON from %s; "
+            "will try re-download.",
+            cached_schema_path,
+            exc_info=True,
+        )
+        return None, cached_schema_path, is_alias
+
+    # If we didn't have bids_version recorded (old cache),
+    # update it now and ensure timestamp is set.
+    if log_dir is not None and isinstance(cached_entry, dict):
+        bids_ver = cached_entry.get("bids_version")
+        changed = False
+        if bids_ver is None:
+            cached_entry["bids_version"] = schema.get("bids_version")
+            changed = True
+        if not cached_entry.get("timestamp"):
+            cached_entry["timestamp"] = datetime.now(timezone.utc).replace(
+                microsecond=0
+            ).isoformat()
+            changed = True
+        if changed:
+            schema_cache[schema_version] = cached_entry
+            _save_schema_cache(schema_cache, full_cache, log_dir)
+
+    return schema, cached_schema_path, is_alias
+
+
+def _get_schema_from_remote(schema_version, log_dir, schema_cache, full_cache):
+    """
+    Try to download schema from remote and update cache. Returns (schema, schema_path).
+    """
+    schema = _download_schema(schema_version)
+    if schema is None:
+        return None, None
+
+    schema_path = None
+    if log_dir is not None:
+        schema_path = _schema_file_path(schema_version, log_dir)
+        try:
+            save_json(filename=schema_path, data=schema)
+            logger.info(
+                "Saved BIDS schema for version '%s' to %s.",
+                schema_version,
+                schema_path,
+            )
+        except OSError:
+            logger.debug(
+                "Failed to write schema JSON to %s; cache metadata will "
+                "still be updated but file-based cache is missing.",
+                schema_path,
+                exc_info=True,
+            )
+            schema_path = None
+
+        schema_cache[schema_version] = {
+            "path": str(schema_path) if schema_path is not None else None,
+            "bids_version": schema.get("bids_version"),
+            "timestamp": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        }
+        _save_schema_cache(schema_cache, full_cache, log_dir)
+
+    return schema, schema_path
+
+
 def get_schema(schema_version=__BIDSversion__, log_dir=None):
     """
     Fetch the BIDS schema JSON for a given version label, with caching and fallback.
@@ -135,120 +284,28 @@ def get_schema(schema_version=__BIDSversion__, log_dir=None):
     Returns:
         dict or None
     """
-    schema = None
-    # TODO: reduce complexity of this very long and complex function.
     if schema_version == "default":
         return _load_default_schema()
-    is_alias = str(schema_version) in {"stable", "latest"}
 
     # If no log_dir, we can still download but won't persist cache metadata or files.
     schema_cache, full_cache = _load_schema_cache(log_dir) if log_dir else ({}, {})
 
     # 1) Cache lookup: metadata -> load from file if present (with TTL for aliases)
-    cached_entry = schema_cache.get(schema_version)
-    cached_schema_path = None
-    cache_fresh = False
+    schema, cached_schema_path, is_alias = _get_schema_from_cache(
+        schema_version, log_dir, schema_cache, full_cache
+    )
+    if schema is not None:
+        return schema
 
-    if isinstance(cached_entry, dict):
-        schema_path_str = cached_entry.get("path")
-        bids_ver = cached_entry.get("bids_version")
-        ts_str = cached_entry.get("timestamp")
-        now = time.time()
-
-        if is_alias and ts_str:
-            try:
-                ts_dt = datetime.fromisoformat(ts_str)
-                age = now - ts_dt.timestamp()
-                cache_fresh = age < SCHEMA_ALIAS_CACHE_TTL
-                logger.debug(
-                    "Schema cache: alias '%s' cached at %s "
-                    "(age=%.1fs, fresh=%s, ttl=%ds)",
-                    schema_version,
-                    ts_str,
-                    age,
-                    cache_fresh,
-                    SCHEMA_ALIAS_CACHE_TTL,
-                )
-            except Exception:
-                logger.debug(
-                    "Failed to parse schema cache timestamp '%s' for %s",
-                    ts_str,
-                    schema_version,
-                    exc_info=True,
-                )
-
-        if schema_path_str:
-            schema_path = Path(schema_path_str)
-            if schema_path.exists():
-                cached_schema_path = schema_path
-                # For fixed versions, always try cache. For aliases, only if fresh.
-                if not is_alias or cache_fresh:
-                    try:
-                        schema = load_json(schema_path)
-                        logger.debug(
-                            "Using cached BIDS schema for version '%s' from %s.",
-                            schema_version,
-                            schema_path,
-                        )
-                        # If we didn't have bids_version recorded (old cache),
-                        # update it now and ensure timestamp is set.
-                        if log_dir is not None:
-                            changed = False
-                            if bids_ver is None:
-                                cached_entry["bids_version"] = schema.get(
-                                    "bids_version"
-                                )
-                                changed = True
-                            if not cached_entry.get("timestamp"):
-                                cached_entry["timestamp"] = datetime.now(
-                                    timezone.utc
-                                ).replace(microsecond=0).isoformat()
-                                changed = True
-                            if changed:
-                                schema_cache[schema_version] = cached_entry
-                                _save_schema_cache(schema_cache, full_cache, log_dir)
-                        return schema
-                    except Exception:
-                        logger.debug(
-                            "Failed to load cached schema JSON from %s; "
-                            "will try re-download.",
-                            schema_path,
-                            exc_info=True,
-                        )
-
+    # 2) Remote download path
     if tools.has_internet():
-        schema = _download_schema(schema_version)
-        if schema is not None and log_dir is not None:
-            # Write full schema to its own file in log dir
-            schema_path = _schema_file_path(schema_version, log_dir)
-            try:
-                save_json(filename=schema_path, data=schema)
-                logger.info(
-                    "Saved BIDS schema for version '%s' to %s.",
-                    schema_version,
-                    schema_path,
-                )
-            except Exception:
-                logger.debug(
-                    "Failed to write schema JSON to %s; cache metadata will "
-                    "still be updated but file-based cache is missing.",
-                    schema_path,
-                    exc_info=True,
-                )
-                schema_path = None
-
-            # Store metadata in version_check.json under "schema"
-            schema_cache[schema_version] = {
-                "path": str(schema_path) if schema_path is not None else None,
-                "bids_version": schema.get("bids_version"),
-                "timestamp": datetime.now(timezone.utc)
-                .replace(microsecond=0)
-                .isoformat(),
-            }
-            _save_schema_cache(schema_cache, full_cache, log_dir)
+        schema, _ = _get_schema_from_remote(
+            schema_version, log_dir, schema_cache, full_cache
+        )
         if schema is not None:
             return schema
 
+        # Download failed; for aliases, fall back to any cached file if present.
         if is_alias and cached_schema_path is not None:
             try:
                 logger.info(
@@ -285,7 +342,7 @@ def get_schema(schema_version=__BIDSversion__, log_dir=None):
                 )
                 schema = load_json(cached_schema_path)
                 return schema
-            except Exception:
+            except (OSError, json.JSONDecodeError):
                 logger.debug(
                     "Failed to load cached schema JSON from %s while offline.",
                     cached_schema_path,
@@ -293,8 +350,8 @@ def get_schema(schema_version=__BIDSversion__, log_dir=None):
                 )
 
     # 3) Fallback to default only if requested version == default
-    if schema_version in (__BIDSversion__,
-                          f"v{__BIDSversion__}"):
+    schema = None
+    if schema_version in (__BIDSversion__, f"v{__BIDSversion__}"):
         logger.info(
             "Falling back to default BIDS schema for default version %s.",
             __BIDSversion__,
@@ -302,7 +359,7 @@ def get_schema(schema_version=__BIDSversion__, log_dir=None):
         schema = _load_default_schema()
 
     if schema is None:
-        logger.debug("BIDS schema: no schema loaded (version=%s)", schema_version)
+        logger.error("BIDS schema: no schema loaded (version=%s)", schema_version)
     return schema
 
 
