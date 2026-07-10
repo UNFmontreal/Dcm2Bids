@@ -1,6 +1,0 @@
-pybids>=0.21.0
-pytest>=8,<9
-pytest-cov>=4.1
-pytest-console-scripts==1.4.1
-flake8
-pylint
