@@ -117,7 +117,7 @@ def _build_arg_parser():
 
     p.add_argument("-v", "--version",
                    action="version",
-                   # This uses DEFAULT.bids_version, which reflects the default schema version.
+                   # This uses version.__BIDSversion__, which reflects the bundled schema version.
                    version=(
                         f"dcm2bids version:\t{__version__}\n"
                         f"default BIDS version:\t{DEFAULT.bids_version} "

@@ -9,9 +9,9 @@ import json
 from dcm2bids.utils.io import load_json, save_json
 import dcm2bids.utils.tools as tools
 from dcm2bids.utils import schema_data
+from dcm2bids.version import __BIDSversion__
 
 # Defaults for BIDS schema handling.
-BIDS_SCHEMA_DEFAULT_VERSION = "v1.11.1"  # imported in DEFAULT
 BIDS_SCHEMA_BASEURL = "https://bids-specification.readthedocs.io/en"
 
 SCHEMA_ALIAS_CACHE_TTL = 7 * 24 * 60 * 60  # 1 week
@@ -31,7 +31,7 @@ def _schema_file_path(schema_version, log_dir):
 
 
 def _build_schema_url(
-    schema_baseurl=BIDS_SCHEMA_BASEURL, schema_version=BIDS_SCHEMA_DEFAULT_VERSION
+    schema_baseurl=BIDS_SCHEMA_BASEURL, schema_version=__BIDSversion__
 ):
     """
     Build the URL to the precompiled BIDS schema JSON for a given BIDS version
@@ -92,7 +92,7 @@ def _load_schema_cache(log_dir):
     Reuse tools' version cache file as a generic JSON cache, and
     keep schema entries under a dedicated 'schema' key.
     """
-    cache = tools._load_version_cache(log_dir) if log_dir is not None else {}
+    cache = tools.load_version_cache(log_dir) if log_dir is not None else {}
     return cache.get("schema", {}), cache
 
 
@@ -101,7 +101,7 @@ def _save_schema_cache(schema_cache, full_cache, log_dir):
     Update the 'schema' key and write back using tools' cache writer.
     """
     full_cache["schema"] = schema_cache
-    tools._save_version_cache(full_cache, log_dir)
+    tools.save_version_cache(full_cache, log_dir)
 
 
 def _load_default_schema():
@@ -109,38 +109,38 @@ def _load_default_schema():
     Load the schema that is default with dcm2bids.
 
     The JSON is packaged under `dcm2bids.utils.schema_data` as
-    `bids_schema_<BIDS_SCHEMA_DEFAULT_VERSION>.json`, e.g.:
+    `bids_schema_<__BIDSversion__>.json`, e.g.:
 
         dcm2bids/utils/schema_data/bids_schema_v1.11.1.json
     """
-    filename = f"bids_schema_{BIDS_SCHEMA_DEFAULT_VERSION}.json"
+    filename = f"bids_schema_{__BIDSversion__}.json"
     try:
         path = schema_data.file / filename
         with path.open("r", encoding="utf-8") as f:
             schema = json.load(f)
         logger.info(
-            "Loaded default BIDS schema (version=%s) from %s.",
-            BIDS_SCHEMA_DEFAULT_VERSION,
+            "Loading default BIDS schema (version=%s) from %s.",
+            __BIDSversion__,
             path,
         )
         return schema
     except FileNotFoundError:
         logger.warning(
             "default BIDS schema file not found for version=%s (expected at %s).",
-            BIDS_SCHEMA_DEFAULT_VERSION,
+            __BIDSversion__,
             filename,
         )
         logger.debug("default schema load FileNotFoundError:", exc_info=True)
     except Exception:
         logger.warning(
             "Failed to load default BIDS schema (version=%s).",
-            BIDS_SCHEMA_DEFAULT_VERSION,
+            __BIDSversion__,
         )
         logger.debug("default schema load exception:", exc_info=True)
     return None
 
 
-def get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
+def get_schema(schema_version=__BIDSversion__, log_dir=None):
     """
     Fetch the BIDS schema JSON for a given version label, with caching and fallback.
 
@@ -305,11 +305,11 @@ def get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=None):
                 )
 
     # 3) Fallback to default only if requested version == default
-    if schema_version in (BIDS_SCHEMA_DEFAULT_VERSION,
-                          f"v{BIDS_SCHEMA_DEFAULT_VERSION}"):
+    if schema_version in (__BIDSversion__,
+                          f"v{__BIDSversion__}"):
         logger.info(
             "Falling back to default BIDS schema for default version %s.",
-            BIDS_SCHEMA_DEFAULT_VERSION,
+            __BIDSversion__,
         )
         schema = _load_default_schema()
 
@@ -480,7 +480,7 @@ def _get_auto_entities_from_schema(schema):
 
 
 def load_schema_derived_defaults(
-        schema_version=BIDS_SCHEMA_DEFAULT_VERSION,
+        schema_version=__BIDSversion__,
         log_dir=None):
     """
     Helper that loads the BIDS schema and returns a small bundle
@@ -520,7 +520,7 @@ def _resolve_bids_version_label(args_bids_version, log_dir):
     Returns the actual label in used (e.g. 'default', 'stable', 'v1.11.1', etc)
     """
     if args_bids_version is None:
-        default_version = BIDS_SCHEMA_DEFAULT_VERSION
+        default_version = __BIDSversion__
         logger.info(
             "No --bids_version provided; using 'default' BIDS spec (version=%s) "
             "for reproducible behavior.",
@@ -574,7 +574,7 @@ def _check_latest_stable(version, log_dir):
             version,
             stable_version,
         )
-        if tools._version_newer(stable_version, version):
+        if tools.version_newer(stable_version, version):
             logger.warning(
                 "A newer 'stable' BIDS specification (%s) is available than the "
                 "default version (%s). The default schema is still used "

@@ -8,8 +8,8 @@ import datetime
 from pathlib import Path
 from subprocess import Popen, PIPE
 
-from dcm2bids.version import __version__
-from dcm2bids.utils.schema import BIDS_SCHEMA_DEFAULT_VERSION, load_schema_derived_defaults
+from dcm2bids.version import __version__, __BIDSversion__
+from dcm2bids.utils.schema import load_schema_derived_defaults
 
 
 
@@ -25,7 +25,7 @@ class DEFAULT(object):
     cli_session = ""
     cli_log_level = "INFO"
 
-    bids_version = BIDS_SCHEMA_DEFAULT_VERSION
+    bids_version = __BIDSversion__
 
     # Archives
     arch_extensions = "tar, tar.bz2, tar.gz or zip"
