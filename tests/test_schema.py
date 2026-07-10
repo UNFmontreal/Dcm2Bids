@@ -1,19 +1,18 @@
 import json
-from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from dcm2bids.utils.tools import _normalize_version, _version_newer
+from dcm2bids.utils.tools import normalize_version, version_newer
 from dcm2bids.utils import schema as schema_mod
 from dcm2bids.utils.schema import (
     get_schema,
-    BIDS_SCHEMA_DEFAULT_VERSION,
-    load_schema_derived_defaults,
+    load_schema,
     _get_raw_mri_entity_table_keys,
     _get_auto_entities_from_schema,
 )
 from dcm2bids.utils.utils import DEFAULT
+from dcm2bids.version import __BIDSversion__
 
 
 @pytest.mark.parametrize(
@@ -51,7 +50,7 @@ from dcm2bids.utils.utils import DEFAULT
     ],
 )
 def test_normalize_version(raw, expected):
-    assert _normalize_version(raw) == expected
+    assert normalize_version(raw) == expected
 
 
 @pytest.mark.parametrize(
@@ -80,7 +79,7 @@ def test_normalize_version(raw, expected):
 
         # For these, we just assert that behavior is consistent, not that it
         # encodes SemVer semantics.
-        ("v1.2.0", "v1.2.0-dev", False),  
+        ("v1.2.0", "v1.2.0-dev", False),
         ("v1.2.0-dev", "v1.2.0", True),
         ("1.11.1-dev", "1.11.1", True),   # "1.11.1-dev" > "1.11.1" lexicographically
         ("1.11.1", "1.11.1-dev", False),
@@ -92,13 +91,13 @@ def test_normalize_version(raw, expected):
 )
 def test_version_newer(latest, current, expected):
     """
-    _version_newer should:
+    version_newer should:
       * Treat tags we actually use (dcm2bids, dcm2niix, BIDS) sensibly.
       * Use numeric comparison when both normalize cleanly.
       * Pad shorter tuples with zeros.
       * Fall back to string comparison for non‑numeric tags (dev, rc, stable, latest).
     """
-    assert _version_newer(latest, current) is expected
+    assert version_newer(latest, current) is expected
 
 
 def test_get_schema_default_calls_loader(monkeypatch):
@@ -146,7 +145,7 @@ def test_get_schema_default_online_uncached_downloads_and_caches(monkeypatch, tm
     log_dir = tmp_path / "log"
     log_dir.mkdir()
 
-    fake_schema = {"bids_version": BIDS_SCHEMA_DEFAULT_VERSION, "from": "download"}
+    fake_schema = {"bids_version": __BIDSversion__, "from": "download"}
     downloaded = {"called": False}
     saved_cache = {"cache": None, "full": None, "log_dir": None}
     saved_path = {"path": None}
@@ -156,7 +155,7 @@ def test_get_schema_default_online_uncached_downloads_and_caches(monkeypatch, tm
 
     def fake_download_schema(version, baseurl=schema_mod.BIDS_SCHEMA_BASEURL):
         downloaded["called"] = True
-        assert version == BIDS_SCHEMA_DEFAULT_VERSION
+        assert version == __BIDSversion__
         return fake_schema
 
     def fake_schema_file_path(schema_version, ld):
@@ -183,7 +182,7 @@ def test_get_schema_default_online_uncached_downloads_and_caches(monkeypatch, tm
     monkeypatch.setattr(schema_mod, "_save_schema_cache", fake_save_schema_cache)
 
     # Use the real save_json/load_json to verify file round-trip
-    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=__BIDSversion__, log_dir=log_dir)
 
     assert downloaded["called"] is True
     assert result == fake_schema
@@ -191,9 +190,9 @@ def test_get_schema_default_online_uncached_downloads_and_caches(monkeypatch, tm
     assert saved_path["path"] is not None
     assert saved_path["path"].exists()
     # cache metadata stored for this version
-    assert BIDS_SCHEMA_DEFAULT_VERSION in saved_cache["cache"]
-    entry = saved_cache["cache"][BIDS_SCHEMA_DEFAULT_VERSION]
-    assert entry["bids_version"] == BIDS_SCHEMA_DEFAULT_VERSION
+    assert __BIDSversion__ in saved_cache["cache"]
+    entry = saved_cache["cache"][__BIDSversion__]
+    assert entry["bids_version"] == __BIDSversion__
     # timestamp is set
     assert isinstance(entry.get("timestamp"), str)
 
@@ -208,8 +207,8 @@ def test_get_schema_default_online_cached_uses_cache(monkeypatch, tmp_path):
     log_dir.mkdir()
 
     # Prepare a fake cached schema file
-    cached_schema = {"bids_version": BIDS_SCHEMA_DEFAULT_VERSION, "from": "cache"}
-    schema_path = log_dir / f"bids_schema_{BIDS_SCHEMA_DEFAULT_VERSION}.json"
+    cached_schema = {"bids_version": __BIDSversion__, "from": "cache"}
+    schema_path = log_dir / f"bids_schema_{__BIDSversion__}.json"
     schema_path.write_text(json.dumps(cached_schema), encoding="utf-8")
 
     def fake_has_internet(timeout=3):
@@ -222,9 +221,9 @@ def test_get_schema_default_online_cached_uses_cache(monkeypatch, tmp_path):
         assert ld == log_dir
         return (
             {
-                BIDS_SCHEMA_DEFAULT_VERSION: {
+                __BIDSversion__: {
                     "path": str(schema_path),
-                    "bids_version": BIDS_SCHEMA_DEFAULT_VERSION,
+                    "bids_version": __BIDSversion__,
                     "timestamp": None,  # simulate old cache w/o timestamp
                 }
             },
@@ -243,13 +242,13 @@ def test_get_schema_default_online_cached_uses_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
     monkeypatch.setattr(schema_mod, "_save_schema_cache", fake_save_schema_cache)
 
-    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=__BIDSversion__, log_dir=log_dir)
     assert result == cached_schema
 
     # cache should have been updated with timestamp (and keep bids_version)
-    assert saved_cache["schema_cache"][BIDS_SCHEMA_DEFAULT_VERSION]["bids_version"] == BIDS_SCHEMA_DEFAULT_VERSION
+    assert saved_cache["schema_cache"][__BIDSversion__]["bids_version"] == __BIDSversion__
     assert isinstance(
-        saved_cache["schema_cache"][BIDS_SCHEMA_DEFAULT_VERSION]["timestamp"], str
+        saved_cache["schema_cache"][__BIDSversion__]["timestamp"], str
     )
 
 
@@ -262,8 +261,8 @@ def test_get_schema_default_offline_with_cache(monkeypatch, tmp_path):
     log_dir = tmp_path / "log"
     log_dir.mkdir()
 
-    cached_schema = {"bids_version": BIDS_SCHEMA_DEFAULT_VERSION, "from": "offline-cache"}
-    schema_path = log_dir / f"bids_schema_{BIDS_SCHEMA_DEFAULT_VERSION}.json"
+    cached_schema = {"bids_version": __BIDSversion__, "from": "offline-cache"}
+    schema_path = log_dir / f"bids_schema_{__BIDSversion__}.json"
     schema_path.write_text(json.dumps(cached_schema), encoding="utf-8")
 
     def fake_has_internet(timeout=3):
@@ -273,9 +272,9 @@ def test_get_schema_default_offline_with_cache(monkeypatch, tmp_path):
         assert ld == log_dir
         return (
             {
-                BIDS_SCHEMA_DEFAULT_VERSION: {
+                __BIDSversion__: {
                     "path": str(schema_path),
-                    "bids_version": BIDS_SCHEMA_DEFAULT_VERSION,
+                    "bids_version": __BIDSversion__,
                     "timestamp": None,
                 }
             },
@@ -285,7 +284,7 @@ def test_get_schema_default_offline_with_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(schema_mod.tools, "has_internet", fake_has_internet)
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
 
-    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=__BIDSversion__, log_dir=log_dir)
     assert result == cached_schema
 
 
@@ -309,7 +308,7 @@ def test_get_schema_default_offline_without_cache_falls_back_to_default(
 
     default_called = {"called": False}
     default_schema = {
-        "bids_version": BIDS_SCHEMA_DEFAULT_VERSION,
+        "bids_version": __BIDSversion__,
         "from": "default-fallback",
     }
 
@@ -321,7 +320,7 @@ def test_get_schema_default_offline_without_cache_falls_back_to_default(
     monkeypatch.setattr(schema_mod, "_load_schema_cache", fake_load_schema_cache)
     monkeypatch.setattr(schema_mod, "_load_default_schema", fake_load_default_schema)
 
-    result = get_schema(schema_version=BIDS_SCHEMA_DEFAULT_VERSION, log_dir=log_dir)
+    result = get_schema(schema_version=__BIDSversion__, log_dir=log_dir)
     assert default_called["called"] is True
     assert result == default_schema
 
@@ -539,13 +538,13 @@ def test_get_schema_alias_offline_with_and_without_cache(monkeypatch, tmp_path):
     assert result_without is None
 
 
-def test_load_schema_derived_defaults_entity_table_keys_non_empty():
+def test_derive_entities_from_schema_entity_table_keys_non_empty():
     """
-    load_schema_derived_defaults should return a non-empty list of
+    derive_entities_from_schema should return a non-empty list of
     entity_table_keys, and it should at least contain core entities
     like 'sub', 'ses', and 'run' that are required by the BIDS spec.
     """
-    derived = load_schema_derived_defaults()
+    schema, derived = load_schema(None, None)
     entity_keys = derived["entity_table_keys"]
 
     assert isinstance(entity_keys, list)
@@ -559,24 +558,24 @@ def test_load_schema_derived_defaults_entity_table_keys_non_empty():
     assert DEFAULT.entityTableKeys == entity_keys
 
 
-def test_load_schema_derived_defaults_auto_entities_non_empty_and_matches_default():
+def test_derive_entities_from_schema_auto_entities_non_empty_and_matches_default():
     """
-    load_schema_derived_defaults should return a non-empty mapping of
+    derive_entities_from_schema should return a non-empty mapping of
     auto_entities and it should be consistent with DEFAULT.auto_entities,
     which is initialized from the same helper at import time.
     """
-    derived = load_schema_derived_defaults()
+    schema, derived = load_schema(None, None)
     auto_entities = derived["auto_entities"]
 
     assert isinstance(auto_entities, dict)
     assert len(auto_entities) > 0
 
-    # DEFAULT.auto_entities is built from load_schema_derived_defaults()
+    # DEFAULT.auto_entities is built from derive_entities_from_schema()
     # at import time; they should match for the default schema version.
     assert DEFAULT.auto_entities == auto_entities
 
 
-# # https://bids-specification.readthedocs.io/en/v1.11.1/99-appendices/04-entity-table.html
+# https://bids-specification.readthedocs.io/en/v1.11.1/99-appendices/04-entity-table.html
 def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
     """
     For BIDS v1.11.1, the derived entity_table_keys should match the
@@ -608,6 +607,7 @@ def test_bids_v1_11_1_entity_table_keys_match_hardcoded_list(tmp_path):
 
     entity_keys = _get_raw_mri_entity_table_keys(schema)
     assert entity_keys == expected_entity_keys
+
 
 def test_bids_v1_11_1_auto_entities_match_hardcoded_mapping(tmp_path):
     """

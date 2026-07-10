@@ -155,7 +155,15 @@ def main():
     if not args.skip_dcm2niix:
         check_latest("dcm2niix", log_dir=log_dir)
 
-    load_schema(args.bids_version, log_dir=log_dir)
+    schema, derived_entities = load_schema(args.bids_version, log_dir=log_dir)
+
+    # Update the DEFAULT based on the requested version directly, otherwise uses default values
+    if args.bids_version is not None:
+        DEFAULT.bids_version = schema["bids_version"]
+        DEFAULT.entityTableKeys = derived_entities.get("entity_table_keys",
+                                              DEFAULT.entityTableKeys)
+        DEFAULT.auto_entities = derived_entities.get("auto_entities",
+                                                DEFAULT.auto_entities)                      
 
     logger.info(f"participant: {participant.name}")
     if participant.session:

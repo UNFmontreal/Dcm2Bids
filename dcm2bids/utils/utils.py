@@ -9,7 +9,7 @@ from pathlib import Path
 from subprocess import Popen, PIPE
 
 from dcm2bids.version import __version__, __BIDSversion__
-from dcm2bids.utils.schema import load_schema_derived_defaults
+from dcm2bids.utils.schema import load_schema
 
 
 
@@ -61,7 +61,7 @@ class DEFAULT(object):
                        'EchoNumber': ["(?P<echo>[0-9])"]}
 
     # Compute schema-derived defaults once from the default schema.
-    _SCHEMA_DERIVED = load_schema_derived_defaults()
+    _, _SCHEMA_DERIVED = load_schema(__BIDSversion__, log_dir=None)
     # Default schema-derived entity table keys derived from it.
     # If schema loading fails, dcm2bids will raise at import time
     entityTableKeys = _SCHEMA_DERIVED["entity_table_keys"]

@@ -1,10 +1,9 @@
+import json
 import logging
-import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib import request, error
-import json
 
 from dcm2bids.utils.io import load_json, save_json
 import dcm2bids.utils.tools as tools
@@ -44,7 +43,7 @@ def _download_schema(schema_version, baseurl=BIDS_SCHEMA_BASEURL):
     """
     Download BIDS schema JSON for a given version label from the official URL.
 
-    This is a low-level primitive: it only performs HTTP + JSON parsing.
+    Performs HTTP + JSON parsing.
     Caching, disk paths, and fallbacks are handled in _get_schema.
 
     Returns:
@@ -68,18 +67,9 @@ def _download_schema(schema_version, baseurl=BIDS_SCHEMA_BASEURL):
             e,
         )
         return None
-    except Exception:
-        logger.warning(
-            "Unexpected error while downloading BIDS schema (version=%s) from %s",
-            schema_version,
-            url,
-        )
-        logger.debug("Schema download exception:", exc_info=True)
-        return None
-
     try:
         return json.loads(raw.decode())
-    except Exception:
+    except json.JSONDecodeError:
         logger.warning(
             "Downloaded schema for version %s is not valid JSON.", schema_version
         )
@@ -109,9 +99,7 @@ def _load_default_schema():
     Load the schema that is default with dcm2bids.
 
     The JSON is packaged under `dcm2bids.utils.schema_data` as
-    `bids_schema_<__BIDSversion__>.json`, e.g.:
-
-        dcm2bids/utils/schema_data/bids_schema_v1.11.1.json
+    `bids_schema_<__BIDSversion__>.json`.
     """
     filename = f"bids_schema_{__BIDSversion__}.json"
     try:
@@ -131,7 +119,7 @@ def _load_default_schema():
             filename,
         )
         logger.debug("default schema load FileNotFoundError:", exc_info=True)
-    except Exception:
+    except (OSError, json.JSONDecodeError):
         logger.warning(
             "Failed to load default BIDS schema (version=%s).",
             __BIDSversion__,
@@ -197,7 +185,7 @@ def get_schema(schema_version=__BIDSversion__, log_dir=None):
                 if not is_alias or cache_fresh:
                     try:
                         schema = load_json(schema_path)
-                        logger.info(
+                        logger.debug(
                             "Using cached BIDS schema for version '%s' from %s.",
                             schema_version,
                             schema_path,
@@ -417,7 +405,7 @@ def _get_auto_entities_from_schema(schema):
     Keys look like 'anat_VFA', 'func_bold', 'fmap_epi', etc.
     Values are lists of entity short names (e.g. ['task'], ['dir'], ['flip', 'mt']).
 
-    This is the schema-driven version of DEFAULT.auto_entities.
+    This is the schema-driven version of former DEFAULT.auto_entities.
     """
     raw_rules = schema["rules"]["files"]['raw']
 
@@ -479,27 +467,23 @@ def _get_auto_entities_from_schema(schema):
     return auto_required_entities
 
 
-def load_schema_derived_defaults(
-        schema_version=__BIDSversion__,
-        log_dir=None):
+def derive_entities_from_schema(schema):
     """
     Helper that loads the BIDS schema and returns a small bundle
     of derived structures to integrate into DEFAULT.
 
     Returned dict includes:
-      - 'entity_table_keys': Entity short names
+      - 'raw_mri_entity_table_keys': Entity short names in order for MRI only
       - 'auto_entities': schema-driven auto-entities (MRI datatypes)
     """
-    schema = get_schema(schema_version=schema_version, log_dir=log_dir)
     if schema is None:
         raise RuntimeError(
-            f"Failed to load BIDS schema for version '{schema_version}'. "
+            f"Failed to load BIDS schema for version '{schema['bids_version']}'."
             "This indicates a broken dcm2bids installation or an invalid "
             "schema_version override."
         )
 
     # All entities in schema order
-    entity_table_keys_all = _get_entity_table_keys(schema)
     auto_entities = _get_auto_entities_from_schema(schema)
     # Entities for raw MRI datatypes only
     raw_mri_entity_table_keys = _get_raw_mri_entity_table_keys(schema)
@@ -509,9 +493,7 @@ def load_schema_derived_defaults(
     return {
         # default set
         "entity_table_keys": raw_mri_entity_table_keys,
-        "auto_entities": auto_entities,
-        # keep the full list available
-        "all_entity_table_keys": entity_table_keys_all,
+        "auto_entities": auto_entities
     }
 
 def _resolve_bids_version_label(args_bids_version, log_dir):
@@ -526,7 +508,8 @@ def _resolve_bids_version_label(args_bids_version, log_dir):
             "for reproducible behavior.",
             default_version,
         )
-
+        
+        # Simplest place to check when default is used
         if tools.has_internet():
             _check_latest_stable(default_version, log_dir)
 
@@ -610,7 +593,8 @@ def _abort_if_schema_missing(schema_version, schema):
     logger.error(
         "To proceed offline, either:\n"
         "  * Run once with internet so the schema for '%s' can be cached, or\n"
-        "  * Use the default schema with '--bids_version default', or\n"
+        "  * Use the default schema without using '--bids_version', or\n",
+        "  * Use the default schema with using '--bids_version default', or\n"
         "  * Pin to a specific BIDS version tag that is already cached.",
         schema_version,
     )
@@ -621,7 +605,7 @@ def _abort_if_schema_missing(schema_version, schema):
     logger.error(
         "dcm2bids cannot continue without a valid BIDS version. Aborting."
     )
-    sys.exit(1)
+    raise SystemExit(1)
 
 
 
@@ -633,6 +617,7 @@ def load_schema(args_bids_version, log_dir):
 
     Args:
         args_bids_version: BIDS version label requested by the user.
+        log_dir: Directory used for caching schema files and version checks.
 
     Returns:
         dict: Loaded BIDS schema JSON corresponding to the actual version label.
@@ -642,7 +627,8 @@ def load_schema(args_bids_version, log_dir):
     """
     actual_label = _resolve_bids_version_label(args_bids_version, log_dir)
 
-    logger.info("Ensuring BIDS version '%s' is available.", actual_label)
-
     schema = get_schema(schema_version=actual_label, log_dir=log_dir)
     _abort_if_schema_missing(actual_label, schema)
+    derived = derive_entities_from_schema(schema)
+
+    return schema, derived
