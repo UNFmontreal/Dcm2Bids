@@ -14,7 +14,7 @@ from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.participant import Participant
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
-from dcm2bids.utils.io import load_json, save_json, valid_path
+from dcm2bids.utils.io import load_json, save_json, valid_path, update_participants_tsv
 
 
 class Dcm2BidsGen(object):
@@ -130,6 +130,13 @@ class Dcm2BidsGen(object):
         idList = {}
         for acq in parser.acquisitions:
             idList = self.move(acq, idList, parser.post_op)
+
+        if parser.acquisitions:
+            update_participants_tsv(
+                self.bids_dir,
+                self.participant.name,
+                self.logger
+            )
 
         if self.bids_validate:
             try:
