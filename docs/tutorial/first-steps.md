@@ -927,7 +927,7 @@ Now, dcm2bids' `--auto_extract_entities` feature will help you with this
 specific situation. Following the BIDS schema, fieldmap EPI files can
 optionally use the standard `dir` entity in their filename (for example,
 `sub-ID01_dir-AP_epi`). dcm2bids can derive this `dir` value automatically
-from the phase-encoding information in the sidecar, so you do **not** need
+from the phase-encoding information in the sidecar (if provided in the dicom file), so you do **not** need
 to specify `dir-AP`, `dir-PA`, etc. yourself in the config file.
 
 If you look at each JSON file, you will find in their respective sidecar a
