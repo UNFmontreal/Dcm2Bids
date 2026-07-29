@@ -549,13 +549,13 @@ class SidecarPairing(object):
             for curr_entity in descWithTask["custom_entities"]:
                 if '-' not in curr_entity:
                     self.logger.warning(f"Removing entity '{curr_entity}' since it "
-                                         f"does not fit the basic BIDS specification "
-                                         "(Entity-Value)")
+                                        f"does not fit the basic BIDS specification "
+                                        "(Entity-Value)")
                     descWithTask["custom_entities"].remove(curr_entity)
                 if '.' in curr_entity:
                     self.logger.warning(f"Removing entity '{curr_entity}' since it "
-                                         f"contains '.' character which is not allowed "
-                                         "in BIDS entities.")
+                                        f"contains '.' character which is not allowed "
+                                        "in BIDS entities.")
                     descWithTask["custom_entities"].remove(curr_entity)
 
         return descWithTask, sidecar
@@ -598,7 +598,7 @@ class SidecarPairing(object):
                 dup = dup[0:-1]
 
             for runNum, acqInd in enumerate(dup):
-                runStr = templateDup.format(runNum+1)
+                runStr = templateDup.format(runNum + 1)
                 self.acquisitions[acqInd].custom_entities += runStr
                 self.acquisitions[acqInd].setDstFile()
 
