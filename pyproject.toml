@@ -49,7 +49,8 @@ exclude = ["tests*"]
 version = {attr = "dcm2bids.version.__version__"}
 
 [tool.codespell]
-skip = '.git,*.pdf,*.svg'
+skip = '.git,*.pdf,*.svg,./dcm2bids/utils/schema_data/*.json'
+#
 ignore-words-list = 'nd'
 
 
