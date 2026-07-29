@@ -135,7 +135,7 @@ class Dcm2BidsGen(object):
             update_participants_tsv(
                 self.bids_dir,
                 self.participant.name,
-                self.logger,
+                self.logger
             )
 
         if self.bids_validate:
