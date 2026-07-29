@@ -25,12 +25,7 @@ jobs:
         uses: astral-sh/setup-uv@v8.3.2
         with:
           python-version: "3.11"
-
-      - name: Cache uv
-        uses: actions/cache@v6.1.0
-        with:
-          path: ~/.cache/uv
-          key: uv-doc-${{ runner.os }}-${{ hashFiles('uv.lock') }}
+          enable-cache: true
 
       - name: Sync documentation dependencies
         run: uv sync --group doc
