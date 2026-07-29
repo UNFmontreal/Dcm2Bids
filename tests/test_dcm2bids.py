@@ -663,3 +663,51 @@ def test_dcm2bids_key_absent():
     data = load_json(epi_file)
     assert os.path.exists(epi_file)
     assert data["SeriesNumber"] == 11
+
+
+def test_add_participants_tsv(tmp_path):
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    # Create participants.tsv
+    participants_file = os.path.join(bids_dir.name, "participants.tsv")
+    with open(participants_file, "w") as f:
+        f.write("participant_id\nsub-02\n")
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test.json"),
+                      bids_dir.name)
+    app.run()
+
+    # Check that sub-01 was added to participants.tsv
+    with open(participants_file) as f:
+        lines = f.readlines()
+        assert "sub-01" in [line.strip() for line in lines[1:]]
+
+
+def test_add_participants_already_exists(tmp_path):
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    # Create participants.tsv with sub-01 already present
+    participants_file = os.path.join(bids_dir.name, "participants.tsv")
+    with open(participants_file, "w") as f:
+        f.write("participant_id\tsex\nsub-01\tM\n")
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test.json"),
+                      bids_dir.name)
+    app.run()
+
+    # Check that sub-01 was not duplicated in participants.tsv
+    # Check only participant_id column for duplication, ignore other columns
+    with open(participants_file) as f:
+        lines = f.readlines()
+        participant_ids = [line.split("\t")[0].strip() for line in lines[1:]]
+        assert participant_ids.count("sub-01") == 1
