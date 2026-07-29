@@ -195,7 +195,7 @@ put the same id with `IntendedFor`.
 For example, **`task_rest`** means it is intended for `task-rest_bold` and
 **`id_task_learning`** is intended for `task-learning_bold`.
 
-You could also use this feature to feed sidecar such as `Source`` for example or
+You could also use this feature to feed sidecar such as `Source` for example or
 anything that suits your needs.
 
 ## Multiple config files

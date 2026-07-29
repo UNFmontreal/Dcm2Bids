@@ -37,6 +37,7 @@
         {
             "datatype": "fmap",
             "suffix": "epi",
+            "custom_entities": "dir",
             "criteria": {
                 "SeriesDescription": "gre_field_mapping"
             },

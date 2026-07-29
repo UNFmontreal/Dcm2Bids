@@ -96,12 +96,14 @@ def main():
     logger.info("Running the following command: " + " ".join(sys.argv))
     logger.info("OS version: %s", platform.platform())
     logger.info("Python version: %s", sys.version.replace("\n", ""))
-    logger.info(f"dcm2bids version: { __version__}")
+    logger.info(f"dcm2bids version: {__version__}")
     logger.info(f"dcm2niix version: {dcm2niix_version()}")
     logger.info("Checking for software update")
 
-    check_latest("dcm2bids")
-    check_latest("dcm2niix")
+    log_dir = log_file.parent
+
+    check_latest("dcm2bids", log_dir=log_dir)
+    check_latest("dcm2niix", log_dir=log_dir)
 
     app = Dcm2niixGen(dicom_dirs=args.dicom_dir, bids_dir=out_dir, helper=True)
 

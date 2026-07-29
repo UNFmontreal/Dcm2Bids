@@ -40,7 +40,7 @@ class Dcm2BidsGen(object):
         output_dir=DEFAULT.output_dir,
         bids_validate=DEFAULT.bids_validate,
         auto_extract_entities=DEFAULT.auto_extract_entities,
-        do_not_reorder_entities = DEFAULT.do_not_reorder_entities,
+        do_not_reorder_entities=DEFAULT.do_not_reorder_entities,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         force_dcm2bids=DEFAULT.force_dcm2bids,
@@ -64,8 +64,8 @@ class Dcm2BidsGen(object):
 
         if self.auto_extract_entities and self.do_not_reorder_entities:
             raise ValueError("Auto extract entities is set to True and "
-                              "do not reorder entities is set to True. "
-                              "Please choose only one option.")
+                             "do not reorder entities is set to True. "
+                             "Please choose only one option.")
 
     @property
     def dicom_dirs(self):
@@ -141,9 +141,9 @@ class Dcm2BidsGen(object):
         if self.bids_validate:
             try:
                 self.logger.info("BIDS VALIDATION")
-                bids_version = run_shell_command(['bids-validator', '-v'], False)
+                bids_version = run_shell_command(['bids-validator-deno', '-V'], False)
                 self.logger.info(f"Use bids-validator version: {bids_version.decode()[:-1]}")
-                bids_report = run_shell_command(['bids-validator', self.bids_dir])
+                bids_report = run_shell_command(['bids-validator-deno', self.bids_dir])
                 self.logger.info("Report from bids-validator")
                 self.logger.info(bids_report.decode())
             except Exception:

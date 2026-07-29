@@ -1,7 +1,5 @@
 name: Publish documentation
 
-# Controls when the workflow will run
-
 on:
   push:
     branches:
@@ -11,47 +9,38 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
   release:
     types: [published]
-  # Allow this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v8.3.2
         with:
           python-version: "3.11"
 
-      - name: Upgrade pip
-        run: |
-          # install pip=>20.1 to use "pip cache dir"
-          python3 -m pip install --upgrade pip
-
-      - name: Get pip cache dir
-        id: pip-cache
-        run: echo "::set-output name=dir::$(pip cache dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v4
+      - name: Cache uv
+        uses: actions/cache@v6.1.0
         with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-doc.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          path: ~/.cache/uv
+          key: uv-doc-${{ runner.os }}-${{ hashFiles('uv.lock') }}
 
-      - name: Install dependencies
+      - name: Sync documentation dependencies
+        run: uv sync --group doc
+
+      - name: Generate CLI help files
         run: |
-          python3 -m pip install -r ./requirements-doc.txt
-          pip install -e .
-          dcm2bids -h > docs_helper/help.txt
-          dcm2bids_helper -h > docs_helper/helper.txt
-          dcm2bids_scaffold -h > docs_helper/help_scaffold.txt
-          echo "export VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')" > docs_helper/version.txt
+          uv run dcm2bids -h > docs_helper/help.txt
+          uv run dcm2bids_helper -h > docs_helper/helper.txt
+          uv run dcm2bids_scaffold -h > docs_helper/help_scaffold.txt
+          echo "export VERSION=$(uv run dcm2bids -v | awk '/dcm2bids/ {print $3}')" > docs_helper/version.txt
 
       - name: Set git credentials
         run: |
@@ -59,28 +48,20 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Build API reference
-        run: pdocs as_markdown -o docs/ dcm2bids --overwrite
+        run: uv run pdocs as_markdown -o docs/ dcm2bids --overwrite
 
-      - name: Build docs for new release
-        if: github.event_name == 'release'
-        run: |
-          echo "Version: $(dcm2bids -v | awk '/dcm2bids/ {print $3}')"
-          echo "Version: ${{ github.ref_name }}"
-          mike deploy -p ${{ github.ref_name }} latest -u
-
-      # This might be also triggered for new release as it pushes a new tag,
-      # but it's ok even if there is an error on this run, the previous run is ok.
-      - name: Build docs for releases already deployed
+      - name: Deploy release docs (tag)
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         run: |
-          echo "Version: $(dcm2bids -v | awk '/dcm2bids/ {print $3}')"
-          echo "Version: ${{ github.ref_name }}"
-          mike deploy -p ${{ github.ref_name }}
+          uv run mike deploy -p "${{ github.ref_name }}"
 
-      - name: Deploy dev version
-        if: ${{ github.ref == 'refs/heads/dev' }}
+      - name: Deploy release + latest (GitHub release event)
+        if: github.event_name == 'release'
         run: |
-          VERSION=$(dcm2bids -v | awk '/dcm2bids/ {print $3}')
-          echo "Version: ${VERSION}-dev"
-          mike delete dev
-          mike deploy -p dev
+          uv run mike deploy -p "${{ github.ref_name }}" latest -u
+
+      - name: Deploy dev docs
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          uv run mike delete dev || true
+          uv run mike deploy -p dev

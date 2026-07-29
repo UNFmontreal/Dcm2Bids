@@ -3,6 +3,7 @@
 """sidecars classes"""
 
 import itertools
+import json
 import logging
 import os
 import re
@@ -28,6 +29,7 @@ class Sidecar(object):
     """
 
     def __init__(self, filename, compKeys=DEFAULT.compKeys):
+        self.logger = logging.getLogger(__name__)
         self._origData = {}
         self._data = {}
         self.filename = filename
@@ -86,7 +88,12 @@ class Sidecar(object):
         """
         try:
             data = load_json(filename)
-        except Exception:
+        except FileNotFoundError:
+            self.logger.error(f"Error: The file at {filename} was not found.")
+            data = {}
+        except json.JSONDecodeError as error:
+            self.logger.error(f"Error: Invalid JSON format detected: {filename}")
+            self.logger.error(f"Error details: {error.msg} at line {error.lineno}, column {error.colno}")
             data = {}
         self._origData = data.copy()
         data["SidecarFilename"] = os.path.basename(filename)
@@ -542,13 +549,13 @@ class SidecarPairing(object):
             for curr_entity in descWithTask["custom_entities"]:
                 if '-' not in curr_entity:
                     self.logger.warning(f"Removing entity '{curr_entity}' since it "
-                                         f"does not fit the basic BIDS specification "
-                                         "(Entity-Value)")
+                                        f"does not fit the basic BIDS specification "
+                                        "(Entity-Value)")
                     descWithTask["custom_entities"].remove(curr_entity)
                 if '.' in curr_entity:
                     self.logger.warning(f"Removing entity '{curr_entity}' since it "
-                                         f"contains '.' character which is not allowed "
-                                         "in BIDS entities.")
+                                        f"contains '.' character which is not allowed "
+                                        "in BIDS entities.")
                     descWithTask["custom_entities"].remove(curr_entity)
 
         return descWithTask, sidecar
@@ -591,7 +598,7 @@ class SidecarPairing(object):
                 dup = dup[0:-1]
 
             for runNum, acqInd in enumerate(dup):
-                runStr = templateDup.format(runNum+1)
+                runStr = templateDup.format(runNum + 1)
                 self.acquisitions[acqInd].custom_entities += runStr
                 self.acquisitions[acqInd].setDstFile()
 
@@ -606,7 +613,7 @@ class SidecarPairing(object):
                                   "Please check this link to update your config file: "
                                   "https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x")
                 raise ValueError("Execution stopped due to invalid config file.")
-            
+
             # Check if required keys are in the description
             required = {"datatype", "suffix", "criteria"}
             if not required.issubset(set(desc.keys())):

@@ -304,6 +304,38 @@ more specifically *`auto_extractors`* and *`auto_entities`* variables.
 
 This option will keep the order of the entities as they are entered in the config file by the user in the `custom_entities` field. However, please note that this flag cannot be used in conjunction with the `--auto_extract_entities` flag.
 
+### `-b, --bids_version <BIDS_VERSION>`
+
+Control which version of the BIDS schema dcm2bids uses for entity defaults and extraction logic. Accepted values:
+
+- `default`: Use the schema JSON that ships with this dcm2bids release. This is the **default** and works offline.
+- `vX.Y.Z` (e.g. `v1.11.1`): Pin to a specific BIDS version tag. dcm2bids will first look in its cache (if available), and otherwise download this version.
+- `stable`: Follow the Read the Docs `stable` alias. This will move over time as new BIDS releases are declared stable. This is **not** recommended for reproducible pipelines.
+- `latest`: Follow the Read the Docs `latest` alias (development head). This is **not** recommended for reproducible pipelines.
+
+If `--bids_version` is not specified, dcm2bids uses the `default` schema by default, but may emit a warning if a newer stable schema is available.
+
+- **Schema-driven defaults**:
+  - The set and order of entities used in filenames (e.g. `sub`, `ses`, `task`, `run`, etc.) is now derived directly from the BIDS schema, rather than hard-coded tables.
+  - The set of “auto-entities” that dcm2bids can infer for certain datatype/suffix combinations (e.g. `task` for `func_bold`) is also derived from the schema. As the BIDS spec evolves, dcm2bids can pick up new entities with minimal changes.
+
+- **Schema caching behavior**:
+  - When you request `stable`, `latest`, or a specific version tag with `--bids_version`, dcm2bids:
+    - Stores the downloaded schema in a cache file under your `log_dir`.
+    - Reuses a **fresh** cached schema to avoid unnecessary downloads.
+    - For aliases (`stable`, `latest`), periodically refreshes the cache; if refresh fails but a cached file exists, it falls back to that cached schema with an informative log.
+  - If there is no internet connection:
+    - dcm2bids uses any existing cached schema for the requested label.
+    - If no cache is available, it errors out for specific labels and suggests using the `default` schema.
+
+- **Reproducible vs "follow latest" behavior**:
+  - For **reproducible pipelines**, prefer:
+    - The default (no `--bids_version`), or
+    - A pinned tag (e.g. `--bids_version v1.11.1`).
+  - Use `--bids_version stable` or `--bids_version latest` **only** if you explicitly want to follow new BIDS releases as they appear. Be aware that:
+    - `stable` moves when new releases happen.
+    - `latest` may change frequently and may be unstable.
+
 ### `--bids_validate`
 
 By default, dcm2bids will not validate your final BIDS structure. If needed, you
