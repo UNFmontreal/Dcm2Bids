@@ -77,7 +77,7 @@ def update_participants_tsv(bids_dir, participant_name, logger):
             lines = f.readlines()
             # Skip header line (participant_id)
             if len(lines) > 1:
-                existing_participants = {line.strip() for line in lines[1:]}
+                existing_participants = {line.split()[0] for line in lines[1:] if line.strip()}
     else:
         logger.info("Creating new participants.tsv file")
 
