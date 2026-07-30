@@ -32,7 +32,7 @@ jobs:
         with:
           nuitka-version: main
           script-name: dcm2bids/cli/dcm2bids.py
-          onefile: true
+          mode: onefile
           show-scons: false
           no-deployment-flag: self-execution
           output-file: dcm2bids
@@ -42,7 +42,7 @@ jobs:
         with:
           nuitka-version: main
           script-name: dcm2bids/cli/dcm2bids_scaffold.py
-          onefile: true
+          mode: onefile
           show-scons: false
           output-file: dcm2bids_scaffold
 
@@ -52,7 +52,7 @@ jobs:
           nuitka-version: main
           script-name: dcm2bids/cli/dcm2bids_helper.py
           show-scons: false
-          onefile: true
+          mode: onefile
           output-file: dcm2bids_helper
 
       - name: Create archive for Linux
