@@ -3,6 +3,7 @@
 """sidecars classes"""
 
 import itertools
+import json
 import logging
 import os
 import re
@@ -11,7 +12,8 @@ from fnmatch import fnmatch
 
 from dcm2bids.acquisition import Acquisition
 from dcm2bids.utils.io import load_json
-from dcm2bids.utils.utils import (DEFAULT, convert_dir, combine_dict_extractors,
+from dcm2bids.utils.utils import (DEFAULT, combine_dict_extractors,
+                                  convert_dir, normalize_acquisition_time,
                                   splitext_)
 
 compare_float_keys = ["lt", "gt", "le", "ge", "btw", "btwe"]
@@ -27,6 +29,7 @@ class Sidecar(object):
     """
 
     def __init__(self, filename, compKeys=DEFAULT.compKeys):
+        self.logger = logging.getLogger(__name__)
         self._origData = {}
         self._data = {}
         self.filename = filename
@@ -39,10 +42,17 @@ class Sidecar(object):
         for key in self.compKeys:
             try:
                 if all(key in d for d in (self.data, other.data)):
-                    if self.data.get(key) == other.data.get(key):
+                    self_value = self.data.get(key)
+                    other_value = other.data.get(key)
+
+                    if key == "AcquisitionTime":
+                        self_value = normalize_acquisition_time(self_value)
+                        other_value = normalize_acquisition_time(other_value)
+
+                    if self_value == other_value:
                         lts.append(None)
                     else:
-                        lts.append(self.data.get(key) < other.data.get(key))
+                        lts.append(self_value < other_value)
                 else:
                     lts.append(None)
 
@@ -78,7 +88,12 @@ class Sidecar(object):
         """
         try:
             data = load_json(filename)
-        except Exception:
+        except FileNotFoundError:
+            self.logger.error(f"Error: The file at {filename} was not found.")
+            data = {}
+        except json.JSONDecodeError as error:
+            self.logger.error(f"Error: Invalid JSON format detected: {filename}")
+            self.logger.error(f"Error details: {error.msg} at line {error.lineno}, column {error.colno}")
             data = {}
         self._origData = data.copy()
         data["SidecarFilename"] = os.path.basename(filename)
@@ -533,9 +548,14 @@ class SidecarPairing(object):
             # Remove entities without -
             for curr_entity in descWithTask["custom_entities"]:
                 if '-' not in curr_entity:
-                    self.logger.info(f"Removing entity '{curr_entity}' since it "
-                                     "does not fit the basic BIDS specification "
-                                     "(Entity-Value)")
+                    self.logger.warning(f"Removing entity '{curr_entity}' since it "
+                                        f"does not fit the basic BIDS specification "
+                                        "(Entity-Value)")
+                    descWithTask["custom_entities"].remove(curr_entity)
+                if '.' in curr_entity:
+                    self.logger.warning(f"Removing entity '{curr_entity}' since it "
+                                        f"contains '.' character which is not allowed "
+                                        "in BIDS entities.")
                     descWithTask["custom_entities"].remove(curr_entity)
 
         return descWithTask, sidecar
@@ -578,7 +598,7 @@ class SidecarPairing(object):
                 dup = dup[0:-1]
 
             for runNum, acqInd in enumerate(dup):
-                runStr = templateDup.format(runNum+1)
+                runStr = templateDup.format(runNum + 1)
                 self.acquisitions[acqInd].custom_entities += runStr
                 self.acquisitions[acqInd].setDstFile()
 
@@ -593,7 +613,7 @@ class SidecarPairing(object):
                                   "Please check this link to update your config file: "
                                   "https://unfmontreal.github.io/Dcm2Bids/latest/upgrade/#upgrading-from-2x-to-3x")
                 raise ValueError("Execution stopped due to invalid config file.")
-            
+
             # Check if required keys are in the description
             required = {"datatype", "suffix", "criteria"}
             if not required.issubset(set(desc.keys())):

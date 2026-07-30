@@ -40,7 +40,7 @@ class Participant(object):
 
         if not self._name.replace('sub-', '').isalnum():
             raise NameError(f"Participant '{self._name.replace('sub-', '')}' "
-                            "should contains only alphanumeric characters.")
+                            "should contain only alphanumeric characters.")
 
     @property
     def session(self):
@@ -64,7 +64,7 @@ class Participant(object):
 
         if not self._session.replace('ses-', '').isalnum() and self._session:
             raise NameError(f"Session '{self._session.replace('ses-', '')}' "
-                            "should contains only alphanumeric characters.")
+                            "should contain only alphanumeric characters.")
 
     @property
     def directory(self):

@@ -7,14 +7,14 @@ Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure
 import logging
 import os
 from pathlib import Path
-from glob import glob
+from glob import glob, escape
 import shutil
 
 from dcm2bids.dcm2niix_gen import Dcm2niixGen
 from dcm2bids.sidecar import Sidecar, SidecarPairing
 from dcm2bids.participant import Participant
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
-from dcm2bids.utils.io import load_json, save_json, valid_path
+from dcm2bids.utils.io import load_json, save_json, valid_path, update_participants_tsv
 
 
 class Dcm2BidsGen(object):
@@ -40,7 +40,7 @@ class Dcm2BidsGen(object):
         output_dir=DEFAULT.output_dir,
         bids_validate=DEFAULT.bids_validate,
         auto_extract_entities=DEFAULT.auto_extract_entities,
-        do_not_reorder_entities = DEFAULT.do_not_reorder_entities,
+        do_not_reorder_entities=DEFAULT.do_not_reorder_entities,
         session=DEFAULT.session,
         clobber=DEFAULT.clobber,
         force_dcm2bids=DEFAULT.force_dcm2bids,
@@ -64,8 +64,8 @@ class Dcm2BidsGen(object):
 
         if self.auto_extract_entities and self.do_not_reorder_entities:
             raise ValueError("Auto extract entities is set to True and "
-                              "do not reorder entities is set to True. "
-                              "Please choose only one option.")
+                             "do not reorder entities is set to True. "
+                             "Please choose only one option.")
 
     @property
     def dicom_dirs(self):
@@ -131,12 +131,19 @@ class Dcm2BidsGen(object):
         for acq in parser.acquisitions:
             idList = self.move(acq, idList, parser.post_op)
 
+        if parser.acquisitions:
+            update_participants_tsv(
+                self.bids_dir,
+                self.participant.name,
+                self.logger
+            )
+
         if self.bids_validate:
             try:
                 self.logger.info("BIDS VALIDATION")
-                bids_version = run_shell_command(['bids-validator', '-v'], False)
+                bids_version = run_shell_command(['bids-validator-deno', '-V'], False)
                 self.logger.info(f"Use bids-validator version: {bids_version.decode()[:-1]}")
-                bids_report = run_shell_command(['bids-validator', self.bids_dir])
+                bids_report = run_shell_command(['bids-validator-deno', self.bids_dir])
                 self.logger.info("Report from bids-validator")
                 self.logger.info(bids_report.decode())
             except Exception:
@@ -147,7 +154,7 @@ class Dcm2BidsGen(object):
 
     def move(self, acq, idList, post_op):
         """Move an acquisition to BIDS format"""
-        for srcFile in sorted(glob(f"{acq.srcRoot}.*"), reverse=True):
+        for srcFile in sorted(glob(f"{escape(acq.srcRoot)}.*"), reverse=True):
             ext = Path(srcFile).suffixes
             ext = [curr_ext for curr_ext in ext if curr_ext in ['.nii', '.gz',
                                                                 '.json',

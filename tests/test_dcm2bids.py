@@ -360,6 +360,32 @@ def test_dcm2bids_complex():
     assert not os.path.exists(mprage)
 
 
+def test_dcm2bids_files_with_brackets_and_dots(tmp_path):
+    # Use TEST_DATA_DIR sidecars: copy into the temporary dcm2bids tmp folder
+    bids_dir = TemporaryDirectory()
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    # pick a sidecar to rename to include dots and brackets
+    original = os.path.join(tmp_sub_dir, "001_localizer_20100603125600_i00001.json")
+    new_root = os.path.join(tmp_sub_dir, "sub-01.name.with.dots[br]")
+    new_json = new_root + ".json"
+    new_nii = new_root + ".nii.gz"
+
+    os.rename(original, new_json)
+    # create corresponding nii.gz file
+    with open(new_nii, "w") as f:
+        f.write("")
+
+    # run generator (it will read the tmp dir we populated)
+    gen = Dcm2BidsGen(TEST_DATA_DIR, "01", os.path.join(TEST_DATA_DIR, "config_test.json"), bids_dir.name)
+    gen.run()
+
+    expected_dst = os.path.join(bids_dir.name, gen.participant.directory, "localizer", "sub-01_run-01_localizer.nii")
+    assert os.path.exists(expected_dst)
+    bids_dir.cleanup()
+
+
 def test_dcm2bids_dup():
     bids_dir = TemporaryDirectory()
 
@@ -637,3 +663,51 @@ def test_dcm2bids_key_absent():
     data = load_json(epi_file)
     assert os.path.exists(epi_file)
     assert data["SeriesNumber"] == 11
+
+
+def test_add_participants_tsv(tmp_path):
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    # Create participants.tsv
+    participants_file = os.path.join(bids_dir.name, "participants.tsv")
+    with open(participants_file, "w") as f:
+        f.write("participant_id\nsub-02\n")
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test.json"),
+                      bids_dir.name)
+    app.run()
+
+    # Check that sub-01 was added to participants.tsv
+    with open(participants_file) as f:
+        lines = f.readlines()
+        assert "sub-01" in [line.strip() for line in lines[1:]]
+
+
+def test_add_participants_already_exists(tmp_path):
+    bids_dir = TemporaryDirectory()
+
+    tmp_sub_dir = os.path.join(bids_dir.name, DEFAULT.tmp_dir_name, "sub-01")
+    shutil.copytree(os.path.join(TEST_DATA_DIR, "sidecars"), tmp_sub_dir)
+
+    # Create participants.tsv with sub-01 already present
+    participants_file = os.path.join(bids_dir.name, "participants.tsv")
+    with open(participants_file, "w") as f:
+        f.write("participant_id\tsex\nsub-01\tM\n")
+
+    app = Dcm2BidsGen(TEST_DATA_DIR, "01",
+                      os.path.join(TEST_DATA_DIR,
+                                   "config_test.json"),
+                      bids_dir.name)
+    app.run()
+
+    # Check that sub-01 was not duplicated in participants.tsv
+    # Check only participant_id column for duplication, ignore other columns
+    with open(participants_file) as f:
+        lines = f.readlines()
+        participant_ids = [line.split("\t")[0].strip() for line in lines[1:]]
+        assert participant_ids.count("sub-01") == 1

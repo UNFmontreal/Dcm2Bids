@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+import json
 from glob import glob
 import os
 import pytest
@@ -28,3 +29,20 @@ def test_sidecar_lt(sidecarFiles):
 
     # 001_localizer_20100603125600_i00002.json
     assert sidecarsDcm2bids[2] == sidecarsExpectedOnlyFilename[1]
+
+
+def test_sidecar_lt_compares_acquisition_time_numerically(tmp_path):
+    early_file = tmp_path / "early.json"
+    late_file = tmp_path / "late.json"
+
+    with early_file.open("w") as f:
+        json.dump({"SeriesNumber": 1, "AcquisitionTime": "08:39:6.332500"}, f)
+
+    with late_file.open("w") as f:
+        json.dump({"SeriesNumber": 1, "AcquisitionTime": "08:39:12.180000"}, f)
+
+    early = Sidecar(str(early_file))
+    late = Sidecar(str(late_file))
+
+    assert early < late
+    assert sorted([late, early]) == [early, late]

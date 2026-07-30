@@ -13,7 +13,7 @@
             "id": "func_task-rest",
             "datatype": "func",
             "suffix": "bold",
-            "custom_entities": ["acq-highres", "random"],
+            "custom_entities": ["acq-highres", "random", "ran.dom"],
             "criteria": {
                 "SeriesDescription": ".*bold.*"
             }
@@ -37,6 +37,7 @@
         {
             "datatype": "fmap",
             "suffix": "epi",
+            "custom_entities": "dir",
             "criteria": {
                 "SeriesDescription": "gre_field_mapping"
             },

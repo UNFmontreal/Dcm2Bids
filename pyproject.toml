@@ -1,5 +1,90 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dcm2bids"
+dynamic = ["version"] # keep in sync with dcm2bids/version.py, or use dynamic below
+description = "Reorganising NIfTI files from dcm2niix into the Brain Imaging Data Structure"
+readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
+requires-python = ">=3.8"
+dependencies = []
+authors = [
+    { name = "Arnaud Boré" },
+    { name = "Samuel Guay" },
+    { name = "Christophe Bedetti" },
+    { name = "Steven Meisler" },
+    { name = "Nick Guenther" },
+]
+maintainers = [
+    { name = "Arnaud Boré", email = "arnaud.bore@gmail.com" },
+    { name = "Samuel Guay", email = "samuel.guay@umontreal.ca" },
+]
+keywords = ["neuroimaging", "bids", "dicom", "mri"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/UNFmontreal/Dcm2Bids"
+Documentation = "https://unfmontreal.github.io/Dcm2Bids"
+"Bug Tracker" = "https://github.com/UNFmontreal/Dcm2Bids/issues"
+
+[project.scripts]
+dcm2bids = "dcm2bids.cli.dcm2bids:main"
+dcm2bids_helper = "dcm2bids.cli.dcm2bids_helper:main"
+dcm2bids_scaffold = "dcm2bids.cli.dcm2bids_scaffold:main"
+
+[tool.setuptools.packages.find]
+exclude = ["tests*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "dcm2bids.version.__version__"}
 
 [tool.codespell]
-skip = '.git,*.pdf,*.svg'
+skip = '.git,*.pdf,*.svg,./dcm2bids/utils/schema_data/*.json'
 #
 ignore-words-list = 'nd'
+
+
+[dependency-groups]
+
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"}
+]
+
+lint = [
+    "pylint",
+    "flake8",
+    "ruff"
+]
+
+test = [
+    # from requirements-test.txt
+    "pybids>=0.21.0 ; python_version >= '3.10'",
+    "pytest",
+    "pytest-cov",
+    "pytest-console-scripts",
+    "pybids; python_version >= '3.10'",
+]
+
+doc = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocs-autorefs",
+    "mkdocs-git-revision-date-localized-plugin",
+    "mike",
+    "pymdown-extensions",
+    "pdocs",
+    "ghp-import",
+    "watchdog",
+    "numpy>=1.26,<2 ; python_version >= '3.11'",
+]

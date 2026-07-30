@@ -4,10 +4,14 @@
 import csv
 import logging
 import os
+import datetime
 from pathlib import Path
 from subprocess import Popen, PIPE
 
-from dcm2bids.version import __version__
+from dcm2bids.version import __version__, __BIDSversion__
+from dcm2bids.utils.schema import load_schema
+
+
 
 class DEFAULT(object):
     """ Default values of the package"""
@@ -20,6 +24,8 @@ class DEFAULT(object):
     # cli dcm2bids
     cli_session = ""
     cli_log_level = "INFO"
+
+    bids_version = __BIDSversion__
 
     # Archives
     arch_extensions = "tar, tar.bz2, tar.gz or zip"
@@ -49,33 +55,19 @@ class DEFAULT(object):
     skip_dcm2niix = False
 
     # sidecar.py
+    extractors = {}
     auto_extractors = {'SeriesDescription': ["task-(?P<task>[a-zA-Z0-9]+)"],
                        'PhaseEncodingDirection': ["(?P<dir>(j|i)-?)"],
                        'EchoNumber': ["(?P<echo>[0-9])"]}
 
-    extractors = {}
+    # Compute schema-derived defaults once from the default schema.
+    _, _SCHEMA_DERIVED = load_schema(__BIDSversion__, log_dir=None)
+    # Default schema-derived entity table keys derived from it.
+    # If schema loading fails, dcm2bids will raise at import time
+    entityTableKeys = _SCHEMA_DERIVED["entity_table_keys"]
 
-    auto_entities = {"anat_IRT1": ["inv"],
-                     "anat_MEGRE": ["echo"],
-                     "anat_MESE": ["echo"],
-                     "anat_MP2RAGE": ["inv"],
-                     "anat_MPM": ["flip", "mt"],
-                     "anat_MTS": ["flip", "mt"],
-                     "anat_MTR": ["mt"],
-                     "anat_VFA": ["flip"],
-                     "func_cbv": ["task"],
-                     "func_bold": ["task"],
-                     "func_sbref": ["task"],
-                     "func_event": ["task"],
-                     "func_stim": ["task"],
-                     "func_phase": ["task"],
-                     "fmap_epi": ["dir"],
-                     "fmap_m0scan": ["dir"],
-                     "fmap_TB1DAM": ["flip"],
-                     "fmap_TB1EPI": ["echo", "flip"],
-                     "fmap_TB1SRGE": ["echo", "inv"],
-                     "perf_physio": ["task"],
-                     "perf_stim": ["task"]}
+    # Default schema-derived auto entities.
+    auto_entities = _SCHEMA_DERIVED["auto_entities"]
 
     compKeys = ["AcquisitionTime", "SeriesNumber", "SidecarFilename"]
     search_methodChoices = ["fnmatch", "re"]
@@ -88,24 +80,14 @@ class DEFAULT(object):
     bids_uri = "URI"
     case_sensitive = True
 
-    # Entity table:
-    # https://bids-specification.readthedocs.io/en/v1.9.0/99-appendices/04-entity-table.html
-    entityTableKeys = ["sub", "ses", "sample", "task", "tracksys",
-                       "acq", "ce", "trc", "stain", "rec", "dir",
-                       "run", "mod", "echo", "flip", "inv", "mt",
-                       "part", "proc", "hemi", "space", "split", "recording",
-                       "chunk", "seg", "res", "den", "label", "desc"]
-
     keyWithPathsidecar_changes = ['IntendedFor', 'Sources']
 
     # misc
     tmp_dir_name = "tmp_dcm2bids"
     helper_dir = "helper"
 
-    # BIDS version
-    bids_version = "v1.9.0"
-
-    old_keys = ["dataType", "modalityLabel", "customLabels", "sidecarChanges", "intendedFor"]
+    old_keys = ["dataType", "modalityLabel", "customLabels",
+                "sidecarChanges", "intendedFor"]
 
 
 def write_participants(filename, participants):
@@ -141,6 +123,30 @@ def splitext_(path, extensions=None):
         if path.endswith(ext):
             return path[: -len(ext)], path[-len(ext) :]
     return os.path.splitext(path)
+
+
+def normalize_acquisition_time(value):
+    """
+    Normalize acquisition time strings into a tuple
+    (hour, minute, second, microsecond).
+
+    Accepts both colon-separated times (H:M:S[.fraction]) and compact
+    HHMMSS[.fraction]. Returns the original value if it cannot be parsed.
+    """
+    if not isinstance(value, str):
+        return value
+
+    s = value.strip()
+
+    # Try a small set of strict formats using only datetime.strptime
+    for fmt in ("%H:%M:%S.%f", "%H:%M:%S", "%H%M%S.%f", "%H%M%S"):
+        try:
+            dt = datetime.datetime.strptime(s, fmt)
+            return (dt.hour, dt.minute, dt.second, dt.microsecond)
+        except ValueError:
+            continue
+
+    return value
 
 
 def run_shell_command(commandLine, log=True):
