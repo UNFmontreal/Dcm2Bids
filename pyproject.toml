@@ -42,8 +42,14 @@ dcm2bids = "dcm2bids.cli.dcm2bids:main"
 dcm2bids_helper = "dcm2bids.cli.dcm2bids_helper:main"
 dcm2bids_scaffold = "dcm2bids.cli.dcm2bids_scaffold:main"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
 exclude = ["tests*"]
+
+[tool.setuptools.package-data]
+dcm2bids = ['utils/schema_data/*.json']
 
 [tool.setuptools.dynamic]
 version = {attr = "dcm2bids.version.__version__"}
