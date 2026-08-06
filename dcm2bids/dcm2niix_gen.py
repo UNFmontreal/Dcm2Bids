@@ -9,6 +9,7 @@ import shutil
 import tarfile
 import zipfile
 from glob import glob
+from pathlib import Path
 
 from dcm2bids.utils.io import valid_path
 from dcm2bids.utils.utils import DEFAULT, run_shell_command
@@ -153,8 +154,9 @@ class Dcm2niixGen(object):
                     self.logger.info("Check log file for dcm2niix output\n")
         else:
             for dicomDir in self.dicom_dirs:
-                shutil.copytree(dicomDir, self.output_dir, dirs_exist_ok=True)
-                cmd = ['cp', '-r', dicomDir, self.output_dir]
-                self.logger.info("Running: %s", " ".join(str(item) for item in cmd))
+                for filepath in Path(dicomDir).rglob("*"):
+                    if filepath.is_file():
+                        shutil.copy(filepath, Path(self.output_dir / f"{Path(dicomDir).name}_{filepath.name}"), follow_symlinks=True)
+                self.logger.info("Copying NIFTI files/sidecars from: %s", dicomDir)
 
             self.logger.info("Not running dcm2niix\n")

@@ -317,9 +317,9 @@ class SidecarPairing(object):
         def compare_list(name, pattern):
             try:
                 subResult = [
-                        len(name) == len(pattern),
-                        isinstance(pattern, list),
-                        ]
+                    len(name) == len(pattern),
+                    isinstance(pattern, list),
+                ]
                 for subName, subPattern in zip(name, pattern):
                     subResult.append(compare(subName, subPattern))
             except Exception:
@@ -451,8 +451,8 @@ class SidecarPairing(object):
                     acquisitions.append(acq)
 
                 self.logger.info(
-                  f"{acq.dstFile.replace(f'{acq.participant.prefix}-', '')}"
-                  f"  <-  {sidecarName}")
+                    f"{acq.dstFile.replace(f'{acq.participant.prefix}-', '')}"
+                    f"  <-  {sidecarName}")
 
             elif len(valid_descriptions) == 0:
                 self.logger.info(f"No Pairing  <-  {sidecarName}")
