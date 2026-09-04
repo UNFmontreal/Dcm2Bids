@@ -1772,7 +1772,93 @@ command.</p>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code>usage:<span class="w"> </span>dcm2bids<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span>PARTICIPANT<span class="w"> </span><span class="o">[</span>-s<span class="w"> </span>SESSION<span class="o">]</span>
+<span class="w">                </span>-c<span class="w"> </span>CONFIG<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>OUTPUT_DIR<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>--auto_extract_entities<span class="w"> </span><span class="p">|</span><span class="w"> </span>--do_not_reorder_entities<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>-b<span class="w"> </span>BIDS_VERSION<span class="o">]</span><span class="w"> </span><span class="o">[</span>--bids_validate<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force_dcm2bids<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>--skip_dcm2niix<span class="o">]</span><span class="w"> </span><span class="o">[</span>--clobber<span class="o">]</span>
+<span class="w">                </span><span class="o">[</span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}]</span><span class="w"> </span><span class="o">[</span>-v<span class="o">]</span>
+
+Reorganising<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>dcm2niix<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span>Brain<span class="w"> </span>Imaging<span class="w"> </span>Data<span class="w"> </span>Structure
+
+options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>-d<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>,<span class="w"> </span>--dicom_dir<span class="w"> </span>DICOM_DIR<span class="w"> </span><span class="o">[</span>DICOM_DIR<span class="w"> </span>...<span class="o">]</span>
+<span class="w">                        </span>Path<span class="w"> </span>to<span class="w"> </span>one<span class="w"> </span>or<span class="w"> </span>more<span class="w"> </span>directories<span class="w"> </span>or<span class="w"> </span>archives<span class="w"> </span><span class="o">(</span>tar,<span class="w"> </span>tar.bz2,<span class="w"> </span>tar.gz<span class="w"> </span>or<span class="w"> </span>zip<span class="o">)</span><span class="w"> </span>containing<span class="w"> </span>the<span class="w"> </span>DICOM<span class="w"> </span>files<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>single<span class="w"> </span>participant<span class="w"> </span>and<span class="w"> </span>session<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>converted<span class="w"> </span>to<span class="w"> </span>BIDS.
+<span class="w">  </span>-p<span class="w"> </span>PARTICIPANT,<span class="w"> </span>--participant<span class="w"> </span>PARTICIPANT
+<span class="w">                        </span>Participant<span class="w"> </span>ID<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>dataset<span class="w"> </span>filenames<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span>sub-&lt;PARTICIPANT&gt;<span class="o">)</span>.
+<span class="w">  </span>-s<span class="w"> </span>SESSION,<span class="w"> </span>--session<span class="w"> </span>SESSION
+<span class="w">                        </span>Session<span class="w"> </span>ID<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>dataset<span class="w"> </span>filenames<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span>ses-&lt;SESSION&gt;<span class="o">)</span>.<span class="w"> </span>If<span class="w"> </span>not<span class="w"> </span>provided,<span class="w"> </span>no<span class="w"> </span>session<span class="w"> </span>entity<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>added<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>filenames.
+<span class="w">  </span>-c<span class="w"> </span>CONFIG,<span class="w"> </span>--config<span class="w"> </span>CONFIG
+<span class="w">                        </span>JSON<span class="w"> </span>configuration<span class="w"> </span>that<span class="w"> </span>specifies<span class="w"> </span>additional<span class="w"> </span>parameters<span class="w"> </span><span class="k">for</span><span class="w"> </span>BIDS<span class="w"> </span>conversion.<span class="w"> </span>See<span class="w"> </span>the<span class="w"> </span>documentation<span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information:<span class="w"> </span>
+<span class="w">                        </span>https://unfmontreal.github.io/Dcm2Bids/3.3.0/how-to/create-config-file/
+<span class="w">  </span>-o<span class="w"> </span>OUTPUT_DIR,<span class="w"> </span>--output_dir<span class="w"> </span>OUTPUT_DIR
+<span class="w">                        </span>Output<span class="w"> </span>BIDS<span class="w"> </span>directory.<span class="w"> </span>Defaults<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span>working<span class="w"> </span>directory.
+<span class="w">  </span>--auto_extract_entities
+<span class="w">                        </span>If<span class="w"> </span>set,<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>automatically<span class="w"> </span>try<span class="w"> </span>to<span class="w"> </span>extract<span class="w"> </span>entity<span class="w"> </span>information<span class="w"> </span><span class="o">[</span>task,<span class="w"> </span>dir,<span class="w"> </span>echo<span class="o">]</span><span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>suffix<span class="w"> </span>and<span class="w"> </span>datatype.<span class="w"> </span>Default<span class="w"> </span>is<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
+<span class="w">  </span>--do_not_reorder_entities
+<span class="w">                        </span>If<span class="w"> </span>set,<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>not<span class="w"> </span>reorder<span class="w"> </span>entities<span class="w"> </span>according<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>relative<span class="w"> </span>ordering<span class="w"> </span>indicated<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>specification<span class="w"> </span>and<span class="w"> </span>use<span class="w"> </span>the<span class="w"> </span>order<span class="w"> </span>defined<span class="w"> </span><span class="k">in</span><span class="w"> </span>custom_entities<span class="w"> </span>by<span class="w"> </span>the<span class="w"> </span>user.
+<span class="w">                        </span>Cannot<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span>with<span class="w"> </span>--auto_extract_entities.<span class="w">  </span>Default<span class="w"> </span>is<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
+<span class="w">  </span>-b<span class="w"> </span>BIDS_VERSION,<span class="w"> </span>--bids_version<span class="w"> </span>BIDS_VERSION
+<span class="w">                        </span>Set<span class="w"> </span>the<span class="w"> </span>BIDS<span class="w"> </span>specification<span class="w"> </span>version<span class="w"> </span>to<span class="w"> </span>follow<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="s1">&#39;v1.11.1&#39;</span>,<span class="w"> </span><span class="s1">&#39;stable&#39;</span>,<span class="w"> </span><span class="s1">&#39;latest&#39;</span><span class="w"> </span>or<span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="o">)</span>.
+<span class="w">                        </span>This<span class="w"> </span>controls<span class="w"> </span>which<span class="w"> </span>BIDS<span class="w"> </span>schema<span class="w"> </span>and<span class="w"> </span>rules<span class="w"> </span>dcm2bids<span class="w"> </span>uses<span class="w"> </span><span class="k">for</span><span class="w"> </span>automatic<span class="w"> </span>entity<span class="w"> </span>extraction<span class="w"> </span>and<span class="w"> </span>ordering.
+<span class="w">                        </span>If<span class="w"> </span>not<span class="w"> </span>provided,<span class="w"> </span>dcm2bids<span class="w"> </span>uses<span class="w"> </span>the<span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="w"> </span>BIDS<span class="w"> </span>spec<span class="w"> </span><span class="k">for</span><span class="w"> </span>reproducible,<span class="w"> </span>offline-friendly<span class="w"> </span>behavior.
+<span class="w">                        </span>For<span class="w"> </span>long-running<span class="w"> </span>or<span class="w"> </span>shared<span class="w"> </span>pipelines,<span class="w"> </span>consider<span class="w"> </span>pinning<span class="w"> </span>a<span class="w"> </span>specific<span class="w"> </span>tag<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="s1">&#39;v1.11.1&#39;</span><span class="o">)</span>.
+<span class="w">                        </span>When<span class="w"> </span>internet<span class="w"> </span>is<span class="w"> </span>available,<span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span>once<span class="w"> </span>whether<span class="w"> </span>the<span class="w"> </span>remote<span class="w"> </span><span class="s1">&#39;stable&#39;</span><span class="w"> </span>is<span class="w"> </span>newer<span class="w"> </span>and,<span class="w"> </span><span class="k">if</span><span class="w"> </span>so,<span class="w"> </span>
+<span class="w">                        </span>suggest<span class="w"> </span>updating<span class="w"> </span>to<span class="w"> </span>that<span class="w"> </span>specific<span class="w"> </span>version<span class="w"> </span>tag.
+<span class="w">  </span>--bids_validate<span class="w">       </span>If<span class="w"> </span>set,<span class="w"> </span>once<span class="w"> </span>your<span class="w"> </span>conversion<span class="w"> </span>is<span class="w"> </span><span class="k">done</span><span class="w"> </span>it<span class="w"> </span>will<span class="w"> </span>check<span class="w"> </span><span class="k">if</span><span class="w"> </span>your<span class="w"> </span>output<span class="w"> </span>folder<span class="w"> </span>is<span class="w"> </span>BIDS<span class="w"> </span>valid.<span class="w"> </span><span class="o">[</span>False<span class="o">]</span>
+<span class="w">                        </span>bids-validator<span class="w"> </span>needs<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>installed<span class="w"> </span>check:<span class="w"> </span>https://github.com/bids-standard/bids-validator#quickstart
+<span class="w">  </span>--force_dcm2bids<span class="w">      </span>Overwrite<span class="w"> </span>previous<span class="w"> </span>temporary<span class="w"> </span>dcm2bids<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+<span class="w">  </span>--skip_dcm2niix<span class="w">       </span>Skip<span class="w"> </span>dcm2niix<span class="w"> </span>conversion.<span class="w"> </span>Option<span class="w"> </span>-d<span class="w"> </span>should<span class="w"> </span>contains<span class="w"> </span>NIFTI<span class="w"> </span>and<span class="w"> </span>json<span class="w"> </span>files.
+<span class="w">  </span>--clobber<span class="w">             </span>Overwrite<span class="w"> </span>output<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>exists.
+<span class="w">  </span>-l<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>,<span class="w"> </span>--log_level<span class="w"> </span><span class="o">{</span>DEBUG,INFO,WARNING,ERROR,CRITICAL<span class="o">}</span>
+<span class="w">                        </span>Set<span class="w"> </span>logging<span class="w"> </span>level<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>console.<span class="w"> </span>The<span class="w"> </span>default<span class="w"> </span>level<span class="w"> </span>is<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span>
+<span class="w">  </span>-v,<span class="w"> </span>--version<span class="w">         </span>Report<span class="w"> </span>dcm2bids<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>BIDS<span class="w"> </span>specification<span class="w"> </span>version<span class="w"> </span>it<span class="w"> </span>follows<span class="w"> </span>by<span class="w"> </span>default.
+
+Documentation<span class="w"> </span>at<span class="w"> </span>https://unfmontreal.github.io/Dcm2Bids/
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
