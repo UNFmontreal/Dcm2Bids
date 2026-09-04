@@ -11,6 +11,10 @@ on:
     types: [published]
   workflow_dispatch:
 
+concurrency:
+  group: gh-pages-deployment
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
