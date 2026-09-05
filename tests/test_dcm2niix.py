@@ -39,3 +39,18 @@ def test_dcm2niix_run():
 
     if os.name != 'nt':
         tmpDir.cleanup()
+
+
+def test_execute_handles_non_utf8_output(tmp_path, monkeypatch, caplog):
+    """dcm2niix output that is not valid UTF-8 must not crash the warning check."""
+    import dcm2bids.dcm2niix_gen as gen
+
+    monkeypatch.setattr(gen, "run_shell_command", lambda cmd: b"\xff Warning: x")
+    dicomDir = tmp_path / "dicom"
+    dicomDir.mkdir()
+
+    app = Dcm2niixGen([str(dicomDir)], tmp_path)
+    with caplog.at_level("WARNING"):
+        app.execute()
+
+    assert "Warning: x" in caplog.text
