@@ -55,27 +55,32 @@ jobs:
           mode: onefile
           output-file: dcm2bids_helper
 
+      - name: Set tag name
+        run: echo "TAG_NAME=${{ github.event.release.tag_name || github.ref_name }}" >> $GITHUB_ENV
+        shell: bash
+
       - name: Create archive for Linux
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           chmod u+x build/dcm2bids{,_helper,_scaffold}
-          tar -czvf dcm2bids_debian-based_${{ github.event.release.tag_name }}.tar.gz \
+          tar -czvf dcm2bids_debian-based_${{ env.TAG_NAME }}.tar.gz \
           -C build dcm2bids dcm2bids_helper dcm2bids_scaffold
 
       - name: Create archive for macOS
         if: startsWith(matrix.os, 'macos')
         run: |
           chmod u+x build/dcm2bids{,_helper,_scaffold}
-          tar -czvf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.tar.gz \
+          tar -czvf dcm2bids_${{ runner.os }}_${{ env.TAG_NAME }}.tar.gz \
           -C build dcm2bids dcm2bids_helper dcm2bids_scaffold
 
       - name: Create archive for Windows
         if: startsWith(matrix.os, 'windows')
-        run: tar.exe cavf dcm2bids_${{ runner.os }}_${{ github.event.release.tag_name }}.zip -C build *.exe
+        run: tar.exe cavf dcm2bids_${{ runner.os }}_${{ env.TAG_NAME }}.zip -C build *.exe
 
       - name: Upload binaries
         uses: actions/upload-artifact@v7
         with:
+          name: artifact-${{ matrix.os }}  # unique name per OS — prevents parallel jobs from overwriting each other
           path: |
             dcm2bids*.zip
             dcm2bids*.tar.gz
@@ -88,11 +93,11 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           path: download
+          merge-multiple: true  # flattens all per-OS artifacts into a single download/ directory
 
       - name: Publish archives and packages
         uses: softprops/action-gh-release@v3
         with:
-          files: |
-            download/artifact/*
+          files: download/*  # matches all three archives directly in download/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
