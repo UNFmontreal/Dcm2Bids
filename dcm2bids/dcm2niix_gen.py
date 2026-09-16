@@ -131,12 +131,7 @@ class Dcm2niixGen(object):
                 cmd = ['dcm2niix', *shlex.split(self.options),
                        '-o', self.output_dir, dicomDir]
 
-                output = run_shell_command(cmd)
-
-                try:
-                    output = output.decode()
-                except Exception:
-                    pass
+                output = run_shell_command(cmd).decode(errors="replace")
 
                 if self.rm_tmp_dir:
                     shutil.rmtree(self.rm_tmp_dir)
