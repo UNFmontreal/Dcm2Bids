@@ -76,6 +76,7 @@ jobs:
       - name: Upload binaries
         uses: actions/upload-artifact@v7
         with:
+          name: artifact-${{ matrix.os }}  # unique name per OS — prevents parallel jobs from overwriting each other
           path: |
             dcm2bids*.zip
             dcm2bids*.tar.gz
@@ -88,11 +89,11 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           path: download
+          merge-multiple: true  # flattens all per-OS artifacts into a single download/ directory
 
       - name: Publish archives and packages
         uses: softprops/action-gh-release@v3
         with:
-          files: |
-            download/artifact/*
+          files: download/*  # matches all three archives directly in download/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
