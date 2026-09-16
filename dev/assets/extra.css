@@ -1,0 +1,55 @@
+:root {
+  --md-primary-fg-color:               hsla(16, 100%, 42%, 1);
+  --md-primary-fg-color--light:        hsla(16, 100%, 64%, 1);
+  --md-primary-fg-color--dark:          #d63900;
+  --md-typeset-a-color:                 var(--md-accent-fg-color--transparent)   
+  --md-accent-fg-color:                hsla(196, 100%, 44%, 1);
+  --md-accent-fg-color--transparent:   hsla(196, 100%, 44%, 0.1);
+}
+
+     /* Hide images by default for dark mode */
+    img[src$="#only-dark"] {
+        display: none;
+    }
+
+@media screen {
+    [data-md-color-scheme="slate"] {
+    --md-primary-fg-color:  var(--md-primary-fg-color--dark);
+    --md-accent-fg-color:     hsla(16, 100%, 42%, 1);
+    --md-typeset-a-color:     #FFA98A;
+    --md-default-bg-color:    #121212
+    }
+    
+     /* Hide images for light mode     */
+    [data-md-color-scheme="slate"] img[src$="#only-light"] {
+        display: none;
+    }
+    
+    /* Show images for dark mode */
+    [data-md-color-scheme="slate"] img[src$="#only-dark"] {
+        display: initial;
+    }
+
+}
+
+/* Add border to images and prevent emojis to get bordered by
+injecting this class optional */
+img[src$="#border"], 
+img[src$="#only-dark#border"],
+img[src$="#only-light#border"],
+img[src$="#border#only-dark"],
+img[src$="#border#only-light"]  {
+    border: .01rem solid var(--md-typeset-kbd-border-color);
+    border-radius: .1rem;
+    padding: .25rem
+}
+
+.md-search-result__meta {
+  /* background-color: var(--md-default-fg-color); */
+  color: var(--md-typeset-color);
+}
+
+.md-top {
+    background-color: #FFA98A;
+    color: var(--md-default-bg-color)
+}
